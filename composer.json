@@ -1,0 +1,19 @@
+{
+  "name": "bbn/appui-ide",
+  "description": "Task system for APPUI",
+  "keywords": ["task","project management","appui"],
+  "homepage": "https://github.com/nabab/appui-task",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thomas Nabet",
+      "email": "thomas.nabet@gmail.com",
+      "homepage": "http://bbn.solutions",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "bbn/bbn": "dev-master"
+  }
+}
