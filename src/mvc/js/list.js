@@ -16,8 +16,8 @@ table.kendoGrid({
   sortable: true,
   selectable: "multiple",
   filterable: {
-    extra: false
-    //mode: "row"
+    extra: false,
+    mode: "row"
   },
   pageable: {
     refresh: true
@@ -29,11 +29,11 @@ table.kendoGrid({
     title: "Auteur",
     field: "id_user",
     width: 150,
-    values: kappui.apst.users,
+    values: appui.app.apst.users,
     template: function(e){
-      var idx = appui.f.search(kappui.apst.users, "value", e.id_user);
+      var idx = appui.fn.search(appui.app.apst.users, "value", e.id_user);
       if ( idx > -1 ){
-        return kappui.apst.users[idx].text;
+        return appui.app.apst.users[idx].text;
       }
       else{
         return '<em>Inconnu!</em>';
@@ -46,10 +46,19 @@ table.kendoGrid({
   }, {
     title: "Activité",
     field: "last_activity",
-    format: "yyyy-MM-dd",
+    format: "{0:yyyy-MM-dd}",
+    parseFormats: "{0:yyyy-MM-dd}",
     width: 100,
     template: function(e){
       return apst.fdate(e.last_activity, 'Inconnue');
+    },
+    filterable: {
+      ui: function(element){
+        element.kendoDatePicker({
+          format: "yyyy-MM-dd",
+          max: new Date()
+        });
+      }
     }
   }, {
     title: "Durée",
@@ -195,22 +204,22 @@ table.kendoGrid({
     },
     transport: {
       create: function(options) {
-        appui.f.post(data.root + "/list", apst.gridParse(options.data), function(d){
+        appui.fn.post(data.root + "/list", apst.gridParse(options.data), function(d){
           options.success(d);
         });
       },
       read: function(options) {
-        appui.f.post(data.root + "/list", options.data, function(d){
+        appui.fn.post(data.root + "/list", options.data, function(d){
           options.success(d);
         });
       },
       update: function(options) {
-        appui.f.post(data.root + "/list", apst.gridParse(options.data), function(d){
+        appui.fn.post(data.root + "/list", apst.gridParse(options.data), function(d){
           options.success(d);
         });
       },
       destroy: function(options) {
-        appui.f.post(data.root + "/list", $.extend({}, apst.gridParse(options.data), {action: "delete"}), function(d){
+        appui.fn.post(data.root + "/list", $.extend({}, apst.gridParse(options.data), {action: "delete"}), function(d){
           options.success(d);
         });
       }
@@ -225,7 +234,7 @@ table.kendoGrid({
           editable: false
         }, {
           field: "id_user",
-          defaultValue: kappui.apst.userid,
+          defaultValue: appui.app.apst.userid,
           editable: false
         }, {
           field: "title",
@@ -265,7 +274,7 @@ table.kendoGrid({
     },
   },
   change: function(e){
-		appui.f.log(e.sender.select());
+		appui.fn.log(e.sender.select());
   },
   detailInit: function(e){
     var stable = $("<div/>");
@@ -280,12 +289,12 @@ table.kendoGrid({
         },
         transport: {
           create: function(options) {
-            appui.f.post(data.root + "/list", $.extend({}, options.data, {id_task: e.data.id, action: "new_comment"}), function(d){
+            appui.fn.post(data.root + "/list", $.extend({}, options.data, {id_task: e.data.id, action: "new_comment"}), function(d){
               e.sender.dataSource.read();
             });
           },
           read: function(options) {
-            appui.f.post(data.root + "/list", $.extend({}, options.data, {id_task: e.data.id, action: "comments"}), function(d){
+            appui.fn.post(data.root + "/list", $.extend({}, options.data, {id_task: e.data.id, action: "comments"}), function(d){
               options.success(d);
             });
           },
@@ -301,7 +310,7 @@ table.kendoGrid({
             }, {
               field: "id_user",
               editable: false,
-              defaultValue: kappui.apst.userid,
+              defaultValue: appui.app.apst.userid,
             }, {
               field: "comment",
               type: "string"
@@ -329,11 +338,11 @@ table.kendoGrid({
         title: "Auteur",
         field: "id_user",
         width: 150,
-        values: kappui.apst.users,
+        values: appui.app.apst.users,
         template: function(e){
-          var idx = appui.f.search(kappui.apst.users, "value", e.id_user);
+          var idx = appui.fn.search(appui.app.apst.users, "value", e.id_user);
           if ( idx > -1 ){
-            return kappui.apst.users[idx].text;
+            return appui.app.apst.users[idx].text;
           }
           else{
             return '<em>Inconnu!</em>';
@@ -365,7 +374,7 @@ $("button.apst-fusion", table).kendoButton({
     table.find(":checkbox:checked").each(function(){
       r.push($(this).val());
     });
-    appui.f.post(data.root + "/list", {id_tasks: r}, function(d){
+    appui.fn.post(data.root + "/list", {id_tasks: r}, function(d){
       if ( d.tiers ){
       }
     });
@@ -374,12 +383,12 @@ $("button.apst-fusion", table).kendoButton({
 // Bouton rapport de bug
 $("button.apst-new", table).kendoButton({
   click: function(e){
-    appui.f.alert(
+    appui.fn.alert(
       kendo.template($("#tpl-tasks_list_form").html())({
-        tab_selected: kappui.tabstrip.ele.tabNav("option", "selected"),
+        tab_selected: appui.app.tabstrip.ele.tabNav("option", "selected"),
         appui: {
-          url: appui.v.url,
-          old_path: appui.v.old_path
+          url: appui.env.url,
+          old_path: appui.env.old_path
         }
       }),
       "Nouveau bug ou problème",
@@ -387,7 +396,7 @@ $("button.apst-new", table).kendoButton({
       400,
       function(ele){
         ele.find("form").data("script", function($form){
-          appui.f.closeAlert();
+          appui.fn.closeAlert();
           grid.dataSource.read();
         })
     });
@@ -407,7 +416,7 @@ $("button.apst-excel", table).kendoButton({
 table.on("click", "button,button i", function(ev){
 	var button = $(ev.target),
 			$tr = button.closest("tr"),
-			data = grid.dataItem($tr),
+      dataItem = grid.dataItem($tr),
 			icon;
   ev.stopImmediatePropagation();
   if ( button[0].tagName === 'I' ){
@@ -418,44 +427,44 @@ table.on("click", "button,button i", function(ev){
     icon = button.find("i.fa");
   }
 	if ( button.hasClass("apst-subscribe") ){
-		appui.f.post(data.root + "/list", {id: data.id, action: "subscribe"}, function(d){
+		appui.fn.post(data.root + "/list", {id: dataItem.id, action: "subscribe"}, function(d){
 			if ( d.success ){
 				if ( d.subscribed ){
-					appui.f.alert("Vous &ecirc;tes désormais bien inscrit aux notifications concernant cette t&acirc;che", "Succès");
+					appui.fn.alert("Vous &ecirc;tes désormais bien inscrit aux notifications concernant cette t&acirc;che", "Succès");
 					icon.removeClass("fa-link").addClass("fa-unlink");
 				}
 				else{
-					appui.f.alert("Vous &ecirc;tes désormais désinscrit des notifications concernant cette t&acirc;che", "Succès");
+					appui.fn.alert("Vous &ecirc;tes désormais désinscrit des notifications concernant cette t&acirc;che", "Succès");
 					icon.removeClass("fa-unlink").addClass("fa-link");
 				}
 			}
 			else{
-				appui.f.alert("Il y a eu un problème...");
+				appui.fn.alert("Il y a eu un problème...");
 			}
 		});
 	}
 	else if ( button.hasClass("apst-up") ){
-    if ( data.priority <= 1 ){
-      appui.f.alert("La priorité est déjà maximale (1)");
+    if ( dataItem.priority <= 1 ){
+      appui.fn.alert("La priorité est déjà maximale (1)");
     }
     else{
-      appui.f.post(data.root + "/list", {id: data.id, action: "up"}, function(d){
+      appui.fn.post(data.root + "/list", {id: dataItem.id, action: "up"}, function(d){
         if ( d.id ){
           grid.dataSource.read();
-          appui.f.alert("Priorité réhaussée", "Succès");
+          appui.fn.alert("Priorité réhaussée", "Succès");
         }
       });
     }
 	}
 	else if ( button.hasClass("apst-down") ){
-    if ( data.priority >= 5 ){
-      appui.f.alert("La priorité est déjà minimale (5)");
+    if ( dataItem.priority >= 5 ){
+      appui.fn.alert("La priorité est déjà minimale (5)");
     }
     else{
-      appui.f.post(data.root + "/list", {id: data.id, action: "down"}, function(d){
+      appui.fn.post(data.root + "/list", {id: dataItem.id, action: "down"}, function(d){
         if ( d.id ){
           grid.dataSource.read();
-          appui.f.alert("Priorité abaissée", "Succès");
+          appui.fn.alert("Priorité abaissée", "Succès");
         }
       });
     }

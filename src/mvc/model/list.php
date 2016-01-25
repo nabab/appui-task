@@ -133,19 +133,23 @@ switch ( $this->data['action'] ){
         WHERE 1
         $where");
       $data = $this->db->get_rows("
-        SELECT q.*, COUNT(bbn_tasks_cc.id_task) AS subscribed
-        FROM ($sql) AS q
-        	LEFT JOIN bbn_tasks_cc
-          	ON bbn_tasks_cc.id_task = q.id
-            AND bbn_tasks_cc.id_user = ?
+        SELECT * FROM (
+          SELECT q.*, COUNT(bbn_tasks_cc.id_task) AS subscribed
+          FROM ($sql) AS q
+            LEFT JOIN bbn_tasks_cc
+              ON bbn_tasks_cc.id_task = q.id
+              AND bbn_tasks_cc.id_user = ?
+          GROUP BY q.id
+        ) AS r
         WHERE 1
         $where
-        GROUP BY q.id
         $sort
         LIMIT {$grid->start()}, {$grid->limit()}",
         $this->inc->user->get_id());
-      $data[0]['where'] = $where;
-      $data[0]['sort'] = $sort;
+      if ( !empty($data) ){
+        $data[0]['where'] = $where;
+        $data[0]['sort'] = $sort;
+      }
     }
     return [
       'data' => $data,
