@@ -50,7 +50,7 @@ table.kendoGrid({
     parseFormats: "{0:yyyy-MM-dd}",
     width: 100,
     template: function(e){
-      return apst.fdate(e.last_activity, 'Inconnue');
+      return appui.fn.fdate(e.last_activity, 'Inconnue');
     },
     filterable: {
       ui: function(element){
@@ -135,7 +135,7 @@ table.kendoGrid({
     format: "yyyy-MM-dd",
     width: 100,
     template: function(e){
-      return apst.fdate(e.target_date, '-');
+      return appui.fn.fdate(e.target_date, '-');
     }
   }, {
     title: "Statut",
@@ -204,7 +204,7 @@ table.kendoGrid({
     },
     transport: {
       create: function(options) {
-        appui.fn.post(data.root + "/list", apst.gridParse(options.data), function(d){
+        appui.fn.post(data.root + "/list", appui.fn.gridParse(options.data), function(d){
           options.success(d);
         });
       },
@@ -214,12 +214,12 @@ table.kendoGrid({
         });
       },
       update: function(options) {
-        appui.fn.post(data.root + "/list", apst.gridParse(options.data), function(d){
+        appui.fn.post(data.root + "/list", appui.fn.gridParse(options.data), function(d){
           options.success(d);
         });
       },
       destroy: function(options) {
-        appui.fn.post(data.root + "/list", $.extend({}, apst.gridParse(options.data), {action: "delete"}), function(d){
+        appui.fn.post(data.root + "/list", $.extend({}, appui.fn.gridParse(options.data), {action: "delete"}), function(d){
           options.success(d);
         });
       }
@@ -353,7 +353,7 @@ table.kendoGrid({
         field: "creation_date",
         width: 100,
         template: function(e){
-          return apst.fdate(e.creation_date, 'Inconnue');
+          return appui.fn.fdate(e.creation_date, 'Inconnue');
         }
       }, {
         title: "Texte",
