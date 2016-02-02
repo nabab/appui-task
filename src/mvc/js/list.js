@@ -31,6 +31,7 @@ table.kendoGrid({
     width: 150,
     values: appui.app.apst.users,
     template: function(e){
+      appui.fn.log(appui.app.apst.users, e);
       var idx = appui.fn.search(appui.app.apst.users, "value", e.id_user);
       if ( idx > -1 ){
         return appui.app.apst.users[idx].text;
@@ -158,7 +159,12 @@ table.kendoGrid({
       }
       return '<span style="color: ' + color + '">' + e.status + '</span>';
     },
-    values: ["ouvert", "en cours", "résolu", "en attente"],
+    values: [
+      {text: "Ouvert", value: "ouvert"},
+      {text: "En cours", value:"en cours"},
+      {text: "Résolu", value: "résolu"},
+      {text: "En attente", value: "en attente"}
+    ],
     editor: function(container, options) {
       $('<select name="' + options.field + '"><option>ouvert</option><option>en cours</option><option>en attente</option><option>résolu</option></select>')
         .appendTo(container).kendoDropDownList();
