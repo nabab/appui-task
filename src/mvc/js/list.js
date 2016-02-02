@@ -31,7 +31,6 @@ table.kendoGrid({
     width: 150,
     values: appui.app.apst.users,
     template: function(e){
-      appui.fn.log(appui.app.apst.users, e);
       var idx = appui.fn.search(appui.app.apst.users, "value", e.id_user);
       if ( idx > -1 ){
         return appui.app.apst.users[idx].text;
@@ -165,10 +164,6 @@ table.kendoGrid({
       {text: "Résolu", value: "résolu"},
       {text: "En attente", value: "en attente"}
     ],
-    editor: function(container, options) {
-      $('<select name="' + options.field + '"><option>ouvert</option><option>en cours</option><option>en attente</option><option>résolu</option></select>')
-        .appendTo(container).kendoDropDownList();
-    },
     width: 100
   },{
     title: "Actions",
@@ -209,11 +204,6 @@ table.kendoGrid({
       value: "résolu"
     },
     transport: {
-      create: function(options) {
-        appui.fn.post(data.root + "/list", appui.fn.gridParse(options.data), function(d){
-          options.success(d);
-        });
-      },
       read: function(options) {
         appui.fn.post(data.root + "/list", options.data, function(d){
           options.success(d);
@@ -391,11 +381,7 @@ $("button.apst-new", table).kendoButton({
   click: function(e){
     appui.fn.alert(
       kendo.template($("#tpl-tasks_list_form").html())({
-        tab_selected: appui.app.tabstrip.ele.tabNav("option", "selected"),
-        appui: {
-          url: appui.env.url,
-          old_path: appui.env.old_path
-        }
+        tab_selected: appui.app.tabstrip.ele.tabNav("option", "selected")
       }),
       "Nouveau bug ou problème",
       600,
