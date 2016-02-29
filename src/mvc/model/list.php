@@ -7,7 +7,7 @@ if ( !isset($this->data['action']) ){
 }
 $time = time();
 $date = date('Y-m-d H:i:s', $time);
-$this->data['creation_date'] = \bbn\time\date::format($time, 'js');
+$this->data['creation_date'] = \bbn\date::format($time, 'js');
 $tache = new \bbn\appui\task($this->db, $this->inc->user);
 switch ( $this->data['action'] ){
 
