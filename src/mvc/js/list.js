@@ -64,18 +64,18 @@ table.kendoGrid({
     title: "Durée",
     field: "duration",
     filterable: false,
-    width: 100,
+    width: 50,
     template: function(e){
       if ( !e.duration ){
         return 'Inconnue';
       }
       if ( e.duration < 3600 ){
-        return Math.round(e.duration/60) + ' minutes';
+        return Math.round(e.duration/60) + ' mn';
       }
       if ( e.duration < (24*3600) ){
-        return Math.round(e.duration/3600) + ' heures';
+        return Math.round(e.duration/3600) + ' h';
       }
-      return Math.round(e.duration/(24*3600)) + ' jours';
+      return Math.round(e.duration/(24*3600)) + ' j';
     }
   }, {
     title: "Titre",

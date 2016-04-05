@@ -1,0 +1,65 @@
+<!-- HTML Document -->
+
+<form action="{{root}}/insert">
+  <div class="appui-line-breaker" id="bbn_pm_form_container">
+
+    <input name="title" class="title k-textbox" placeholder="Title/short description of the new task" required="required">
+
+    <div class="appui-form-label">
+      Comment<br>
+      <select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
+        <option value="text">Simple text</option>
+        <option value="html">Rich text</option>
+        <option value="md">Markdown</option>
+        <option value="php">Code PHP</option>
+        <option value="js">Code JavaScript</option>
+        <option value="css">Code CSS</option>
+      </select><br>
+    </div>
+    <div class="appui-form-field">
+      <textarea class="k-textbox" name="comment"></textarea>
+    </div>
+    
+    <div class="appui-form-label">Deadline</div>
+    <div class="appui-form-field">
+      <input type="date" data-role="datepicker">
+    </div>
+
+    <div class="appui-form-label">
+      Roles
+      <button class="k-button" data-bind="click: add_role">
+        <i class="fa fa-plus"> </i>
+      </button>
+    </div>
+    <div class="appui-form-field">
+      <input name="role" data-role="dropdownlist" data-bind="source: roles, events: {change: change_role}" data-option-label="Pick a role" data-text-field="text" data-value-field="value">
+      <div class="k-block">
+      </div>
+    </div>
+
+    <div class="appui-form-label">
+      Attachments
+      <button class="k-button" data-bind="click: add_attachment">
+        <i class="fa fa-plus"> </i>
+      </button>
+    </div>
+    <div class="appui-form-field">
+      <div class="k-block">
+        
+      </div>
+    </div>
+
+    <div class="appui-form-label">
+      Links
+      <button class="k-button" data-bind="click: add_link">
+        <i class="fa fa-plus"> </i>
+      </button>
+    </div>
+    <div class="appui-form-field">
+      <div class="k-block">
+        
+      </div>
+    </div>
+  </div>
+
+</form>
