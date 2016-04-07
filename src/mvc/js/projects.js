@@ -11,16 +11,14 @@ $("#bbn_tasks_tabnav").tabNav({
     url: "new",
     static: true,
     callonce: function(ele){
-      appui.fn.log(data.script);
       eval(data.script);
     }
   }, {
-    title: "My ongoing tasks",
+    title: data.my_ongoing_tasks,
     content: ' ',
     url: "ongoing",
     static: true,
     callonce: function(cont, idx, dt, widget){
-      appui.fn.log(cont, idx, dt, widget);
       appui.fn.post(data.root + '/ongoing', function(d){
         if ( d.html ){
           widget.setContent(d.html, idx);
@@ -28,14 +26,14 @@ $("#bbn_tasks_tabnav").tabNav({
       })
     }
   }, {
-    title: "Timeline",
+    title: data.timeline,
     content: 'Hello 3',
     url: "timeline",
     static: true,
     callback: function(ele){
     }
   }, {
-    title: "Search",
+    title: data.search,
     content: 'Hello 4',
     url: "search",
     static: true,

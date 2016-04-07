@@ -5,5 +5,4 @@
  **/
 
 /** @var $this \bbn\mvc\controller */
-//$this->combo("Hello")
-echo "Heyyyyyyyyyyyyyy";
+$this->combo(_("My ongoing tasks"));

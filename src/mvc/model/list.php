@@ -8,7 +8,7 @@ if ( !isset($this->data['action']) ){
 $time = time();
 $date = date('Y-m-d H:i:s', $time);
 $this->data['creation_date'] = \bbn\date::format($time, 'js');
-$tache = new \bbn\appui\task($this->db, $this->inc->user);
+$tache = new \bbn\appui\task($this->db, $this->inc->user, $this->inc->options);
 switch ( $this->data['action'] ){
 
   case 'new_comment':

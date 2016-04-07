@@ -6,4 +6,4 @@
 
 /** @var $this \bbn\mvc\controller */
 
-$this->combo("New task", $this->data);
+$this->combo(_("New task"), 1);
