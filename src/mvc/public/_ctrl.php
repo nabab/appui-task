@@ -5,7 +5,7 @@
  **/
 
 /** @var $this \bbn\mvc\controller */
-$this->data['root'] = $this->say_dir();
+$this->data['root'] = $this->say_dir().'/';
 
 // cd ~/_lib/vendor/bbn/appui-task/src
 // find . -iname "*.php" | xargs xgettext

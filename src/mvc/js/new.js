@@ -65,6 +65,7 @@ kendo.bind(ele, {
     }
   },
   users: [],
+  ref: data.ref,
   roles: data.roles,
   change_role: function(){
     var role = $("input[name=role]", ele).data("kendoDropDownList").value();
@@ -78,7 +79,6 @@ kendo.bind(ele, {
         rolePicker = $("input[name=role]", ele).data("kendoDropDownList"),
         role = rolePicker.value(),
         frole = appui.fn.get_field(dataItem.roles, "value", role, "text");
-    appui.fn.log(frole);
     if ( frole && ($.inArray(dataItem.users, id_user) === -1) ){
       appui.fn.post("usergroup/get_user", {id_user: id_user}, function(d){
         if ( d.res ){
@@ -123,11 +123,27 @@ var $tree,
           }
         }
       }
-    });
+    }),
+    dragCfg = {
+      helper: "clone",
+      containment: $("div.bbn_pm_form_container", ele),
+      scroll: false,
+    };
 
 
-$tree = $("div.bbn_usergroup_tree", ele).kendoTreeView({
+$tree = $("div.appui-task-usertree", ele).kendoTreeView({
   dataSource: treeDS,
+  expand: function(e){
+    appui.fn.log(e.node);
+    setTimeout(function(){
+      $(e.node).find("li.k-item").each(function(){
+        var $$ = $(this);
+        if ( !$$.hasClass("ui-draggable") ){
+          $$.draggable(dragCfg);
+        }
+      });
+    }, 300);
+  },
   select: function (e) {
     if ( data.picker ){
       var r = this.dataItem(e.node);
@@ -159,4 +175,137 @@ $("input:first", ele).keyup(function(){
   treeDS.filter({field: "text", operator: "contains", value: $(this).val()});
   Porca putana!
   */
+});
+
+$li.draggable(dragCfg);
+
+$("div.appui-task-assigned", ele).droppable({
+  accept: "*",
+  hoverClass: "selected",
+  activeClass: "active",
+  drop: function(e, ui){
+    var $ul = $(this).find("ul"),
+        dataItem = $tree.dataItem(ui.draggable).toJSON(),
+        $input = $(this).find("input"),
+        v = $input.val(),
+        vals = v ? JSON.parse(v) : [],
+        id = dataItem.id;
+    vals.push(id);
+    $input.val(JSON.stringify(vals));
+    ui.draggable.hide();
+    $ul.append('<li class="k-item">' + ui.helper.html() + '</li>');
+    $ul.find("li.k-item:last span").append(
+      '&nbsp;',
+      $('<i class="fa fa-times appui-p"/>').data("id", id).click(function(){
+        ui.draggable.show();
+        v = $input.val();
+        vals = v ? JSON.parse(v) : [];
+        var idx = $.inArray(id, vals);
+        if ( idx > -1 ){
+          vals.splice(idx, 1);
+          $input.val(JSON.stringify(vals));
+        }
+        $(this).closest("li").remove();
+        appui.fn.log(idx, id);
+      })
+    )
+  }
+});
+
+var ddTree = $("input[name=type]", ele).kendoDropDownTreeView({
+  optionLabel: appui.lng.choose,
+  treeview: {
+    select: function(e){
+      ddTree.element.val(e.sender.dataItem(e.node).id).change();
+      appui.fn.log(ddTree.element, e.sender.dataItem(e.node));
+    },
+    dataTextField: "text",
+    dataValueField: "id",
+    dataSource: new kendo.data.HierarchicalDataSource({
+      data: data.categories,
+      schema: {
+        model: {
+          id: "id",
+          hasChildren: "is_parent",
+          children: "items",
+          fields: {
+            text: {type: "string"},
+            is_parent: {type: "bool"}
+          }
+        }
+      }
+    })
+  }
+}).data("kendoDropDownTreeView");
+
+var uploader = $("input[name=file]");
+uploader.kendoUpload({
+  async: {
+    saveUrl: "file/save/" + $("input[name=ref]", ele).val(),
+    removeUrl: "file/delete/" + $("input[name=ref]", ele).val(),
+  },
+
+  // @todo Voir la taille
+  files: /*d.fichiers ? $.map(d.fichiers, function(a, i){
+    return {name: a, size: 1000, ext: a.substr(x.lastIndexOf("."))};
+  }) :*/ [],
+
+  upload: function(e){
+    var st = uploader.val(),
+        v = st ? JSON.parse(st) : [];
+    appui.fn.log(e.files);
+    if ( v.length > 0 ){
+      $.each(e.files, function (i, f){
+        if ( $.inArray(f.rawFile.name, v) > -1 ){
+          e.preventDefault();
+          appui.fn.alert(data.lng.file_exists);
+          return false;
+        }
+      });
+    }
+  },
+  success: function(e){
+    if ( e.response && e.files && (e.response.success === 1) ){
+      var idx,
+          st = uploader.val(),
+          fichiers = st ? JSON.parse(st) : [];
+      if ( (e.operation === 'upload') && e.response.fichier ){
+        $.each(e.files, function(i, f){
+          fichiers.push(f.rawFile.name);
+        });
+      }
+      else if ( (e.operation === 'remove') ){
+        $.each(e.files, function(i, f){
+          if ( (idx = $.inArray(f.rawFile.name, fichiers)) > -1 ){
+            fichiers.splice(idx, 1);
+          }
+        });
+      }
+      inp.val(JSON.stringify(fichiers));
+    }
+    else{
+      appui.fn.alert(data.lng.problem_file);
+    }
+  },
+  error:function(e){
+    appui.fn.alert(data.lng.error_uploading)
+  }
+});
+
+$("button.appui-task-link-button", ele).mousedown(function(){
+  var v = $(this).prev("input").val();
+  appui.fn.post(data.root + "link_preview", {url: v}, function(d){
+    if ( d.res ){
+       $("div.bbn-task-files-container", ele).append(
+         $('<div class="appui-nl"/>').append(
+           '<img class="appui-block" src="' + d.res.pictures[0] + '" style="width: 200px; height: auto">',
+           '<div class="appui-spacer"/>',
+           $('<div class="appui-block"/>').append(
+             '<h3>' + d.res.title + '</h3>',
+             '<p>' + d.res.desc + '</p>'
+           )
+         )
+       );
+    }
+  });
 });

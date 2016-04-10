@@ -1,9 +1,8 @@
 /* LESS Document */
 #bbn_pm_form_container{
+  margin: 1em 0;
   input.title{
-    margin: 1em 0;
     width: 100%;
-    font-size: large;
   }
   .appui-form-label{
     text-align: right;
@@ -28,12 +27,32 @@
     }
     div.k-content{
       padding: 1em 1.5%;
-      div.k-block{
-        margin: 0 1.5%;
+      div.active{
+        background-color: yellow;
+      }
+      div.selected{
+        background-color: pink;
+      }
+      div.appui-spacer{
+        width: 2%;
+      }
+      div.appui-task-assigned{
+        width: 32%;
         float: left;
         div.k-header{
           text-align: center;
         }
+        div.k-content{
+          background-color: inherit;
+        }
+      }
+      div.appui-task-roles-desc{
+        position: absolute;
+        right: 0;
+        top: 30%;
+        color: #CCC;
+        padding: 20px;
+        border: 2px dotted #CCC;
       }
     }
   }
