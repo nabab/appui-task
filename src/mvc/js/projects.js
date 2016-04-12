@@ -1,7 +1,7 @@
 // Javascript Document
-$(ele).css("overflow", "hidden");
+$(ele).closest(".k-content").css("padding", "0px");
 
-$("#bbn_tasks_tabnav").tabNav({
+$("#appui_task_tabnav").tabNav({
   baseURL: data.root + '/projects/',
   baseTitle: 'Projects - ',
   scrollable: false,

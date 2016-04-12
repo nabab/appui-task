@@ -70,7 +70,7 @@ kendo.bind(ele, {
   change_role: function(){
     var role = $("input[name=role]", ele).data("kendoDropDownList").value();
     if ( role ){
-      appui.fn.window("usergroup/picker", {picker: "#bbn_pm_form_container input[name=id_user]"}, 350, 700);
+      appui.fn.window("usergroup/picker", {picker: "#appui_pm_form_container input[name=id_user]"}, 350, 700);
     }
   },
   add_user: function(){
@@ -126,7 +126,7 @@ var $tree,
     }),
     dragCfg = {
       helper: "clone",
-      containment: $("div.bbn_pm_form_container", ele),
+      containment: $("div.appui_task_form_container", ele),
       scroll: false,
       start: function(e, ui){
         var dataItem = $tree.dataItem(e.target).toJSON();
@@ -269,7 +269,7 @@ var ddTree = $("input[name=type]", ele).kendoDropDownTreeView({
 }).data("kendoDropDownTreeView");
 
 var uploadedFiles = [],
-    uploadWrapper = $("div.bbn-task-upload-wrapper", ele),
+    uploadWrapper = $("div.appui-task-upload-wrapper", ele),
     iconClass = function(file){
       if ( file.extension ){
         var ext = file.extension.substr(1),
@@ -334,8 +334,8 @@ var uploadedFiles = [],
             if ( !done ){
               st += '<i class="fa fa-' + iconClass(e.files[0]) + '"> </i>';
             }
-            st += '</td><td class="appui-task-link-title"><div title="' + e.name + '">' + e.name + '</div>' +
-              '</td><td class="appui-task-link-actions">' +
+            st += '</td><td class="appui-task-link-title">' + e.name + '</td>' +
+              '<td class="appui-task-link-actions">' +
                 '<span class="k-upload-pct">' + kendo.toString(size, 'n0') + ' ' + unit + '</span>' +
                 '<button class="k-button k-button-bare k-upload-action" type="button">' +
                 '<span class="k-icon k-i-close k-delete" title="Supprimer"></span>' +
@@ -396,7 +396,7 @@ $("input[name=link]", ele).keydown(function(e){
     e.preventDefault();
     var $input = $(this),
         v = $input.val(),
-        $target = $("table.appui-task-link-container", ele),
+        $target = $("table.appui-task-links-container", ele),
         $li;
     if ( v.toLowerCase().indexOf("http") !== 0 ){
       v = "http://" + v;

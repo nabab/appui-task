@@ -2,7 +2,7 @@
 
 <form action="<?=$root?>/insert">
   <input type="hidden" name="ref" data-bind="value: ref">
-  <div class="appui-line-breaker" id="bbn_pm_form_container">
+  <div class="appui-line-breaker" id="appui_task_form_container">
 
     <div class="appui-form-full">
       <input name="title" class="k-textbox appui-l title" placeholder="Title/short description of the new task" required="required">
@@ -49,8 +49,7 @@
     </div>
 
     <div class="appui-form-label"><?=_("Files")?></div>
-    <div class="appui-form-field bbn-task-upload-wrapper"> </div>
-    <div class="appui-nl bbn-task-files-container"> </div>
+    <div class="appui-form-field appui-task-upload-wrapper appui-task-files-container"> </div>
 
     <div class="appui-form-label"><?=_("Links")?></div>
     <div class="appui-form-field">
@@ -58,21 +57,20 @@
         <div class="k-dropzone">
           <input type="text" name="link" class="k-textbox" style="width: 100%" placeholder="<?=_("Type or paste your URL and press Enter to valid")?>">
         </div>
-        <table class="k-upload-files appui-task-link-container">
+        <table class="k-upload-files appui-task-links-container">
         </table>
       </div>
     </div>
-    <div class="appui-nl bbn-task-links-container"> </div>
 
     <div class="appui-form-full">
       <div class="k-block">
         <div class="k-header appui-l"><div><?=_("Roles")?></div></div>
-        <div class="k-content appui-task-roles-container">
+        <div class="k-content">
           <div class="k-block appui-task-assigned">
             <div class="k-header"><?=_("Manager")?></div>
             <div class="k-content appui-task-managers">
               <input type="hidden" name="managers">
-              <ul></ul>
+              <ul class="appui-task-roles-container"></ul>
             </div>
           </div>
           <div class="appui-spacer"> </div>
