@@ -25,7 +25,7 @@
 
     <div class="appui-form-label"><?=_("Category")?></div>
     <div class="appui-form-field">
-      <input name="type" style="width: 100%" required="required">
+      <input name="type" style="width: inherit" required="required">
     </div>
 
     <div class="appui-form-label"><?=_("Priority")?></div>
@@ -49,7 +49,9 @@
     </div>
 
     <div class="appui-form-label"><?=_("Files")?></div>
-    <div class="appui-form-field appui-task-upload-wrapper appui-task-files-container"> </div>
+    <div class="appui-form-field">
+      <div class="appui-task-upload-wrapper appui-task-files-container"> </div>
+    </div>
 
     <div class="appui-form-label"><?=_("Links")?></div>
     <div class="appui-form-field">
