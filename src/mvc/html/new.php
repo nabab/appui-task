@@ -49,17 +49,18 @@
     </div>
 
     <div class="appui-form-label"><?=_("Files")?></div>
-    <div class="appui-form-field">
-      <input type="file" name="file">
-    </div>
+    <div class="appui-form-field bbn-task-upload-wrapper"> </div>
     <div class="appui-nl bbn-task-files-container"> </div>
 
     <div class="appui-form-label"><?=_("Links")?></div>
     <div class="appui-form-field">
-      <input type="text" name="link" class="k-textbox" value="http://" style="width: 90%; margin-right: 1em">
-      <button class="k-button appui-task-link-button">
-        <i class="fa fa-check"> </i>
-      </button>
+      <div class="k-widget k-upload k-header">
+        <div class="k-dropzone">
+          <input type="text" name="link" class="k-textbox" style="width: 100%" placeholder="<?=_("Type or paste your URL and press Enter to valid")?>">
+        </div>
+        <table class="k-upload-files appui-task-link-container">
+        </table>
+      </div>
     </div>
     <div class="appui-nl bbn-task-links-container"> </div>
 
@@ -71,7 +72,7 @@
             <div class="k-header"><?=_("Manager")?></div>
             <div class="k-content appui-task-managers">
               <input type="hidden" name="managers">
-              <ul data-role="treeview"></ul>
+              <ul></ul>
             </div>
           </div>
           <div class="appui-spacer"> </div>
@@ -79,7 +80,7 @@
             <div class="k-header"><?=_("Worker")?></div>
             <div class="k-content appui-task-doers">
               <input type="hidden" name="doers">
-              <ul data-role="treeview"></ul>
+              <ul></ul>
             </div>
           </div>
           <div class="appui-spacer"> </div>
@@ -87,7 +88,7 @@
             <div class="k-header"><?=_("Spectator")?></div>
             <div class="k-content appui-task-viewers">
               <input type="hidden" name="viewers">
-              <ul data-role="treeview"></ul>
+              <ul></ul>
             </div>
           </div>
           <div class="appui-form-full">

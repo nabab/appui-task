@@ -128,6 +128,12 @@ var $tree,
       helper: "clone",
       containment: $("div.bbn_pm_form_container", ele),
       scroll: false,
+      start: function(e, ui){
+        var dataItem = $tree.dataItem(e.target).toJSON();
+        if ( dataItem.is_parent && !dataItem.expanded ){
+          $tree.expand(e.target);
+        }
+      }
     };
 
 
@@ -155,7 +161,7 @@ $tree = $("div.appui-task-usertree", ele).kendoTreeView({
     return '<i class="fa fa-' + (e.item.is_parent ? 'users' : 'user') + '"> </i> ' + e.item.text;
   }
 }).data("kendoTreeView");
-$li = $("li.k-item li.k-item", $tree.element);
+$li = $("li.k-item", $tree.element);
 $("input:first", ele).keyup(function(){
   var v = $(this).val().toLowerCase();
   $li.filter(":hidden").show();
@@ -185,30 +191,54 @@ $("div.appui-task-assigned", ele).droppable({
   activeClass: "active",
   drop: function(e, ui){
     var $ul = $(this).find("ul"),
-        dataItem = $tree.dataItem(ui.draggable).toJSON(),
+        dataItem = $tree.dataItem(ui.draggable),
         $input = $(this).find("input"),
         v = $input.val(),
         vals = v ? JSON.parse(v) : [],
-        id = dataItem.id;
-    vals.push(id);
+        items = [],
+        $ele;
+    appui.fn.log(dataItem, $tree.dataItem(ui.draggable));
+    if ( dataItem.is_parent ){
+      if ( dataItem.items && dataItem.items.length ){
+        items = dataItem.items;
+      }
+    }
+    else{
+      items.push(dataItem);
+    }
+    $.each(items, function(i, v){
+      var id = v.get("id");
+      $ele = $tree.findByUid(v.get("uid"));
+      if ( $ele.is(":visible") ){
+        vals.push(id);
+        $ul.append(
+          $('<li class="k-item">' + $ele.html() + '</li>').mousedown(function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            e.stopPropagation();
+            return false;
+          })
+        );
+        $ele.hide();
+        $ul.find("li.k-item:last span").append(
+          '&nbsp;',
+          $('<i class="fa fa-times appui-p"/>').data("id", id).data("ele", $ele).click(function(){
+            var $$ = $(this);
+            $$.data("ele").show();
+            v = $input.val();
+            vals = v ? JSON.parse(v) : [];
+            var idx = $.inArray($$.data("id"), vals);
+            if ( idx > -1 ){
+              vals.splice(idx, 1);
+              $input.val(JSON.stringify(vals));
+            }
+            $$.closest("li").remove();
+            appui.fn.log(idx, id);
+          })
+        ).removeEv
+      }
+    });
     $input.val(JSON.stringify(vals));
-    ui.draggable.hide();
-    $ul.append('<li class="k-item">' + ui.helper.html() + '</li>');
-    $ul.find("li.k-item:last span").append(
-      '&nbsp;',
-      $('<i class="fa fa-times appui-p"/>').data("id", id).click(function(){
-        ui.draggable.show();
-        v = $input.val();
-        vals = v ? JSON.parse(v) : [];
-        var idx = $.inArray(id, vals);
-        if ( idx > -1 ){
-          vals.splice(idx, 1);
-          $input.val(JSON.stringify(vals));
-        }
-        $(this).closest("li").remove();
-        appui.fn.log(idx, id);
-      })
-    )
   }
 });
 
@@ -238,74 +268,180 @@ var ddTree = $("input[name=type]", ele).kendoDropDownTreeView({
   }
 }).data("kendoDropDownTreeView");
 
-var uploader = $("input[name=file]");
-uploader.kendoUpload({
-  async: {
-    saveUrl: "file/save/" + $("input[name=ref]", ele).val(),
-    removeUrl: "file/delete/" + $("input[name=ref]", ele).val(),
-  },
+var uploadedFiles = [],
+    uploadWrapper = $("div.bbn-task-upload-wrapper", ele),
+    iconClass = function(file){
+      if ( file.extension ){
+        var ext = file.extension.substr(1),
+            cls = "file-o";
+        if ( ext === "pdf" ){
+          return "file-pdf-o";
+        }
+        else if ( $.inArray(ext, ["xls", "xlsx", "csv", "ods"]) > -1 ){
+          return "file-excel-o";
+        }
+        else if ( $.inArray(ext, ["rtf", "doc", "docx", "odt"]) > -1 ){
+          return "file-word-o";
+        }
+        else if ( $.inArray(ext, ["svg", "gif", "png", "jpg", "jpeg"]) > -1 ){
+          return "file-picture-o";
+        }
+        else if ( $.inArray(ext, ["zip", "gz", "rar", "7z", "bz2", "xz"]) > -1 ){
+          return "file-archive-o";
+        }
+        return "file-o";
+      }
+      return false;
+    }
+    createUpload = function(){
+      appui.fn.log("CREATE", uploadedFiles);
+      var uploader = $('<input name="file" type="file"/>');
+      uploadWrapper.empty().append(uploader);
+      uploader.kendoUpload({
+        async: {
+          saveUrl: data.root + "upload/" + data.ref,
+          removeUrl: data.root + "unupload/" + data.ref
+        },
+        template: function(e){
+          appui.fn.log("TEM<PLATE", e);
+          var size,
+              unit;
+          appui.fn.log(e);
+          if ( e.size > 5000000 ){
+            unit = 'Mb';
+            size = Math.floor(e.size / 1024 / 1024).toString();
+          }
+          else if ( e.size > 1024 ){
+            unit = 'Kb';
+            size = Math.floor(e.size / 1024).toString();
+          }
+          else{
+            unit = 'b';
+            size = e.size;
+          }
+          if ( e.files && e.files[0] ){
+            var st = '<div class="k-progress"><table><tbody><tr><td class="appui-task-link-image">',
+                done = false;
+            if ( e.files[0].imgs ){
+              $.each(e.files[0].imgs, function(i, v){
+                if ( v.h96 ){
+                  st += '<img src="' + data.root + 'image/tmp/' + data.ref + v.h96 + '">';
+                  done = 1;
+                  return false;
+                }
+              });
+            }
+            if ( !done ){
+              st += '<i class="fa fa-' + iconClass(e.files[0]) + '"> </i>';
+            }
+            st += '</td><td class="appui-task-link-title"><div title="' + e.name + '">' + e.name + '</div>' +
+              '</td><td class="appui-task-link-actions">' +
+                '<span class="k-upload-pct">' + kendo.toString(size, 'n0') + ' ' + unit + '</span>' +
+                '<button class="k-button k-button-bare k-upload-action" type="button">' +
+                '<span class="k-icon k-i-close k-delete" title="Supprimer"></span>' +
+                '</button>' +
+              '</td></tr></tbody></table></div>';
+            return st;
+          }
+        },
 
-  // @todo Voir la taille
-  files: /*d.fichiers ? $.map(d.fichiers, function(a, i){
-    return {name: a, size: 1000, ext: a.substr(x.lastIndexOf("."))};
-  }) :*/ [],
-
-  upload: function(e){
-    var st = uploader.val(),
-        v = st ? JSON.parse(st) : [];
-    appui.fn.log(e.files);
-    if ( v.length > 0 ){
-      $.each(e.files, function (i, f){
-        if ( $.inArray(f.rawFile.name, v) > -1 ){
-          e.preventDefault();
-          appui.fn.alert(data.lng.file_exists);
-          return false;
+        // @todo Voir la taille
+        files: uploadedFiles,
+        upload: function(e){
+          appui.fn.log("UPLOAD", e);
+          if ( e.files && e.files[0] ){
+            var idx = appui.fn.search(uploadedFiles, "name", e.files[0].name);
+            if ( idx > -1 ){
+              e.preventDefault();
+              appui.fn.alert(data.lng.file_exists);
+              return false;
+            }
+          }
+        },
+        success: function(e){
+          appui.fn.log("SUCCESS", e);
+          if ( e.response && e.response.files && e.files && (e.response.success === 1) ){
+            var file = uploader.val();
+            if ( e.operation === 'upload' ){
+              $.each(e.response.files, function(i, f){
+                if ( f.size ){
+                  uploadedFiles.push(f);
+                }
+              });
+              createUpload();
+              uploadWrapper.redraw();
+            }
+            else if ( (e.operation === 'remove') ){
+              $.each(e.files, function(i, f){
+                if ( (idx = $.inArray(f.rawFile.name, uploadedFiles)) > -1 ){
+                  uploadedFiles.splice(idx, 1);
+                }
+              });
+            }
+          }
+          else{
+            appui.fn.alert(data.lng.problem_file);
+          }
+        },
+        error:function(e){
+          appui.fn.alert(data.lng.error_uploading)
         }
       });
-    }
-  },
-  success: function(e){
-    if ( e.response && e.files && (e.response.success === 1) ){
-      var idx,
-          st = uploader.val(),
-          fichiers = st ? JSON.parse(st) : [];
-      if ( (e.operation === 'upload') && e.response.fichier ){
-        $.each(e.files, function(i, f){
-          fichiers.push(f.rawFile.name);
-        });
-      }
-      else if ( (e.operation === 'remove') ){
-        $.each(e.files, function(i, f){
-          if ( (idx = $.inArray(f.rawFile.name, fichiers)) > -1 ){
-            fichiers.splice(idx, 1);
-          }
-        });
-      }
-      inp.val(JSON.stringify(fichiers));
-    }
-    else{
-      appui.fn.alert(data.lng.problem_file);
-    }
-  },
-  error:function(e){
-    appui.fn.alert(data.lng.error_uploading)
-  }
-});
+    };
+createUpload();
 
-$("button.appui-task-link-button", ele).mousedown(function(){
-  var v = $(this).prev("input").val();
-  appui.fn.post(data.root + "link_preview", {url: v}, function(d){
-    if ( d.res ){
-       $("div.bbn-task-files-container", ele).append(
-         $('<div class="appui-nl"/>').append(
-           '<img class="appui-block" src="' + d.res.pictures[0] + '" style="width: 200px; height: auto">',
-           '<div class="appui-spacer"/>',
-           $('<div class="appui-block"/>').append(
-             '<h3>' + d.res.title + '</h3>',
-             '<p>' + d.res.desc + '</p>'
-           )
-         )
-       );
+
+$("input[name=link]", ele).keydown(function(e){
+  if ( e.key === "Enter" ){
+    e.preventDefault();
+    var $input = $(this),
+        v = $input.val(),
+        $target = $("table.appui-task-link-container", ele),
+        $li;
+    if ( v.toLowerCase().indexOf("http") !== 0 ){
+      v = "http://" + v;
     }
-  });
+    $target.append(
+      '<tr><td class="k-file k-file-progress">' +
+      '<div class="k-progress">' +
+      '<table><tr>' +
+      '<td class="appui-task-link-image"><i class="fa fa-link"> </i></td>' +
+      '<td class="appui-task-link-title"><div><strong><a href="' + v + '">' + v + '</a></strong><br></div></td>' +
+      '<td class="appui-task-link-actions">' +
+        '<span class="k-upload-pct"> </span>' +
+        '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
+          '<span title="Supprimer" class="k-icon k-i-close k-delete"></span>' +
+        '</button>' +
+      '</tr></table>' +
+      '</div>' +
+      '</td></tr>'
+    );
+    $target.redraw();
+    $input.val("");
+    $li = $target.find("tr:last").parent().closest("tr");
+    appui.fn.post(data.root + "link_preview", {url: v, ref: data.ref}, function(d){
+      if ( d.res && d.res.realurl ){
+        appui.fn.log("ok", d.res);
+        $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-success");
+        if ( d.res.pictures ){
+          $.each(d.res.pictures, function(i, v){
+            if ( v.h96 ){
+              $li.find("td.appui-task-link-image").html('<img src="pm/image/tmp/' + data.ref + '/' + v.h96 + '">');
+              return false;
+            }
+          });
+        }
+        var st = '<strong><a href="' + d.res.realurl + '">' +
+            ( d.res.title ? d.res.title : d.res.realurl ) +
+            '</a></strong><br>';
+        if ( d.res.desc ){
+          st += d.res.desc;
+        }
+        $li.find("td.appui-task-link-title div").html(st);
+      }
+      else{
+        $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");
+      }
+    });
+  }
 });

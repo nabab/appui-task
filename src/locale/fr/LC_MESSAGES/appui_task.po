@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-06 11:31+0200\n"
+"POT-Creation-Date: 2016-04-12 11:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,42 +18,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: mvc/public/new.php:9 ../../../mvc/html/new.php:9
+#: ../../../mvc/html/new.php:12
 msgid "Comment"
 msgstr "Commentaire"
 
 #: mvc/public/new.php:11 ../../../mvc/html/new.php:11
+#: ../../../mvc/html/new.php:14
 msgid "Simple text"
 msgstr "Texte simple"
 
 #: mvc/public/new.php:12 ../../../mvc/html/new.php:12
+#: ../../../mvc/html/new.php:15
 msgid "Rich text"
 msgstr "Texte enrichi"
 
 #: mvc/public/new.php:13 ../../../mvc/html/new.php:13
+#: ../../../mvc/html/new.php:16
 msgid "Markdown"
 msgstr "Format Markdown"
 
 #: mvc/public/new.php:14 ../../../mvc/html/new.php:14
+#: ../../../mvc/html/new.php:17
 msgid "PHP code"
 msgstr "Code PHP"
 
 #: mvc/public/new.php:15 ../../../mvc/html/new.php:15
+#: ../../../mvc/html/new.php:18
 msgid "JavaScript code"
 msgstr "Code JavaScript"
 
 #: mvc/public/new.php:16 ../../../mvc/html/new.php:16
+#: ../../../mvc/html/new.php:19
 msgid "CSS code"
 msgstr "Code CSS"
 
 #: mvc/public/new.php:23 ../../../mvc/html/new.php:23
+#: ../../../mvc/html/new.php:26
 msgid "Category"
 msgstr "Catégorie"
 
 #: mvc/public/new.php:28 ../../../mvc/html/new.php:28
+#: ../../../mvc/html/new.php:46
 msgid "Deadline"
 msgstr "Date butoir"
 
 #: mvc/public/new.php:37 ../../../mvc/html/new.php:37
+#: ../../../mvc/html/new.php:69
 msgid "Roles"
 msgstr "Rôles"
 
@@ -66,32 +76,38 @@ msgid "Attachments"
 msgstr "Pièces jointes"
 
 #: mvc/public/new.php:63 ../../../mvc/html/new.php:63
+#: ../../../mvc/html/new.php:55
 msgid "Links"
 msgstr "Liens"
 
 #: mvc/public/new.php:75 ../../../mvc/html/new.php:75
+#: ../../../mvc/html/new.php:109
 msgid "Create task"
 msgstr "Créer la tâche"
 
 #: mvc/public/new.php:10 ../../../mvc/public/new.php:10
+#: ../../../mvc/model/new.php:13
 msgid "Are you sure you want to remove yourself from this task??"
 msgstr "Êtes-vous sûr de vouloir vous supprimer vous-même de cette tâche??"
 
 #: public/ongoing.php:8 ../../../mvc/public/projects.php:19
 #: ../../../mvc/public/ongoing.php:8 ../../../mvc/public/projects.php:22
+#: ../../../mvc/public/projects.php:23
 msgid "My ongoing tasks"
 msgstr "Mes tâches en cours"
 
 #: public/new.php:12 ../../../mvc/public/new.php:12
-#: ../../../mvc/public/new.php:22
+#: ../../../mvc/public/new.php:22 ../../../mvc/public/new.php:9
 msgid "New task"
 msgstr "Nouvelle tâche"
 
 #: ../../../mvc/public/projects.php:20 ../../../mvc/public/projects.php:23
+#: ../../../mvc/public/projects.php:24
 msgid "Timeline"
 msgstr "Ligne de temps"
 
 #: ../../../mvc/public/projects.php:21 ../../../mvc/public/projects.php:24
+#: ../../../mvc/public/projects.php:25
 msgid "Search"
 msgstr "Recherche"
 
@@ -100,15 +116,53 @@ msgstr "Recherche"
 msgid "Projects"
 msgstr "Projets"
 
-#: ../../../mvc/public/new.php:12
+#: ../../../mvc/public/new.php:12 ../../../mvc/html/new.php:80
+#: ../../../mvc/model/new.php:21
 msgid "Worker"
 msgstr "Exécutant"
 
-#: ../../../mvc/public/new.php:15
+#: ../../../mvc/public/new.php:15 ../../../mvc/html/new.php:72
+#: ../../../mvc/model/new.php:24
 msgid "Manager"
 msgstr "Responsable"
 
-#: ../../../mvc/public/new.php:18
+#: ../../../mvc/public/new.php:18 ../../../mvc/html/new.php:88
+#: ../../../mvc/model/new.php:27
 msgid "Spectator"
 msgstr "Spectateur"
 
+#: ../../../mvc/html/new.php:31
+msgid "Priority"
+msgstr "Priorité"
+
+#: ../../../mvc/html/new.php:51
+msgid "Files"
+msgstr "Fichiers"
+
+#: ../../../mvc/html/new.php:59
+msgid "Type or paste your URL and press Enter to valid"
+msgstr "Tapez ou collez votre URL et pressez Entrée pour valider"
+
+#: ../../../mvc/html/new.php:98
+msgid "Drag and drop the users into the corresponding role block"
+msgstr "Faites glisser les utilisateurs ou les groupes dans les blocs correspondants"
+
+#: ../../../mvc/model/new.php:14
+msgid "File"
+msgstr "Fichier"
+
+#: ../../../mvc/model/new.php:15
+msgid "Link"
+msgstr "Lien"
+
+#: ../../../mvc/model/new.php:16
+msgid "Problem with the file..."
+msgstr "Problème avec le fichier"
+
+#: ../../../mvc/model/new.php:17
+msgid "Problem during the upload"
+msgstr "Problème pendant l'envoi du fichier"
+
+#: ../../../mvc/model/new.php:18
+msgid "A file with this name already exists"
+msgstr "Un fichier de ce nom existe déjà"
