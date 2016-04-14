@@ -6,4 +6,4 @@
 
 /** @var $this \bbn\mvc\model */
 $pm = new \bbn\appui\task($this->db, $this->inc->user, $this->inc->options);
-return $pm->categories();
+return ['items' => $pm->get_mine()];

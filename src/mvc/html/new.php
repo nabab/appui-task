@@ -5,7 +5,7 @@
   <div class="appui-line-breaker" id="appui_task_form_container">
 
     <div class="appui-form-full">
-      <input name="title" class="k-textbox appui-l title" placeholder="Title/short description of the new task" required="required">
+      <input name="title" class="k-textbox appui-lg title" placeholder="Title/short description of the new task" required="required">
     </div>
 
     <div class="appui-form-label">
@@ -66,7 +66,7 @@
 
     <div class="appui-form-full">
       <div class="k-block">
-        <div class="k-header appui-l"><div><?=_("Roles")?></div></div>
+        <div class="k-header appui-lg"><div><?=_("Roles")?></div></div>
         <div class="k-content">
           <div class="k-block appui-task-assigned">
             <div class="k-header"><?=_("Manager")?></div>
@@ -93,7 +93,7 @@
           </div>
           <div class="appui-form-full">
             <div class="appui-task-usertree"></div>
-            <div class="appui-task-roles-desc appui-l">
+            <div class="appui-task-roles-desc appui-lg">
               <i class="fa fa-question-circle"> </i>
               <?=_("Drag and drop the users into the corresponding role block")?>
             </div>
@@ -104,7 +104,7 @@
 
     <div class="appui-form-label"> </div>
     <div class="appui-form-field">
-      <button class="k-button appui-l" data-bind="click: insert">
+      <button class="k-button appui-lg" data-bind="click: insert">
         <i class="fa fa-save"> </i>
         <?=_("Create task")?>
       </button>

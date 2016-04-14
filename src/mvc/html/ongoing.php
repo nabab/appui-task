@@ -1,7 +1,1 @@
-<!-- HTML Document -->
-
-<ul>
-<?php foreach ( $items as $it ) { ?>
-  <li><?=$it['text']?></li>
-<?php } ?>
-</ul>
+<div id="bbn_tasks_mine_container" class="appui-full-height"></div>
