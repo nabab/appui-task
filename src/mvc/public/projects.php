@@ -26,7 +26,9 @@ if ( $obj = $new->get() ){
 $this->combo(_("Projects"), [
   'root' => $this->data['root'],
   'lng' => [
+    'opened_tasks' => _("Opened tasks"),
     'new_task' => _("New task"),
+    'demo_task' => _("Demo task form"),
     'my_ongoing_tasks' => _("My ongoing tasks"),
     'timeline' => _("Timeline"),
     'search' => _("Search"),

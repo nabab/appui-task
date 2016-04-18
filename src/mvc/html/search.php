@@ -4,7 +4,7 @@
   <div class="appui-form-full appui-c">
     <input name="title" class="k-textbox appui-lg" placeholder="Title/short description of the new task" required="required">
   </div>
-  <ul>
+  <ul data-bind="source: rows" data-template="appui_tasks_search_element">
     
   </ul>
 </div>

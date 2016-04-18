@@ -2,10 +2,19 @@
 $(ele).closest(".k-content").css("padding", "0px");
 
 $("#appui_task_tabnav").tabNav({
-  baseURL: data.root + 'projects/',
   baseTitle: 'Projects - ',
   scrollable: false,
   list: [{
+    title: data.lng.opened_tasks,
+    content: '<div class="appui-task-opened-task-tabstrip appui-full-height"> </div>',
+    url: "opened",
+    static: true,
+    callback: function(cont, idx, dt, widget){
+      $(".appui-task-opened-task-tabstrip", cont).tabNav({
+        baseURL: "pm/projects/opened/"
+      });
+    }
+  }, {
     title: data.lng.new_task + ' / ' + data.lng.search,
     content: ' ',
     url: "search",
@@ -19,12 +28,28 @@ $("#appui_task_tabnav").tabNav({
             if ( v.length > 1 ){
               appui.fn.post(data.root + "search", {search: v}, function(d){
                 if ( d.data ){
-                  
+                  for ( var i = 0; i < d.data.length; i++ ){
+                    
+                  }
+                  kendo.bind($(".appui-task-search-container ul", cont), d.data);
                 }
               });
             }
-            appui.fn.log(e, $(this).val());
           });
+        }
+      });
+    }
+  }, {
+    title: data.lng.demo_task,
+    content: ' ',
+    url: "new",
+    static: true,
+    callonce: function(cont, idx, dt, widget){
+      appui.fn.post(data.root + 'new', function(d){
+        if ( d.html ){
+          widget.setContent(d.html, idx);
+          var data = d.data;
+          eval(d.script);
         }
       });
     }

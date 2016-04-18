@@ -2,7 +2,6 @@
 var ds = new kendo.data.TreeListDataSource({
   transport: {
     read: function(e){
-      appui.fn.log(e);
       appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
         if ( d && d.tasks ){
           e.success(d.tasks);
@@ -36,6 +35,13 @@ $("div.appui-task-gantt", ele).kendoTreeList({
   pageable: {
     refresh: true
   },
+  dataBound: function(e){
+    $(e.sender.element).find("tbody tr").not("[class*='appui-task-pr']").each(function(){
+      var dataItem = e.sender.dataItem(this);
+      $(this).addClass("appui-task-pr" + dataItem.get("priority"));
+      appui.fn.log("Adding class");
+    })
+  },
   sortable: true,
   dataSource: ds,
   columns: [
@@ -44,9 +50,6 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       title: "Priority",
       width: 100,
       expandable: true
-    }, {
-      field: "id",
-      width: 100,
     }, {
       field: "id_parent",
       hidden: true
@@ -97,6 +100,13 @@ $("div.appui-task-gantt", ele).kendoTreeList({
     }, {
       field: "title",
       title: "Title",
+    }, {
+      field: "id",
+      title: " ",
+      width: 50,
+      template: function(e){
+        return '<a href="' + data.root + 'projects/' + e.id + '" title="' + data.lng.see_task + '"><button class="k-button"><i class="fa fa-eye"> </i></button></a>';
+      }
     }
   ]
 });

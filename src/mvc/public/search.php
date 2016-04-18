@@ -7,7 +7,7 @@
 /** @var $this \bbn\mvc\controller */
 
 if ( isset($this->post['search']) ){
-  $this->obj->data = $this->get_model();
+  $this->obj->data = $this->get_model($this->post);
 }
 else{
   $this->combo("Recherche");
