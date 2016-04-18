@@ -6,4 +6,4 @@
 
 /** @var $this \bbn\mvc\model*/
 $pm = new \bbn\appui\task($this->db);
-return $pm->get_mine(empty($this->data['id']) ? null : $this->data['id']);
+return $pm->get_mine(isset($this->data['id']) ? $this->data['id'] : null);

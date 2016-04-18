@@ -5,8 +5,6 @@ var ds = new kendo.data.TreeListDataSource({
       appui.fn.log(e);
       appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
         if ( d && d.tasks ){
-          appui.fn.log("OK");
-          //d.tasks.unshift({id:0, is_parent: true, id_parent: null, title: "My tasks"});
           e.success(d.tasks);
         }
         else{
@@ -35,6 +33,9 @@ var ds = new kendo.data.TreeListDataSource({
   }
 });
 $("div.appui-task-gantt", ele).kendoTreeList({
+  pageable: {
+    refresh: true
+  },
   sortable: true,
   dataSource: ds,
   columns: [
@@ -45,7 +46,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       expandable: true
     }, {
       field: "id",
-      hidden: true
+      width: 100,
     }, {
       field: "id_parent",
       hidden: true

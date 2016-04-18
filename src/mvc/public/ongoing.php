@@ -5,4 +5,12 @@
  **/
 
 /** @var $this \bbn\mvc\controller */
-$this->combo(_("My ongoing tasks"));
+if ( !isset($this->post['id']) ){
+  echo $this->set_title("Gantt")->add_js([
+    'root' => $this->data['root'],
+    'lng' => []
+  ])->get_view();
+}
+else{
+  $this->obj->tasks = $this->get_model($this->post);
+}
