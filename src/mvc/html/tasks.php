@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 <?php if ( $is_template ){ ?>
 <div class="appui-full-height">
-	<div class="info-tabstrip" style="height:100%"></div>
+	<div class="info-tabstrip" style="height:100%" id="appui_task<?=$id?>"></div>
 </div>
 <?php } else { ?>
 <div class="appui-task-opened-tabstrip appui-full-height">
