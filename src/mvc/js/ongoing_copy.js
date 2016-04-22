@@ -2,8 +2,11 @@
 var ds = new kendo.data.TreeListDataSource({
   transport: {
     read: function(e){
+      appui.fn.log(e);
       appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
         if ( d && d.tasks ){
+          appui.fn.log("OK");
+          //d.tasks.unshift({id:0, is_parent: true, id_parent: null, title: "My tasks"});
           e.success(d.tasks);
         }
         else{
@@ -32,22 +35,6 @@ var ds = new kendo.data.TreeListDataSource({
   }
 });
 $("div.appui-task-gantt", ele).kendoTreeList({
-  pageable: {
-    refresh: true
-  },
-  dataBound: function(e){
-    $(e.sender.element).find("tbody tr[class*='appui-task-pr']").each(function(){
-      var $$ = $(this);
-      for ( var i = 1; i <= 10; i++ ){
-        $$.removeClass("appui-task-pr" + i);
-      }
-    });
-    $(e.sender.element).find("tbody tr").each(function(){
-      var dataItem = e.sender.dataItem(this);
-      $(this).addClass("appui-task-pr" + dataItem.get("priority"));
-      appui.fn.log("Adding class");
-    })
-  },
   sortable: true,
   dataSource: ds,
   columns: [
@@ -56,6 +43,9 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       title: "Priority",
       width: 100,
       expandable: true
+    }, {
+      field: "id",
+      hidden: true
     }, {
       field: "id_parent",
       hidden: true
@@ -106,13 +96,6 @@ $("div.appui-task-gantt", ele).kendoTreeList({
     }, {
       field: "title",
       title: "Title",
-    }, {
-      field: "id",
-      title: " ",
-      width: 50,
-      template: function(e){
-        return '<a href="' + data.root + 'tasks/display_' + e.id + '" title="' + data.lng.see_task + '"><button class="k-button"><i class="fa fa-eye"> </i></button></a>';
-      }
     }
   ]
 });

@@ -5,7 +5,7 @@
  **/
 
 /** @var $this \bbn\mvc\model */
-$pm = new \bbn\appui\task($this->db, $this->inc->user, $this->inc->options);
+$pm = new \bbn\appui\task($this->db);
 $s =& $this->inc->session;
 return [
   'ref' => time(),

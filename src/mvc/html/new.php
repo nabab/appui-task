@@ -2,7 +2,7 @@
 
 <form action="<?=$root?>/insert">
   <input type="hidden" name="ref" data-bind="value: ref">
-  <div class="appui-line-breaker" id="appui_task_form_container">
+  <div class="appui-line-breaker appui-task-form-container">
 
     <div class="appui-form-full">
       <input name="title" class="k-textbox appui-lg title" placeholder="Title/short description of the new task" required="required">
@@ -93,7 +93,7 @@
           </div>
           <div class="appui-form-full">
             <div class="appui-task-usertree"></div>
-            <div class="appui-task-roles-desc appui-lg">
+            <div class="appui-task-roles-desc container-placeholder appui-lg">
               <i class="fa fa-question-circle"> </i>
               <?=_("Drag and drop the users into the corresponding role block")?>
             </div>

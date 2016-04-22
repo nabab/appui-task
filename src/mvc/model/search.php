@@ -12,4 +12,4 @@ if ( isset($this->data['search']) ){
     return ['rows' => $rows];
   }
 }
-return [];
+return ['rows' => []];

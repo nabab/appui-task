@@ -292,7 +292,7 @@ var uploadedFiles = [],
         return "file-o";
       }
       return false;
-    }
+    },
     createUpload = function(){
       appui.fn.log("CREATE", uploadedFiles);
       var uploader = $('<input name="file" type="file"/>');

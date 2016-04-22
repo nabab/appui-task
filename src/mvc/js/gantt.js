@@ -36,7 +36,13 @@ $("div.appui-task-gantt", ele).kendoTreeList({
     refresh: true
   },
   dataBound: function(e){
-    $(e.sender.element).find("tbody tr").not("[class*='appui-task-pr']").each(function(){
+    $(e.sender.element).find("tbody tr[class*='appui-task-pr']").each(function(){
+      var $$ = $(this);
+      for ( var i = 1; i <= 10; i++ ){
+        $$.removeClass("appui-task-pr" + i);
+      }
+    });
+    $(e.sender.element).find("tbody tr").each(function(){
       var dataItem = e.sender.dataItem(this);
       $(this).addClass("appui-task-pr" + dataItem.get("priority"));
       appui.fn.log("Adding class");
