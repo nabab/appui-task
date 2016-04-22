@@ -6,4 +6,4 @@
 
 /** @var $this \bbn\mvc\controller */
 
-$this->combo(_("New task"), 1);
+$this->combo(_("Demo task form"), 1);
