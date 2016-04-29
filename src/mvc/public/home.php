@@ -15,7 +15,7 @@ if ( $this->get_url() === $this->obj->url ){
 $new = $this->add('./new');
 if ( $obj = $new->get() ){
 	$this->data['title'] = $obj->title;
-  $this->data['content'] = $obj->output;
+  $this->data['content'] = $obj->content;
   $this->data['script'] = $obj->script;
   if ( !empty($obj->data) ){
     $this->add_data($obj->data);

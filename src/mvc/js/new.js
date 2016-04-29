@@ -186,9 +186,9 @@ $("input:first", ele).keyup(function(){
 $li.draggable(dragCfg);
 
 $("div.appui-task-assigned", ele).droppable({
-  accept: "*",
-  hoverClass: "selected",
-  activeClass: "active",
+  accept: ".appui-task-usertree li",
+  hoverClass: "bbn-dropable-hover",
+  activeClass: "bbn-dropable-active",
   drop: function(e, ui){
     var $ul = $(this).find("ul"),
         dataItem = $tree.dataItem(ui.draggable),
