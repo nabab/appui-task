@@ -1,5 +1,9 @@
 // Javascript Document
 var ds = new kendo.data.TreeListDataSource({
+  sort: {
+    field: "priority"
+  },
+  serverSorting: false,
   transport: {
     read: function(e){
       appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
@@ -35,20 +39,20 @@ $("div.appui-task-gantt", ele).kendoTreeList({
   pageable: {
     refresh: true
   },
+  sortable: true,
   dataBound: function(e){
-    $(e.sender.element).find("tbody tr[class*='appui-task-pr']").each(function(){
+    $(e.sender.element).find("tbody tr[class*='appui-task-pr'] td:first-child").each(function(){
       var $$ = $(this);
       for ( var i = 1; i <= 10; i++ ){
         $$.removeClass("appui-task-pr" + i);
       }
     });
-    $(e.sender.element).find("tbody tr").each(function(){
+    $(e.sender.element).find("tbody tr td:first-child").each(function(){
       var dataItem = e.sender.dataItem(this);
       $(this).addClass("appui-task-pr" + dataItem.get("priority"));
       appui.fn.log("Adding class");
     })
   },
-  sortable: true,
   dataSource: ds,
   columns: [
     {

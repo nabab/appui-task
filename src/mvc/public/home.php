@@ -42,5 +42,7 @@ if ( empty($this->post['appui_baseURL']) ){
 else if ( !empty($this->arguments) ){
   $ctrl = $this->add('./'.implode($this->arguments, '/'), \bbn\x::merge_arrays($this->data, $this->post), true);
   $this->obj = $ctrl->get();
-  $this->obj->url = implode($this->arguments, '/');
+  if ( !isset($this->obj->url) ){
+    $this->obj->url = implode($this->arguments, '/');
+  }
 }
