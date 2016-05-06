@@ -6,4 +6,4 @@
 
 /** @var $this \bbn\mvc\controller */
 
-$this->combo(_("Demo task form"), 1);
+$this->combo('<i class="fa fa-file-text-o"> </i> &nbsp; '._("Demo task form"), 1);

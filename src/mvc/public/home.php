@@ -23,21 +23,9 @@ if ( $obj = $new->get() ){
 }
 */
 if ( empty($this->post['appui_baseURL']) ){
-  $this->combo(_("Projects"), [
-    'root' => $this->data['root'],
-    'options' => \bbn\appui\task::get_options(),
-    'categories' => \bbn\appui\task::get_cats(),
-    'lng' => [
-      'opened_tasks' => _("Opened tasks"),
-      'new_task' => _("New task"),
-      'demo_task' => _("Demo task form"),
-      'my_ongoing_tasks' => _("My ongoing tasks"),
-      'timeline' => _("Timeline"),
-      'search' => _("Search"),
-      'soon' => _("Soon"),
-      'all_tasks' => _("All tasks")
-    ]
-  ]);
+  $this->combo('<i class="fa fa-bug"> </i> &nbsp; '._("Projects"), true);
+  $this->obj->bcolor = '#000000';
+  $this->obj->fcolor = '#FFFFFF';
 }
 else if ( !empty($this->arguments) ){
   $ctrl = $this->add('./'.implode($this->arguments, '/'), \bbn\x::merge_arrays($this->data, $this->post), true);

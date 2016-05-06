@@ -6,7 +6,7 @@
 
 /** @var $this \bbn\mvc\controller */
 if ( !isset($this->post['id']) ){
-  echo $this->set_title("Mes tâches en cours")->add_js([
+  echo $this->set_title('<i class="fa fa-clock-o"> </i> &nbsp; Mes tâches en cours')->add_js([
     'root' => $this->data['root'],
     'lng' => []
   ])->get_view();

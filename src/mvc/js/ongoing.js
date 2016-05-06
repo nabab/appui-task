@@ -1,65 +1,70 @@
 // Javascript Document
 var ds = new kendo.data.TreeListDataSource({
-  sort: {
-    field: "priority"
-  },
-  serverSorting: false,
-  transport: {
-    read: function(e){
-      appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
-        if ( d && d.tasks ){
-          e.success(d.tasks);
+      sort: [{
+        field: "priority",
+        dir: "asc"
+      }],
+      transport: {
+        read: function(e){
+          appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
+            if ( d && d.tasks ){
+              e.success(d.tasks);
+            }
+            else{
+              e.error();
+            }
+          });
         }
-        else{
-          e.error();
+      },
+      schema: {
+        model: {
+          id: "id",
+          parentId: "id_parent",
+          fields: {
+            id: {type: "number", nullable: false},
+            id_parent: {type: "number", nullable: true},
+            is_parent: {type: "boolean"},
+            first: {type: "date"},
+            last: {type: "date"},
+            title: {type: "string"},
+            priority: {type: "number"},
+            state: {type: "string"},
+            type: {type: "string"},
+            id_user: {type: "string"},
+          }
         }
-      });
-    }
-  },
-  schema: {
-    model: {
-      id: "id",
-      parentId: "id_parent",
-      fields: {
-        id: {type: "number", nullable: false},
-        id_parent: {type: "number", nullable: true},
-        is_parent: {type: "boolean"},
-        first: {type: "date"},
-        last: {type: "date"},
-        title: {type: "string"},
-        priority: {type: "number"},
-        state: {type: "string"},
-        type: {type: "string"},
-        id_user: {type: "string"},
       }
-    }
-  }
-});
-$("div.appui-task-gantt", ele).kendoTreeList({
+    }),
+    gant_container = $("div.appui-task-gantt", ele);
+
+gant_container.kendoTreeList({
   pageable: {
     refresh: true
   },
   sortable: true,
-  dataBound: function(e){
-    $(e.sender.element).find("tbody tr[class*='appui-task-pr'] td:first-child").each(function(){
-      var $$ = $(this);
-      for ( var i = 1; i <= 10; i++ ){
-        $$.removeClass("appui-task-pr" + i);
-      }
-    });
-    $(e.sender.element).find("tbody tr td:first-child").each(function(){
-      var dataItem = e.sender.dataItem(this);
-      $(this).addClass("appui-task-pr" + dataItem.get("priority"));
-      appui.fn.log("Adding class");
-    })
-  },
   dataSource: ds,
+  columnMenu: true,
+  dataBound: function(e){
+    e.sender.element.find("tbody tr").each(function(){
+      var v = e.sender.dataItem(this);
+      $(this).find("td:eq(1)").css({
+        backgroundColor: appui.tasks.priority_colors[v.priority-1],
+        color: v.priority > 6 ? '#666' : '#EEE'
+      })
+    });
+  },
   columns: [
     {
+      field: "title",
+      title: "Title",
+      expandable: true,
+    }, {
       field: "priority",
-      title: "Priority",
-      width: 100,
-      expandable: true
+      title: "!",
+      attributes: {
+        style: "text-align: center; font-weight: bold; border-top: 1px solid #FFF"
+      },
+      width: 60
     }, {
       field: "id_parent",
       hidden: true
@@ -70,6 +75,10 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       field: "type",
       title: "Type",
       width: 150
+    }, {
+      field: "num_notes",
+      title: "#",
+      width: 50
     }, {
       field: "state",
       title: "State",
@@ -95,6 +104,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       field: "first",
       title: "Start",
       width: 100,
+      hidden: true,
       template: function(e){
         var t = moment(e.first);
         return t.fromNow();
@@ -103,13 +113,19 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       field: "last",
       title: "Last",
       width: 100,
+      hidden: true,
       template: function(e){
         var t = moment(e.last);
         return t.format("DD MMM YY");
       }
     }, {
-      field: "title",
-      title: "Title",
+      field: "target_date",
+      title: "Deadline",
+      width: 100,
+      template: function(e){
+        var t = moment(e.last);
+        return t.format("DD MMM YY");
+      }
     }, {
       field: "id",
       title: " ",
