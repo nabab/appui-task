@@ -19,7 +19,7 @@ return [
   ],
   'roles' => [[
     "text" => _("Worker"),
-    "value" => "doer"
+    "value" => "worker"
   ], [
     "text" => _("Manager"),
     "value" => "manager"

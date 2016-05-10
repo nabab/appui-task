@@ -26,6 +26,7 @@ if ( empty($this->post['appui_baseURL']) ){
   $this->combo('<i class="fa fa-bug"> </i> &nbsp; '._("Projects"), true);
   $this->obj->bcolor = '#000000';
   $this->obj->fcolor = '#FFFFFF';
+  $this->obj->url = $this->say_dir();
 }
 else if ( !empty($this->arguments) ){
   $ctrl = $this->add('./'.implode($this->arguments, '/'), \bbn\x::merge_arrays($this->data, $this->post), true);

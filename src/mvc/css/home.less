@@ -1,7 +1,36 @@
 /* LESS Document */
 
 #appui_task_tabnav{
-  
+  div.appui-task-search-container{
+    overflow: hidden;
+  }
+  .appui-task-info-ppl{
+    padding: 1em;
+    overflow: auto;
+    div.appui-block{
+      width: 30%;
+      img{
+        width: 16px;
+        height: auto;
+      }
+      ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .appui-block{
+        white-space: nowrap;
+        width: inherit;
+      }
+    }
+    div.appui-block:nth-child(even) {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+  .appui-task-comments.ui.comments{
+    max-width: inherit;
+  }
   padding: 0;
   .appui-task-pr1{
     background-color: #F00 !important;
@@ -56,6 +85,9 @@
     input.title{
       width: 100%;
     }
+    .appui-form-label{
+      padding-right: 20px
+    }
     .appui-form-field,.appui-form-label{
       margin-top: 1em;
       textarea{
@@ -105,37 +137,42 @@
         }
       }
     }
-    div.k-block{
-      div.k-header{
-        font-size: 1em;
-        height: auto;
-        div{
-          padding: 0 1.5em;
+  }
+  div.appui-task-roles-container{
+    div.k-header{
+      font-size: 1em;
+      height: auto;
+      div{
+        padding: 0 1.5em;
+      }
+    }
+    div.k-content{
+      div.appui-spacer{
+        width: 2%;
+      }
+      div.appui-task-assigned{
+        width: 32%;
+        float: left;
+        div.k-header{
+          text-align: center;
+        }
+        div.k-content{
+          background-color: inherit;
+        }
+        ul{
+          list-style: none;
         }
       }
-      div.k-content{
-        padding: 1em 1.5%;
-        div.appui-spacer{
-          width: 2%;
-        }
-        div.appui-task-assigned{
-          width: 32%;
-          float: left;
-          div.k-header{
-            text-align: center;
-          }
-          div.k-content{
-            background-color: inherit;
-          }
-          ul{
-            list-style: none;
-          }
-        }
-        div.appui-task-roles-desc{
-          right: 0;
-        }
+      div.appui-task-roles-desc{
+        right: 30px;
       }
     }
   }
-
+  div.tab-logs{
+    .appui-avatar {
+      img{
+        width: 36px;
+      }
+    }
+  }
 }

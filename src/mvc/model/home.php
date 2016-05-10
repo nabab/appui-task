@@ -11,6 +11,7 @@ return [
   'root' => $this->data['root'],
   'options' => \bbn\appui\task::get_options(),
   'categories' => \bbn\appui\task::get_cats(),
+  'priority_colors' => ['#F00', '#F40', '#F90', '#FC0', '#FF0', '#AD0', '#5B0', '#090', '#CCC', '#FFF'],
   'lng' => [
     'opened_tasks' => _("Opened tasks"),
     'new_task' => _("New task"),

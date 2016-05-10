@@ -6,7 +6,7 @@
 
 /** @var $this \bbn\mvc\controller */
 if ( !isset($this->post['search']) ){
-  $this->combo('<i class="fa fa-plus-square"> </i> &nbsp; '._("New task").' / '._("Search"), [
+  $this->combo('<i class="fa fa-home appui-lg" title="'._("New task").' / '._("Search").'"> </i>', [
     'root' => $this->data['root'],
     'lng' => []
   ]);
