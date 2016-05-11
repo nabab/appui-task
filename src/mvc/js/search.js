@@ -14,7 +14,14 @@ var ds = new kendo.data.TreeListDataSource({
       }],
       transport: {
         read: function(e){
-          appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
+          var myData = {
+                selection: $("input[name=selection]").val() || 'mine'
+              },
+        			v = $(".appui-task-search-container input.appui-lg", ele).val();
+          if ( v ){
+            myData.search = v;
+          }
+          appui.fn.post(data.root + 'treelist', myData, function(d){
             if ( d && d.tasks ){
               e.success(d.tasks);
             }
@@ -45,6 +52,11 @@ var ds = new kendo.data.TreeListDataSource({
     }),
     gant_container = $("div.appui-task-gantt", ele);
 
+kendo.bind(ele, {
+  change_selection: function(){
+    ds.read();
+  }
+});
 gant_container.kendoTreeList({
   autoBind: false,
   sortable: true,
@@ -153,14 +165,8 @@ $(ele).closest(".ui-tabNav").tabNav("addCallback", function(cont){
 var timer;
 $(".appui-task-search-container input.appui-lg", ele).keyup(function(e){
   clearTimeout(timer);
-  var v = $(this).val();
   timer = setTimeout(function(){
-    if ( v.length > 1 ){
-      ds.read({search: v});
-    }
-    else{
-      ds.read();
-    }
+    ds.read();
   }, 1000);
 });
 $(".appui-task-search-container button", ele).click(function(){

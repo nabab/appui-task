@@ -61,6 +61,19 @@
       </div>
     </div>
 
+    <div class="appui-form-label"> </div>
+    <div class="appui-form-field">
+      <select data-role="dropdownlist">
+        <option value=""><?=_("Actions")?></option>
+        <option value="close"><?=_("Close")?></option>
+        <option value="hold"><?=_("Put on hold")?></option>
+        <option value="to_manager"><?=_("Make me a manager")?></option>
+        <option value="to_worker"><?=_("Make me a worker")?></option>
+        <option value="to_viewer"><?=_("Make me a viewer")?></option>
+        <option value="ping"><?=_("Ping workers")?></option>
+      </select>
+    </div>
+
     <div class="appui-line-breaker"> </div>
 
     <div class="appui-form-label appui-p" onclick="$(this).next().toggle().redraw().next().toggle().redraw()">
@@ -115,7 +128,7 @@
       </div>
     </div>
   </div>
-
+  
 	<div class="appui-form-full appui-task-comments ui comments" data-bind="source: notes" data-template="tpl-appui_task_comment"></div>
 </script>
 <script type="text/x-kendo-template" id="tpl-appui_task_comment">
