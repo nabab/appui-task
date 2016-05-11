@@ -1,5 +1,5 @@
 // Javascript Document
-$(ele).closest(".k-content").css("padding", "0px");
+//$(ele).closest(".k-content").css("padding", "0px");
 
 var tabnav = $("#appui_task_tabnav").tabNav({
   baseTitle: 'Projects - ',
@@ -43,19 +43,455 @@ appui.tasks = {
 	},
   mainView: function(info, ele){
     var textarea = $("textarea", ele),
-        cont_textarea = textarea.parent(),
-        old_type = 'text',
-    		ref = (new moment()).unix();
+        cont_textarea = textarea.parent();
+    textarea.kendoEditor({
+      tools: [
+        "formatting",
+        "bold",
+        "italic",
+        "underline",
+        "justifyLeft",
+        "justifyCenter",
+        "justifyRight",
+        "insertUnorderedList",
+        "insertOrderedList",
+        "indent",
+        "outdent",
+        "createLink",
+        "unlink"
+      ]
+    });
     if ( info.notes ){
       $.each(info.notes, function(i, v){
         var m = new moment(v.creation);
         info.notes[i].since = m.fromNow();
       });
     }
-    kendo.bind(ele, $.extend(info, {
+    kendo.bind(ele, info);
+    var ddTree = appui.tasks.typeField(ele),
+        uploadedFiles = [],
+        uploadWrapper = $("div.appui-task-upload-wrapper", ele),
+        iconClass = function(file){
+          if ( file.extension ){
+            var ext = file.extension.substr(1),
+                cls = "file-o";
+            if ( ext === "pdf" ){
+              return "file-pdf-o";
+            }
+            else if ( $.inArray(ext, ["xls", "xlsx", "csv", "ods"]) > -1 ){
+              return "file-excel-o";
+            }
+            else if ( $.inArray(ext, ["rtf", "doc", "docx", "odt"]) > -1 ){
+              return "file-word-o";
+            }
+            else if ( $.inArray(ext, ["svg", "gif", "png", "jpg", "jpeg"]) > -1 ){
+              return "file-picture-o";
+            }
+            else if ( $.inArray(ext, ["zip", "gz", "rar", "7z", "bz2", "xz"]) > -1 ){
+              return "file-archive-o";
+            }
+            return "file-o";
+          }
+          return false;
+        },
+        createUpload = function(){
+          var uploader = $('<input name="file" type="file"/>');
+          uploadWrapper.empty().append(uploader);
+          uploader.kendoUpload({
+            localization: {
+              select: "Fichiers / Images"
+            },
+            async: {
+              saveUrl: data.root + "upload/" + info.ref,
+              removeUrl: data.root + "unupload/" + info.ref
+            },
+            template: function(e){
+              var size,
+                  unit;
+              if ( e.size > 5000000 ){
+                unit = 'Mb';
+                size = Math.floor(e.size / 1024 / 1024).toString();
+              }
+              else if ( e.size > 1024 ){
+                unit = 'Kb';
+                size = Math.floor(e.size / 1024).toString();
+              }
+              else{
+                unit = 'b';
+                size = e.size;
+              }
+              if ( e.files && e.files[0] ){
+                var st = '<div class="k-progress"><table><tbody><tr><td class="appui-task-link-image">',
+                    done = false;
+                if ( e.files[0].imgs ){
+                  $.each(e.files[0].imgs, function(i, v){
+                    if ( v.h96 ){
+                      st += '<img src="' + data.root + 'image/tmp/' + info.ref + v.h96 + '">';
+                      done = 1;
+                      return false;
+                    }
+                  });
+                }
+                if ( !done ){
+                  st += '<i class="fa fa-' + iconClass(e.files[0]) + '"> </i>';
+                }
+                st += '</td><td class="appui-task-link-title">' + e.name + '</td>' +
+                  '<td class="appui-task-link-actions">' +
+                  '<span class="k-upload-pct">' + kendo.toString(size, 'n0') + ' ' + unit + '</span>' +
+                  '<button class="k-button k-button-bare k-upload-action" type="button">' +
+                  '<span class="k-icon k-i-close k-delete" title="Supprimer"></span>' +
+                  '</button>' +
+                  '</td></tr></tbody></table></div>';
+                return st;
+              }
+            },
+
+            // @todo Voir la taille
+            files: uploadedFiles,
+            upload: function(e){
+              if ( e.files && e.files[0] ){
+                var idx = appui.fn.search(uploadedFiles, "name", e.files[0].name);
+                if ( idx > -1 ){
+                  e.preventDefault();
+                  appui.fn.alert(data.lng.file_exists);
+                  return false;
+                }
+              }
+            },
+            success: function(e){
+              if ( e.response && e.response.files && e.files && (e.response.success === 1) ){
+                var file = uploader.val();
+                if ( e.operation === 'upload' ){
+                  $.each(e.response.files, function(i, f){
+                    if ( f.size ){
+                      uploadedFiles.push(f);
+                    }
+                  });
+                  createUpload();
+                  uploadWrapper.redraw();
+                }
+                else if ( (e.operation === 'remove') ){
+                  $.each(e.files, function(i, f){
+                    if ( (idx = $.inArray(f.rawFile.name, uploadedFiles)) > -1 ){
+                      uploadedFiles.splice(idx, 1);
+                    }
+                  });
+                }
+              }
+              else{
+                appui.fn.alert(data.lng.problem_file);
+              }
+            },
+            error:function(e){
+              appui.fn.alert(data.lng.error_uploading)
+            }
+          });
+        };
+    createUpload();
+    $("input[name=link]", ele).keydown(function(e){
+      if ( e.key === "Enter" ){
+        e.preventDefault();
+        var $input = $(this),
+            v = $input.val(),
+            $target = $("table.appui-task-links-container", ele),
+            $li;
+        if ( v.toLowerCase().indexOf("http") !== 0 ){
+          v = "http://" + v;
+        }
+        $target.append(
+          '<tr><td class="k-file k-file-progress">' +
+          '<div class="k-progress">' +
+          '<table><tr>' +
+          '<td class="appui-task-link-image"><i class="fa fa-link"> </i></td>' +
+          '<td class="appui-task-link-title"><div><strong><a href="' + v + '">' + v + '</a></strong><br></div></td>' +
+          '<td class="appui-task-link-actions">' +
+          '<span class="k-upload-pct"> </span>' +
+          '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
+          '<span title="Supprimer" class="k-icon k-i-close k-delete"></span>' +
+          '</button>' +
+          '</tr></table>' +
+          '</div>' +
+          '</td></tr>'
+        );
+        $target.redraw();
+        $input.val("");
+        $li = $target.find("tr:last").parent().closest("tr");
+        appui.fn.post(data.root + "link_preview", {url: v, ref: info.ref}, function(d){
+          if ( d.res && d.res.realurl ){
+            $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-success");
+            if ( d.res.pictures ){
+              $.each(d.res.pictures, function(i, v){
+                if ( v.h96 ){
+                  $li.find("td.appui-task-link-image").html('<img src="pm/image/tmp/' + info.ref + '/' + v.h96 + '">');
+                  return false;
+                }
+              });
+            }
+            var st = '<strong><a href="' + d.res.realurl + '">' +
+                ( d.res.title ? d.res.title : d.res.realurl ) +
+                '</a></strong><br>';
+            if ( d.res.desc ){
+              st += d.res.desc;
+            }
+            $li.find("td.appui-task-link-title div").html(st);
+          }
+          else{
+            $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");
+          }
+        });
+      }
+    });
+    appui.fn.log("INFO", ddTree, info);
+  },
+  rolesView: function(info, ele){
+    var $tree,
+        $li,
+        roles = {},
+        tmp,
+        types_roles = ['managers', 'viewers', 'workers'],
+        treeDS = new kendo.data.HierarchicalDataSource({
+          data: data.groups,
+          schema: {
+            model: {
+              id: "id",
+              hasChildren: "is_parent",
+              children: "items",
+              fields: {
+                text: {type: "string"},
+                is_parent: {type: "bool"}
+              }
+            }
+          }
+        }),
+        dragCfg = {
+          helper: "clone",
+          containment: $("div.appui_task_form_container", ele),
+          scroll: false,
+          start: function(e, ui){
+            var dataItem = $tree.dataItem(e.target).toJSON();
+            if ( dataItem.is_parent && !dataItem.expanded ){
+              $tree.expand(e.target);
+            }
+          }
+        };
+
+
+    $tree = $("div.appui-task-usertree", ele).kendoTreeView({
+      dataSource: treeDS,
+      loadOnDemand: false,
+      select: function (e) {
+        if ( data.picker ){
+          var r = this.dataItem(e.node);
+          $(data.picker).val(r.id).trigger("change");
+          appui.fn.closeAlert();
+        }
+      },
+      template: function (e) {
+        if ( e.item.is_parent ){
+          return '<i class="fa fa-users"> </i> ' + e.item.text;
+        }
+        return apst.userFull(e.item.id);
+      }
+    }).data("kendoTreeView");
+    $li = $("li.k-item", $tree.element);
+    /*
+    $("input:first", ele).keyup(function(){
+      var v = $(this).val().toLowerCase();
+      $li.filter(":hidden").show();
+      if ( v.length ){
+        $li.filter(function(){
+          var txt = appui.fn.removeAccents($(this).find("span:not(.k-icon):first").text().toLowerCase());
+          return txt.indexOf(v) === -1;
+        }).hide();
+      }
+      var data = treeDS.data();
+      data.forEach(function(a){
+        appui.fn.log(a, this);
+        a.filter({field: "text", operator: "contains", value: $(this).val()});
+      })
+      appui.fn.log(treeDS, treeDS.data());
+      treeDS.filter({field: "text", operator: "contains", value: $(this).val()});
+      Porca putana!
+    });
+    */
+
+    $.each(types_roles, function(i, v){
+      if ( tmp = info.roles.get(v) ){
+        roles[v] = tmp;
+      }
+    });
+    $li.draggable(dragCfg).each(function(){
+      var dataItem = $tree.dataItem(this);
+      if ( !dataItem.is_parent ){
+        for ( var n in roles ){
+          if ( $.inArray(dataItem.id, roles[n]) > -1 ){
+            appui.tasks.addUser(info, dataItem, $(".appui-task-" + n, ele)[0], false);
+          }
+        }
+      }
+    });
+
+    $("div.appui-task-assigned", ele).droppable({
+      accept: ".appui-task-usertree li",
+      hoverClass: "bbn-dropable-hover",
+      activeClass: "bbn-dropable-active",
+      drop: function(e, ui){
+        var dataItem = $tree.dataItem(ui.draggable),
+            $ele = this,
+            items = [];
+        if ( dataItem.is_parent ){
+          if ( dataItem.items && dataItem.items.length ){
+            items = dataItem.items;
+          }
+        }
+        else{
+          items.push(dataItem);
+        }
+        $.each(items, function(i, v){
+          appui.tasks.addUser(info, v, $ele, true);
+        });
+      }
+    });
+  },
+  logsView: function(info, ele){
+    var tab = $("div.tab-logs", ele);
+    tab.kendoGrid({
+      dataSource: {
+        sort: {
+          field: "chrono",
+          dir: "desc"
+        },
+        transport: {
+          read: function(e){
+            appui.fn.post(data.root + 'logs', {id_task: info.id}, function(d){
+              if ( d.data ){
+                return e.success(d.data);
+              }
+            })
+          }
+        },
+        schema: {
+          model: {
+            fields: {
+              id_user: {
+                type: "number"
+              },
+              date: {
+                type: "date"
+              },
+              action: {
+                type: "string"
+              }
+            }
+          }
+        }
+      },
+      autoBind: false,
+      sortable: true,
+      columns: [{
+        title: " ",
+        width: 38,
+        attributes: {
+          style: "padding: 1px"
+        },
+        sortable: false,
+        template: function(e){
+          return apst.userAvatarImg(e.id_user);
+        }
+      }, {
+        title: "User",
+        title: "User",
+        field: "id_user",
+        width: 150,
+        template: function(e){
+          return apst.userName(e.id_user);
+        }
+      }, {
+        title: "Date",
+        field: "chrono",
+        width: 150,
+        template: function(e){
+          return appui.fn.fdate(e.chrono);
+        }
+      }, {
+        title: "Action",
+        field: "action",
+        encoded: false
+      }]
+    });
+  },
+  addUser: function(info, dataItem, cont, insert){
+    var id = dataItem.get("id"),
+        $ul = $(cont).find("ul"),
+        $input = $(cont).find("input"),
+        prop = $input.attr("name"),
+        $tree = $("div.appui-task-usertree", ele).data("kendoTreeView"),
+		    $ele = $tree.findByUid(dataItem.get("uid"));
+    if ( $ele.css("display") !== 'none' ){
+      if ( $.inArray(id, info.roles.get(prop)) === -1 ){
+        info.roles[prop].push(id);
+        $input.val(JSON.stringify(info.roles[prop].toJSON()));
+        if ( insert ){
+          appui.fn.post(data.root + 'actions/role/insert', {id_task: info.id, role: prop, id_user: id}, function(d){
+            if ( !d.success ){
+              appui.fn.alert();
+            }
+          });
+        }
+      }
+      $ul.append(
+        $('<li class="k-item">' + $ele.html() + '</li>').mousedown(function(e){
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          e.stopPropagation();
+          return false;
+        })
+      );
+      $ele.hide();
+      $ul.find("li.k-item:last span:last").append(
+        '&nbsp;',
+        $('<i class="fa fa-times appui-p"/>').data("id", id).data("ele", $ele).click(function(){
+          var $$ = $(this);
+          $$.data("ele").show();
+          var idx = $.inArray($$.data("id"), info.roles.get(prop));
+          if ( idx > -1 ){
+            appui.fn.post(data.root + 'actions/role/delete', {id_task: info.id, role: prop, id_user: id}, function(d){
+              if ( !d.success ){
+                appui.fn.alert();
+              }
+              else{
+                info.roles[prop].splice(idx, 1);
+                $input.val(JSON.stringify(info.roles[prop].toJSON()));
+                $$.closest("li").remove();
+              }
+            });
+          }
+        })
+      );
+    }
+
+  },
+  update: function(prop, val, id){
+    appui.fn.post(data.root + 'actions/task/update', {
+      id_task: id,
+      prop: prop,
+      val: val
+    }, function(d){
+      if ( !d.success ){
+        appui.fn.alert();
+      }
+    })
+  },
+  _init: function(info, ele){
+    return kendo.observable($.extend(info, {
       creator: apst.userFull(info.id_user),
       creation: appui.fn.fdate(info.creation_date),
-      ref: ref,
+      ref: (new moment()).unix(),
+      add_code: function(){},
+      add_link: function(){},
+      add_comment: function(){
+        
+      },
       change_comment_type: function(){
         var type = $("select.comment_type", ele).data("kendoDropDownList").value(),
             textarea_st = '<textarea class="k-textbox" name="comment"></textarea>',
@@ -170,422 +606,17 @@ appui.tasks = {
           });
         }
       },
-      insert: function(){
-        appui.fn.log(appui.fn.formdata(ele));
+      update: function(e){
+        if ( e.sender ){
+          return appui.tasks.update($(e.sender.element).attr("name"), e.sender.value(), info.id);
+        }
+        return appui.tasks.update($(e.target).attr("name"), $(e.target).val(), info.id);
       }
-    }));
-    var ddTree = appui.tasks.typeField(ele),
-        uploadedFiles = [],
-        uploadWrapper = $("div.appui-task-upload-wrapper", ele),
-        iconClass = function(file){
-          if ( file.extension ){
-            var ext = file.extension.substr(1),
-                cls = "file-o";
-            if ( ext === "pdf" ){
-              return "file-pdf-o";
-            }
-            else if ( $.inArray(ext, ["xls", "xlsx", "csv", "ods"]) > -1 ){
-              return "file-excel-o";
-            }
-            else if ( $.inArray(ext, ["rtf", "doc", "docx", "odt"]) > -1 ){
-              return "file-word-o";
-            }
-            else if ( $.inArray(ext, ["svg", "gif", "png", "jpg", "jpeg"]) > -1 ){
-              return "file-picture-o";
-            }
-            else if ( $.inArray(ext, ["zip", "gz", "rar", "7z", "bz2", "xz"]) > -1 ){
-              return "file-archive-o";
-            }
-            return "file-o";
-          }
-          return false;
-        },
-        createUpload = function(){
-          var uploader = $('<input name="file" type="file"/>');
-          uploadWrapper.empty().append(uploader);
-          uploader.kendoUpload({
-            localization: {
-              select: "Fichiers / Images"
-            },
-            async: {
-              saveUrl: data.root + "upload/" + ref,
-              removeUrl: data.root + "unupload/" + ref
-            },
-            template: function(e){
-              var size,
-                  unit;
-              if ( e.size > 5000000 ){
-                unit = 'Mb';
-                size = Math.floor(e.size / 1024 / 1024).toString();
-              }
-              else if ( e.size > 1024 ){
-                unit = 'Kb';
-                size = Math.floor(e.size / 1024).toString();
-              }
-              else{
-                unit = 'b';
-                size = e.size;
-              }
-              if ( e.files && e.files[0] ){
-                var st = '<div class="k-progress"><table><tbody><tr><td class="appui-task-link-image">',
-                    done = false;
-                if ( e.files[0].imgs ){
-                  $.each(e.files[0].imgs, function(i, v){
-                    if ( v.h96 ){
-                      st += '<img src="' + data.root + 'image/tmp/' + ref + v.h96 + '">';
-                      done = 1;
-                      return false;
-                    }
-                  });
-                }
-                if ( !done ){
-                  st += '<i class="fa fa-' + iconClass(e.files[0]) + '"> </i>';
-                }
-                st += '</td><td class="appui-task-link-title">' + e.name + '</td>' +
-                  '<td class="appui-task-link-actions">' +
-                  '<span class="k-upload-pct">' + kendo.toString(size, 'n0') + ' ' + unit + '</span>' +
-                  '<button class="k-button k-button-bare k-upload-action" type="button">' +
-                  '<span class="k-icon k-i-close k-delete" title="Supprimer"></span>' +
-                  '</button>' +
-                  '</td></tr></tbody></table></div>';
-                return st;
-              }
-            },
-
-            // @todo Voir la taille
-            files: uploadedFiles,
-            upload: function(e){
-              if ( e.files && e.files[0] ){
-                var idx = appui.fn.search(uploadedFiles, "name", e.files[0].name);
-                if ( idx > -1 ){
-                  e.preventDefault();
-                  appui.fn.alert(data.lng.file_exists);
-                  return false;
-                }
-              }
-            },
-            success: function(e){
-              if ( e.response && e.response.files && e.files && (e.response.success === 1) ){
-                var file = uploader.val();
-                if ( e.operation === 'upload' ){
-                  $.each(e.response.files, function(i, f){
-                    if ( f.size ){
-                      uploadedFiles.push(f);
-                    }
-                  });
-                  createUpload();
-                  uploadWrapper.redraw();
-                }
-                else if ( (e.operation === 'remove') ){
-                  $.each(e.files, function(i, f){
-                    if ( (idx = $.inArray(f.rawFile.name, uploadedFiles)) > -1 ){
-                      uploadedFiles.splice(idx, 1);
-                    }
-                  });
-                }
-              }
-              else{
-                appui.fn.alert(data.lng.problem_file);
-              }
-            },
-            error:function(e){
-              appui.fn.alert(data.lng.error_uploading)
-            }
-          });
-        };
-    createUpload();
-    $("input[name=link]", ele).keydown(function(e){
-      if ( e.key === "Enter" ){
-        e.preventDefault();
-        var $input = $(this),
-            v = $input.val(),
-            $target = $("table.appui-task-links-container", ele),
-            $li;
-        if ( v.toLowerCase().indexOf("http") !== 0 ){
-          v = "http://" + v;
-        }
-        $target.append(
-          '<tr><td class="k-file k-file-progress">' +
-          '<div class="k-progress">' +
-          '<table><tr>' +
-          '<td class="appui-task-link-image"><i class="fa fa-link"> </i></td>' +
-          '<td class="appui-task-link-title"><div><strong><a href="' + v + '">' + v + '</a></strong><br></div></td>' +
-          '<td class="appui-task-link-actions">' +
-          '<span class="k-upload-pct"> </span>' +
-          '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
-          '<span title="Supprimer" class="k-icon k-i-close k-delete"></span>' +
-          '</button>' +
-          '</tr></table>' +
-          '</div>' +
-          '</td></tr>'
-        );
-        $target.redraw();
-        $input.val("");
-        $li = $target.find("tr:last").parent().closest("tr");
-        appui.fn.post(data.root + "link_preview", {url: v, ref: ref}, function(d){
-          if ( d.res && d.res.realurl ){
-            $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-success");
-            if ( d.res.pictures ){
-              $.each(d.res.pictures, function(i, v){
-                if ( v.h96 ){
-                  $li.find("td.appui-task-link-image").html('<img src="pm/image/tmp/' + ref + '/' + v.h96 + '">');
-                  return false;
-                }
-              });
-            }
-            var st = '<strong><a href="' + d.res.realurl + '">' +
-                ( d.res.title ? d.res.title : d.res.realurl ) +
-                '</a></strong><br>';
-            if ( d.res.desc ){
-              st += d.res.desc;
-            }
-            $li.find("td.appui-task-link-title div").html(st);
-          }
-          else{
-            $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");
-          }
-        });
-      }
-    });
-    appui.fn.log("INFO", info);
-  },
-  rolesView: function(info, ele){
-    var $tree,
-        $li,
-        roles = {},
-        tmp,
-        types_roles = ['managers', 'viewers', 'workers'],
-        treeDS = new kendo.data.HierarchicalDataSource({
-          data: data.groups,
-          schema: {
-            model: {
-              id: "id",
-              hasChildren: "is_parent",
-              children: "items",
-              fields: {
-                text: {type: "string"},
-                is_parent: {type: "bool"}
-              }
-            }
-          }
-        }),
-        dragCfg = {
-          helper: "clone",
-          containment: $("div.appui_task_form_container", ele),
-          scroll: false,
-          start: function(e, ui){
-            var dataItem = $tree.dataItem(e.target).toJSON();
-            if ( dataItem.is_parent && !dataItem.expanded ){
-              $tree.expand(e.target);
-            }
-          }
-        };
-
-
-    $tree = $("div.appui-task-usertree", ele).kendoTreeView({
-      dataSource: treeDS,
-      loadOnDemand: false,
-      select: function (e) {
-        if ( data.picker ){
-          var r = this.dataItem(e.node);
-          $(data.picker).val(r.id).trigger("change");
-          appui.fn.closeAlert();
-        }
-      },
-      template: function (e) {
-        if ( e.item.is_parent ){
-          return '<i class="fa fa-users"> </i> ' + e.item.text;
-        }
-        return apst.userFull(e.item.id);
-      }
-    }).data("kendoTreeView");
-    $li = $("li.k-item", $tree.element);
-    /*
-    $("input:first", ele).keyup(function(){
-      var v = $(this).val().toLowerCase();
-      $li.filter(":hidden").show();
-      if ( v.length ){
-        $li.filter(function(){
-          var txt = appui.fn.removeAccents($(this).find("span:not(.k-icon):first").text().toLowerCase());
-          return txt.indexOf(v) === -1;
-        }).hide();
-      }
-      var data = treeDS.data();
-      data.forEach(function(a){
-        appui.fn.log(a, this);
-        a.filter({field: "text", operator: "contains", value: $(this).val()});
-      })
-      appui.fn.log(treeDS, treeDS.data());
-      treeDS.filter({field: "text", operator: "contains", value: $(this).val()});
-      Porca putana!
-    });
-    */
-
-    $.each(types_roles, function(i, v){
-      if ( tmp = info.roles.get(v) ){
-        roles[v] = tmp;
-      }
-    });
-    $li.draggable(dragCfg).each(function(){
-      var dataItem = $tree.dataItem(this);
-      if ( !dataItem.is_parent ){
-        appui.fn.log("ROLES", dataItem.id);
-        for ( var n in roles ){
-          if ( $.inArray(dataItem.id, roles[n]) > -1 ){
-            appui.fn.log("IS!!!!!", roles[n]);
-            appui.tasks.addUser(dataItem, $(".appui-task-" + n, ele)[0], false);
-          }
-        }
-      }
-    });
-
-    $("div.appui-task-assigned", ele).droppable({
-      accept: ".appui-task-usertree li",
-      hoverClass: "bbn-dropable-hover",
-      activeClass: "bbn-dropable-active",
-      drop: function(e, ui){
-        var dataItem = $tree.dataItem(ui.draggable),
-            $ele = this,
-            items = [];
-        if ( dataItem.is_parent ){
-          if ( dataItem.items && dataItem.items.length ){
-            items = dataItem.items;
-          }
-        }
-        else{
-          items.push(dataItem);
-        }
-        $.each(items, function(i, v){
-          appui.tasks.addUser(v, $ele, true);
-        });
-      }
-    });
-  },
-  logsView: function(info, ele){
-    var tab = $("div.tab-logs", ele);
-    tab.kendoGrid({
-      dataSource: {
-        sort: {
-          field: "chrono",
-          dir: "desc"
-        },
-        transport: {
-          read: function(e){
-            appui.fn.post(data.root + 'logs', {id_task: info.id}, function(d){
-              if ( d.data ){
-                return e.success(d.data);
-              }
-              appui.fn.log(d);
-            })
-          }
-        },
-        schema: {
-          model: {
-            fields: {
-              id_user: {
-                type: "number"
-              },
-              date: {
-                type: "date"
-              },
-              action: {
-                type: "string"
-              }
-            }
-          }
-        }
-      },
-      pageable: {
-        refresh: true
-      },
-      sortable: true,
-      columns: [{
-        title: " ",
-        width: 38,
-        attributes: {
-          style: "padding: 1px"
-        },
-        sortable: false,
-        template: function(e){
-          return apst.userAvatarImg(e.id_user);
-        }
-      }, {
-        title: "User",
-        title: "User",
-        field: "id_user",
-        width: 150,
-        template: function(e){
-          return apst.userName(e.id_user);
-        }
-      }, {
-        title: "Date",
-        field: "chrono",
-        width: 150,
-        template: function(e){
-          return appui.fn.fdate(e.chrono);
-        }
-      }, {
-        title: "Action",
-        field: "action",
-        encoded: false
-      }]
-    });
-  },
-  addUser: function(dataItem, cont, insert){
-    appui.fn.log("addUser", dataItem, cont);
-    var id = dataItem.get("id"),
-        $ul = $(cont).find("ul"),
-        $input = $(cont).find("input"),
-        $tree = $("div.appui-task-usertree", ele).data("kendoTreeView"),
-        v = $input.val(),
-        vals = v ? JSON.parse(v) : [],
-		    $ele = $tree.findByUid(dataItem.get("uid"));
-    if ( $ele.css("display") !== 'none' ){
-      if ( $.inArray(id, vals) === -1 ){
-        vals.push(id);
-        $input.val(JSON.stringify(vals));
-        if ( insert ){
-          appui.fn.post(data.root + 'actions/role/insert', {role: $input.attr("name"), id_user: id}, function(d){
-            if ( !d.success ){
-              appui.fn.alert();
-            }
-          });
-        }
-      }
-      $ul.append(
-        $('<li class="k-item">' + $ele.html() + '</li>').mousedown(function(e){
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          e.stopPropagation();
-          return false;
-        })
-      );
-      $ele.hide();
-      $ul.find("li.k-item:last span:last").append(
-        '&nbsp;',
-        $('<i class="fa fa-times appui-p"/>').data("id", id).data("ele", $ele).click(function(){
-          var $$ = $(this);
-          $$.data("ele").show();
-          v = $input.val();
-          vals = v ? JSON.parse(v) : [];
-          var idx = $.inArray($$.data("id"), vals);
-          if ( idx > -1 ){
-            appui.fn.post(data.root + 'actions/role/delete', {role: $input.attr("name"), id_user: id}, function(d){
-              if ( !d.success ){
-                appui.fn.alert();
-              }
-            });
-            vals.splice(idx, 1);
-            $input.val(JSON.stringify(vals));
-          }
-          $$.closest("li").remove();
-        })
-      );
-    }
-
+    }))
   },
   create: function(info){
     if ( info.id ){
+      info = appui.tasks._init(info, ele);
       var tabstrip = $("#appui_task" + info.id, ele);
       tabnav.tabNav("setColor", appui.tasks.priority_colors[info.priority-1], tabstrip);
       if ( tabstrip.length ){
@@ -613,6 +644,9 @@ appui.tasks = {
             static: true,
             callonce: function(ele){
               return appui.tasks.logsView(info, ele);
+            },
+            callback: function(ele){
+              $("div.tab-logs", ele).data("kendoGrid").dataSource.read();
             }
           }]
         })
@@ -626,7 +660,10 @@ appui.tasks = {
       $("form").attr("action", data.root + 'actions/task/insert').data("script", function(e, f){
         if ( e.success ){
           appui.fn.closeAlert();
-          tabNav.tabNav("link", 'display_' + e.success);
+          tabnav.tabNav("link", 'tasks/display_' + e.success);
+        }
+        else{
+          appui.fn.alert();
         }
       });
     })

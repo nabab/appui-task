@@ -131,11 +131,11 @@ table.kendoGrid({
     }
   }, {
     title: "Objectif",
-    field: "target_date",
+    field: "deadline",
     format: "yyyy-MM-dd",
     width: 100,
     template: function(e){
-      return appui.fn.fdate(e.target_date, '-');
+      return appui.fn.fdate(e.deadline, '-');
     }
   }, {
     title: "Statut",
@@ -247,7 +247,7 @@ table.kendoGrid({
           type: "date",
           editable: false
         }, {
-          field: "target_date",
+          field: "deadline",
           type: "date",
           validation: {
             min: new Date()

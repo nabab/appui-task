@@ -5,4 +5,5 @@
  **/
 
 /** @var $this \bbn\mvc\controller */
-$this->obj->success = 1;
+
+$this->obj = $this->get_object_model($this->post);

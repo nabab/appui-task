@@ -45,9 +45,8 @@ var ds = new kendo.data.TreeListDataSource({
     }),
     gant_container = $("div.appui-task-gantt", ele);
 
-appui.thomas = ds;
-
 gant_container.kendoTreeList({
+  autoBind: false,
   sortable: true,
   dataSource: ds,
   columnMenu: true,
@@ -143,6 +142,13 @@ gant_container.kendoTreeList({
     }
   ]
 });
+
+$(ele).closest(".ui-tabNav").tabNav("addCallback", function(cont){
+  var $input = $("input[name=title]:first", cont);
+  if ( !$input.val() ){
+    ds.read();
+  }
+}, ele);
 
 var timer;
 $(".appui-task-search-container input.appui-lg", ele).keyup(function(e){

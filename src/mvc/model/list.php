@@ -27,14 +27,14 @@ switch ( $this->data['action'] ){
 
   case 'insert':
   if ( isset($this->data['title'], $this->data['comment']) ){
-    $this->data['id'] = $tache->insert($this->data['title'], $this->data['comment'], empty($this->data['target_date']) ? null : $this->data['target_date']);
+    $this->data['id'] = $tache->insert($this->data['title'], $this->data['comment'], empty($this->data['deadline']) ? null : $this->data['deadline']);
     return $this->data;
   }
   break;
 
   case 'update':
   if ( isset($this->data['id'], $this->data['title'], $this->data['status'], $this->data['priority']) ){
-    $this->data['id'] = $tache->update($this->data['id'], $this->data['title'], $this->data['status'], $this->data['priority'], empty($this->data['target_date']) ? null : $this->data['target_date']);
+    $this->data['id'] = $tache->update($this->data['id'], $this->data['title'], $this->data['status'], $this->data['priority'], empty($this->data['deadline']) ? null : $this->data['deadline']);
     return $this->data;
   }
   break;
@@ -73,7 +73,7 @@ switch ( $this->data['action'] ){
   break;
 
   default:
-  $grid = new \bbn\appui\grid($this->db, $this->data, isset($this->data['id_task']) ? 'bbn_tasks_comments' : 'bbn_tasks', isset($this->data['id_task']) ? [] : ['id_user', 'title', 'duration', 'last_activity', 'status', 'comments', 'priority', 'target_date']);
+  $grid = new \bbn\appui\grid($this->db, $this->data, isset($this->data['id_task']) ? 'bbn_tasks_comments' : 'bbn_tasks', isset($this->data['id_task']) ? [] : ['id_user', 'title', 'duration', 'last_activity', 'status', 'comments', 'priority', 'deadline']);
   if ( $grid->check() ){
     $where = $grid->where();
     if ( !empty($where) ){
