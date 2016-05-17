@@ -53,7 +53,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
   columns: [
     {
       field: "priority",
-      title: "Priority",
+      title: data.lng.priority,
       width: 100,
       expandable: true
     }, {
@@ -64,19 +64,19 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       hidden: true
     }, {
       field: "type",
-      title: "Type",
+      title: data.lng.type,
       width: 150
     }, {
       field: "state",
-      title: "State",
+      title: data.lng.state,
       width: 120
     }, {
       field: "duration",
-      title: "Duration",
+      title: data.lng.duration,
       width: 100,
       template: function(e){
         if ( !e.duration ){
-          return 'Inconnue';
+          return data.lng.inconnue;
         }
         if ( e.duration < 3600 ){
           return Math.round(e.duration/60) + ' mn';
@@ -89,7 +89,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       hidden: true
     }, {
       field: "first",
-      title: "Start",
+      title: data.lng.start,
       width: 100,
       template: function(e){
         var t = moment(e.first);
@@ -97,7 +97,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       }
     }, {
       field: "last",
-      title: "Last",
+      title: dat.lng.last,
       width: 100,
       template: function(e){
         var t = moment(e.last);
@@ -105,7 +105,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       }
     }, {
       field: "title",
-      title: "Title",
+      title: data.lng.title,
     }, {
       field: "id",
       title: " ",

@@ -26,7 +26,7 @@ table.kendoGrid({
     field: "id",
     hidden: true,
   }, {
-    title: "Auteur",
+    title: data.lng.auter,
     field: "id_user",
     width: 150,
     values: appui.app.apst.users,
@@ -36,15 +36,15 @@ table.kendoGrid({
         return appui.app.apst.users[idx].text;
       }
       else{
-        return '<em>Inconnu!</em>';
+        return '<em>'+ data.lng.inconnu + '</em>';
       }
     }
   }, {
-    title: "#Cmt",
+    title: data.lng.cmt,
     width: 40,
     field: "comments"
   }, {
-    title: "Activité",
+    title: data.lng.active,
     field: "last_activity",
     format: "{0:yyyy-MM-dd}",
     parseFormats: "{0:yyyy-MM-dd}",
@@ -61,7 +61,7 @@ table.kendoGrid({
       }
     }
   }, {
-    title: "Durée",
+    title: data.lng.duree,
     field: "duration",
     filterable: false,
     width: 50,
@@ -78,7 +78,7 @@ table.kendoGrid({
       return Math.round(e.duration/(24*3600)) + ' j';
     }
   }, {
-    title: "Titre",
+    title: data.lng.titre,
     field: "title",
     filterable: {
       cell: {
@@ -87,7 +87,7 @@ table.kendoGrid({
       }
     }
   }, {
-    title: "Priorité",
+    title: data.lng.priority,
     width: 50,
     field: "priority",
     template: function(e){
@@ -130,7 +130,7 @@ table.kendoGrid({
       });
     }
   }, {
-    title: "Objectif",
+    title: data.lng.objectif,
     field: "deadline",
     format: "yyyy-MM-dd",
     width: 100,
@@ -138,7 +138,7 @@ table.kendoGrid({
       return appui.fn.fdate(e.deadline, '-');
     }
   }, {
-    title: "Statut",
+    title: data.lng.statut,
     field: "status",
     template: function(e){
       var color;
@@ -159,32 +159,32 @@ table.kendoGrid({
       return '<span style="color: ' + color + '">' + e.status + '</span>';
     },
     values: [
-      {text: "Ouvert", value: "ouvert"},
-      {text: "En cours", value:"en cours"},
-      {text: "Résolu", value: "résolu"},
-      {text: "En attente", value: "en attente"}
+      {text: data.lng.ouvert, value: "ouvert"},
+      {text: data.lng.en_cours, value:"en cours"},
+      {text: data.lng.resolu, value: "résolu"},
+      {text: data.lng.en_attente, value: "en attente"}
     ],
     width: 100
   },{
-    title: "Actions",
+    title: data.lng.actions,
     field: "id",
     width: 110,
     filterable: false,
     sortable: false,
     template: function(e){
       var cls = e.subscribed > 0 ? 'fa-unlink' : 'fa-link',
-          title = e.subscribed > 0 ? "Se désabonner" : "S'abonner",
+          title = e.subscribed > 0 ? data.lng.desabonner : data.lng.abboner,
           st = '<button class="k-button apst-subscribe" title="' + title + '"><i class="fa ' + cls + '"> </i></button>';
       //'<button class="k-button apst-info" title="Infos"><i class="fa fa-info-circle"> </i></button>' +
       if ( data.is_dev ){
-        st += '<button class="k-button apst-edit" title="Modifier" href="javascript:;"><i class="fa fa-edit"> </i></a>' +
-          '<button class="k-button apst-save" title="Sauvegarder" style="display: none"><i class="fa fa-check-circle-o"> </i></a>' +
-          '<button class="k-button apst-cancel" title="Annuler" style="display: none"><i class="fa fa-times-circle-o"> </i></a>' +
-          '<button class="k-button apst-delete" title="Supprimer" href="javascript:;"><i class="fa fa-trash"> </i></a>';
+        st += '<button class="k-button apst-edit" title="' + data.lng.modifier + '" href="javascript:;"><i class="fa fa-edit"> </i></a>' +
+          '<button class="k-button apst-save" title="' + data.lng.sauvegarder + '" style="display: none"><i class="fa fa-check-circle-o"> </i></a>' +
+          '<button class="k-button apst-cancel" title="' + data.lng.annuler + '" style="display: none"><i class="fa fa-times-circle-o"> </i></a>' +
+          '<button class="k-button apst-delete" title="' + data.lng.supprimer + '" href="javascript:;"><i class="fa fa-trash"> </i></a>';
       }
       else{
-        st += '<button class="k-button apst-up" title="Réhausser la priorité" href="javascript:;"><i class="fa fa-hand-o-up"> </i></a>' +
-      		'<button class="k-button apst-down" title="Rabaisser la priorité"><i class="fa fa-hand-o-down"> </i></a>';
+        st += '<button class="k-button apst-up" title="' + data.lng.priority_re + '" href="javascript:;"><i class="fa fa-hand-o-up"> </i></a>' +
+      		'<button class="k-button apst-down" title="' + data.lng.priority_ra + '"><i class="fa fa-hand-o-down"> </i></a>';
       }
       return st;
     },
@@ -331,7 +331,7 @@ table.kendoGrid({
         field: "id",
         hidden: true,
       }, {
-        title: "Auteur",
+        title: data.lng.auter,
         field: "id_user",
         width: 150,
         values: appui.app.apst.users,
@@ -341,22 +341,22 @@ table.kendoGrid({
             return appui.app.apst.users[idx].text;
           }
           else{
-            return '<em>Inconnu!</em>';
+            return '<em>' + data.lng.inconnu + '</em>';
           }
         }
       }, {
-        title: "Date",
+        title: data.lng.date,
         field: "creation_date",
         width: 100,
         template: function(e){
           return appui.fn.fdate(e.creation_date, 'Inconnue');
         }
       }, {
-        title: "Texte",
+        title: data.lng.texte,
         field: "comment",
         encoded: false,
         editor: function(c, o){
-          $(c).append('<table style="width:100%"><tr><td><textarea data-bind="value:' + o.field + '" name="' + o.field + '" class="k-textbox" rows="4" cols="30"style="width: 100%"></textarea></td><td style="width: 100px; vertical-align: middle"><a href="javascript:;" class="k-button k-button-icontext k-primary k-grid-update"><span class="k-icon k-update"></span>Sauver</a><br><br><a href="#" class="k-button k-button-icontext k-grid-cancel"><span class="k-icon k-cancel"></span>Annuler</a></td></tr></table>');
+          $(c).append('<table style="width:100%"><tr><td><textarea data-bind="value:' + o.field + '" name="' + o.field + '" class="k-textbox" rows="4" cols="30"style="width: 100%"></textarea></td><td style="width: 100px; vertical-align: middle"><a href="javascript:;" class="k-button k-button-icontext k-primary k-grid-update"><span class="k-icon k-update"></span>' + data.lng.sauver + ' </a><br><br><a href="#" class="k-button k-button-icontext k-grid-cancel"><span class="k-icon k-cancel"></span> ' + data.lng.annuler + '</a></td></tr></table>');
         }
       }],
     });
@@ -383,7 +383,7 @@ $("button.apst-new", table).kendoButton({
       kendo.template($("#tpl-tasks_list_form").html())({
         tab_selected: appui.app.tabstrip.ele.tabNav("option", "selected")
       }),
-      "Nouveau bug ou problème",
+      data.lng.bug,
       600,
       400,
       function(ele){
@@ -422,41 +422,41 @@ table.on("click", "button,button i", function(ev){
 		appui.fn.post(data.root + "/list", {id: dataItem.id, action: "subscribe"}, function(d){
 			if ( d.success ){
 				if ( d.subscribed ){
-					appui.fn.alert("Vous &ecirc;tes désormais bien inscrit aux notifications concernant cette t&acirc;che", "Succès");
+					appui.fn.alert(data.lng.inscrit, data.lng.succes);
 					icon.removeClass("fa-link").addClass("fa-unlink");
 				}
 				else{
-					appui.fn.alert("Vous &ecirc;tes désormais désinscrit des notifications concernant cette t&acirc;che", "Succès");
+					appui.fn.alert(data.lng.desinscrit, data.lng.succes);
 					icon.removeClass("fa-unlink").addClass("fa-link");
 				}
 			}
 			else{
-				appui.fn.alert("Il y a eu un problème...");
+				appui.fn.alert(data.lng.problem);
 			}
 		});
 	}
 	else if ( button.hasClass("apst-up") ){
     if ( dataItem.priority <= 1 ){
-      appui.fn.alert("La priorité est déjà maximale (1)");
+      appui.fn.alert(data.lng.priority_max);
     }
     else{
       appui.fn.post(data.root + "/list", {id: dataItem.id, action: "up"}, function(d){
         if ( d.id ){
           grid.dataSource.read();
-          appui.fn.alert("Priorité réhaussée", "Succès");
+          appui.fn.alert(data.lng.priority_r, data.lng.succes);
         }
       });
     }
 	}
 	else if ( button.hasClass("apst-down") ){
     if ( dataItem.priority >= 5 ){
-      appui.fn.alert("La priorité est déjà minimale (5)");
+      appui.fn.alert(data.lng.priority_min);
     }
     else{
       appui.fn.post(data.root + "/list", {id: dataItem.id, action: "down"}, function(d){
         if ( d.id ){
           grid.dataSource.read();
-          appui.fn.alert("Priorité abaissée", "Succès");
+          appui.fn.alert(data.lng.priority_abb, data.lng.succes);
         }
       });
     }

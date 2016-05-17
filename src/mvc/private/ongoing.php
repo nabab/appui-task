@@ -6,9 +6,21 @@
 
 /** @var $this \bbn\mvc\controller */
 if ( !isset($this->post['id']) ){
-  echo $this->set_title('<i class="fa fa-clock-o"> </i> &nbsp; Mes tâches en cours')->add_js([
+  echo $this->set_title('<i class="fa fa-clock-o"> </i> &nbsp; _("Mes tâches en cours")')->add_js([
     'root' => $this->data['root'],
-    'lng' => []
+    'lng' => [
+      'title' => _("Title"),
+      'type' => _("Type"),
+      'state' => _("State"),
+      'duration' => _("Duration"),
+      'inconnue' => _("Inconnue")
+      'start' => _("Start"),
+      'last'=> _("Last"),
+      'deadline' => _("Deadline")
+      'see_task' => _(""), // dichiarato in js inserire stringa
+
+
+    ]
   ])->get_view();
 }
 else{

@@ -56,7 +56,7 @@ gant_container.kendoTreeList({
   columns: [
     {
       field: "title",
-      title: "Title",
+      title: data.lng.title,
       expandable: true,
     }, {
       field: "priority",
@@ -73,7 +73,7 @@ gant_container.kendoTreeList({
       hidden: true
     }, {
       field: "type",
-      title: "Type",
+      title: data.lng.type,
       width: 150
     }, {
       field: "num_notes",
@@ -81,15 +81,15 @@ gant_container.kendoTreeList({
       width: 50
     }, {
       field: "state",
-      title: "State",
+      title: data.lng.state,
       width: 120
     }, {
       field: "duration",
-      title: "Duration",
+      title: data.lng.duration,
       width: 100,
       template: function(e){
         if ( !e.duration ){
-          return 'Inconnue';
+          return data.lng.inconnue;
         }
         if ( e.duration < 3600 ){
           return Math.round(e.duration/60) + ' mn';
@@ -102,7 +102,7 @@ gant_container.kendoTreeList({
       hidden: true
     }, {
       field: "first",
-      title: "Start",
+      title: data.lng.start,
       width: 100,
       hidden: true,
       template: function(e){
@@ -111,7 +111,7 @@ gant_container.kendoTreeList({
       }
     }, {
       field: "last",
-      title: "Last",
+      title: data.lng.last,
       width: 100,
       hidden: true,
       template: function(e){
@@ -120,7 +120,7 @@ gant_container.kendoTreeList({
       }
     }, {
       field: "target_date",
-      title: "Deadline",
+      title: data.lng.deadline,
       width: 100,
       template: function(e){
         var t = moment(e.last);

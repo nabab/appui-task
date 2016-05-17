@@ -26,7 +26,14 @@ return [
     'link' => _("Link"),
     'problem_file' => _("Problem with the file..."),
     'error_uploading' => _("Problem during the upload"),
-    'file_exists' => _("A file with this name already exists")
+    'file_exists' => _("A file with this name already exists"),
+    'user' => _("User"),
+    'date' => _("Date"),
+    'action' => _("Action"),
+    'global_view' => _("Global view"),
+    'roles' => _("Rôles"),
+    'journal' => _("Journal des évènements"),
+    'no_comment_text' => _("You have to enter a comment, a link, or a file")
   ],
   'roles' => [[
     "text" => _("Worker"),

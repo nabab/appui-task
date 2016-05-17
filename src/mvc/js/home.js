@@ -10,6 +10,14 @@ var tabnav = $("#appui_task_tabnav").tabNav({
     load: true
   }]
 });
+$.each(data.groups, function(i, v){
+  data.groups[i].items = $.map($.grep(appui.app.apst.users, function(user){
+    return user.active && (user.id_group === v.id);
+  }), function(user){
+    user.id = user.value;
+    return user;
+  });
+});
 
 appui.tasks = {
   priority_colors: ['#F00', '#F40', '#F90', '#FC0', '#FF0', '#AD0', '#5B0', '#090', '#CCC', '#FFF'],
@@ -45,6 +53,7 @@ appui.tasks = {
     var textarea = $("textarea", ele),
         cont_textarea = textarea.parent();
     textarea.kendoEditor({
+      encoded: false,
       tools: [
         "formatting",
         "bold",
@@ -61,12 +70,6 @@ appui.tasks = {
         "unlink"
       ]
     });
-    if ( info.notes ){
-      $.each(info.notes, function(i, v){
-        var m = new moment(v.creation);
-        info.notes[i].since = m.fromNow();
-      });
-    }
     kendo.bind(ele, info);
     var ddTree = appui.tasks.typeField(ele),
         uploadedFiles = [],
@@ -399,22 +402,22 @@ appui.tasks = {
           return apst.userAvatarImg(e.id_user);
         }
       }, {
-        title: "User",
-        title: "User",
+        title: data.lng.user,
+        title: data.lng.user,
         field: "id_user",
         width: 150,
         template: function(e){
           return apst.userName(e.id_user);
         }
       }, {
-        title: "Date",
+        title: data.lng.date,
         field: "chrono",
         width: 150,
         template: function(e){
           return appui.fn.fdate(e.chrono);
         }
       }, {
-        title: "Action",
+        title: data.lng.action,
         field: "action",
         encoded: false
       }]
@@ -428,7 +431,11 @@ appui.tasks = {
         $tree = $("div.appui-task-usertree", ele).data("kendoTreeView"),
 		    $ele = $tree.findByUid(dataItem.get("uid"));
     if ( $ele.css("display") !== 'none' ){
-      if ( $.inArray(id, info.roles.get(prop)) === -1 ){
+      var v = info.roles.get(prop);
+      if ( !$.isArray(v) ){
+        info.roles.set(prop, []);
+      }
+      if ( $.inArray(id, v) === -1 ){
         info.roles[prop].push(id);
         $input.val(JSON.stringify(info.roles[prop].toJSON()));
         if ( insert ){
@@ -483,14 +490,56 @@ appui.tasks = {
     })
   },
   _init: function(info, ele){
+    if ( info.notes ){
+      $.each(info.notes, function(i, v){
+        var m = new moment(v.creation);
+        info.notes[i].since = m.fromNow();
+      });
+    }
     return kendo.observable($.extend(info, {
       creator: apst.userFull(info.id_user),
       creation: appui.fn.fdate(info.creation_date),
       ref: (new moment()).unix(),
       add_code: function(){},
       add_link: function(){},
-      add_comment: function(){
-        
+      add_comment: function(e){
+        var ko = this,
+            v = {
+              id: ko.id,
+              title: $("input[name=comment_title]", ele).val() || '',
+              text: $("textarea[name=comment]", ele).val() || ''
+            };
+        if ( !v.title && !v.text ){
+          appui.fn.alert(data.lng.no_comment_text)
+        }
+        else{
+          appui.fn.post(data.root + 'actions/comment/insert', v, function(d){
+            if ( d.success ){
+              var cr = new Date().getSQL(1),
+                  m = new moment(cr);
+              ko.notes.push({
+                content: v.text,
+                title: v.title,
+                id_note: d.success,
+                id_user: appui.env.userId,
+                creation: new Date().getSQL(1),
+                since: m.fromNow(),
+                version: 1,
+              });
+              $("textarea[name=comment]", ele).val('').trigger("change");
+              $("input[name=comment_title]", ele).val('').trigger("change").parent().parent().hide();
+            }
+            else{
+              appui.f.alert();
+            }
+          });
+        }
+      },
+      preventEnter: function(e){
+        if ( e.key === "Enter" ){
+          e.preventDefault();
+          e.stopPropagation();
+        }
       },
       change_comment_type: function(){
         var type = $("select.comment_type", ele).data("kendoDropDownList").value(),
@@ -568,7 +617,6 @@ appui.tasks = {
             break;
         }
       },
-      users: [],
       types_roles: data.roles,
       change_role: function(){
         var role = $("input[name=role]", ele).data("kendoDropDownList").value();
@@ -623,7 +671,7 @@ appui.tasks = {
         tabstrip.tabNav({
           list: [{
             url: "main",
-            title: '<i class="fa fa-eye"> </i> &nbsp; Vue d\'ensemble',
+            title: '<i class="fa fa-eye"> </i> &nbsp; ' + data.lng.global_view,
             content: $("#tpl-task_tab_main").html(),
             static: true,
             callonce: function(ele){
@@ -631,7 +679,7 @@ appui.tasks = {
             }
           }, {
             url: "people",
-            title: '<i class="fa fa-users"> </i> &nbsp; Rôles',
+            title: '<i class="fa fa-users"> </i> &nbsp; ' + data.lng.roles,
             content: $("#tpl-task_tab_roles").html(),
             static: true,
             callonce: function(ele){
@@ -639,7 +687,7 @@ appui.tasks = {
             }
           }, {
             url: "logs",
-            title: '<i class="fa fa-list"> </i> &nbsp; Journal des évènements',
+            title: '<i class="fa fa-list"> </i> &nbsp; ' + data.lng.journal,
             content: '<div class="tab-logs appui-full-height"></div>',
             static: true,
             callonce: function(ele){

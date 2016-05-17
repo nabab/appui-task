@@ -4,7 +4,7 @@
   <div class="appui-task-search-container">
     <div class="appui-form-full appui-c">
     	<select name="selection" class="appui-lg" data-role="dropdownlist" data-bind="events: {change: change_selection}">
-      	<option value="me">Mine</option>
+      	<option value="user">Mine</option>
       	<option value="group">My groups'</option>
       	<option value="all">All</option>
       </select>

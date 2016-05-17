@@ -7,21 +7,43 @@ $("#appui_task_splitter", ele).kendoSplitter({
   ]
 });
 
-var ds = new kendo.data.TreeListDataSource({
+var operators = kendo.ui.FilterCell.fn.options.operators,
+    gant_container = $("div.appui-task-gantt", ele),
+    ds = new kendo.data.TreeListDataSource({
+      serverFiltering: true,
+      serverSorting: true,
       sort: [{
         field: "priority",
         dir: "asc"
       }],
+      filter: {
+        filters: [
+          {field: "state", operator: "eq", value: 1119180276},
+          {field: "state", operator: "eq", value: 510149757},
+          {field: "state", operator: "eq", value: 1349638282}
+        ],
+        logic: "or"
+      },
       transport: {
         read: function(e){
+          if ( e.data && e.data.filter && e.data.filter.filters ){
+            for ( var i = 0; i < e.data.filter.filters.length; i++ ){
+              if ( e.data.filter.filters[i].field ){
+                if ( ds.options.schema.model.fields[e.data.filter.filters[i].field].type === "date" ){
+                  e.data.filter.filters[i].value = kendo.parseDate(e.data.filter.filters[i].value);
+                  e.data.filter.filters[i].value = kendo.toString(e.data.filter.filters[i].value, 'yyyy-MM-dd HH:mm:ss');
+                }
+              }
+            }
+          }
           var myData = {
-                selection: $("input[name=selection]").val() || 'mine'
-              },
-        			v = $(".appui-task-search-container input.appui-lg", ele).val();
+            selection: $("select[name=selection]", ele).data("kendoDropDownList").value()
+          },
+              v = $(".appui-task-search-container input.appui-lg", ele).val();
           if ( v ){
             myData.search = v;
           }
-          appui.fn.post(data.root + 'treelist', myData, function(d){
+          appui.fn.post(data.root + 'treelist', $.extend(myData, e.data), function(d){
             if ( d && d.tasks ){
               e.success(d.tasks);
             }
@@ -32,6 +54,8 @@ var ds = new kendo.data.TreeListDataSource({
         }
       },
       schema: {
+        data: "data",
+        total: "total",
         model: {
           id: "id",
           parentId: "id_parent",
@@ -42,24 +66,40 @@ var ds = new kendo.data.TreeListDataSource({
             first: {type: "date"},
             last: {type: "date"},
             title: {type: "string"},
-            priority: {type: "number"},
-            state: {type: "string"},
-            type: {type: "string"},
-            id_user: {type: "string"},
+            priority: {type: "number", nullable: false},
+            state: {type: "number"},
+            num_notes: {type: "number"},
+            deadline: {type: "date", nullable: true},
+            role: {type: "number"},
+            type: {type: "number"},
+            id_user: {type: "number"},
           }
         }
       }
-    }),
-    gant_container = $("div.appui-task-gantt", ele);
+    });
 
 kendo.bind(ele, {
   change_selection: function(){
     ds.read();
+  },
+  create_task: function(){
+    var $input = $(".appui-task-search-container input.appui-lg", ele),
+        v = $input.val();
+    if ( v.length ){
+      appui.tasks.formNew(v);
+      $input.val("");
+      ds.read();
+    }
   }
 });
 gant_container.kendoTreeList({
   autoBind: false,
   sortable: true,
+  pageable: true,
+  pageSize: 50,
+  filterable: {
+    extra: false
+  },
   dataSource: ds,
   columnMenu: true,
   dataBound: function(e){
@@ -74,40 +114,99 @@ gant_container.kendoTreeList({
   columns: [
     {
       field: "title",
-      title: "Title",
+      title: data.lng.title,
       expandable: true,
+      filterable: {
+        operators:{
+          string: {
+            contains: operators.string.contains
+          }
+        }
+      },
     }, {
       field: "priority",
-      title: "!",
+      title: data.lng.priority,
+      width: 60,
       attributes: {
         style: "text-align: center; font-weight: bold; border-top: 1px solid #FFF"
       },
-      width: 60
+      filterable: {
+        operators:{
+          number: {
+            eq: operators.number.eq,
+            gt: operators.number.gt,
+            lt: operators.number.lt
+          }
+        }
+      },
     }, {
       field: "id_parent",
-      hidden: true
+      hidden: true,
+      menu: false,
+      filterable: false,
+      sortable: false,
     }, {
       field: "is_parent",
-      hidden: true
+      hidden: true,
+      menu: false,
+      filterable: false,
+      sortable: false,
+    }, {
+      field: "role",
+      filterable: {
+        multi: true
+      },
+      sortable: false,
+      title: data.lng.role,
+      width: 80,
+      values: appui.tasks.options.roles,
+      template: function(e){
+        return appui.fn.get_field(appui.tasks.options.roles, "value", e.role, "text") || '-';
+      }
     }, {
       field: "type",
-      title: "Type",
-      width: 150
+      filterable: {
+        multi: true
+      },
+      sortable: false,
+      title: data.lng.type,
+      width: 150,
+      values: appui.tasks.options.cats,
+      template: function(e){
+        return appui.fn.get_field(appui.tasks.options.cats, "value", e.type, "text");
+      }
     }, {
       field: "num_notes",
-      title: "#",
+      title: "#Notes",
+      filterable: {
+        operators:{
+          number: {
+            eq: operators.number.eq,
+            gt: operators.number.gt,
+            lt: operators.number.lt
+          }
+        }
+      },
       width: 50
     }, {
       field: "state",
-      title: "State",
-      width: 120
+      filterable: {
+        multi: true
+      },
+      sortable: false,
+      title: data.lng.state,
+      width: 120,
+      values: appui.tasks.options.states,
+      template: function(e){
+        return appui.fn.get_field(appui.tasks.options.states, "value", e.state, "text");
+      }
     }, {
       field: "duration",
-      title: "Duration",
-      width: 100,
+      title: data.lng.duration,
+      width: 70,
       template: function(e){
         if ( !e.duration ){
-          return 'Inconnue';
+          return data.lng.inconnue;
         }
         if ( e.duration < 3600 ){
           return Math.round(e.duration/60) + ' mn';
@@ -120,33 +219,65 @@ gant_container.kendoTreeList({
       hidden: true
     }, {
       field: "first",
-      title: "Start",
+      title: data.lng.start,
       width: 100,
       hidden: true,
+      filterable: {
+        operators:{
+          date: {
+            eq: operators.date.eq,
+            gt: operators.date.gt,
+            lt: operators.date.lt
+          }
+        }
+      },
       template: function(e){
         var t = moment(e.first);
         return t.fromNow();
       }
     }, {
       field: "last",
-      title: "Last",
+      title: data.lng.last,
       width: 100,
       hidden: true,
+      filterable: {
+        operators:{
+          date: {
+            eq: operators.date.eq,
+            gt: operators.date.gt,
+            lt: operators.date.lt
+          }
+        }
+      },
       template: function(e){
         var t = moment(e.last);
         return t.format("DD MMM YY");
       }
     }, {
-      field: "target_date",
-      title: "Deadline",
+      field: "deadline",
+      title: data.lng.dead,
       width: 100,
+      filterable: {
+        operators:{
+          date: {
+            eq: operators.date.eq,
+            gt: operators.date.gt,
+            lt: operators.date.lt,
+            isnull: operators.date.isnull,
+            isnotnull: operators.date.isnotnull
+          }
+        }
+      },
       template: function(e){
-        var t = moment(e.last);
-        return t.format("DD MMM YY");
+        var t = moment(e.deadline);
+        return t.isValid() ? t.format("DD MMM YY") : '-';
       }
     }, {
       field: "id",
       title: " ",
+      menu: false,
+      filterable: false,
+      sortable: false,
       width: 50,
       template: function(e){
         return '<a href="' + data.root + 'tasks/display_' + e.id + '" title="' + data.lng.see_task + '"><button class="k-button"><i class="fa fa-eye"> </i></button></a>';
@@ -168,13 +299,4 @@ $(".appui-task-search-container input.appui-lg", ele).keyup(function(e){
   timer = setTimeout(function(){
     ds.read();
   }, 1000);
-});
-$(".appui-task-search-container button", ele).click(function(){
-  var $input = $(".appui-task-search-container input.appui-lg", ele),
-      v = $input.val();
-  if ( v.length ){
-    appui.tasks.formNew(v);
-    $input.val("");
-    ds.read();
-  }
 });

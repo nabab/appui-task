@@ -4,31 +4,32 @@
 <script type="text/x-kendo-template" id="tpl-task_tab_main">
   <input type="hidden" name="id" data-bind="value: id">
   <input type="hidden" name="ref" data-bind="value: ref">
-  <div class="appui-line-breaker appui-task-form-container k-content">
+
+  <div class="appui-line-breaker appui-task-form-container">
 
     <div class="appui-task-info-ppl k-widget">
-    	<div class="appui-block">
-      	<div class="appui-block">
-        	<?=_("Created by")?><br>
-	      	<?=_("On")?>
-  			</div>
+      <div class="appui-block">
         <div class="appui-block">
-        	<span data-bind="html: creator"></span><br>
-        	<span data-bind="text: creation"></span>
-  			</div>
-  		</div>
-    	<div class="appui-block" data-bind="visible: roles.workers">
-      	<div class="appui-block"><?=_("Assigned to")?></div>
+          <?=_("Created by")?><br>
+          <?=_("On")?>
+        </div>
+        <div class="appui-block">
+          <span data-bind="html: creator"></span><br>
+          <span data-bind="text: creation"></span>
+        </div>
+      </div>
+      <div class="appui-block" data-bind="visible: roles.workers">
+        <div class="appui-block"><?=_("Assigned to")?></div>
         <ul class="appui-block" data-bind="source: roles.workers" data-template="tpl-task_info_ppl"></ul>
-  		</div>
-    	<div class="appui-block" data-bind="visible: roles.managers">
-      	<div class="appui-block"><?=_("Managed by")?></div>
+      </div>
+      <div class="appui-block" data-bind="visible: roles.managers">
+        <div class="appui-block"><?=_("Managed by")?></div>
         <ul class="appui-block" data-bind="source: roles.managers" data-template="tpl-task_info_ppl"></ul>
-  		</div>
+      </div>
     </div>
 
-		<div class="appui-form-full">
-      <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update}">
+    <div class="appui-form-full">
+      <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
     </div>
 
     <div class="appui-form-label" style="width: 220px"><?=_("Category")?></div>
@@ -36,9 +37,10 @@
       <input name="type" style="width: 500px" required="required" data-bind="value: type, events: {change: update}">
     </div>
 
-    <div class="appui-form-label"><?=_("Priority")?></div>
+		<div class="appui-form-label"><?=_("Priority")?></div>
     <div class="appui-form-field">
-    	<div class="appui-form-label" style="width: 140px">
+
+      <div class="appui-form-label" style="width: 140px">
         <div class="appui-block">
           <select data-role="dropdownlist" data-bind="value: priority, events: {change: update}" name="priority" style="width: 80px">
             <option value="1">1</option>
@@ -52,16 +54,18 @@
             <option value="9">9</option>
           </select>
         </div>
-		  </div>
+      </div>
       <div class="appui-form-field">
+
         <div class="appui-form-label" style="width: 140px"><?=_("Deadline")?></div>
         <div class="appui-form-field">
-          <input type="date" data-role="datepicker" name="deadline" data-bind="value: deadline, events: {change: update}" data-format="yyyy-MM-dd">
+          <input type="date" data-role="datepicker" name="deadline" data-bind="value: deadline, events: {change: update, keydown: preventEnter}" data-format="yyyy-MM-dd">
         </div>
+
       </div>
     </div>
 
-    <div class="appui-form-label"> </div>
+    <!--<div class="appui-form-label"> </div>
     <div class="appui-form-field">
       <select data-role="dropdownlist">
         <option value=""><?=_("Actions")?></option>
@@ -72,29 +76,37 @@
         <option value="to_viewer"><?=_("Make me a viewer")?></option>
         <option value="ping"><?=_("Ping workers")?></option>
       </select>
-    </div>
+    </div>-->
 
     <div class="appui-line-breaker"> </div>
+    <!--onclick="$(this).next().toggle().redraw().next().toggle().redraw()">-->
+    <div class="appui-form-label appui-p" onclick="$(this).next().next().toggle().redraw()">
+      <i class="fa fa-edit"> </i> &nbsp; <?=_("Add a comment")?>
+    </div>
 
-    <div class="appui-form-label appui-p" onclick="$(this).next().toggle().redraw().next().toggle().redraw()">
-	  	<i class="fa fa-edit"> </i> &nbsp; <?=_("Add a comment")?>
-  	</div>
     <div class="appui-form-field" style="display: none">
       <div class="appui-form-label appui-p" style="width: 140px">
-      	<button class="k-button" onclick="appui.fn.alert('Link')">
+        <button class="k-button" onclick="appui.fn.alert('Link')">
           <i class="fa fa-link"> </i> &nbsp; <?=_("Link")?>
         </button>
         &nbsp;&nbsp;
-      	<button class="k-button" onclick="appui.fn.alert('Link')">
+        <button class="k-button" onclick="appui.fn.alert('Link')">
           <i class="fa fa-code"> </i> &nbsp; <?=_("Code")?>
         </button>
- 			</div>
+      </div>
       <div class="appui-form-field">
         <div class="appui-task-upload-wrapper appui-task-files-container"> </div>
       </div>
-  	</div>
+    </div>
 
-		<div class="appui-form-full appui-task-form-adder">
+    <div class="appui-form-full appui-task-form-adder">
+      <div class="appui-form-label" style="width: 220px">
+        <?=_("Title")?><br>
+      </div>
+      <div class="appui-form-field">
+        <input class="k-textbox" name="comment_title" style="width: 90%">
+      </div>
+
       <div class="appui-form-label" style="width: 220px">
         <?=_("Comment")?><br>
         <!--<select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
@@ -120,15 +132,16 @@
           </table>
         </div>
       </div>-->
+
       <div class="appui-form-label" style="width: 220px"> </div>
       <div class="appui-form-field">
-      	<button class="k-button appui-task-comment-button">
-        	<i class="fa fa-save"> </i> Save
+        <button class="k-button appui-task-comment-button" data-bind="click: add_comment">
+          <i class="fa fa-save"> </i> Save
         </button>
       </div>
+
     </div>
   </div>
-  
 	<div class="appui-form-full appui-task-comments ui comments" data-bind="source: notes" data-template="tpl-appui_task_comment"></div>
 </script>
 <script type="text/x-kendo-template" id="tpl-appui_task_comment">
