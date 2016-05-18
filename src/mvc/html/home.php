@@ -158,6 +158,9 @@
           5 Faves
         </div>-->
       </div>
+      # if ( title ){ #
+      <div class="title appui-u">#= title #</div>
+      # } #
       <div class="text">#= content #</div>
     </div>
   </div>

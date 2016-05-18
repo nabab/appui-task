@@ -9,8 +9,8 @@ if ( isset($this->data['id']) ){
   $pm = new \bbn\appui\task($this->db);
   return [
     'success' => $pm->comment($this->data['id'], [
-      'title' => isset($this->data['comment_title']) ? $this->data['comment_title'] : '',
-      'text' => isset($this->data['comment']) ? $this->data['comment'] : ''
+      'title' => isset($this->data['title']) ? $this->data['title'] : '',
+      'text' => isset($this->data['text']) ? $this->data['text'] : ''
      ])
   ];
 }
