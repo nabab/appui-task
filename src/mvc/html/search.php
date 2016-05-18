@@ -4,12 +4,12 @@
   <div class="appui-task-search-container">
     <div class="appui-form-full appui-c">
     	<select name="selection" class="appui-lg" data-role="dropdownlist" data-bind="events: {change: change_selection}">
-      	<option value="user">Mine</option>
-      	<option value="group">My groups'</option>
-      	<option value="all">All</option>
+      	<option value="user"><?=_("Mine")?></option>
+      	<option value="group"><?=_("My groups'")?></option>
+      	<option value="all"><?=_("All")?></option>
       </select>
      &nbsp;
-      <input name="title" class="k-textbox appui-lg" placeholder="Title/short description of the new task">
+      <input name="title" class="k-textbox appui-lg" placeholder="<?=_("Title/short description of the new task")?>">
       <button class="k-button appui-lg" data-bind="click: create_task"><i class="fa fa-flag-checkered"> </i> <?=_("Create a task")?></button>
     </div>
   </div>

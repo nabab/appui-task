@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-18 15:06+0200\n"
+"POT-Creation-Date: 2016-05-18 15:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -343,3 +343,19 @@ msgstr "Journal des évènements"
 #: ../../../mvc/model/home.php:36
 msgid "You have to enter a comment, a link, or a file"
 msgstr "Vous devez entrer un texte, un lien ou un fichier"
+
+#: ../../../mvc/html/search.php:7
+msgid "Mine"
+msgstr "Les miennes"
+
+#: ../../../mvc/html/search.php:8
+msgid "My groups'"
+msgstr "Mon groupe"
+
+#: ../../../mvc/html/search.php:9
+msgid "All"
+msgstr "Toutes"
+
+#: ../../../mvc/html/search.php:12
+msgid "Title/short description of the new task"
+msgstr "Titre/courte description de la nouvelle tâche"
