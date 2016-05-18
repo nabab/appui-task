@@ -76,7 +76,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       width: 100,
       template: function(e){
         if ( !e.duration ){
-          return data.lng.inconnue;
+          return data.lng.unknown;
         }
         if ( e.duration < 3600 ){
           return Math.round(e.duration/60) + ' mn';
@@ -97,7 +97,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
       }
     }, {
       field: "last",
-      title: dat.lng.last,
+      title: data.lng.last,
       width: 100,
       template: function(e){
         var t = moment(e.last);

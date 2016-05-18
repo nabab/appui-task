@@ -16,7 +16,7 @@ return [
     'problem_file' => _("Problem with the file..."),
     'error_uploading' => _("Problem during the upload"),
     'file_exists' => _("A file with this name already exists"),
-    'supprimer'=> _("Supprimer"),
+    'delete'=> _("Delete"),
   ],
   'roles' => [[
     "text" => _("Worker"),

@@ -13,11 +13,11 @@ if ( !isset($this->post['id']) ){
       'type' => _("Type"),
       'state' => _("State"),
       'duration' => _("Duration"),
-      'inconnue' => _("Inconnue")
+      'unknown' => _("Unknown")
       'start' => _("Start"),
       'last'=> _("Last"),
       'deadline' => _("Deadline")
-      'see_task' => _(""), // dichiarato in js inserire stringa
+      'see_task' => _("See task"), // dichiarato in js inserire stringa
 
 
     ]

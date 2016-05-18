@@ -338,7 +338,7 @@ var uploadedFiles = [],
               '<td class="appui-task-link-actions">' +
                 '<span class="k-upload-pct">' + kendo.toString(size, 'n0') + ' ' + unit + '</span>' +
                 '<button class="k-button k-button-bare k-upload-action" type="button">' +
-                '<span class="k-icon k-i-close k-delete" title="Supprimer"></span>' +
+                '<span class="k-icon k-i-close k-delete" title="' + data.lng.delete + '"></span>' +
                 '</button>' +
               '</td></tr></tbody></table></div>';
             return st;
@@ -410,7 +410,7 @@ $("input[name=link]", ele).keydown(function(e){
       '<td class="appui-task-link-actions">' +
         '<span class="k-upload-pct"> </span>' +
         '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
-          '<span title="Supprimer" class="k-icon k-i-close k-delete"></span>' +
+          '<span title="' + data.lng.delete + '" class="k-icon k-i-close k-delete"></span>' +
         '</button>' +
       '</tr></table>' +
       '</div>' +

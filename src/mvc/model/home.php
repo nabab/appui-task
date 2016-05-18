@@ -31,8 +31,8 @@ return [
     'date' => _("Date"),
     'action' => _("Action"),
     'global_view' => _("Global view"),
-    'roles' => _("Rôles"),
-    'journal' => _("Journal des évènements"),
+    'roles' => _("Roles"),
+    'journal' => _("Events journal"),
     'no_comment_text' => _("You have to enter a comment, a link, or a file")
   ],
   'roles' => [[

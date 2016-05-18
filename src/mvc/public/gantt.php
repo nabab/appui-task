@@ -12,10 +12,9 @@ echo $this->set_title("Gantt")->add_js([
     'type' => _("Type"),
     'state' => _("State"),
     'duration' => _("Duration"),
-    'inconnue' => _("Inconnue"),
+    'unknown' => _("Unknown"),
     'start' => _("Start"),
     'last' => _("Last"),
-    'title' => _("Title"),
-    'see_task' => _(" ") //inserire stringa  per linea di comando 114 gantt.js
+    'title' => _("Title")
   ]
 ])->get_view();

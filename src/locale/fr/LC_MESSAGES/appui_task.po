@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-12 11:11+0200\n"
+"POT-Creation-Date: 2016-05-18 15:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,52 +18,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: mvc/public/new.php:9 ../../../mvc/html/new.php:9
-#: ../../../mvc/html/new.php:12
+#: ../../../mvc/html/new.php:12 ../../../mvc/html/home.php:111
 msgid "Comment"
 msgstr "Commentaire"
 
 #: mvc/public/new.php:11 ../../../mvc/html/new.php:11
-#: ../../../mvc/html/new.php:14
+#: ../../../mvc/html/new.php:14 ../../../mvc/html/home.php:113
 msgid "Simple text"
 msgstr "Texte simple"
 
 #: mvc/public/new.php:12 ../../../mvc/html/new.php:12
-#: ../../../mvc/html/new.php:15
+#: ../../../mvc/html/new.php:15 ../../../mvc/html/home.php:114
 msgid "Rich text"
 msgstr "Texte enrichi"
 
 #: mvc/public/new.php:13 ../../../mvc/html/new.php:13
-#: ../../../mvc/html/new.php:16
+#: ../../../mvc/html/new.php:16 ../../../mvc/html/home.php:115
 msgid "Markdown"
 msgstr "Format Markdown"
 
 #: mvc/public/new.php:14 ../../../mvc/html/new.php:14
-#: ../../../mvc/html/new.php:17
+#: ../../../mvc/html/new.php:17 ../../../mvc/html/home.php:116
 msgid "PHP code"
 msgstr "Code PHP"
 
 #: mvc/public/new.php:15 ../../../mvc/html/new.php:15
-#: ../../../mvc/html/new.php:18
+#: ../../../mvc/html/new.php:18 ../../../mvc/html/home.php:117
 msgid "JavaScript code"
 msgstr "Code JavaScript"
 
 #: mvc/public/new.php:16 ../../../mvc/html/new.php:16
-#: ../../../mvc/html/new.php:19
+#: ../../../mvc/html/new.php:19 ../../../mvc/html/home.php:118
 msgid "CSS code"
 msgstr "Code CSS"
 
 #: mvc/public/new.php:23 ../../../mvc/html/new.php:23
-#: ../../../mvc/html/new.php:26
+#: ../../../mvc/html/new.php:26 ../../../mvc/html/home.php:35
 msgid "Category"
 msgstr "Catégorie"
 
 #: mvc/public/new.php:28 ../../../mvc/html/new.php:28
-#: ../../../mvc/html/new.php:46
+#: ../../../mvc/html/new.php:46 ../../../mvc/private/search.php:21
+#: ../../../mvc/private/ongoing.php:19 ../../../mvc/html/home.php:60
 msgid "Deadline"
 msgstr "Date butoir"
 
 #: mvc/public/new.php:37 ../../../mvc/html/new.php:37
-#: ../../../mvc/html/new.php:69
+#: ../../../mvc/html/new.php:69 ../../../mvc/model/home.php:34
 msgid "Roles"
 msgstr "Rôles"
 
@@ -76,7 +77,8 @@ msgid "Attachments"
 msgstr "Pièces jointes"
 
 #: mvc/public/new.php:63 ../../../mvc/html/new.php:63
-#: ../../../mvc/html/new.php:55
+#: ../../../mvc/html/new.php:55 ../../../mvc/html/new.php:56
+#: ../../../mvc/html/home.php:125
 msgid "Links"
 msgstr "Liens"
 
@@ -86,52 +88,58 @@ msgid "Create task"
 msgstr "Créer la tâche"
 
 #: mvc/public/new.php:10 ../../../mvc/public/new.php:10
-#: ../../../mvc/model/new.php:13
+#: ../../../mvc/model/new.php:13 ../../../mvc/model/home.php:24
 msgid "Are you sure you want to remove yourself from this task??"
 msgstr "Êtes-vous sûr de vouloir vous supprimer vous-même de cette tâche??"
 
 #: public/ongoing.php:8 ../../../mvc/public/projects.php:19
 #: ../../../mvc/public/ongoing.php:8 ../../../mvc/public/projects.php:22
-#: ../../../mvc/public/projects.php:23
+#: ../../../mvc/public/projects.php:23 ../../../mvc/model/home.php:19
 msgid "My ongoing tasks"
 msgstr "Mes tâches en cours"
 
 #: public/new.php:12 ../../../mvc/public/new.php:12
 #: ../../../mvc/public/new.php:22 ../../../mvc/public/new.php:9
+#: ../../../mvc/private/search.php:9 ../../../mvc/model/home.php:17
 msgid "New task"
 msgstr "Nouvelle tâche"
 
 #: ../../../mvc/public/projects.php:20 ../../../mvc/public/projects.php:23
-#: ../../../mvc/public/projects.php:24
+#: ../../../mvc/public/projects.php:24 ../../../mvc/model/home.php:20
 msgid "Timeline"
 msgstr "Ligne de temps"
 
 #: ../../../mvc/public/projects.php:21 ../../../mvc/public/projects.php:24
-#: ../../../mvc/public/projects.php:25
+#: ../../../mvc/public/projects.php:25 ../../../mvc/private/search.php:9
+#: ../../../mvc/model/home.php:21
 msgid "Search"
 msgstr "Recherche"
 
 #: ../../../mvc/public/projects.php:23 ../../../mvc/public/projects.php:26
-#: ../../../mvc/public/projects.php:27
+#: ../../../mvc/public/projects.php:27 ../../../mvc/public/home.php:26
 msgid "Projects"
 msgstr "Projets"
 
 #: ../../../mvc/public/new.php:12 ../../../mvc/html/new.php:80
-#: ../../../mvc/model/new.php:21
+#: ../../../mvc/model/new.php:21 ../../../mvc/html/home.php:180
+#: ../../../mvc/model/new.php:22 ../../../mvc/model/home.php:39
 msgid "Worker"
 msgstr "Exécutant"
 
 #: ../../../mvc/public/new.php:15 ../../../mvc/html/new.php:72
-#: ../../../mvc/model/new.php:24
+#: ../../../mvc/model/new.php:24 ../../../mvc/html/home.php:172
+#: ../../../mvc/model/new.php:25 ../../../mvc/model/home.php:42
 msgid "Manager"
 msgstr "Responsable"
 
 #: ../../../mvc/public/new.php:18 ../../../mvc/html/new.php:88
-#: ../../../mvc/model/new.php:27
+#: ../../../mvc/model/new.php:27 ../../../mvc/html/home.php:188
+#: ../../../mvc/model/new.php:28 ../../../mvc/model/home.php:45
 msgid "Spectator"
 msgstr "Spectateur"
 
-#: ../../../mvc/html/new.php:31
+#: ../../../mvc/html/new.php:31 ../../../mvc/private/search.php:18
+#: ../../../mvc/html/home.php:40 ../../../mvc/public/gantt.php:11
 msgid "Priority"
 msgstr "Priorité"
 
@@ -139,30 +147,199 @@ msgstr "Priorité"
 msgid "Files"
 msgstr "Fichiers"
 
-#: ../../../mvc/html/new.php:59
+#: ../../../mvc/html/new.php:59 ../../../mvc/html/new.php:60
+#: ../../../mvc/html/home.php:129
 msgid "Type or paste your URL and press Enter to valid"
 msgstr "Tapez ou collez votre URL et pressez Entrée pour valider"
 
-#: ../../../mvc/html/new.php:98
+#: ../../../mvc/html/new.php:98 ../../../mvc/html/home.php:198
 msgid "Drag and drop the users into the corresponding role block"
-msgstr "Faites glisser les utilisateurs ou les groupes dans les blocs correspondants"
+msgstr ""
+"Faites glisser les utilisateurs ou les groupes dans les blocs correspondants"
 
-#: ../../../mvc/model/new.php:14
+#: ../../../mvc/model/new.php:14 ../../../mvc/model/home.php:25
 msgid "File"
 msgstr "Fichier"
 
-#: ../../../mvc/model/new.php:15
+#: ../../../mvc/model/new.php:15 ../../../mvc/html/home.php:90
+#: ../../../mvc/model/home.php:26
 msgid "Link"
 msgstr "Lien"
 
-#: ../../../mvc/model/new.php:16
+#: ../../../mvc/model/new.php:16 ../../../mvc/model/home.php:27
 msgid "Problem with the file..."
 msgstr "Problème avec le fichier"
 
-#: ../../../mvc/model/new.php:17
+#: ../../../mvc/model/new.php:17 ../../../mvc/model/home.php:28
 msgid "Problem during the upload"
 msgstr "Problème pendant l'envoi du fichier"
 
-#: ../../../mvc/model/new.php:18
+#: ../../../mvc/model/new.php:18 ../../../mvc/model/home.php:29
 msgid "A file with this name already exists"
 msgstr "Un fichier de ce nom existe déjà"
+
+#: ../../../mvc/private/new.php:9 ../../../mvc/model/home.php:18
+msgid "Demo task form"
+msgstr "Formulaire de démo"
+
+#: ../../../mvc/private/search.php:12 ../../../mvc/private/ongoing.php:12
+#: ../../../mvc/html/home.php:104 ../../../mvc/html/home.php:209
+#: ../../../mvc/public/gantt.php:18
+msgid "Title"
+msgstr "Titre"
+
+#: ../../../mvc/private/search.php:13 ../../../mvc/private/ongoing.php:13
+#: ../../../mvc/html/home.php:212 ../../../mvc/public/gantt.php:12
+msgid "Type"
+msgstr "Type"
+
+#: ../../../mvc/private/search.php:14
+msgid "Role"
+msgstr "Rôle"
+
+#: ../../../mvc/private/search.php:15 ../../../mvc/private/ongoing.php:14
+#: ../../../mvc/public/gantt.php:13
+msgid "State"
+msgstr "État"
+
+#: ../../../mvc/private/search.php:16 ../../../mvc/private/ongoing.php:15
+#: ../../../mvc/public/gantt.php:14
+msgid "Duration"
+msgstr "Durée"
+
+#: ../../../mvc/private/search.php:17 ../../../mvc/public/gantt.php:15
+#: ../../../mvc/private/ongoing.php:16
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: ../../../mvc/private/search.php:19 ../../../mvc/private/ongoing.php:17
+#: ../../../mvc/public/gantt.php:16
+msgid "Start"
+msgstr "Début"
+
+#: ../../../mvc/private/search.php:20 ../../../mvc/private/ongoing.php:18
+#: ../../../mvc/public/gantt.php:17
+msgid "Last"
+msgstr "Dernier"
+
+#: ../../../mvc/private/search.php:22 ../../../mvc/private/ongoing.php:20
+msgid "See task"
+msgstr "Voir la tâche"
+
+#: ../../../mvc/html/search.php:13
+msgid "Create a task"
+msgstr "Créer une tâche"
+
+#: ../../../mvc/html/home.php:13
+msgid "Created by"
+msgstr "Créé par"
+
+#: ../../../mvc/html/home.php:14
+msgid "On"
+msgstr "le/à"
+
+#: ../../../mvc/html/home.php:22
+msgid "Assigned to"
+msgstr "Assigné à"
+
+#: ../../../mvc/html/home.php:26
+msgid "Managed by"
+msgstr "Managers"
+
+#: ../../../mvc/html/home.php:32
+msgid "Title/short description"
+msgstr "Titre/courte description"
+
+#: ../../../mvc/html/home.php:71
+msgid "Actions"
+msgstr "Actions"
+
+#: ../../../mvc/html/home.php:72
+msgid "Close"
+msgstr "Fermer"
+
+#: ../../../mvc/html/home.php:73
+msgid "Put on hold"
+msgstr "Mettre en attente"
+
+#: ../../../mvc/html/home.php:74
+msgid "Make me a manager"
+msgstr "Devenir manager"
+
+#: ../../../mvc/html/home.php:75
+msgid "Make me a worker"
+msgstr "Devenir exécutant"
+
+#: ../../../mvc/html/home.php:76
+msgid "Make me a viewer"
+msgstr "Devenir spectateur"
+
+#: ../../../mvc/html/home.php:77
+msgid "Ping workers"
+msgstr "Rappel aux exécutants"
+
+#: ../../../mvc/html/home.php:84
+msgid "Add a comment"
+msgstr "Ajouter un commentaire"
+
+#: ../../../mvc/html/home.php:94
+msgid "Code"
+msgstr "Code"
+
+#: ../../../mvc/html/home.php:218
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: ../../../mvc/public/tree.php:13
+msgid ""
+"Sorry, a problem occured while moving this item, and although the tree says "
+"otherwise the item has not been moved."
+msgstr ""
+
+#: ../../../mvc/public/tree.php:14
+msgid "Please refresh the tab in order to see the awful truth..."
+msgstr "S'il-vous-plaît rafraîchissez le tab pour voir la terrible vérité"
+
+#: ../../../mvc/public/tree.php:15
+msgid "Are you sure you want to move this task?"
+msgstr "Êtes-vous sûr de vouloir déplacer cette tâche?"
+
+#: ../../../mvc/model/new.php:19
+msgid "Delete"
+msgstr "Supprimer"
+
+#: ../../../mvc/model/home.php:16
+msgid "Opened tasks"
+msgstr "Tâches ouvertes"
+
+#: ../../../mvc/model/home.php:22
+msgid "Soon"
+msgstr "Bientôt"
+
+#: ../../../mvc/model/home.php:23
+msgid "All tasks"
+msgstr "Toutes les tâches"
+
+#: ../../../mvc/model/home.php:30
+msgid "User"
+msgstr "Utilisateur"
+
+#: ../../../mvc/model/home.php:31
+msgid "Date"
+msgstr "Date"
+
+#: ../../../mvc/model/home.php:32
+msgid "Action"
+msgstr "Action"
+
+#: ../../../mvc/model/home.php:33
+msgid "Global view"
+msgstr "Vue globale"
+
+#: ../../../mvc/model/home.php:35
+msgid "Events journal"
+msgstr "Journal des évènements"
+
+#: ../../../mvc/model/home.php:36
+msgid "You have to enter a comment, a link, or a file"
+msgstr "Vous devez entrer un texte, un lien ou un fichier"
