@@ -9,10 +9,12 @@ $s =& $this->inc->session;
 $pm = new \bbn\appui\task($this->db);
 return [
   'root' => $this->data['root'],
+  'roles' => \bbn\appui\task::get_roles(),
+  'states' => \bbn\appui\task::get_states(),
   'options' => \bbn\appui\task::get_options(),
   'categories' => \bbn\appui\task::get_cats(),
-  'priority_colors' => ['#F00', '#F40', '#F90', '#FC0', '#FF0', '#AD0', '#5B0', '#090', '#CCC', '#FFF'],
   'lng' => [
+    'no_role_permission' => _("You have no right to modify the roles in this task"),
     'opened_tasks' => _("Opened tasks"),
     'new_task' => _("New task"),
     'demo_task' => _("Demo task form"),
@@ -33,18 +35,12 @@ return [
     'global_view' => _("Global view"),
     'roles' => _("Roles"),
     'journal' => _("Events journal"),
-    'no_comment_text' => _("You have to enter a comment, a link, or a file")
+    'no_comment_text' => _("You have to enter a comment, a link, or a file"),
+    'sure_to_hold' => _("Are you sure you want to put this task on hold?"),
+    'sure_to_resume' => _("Are you sure you want to resume this task?"),
+    'sure_to_close' => _("Are you sure you want to close this task?"),
+    'sure_to_unfollow' => _("Are you sure you want to unfollow this task?"),
   ],
-  'roles' => [[
-    "text" => _("Worker"),
-    "value" => "doer"
-  ], [
-    "text" => _("Manager"),
-    "value" => "manager"
-  ], [
-    "text" => _("Spectator"),
-    "value" => "viewer"
-  ]],
   'groups' => array_map(function($a) use ($s){
     if ( $a['id'] !== $s->get('user', 'id_group') ){
       $a['expanded'] = false;

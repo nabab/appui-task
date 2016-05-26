@@ -72,7 +72,7 @@
             <div class="k-header"><?=_("Manager")?></div>
             <div class="k-content appui-task-managers">
               <input type="hidden" name="managers">
-              <ul class="appui-task-roles-container"></ul>
+              <ul></ul>
             </div>
           </div>
           <div class="appui-spacer"> </div>

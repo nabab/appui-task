@@ -1,6 +1,4 @@
-<div class="appui-full-height" style="width: 100%">
-  <div id="appui_task_tabnav"></div>
-</div>
+<div class="appui-full-height" id="appui_task_tabnav"></div>
 <script type="text/x-kendo-template" id="tpl-task_tab_main">
   <input type="hidden" name="id" data-bind="value: id">
   <input type="hidden" name="ref" data-bind="value: ref">
@@ -23,13 +21,9 @@
         <ul class="appui-block" data-bind="source: roles.workers" data-template="tpl-task_info_ppl"></ul>
       </div>
       <div class="appui-block" data-bind="visible: roles.managers">
-        <div class="appui-block"><?=_("Managed by")?></div>
+        <div class="appui-block"><?=_("Supervised by")?></div>
         <ul class="appui-block" data-bind="source: roles.managers" data-template="tpl-task_info_ppl"></ul>
       </div>
-    </div>
-
-    <div class="appui-form-full">
-      <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
     </div>
 
     <div class="appui-form-label" style="width: 220px"><?=_("Category")?></div>
@@ -65,34 +59,66 @@
       </div>
     </div>
 
-    <!--<div class="appui-form-label"> </div>
-    <div class="appui-form-field">
-      <select data-role="dropdownlist">
-        <option value=""><?=_("Actions")?></option>
-        <option value="close"><?=_("Close")?></option>
-        <option value="hold"><?=_("Put on hold")?></option>
-        <option value="to_manager"><?=_("Make me a manager")?></option>
-        <option value="to_worker"><?=_("Make me a worker")?></option>
-        <option value="to_viewer"><?=_("Make me a viewer")?></option>
-        <option value="ping"><?=_("Ping workers")?></option>
-      </select>
-    </div>-->
+    <div class="appui-form-full">
+      <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
+    </div>
+
+    <div class="appui-form-label appui-lg"><em data-bind="text: statef"></em></div>
+    <div class="appui-form-field appui-lg">
+      <img class="profile">
+    	<div data-bind="visible: is_opened">
+        <button data-bind="visible: can_hold, click: hold" class="k-button" title="<?=_("Put on hold")?>">
+          <i class="fa fa-pause"> </i>
+        </button>
+        <button data-bind="visible: can_close, click: close" class="k-button" title="<?=_("Close")?>">
+          <i class="fa fa-check"> </i>
+        </button>
+        <div data-bind="style: {display: make_me_display}" style="vertical-align: middle">
+          <ul data-role="menu" data-bind="events: {select: make_me}" style="vertical-align: middle">
+            <li>
+              <i class="fa fa-user-plus"> </i>
+              <ul>
+                <li data-task-role="managers"><?=_("Make me a supervisor")?></li>
+                <li data-task-role="workers"><?=_("Make me a worker")?></li>
+                <li data-task-role="viewers"><?=_("Make me a viewer")?></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <button data-bind="visible: can_ping, click: ping" class="k-button" title="<?=_("Ping workers")?>">
+          <i class="fa fa-hand-o-up"> </i>
+        </button>
+        <button data-bind="visible: is_added, click: unmake_me" class="k-button" title="<?=_("Unfollow the task")?>">
+          <i class="fa fa-user-times"> </i>
+        </button>
+      </div>
+    	<div data-bind="visible: is_holding">
+        <button data-bind="visible: can_resume, click: resume" class="k-button" title="<?=_("Resume")?>">
+          <i class="fa fa-play"> </i>
+        </button>
+      </div>
+    	<div data-bind="visible: is_closed">
+        <button data-bind="visible: can_open, click: reopen" class="k-button" title="<?=_("Reopen")?>">
+          <i class="fa fa-hand-o-left"> </i>
+        </button>
+      </div>
+    </div>
 
     <div class="appui-line-breaker"> </div>
     <!--onclick="$(this).next().toggle().redraw().next().toggle().redraw()">-->
-    <div class="appui-form-label appui-p" onclick="$(this).next().next().toggle().redraw()">
+    <div class="appui-form-label appui-p" onclick="$(this).next().toggle().next().toggle().parent().redraw()">
       <i class="fa fa-edit"> </i> &nbsp; <?=_("Add a comment")?>
     </div>
 
     <div class="appui-form-field" style="display: none">
-      <div class="appui-form-label appui-p" style="width: 140px">
-        <button class="k-button" onclick="appui.fn.alert('Link')">
+      <div class="appui-form-label appui-p" style="width: 140px"> 
+        <!--<button class="k-button" onclick="appui.fn.alert('Link')">
           <i class="fa fa-link"> </i> &nbsp; <?=_("Link")?>
         </button>
         &nbsp;&nbsp;
         <button class="k-button" onclick="appui.fn.alert('Link')">
           <i class="fa fa-code"> </i> &nbsp; <?=_("Code")?>
-        </button>
+        </button>-->
       </div>
       <div class="appui-form-field">
         <div class="appui-task-upload-wrapper appui-task-files-container"> </div>
@@ -159,9 +185,18 @@
         </div>-->
       </div>
       # if ( title ){ #
-      <div class="title appui-u">#= title #</div>
+      <div class="title appui-u appui-lg">#= title #</div>
       # } #
-      <div class="text">#= content #</div>
+      <div class="text">
+      #= content #
+      # if ( data.medias && data.medias.length ){ #
+        <p>
+        # for ( var i = 0; i < data.medias.length; i++ ){ #
+          <a class="media" href="javascript:;" onclick="appui.fn.post_out('<?=$root?>download/media/#= data.medias[i].id #')">#= data.medias[i].title #</a>
+        # } #
+        </p>
+      # } #
+  		</div>
     </div>
   </div>
 </script>
@@ -169,15 +204,15 @@
   <div class="appui-form-full appui-task-roles-container">
     <div class="k-content">
       <div class="k-block appui-task-assigned">
-        <div class="k-header"><?=_("Manager")?></div>
+        <div class="k-header"><?=_("Supervisors")?></div>
         <div class="k-content appui-task-managers">
           <input type="hidden" name="managers">
-          <ul class="appui-task-roles-container"></ul>
+          <ul></ul>
         </div>
       </div>
       <div class="appui-spacer"> </div>
       <div class="k-block appui-task-assigned">
-        <div class="k-header"><?=_("Worker")?></div>
+        <div class="k-header"><?=_("Workers")?></div>
         <div class="k-content appui-task-workers">
           <input type="hidden" name="workers">
           <ul></ul>
@@ -185,7 +220,7 @@
     </div>
     <div class="appui-spacer"> </div>
     <div class="k-block appui-task-assigned">
-      <div class="k-header"><?=_("Spectator")?></div>
+      <div class="k-header"><?=_("Spectators")?></div>
         <div class="k-content appui-task-viewers">
           <input type="hidden" name="viewers">
           <ul></ul>
@@ -193,9 +228,19 @@
       </div>
       <div class="appui-form-full">
         <div class="appui-task-usertree"></div>
-        <div class="appui-task-roles-desc container-placeholder appui-lg">
-          <i class="fa fa-question-circle"> </i>
-          <?=_("Drag and drop the users into the corresponding role block")?>
+        <div class="appui-task-roles-desc container-placeholder appui-lg" data-bind="invisible: is_closed">
+        	<span data-bind="visible: can_change">
+            <i class="fa fa-question-circle"> </i>
+            <?=_("Drag and drop the users into the corresponding role block")?>
+          </span>
+        	<span data-bind="invisible: can_change">
+            <i class="fa fa-exclamation-circle"> </i>
+            <?=_("You have no right to modify the roles in this task")?>
+          </span>
+        </div>
+        <div class="appui-task-roles-desc container-placeholder appui-lg" data-bind="visible: is_closed">
+          <i class="fa fa-exclamation-circle"> </i>
+          <?=_("You cannot change the roles because the task is closed")?>
         </div>
       </div>
     </div>

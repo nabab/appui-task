@@ -9,14 +9,15 @@ if ( isset($this->arguments[0]) && ($this->arguments[0] === 'tasks') ){
   array_shift($this->arguments);
 }
 if ( !empty($this->arguments) ){
-  $this->data['is_template'] = true;
-  $this->data['id'] = \bbn\str::get_numbers($this->arguments[0]);
+  $this->add_data([
+    'is_template' => true,
+    'id' => \bbn\str::get_numbers($this->arguments[0])
+  ]);
   /** @todo false should be removed as last argument but idk why I need it */
   echo $this->get_view('', 'php', false);
   $this->obj->data = $this->get_model();
   if ( isset($this->obj->data['info']) ){
-    $this->add_script('appui.tasks.create(data.info);');
-    $this->set_title($this->obj->data['info']['title']);
+    $this->add_js()->set_title($this->obj->data['info']['title']);
   }
   $this->obj->url = implode("/", $this->arguments);
 }

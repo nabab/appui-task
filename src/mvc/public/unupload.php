@@ -5,13 +5,13 @@
  **/
 
 /** @var $this \bbn\mvc\controller */
+$this->obj->success = false;
 if ( isset($this->arguments[0], $this->post['fileNames']) ){
   $path = BBN_USER_PATH.'tmp/'.$this->arguments[0];
-  $new = \bbn\str::encode_filename($f['name'], \bbn\str::file_ext($f['name']));
+  $new = \bbn\str::encode_filename($this->post['fileNames'], \bbn\str::file_ext($this->post['fileNames']));
   $file = $path.'/'.$new;
-  if ( is_file($new) ){
-    
+  if ( is_file($file) ){
+    $this->obj->files = $this->post['fileNames'];
+    $this->obj->success = unlink($file);
   }
-  if $this->arguments[0]
 }
-die(var_dump($this->post));

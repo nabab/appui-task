@@ -37,8 +37,8 @@ var operators = kendo.ui.FilterCell.fn.options.operators,
             }
           }
           var myData = {
-            selection: $("select[name=selection]", ele).data("kendoDropDownList").value()
-          },
+                selection: $("select[name=selection]", ele).data("kendoDropDownList").value()
+              },
               v = $(".appui-task-search-container input.appui-lg", ele).val();
           if ( v ){
             myData.search = v;
@@ -63,8 +63,8 @@ var operators = kendo.ui.FilterCell.fn.options.operators,
             id: {type: "number", nullable: false},
             id_parent: {type: "number", nullable: true},
             is_parent: {type: "boolean"},
-            first: {type: "date"},
-            last: {type: "date"},
+            creation_date: {type: "date"},
+            last_action: {type: "date"},
             title: {type: "string"},
             priority: {type: "number", nullable: false},
             state: {type: "number"},
@@ -106,8 +106,7 @@ gant_container.kendoTreeList({
     e.sender.element.find("tbody tr").each(function(){
       var v = e.sender.dataItem(this);
       $(this).find("td:eq(1)").css({
-        backgroundColor: appui.tasks.priority_colors[v.priority-1],
-        color: v.priority > 6 ? '#666' : '#EEE'
+        backgroundColor: appui.tasks.priority_colors[v.priority-1]
       })
     });
   },
@@ -128,7 +127,7 @@ gant_container.kendoTreeList({
       title: data.lng.priority,
       width: 60,
       attributes: {
-        style: "text-align: center; font-weight: bold; border-top: 1px solid #FFF"
+        style: "text-align: center; font-weight: bold; border-top: 1px solid #FFF; color: #FFF"
       },
       filterable: {
         operators:{
@@ -195,10 +194,28 @@ gant_container.kendoTreeList({
       },
       sortable: false,
       title: data.lng.state,
-      width: 120,
+      width: 50,
       values: appui.tasks.options.states,
       template: function(e){
-        return appui.fn.get_field(appui.tasks.options.states, "value", e.state, "text");
+        var icon,
+            color;
+        if ( e.state === appui.tasks.states.opened ){
+          icon = 'clock-o';
+          color = 'red';
+        }
+        else if ( e.state === appui.tasks.states.ongoing ){
+          icon = 'play';
+          color = 'blue';
+        }
+        else if ( e.state === appui.tasks.states.closed ){
+          icon = 'check';
+          color = 'green';
+        }
+        else if ( e.state === appui.tasks.states.holding ){
+          icon = 'pause';
+          color = 'grey';
+        }
+        return '<i class="appui-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + appui.fn.get_field(appui.tasks.options.states, "value", e.state, "text") + '"> </i>';
       }
     }, {
       field: "duration",
@@ -218,7 +235,7 @@ gant_container.kendoTreeList({
       },
       hidden: true
     }, {
-      field: "first",
+      field: "creation_date",
       title: data.lng.start,
       width: 100,
       hidden: true,
@@ -232,11 +249,11 @@ gant_container.kendoTreeList({
         }
       },
       template: function(e){
-        var t = moment(e.first);
+        var t = moment(e.creation_date);
         return t.fromNow();
       }
     }, {
-      field: "last",
+      field: "last_action",
       title: data.lng.last,
       width: 100,
       hidden: true,
@@ -250,7 +267,7 @@ gant_container.kendoTreeList({
         }
       },
       template: function(e){
-        var t = moment(e.last);
+        var t = moment(e.last_action);
         return t.format("DD MMM YY");
       }
     }, {

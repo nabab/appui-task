@@ -15,7 +15,6 @@ if ( isset($this->data['id']) ){
     $mgr = new \apst\manager($this->inc->user);
     array_walk($r['info']['notes'], function(&$a) use($note, $mgr){
       $a = $note->get($a);
-      $a['content'] = nl2br($a['content'], false);
     });
   }
   return $r;

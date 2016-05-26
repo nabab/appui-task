@@ -47,6 +47,14 @@ else{
       }
     }
   }
+  $sort = [];
+  if ( !empty($this->data['sort']) ){
+    foreach ( $this->data['sort'] as $s ){
+      if ( isset($s['dir'], $s['field']) ){
+        $sort[$s['field']] = $s['dir'];
+      }
+    }
+  }
   if ( isset($data['selection']) ){
     if ( $data['selection'] === 'user' ){
       array_push($res, ['id_user', '=', $this->inc->user->get_id()]);
@@ -55,5 +63,5 @@ else{
       array_push($res, ['id_group', '=', $this->inc->user->get_group()]);
     }
   }
-  return $pm->search($res);
+  return $pm->search($res, $sort);
 }
