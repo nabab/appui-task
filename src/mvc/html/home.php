@@ -66,7 +66,7 @@
     <div class="appui-form-label appui-lg"><em data-bind="text: statef"></em></div>
     <div class="appui-form-field appui-lg">
       <img class="profile">
-    	<div data-bind="visible: is_opened">
+    	<div data-bind="visible: is_opened" class="appui-task-actions">
         <button data-bind="visible: can_hold, click: hold" class="k-button" title="<?=_("Put on hold")?>">
           <i class="fa fa-pause"> </i>
         </button>
@@ -92,7 +92,7 @@
           <i class="fa fa-user-times"> </i>
         </button>
       </div>
-    	<div data-bind="visible: is_holding">
+    	<div data-bind="visible: is_holding_or_opened">
         <button data-bind="visible: can_resume, click: resume" class="k-button" title="<?=_("Resume")?>">
           <i class="fa fa-play"> </i>
         </button>
