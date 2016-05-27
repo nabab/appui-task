@@ -63,12 +63,14 @@
       <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
     </div>
 
-    <div class="appui-form-label appui-lg"><em data-bind="text: statef"></em></div>
-    <div class="appui-form-field appui-lg">
-      <img class="profile">
-    	<div data-bind="visible: is_opened" class="appui-task-actions">
+    <div class="appui-form-label appui-lg" class="appui-task-actions"><em data-bind="text: statef"></em></div>
+    <div class="appui-form-field appui-lg" class="appui-task-actions">
+    	<div data-bind="visible: is_opened_or_ongoing">
         <button data-bind="visible: can_hold, click: hold" class="k-button" title="<?=_("Put on hold")?>">
           <i class="fa fa-pause"> </i>
+        </button>
+        <button data-bind="visible: can_resume, click: resume" class="k-button" title="<?=_("Resume")?>">
+          <i class="fa fa-play"> </i>
         </button>
         <button data-bind="visible: can_close, click: close" class="k-button" title="<?=_("Close")?>">
           <i class="fa fa-check"> </i>
@@ -92,7 +94,7 @@
           <i class="fa fa-user-times"> </i>
         </button>
       </div>
-    	<div data-bind="visible: is_holding_or_opened">
+    	<div data-bind="visible: is_holding">
         <button data-bind="visible: can_resume, click: resume" class="k-button" title="<?=_("Resume")?>">
           <i class="fa fa-play"> </i>
         </button>

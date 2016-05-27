@@ -199,7 +199,7 @@ appui.tasks = {
                 }
               },
               can_resume: function(e){
-                if ( (this.get("state") === appui.tasks.states.holding) && (this.is_manager() || this.is_worker()) ){
+                if ( (this.is_holding() || this.is_opened()) && (this.is_manager() || this.is_worker()) ){
                   return true;
                 }
                 return false;
@@ -221,7 +221,13 @@ appui.tasks = {
                 return this.get("state") === appui.tasks.states.closed;
               },
               is_opened: function(){
-                return (this.get("state") === appui.tasks.states.opened) || (this.get("state") === appui.tasks.states.ongoing);
+                return (this.get("state") === appui.tasks.states.opened);
+              },
+              is_ongoing: function(){
+                return (this.get("state") === appui.tasks.states.ongoing);
+              },
+              is_opened_or_ongoing: function(){
+                return this.is_ongoing() || this.is_opened();
               },
               is_holding_or_opened: function(){
                 return this.is_holding() || this.is_opened();
