@@ -7,16 +7,8 @@
 /** @var $this \bbn\mvc\model*/
 if ( isset($this->data['id']) ){
   $task = new \bbn\appui\task($this->db);
-  $r = [
-    'info' => $task->info($this->data['id'])
+  return [
+    'info' => $task->info($this->data['id'], true)
   ];
-  if ( !empty($r['info']['notes']) ){
-    $note = new \bbn\appui\note($this->db);
-    $mgr = new \apst\manager($this->inc->user);
-    array_walk($r['info']['notes'], function(&$a) use($note, $mgr){
-      $a = $note->get($a);
-    });
-  }
-  return $r;
 }
 return [];

@@ -3,7 +3,6 @@
  * Describe what it does to show you're not that dumb!
  *
  **/
-
 /** @var $this \bbn\mvc\controller */
 if ( count($this->arguments) > 1 ){
   switch ( $this->arguments[0] ){

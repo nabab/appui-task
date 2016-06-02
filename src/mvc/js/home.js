@@ -116,7 +116,7 @@ appui.tasks = {
                 var mvvm = this,
                     role = $(e.item).attr("data-task-role");
                 if ( role ){
-                  appui.fn.post('actions/role/insert', {id_task: info.id, role: appui.tasks.roles[role], id_user: appui.env.userId}, function(d){
+                  appui.fn.post(data.root + 'actions/role/insert', {id_task: info.id, role: appui.tasks.roles[role], id_user: appui.env.userId}, function(d){
                     if ( app.userUID ){
                       // @todo Do something to update the roles tab
                       app.tree.findByUid(app.userUID);
@@ -142,7 +142,7 @@ appui.tasks = {
                   prop = "workers";
                 }
                 if ( prop && confirm(data.lng.sure_to_unfollow) ){
-                  appui.fn.post("actions/role/delete", {id_task: info.id, id_user: appui.env.userId, role: appui.tasks.roles[prop]}, function(d){
+                  appui.fn.post(data.root + "actions/role/delete", {id_task: info.id, id_user: appui.env.userId, role: appui.tasks.roles[prop]}, function(d){
                     var idx = $.inArray(appui.env.userId, mvvm.roles.get(prop))
                     if ( idx > -1 ){
                       mvvm.roles[prop].splice(idx, 1);
@@ -253,18 +253,11 @@ appui.tasks = {
                 }
                 else{
                   appui.fn.post(data.root + 'actions/comment/insert', v, function(d){
-                    if ( d.success ){
-                      var cr = new Date().getSQL(1),
-                          m = new moment(cr);
-                      ko.notes.push({
-                        content: v.text,
-                        title: v.title,
-                        id_note: d.success,
-                        id_user: appui.env.userId,
-                        creation: new Date().getSQL(1),
-                        since: m.fromNow(),
-                        version: 1,
-                      });
+                    if ( d.success && d.comment ){
+                      d.comment.creation = new Date().getSQL(1);
+                      var m = new moment(d.comment.creation);
+                      d.comment.since = m.fromNow();
+                      ko.notes.push(d.comment);
                       app.createUpload();
                       $(ele).redraw();
                       $("textarea[name=comment]", ele).data("kendoEditor").value('');

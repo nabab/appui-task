@@ -5,5 +5,4 @@
  **/
 
 /** @var $this \bbn\mvc\controller */
-
 $this->obj = $this->get_object_model($this->post);
