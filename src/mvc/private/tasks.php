@@ -11,7 +11,7 @@ if ( isset($this->arguments[0]) && ($this->arguments[0] === 'tasks') ){
 if ( !empty($this->arguments) ){
   $this->add_data([
     'is_template' => true,
-    'id' => \bbn\str::get_numbers($this->arguments[0])
+    'id' => $this->arguments[0]
   ]);
   /** @todo false should be removed as last argument but idk why I need it */
   echo $this->get_view('', 'php', false);
@@ -19,5 +19,5 @@ if ( !empty($this->arguments) ){
   if ( isset($this->obj->data['info']) ){
     $this->add_js()->set_title($this->obj->data['info']['title']);
   }
-  $this->obj->url = implode("/", $this->arguments);
+  $this->obj->url = 'tasks/'.implode("/", $this->arguments);
 }

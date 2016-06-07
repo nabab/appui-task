@@ -297,7 +297,7 @@ gant_container.kendoTreeList({
       sortable: false,
       width: 50,
       template: function(e){
-        return '<a href="' + data.root + 'tasks/display_' + e.id + '" title="' + data.lng.see_task + '"><button class="k-button"><i class="fa fa-eye"> </i></button></a>';
+        return '<a href="' + data.root + 'tasks/' + e.id + '" title="' + data.lng.see_task + '"><button class="k-button"><i class="fa fa-eye"> </i></button></a>';
       }
     }
   ]

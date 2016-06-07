@@ -4,6 +4,7 @@
 var tabnav = $("#appui_task_tabnav").tabNav({
   baseTitle: 'Projects - ',
   scrollable: false,
+  autoload: true,
   list: [{
     url: "search",
     static: true,
@@ -32,7 +33,7 @@ appui.tasks = {
       $("form").attr("action", data.root + 'actions/task/insert').data("script", function(e, f){
         if ( e.success ){
           appui.fn.closeAlert();
-          tabnav.tabNav("link", 'tasks/display_' + e.success);
+          tabnav.tabNav("link", 'tasks/' + e.success);
         }
         else{
           appui.fn.alert();
