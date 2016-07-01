@@ -1,5 +1,5 @@
 // Javascript Document
-$("#appui_task_splitter", ele).kendoSplitter({
+$(".appui-task-splitter", ele).kendoSplitter({
   orientation: "vertical",
   panes: [
     { collapsible: false, resizable: false, size: "50px", scrollable: false },
@@ -72,6 +72,7 @@ var operators = kendo.ui.FilterCell.fn.options.operators,
             deadline: {type: "date", nullable: true},
             role: {type: "number"},
             type: {type: "number"},
+            reference: {type: "string"},
             id_user: {type: "number"},
           }
         }
@@ -97,6 +98,8 @@ gant_container.kendoTreeList({
   sortable: true,
   pageable: true,
   pageSize: 50,
+  reorderable: true,
+  resizable: true,
   filterable: {
     extra: false
   },
@@ -105,23 +108,17 @@ gant_container.kendoTreeList({
   dataBound: function(e){
     e.sender.element.find("tbody tr").each(function(){
       var v = e.sender.dataItem(this);
-      $(this).find("td:eq(1)").css({
+      appui.fn.log(e);
+      $(this).find("td").css({backgroundColor: "transparent"}).eq(appui.fn.search(e.sender.columns, "field", "priority")).css({
         backgroundColor: appui.tasks.priority_colors[v.priority-1]
       })
     });
   },
   columns: [
     {
-      field: "title",
-      title: data.lng.title,
-      expandable: true,
-      filterable: {
-        operators:{
-          string: {
-            contains: operators.string.contains
-          }
-        }
-      },
+      field: "user",
+      title: data.lng.author,
+      width: 150
     }, {
       field: "priority",
       title: data.lng.priority,
@@ -138,42 +135,6 @@ gant_container.kendoTreeList({
           }
         }
       },
-    }, {
-      field: "id_parent",
-      hidden: true,
-      menu: false,
-      filterable: false,
-      sortable: false,
-    }, {
-      field: "is_parent",
-      hidden: true,
-      menu: false,
-      filterable: false,
-      sortable: false,
-    }, {
-      field: "role",
-      filterable: {
-        multi: true
-      },
-      sortable: false,
-      title: data.lng.role,
-      width: 80,
-      values: appui.tasks.options.roles,
-      template: function(e){
-        return appui.fn.get_field(appui.tasks.options.roles, "value", e.role, "text") || '-';
-      }
-    }, {
-      field: "type",
-      filterable: {
-        multi: true
-      },
-      sortable: false,
-      title: data.lng.type,
-      width: 150,
-      values: appui.tasks.options.cats,
-      template: function(e){
-        return appui.fn.get_field(appui.tasks.options.cats, "value", e.type, "text");
-      }
     }, {
       field: "num_notes",
       title: "#Notes",
@@ -218,6 +179,50 @@ gant_container.kendoTreeList({
         return '<i class="appui-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + appui.fn.get_field(appui.tasks.options.states, "value", e.state, "text") + '"> </i>';
       }
     }, {
+      field: "last_action",
+      title: data.lng.last,
+      width: 100,
+      filterable: {
+        operators:{
+          date: {
+            eq: operators.date.eq,
+            gt: operators.date.gt,
+            lt: operators.date.lt
+          }
+        }
+      },
+      template: function(e){
+        var t = moment(e.last_action);
+        return t.format("DD MMM YY");
+      }
+    }, {
+      field: "role",
+      filterable: {
+        multi: true
+      },
+      sortable: false,
+      title: data.lng.role,
+      width: 80,
+      values: appui.tasks.options.roles,
+      template: function(e){
+        return appui.fn.get_field(appui.tasks.options.roles, "value", e.role, "text") || '-';
+      }
+    }, {
+      field: "type",
+      filterable: {
+        multi: true
+      },
+      sortable: false,
+      title: data.lng.type,
+      attributes: {
+        style: "max-width: 300px",
+      },
+      width: 150,
+      values: appui.tasks.options.cats,
+      template: function(e){
+        return appui.fn.get_field(appui.tasks.options.cats, "value", e.type, "text");
+      }
+    }, {
       field: "duration",
       title: data.lng.duration,
       width: 70,
@@ -235,10 +240,24 @@ gant_container.kendoTreeList({
       },
       hidden: true
     }, {
+      field: "title",
+      title: data.lng.title,
+      expandable: true,
+      filterable: {
+        operators:{
+          string: {
+            contains: operators.string.contains
+          }
+        }
+      },
+    }, {
+      field: "reference",
+      title: data.lng.reference,
+      encoded: false
+    }, {
       field: "creation_date",
       title: data.lng.start,
       width: 100,
-      hidden: true,
       filterable: {
         operators:{
           date: {
@@ -251,24 +270,6 @@ gant_container.kendoTreeList({
       template: function(e){
         var t = moment(e.creation_date);
         return t.fromNow();
-      }
-    }, {
-      field: "last_action",
-      title: data.lng.last,
-      width: 100,
-      hidden: true,
-      filterable: {
-        operators:{
-          date: {
-            eq: operators.date.eq,
-            gt: operators.date.gt,
-            lt: operators.date.lt
-          }
-        }
-      },
-      template: function(e){
-        var t = moment(e.last_action);
-        return t.format("DD MMM YY");
       }
     }, {
       field: "deadline",
@@ -286,8 +287,26 @@ gant_container.kendoTreeList({
         }
       },
       template: function(e){
-        var t = moment(e.deadline);
-        return t.isValid() ? t.format("DD MMM YY") : '-';
+        var t = moment(e.deadline),
+            now = moment(),
+            diff = t.unix() - now.unix(),
+            col = 'green';
+        if ( !t.isValid() ){
+          return '-';
+        }
+        if ( diff < 0 ){
+          col = 'brown'
+        }
+        else if ( diff < (3*24*3600) ){
+          col = 'red'
+        }
+        else if ( diff < (7*24*3600) ){
+          col = 'orange'
+        }
+        else if ( diff < (7*24*3600) ){
+          col = 'orange'
+        }
+        return '<strong style="color: ' + col + '">' + t.format("DD MMM YY") + '</strong>';
       }
     }, {
       field: "id",
@@ -299,6 +318,18 @@ gant_container.kendoTreeList({
       template: function(e){
         return '<a href="' + data.root + 'tasks/' + e.id + '" title="' + data.lng.see_task + '"><button class="k-button"><i class="fa fa-eye"> </i></button></a>';
       }
+    }, {
+      field: "id_parent",
+      hidden: true,
+      menu: false,
+      filterable: false,
+      sortable: false,
+    }, {
+      field: "is_parent",
+      hidden: true,
+      menu: false,
+      filterable: false,
+      sortable: false,
     }
   ]
 });

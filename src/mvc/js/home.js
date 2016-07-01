@@ -89,6 +89,9 @@ appui.tasks = {
               creator: apst.userFull(info.id_user),
               creation: appui.fn.fdate(info.creation_date),
               ref: (new moment()).unix(),
+              has_comments: function(){
+                return info.notes.length ? true : false;
+              },
               is_manager: function(){
                 var managers = this.roles.get("managers");
                 if ( managers && ($.inArray(appui.env.userId, managers) > -1) ){

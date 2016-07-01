@@ -59,6 +59,9 @@
       </div>
     </div>
 
+		<div class="appui-form-label" data-bind="visible: ref"><?=_("External reference")?></div>
+    <div class="appui-form-field" data-bind="visible: ref, html: ref"></div>
+
     <div class="appui-form-full">
       <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
     </div>
@@ -112,8 +115,8 @@
       <i class="fa fa-edit"> </i> &nbsp; <?=_("Add a comment")?>
     </div>
 
-    <div class="appui-form-field" style="display: none">
-      <div class="appui-form-label appui-p" style="width: 140px"> 
+    <div class="appui-form-field" data-bind="invisible: has_comments">
+      <div class="appui-form-label appui-p" style="width: 140px">
         <!--<button class="k-button" onclick="appui.fn.alert('Link')">
           <i class="fa fa-link"> </i> &nbsp; <?=_("Link")?>
         </button>
@@ -127,7 +130,7 @@
       </div>
     </div>
 
-    <div class="appui-form-full appui-task-form-adder">
+    <div class="appui-form-full appui-task-form-adder" data-bind="invisible: has_comments">
       <div class="appui-form-label" style="width: 220px">
         <?=_("Title")?><br>
       </div>

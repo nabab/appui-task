@@ -1,6 +1,6 @@
 <!-- HTML Document -->
 
-<div id="appui_task_splitter" class="appui-full-height">
+<div class="appui-task-splitter appui-full-height">
   <div class="appui-task-search-container">
     <div class="appui-form-full appui-c">
       <div class="appui-block">
