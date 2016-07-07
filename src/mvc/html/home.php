@@ -26,6 +26,10 @@
       </div>
     </div>
 
+    <div class="appui-form-full">
+      <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
+    </div>
+
     <div class="appui-form-label" style="width: 220px"><?=_("Category")?></div>
     <div class="appui-form-field">
       <input name="type" style="width: 500px" required="required" data-bind="value: type, events: {change: update}">
@@ -61,10 +65,6 @@
 
 		<div class="appui-form-label" data-bind="visible: ref"><?=_("External reference")?></div>
     <div class="appui-form-field" data-bind="visible: ref, html: ref"></div>
-
-    <div class="appui-form-full">
-      <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
-    </div>
 
     <div class="appui-form-label appui-lg" class="appui-task-actions"><em data-bind="text: statef"></em></div>
     <div class="appui-form-field appui-lg" class="appui-task-actions">
