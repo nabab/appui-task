@@ -4,10 +4,10 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
-if ( isset($this->post['ref']) ){
-  $path = BBN_USER_PATH.'tmp/'.$this->post['ref'];
+/** @var $ctrl \bbn\mvc\controller */
+if ( isset($ctrl->post['ref']) ){
+  $path = BBN_USER_PATH.'tmp/'.$ctrl->post['ref'];
   $files = \bbn\file\dir::get_files($path);
-  $this->post['files'] = $files;
+  $ctrl->post['files'] = $files;
 }
-$this->obj = $this->get_object_model($this->post);
+$ctrl->obj = $ctrl->get_object_model($ctrl->post);

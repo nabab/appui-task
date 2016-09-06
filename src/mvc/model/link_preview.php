@@ -4,11 +4,11 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
-if ( isset($this->data['url'], $this->data['ref']) && \bbn\str::is_url($this->data['url']) ){
-  $linkPreview = new \LinkPreview\LinkPreview($this->data['url']);
+/** @var $model \bbn\mvc\model*/
+if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model->data['url']) ){
+  $linkPreview = new \LinkPreview\LinkPreview($model->data['url']);
   $parsed = $linkPreview->getParsed();
-  $path = BBN_USER_PATH.'tmp/'.$this->data['ref'].'/';
+  $path = BBN_USER_PATH.'tmp/'.$model->data['ref'].'/';
   $root = strval(time());
   \bbn\file\dir::create_path($path.$root);
   foreach ($parsed as $parserName => $link) {

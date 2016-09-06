@@ -4,9 +4,9 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
-echo $this->set_title("Gantt")->add_js([
-  'root' => $this->data['root'],
+/** @var $ctrl \bbn\mvc\controller */
+echo $ctrl->set_title("Gantt")->add_js([
+  'root' => $ctrl->data['root'],
   'lng' => [
     'priority' => _("Priority"),
     'type' => _("Type"),

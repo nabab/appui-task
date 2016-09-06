@@ -4,6 +4,6 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
+/** @var $ctrl \bbn\mvc\controller */
 
-$this->combo('<i class="fa fa-file-text-o"> </i> &nbsp; '._("Demo task form"), 1);
+$ctrl->combo('<i class="fa fa-file-text-o"> </i> &nbsp; '._("Demo task form"), 1);

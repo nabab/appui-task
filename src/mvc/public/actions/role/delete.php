@@ -4,6 +4,6 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
+/** @var $ctrl \bbn\mvc\controller */
 
-$this->obj = $this->get_object_model($this->post);
+$ctrl->obj = $ctrl->get_object_model($ctrl->post);

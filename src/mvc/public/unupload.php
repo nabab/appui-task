@@ -4,14 +4,14 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
-$this->obj->success = false;
-if ( isset($this->arguments[0], $this->post['fileNames']) ){
-  $path = BBN_USER_PATH.'tmp/'.$this->arguments[0];
-  $new = \bbn\str::encode_filename($this->post['fileNames'], \bbn\str::file_ext($this->post['fileNames']));
+/** @var $ctrl \bbn\mvc\controller */
+$ctrl->obj->success = false;
+if ( isset($ctrl->arguments[0], $ctrl->post['fileNames']) ){
+  $path = BBN_USER_PATH.'tmp/'.$ctrl->arguments[0];
+  $new = \bbn\str::encode_filename($ctrl->post['fileNames'], \bbn\str::file_ext($ctrl->post['fileNames']));
   $file = $path.'/'.$new;
   if ( is_file($file) ){
-    $this->obj->files = $this->post['fileNames'];
-    $this->obj->success = unlink($file);
+    $ctrl->obj->files = $ctrl->post['fileNames'];
+    $ctrl->obj->success = unlink($file);
   }
 }

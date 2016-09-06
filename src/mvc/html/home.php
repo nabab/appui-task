@@ -30,7 +30,7 @@
       <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
     </div>
 
-    <div class="appui-form-label" style="width: 220px"><?=_("Category")?></div>
+    <div class="appui-form-label"><?=_("Category")?></div>
     <div class="appui-form-field">
       <input name="type" style="width: 500px" required="required" data-bind="value: type, events: {change: update}">
     </div>
@@ -135,10 +135,10 @@
         <?=_("Title")?><br>
       </div>
       <div class="appui-form-field">
-        <input class="k-textbox" name="comment_title" style="width: 90%">
+        <input class="k-textbox" name="comment_title" style="width: 100%">
       </div>
 
-      <div class="appui-form-label" style="width: 220px">
+      <div class="appui-form-label">
         <?=_("Comment")?><br>
         <!--<select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
           <option value="text"><?=_("Simple text")?></option>
@@ -150,7 +150,7 @@
         </select><br>-->
       </div>
       <div class="appui-form-field">
-        <textarea class="k-textbox" name="comment" style="width: 90%"></textarea>
+        <textarea class="k-textbox" name="comment" style="width: 100%"></textarea>
       </div>
 
       <!--<div class="appui-form-label"><?=_("Links")?></div>
@@ -164,7 +164,7 @@
         </div>
       </div>-->
 
-      <div class="appui-form-label" style="width: 220px"> </div>
+      <div class="appui-form-label"> </div>
       <div class="appui-form-field">
         <button class="k-button appui-task-comment-button" data-bind="click: add_comment">
           <i class="fa fa-save"> </i> Save

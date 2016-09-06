@@ -4,9 +4,9 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model */
-$pm = new \bbn\appui\task($this->db);
-$s =& $this->inc->session;
+/** @var $model \bbn\mvc\model */
+$pm = new \bbn\appui\task($model->db);
+$s =& $model->inc->session;
 return [
   'ref' => time(),
   'lng' => [
@@ -33,8 +33,8 @@ return [
       $a['expanded'] = false;
     }
     return $a;
-  }, $this->get_model('usergroup/picker')),
-  'categories' => $this->inc->options->map(function($a){
+  }, $model->get_model('usergroup/picker')),
+  'categories' => $model->inc->options->map(function($a){
     $a['is_parent'] = !empty($a['items']);
     if ( $a['is_parent'] ){
       $a['expanded'] = true;

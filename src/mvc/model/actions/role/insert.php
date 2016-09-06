@@ -4,11 +4,11 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
+/** @var $model \bbn\mvc\model*/
 
 $res = false;
-if ( isset($this->data['id_task'], $this->data['role'], $this->data['id_user']) ){
-	$pm = new \bbn\appui\task($this->db);
-  $res = $pm->add_role($this->data['id_task'], $this->data['role'], $this->data['id_user']);
+if ( isset($model->data['id_task'], $model->data['role'], $model->data['id_user']) ){
+	$pm = new \bbn\appui\task($model->db);
+  $res = $pm->add_role($model->data['id_task'], $model->data['role'], $model->data['id_user']);
 }
 return ['success' => $res];

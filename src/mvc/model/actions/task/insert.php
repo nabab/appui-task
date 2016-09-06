@@ -4,12 +4,12 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
-$pm = new \bbn\appui\task($this->db);
+/** @var $model \bbn\mvc\model*/
+$pm = new \bbn\appui\task($model->db);
 return [
-  'success' => isset($this->data['title'], $this->data['type']) ? $pm->insert([
-    'title' => $this->data['title'],
-    'type' => $this->data['type'],
-    'deadline' => empty($this->data['deadline']) ? null : $this->data['deadline']
+  'success' => isset($model->data['title'], $model->data['type']) ? $pm->insert([
+    'title' => $model->data['title'],
+    'type' => $model->data['type'],
+    'deadline' => empty($model->data['deadline']) ? null : $model->data['deadline']
    ]) : false
 ];

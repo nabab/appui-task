@@ -4,11 +4,11 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
-$s =& $this->inc->session;
-$pm = new \bbn\appui\task($this->db);
+/** @var $model \bbn\mvc\model*/
+$s =& $model->inc->session;
+$pm = new \bbn\appui\task($model->db);
 return [
-  'root' => $this->data['root'],
+  'root' => $model->data['root'],
   'roles' => \bbn\appui\task::get_roles(),
   'states' => \bbn\appui\task::get_states(),
   'options' => \bbn\appui\task::get_options(),
@@ -46,8 +46,8 @@ return [
       $a['expanded'] = false;
     }
     return $a;
-  }, $this->get_model('usergroup/picker')),
-  'categories' => $this->inc->options->map(function($a){
+  }, $model->get_model('usergroup/picker')),
+  'categories' => $model->inc->options->map(function($a){
     $a['is_parent'] = !empty($a['items']);
     if ( $a['is_parent'] ){
       $a['expanded'] = true;

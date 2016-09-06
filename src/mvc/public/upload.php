@@ -4,12 +4,12 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
+/** @var $ctrl \bbn\mvc\controller */
 
-if ( isset($this->files['file'], $this->arguments[0]) &&
-        \bbn\str::is_integer($this->arguments[0]) ){
-  $f =& $this->files['file'];
-  $path = BBN_USER_PATH.'tmp/'.$this->arguments[0];
+if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
+        \bbn\str::is_integer($ctrl->arguments[0]) ){
+  $f =& $ctrl->files['file'];
+  $path = BBN_USER_PATH.'tmp/'.$ctrl->arguments[0];
   $new = \bbn\str::encode_filename($f['name'], \bbn\str::file_ext($f['name']));
   $file = $path.'/'.$new;
   if ( \bbn\file\dir::create_path($path) &&
@@ -17,7 +17,7 @@ if ( isset($this->files['file'], $this->arguments[0]) &&
     $tmp = \bbn\str::file_ext($new, 1);
     $fname = $tmp[0];
     $ext = $tmp[1];
-    $this->obj->success = 1;
+    $ctrl->obj->success = 1;
     $archives = ['zip', 'rar', 'tar', 'gzip', 'iso'];
     $images = ['jpg','gif','jpeg','png','svg'];
     $files = [basename($file)];
@@ -34,7 +34,7 @@ if ( isset($this->files['file'], $this->arguments[0]) &&
         chdir($tmp);
       }
     }
-    $this->obj->files = [];
+    $ctrl->obj->files = [];
     foreach ( $files as $f ){
       $tmp = \bbn\str::file_ext($f, 1);
       $fname = $tmp[0];
@@ -55,10 +55,10 @@ if ( isset($this->files['file'], $this->arguments[0]) &&
         }
         $res['imgs']['length'] = count($res['imgs']);
       }
-      array_push($this->obj->files, $res);
+      array_push($ctrl->obj->files, $res);
     }
   }
 }
-if ( !isset($this->obj->success) ){
-  $this->obj->success = 0;
+if ( !isset($ctrl->obj->success) ){
+  $ctrl->obj->success = 0;
 }

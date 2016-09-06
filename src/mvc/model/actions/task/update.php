@@ -4,8 +4,8 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
-$pm = new \bbn\appui\task($this->db);
+/** @var $model \bbn\mvc\model*/
+$pm = new \bbn\appui\task($model->db);
 return [
-  'success' => isset($this->data['id_task'], $this->data['prop'], $this->data['val']) ? $pm->update($this->data['id_task'], $this->data['prop'], $this->data['val']) : false
+  'success' => isset($model->data['id_task'], $model->data['prop'], $model->data['val']) ? $pm->update($model->data['id_task'], $model->data['prop'], $model->data['val']) : false
 ];

@@ -9,5 +9,5 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
-$this->combo(_("Settings"), true);
+/** @var $ctrl \bbn\mvc\controller */
+$ctrl->combo(_("Settings"), true);

@@ -4,10 +4,10 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
-$pm = new \bbn\appui\task($this->db);
-if ( !empty($this->data['search']) ){
-  return $pm->get_slist($this->data['search']);
+/** @var $model \bbn\mvc\model*/
+$pm = new \bbn\appui\task($model->db);
+if ( !empty($model->data['search']) ){
+  return $pm->get_slist($model->data['search']);
 }
 else{
   $ops = [
@@ -23,8 +23,8 @@ else{
   ];
   $res = [];
   $done = [];
-  if ( isset($this->data['filter'], $this->data['filter']['filters']) ){
-    $fs =& $this->data['filter']['filters'];
+  if ( isset($model->data['filter'], $model->data['filter']['filters']) ){
+    $fs =& $model->data['filter']['filters'];
     foreach ( $fs as $f ){
       if ( isset($f['field'], $f['operator'], $ops[$f['operator']]) ){
         if ( !isset($done[$f['field']]) ){
@@ -48,8 +48,8 @@ else{
     }
   }
   $sort = [];
-  if ( !empty($this->data['sort']) ){
-    foreach ( $this->data['sort'] as $s ){
+  if ( !empty($model->data['sort']) ){
+    foreach ( $model->data['sort'] as $s ){
       if ( isset($s['dir'], $s['field']) ){
         $sort[$s['field']] = $s['dir'];
       }
@@ -57,10 +57,10 @@ else{
   }
   if ( isset($data['selection']) ){
     if ( $data['selection'] === 'user' ){
-      array_push($res, ['id_user', '=', $this->inc->user->get_id()]);
+      array_push($res, ['id_user', '=', $model->inc->user->get_id()]);
     }
     else if ( $data['selection'] === 'group' ){
-      array_push($res, ['id_group', '=', $this->inc->user->get_group()]);
+      array_push($res, ['id_group', '=', $model->inc->user->get_group()]);
     }
   }
   return $pm->search($res, $sort);

@@ -4,20 +4,20 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
-if ( isset($this->arguments[0]) && ($this->arguments[0] === 'tasks') ){
-  array_shift($this->arguments);
+/** @var $ctrl \bbn\mvc\controller */
+if ( isset($ctrl->arguments[0]) && ($ctrl->arguments[0] === 'tasks') ){
+  array_shift($ctrl->arguments);
 }
-if ( !empty($this->arguments) ){
-  $this->add_data([
+if ( !empty($ctrl->arguments) ){
+  $ctrl->add_data([
     'is_template' => true,
-    'id' => $this->arguments[0]
+    'id' => $ctrl->arguments[0]
   ]);
   /** @todo false should be removed as last argument but idk why I need it */
-  echo $this->get_view('', 'php', false);
-  $this->obj->data = $this->get_model();
-  if ( isset($this->obj->data['info']) ){
-    $this->add_js()->set_title($this->obj->data['info']['title']);
+  echo $ctrl->get_view('', 'php', false);
+  $ctrl->obj->data = $ctrl->get_model();
+  if ( isset($ctrl->obj->data['info']) ){
+    $ctrl->add_js()->set_title($ctrl->obj->data['info']['title']);
   }
-  $this->obj->url = 'tasks/'.implode("/", $this->arguments);
+  $ctrl->obj->url = 'tasks/'.implode("/", $ctrl->arguments);
 }

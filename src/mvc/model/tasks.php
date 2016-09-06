@@ -4,11 +4,11 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
-if ( isset($this->data['id']) ){
-  $task = new \bbn\appui\task($this->db);
+/** @var $model \bbn\mvc\model*/
+if ( isset($model->data['id']) ){
+  $task = new \bbn\appui\task($model->db);
   return [
-    'info' => $task->info($this->data['id'], true)
+    'info' => $task->info($model->data['id'], true)
   ];
 }
 return [];

@@ -4,10 +4,10 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
-if ( !isset($this->post['id']) ){
-  echo $this->set_title('<i class="fa fa-clock-o"> </i> &nbsp; _("Mes tâches en cours")')->add_js([
-    'root' => $this->data['root'],
+/** @var $ctrl \bbn\mvc\controller */
+if ( !isset($ctrl->post['id']) ){
+  echo $ctrl->set_title('<i class="fa fa-clock-o"> </i> &nbsp; _("Mes tâches en cours")')->add_js([
+    'root' => $ctrl->data['root'],
     'lng' => [
       'title' => _("Title"),
       'type' => _("Type"),
@@ -24,5 +24,5 @@ if ( !isset($this->post['id']) ){
   ])->get_view();
 }
 else{
-  $this->obj->tasks = $this->get_model($this->post);
+  $ctrl->obj->tasks = $ctrl->get_model($ctrl->post);
 }
