@@ -1,7 +1,6 @@
 // Javascript Document
 //$(ele).closest(".k-content").css("padding", "0px");
 
-alert(data.root);
 var tabnav = $("#appui_task_tabnav").tabNav({
   baseTitle: 'Projects - ',
   baseURL: data.root,
