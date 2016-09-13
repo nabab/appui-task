@@ -5,10 +5,7 @@
  **/
 
 /** @var $ctrl \bbn\mvc\controller */
-if ( isset($ctrl->arguments[0]) && ($ctrl->arguments[0] === 'tasks') ){
-  array_shift($ctrl->arguments);
-}
-if ( !empty($ctrl->arguments) ){
+if ( !empty($ctrl->arguments[0]) ){
   $ctrl->add_data([
     'is_template' => true,
     'id' => $ctrl->arguments[0]
@@ -19,5 +16,4 @@ if ( !empty($ctrl->arguments) ){
   if ( isset($ctrl->obj->data['info']) ){
     $ctrl->add_js()->set_title($ctrl->obj->data['info']['title']);
   }
-  $ctrl->obj->url = 'tasks/'.implode("/", $ctrl->arguments);
 }
