@@ -426,7 +426,7 @@ $("input[name=link]", ele).keydown(function(e){
         if ( d.res.pictures ){
           $.each(d.res.pictures, function(i, v){
             if ( v.h96 ){
-              $li.find("td.appui-task-link-image").html('<img src="' + data.root + '/image/tmp/' + data.ref + '/' + v.h96 + '">');
+              $li.find("td.appui-task-link-image").html('<img src="pm/image/tmp/' + data.ref + '/' + v.h96 + '">');
               return false;
             }
           });

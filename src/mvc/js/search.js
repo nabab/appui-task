@@ -108,6 +108,7 @@ gant_container.kendoTreeList({
   dataBound: function(e){
     e.sender.element.find("tbody tr").each(function(){
       var v = e.sender.dataItem(this);
+      //appui.fn.log(e);
       $(this).find("td").css({backgroundColor: "transparent"}).eq(appui.fn.search(e.sender.columns, "field", "priority")).css({
         backgroundColor: appui.tasks.priority_colors[v.priority-1]
       })

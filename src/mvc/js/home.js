@@ -3,13 +3,11 @@
 
 var tabnav = $("#appui_task_tabnav").tabNav({
   baseTitle: 'Projects - ',
-  baseURL: data.root,
+  baseURL: data.baseURL,
   scrollable: false,
   autoload: true,
   list: [{
     url: "search",
-    bcolor: "#000",
-    fcolor: "#FFF",
     static: true,
     load: true
   }]
@@ -595,7 +593,7 @@ appui.tasks = {
                   if ( d.res.pictures ){
                     $.each(d.res.pictures, function(i, v){
                       if ( v.h96 ){
-                        $li.find("td.appui-task-link-image").html('<img src="' + data.root + 'image/tmp/' + info.ref + '/' + v.h96 + '">');
+                        $li.find("td.appui-task-link-image").html('<img src="pm/image/tmp/' + info.ref + '/' + v.h96 + '">');
                         return false;
                       }
                     });
@@ -677,7 +675,6 @@ appui.tasks = {
           }).data("kendoTreeView");
           $li = $("li.k-item", app.roleTree.element);
           /*
-
           $("input:first", ele).keyup(function(){
             var v = $(this).val().toLowerCase();
             $li.filter(":hidden").show();
@@ -896,8 +893,6 @@ appui.tasks = {
       tabnav.tabNav("setColor", appui.tasks.priority_colors[info.priority-1], "#FFF", tabstrip);
       if ( tabstrip.length ){
         tabstrip.tabNav({
-          autoload: false,
-          baseURL: "tasks/" + info.id,
           list: [{
             url: "main",
             title: '<i class="fa fa-eye"> </i> &nbsp; ' + data.lng.global_view,
