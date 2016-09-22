@@ -90,6 +90,13 @@ appui.tasks = {
               creator: apst.userFull(info.id_user),
               creation: appui.fn.fdate(info.creation_date),
               ref: (new moment()).unix(),
+              has_deadline: function(){
+                return this.get("deadline") ? true : false;
+              },
+              remove_deadline: function(){
+                this.set("deadline", null);
+                this.update("deadline", null);
+              },
               has_comments: function(){
                 return info.notes.length ? true : false;
               },
@@ -395,11 +402,16 @@ appui.tasks = {
                 }
               },
               */
-              update: function(e){
+              update: function(e, f){
+                if ( f !== undefined ){
+                  return app.update(e, f, info.id);
+                }
                 if ( e.sender ){
                   return app.update($(e.sender.element).attr("name"), e.sender.value(), info.id);
                 }
-                return app.update($(e.target).attr("name"), $(e.target).val(), info.id);
+                if ( e.target ){
+                  return app.update($(e.target).attr("name"), $(e.target).val(), info.id);
+                }
               }
             });
             for ( var n in info ){

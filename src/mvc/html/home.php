@@ -58,6 +58,9 @@
         <div class="appui-form-label" style="width: 140px"><?=_("Deadline")?></div>
         <div class="appui-form-field">
           <input type="date" data-role="datepicker" name="deadline" data-bind="value: deadline, events: {change: update, keydown: preventEnter}" data-format="yyyy-MM-dd">
+          <button class="k-button" data-bind="visible: has_deadline, click: remove_deadline">
+            <i class="fa fa-times"></i>
+          </button>
         </div>
 
       </div>
