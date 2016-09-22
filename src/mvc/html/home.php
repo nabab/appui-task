@@ -178,7 +178,7 @@
 <script type="text/x-kendo-template" id="tpl-appui_task_comment">
 	<div class="ui comment">
   	<a class="avatar">
-    	<img src="#= apst.userAvatar(id_user) #" alt="#= apst.userName(id_user)#">
+    	<img src="#= apst.userAvatar(id_user) #" alt="#= apst.userName(id_user)#" title="#= apst.userName(id_user)#">
     </a>
     <div class="content">
     	<a class="author">#= apst.userName(id_user) #</a>

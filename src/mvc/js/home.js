@@ -878,6 +878,9 @@ appui.tasks = {
 
         },
         update: function(prop, val){
+          if ( prop === 'deadline' ){
+            val = kendo.toString(val,"yyyy-MM-dd");
+          }
           appui.fn.post(data.root + 'actions/task/update', {
             id_task: info.id,
             prop: prop,
