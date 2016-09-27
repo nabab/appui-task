@@ -156,11 +156,18 @@ gant_container.kendoTreeList({
       sortable: false,
       title: data.lng.state,
       width: 50,
+      attr: {
+        style: "background-color: #666"
+      },
       values: appui.tasks.options.states,
       template: function(e){
         var icon,
             color;
         if ( e.state === appui.tasks.states.opened ){
+          icon = 'clock-o';
+          color = 'white';
+        }
+        else if ( e.state === appui.tasks.states.pending ){
           icon = 'clock-o';
           color = 'red';
         }
@@ -174,7 +181,7 @@ gant_container.kendoTreeList({
         }
         else if ( e.state === appui.tasks.states.holding ){
           icon = 'pause';
-          color = 'grey';
+          color = 'yellow';
         }
         return '<i class="appui-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + appui.fn.get_field(appui.tasks.options.states, "value", e.state, "text") + '"> </i>';
       }
