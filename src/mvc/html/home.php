@@ -73,7 +73,7 @@
 
       <div class="appui-form-label appui-lg" class="appui-task-actions"><em data-bind="text: statef"></em></div>
       <div class="appui-form-field appui-lg" class="appui-task-actions">
-        <div data-bind="visible: is_opened_or_ongoing_or_pending">
+        <div data-bind="visible: is_active">
           <button data-bind="visible: can_hold, click: hold" class="k-button" title="<?=_("Put on hold")?>">
             <i class="fa fa-pause"> </i>
           </button>

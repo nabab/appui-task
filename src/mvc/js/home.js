@@ -241,6 +241,9 @@ appui.tasks = {
               is_opened_or_ongoing: function(){
                 return this.is_ongoing() || this.is_opened();
               },
+              is_active: function(){
+                return !this.is_closed();
+              },
               is_holding_or_opened: function(){
                 return this.is_holding() || this.is_opened();
               },
