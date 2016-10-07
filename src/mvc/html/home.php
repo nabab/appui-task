@@ -1,183 +1,187 @@
 <div class="appui-full-height" id="appui_task_tabnav"></div>
+
 <script type="text/x-kendo-template" id="tpl-task_tab_main">
-  <input type="hidden" name="id" data-bind="value: id">
-  <input type="hidden" name="ref" data-bind="value: ref">
+  <div class="appui-margin">
+    <input type="hidden" name="id" data-bind="value: id">
+    <input type="hidden" name="ref" data-bind="value: ref">
 
-  <div class="appui-line-breaker appui-task-form-container">
+    <div class="appui-line-breaker appui-task-form-container">
 
-    <div class="appui-task-info-ppl k-widget">
-      <div class="appui-block">
+      <div class="appui-task-info-ppl k-widget">
         <div class="appui-block">
-          <?=_("Created by")?><br>
-          <?=_("On")?>
+          <div class="appui-block">
+            <?=_("Created by")?><br>
+            <?=_("On")?>
+          </div>
+          <div class="appui-block">
+            <span data-bind="html: creator"></span><br>
+            <span data-bind="text: creation"></span>
+          </div>
         </div>
-        <div class="appui-block">
-          <span data-bind="html: creator"></span><br>
-          <span data-bind="text: creation"></span>
+        <div class="appui-block" data-bind="visible: roles.workers">
+          <div class="appui-block"><?=_("Assigned to")?></div>
+          <ul class="appui-block" data-bind="source: roles.workers" data-template="tpl-task_info_ppl"></ul>
         </div>
-      </div>
-      <div class="appui-block" data-bind="visible: roles.workers">
-        <div class="appui-block"><?=_("Assigned to")?></div>
-        <ul class="appui-block" data-bind="source: roles.workers" data-template="tpl-task_info_ppl"></ul>
-      </div>
-      <div class="appui-block" data-bind="visible: roles.managers">
-        <div class="appui-block"><?=_("Supervised by")?></div>
-        <ul class="appui-block" data-bind="source: roles.managers" data-template="tpl-task_info_ppl"></ul>
-      </div>
-    </div>
-
-    <div class="appui-form-full">
-      <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
-    </div>
-
-    <div class="appui-form-label"><?=_("Category")?></div>
-    <div class="appui-form-field">
-      <input name="type" style="width: 500px" required="required" data-bind="value: type, events: {change: update}">
-    </div>
-
-		<div class="appui-form-label"><?=_("Priority")?></div>
-    <div class="appui-form-field">
-
-      <div class="appui-form-label" style="width: 140px">
-        <div class="appui-block">
-          <select data-role="dropdownlist" data-bind="value: priority, events: {change: update}" name="priority" style="width: 80px">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5" selected>5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-          </select>
+        <div class="appui-block" data-bind="visible: roles.managers">
+          <div class="appui-block"><?=_("Supervised by")?></div>
+          <ul class="appui-block" data-bind="source: roles.managers" data-template="tpl-task_info_ppl"></ul>
         </div>
       </div>
+
+      <div class="appui-form-full">
+        <input name="title" autocomplete="off" class="k-textbox appui-lg title" placeholder="<?=_("Title/short description")?>" required="required" data-bind="value: title, events: {change: update, keydown: preventEnter}">
+      </div>
+
+      <div class="appui-form-label"><?=_("Category")?></div>
+      <div class="appui-form-field">
+        <input name="type" style="width: 500px" required="required" data-bind="value: type, events: {change: update}">
+      </div>
+
+      <div class="appui-form-label"><?=_("Priority")?></div>
       <div class="appui-form-field">
 
-        <div class="appui-form-label" style="width: 140px"><?=_("Deadline")?></div>
+        <div class="appui-form-label" style="width: 140px">
+          <div class="appui-block">
+            <select data-role="dropdownlist" data-bind="value: priority, events: {change: update}" name="priority" style="width: 80px">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+        </div>
         <div class="appui-form-field">
-          <input type="date" data-role="datepicker" name="deadline" data-bind="value: deadline, events: {change: update, keydown: preventEnter}" data-format="yyyy-MM-dd">
-          <button class="k-button" data-bind="visible: has_deadline, click: remove_deadline">
-            <i class="fa fa-times"></i>
+
+          <div class="appui-form-label" style="width: 140px"><?=_("Deadline")?></div>
+          <div class="appui-form-field">
+            <input type="date" data-role="datepicker" name="deadline" data-bind="value: deadline, events: {change: update, keydown: preventEnter}" data-format="yyyy-MM-dd">
+            <button class="k-button" data-bind="visible: has_deadline, click: remove_deadline">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="appui-form-label" data-bind="visible: ref"><?=_("External reference")?></div>
+      <div class="appui-form-field" data-bind="visible: ref, html: ref"></div>
+
+      <div class="appui-form-label appui-lg" class="appui-task-actions"><em data-bind="text: statef"></em></div>
+      <div class="appui-form-field appui-lg" class="appui-task-actions">
+        <div data-bind="visible: is_opened_or_ongoing_or_pending">
+          <button data-bind="visible: can_hold, click: hold" class="k-button" title="<?=_("Put on hold")?>">
+            <i class="fa fa-pause"> </i>
+          </button>
+          <button data-bind="visible: can_resume, click: resume" class="k-button" title="<?=_("Resume")?>">
+            <i class="fa fa-play"> </i>
+          </button>
+          <button data-bind="visible: can_close, click: close" class="k-button" title="<?=_("Close")?>">
+            <i class="fa fa-check"> </i>
+          </button>
+          <div data-bind="style: {display: make_me_display}" style="vertical-align: middle">
+            <ul data-role="menu" data-bind="events: {select: make_me}" style="vertical-align: middle">
+              <li>
+                <i class="fa fa-user-plus"> </i>
+                <ul>
+                  <li data-task-role="managers"><?=_("Make me a supervisor")?></li>
+                  <li data-task-role="workers"><?=_("Make me a worker")?></li>
+                  <li data-task-role="viewers"><?=_("Make me a viewer")?></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <button data-bind="visible: can_ping, click: ping" class="k-button" title="<?=_("Ping workers")?>">
+            <i class="fa fa-hand-o-up"> </i>
+          </button>
+          <button data-bind="visible: is_added, click: unmake_me" class="k-button" title="<?=_("Unfollow the task")?>">
+            <i class="fa fa-user-times"> </i>
+          </button>
+        </div>
+        <div data-bind="visible: is_holding">
+          <button data-bind="visible: can_resume, click: resume" class="k-button" title="<?=_("Resume")?>">
+            <i class="fa fa-play"> </i>
+          </button>
+        </div>
+        <div data-bind="visible: is_closed">
+          <button data-bind="visible: can_open, click: reopen" class="k-button" title="<?=_("Reopen")?>">
+            <i class="fa fa-hand-o-left"> </i>
+          </button>
+        </div>
+      </div>
+
+      <div class="appui-line-breaker"> </div>
+      <!--onclick="$(this).next().toggle().redraw().next().toggle().redraw()">-->
+      <div class="appui-form-label appui-p" onclick="$(this).next().toggle().next().toggle().parent().redraw()">
+        <i class="fa fa-edit"> </i> &nbsp; <?=_("Add a comment")?>
+      </div>
+
+      <div class="appui-form-field" data-bind="invisible: has_comments">
+        <div class="appui-form-label appui-p" style="width: 140px">
+          <!--<button class="k-button" onclick="appui.fn.alert('Link')">
+            <i class="fa fa-link"> </i> &nbsp; <?=_("Link")?>
+          </button>
+          &nbsp;&nbsp;
+          <button class="k-button" onclick="appui.fn.alert('Link')">
+            <i class="fa fa-code"> </i> &nbsp; <?=_("Code")?>
+          </button>-->
+        </div>
+        <div class="appui-form-field">
+          <div class="appui-task-upload-wrapper appui-task-files-container"> </div>
+        </div>
+      </div>
+
+      <div class="appui-form-full appui-task-form-adder" data-bind="invisible: has_comments">
+        <div class="appui-form-label" style="width: 220px">
+          <?=_("Title")?><br>
+        </div>
+        <div class="appui-form-field">
+          <input class="k-textbox" name="comment_title" style="width: 100%">
+        </div>
+
+        <div class="appui-form-label">
+          <?=_("Comment")?><br>
+          <!--<select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
+            <option value="text"><?=_("Simple text")?></option>
+            <option value="html"><?=_("Rich text")?></option>
+            <option value="gfm"><?=_("Markdown")?></option>
+            <option value="php"><?=_("PHP code")?></option>
+            <option value="js"><?=_("JavaScript code")?></option>
+            <option value="css"><?=_("CSS code")?></option>
+          </select><br>-->
+        </div>
+        <div class="appui-form-field">
+          <textarea class="k-textbox" name="comment" style="width: 100%"></textarea>
+        </div>
+
+        <!--<div class="appui-form-label"><?=_("Links")?></div>
+        <div class="appui-form-field">
+          <div class="k-widget k-upload k-header">
+            <div class="k-dropzone">
+              <input type="text" name="link" class="k-textbox" style="width: 100%" placeholder="<?=_("Type or paste your URL and press Enter to valid")?>">
+            </div>
+            <table class="k-upload-files appui-task-links-container">
+            </table>
+          </div>
+        </div>-->
+
+        <div class="appui-form-label"> </div>
+        <div class="appui-form-field">
+          <button class="k-button appui-task-comment-button" data-bind="click: add_comment">
+            <i class="fa fa-save"> </i> Save
           </button>
         </div>
 
       </div>
     </div>
-
-		<div class="appui-form-label" data-bind="visible: ref"><?=_("External reference")?></div>
-    <div class="appui-form-field" data-bind="visible: ref, html: ref"></div>
-
-    <div class="appui-form-label appui-lg" class="appui-task-actions"><em data-bind="text: statef"></em></div>
-    <div class="appui-form-field appui-lg" class="appui-task-actions">
-    	<div data-bind="visible: is_opened_or_ongoing_or_pending">
-        <button data-bind="visible: can_hold, click: hold" class="k-button" title="<?=_("Put on hold")?>">
-          <i class="fa fa-pause"> </i>
-        </button>
-        <button data-bind="visible: can_resume, click: resume" class="k-button" title="<?=_("Resume")?>">
-          <i class="fa fa-play"> </i>
-        </button>
-        <button data-bind="visible: can_close, click: close" class="k-button" title="<?=_("Close")?>">
-          <i class="fa fa-check"> </i>
-        </button>
-        <div data-bind="style: {display: make_me_display}" style="vertical-align: middle">
-          <ul data-role="menu" data-bind="events: {select: make_me}" style="vertical-align: middle">
-            <li>
-              <i class="fa fa-user-plus"> </i>
-              <ul>
-                <li data-task-role="managers"><?=_("Make me a supervisor")?></li>
-                <li data-task-role="workers"><?=_("Make me a worker")?></li>
-                <li data-task-role="viewers"><?=_("Make me a viewer")?></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <button data-bind="visible: can_ping, click: ping" class="k-button" title="<?=_("Ping workers")?>">
-          <i class="fa fa-hand-o-up"> </i>
-        </button>
-        <button data-bind="visible: is_added, click: unmake_me" class="k-button" title="<?=_("Unfollow the task")?>">
-          <i class="fa fa-user-times"> </i>
-        </button>
-      </div>
-    	<div data-bind="visible: is_holding">
-        <button data-bind="visible: can_resume, click: resume" class="k-button" title="<?=_("Resume")?>">
-          <i class="fa fa-play"> </i>
-        </button>
-      </div>
-    	<div data-bind="visible: is_closed">
-        <button data-bind="visible: can_open, click: reopen" class="k-button" title="<?=_("Reopen")?>">
-          <i class="fa fa-hand-o-left"> </i>
-        </button>
-      </div>
-    </div>
-
-    <div class="appui-line-breaker"> </div>
-    <!--onclick="$(this).next().toggle().redraw().next().toggle().redraw()">-->
-    <div class="appui-form-label appui-p" onclick="$(this).next().toggle().next().toggle().parent().redraw()">
-      <i class="fa fa-edit"> </i> &nbsp; <?=_("Add a comment")?>
-    </div>
-
-    <div class="appui-form-field" data-bind="invisible: has_comments">
-      <div class="appui-form-label appui-p" style="width: 140px">
-        <!--<button class="k-button" onclick="appui.fn.alert('Link')">
-          <i class="fa fa-link"> </i> &nbsp; <?=_("Link")?>
-        </button>
-        &nbsp;&nbsp;
-        <button class="k-button" onclick="appui.fn.alert('Link')">
-          <i class="fa fa-code"> </i> &nbsp; <?=_("Code")?>
-        </button>-->
-      </div>
-      <div class="appui-form-field">
-        <div class="appui-task-upload-wrapper appui-task-files-container"> </div>
-      </div>
-    </div>
-
-    <div class="appui-form-full appui-task-form-adder" data-bind="invisible: has_comments">
-      <div class="appui-form-label" style="width: 220px">
-        <?=_("Title")?><br>
-      </div>
-      <div class="appui-form-field">
-        <input class="k-textbox" name="comment_title" style="width: 100%">
-      </div>
-
-      <div class="appui-form-label">
-        <?=_("Comment")?><br>
-        <!--<select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
-          <option value="text"><?=_("Simple text")?></option>
-          <option value="html"><?=_("Rich text")?></option>
-          <option value="gfm"><?=_("Markdown")?></option>
-          <option value="php"><?=_("PHP code")?></option>
-          <option value="js"><?=_("JavaScript code")?></option>
-          <option value="css"><?=_("CSS code")?></option>
-        </select><br>-->
-      </div>
-      <div class="appui-form-field">
-        <textarea class="k-textbox" name="comment" style="width: 100%"></textarea>
-      </div>
-
-      <!--<div class="appui-form-label"><?=_("Links")?></div>
-      <div class="appui-form-field">
-        <div class="k-widget k-upload k-header">
-          <div class="k-dropzone">
-            <input type="text" name="link" class="k-textbox" style="width: 100%" placeholder="<?=_("Type or paste your URL and press Enter to valid")?>">
-          </div>
-          <table class="k-upload-files appui-task-links-container">
-          </table>
-        </div>
-      </div>-->
-
-      <div class="appui-form-label"> </div>
-      <div class="appui-form-field">
-        <button class="k-button appui-task-comment-button" data-bind="click: add_comment">
-          <i class="fa fa-save"> </i> Save
-        </button>
-      </div>
-
-    </div>
+    <div class="appui-form-full appui-task-comments ui comments" data-bind="source: notes" data-template="tpl-appui_task_comment"></div>
   </div>
-	<div class="appui-form-full appui-task-comments ui comments" data-bind="source: notes" data-template="tpl-appui_task_comment"></div>
 </script>
+
 <script type="text/x-kendo-template" id="tpl-appui_task_comment">
 	<div class="ui comment">
   	<a class="avatar">
@@ -208,8 +212,9 @@
     </div>
   </div>
 </script>
+
 <script type="text/x-kendo-template" id="tpl-task_tab_roles">
-  <div class="appui-form-full appui-task-roles-container">
+  <div class="appui-margin appui-task-roles-container">
     <div class="k-content">
       <div class="k-block appui-task-assigned">
         <div class="k-header"><?=_("Supervisors")?></div>
