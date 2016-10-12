@@ -1,4 +1,4 @@
-<div class="appui-full-height" id="appui_task_tabnav"></div>
+<div class="appui-h-100" id="appui_task_tabnav"></div>
 
 <script type="text/x-kendo-template" id="tpl-task_tab_main">
   <div class="appui-margin">
