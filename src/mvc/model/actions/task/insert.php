@@ -6,6 +6,7 @@
 
 /** @var $model \bbn\mvc\model*/
 $pm = new \bbn\appui\task($model->db);
+
 return [
   'success' => isset($model->data['title'], $model->data['type']) ? $pm->insert([
     'title' => $model->data['title'],

@@ -19,5 +19,5 @@ if ( !empty($ctrl->arguments) ){
   if ( isset($ctrl->obj->data['info']) ){
     $ctrl->add_js()->set_title($ctrl->obj->data['info']['title']);
   }
-  $ctrl->obj->url = 'tasks/'.implode("/", $ctrl->arguments);
+  $ctrl->obj->url = 'tasks/'.$ctrl->data['id'];
 }

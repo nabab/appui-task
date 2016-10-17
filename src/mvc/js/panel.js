@@ -3,13 +3,16 @@
 
 var tabnav = $("#appui_task_tabnav").tabNav({
   baseTitle: 'Projects - ',
-  baseURL: data.baseURL,
+  baseURL: data.root + 'panel/',
   scrollable: false,
   autoload: true,
   list: [{
     url: "search",
     static: true,
-    load: true
+    load: true,
+    fcolor: '#000',
+    bcolor: '#FFF',
+    title: '<i class="fa fa-home appui-lg" title="' + data.lng.new_task_search+ '"> </i>'
   }]
 });
 $.each(data.groups, function(i, v){
@@ -242,7 +245,7 @@ appui.tasks = {
                 return this.is_ongoing() || this.is_opened();
               },
               is_active: function(){
-                return !this.is_closed();
+                return !this.is_closed() && !this.is_holding();
               },
               is_holding_or_opened: function(){
                 return this.is_holding() || this.is_opened();
@@ -771,7 +774,7 @@ appui.tasks = {
               },
               transport: {
                 read: function(e){
-                  appui.fn.post(data.root + 'logs', {id_task: info.id}, function(d){
+                  appui.fn.post(data.root + 'panel/logs', {id_task: info.id}, function(d){
                     if ( d.data ){
                       return e.success(d.data);
                     }
@@ -911,6 +914,7 @@ appui.tasks = {
       tabnav.tabNav("setColor", appui.tasks.priority_colors[info.priority-1], "#FFF", tabstrip);
       if ( tabstrip.length ){
         tabstrip.tabNav({
+          baseURL: "panel/",
           list: [{
             url: "main",
             title: '<i class="fa fa-eye"> </i> &nbsp; ' + data.lng.global_view,

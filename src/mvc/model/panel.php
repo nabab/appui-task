@@ -14,6 +14,7 @@ return [
   'options' => \bbn\appui\task::get_options(),
   'categories' => \bbn\appui\task::get_cats(),
   'lng' => [
+    'new_task_search' => 'Nouvelle tâche / Recherche',
     'no_role_permission' => _("You have no right to modify the roles in this task"),
     'opened_tasks' => _("Opened tasks"),
     'new_task' => _("New task"),
