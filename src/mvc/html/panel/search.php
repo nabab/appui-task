@@ -19,6 +19,6 @@
     </div>
   </div>
   <div class="appui-task-results-container">
-    <div class="appui-task-gantt" style=""></div>
+    <div class="appui-task-gantt appui-h-100" style=""></div>
   </div>
 </div>

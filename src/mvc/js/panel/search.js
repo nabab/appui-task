@@ -9,7 +9,7 @@ $(".appui-task-splitter", ele).kendoSplitter({
 
 var operators = kendo.ui.FilterCell.fn.options.operators,
     gant_container = $("div.appui-task-gantt", ele),
-    ds = new kendo.data.TreeListDataSource({
+    ds = new kendo.data.DataSource({
       serverFiltering: true,
       serverSorting: true,
       sort: [{
@@ -58,7 +58,6 @@ var operators = kendo.ui.FilterCell.fn.options.operators,
         total: "total",
         model: {
           id: "id",
-          parentId: "id_parent",
           fields: {
             id: {type: "number", nullable: false},
             id_parent: {type: "number", nullable: true},
@@ -93,12 +92,11 @@ kendo.bind(ele, {
     }
   }
 });
-gant_container.kendoTreeList({
+gant_container.kendoGrid({
   autoBind: false,
   sortable: true,
   pageable: true,
   pageSize: 50,
-  reorderable: true,
   resizable: true,
   filterable: {
     extra: false
@@ -110,7 +108,7 @@ gant_container.kendoTreeList({
       var v = e.sender.dataItem(this);
       //appui.fn.log(e);
       $(this).find("td").css({backgroundColor: "transparent"}).eq(appui.fn.search(e.sender.columns, "field", "priority")).css({
-        backgroundColor: appui.tasks.priority_colors[v.priority-1]
+        backgroundColor: "#" + appui.tasks.priority_colors[v.priority-1]
       })
     });
   },
@@ -124,7 +122,7 @@ gant_container.kendoTreeList({
       title: data.lng.priority,
       width: 60,
       attributes: {
-        style: "text-align: center; font-weight: bold; border-top: 1px solid #FFF; color: #FFF"
+        style: "text-align: center; font-weight: bold; border-top: 1px solid white; color: white"
       },
       filterable: {
         operators:{
@@ -156,10 +154,8 @@ gant_container.kendoTreeList({
       sortable: false,
       title: data.lng.state,
       width: 50,
-      attr: {
-        style: "background-color: #666"
-      },
       values: appui.tasks.options.states,
+      encoded: false,
       template: function(e){
         var icon,
             color;
@@ -282,6 +278,7 @@ gant_container.kendoTreeList({
       field: "deadline",
       title: data.lng.dead,
       width: 100,
+      encoded: false,
       filterable: {
         operators:{
           date: {
