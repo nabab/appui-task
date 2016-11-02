@@ -13,8 +13,9 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0",
+    "php": ">=7.0",
     "bbn/bbn": "dev-master",
-		"runmybusiness/initialcon": "*"
+    "runmybusiness/initialcon": "*",
+    "dusterio/link-preview": "~1.2"
   }
 }

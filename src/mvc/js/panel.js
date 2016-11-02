@@ -31,12 +31,12 @@ appui.tasks = {
   roles: data.roles,
   options: data.options,
   formNew: function(v){
-    appui.fn.alert($("#tpl-task_form_new").html(), data.lng.new_task, 800, 250, function(cont){
+    appui.fn.popup($("#tpl-task_form_new").html(), data.lng.new_task, 800, 250, function(cont){
       $("input[name=title]", cont).val(v);
       appui.tasks.typeField(cont);
       $("form").attr("action", data.root + 'actions/task/insert').data("script", function(e, f){
         if ( e.success ){
-          appui.fn.closeAlert();
+          appui.fn.closePopup();
           tabnav.tabNav("link", 'tasks/' + e.success);
         }
         else{
@@ -156,13 +156,15 @@ appui.tasks = {
                 if ( this.is_worker() ){
                   prop = "workers";
                 }
-                if ( prop && confirm(data.lng.sure_to_unfollow) ){
-                  appui.fn.post(data.root + "actions/role/delete", {id_task: info.id, id_user: appui.env.userId, role: appui.tasks.roles[prop]}, function(d){
-                    var idx = $.inArray(appui.env.userId, mvvm.roles.get(prop))
-                    if ( idx > -1 ){
-                      mvvm.roles[prop].splice(idx, 1);
-                      tabstrip.tabNav("disable", 1);
-                    }
+                if ( prop ){
+                  appui.fn.confirm(data.lng.sure_to_unfollow, function(){
+                    appui.fn.post(data.root + "actions/role/delete", {id_task: info.id, id_user: appui.env.userId, role: appui.tasks.roles[prop]}, function(d){
+                      var idx = $.inArray(appui.env.userId, mvvm.roles.get(prop))
+                      if ( idx > -1 ){
+                        mvvm.roles[prop].splice(idx, 1);
+                        tabstrip.tabNav("disable", 1);
+                      }
+                    });
                   });
                 }
               },
@@ -189,13 +191,13 @@ appui.tasks = {
               },
               close: function(){
                 var mvvm = this;
-                if ( confirm(data.lng.sure_to_close) ){
+                appui.fn.confirm(data.lng.sure_to_close, function(){
                   appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.closed}, function(d){
                     if ( d.success ){
                       mvvm.set("state", appui.tasks.states.closed);
                     }
                   });
-                }
+                });
               },
               can_hold: function(){
                 if ( ((this.get("state") === appui.tasks.states.ongoing) || (this.get("state") === appui.tasks.states.opened)) && (this.is_manager() || this.is_worker()) ){
@@ -205,13 +207,13 @@ appui.tasks = {
               },
               hold: function(e){
                 var mvvm = this;
-                if ( confirm(data.lng.sure_to_hold) ){
+                appui.fn.confirm(data.lng.sure_to_hold, function(){
                   appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.holding}, function(d){
                     if ( d.success ){
                       mvvm.set("state", appui.tasks.states.holding);
                     }
                   });
-                }
+                })
               },
               can_resume: function(e){
                 if ( (this.is_holding() || this.is_opened()) && (this.is_manager() || this.is_worker()) ){
@@ -221,13 +223,13 @@ appui.tasks = {
               },
               resume: function(e){
                 var mvvm = this;
-                if ( confirm(data.lng.sure_to_resume) ){
+                appui.fn.confirm(data.lng.sure_to_resume, function(){
                   appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.ongoing}, function(d){
                     if ( d.success ){
                       mvvm.set("state", appui.tasks.states.ongoing);
                     }
                   });
-                }
+                })
               },
               is_holding: function(){
                 return this.get("state") === appui.tasks.states.holding;
@@ -277,12 +279,11 @@ appui.tasks = {
                       d.comment.since = m.fromNow();
                       ko.notes.push(d.comment);
                       app.createUpload();
-                      $(ele).redraw();
                       $("textarea[name=comment]", ele).data("kendoEditor").value('');
                       $("input[name=comment_title]", ele).val('').trigger("change").parent().parent().hide().prev().hide();
                     }
                     else{
-                      appui.f.alert();
+                      appui.fn.alert();
                     }
                   });
                 }
@@ -293,6 +294,13 @@ appui.tasks = {
                   e.stopPropagation();
                 }
               },
+              preventAll: function(e){
+                if ( e.key !== "Tab" ){
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+                }
+              },
+              /** @todo It is not used but maybe think about redoing the comment part */
               change_comment_type: function(){
                 var type = $("select.comment_type", ele).data("kendoDropDownList").value(),
                     textarea_st = '<textarea class="k-textbox" name="comment"></textarea>',
@@ -309,8 +317,8 @@ appui.tasks = {
                   val = textarea.val();
                 }
 
-                cont_textarea.html(textarea_st);
-                textarea = $("textarea", ele);
+                appui.fn.insertContent(textarea_st, cont_textarea);
+                textarea = $("textarea", cont_textarea);
                 if ( val ){
                   textarea.val(val);
                 }
@@ -376,38 +384,6 @@ appui.tasks = {
                   appui.fn.window("usergroup/picker", {picker: "#appui_pm_form_container input[name=id_user]"}, 350, 700);
                 }
               },
-              /*
-              add_user: function(){
-                var dataItem = this,
-                    id_user = $("input[name=id_user]", ele).val(),
-                    rolePicker = $("input[name=role]", ele).data("kendoDropDownList"),
-                    role = rolePicker.value(),
-                    frole = appui.fn.get_field(dataItem.types_roles, "value", role, "text");
-                if ( frole && ($.inArray(dataItem.users, id_user) === -1) ){
-                  appui.fn.post("usergroup/get_user", {id_user: id_user}, function(d){
-                    if ( d.res ){
-                      dataItem.users.push(id_user);
-                      rolePicker.value("");
-                      $("div.appui-task-roles-container").append(
-                        $('<div class="appui-nl"/>').append(
-                          // @todo Change this!
-                          '<span>' + apst.fnom(d.res)  + ' (' + frole + ')</span> &nbsp; ',
-                          $('<i class="fa fa-times appui-p"/>').click(function(e){
-                            if ( (id_user !== appui.env.userId) || confirm(data.confirm_delete) ){
-                              var idx = $.inArray(dataItem.users, id_user);
-                              if ( idx > -1 ){
-                                dataItem.users.splice(idx, 1);
-                              }
-                              $(this).closest("div.appui-nl").remove();
-                            }
-                          })
-                        )
-                      );
-                    }
-                  });
-                }
-              },
-              */
               update: function(e, f){
                 if ( f !== undefined ){
                   return app.update(e, f, info.id);
@@ -514,7 +490,8 @@ appui.tasks = {
                 var idx = appui.fn.search(uploadedFiles, "name", e.files[0].name);
                 if ( idx > -1 ){
                   e.preventDefault();
-                  $(ele).redraw();
+                  uploadWrapper = $("div.appui-task-upload-wrapper", ele);
+                  appui.fn.analyzeContent(uploadWrapper);
                   appui.fn.alert(data.lng.file_exists);
                   return false;
                 }
@@ -541,7 +518,6 @@ appui.tasks = {
                   });
                 }
                 app.createUpload(uploadedFiles);
-                //$(ele).redraw();
               }
               else{
                 appui.fn.alert(data.lng.problem_file);
@@ -551,7 +527,7 @@ appui.tasks = {
               appui.fn.alert(data.lng.error_uploading)
             }
           });
-          $(ele).redraw();
+          appui.fn.analyzeContent(uploadWrapper);
         },
         mainView: function(){
           app.mainInit = true;
@@ -602,7 +578,7 @@ appui.tasks = {
                 '</div>' +
                 '</td></tr>'
               );
-              $target.redraw();
+              appui.fn.analyzeContent($target, 1);
               $input.val("");
               $li = $target.find("tr:last").parent().closest("tr");
               appui.fn.post(data.root + "link_preview", {url: v, ref: info.ref}, function(d){
@@ -622,7 +598,7 @@ appui.tasks = {
                   if ( d.res.desc ){
                     st += d.res.desc;
                   }
-                  $li.find("td.appui-task-link-title div").html(st);
+                  appui.fn.insertContent(st, $li.find("td.appui-task-link-title div"));
                 }
                 else{
                   $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");
@@ -681,7 +657,7 @@ appui.tasks = {
               if ( data.picker ){
                 var r = this.dataItem(e.node);
                 $(data.picker).val(r.id).trigger("change");
-                appui.fn.closeAlert();
+                appui.fn.closePopup();
               }
             },
             template: function (e) {

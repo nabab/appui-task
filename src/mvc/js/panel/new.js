@@ -89,12 +89,20 @@ kendo.bind(ele, {
               /** @todo Change this! */
               '<span>' + apst.fnom(d.res)  + ' (' + frole + ')</span> &nbsp; ',
               $('<i class="fa fa-times appui-p"/>').click(function(e){
-                if ( (id_user !== appui.env.userId) || confirm(data.confirm_delete) ){
-                var idx = $.inArray(dataItem.users, id_user);
-                if ( idx > -1 ){
-                  dataItem.users.splice(idx, 1);
+                var del = function(){
+                  var idx = $.inArray(dataItem.users, id_user);
+                  if ( idx > -1 ){
+                    dataItem.users.splice(idx, 1);
+                  }
+                  $(this).closest("div.appui-nl").remove();
+                };
+                if ( id_user !== appui.env.userId ){
+                  del();
                 }
-                $(this).closest("div.appui-nl").remove();
+                else{
+                  appui.fn.(data.confirm_delete, function(){
+                    del();
+                  })
                 }
               })
             )
@@ -154,7 +162,7 @@ $tree = $("div.appui-task-usertree", ele).kendoTreeView({
     if ( data.picker ){
       var r = this.dataItem(e.node);
       $(data.picker).val(r.id).trigger("change");
-      appui.fn.closeAlert();
+      appui.fn.closePopup();
     }
   },
   template: function (e) {

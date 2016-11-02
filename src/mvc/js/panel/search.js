@@ -83,7 +83,7 @@ kendo.bind(ele, {
     ds.read();
   },
   create_task: function(){
-    var $input = $(".appui-task-search-container input.appui-lg", ele),
+    var $input = $("input[name=title]", ele),
         v = $input.val();
     if ( v.length ){
       appui.tasks.formNew(v);

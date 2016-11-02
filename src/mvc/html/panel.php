@@ -59,7 +59,7 @@
 
           <div class="appui-form-label" style="width: 140px"><?=_("Deadline")?></div>
           <div class="appui-form-field">
-            <input type="date" data-role="datepicker" name="deadline" data-bind="value: deadline, events: {change: update, keydown: preventEnter}" data-format="yyyy-MM-dd">
+            <input type="date" data-role="datepicker" name="deadline" data-bind="value: deadline, events: {keydown: preventAll, change: update}" data-format="yyyy-MM-dd">
             <button class="k-button" data-bind="visible: has_deadline, click: remove_deadline">
               <i class="fa fa-times"></i>
             </button>
@@ -68,8 +68,8 @@
         </div>
       </div>
 
-      <div class="appui-form-label" data-bind="visible: ref"><?=_("External reference")?></div>
-      <div class="appui-form-field" data-bind="visible: ref, html: ref"></div>
+      <div class="appui-form-label" data-bind="visible: reference"><?=_("External reference")?></div>
+      <div class="appui-form-field" data-bind="visible: reference, html: reference"></div>
 
       <div class="appui-form-label appui-lg" class="appui-task-actions"><em data-bind="text: statef"></em></div>
       <div class="appui-form-field appui-lg" class="appui-task-actions">
@@ -122,13 +122,13 @@
 
       <div class="appui-form-field" data-bind="invisible: has_comments">
         <div class="appui-form-label appui-p" style="width: 140px">
-          <!--<button class="k-button" onclick="appui.fn.alert('Link')">
+          <button class="k-button" onclick="appui.fn.alert('Link')">
             <i class="fa fa-link"> </i> &nbsp; <?=_("Link")?>
           </button>
           &nbsp;&nbsp;
           <button class="k-button" onclick="appui.fn.alert('Link')">
             <i class="fa fa-code"> </i> &nbsp; <?=_("Code")?>
-          </button>-->
+          </button>
         </div>
         <div class="appui-form-field">
           <div class="appui-task-upload-wrapper appui-task-files-container"> </div>
@@ -145,20 +145,20 @@
 
         <div class="appui-form-label">
           <?=_("Comment")?><br>
-          <!--<select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
+          <select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
             <option value="text"><?=_("Simple text")?></option>
             <option value="html"><?=_("Rich text")?></option>
             <option value="gfm"><?=_("Markdown")?></option>
             <option value="php"><?=_("PHP code")?></option>
             <option value="js"><?=_("JavaScript code")?></option>
             <option value="css"><?=_("CSS code")?></option>
-          </select><br>-->
+          </select><br>
         </div>
         <div class="appui-form-field">
           <textarea class="k-textbox" name="comment" style="width: 100%"></textarea>
         </div>
 
-        <!--<div class="appui-form-label"><?=_("Links")?></div>
+        <div class="appui-form-label"><?=_("Links")?></div>
         <div class="appui-form-field">
           <div class="k-widget k-upload k-header">
             <div class="k-dropzone">
@@ -167,7 +167,7 @@
             <table class="k-upload-files appui-task-links-container">
             </table>
           </div>
-        </div>-->
+        </div>
 
         <div class="appui-form-label"> </div>
         <div class="appui-form-field">
