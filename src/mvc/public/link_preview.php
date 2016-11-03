@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $ctrl \bbn\mvc\controller */
+/** @var $ctrl bbn\mvc\controller */
 if ( isset($ctrl->post['url'], $ctrl->post['ref']) ){
   $ctrl->obj->res = $ctrl->get_model(['url' => $ctrl->post['url'], 'ref' => $ctrl->post['ref']]);
 }
