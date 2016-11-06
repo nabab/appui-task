@@ -9,10 +9,14 @@ $s =& $model->inc->session;
 $pm = new \bbn\appui\task($model->db);
 return [
   'root' => $model->data['root'],
-  'roles' => \bbn\appui\task::get_roles(),
-  'states' => \bbn\appui\task::get_states(),
-  'options' => \bbn\appui\task::get_options(),
-  'categories' => \bbn\appui\task::get_cats(),
+  'roles' => \bbn\appui\task::get_codes_options('roles'),
+  'states' => \bbn\appui\task::get_codes_options('states'),
+  'options' => [
+    'states' => \bbn\appui\task::get_text_value_options('states'),
+    'roles' => \bbn\appui\task::get_text_value_options('roles'),
+    'cats' => \bbn\appui\task::cat_correspondances()
+  ],
+  'categories' => \bbn\appui\task::get_tree_options('cat'),
   'lng' => [
     'new_task_search' => 'Nouvelle tâche / Recherche',
     'no_role_permission' => _("You have no right to modify the roles in this task"),
