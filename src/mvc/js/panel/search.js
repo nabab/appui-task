@@ -1,4 +1,5 @@
 // Javascript Document
+// Splitter between searchbar and list
 $(".appui-task-splitter", ele).kendoSplitter({
   orientation: "vertical",
   panes: [
@@ -12,6 +13,8 @@ var operators = kendo.ui.FilterCell.fn.options.operators,
     ds = new kendo.data.DataSource({
       serverFiltering: true,
       serverSorting: true,
+      serverPaging: true,
+      pageSize: 25,
       sort: [{
         field: "priority",
         dir: "asc"
@@ -26,6 +29,7 @@ var operators = kendo.ui.FilterCell.fn.options.operators,
       },
       transport: {
         read: function(e){
+          appui.fn.log(e);
           if ( e.data && e.data.filter && e.data.filter.filters ){
             for ( var i = 0; i < e.data.filter.filters.length; i++ ){
               if ( e.data.filter.filters[i].field ){
@@ -39,9 +43,9 @@ var operators = kendo.ui.FilterCell.fn.options.operators,
           var myData = {
                 selection: $("select[name=selection]", ele).data("kendoDropDownList").value()
               },
-              v = $(".appui-task-search-container input.appui-lg", ele).val();
+              v = $(".appui-task-search-container input[name=title]", ele).val();
           if ( v ){
-            myData.search = v;
+            myData.title = v;
           }
           appui.fn.post(data.root + 'treelist', $.extend(myData, e.data), function(d){
             if ( d && d.tasks ){
@@ -95,8 +99,10 @@ kendo.bind(ele, {
 gant_container.kendoGrid({
   autoBind: false,
   sortable: true,
-  pageable: true,
-  pageSize: 50,
+  pageable: {
+    pageSize: 25,
+    refresh: true
+  },
   resizable: true,
   filterable: {
     extra: false
@@ -114,12 +120,16 @@ gant_container.kendoGrid({
   },
   columns: [
     {
-      field: "user",
-      title: data.lng.author,
-      width: 150
+      field: "id_user",
+      title: appui.tasks.lng.user,
+      template: function(e){
+        return apst.userAvatarImg(e.id_user);
+      },
+      width: 50,
+      values: appui.app.apst.users
     }, {
       field: "priority",
-      title: data.lng.priority,
+      title: appui.tasks.lng.priority,
       width: 60,
       attributes: {
         style: "text-align: center; font-weight: bold; border-top: 1px solid white; color: white"
@@ -152,7 +162,7 @@ gant_container.kendoGrid({
         multi: true
       },
       sortable: false,
-      title: data.lng.state,
+      title: appui.tasks.lng.state,
       width: 50,
       values: appui.tasks.options.states,
       encoded: false,
@@ -177,13 +187,13 @@ gant_container.kendoGrid({
         }
         else if ( e.state === appui.tasks.states.holding ){
           icon = 'pause';
-          color = 'yellow';
+          color = 'grey';
         }
         return '<i class="appui-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + appui.fn.get_field(appui.tasks.options.states, "value", e.state, "text") + '"> </i>';
       }
     }, {
       field: "last_action",
-      title: data.lng.last,
+      title: appui.tasks.lng.last,
       width: 100,
       filterable: {
         operators:{
@@ -204,7 +214,7 @@ gant_container.kendoGrid({
         multi: true
       },
       sortable: false,
-      title: data.lng.role,
+      title: appui.tasks.lng.role,
       width: 80,
       values: appui.tasks.options.roles,
       template: function(e){
@@ -216,7 +226,7 @@ gant_container.kendoGrid({
         multi: true
       },
       sortable: false,
-      title: data.lng.type,
+      title: appui.tasks.lng.type,
       attributes: {
         style: "max-width: 300px",
       },
@@ -227,11 +237,11 @@ gant_container.kendoGrid({
       }
     }, {
       field: "duration",
-      title: data.lng.duration,
+      title: appui.tasks.lng.duration,
       width: 70,
       template: function(e){
         if ( !e.duration ){
-          return data.lng.inconnue;
+          return appui.tasks.lng.inconnue;
         }
         if ( e.duration < 3600 ){
           return Math.round(e.duration/60) + ' mn';
@@ -244,22 +254,19 @@ gant_container.kendoGrid({
       hidden: true
     }, {
       field: "title",
-      title: data.lng.title,
+      title: appui.tasks.lng.title,
+      menu: false,
       expandable: true,
-      filterable: {
-        operators:{
-          string: {
-            contains: operators.string.contains
-          }
-        }
-      },
+      filterable: false,
     }, {
       field: "reference",
-      title: data.lng.reference,
-      encoded: false
+      title: appui.tasks.lng.reference,
+      encoded: false,
+      filterable: false,
+      hidden: true
     }, {
       field: "creation_date",
-      title: data.lng.start,
+      title: appui.tasks.lng.start,
       width: 100,
       filterable: {
         operators:{
@@ -276,7 +283,7 @@ gant_container.kendoGrid({
       }
     }, {
       field: "deadline",
-      title: data.lng.dead,
+      title: appui.tasks.lng.dead,
       width: 100,
       encoded: false,
       filterable: {
@@ -320,9 +327,9 @@ gant_container.kendoGrid({
       sortable: false,
       width: 50,
       template: function(e){
-        return '<a href="' + data.root + 'tasks/' + e.id + '" title="' + data.lng.see_task + '"><button class="k-button"><i class="fa fa-eye"> </i></button></a>';
+        return '<a href="' + data.root + 'tasks/' + e.id + '" title="' + appui.tasks.lng.see_task + '"><button class="k-button"><i class="fa fa-eye"> </i></button></a>';
       }
-    }, {
+    }/*, {
       field: "id_parent",
       hidden: true,
       menu: false,
@@ -334,7 +341,7 @@ gant_container.kendoGrid({
       menu: false,
       filterable: false,
       sortable: false,
-    }
+    }*/
   ]
 });
 
@@ -346,9 +353,19 @@ $(ele).closest(".ui-tabNav").tabNav("addCallback", function(cont){
 }, ele);
 
 var timer;
-$(".appui-task-search-container input.appui-lg", ele).keyup(function(e){
-  clearTimeout(timer);
-  timer = setTimeout(function(){
-    ds.read();
-  }, 1000);
+$(".appui-task-search-container input[name=title]", ele).keyup(function(e){
+  if ( timer ){
+    clearTimeout(timer);
+  }
+  if ( e.key === "Enter" ){
+    $(this).closest(".appui-form-full").find("button").click();
+    setTimeout(function(){
+      appui.fn.get_popup().find("input[name=title]").focus();
+    }, 200);
+  }
+  else{
+    timer = setTimeout(function(){
+      ds.read();
+    }, 1000);
+  }
 });

@@ -11,7 +11,7 @@
         </select>
       </div>
       <div class="appui-block appui-full-width">
-        <input name="title" class="appui-xl appui-full-width k-textbox" placeholder="<?=_("Title/short description of the new task")?>">
+        <input name="title" class="appui-xl appui-full-width k-textbox" placeholder="<?=_("Search or Title for the new task")?>">
       </div>
       <div class="appui-block" style="margin: 0 2em">
         <button class="k-button appui-xl" data-bind="click: create_task">

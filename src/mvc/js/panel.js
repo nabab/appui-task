@@ -1,6 +1,7 @@
 // Javascript Document
 //$(ele).closest(".k-content").css("padding", "0px");
 
+// Main tabNav
 var tabnav = $("#appui_task_tabnav").tabNav({
   baseTitle: 'Projects - ',
   baseURL: data.root + 'panel/',
@@ -15,6 +16,8 @@ var tabnav = $("#appui_task_tabnav").tabNav({
     title: '<i class="fa fa-home appui-lg" title="' + data.lng.new_task_search+ '"> </i>'
   }]
 });
+
+// Populates the group array with the users for each as item
 $.each(data.groups, function(i, v){
   data.groups[i].items = $.map($.grep(appui.app.apst.users, function(user){
     return user.active && (user.id_group === v.id);
@@ -24,20 +27,34 @@ $.each(data.groups, function(i, v){
   });
 });
 
+// All the following vars will be always accessible
 appui.tasks = {
   priority_colors: ['#F00', '#F40', '#F90', '#FC0', '#9B3', '#7A4', '#5A5', '#396', '#284', '#063'],
+  // Translations
+  lng: data.lng,
+  // Tasks' categories tree
   categories: data.categories,
+  // Tasks' states
   states: data.states,
+  // Tasks' roles
   roles: data.roles,
+  // The same 3, as text/value options
   options: data.options,
+  // Function on the media links in the comments of the task main view
+  download_media: function(id){
+    if ( id ){
+      appui.fn.post_out(data.root + 'download/media/' + id);
+    }
+  },
+  // Form creating a new task
   formNew: function(v){
-    appui.fn.popup($("#tpl-task_form_new").html(), data.lng.new_task, 800, 250, function(cont){
+    appui.fn.popup($("#tpl-task_form_new").html(), appui.tasks.lng.new_task, 800, 250, function(cont){
       $("input[name=title]", cont).val(v);
       appui.tasks.typeField(cont);
       $("form").attr("action", data.root + 'actions/task/insert').data("script", function(e, f){
         if ( e.success ){
           appui.fn.closePopup();
-          tabnav.tabNav("link", 'tasks/' + e.success);
+          tabnav.tabNav("link", data.root + 'panel/tasks/' + e.success);
         }
         else{
           appui.fn.alert();
@@ -45,17 +62,14 @@ appui.tasks = {
       });
     })
   },
+  // The special field for the type of task (tree inside a dropdown)
   typeField: function(container, info){
     var ddTree = $("input[name=type]", container).kendoDropDownTreeView({
       treeview: {
         select: function(e){
-          var dt = e.sender.dataItem(e.node),
-          		app = $(container).data("appui_tasks_app");
+          var dt = e.sender.dataItem(e.node);
           if ( dt ){
             ddTree.element.val(dt.id).change();
-            if ( app ){
-              return app.update("type", dt.id, info.id);
-            }
           }
         },
         dataTextField: "text",
@@ -78,6 +92,7 @@ appui.tasks = {
     }).data("kendoDropDownTreeView");
     return ddTree;
   },
+  // app is the function launched when opening a task, it manages the tabNav for each task and all the functions
   app: function(info, ele){
     if ( info.id ){
       var app = this,
@@ -157,7 +172,7 @@ appui.tasks = {
                   prop = "workers";
                 }
                 if ( prop ){
-                  appui.fn.confirm(data.lng.sure_to_unfollow, function(){
+                  appui.fn.confirm(appui.tasks.lng.sure_to_unfollow, function(){
                     appui.fn.post(data.root + "actions/role/delete", {id_task: info.id, id_user: appui.env.userId, role: appui.tasks.roles[prop]}, function(d){
                       var idx = $.inArray(appui.env.userId, mvvm.roles.get(prop))
                       if ( idx > -1 ){
@@ -191,7 +206,7 @@ appui.tasks = {
               },
               close: function(){
                 var mvvm = this;
-                appui.fn.confirm(data.lng.sure_to_close, function(){
+                appui.fn.confirm(appui.tasks.lng.sure_to_close, function(){
                   appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.closed}, function(d){
                     if ( d.success ){
                       mvvm.set("state", appui.tasks.states.closed);
@@ -207,7 +222,7 @@ appui.tasks = {
               },
               hold: function(e){
                 var mvvm = this;
-                appui.fn.confirm(data.lng.sure_to_hold, function(){
+                appui.fn.confirm(appui.tasks.lng.sure_to_hold, function(){
                   appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.holding}, function(d){
                     if ( d.success ){
                       mvvm.set("state", appui.tasks.states.holding);
@@ -223,7 +238,7 @@ appui.tasks = {
               },
               resume: function(e){
                 var mvvm = this;
-                appui.fn.confirm(data.lng.sure_to_resume, function(){
+                appui.fn.confirm(appui.tasks.lng.sure_to_resume, function(){
                   appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.ongoing}, function(d){
                     if ( d.success ){
                       mvvm.set("state", appui.tasks.states.ongoing);
@@ -269,7 +284,7 @@ appui.tasks = {
                       ref: $("input[name=ref]", ele).val(),
                     };
                 if ( !v.title && !v.text ){
-                  appui.fn.alert(data.lng.no_comment_text)
+                  appui.fn.alert(appui.tasks.lng.no_comment_text)
                 }
                 else{
                   appui.fn.post(data.root + 'actions/comment/insert', v, function(d){
@@ -287,6 +302,9 @@ appui.tasks = {
                     }
                   });
                 }
+              },
+              hideCommentForm: function(){
+                
               },
               preventEnter: function(e){
                 if ( e.key === "Enter" ){
@@ -492,7 +510,7 @@ appui.tasks = {
                   e.preventDefault();
                   uploadWrapper = $("div.appui-task-upload-wrapper", ele);
                   appui.fn.analyzeContent(uploadWrapper);
-                  appui.fn.alert(data.lng.file_exists);
+                  appui.fn.alert(appui.tasks.lng.file_exists);
                   return false;
                 }
                 else{
@@ -520,11 +538,11 @@ appui.tasks = {
                 app.createUpload(uploadedFiles);
               }
               else{
-                appui.fn.alert(data.lng.problem_file);
+                appui.fn.alert(appui.tasks.lng.problem_file);
               }
             },
             error:function(e){
-              appui.fn.alert(data.lng.error_uploading)
+              appui.fn.alert(appui.tasks.lng.error_uploading)
             }
           });
           appui.fn.analyzeContent(uploadWrapper);
@@ -786,22 +804,22 @@ appui.tasks = {
                 return apst.userAvatarImg(e.id_user);
               }
             }, {
-              title: data.lng.user,
-              title: data.lng.user,
+              title: appui.tasks.lng.user,
+              title: appui.tasks.lng.user,
               field: "id_user",
               width: 150,
               template: function(e){
                 return apst.userName(e.id_user);
               }
             }, {
-              title: data.lng.date,
+              title: appui.tasks.lng.date,
               field: "chrono",
               width: 150,
               template: function(e){
                 return appui.fn.fdate(e.chrono);
               }
             }, {
-              title: data.lng.action,
+              title: appui.tasks.lng.action,
               field: "action",
               encoded: false
             }]
@@ -847,7 +865,7 @@ appui.tasks = {
                 '&nbsp;',
                 $closer.click(function(){
                   if ( !info.can_change() ){
-                    appui.fn.alert(data.lng.no_role_permission);
+                    appui.fn.alert(appui.tasks.lng.no_role_permission);
                     return;
                   }
                   var idx = $.inArray(id, info.roles.get(prop));
@@ -893,7 +911,7 @@ appui.tasks = {
           baseURL: "panel/",
           list: [{
             url: "main",
-            title: '<i class="fa fa-eye"> </i> &nbsp; ' + data.lng.global_view,
+            title: '<i class="fa fa-eye"> </i> &nbsp; ' + appui.tasks.lng.global_view,
             content: $("#tpl-task_tab_main").html(),
             static: true,
             callonce: function(ele){
@@ -901,7 +919,7 @@ appui.tasks = {
             }
           }, {
             url: "people",
-            title: '<i class="fa fa-users"> </i> &nbsp; ' + data.lng.roles,
+            title: '<i class="fa fa-users"> </i> &nbsp; ' + appui.tasks.lng.roles,
             content: $("#tpl-task_tab_roles").html(),
             static: true,
             callonce: function(ele){
@@ -914,7 +932,7 @@ appui.tasks = {
             disabled: !info.is_master()
           }, {
             url: "logs",
-            title: '<i class="fa fa-list"> </i> &nbsp; ' + data.lng.journal,
+            title: '<i class="fa fa-list"> </i> &nbsp; ' + appui.tasks.lng.journal,
             content: '<div class="tab-logs appui-full-height"></div>',
             static: true,
             callonce: function(ele){

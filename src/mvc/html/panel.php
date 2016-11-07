@@ -1,4 +1,4 @@
-<div class="appui-h-100" id="appui_task_tabnav"></div>
+<div class="appui-full-height" id="appui_task_tabnav"></div>
 
 <script type="text/x-kendo-template" id="tpl-task_tab_main">
   <div class="appui-margin">
@@ -122,13 +122,13 @@
 
       <div class="appui-form-field" data-bind="invisible: has_comments">
         <div class="appui-form-label appui-p" style="width: 140px">
-          <button class="k-button" onclick="appui.fn.alert('Link')">
+          <!--button class="k-button" onclick="appui.fn.alert('Link')">
             <i class="fa fa-link"> </i> &nbsp; <?=_("Link")?>
           </button>
           &nbsp;&nbsp;
           <button class="k-button" onclick="appui.fn.alert('Link')">
             <i class="fa fa-code"> </i> &nbsp; <?=_("Code")?>
-          </button>
+          </button-->
         </div>
         <div class="appui-form-field">
           <div class="appui-task-upload-wrapper appui-task-files-container"> </div>
@@ -144,7 +144,7 @@
         </div>
 
         <div class="appui-form-label">
-          <?=_("Comment")?><br>
+          <?=_("Comment")?><!--br>
           <select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
             <option value="text"><?=_("Simple text")?></option>
             <option value="html"><?=_("Rich text")?></option>
@@ -152,7 +152,7 @@
             <option value="php"><?=_("PHP code")?></option>
             <option value="js"><?=_("JavaScript code")?></option>
             <option value="css"><?=_("CSS code")?></option>
-          </select><br>
+          </select><br-->
         </div>
         <div class="appui-form-field">
           <textarea class="k-textbox" name="comment" style="width: 100%"></textarea>
@@ -190,27 +190,25 @@
     <div class="content">
     	<a class="author">#= apst.userName(id_user) #</a>
       <div class="metadata">
-        <div class="date">#: since #</div>
+        <div class="date" data-bind="text: since"></div>
         <!--<div class="rating">
           <i class="star icon"></i>
           5 Faves
         </div>-->
       </div>
-      # if ( title ){ #
-      <div class="title appui-u appui-lg">#= title #</div>
-      # } #
+      <div class="title appui-lg" data-bind="visible: title, html: title"></div>
       <div class="text">
-      #= content #
-      # if ( data.medias && data.medias.length ){ #
-        <p>
-        # for ( var i = 0; i < data.medias.length; i++ ){ #
-          <a class="media" href="javascript:;" onclick="appui.fn.post_out('<?=$root?>download/media/#= data.medias[i].id #')">#= data.medias[i].title #</a>
-        # } #
-        </p>
-      # } #
+        <div data-bind="visible: content, html: content"></div>
+        <p data-bind="source: medias" data-template="tpl-appui_task_media"></p>
   		</div>
     </div>
   </div>
+</script>
+
+<script type="text/x-kendo-template" id="tpl-appui_task_media">
+  <span style="margin-right: 2em">
+    <a class="media" data-bind="text: title" onclick="appui.tasks.download_media(#=id#)"></a>
+  </span>
 </script>
 
 <script type="text/x-kendo-template" id="tpl-task_tab_roles">
