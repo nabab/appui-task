@@ -206,7 +206,7 @@ gant_container.kendoGrid({
       },
       template: function(e){
         var t = moment(e.last_action);
-        return t.format("DD MMM YY");
+        return t.fromNow();
       }
     }, {
       field: "role",
