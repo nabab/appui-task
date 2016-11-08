@@ -206,7 +206,7 @@ gant_container.kendoGrid({
       },
       template: function(e){
         var t = moment(e.last_action);
-        return t.fromNow();
+        return t.calendar();
       }
     }, {
       field: "role",
@@ -240,6 +240,12 @@ gant_container.kendoGrid({
       title: appui.tasks.lng.duration,
       width: 70,
       template: function(e){
+        var start = moment(e.creation_date),
+            end = moment(e.last_action);
+        if ( e.state === appui.tasks.states.closed ){
+          end = moment();
+        }
+        return end.from(start, true);
         if ( !e.duration ){
           return appui.tasks.lng.inconnue;
         }
@@ -279,7 +285,7 @@ gant_container.kendoGrid({
       },
       template: function(e){
         var t = moment(e.creation_date);
-        return t.fromNow();
+        return t.calendar();
       }
     }, {
       field: "deadline",
@@ -301,7 +307,9 @@ gant_container.kendoGrid({
         var t = moment(e.deadline),
             now = moment(),
             diff = t.unix() - now.unix(),
-            col = 'green';
+            col = 'green',
+            d = e.state === appui.tasks.states.closed ? t.calendar() : t.fromNow();
+          ;
         if ( !t.isValid() ){
           return '-';
         }
@@ -317,7 +325,7 @@ gant_container.kendoGrid({
         else if ( diff < (7*24*3600) ){
           col = 'orange'
         }
-        return '<strong style="color: ' + col + '">' + t.format("DD MMM YY") + '</strong>';
+        return '<strong style="color: ' + col + '">' + d + '</strong>';
       }
     }, {
       field: "id",
