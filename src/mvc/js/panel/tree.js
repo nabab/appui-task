@@ -53,7 +53,7 @@ if ( data.is_admin ){
         else if ( ds.id === dd.id ){
           ok = false;
         }
-        else if ( !dd.cfg.orderable && (ds.id_parent === dd.id) ){
+        else if ( !dd.cfg.sortable && (ds.id_parent === dd.id) ){
           ok = false;
         }
       }
