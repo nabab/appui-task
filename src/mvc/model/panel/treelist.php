@@ -5,7 +5,7 @@
  **/
 
 /** @var $model \bbn\mvc\model*/
-$pm = new \bbn\appui\task($model->db);
+$pm = new \bbn\appui\tasks($model->db);
 $grid = new \bbn\appui\grid($model->db, $model->data, 'bbn_tasks', [
   'reference',
   'role',

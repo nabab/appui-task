@@ -6,7 +6,7 @@
 
 /** @var $model \bbn\mvc\model*/
 if ( isset($model->data['id']) ){
-  $task = new \bbn\appui\task($model->db);
+  $task = new \bbn\appui\tasks($model->db);
   return [
     'info' => $task->info($model->data['id'], true)
   ];

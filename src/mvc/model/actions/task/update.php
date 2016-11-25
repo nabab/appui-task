@@ -5,7 +5,7 @@
  **/
 
 /** @var $model \bbn\mvc\model*/
-$pm = new \bbn\appui\task($model->db);
+$pm = new \bbn\appui\tasks($model->db);
 return [
   'success' => isset($model->data['id_task'], $model->data['prop']) ?
     $pm->update(

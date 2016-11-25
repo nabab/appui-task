@@ -5,5 +5,5 @@
  **/
 
 /** @var $model \bbn\mvc\model*/
-$pm = new \bbn\appui\task($model->db);
+$pm = new \bbn\appui\tasks($model->db);
 return $pm->get_mine(empty($model->data['id']) ? null : $model->data['id']);
