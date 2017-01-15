@@ -122,11 +122,11 @@
 
       <div class="appui-form-field" data-bind="invisible: has_comments">
         <div class="appui-form-label appui-p" style="width: 140px">
-          <!--button class="k-button" onclick="appui.fn.alert('Link')">
+          <!--button class="k-button" onclick="bbn.fn.alert('Link')">
             <i class="fa fa-link"> </i> &nbsp; <?=_("Link")?>
           </button>
           &nbsp;&nbsp;
-          <button class="k-button" onclick="appui.fn.alert('Link')">
+          <button class="k-button" onclick="bbn.fn.alert('Link')">
             <i class="fa fa-code"> </i> &nbsp; <?=_("Code")?>
           </button-->
         </div>
@@ -207,7 +207,7 @@
 
 <script type="text/x-kendo-template" id="tpl-appui_task_media">
   <span style="margin-right: 2em">
-    <a class="media" data-bind="text: title" onclick="appui.tasks.download_media(#=id#)"></a>
+    <a class="media" data-bind="text: title" onclick="bbn.tasks.download_media(#=id#)"></a>
   </span>
 </script>
 

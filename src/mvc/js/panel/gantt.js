@@ -2,7 +2,7 @@
 var ds = new kendo.data.TreeListDataSource({
   transport: {
     read: function(e){
-      appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
+      bbn.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
         if ( d && d.tasks ){
           e.success(d.tasks);
         }
@@ -45,7 +45,7 @@ $("div.appui-task-gantt", ele).kendoTreeList({
     $(e.sender.element).find("tbody tr").each(function(){
       var dataItem = e.sender.dataItem(this);
       $(this).addClass("appui-task-pr" + dataItem.get("priority"));
-      appui.fn.log("Adding class");
+      bbn.fn.log("Adding class");
     })
   },
   sortable: true,

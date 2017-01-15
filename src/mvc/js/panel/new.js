@@ -70,7 +70,7 @@ kendo.bind(ele, {
   change_role: function(){
     var role = $("input[name=role]", ele).data("kendoDropDownList").value();
     if ( role ){
-      appui.fn.window("usergroup/picker", {picker: "#appui_pm_form_container input[name=id_user]"}, 350, 700);
+      bbn.fn.window("usergroup/picker", {picker: "#appui_pm_form_container input[name=id_user]"}, 350, 700);
     }
   },
   add_user: function(){
@@ -78,9 +78,9 @@ kendo.bind(ele, {
         id_user = $("input[name=id_user]", ele).val(),
         rolePicker = $("input[name=role]", ele).data("kendoDropDownList"),
         role = rolePicker.value(),
-        frole = appui.fn.get_field(dataItem.roles, "value", role, "text");
+        frole = bbn.fn.get_field(dataItem.roles, "value", role, "text");
     if ( frole && ($.inArray(dataItem.users, id_user) === -1) ){
-      appui.fn.post("usergroup/get_user", {id_user: id_user}, function(d){
+      bbn.fn.post("usergroup/get_user", {id_user: id_user}, function(d){
         if ( d.res ){
           dataItem.users.push(id_user);
           rolePicker.value("");
@@ -96,11 +96,11 @@ kendo.bind(ele, {
                   }
                   $(this).closest("div.appui-nl").remove();
                 };
-                if ( id_user !== appui.env.userId ){
+                if ( id_user !== bbn.env.userId ){
                   del();
                 }
                 else{
-                  appui.fn.(data.confirm_delete, function(){
+                  bbn.fn.(data.confirm_delete, function(){
                     del();
                   })
                 }
@@ -112,7 +112,7 @@ kendo.bind(ele, {
     }
   },
   insert: function(){
-    appui.fn.log(appui.fn.formdata(ele));
+    bbn.fn.log(bbn.fn.formdata(ele));
   }
 });
 
@@ -148,7 +148,7 @@ var $tree,
 $tree = $("div.appui-task-usertree", ele).kendoTreeView({
   dataSource: treeDS,
   expand: function(e){
-    appui.fn.log(e.node);
+    bbn.fn.log(e.node);
     setTimeout(function(){
       $(e.node).find("li.k-item").each(function(){
         var $$ = $(this);
@@ -162,7 +162,7 @@ $tree = $("div.appui-task-usertree", ele).kendoTreeView({
     if ( data.picker ){
       var r = this.dataItem(e.node);
       $(data.picker).val(r.id).trigger("change");
-      appui.fn.closePopup();
+      bbn.fn.closePopup();
     }
   },
   template: function (e) {
@@ -175,17 +175,17 @@ $("input:first", ele).keyup(function(){
   $li.filter(":hidden").show();
   if ( v.length ){
     $li.filter(function(){
-      var txt = appui.fn.removeAccents($(this).find("span:not(.k-icon):first").text().toLowerCase());
+      var txt = bbn.fn.removeAccents($(this).find("span:not(.k-icon):first").text().toLowerCase());
       return txt.indexOf(v) === -1;
     }).hide();
   }
   /*
   var data = treeDS.data();
   data.forEach(function(a){
-    appui.fn.log(a, this);
+    bbn.fn.log(a, this);
     a.filter({field: "text", operator: "contains", value: $(this).val()});
   })
-  appui.fn.log(treeDS, treeDS.data());
+  bbn.fn.log(treeDS, treeDS.data());
   treeDS.filter({field: "text", operator: "contains", value: $(this).val()});
   Porca putana!
   */
@@ -205,7 +205,7 @@ $("div.appui-task-assigned", ele).droppable({
         vals = v ? JSON.parse(v) : [],
         items = [],
         $ele;
-    appui.fn.log(dataItem, $tree.dataItem(ui.draggable));
+    bbn.fn.log(dataItem, $tree.dataItem(ui.draggable));
     if ( dataItem.is_parent ){
       if ( dataItem.items && dataItem.items.length ){
         items = dataItem.items;
@@ -241,7 +241,7 @@ $("div.appui-task-assigned", ele).droppable({
               $input.val(JSON.stringify(vals));
             }
             $$.closest("li").remove();
-            appui.fn.log(idx, id);
+            bbn.fn.log(idx, id);
           })
         ).removeEv
       }
@@ -251,11 +251,11 @@ $("div.appui-task-assigned", ele).droppable({
 });
 
 var ddTree = $("input[name=type]", ele).kendoDropDownTreeView({
-  optionLabel: appui.lng.choose,
+  optionLabel: bbn.lng.choose,
   treeview: {
     select: function(e){
       ddTree.element.val(e.sender.dataItem(e.node).id).change();
-      appui.fn.log(ddTree.element, e.sender.dataItem(e.node));
+      bbn.fn.log(ddTree.element, e.sender.dataItem(e.node));
     },
     dataTextField: "text",
     dataValueField: "id",
@@ -302,7 +302,7 @@ var uploadedFiles = [],
       return false;
     },
     createUpload = function(){
-      appui.fn.log("CREATE", uploadedFiles);
+      bbn.fn.log("CREATE", uploadedFiles);
       var uploader = $('<input name="file" type="file"/>');
       uploadWrapper.empty().append(uploader);
       uploader.kendoUpload({
@@ -311,10 +311,10 @@ var uploadedFiles = [],
           removeUrl: data.root + "unupload/" + data.ref
         },
         template: function(e){
-          appui.fn.log("TEM<PLATE", e);
+          bbn.fn.log("TEM<PLATE", e);
           var size,
               unit;
-          appui.fn.log(e);
+          bbn.fn.log(e);
           if ( e.size > 5000000 ){
             unit = 'Mb';
             size = Math.floor(e.size / 1024 / 1024).toString();
@@ -356,18 +356,18 @@ var uploadedFiles = [],
         // @todo Voir la taille
         files: uploadedFiles,
         upload: function(e){
-          appui.fn.log("UPLOAD", e);
+          bbn.fn.log("UPLOAD", e);
           if ( e.files && e.files[0] ){
-            var idx = appui.fn.search(uploadedFiles, "name", e.files[0].name);
+            var idx = bbn.fn.search(uploadedFiles, "name", e.files[0].name);
             if ( idx > -1 ){
               e.preventDefault();
-              appui.fn.alert(data.lng.file_exists);
+              bbn.fn.alert(data.lng.file_exists);
               return false;
             }
           }
         },
         success: function(e){
-          appui.fn.log("SUCCESS", e);
+          bbn.fn.log("SUCCESS", e);
           if ( e.response && e.response.files && e.files && (e.response.success === 1) ){
             var file = uploader.val();
             if ( e.operation === 'upload' ){
@@ -388,11 +388,11 @@ var uploadedFiles = [],
             }
           }
           else{
-            appui.fn.alert(data.lng.problem_file);
+            bbn.fn.alert(data.lng.problem_file);
           }
         },
         error:function(e){
-          appui.fn.alert(data.lng.error_uploading)
+          bbn.fn.alert(data.lng.error_uploading)
         }
       });
     };
@@ -427,9 +427,9 @@ $("input[name=link]", ele).keydown(function(e){
     $target.redraw();
     $input.val("");
     $li = $target.find("tr:last").parent().closest("tr");
-    appui.fn.post(data.root + "link_preview", {url: v, ref: data.ref}, function(d){
+    bbn.fn.post(data.root + "link_preview", {url: v, ref: data.ref}, function(d){
       if ( d.res && d.res.realurl ){
-        appui.fn.log("ok", d.res);
+        bbn.fn.log("ok", d.res);
         $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-success");
         if ( d.res.pictures ){
           $.each(d.res.pictures, function(i, v){

@@ -6,7 +6,7 @@ var ds = new kendo.data.TreeListDataSource({
       }],
       transport: {
         read: function(e){
-          appui.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
+          bbn.fn.post(data.root + 'treelist', e.data ? e.data : {}, function(d){
             if ( d && d.tasks ){
               e.success(d.tasks);
             }
@@ -48,7 +48,7 @@ gant_container.kendoTreeList({
     e.sender.element.find("tbody tr").each(function(){
       var v = e.sender.dataItem(this);
       $(this).find("td:eq(1)").css({
-        backgroundColor: appui.tasks.priority_colors[v.priority-1],
+        backgroundColor: bbn.tasks.priority_colors[v.priority-1],
         color: v.priority > 6 ? '#666' : '#EEE'
       })
     });

@@ -19,7 +19,7 @@ var tabnav = $("#appui_task_tabnav").tabNav({
 
 // Populates the group array with the users for each as item
 $.each(data.groups, function(i, v){
-  data.groups[i].items = $.map($.grep(appui.app.apst.users, function(user){
+  data.groups[i].items = $.map($.grep(bbn.app.apst.users, function(user){
     return user.active && (user.id_group === v.id);
   }), function(user){
     user.id = user.value;
@@ -28,7 +28,7 @@ $.each(data.groups, function(i, v){
 });
 
 // All the following vars will be always accessible
-appui.tasks = {
+bbn.tasks = {
   priority_colors: ['#F00', '#F40', '#F90', '#FC0', '#9B3', '#7A4', '#5A5', '#396', '#284', '#063'],
   // Translations
   lng: data.lng,
@@ -43,21 +43,21 @@ appui.tasks = {
   // Function on the media links in the comments of the task main view
   download_media: function(id){
     if ( id ){
-      appui.fn.post_out(data.root + 'download/media/' + id);
+      bbn.fn.post_out(data.root + 'download/media/' + id);
     }
   },
   // Form creating a new task
   formNew: function(v){
-    appui.fn.popup($("#tpl-task_form_new").html(), appui.tasks.lng.new_task, 800, 250, function(cont){
+    bbn.fn.popup($("#tpl-task_form_new").html(), bbn.tasks.lng.new_task, 800, 250, function(cont){
       $("input[name=title]", cont).val(v);
-      appui.tasks.typeField(cont);
+      bbn.tasks.typeField(cont);
       $("form").attr("action", data.root + 'actions/task/insert').data("script", function(e, f){
         if ( e.success ){
-          appui.fn.closePopup();
+          bbn.fn.closePopup();
           tabnav.tabNav("link", data.root + 'panel/tasks/' + e.success);
         }
         else{
-          appui.fn.alert();
+          bbn.fn.alert();
         }
       });
     })
@@ -75,7 +75,7 @@ appui.tasks = {
         dataTextField: "text",
         dataValueField: "id",
         dataSource: new kendo.data.HierarchicalDataSource({
-          data: appui.tasks.categories,
+          data: bbn.tasks.categories,
           schema: {
             model: {
               id: "id",
@@ -106,7 +106,7 @@ appui.tasks = {
             }
             var obs = kendo.observable({
               creator: apst.userFull(info.id_user),
-              creation: appui.fn.fdate(info.creation_date),
+              creation: bbn.fn.fdate(info.creation_date),
               ref: (new moment()).unix(),
               has_deadline: function(){
                 return this.get("deadline") ? true : false;
@@ -120,21 +120,21 @@ appui.tasks = {
               },
               is_manager: function(){
                 var managers = this.roles.get("managers");
-                if ( managers && ($.inArray(appui.env.userId, managers) > -1) ){
+                if ( managers && ($.inArray(bbn.env.userId, managers) > -1) ){
                   return true;
                 }
                 return false;
               },
               is_worker: function(){
                 var workers = this.roles.get("workers");
-                if ( workers && ($.inArray(appui.env.userId, workers) > -1) ){
+                if ( workers && ($.inArray(bbn.env.userId, workers) > -1) ){
                   return true;
                 }
                 return false;
               },
               is_viewer: function(){
                 var viewers = this.roles.get("viewers");
-                if ( viewers && ($.inArray(appui.env.userId, viewers) > -1) ){
+                if ( viewers && ($.inArray(bbn.env.userId, viewers) > -1) ){
                   return true;
                 }
                 return false;
@@ -146,7 +146,7 @@ appui.tasks = {
                 var mvvm = this,
                     role = $(e.item).attr("data-task-role");
                 if ( role ){
-                  appui.fn.post(data.root + 'actions/role/insert', {id_task: info.id, role: appui.tasks.roles[role], id_user: appui.env.userId}, function(d){
+                  bbn.fn.post(data.root + 'actions/role/insert', {id_task: info.id, role: bbn.tasks.roles[role], id_user: bbn.env.userId}, function(d){
                     if ( app.userUID ){
                       // @todo Do something to update the roles tab
                       app.tree.findByUid(app.userUID);
@@ -154,7 +154,7 @@ appui.tasks = {
                     if ( !mvvm.roles[role] ){
                       mvvm.roles.set(role, []);
                     }
-                    mvvm.roles[role].push(appui.env.userId);
+                    mvvm.roles[role].push(bbn.env.userId);
                     tabstrip.tabNav("enable", 1);
                   });
                 }
@@ -172,9 +172,9 @@ appui.tasks = {
                   prop = "workers";
                 }
                 if ( prop ){
-                  appui.fn.confirm(appui.tasks.lng.sure_to_unfollow, function(){
-                    appui.fn.post(data.root + "actions/role/delete", {id_task: info.id, id_user: appui.env.userId, role: appui.tasks.roles[prop]}, function(d){
-                      var idx = $.inArray(appui.env.userId, mvvm.roles.get(prop))
+                  bbn.fn.confirm(bbn.tasks.lng.sure_to_unfollow, function(){
+                    bbn.fn.post(data.root + "actions/role/delete", {id_task: info.id, id_user: bbn.env.userId, role: bbn.tasks.roles[prop]}, function(d){
+                      var idx = $.inArray(bbn.env.userId, mvvm.roles.get(prop))
                       if ( idx > -1 ){
                         mvvm.roles[prop].splice(idx, 1);
                         tabstrip.tabNav("disable", 1);
@@ -190,13 +190,13 @@ appui.tasks = {
                 if ( this.is_manager() ){
                   return true;
                 }
-                return appui.env.userId === this.get("id_user");
+                return bbn.env.userId === this.get("id_user");
               },
               can_change: function(){
                 return !this.is_closed() && this.is_master();
               },
               statef: function(){
-                return appui.fn.get_field(appui.tasks.options.states, "value", this.get("state"), "text");
+                return bbn.fn.get_field(bbn.tasks.options.states, "value", this.get("state"), "text");
               },
               can_close: function(){
                 if ( this.is_manager() && !this.is_closed() ){
@@ -206,26 +206,26 @@ appui.tasks = {
               },
               close: function(){
                 var mvvm = this;
-                appui.fn.confirm(appui.tasks.lng.sure_to_close, function(){
-                  appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.closed}, function(d){
+                bbn.fn.confirm(bbn.tasks.lng.sure_to_close, function(){
+                  bbn.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: bbn.tasks.states.closed}, function(d){
                     if ( d.success ){
-                      mvvm.set("state", appui.tasks.states.closed);
+                      mvvm.set("state", bbn.tasks.states.closed);
                     }
                   });
                 });
               },
               can_hold: function(){
-                if ( ((this.get("state") === appui.tasks.states.ongoing) || (this.get("state") === appui.tasks.states.opened)) && (this.is_manager() || this.is_worker()) ){
+                if ( ((this.get("state") === bbn.tasks.states.ongoing) || (this.get("state") === bbn.tasks.states.opened)) && (this.is_manager() || this.is_worker()) ){
                   return true;
                 }
                 return false;
               },
               hold: function(e){
                 var mvvm = this;
-                appui.fn.confirm(appui.tasks.lng.sure_to_hold, function(){
-                  appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.holding}, function(d){
+                bbn.fn.confirm(bbn.tasks.lng.sure_to_hold, function(){
+                  bbn.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: bbn.tasks.states.holding}, function(d){
                     if ( d.success ){
-                      mvvm.set("state", appui.tasks.states.holding);
+                      mvvm.set("state", bbn.tasks.states.holding);
                     }
                   });
                 })
@@ -238,25 +238,25 @@ appui.tasks = {
               },
               resume: function(e){
                 var mvvm = this;
-                appui.fn.confirm(appui.tasks.lng.sure_to_resume, function(){
-                  appui.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: appui.tasks.states.ongoing}, function(d){
+                bbn.fn.confirm(bbn.tasks.lng.sure_to_resume, function(){
+                  bbn.fn.post(data.root + "actions/task/update", {id_task: info.id, prop: "state", val: bbn.tasks.states.ongoing}, function(d){
                     if ( d.success ){
-                      mvvm.set("state", appui.tasks.states.ongoing);
+                      mvvm.set("state", bbn.tasks.states.ongoing);
                     }
                   });
                 })
               },
               is_holding: function(){
-                return this.get("state") === appui.tasks.states.holding;
+                return this.get("state") === bbn.tasks.states.holding;
               },
               is_closed: function(){
-                return this.get("state") === appui.tasks.states.closed;
+                return this.get("state") === bbn.tasks.states.closed;
               },
               is_opened: function(){
-                return (this.get("state") === appui.tasks.states.opened);
+                return (this.get("state") === bbn.tasks.states.opened);
               },
               is_ongoing: function(){
-                return (this.get("state") === appui.tasks.states.ongoing);
+                return (this.get("state") === bbn.tasks.states.ongoing);
               },
               is_opened_or_ongoing: function(){
                 return this.is_ongoing() || this.is_opened();
@@ -284,10 +284,10 @@ appui.tasks = {
                       ref: $("input[name=ref]", ele).val(),
                     };
                 if ( !v.title && !v.text ){
-                  appui.fn.alert(appui.tasks.lng.no_comment_text)
+                  bbn.fn.alert(bbn.tasks.lng.no_comment_text)
                 }
                 else{
-                  appui.fn.post(data.root + 'actions/comment/insert', v, function(d){
+                  bbn.fn.post(data.root + 'actions/comment/insert', v, function(d){
                     if ( d.success && d.comment ){
                       d.comment.creation = new Date().getSQL(1);
                       var m = new moment(d.comment.creation);
@@ -298,7 +298,7 @@ appui.tasks = {
                       $("input[name=comment_title]", ele).val('').trigger("change").parent().parent().hide().prev().hide();
                     }
                     else{
-                      appui.fn.alert();
+                      bbn.fn.alert();
                     }
                   });
                 }
@@ -335,7 +335,7 @@ appui.tasks = {
                   val = textarea.val();
                 }
 
-                appui.fn.insertContent(textarea_st, cont_textarea);
+                bbn.fn.insertContent(textarea_st, cont_textarea);
                 textarea = $("textarea", cont_textarea);
                 if ( val ){
                   textarea.val(val);
@@ -399,7 +399,7 @@ appui.tasks = {
               change_role: function(){
                 var role = $("input[name=role]", ele).data("kendoDropDownList").value();
                 if ( role ){
-                  appui.fn.window("usergroup/picker", {picker: "#appui_pm_form_container input[name=id_user]"}, 350, 700);
+                  bbn.fn.window("usergroup/picker", {picker: "#appui_pm_form_container input[name=id_user]"}, 350, 700);
                 }
               },
               update: function(e, f){
@@ -505,16 +505,16 @@ appui.tasks = {
             files: uploadedFiles,
             upload: function(e){
               if ( e.files && e.files[0] ){
-                var idx = appui.fn.search(uploadedFiles, "name", e.files[0].name);
+                var idx = bbn.fn.search(uploadedFiles, "name", e.files[0].name);
                 if ( idx > -1 ){
                   e.preventDefault();
                   uploadWrapper = $("div.appui-task-upload-wrapper", ele);
-                  appui.fn.analyzeContent(uploadWrapper);
-                  appui.fn.alert(appui.tasks.lng.file_exists);
+                  bbn.fn.analyzeContent(uploadWrapper);
+                  bbn.fn.alert(bbn.tasks.lng.file_exists);
                   return false;
                 }
                 else{
-                  $(ele).redraw();
+                  $(ele).bbn("redraw", true);
                 }
               }
             },
@@ -538,14 +538,14 @@ appui.tasks = {
                 app.createUpload(uploadedFiles);
               }
               else{
-                appui.fn.alert(appui.tasks.lng.problem_file);
+                bbn.fn.alert(bbn.tasks.lng.problem_file);
               }
             },
             error:function(e){
-              appui.fn.alert(appui.tasks.lng.error_uploading)
+              bbn.fn.alert(bbn.tasks.lng.error_uploading)
             }
           });
-          appui.fn.analyzeContent(uploadWrapper);
+          bbn.fn.analyzeContent(uploadWrapper);
         },
         mainView: function(){
           app.mainInit = true;
@@ -569,7 +569,7 @@ appui.tasks = {
               "unlink"
             ]
           });
-          var ddTree = appui.tasks.typeField(ele, info);
+          var ddTree = bbn.tasks.typeField(ele, info);
           app.createUpload();
           $("input[name=link]", ele).keydown(function(e){
             if ( e.key === "Enter" ){
@@ -596,10 +596,10 @@ appui.tasks = {
                 '</div>' +
                 '</td></tr>'
               );
-              appui.fn.analyzeContent($target, 1);
+              bbn.fn.analyzeContent($target, 1);
               $input.val("");
               $li = $target.find("tr:last").parent().closest("tr");
-              appui.fn.post(data.root + "link_preview", {url: v, ref: info.ref}, function(d){
+              bbn.fn.post(data.root + "link_preview", {url: v, ref: info.ref}, function(d){
                 if ( d.res && d.res.realurl ){
                   $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-success");
                   if ( d.res.pictures ){
@@ -616,7 +616,7 @@ appui.tasks = {
                   if ( d.res.desc ){
                     st += d.res.desc;
                   }
-                  appui.fn.insertContent(st, $li.find("td.appui-task-link-title div"));
+                  bbn.fn.insertContent(st, $li.find("td.appui-task-link-title div"));
                 }
                 else{
                   $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");
@@ -675,7 +675,7 @@ appui.tasks = {
               if ( data.picker ){
                 var r = this.dataItem(e.node);
                 $(data.picker).val(r.id).trigger("change");
-                appui.fn.closePopup();
+                bbn.fn.closePopup();
               }
             },
             template: function (e) {
@@ -692,22 +692,22 @@ appui.tasks = {
             $li.filter(":hidden").show();
             if ( v.length ){
               $li.filter(function(){
-                var txt = appui.fn.removeAccents($(this).find("span:not(.k-icon):first").text().toLowerCase());
+                var txt = bbn.fn.removeAccents($(this).find("span:not(.k-icon):first").text().toLowerCase());
                 return txt.indexOf(v) === -1;
               }).hide();
             }
             var data = treeDS.data();
             data.forEach(function(a){
-              appui.fn.log(a, this);
+              bbn.fn.log(a, this);
               a.filter({field: "text", operator: "contains", value: $(this).val()});
             })
-            appui.fn.log(treeDS, treeDS.data());
+            bbn.fn.log(treeDS, treeDS.data());
             treeDS.filter({field: "text", operator: "contains", value: $(this).val()});
             Porca putana!
           });
           */
 
-          for ( var v in appui.tasks.roles){
+          for ( var v in bbn.tasks.roles){
             if ( tmp = info.roles.get(v) ){
               roles[v] = tmp;
             }
@@ -715,7 +715,7 @@ appui.tasks = {
           $li.draggable(dragCfg).each(function(){
             var dataItem = app.roleTree.dataItem(this);
             if ( !dataItem.is_parent ){
-              if ( dataItem.id === appui.env.userId ){
+              if ( dataItem.id === bbn.env.userId ){
                 app.userUID = dataItem.uid;
               }
               for ( var n in roles ){
@@ -768,7 +768,7 @@ appui.tasks = {
               },
               transport: {
                 read: function(e){
-                  appui.fn.post(data.root + 'panel/logs', {id_task: info.id}, function(d){
+                  bbn.fn.post(data.root + 'panel/logs', {id_task: info.id}, function(d){
                     if ( d.data ){
                       return e.success(d.data);
                     }
@@ -804,22 +804,22 @@ appui.tasks = {
                 return apst.userAvatarImg(e.id_user);
               }
             }, {
-              title: appui.tasks.lng.user,
-              title: appui.tasks.lng.user,
+              title: bbn.tasks.lng.user,
+              title: bbn.tasks.lng.user,
               field: "id_user",
               width: 150,
               template: function(e){
                 return apst.userName(e.id_user);
               }
             }, {
-              title: appui.tasks.lng.date,
+              title: bbn.tasks.lng.date,
               field: "chrono",
               width: 150,
               template: function(e){
-                return appui.fn.fdate(e.chrono);
+                return bbn.fn.fdate(e.chrono);
               }
             }, {
-              title: appui.tasks.lng.action,
+              title: bbn.tasks.lng.action,
               field: "action",
               encoded: false
             }]
@@ -843,9 +843,9 @@ appui.tasks = {
               v.push(id);
               $input.val(JSON.stringify(info.roles[prop].toJSON()));
               if ( insert ){
-                appui.fn.post(data.root + 'actions/role/insert', {id_task: info.id, role: prop, id_user: id}, function(d){
+                bbn.fn.post(data.root + 'actions/role/insert', {id_task: info.id, role: prop, id_user: id}, function(d){
                   if ( !d.success ){
-                    appui.fn.alert();
+                    bbn.fn.alert();
                   }
                 });
               }
@@ -865,15 +865,15 @@ appui.tasks = {
                 '&nbsp;',
                 $closer.click(function(){
                   if ( !info.can_change() ){
-                    appui.fn.alert(appui.tasks.lng.no_role_permission);
+                    bbn.fn.alert(bbn.tasks.lng.no_role_permission);
                     return;
                   }
                   var idx = $.inArray(id, info.roles.get(prop));
-                  appui.fn.log("remove", idx, id, info.roles.get(prop), prop);
+                  bbn.fn.log("remove", idx, id, info.roles.get(prop), prop);
                   if ( (idx > -1) ){
-                    appui.fn.post(data.root + 'actions/role/delete', {id_task: info.id, role: prop, id_user: id}, function(d){
+                    bbn.fn.post(data.root + 'actions/role/delete', {id_task: info.id, role: prop, id_user: id}, function(d){
                       if ( !d.success ){
-                        appui.fn.alert();
+                        bbn.fn.alert();
                       }
                       else{
                         $ele.show();
@@ -893,25 +893,25 @@ appui.tasks = {
           if ( prop === 'deadline' ){
             val = kendo.toString(val,"yyyy-MM-dd");
           }
-          appui.fn.post(data.root + 'actions/task/update', {
+          bbn.fn.post(data.root + 'actions/task/update', {
             id_task: info.id,
             prop: prop,
             val: val
           }, function(d){
             if ( !d.success ){
-              appui.fn.alert();
+              bbn.fn.alert();
             }
           })
         }
       });
       info = _init(info, ele);
-      tabnav.tabNav("setColor", appui.tasks.priority_colors[info.priority-1], "#FFF", tabstrip);
+      tabnav.tabNav("setColor", bbn.tasks.priority_colors[info.priority-1], "#FFF", tabstrip);
       if ( tabstrip.length ){
         tabstrip.tabNav({
           baseURL: "panel/",
           list: [{
             url: "main",
-            title: '<i class="fa fa-eye"> </i> &nbsp; ' + appui.tasks.lng.global_view,
+            title: '<i class="fa fa-eye"> </i> &nbsp; ' + bbn.tasks.lng.global_view,
             content: $("#tpl-task_tab_main").html(),
             static: true,
             callonce: function(ele){
@@ -919,7 +919,7 @@ appui.tasks = {
             }
           }, {
             url: "people",
-            title: '<i class="fa fa-users"> </i> &nbsp; ' + appui.tasks.lng.roles,
+            title: '<i class="fa fa-users"> </i> &nbsp; ' + bbn.tasks.lng.roles,
             content: $("#tpl-task_tab_roles").html(),
             static: true,
             callonce: function(ele){
@@ -932,7 +932,7 @@ appui.tasks = {
             disabled: !info.is_master()
           }, {
             url: "logs",
-            title: '<i class="fa fa-list"> </i> &nbsp; ' + appui.tasks.lng.journal,
+            title: '<i class="fa fa-list"> </i> &nbsp; ' + bbn.tasks.lng.journal,
             content: '<div class="tab-logs appui-full-height"></div>',
             static: true,
             callonce: function(ele){

@@ -5,7 +5,7 @@ var $tree,
       filterable: true,
       transport: {
         read: function(e){
-          appui.fn.post(data.root + "tree/" + (e.data.id ? e.data.id : data.cat), function(d){
+          bbn.fn.post(data.root + "tree/" + (e.data.id ? e.data.id : data.cat), function(d){
             $.each(d.data, function(i, v){
               d.data[i].text = v.text.toString();
               d.data[i].is_parent = v.num_children > 0 ? true : false;
@@ -73,15 +73,15 @@ if ( data.is_admin ){
             ds = this.dataItem(e.sourceNode),
             prev = $(e.sourceNode).prev(),
             parent = $(e.sourceNode).parent();
-        appui.fn.log(e);
-        appui.fn.post(data.root + 'actions/move', {
+        bbn.fn.log(e);
+        bbn.fn.post(data.root + 'actions/move', {
           dest: dd.id,
           src: ds.id
         }, function(d){
           if ( !d.res ){
             e.setValid(false);
             e.preventDefault();
-            appui.fn.alert(data.lng.problem_while_moving, appui.lng.error, 400);
+            bbn.fn.alert(data.lng.problem_while_moving, bbn.lng.error, 400);
             tree.dataSource.read();
           }
         });
