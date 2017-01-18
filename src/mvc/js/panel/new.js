@@ -377,7 +377,7 @@ var uploadedFiles = [],
                 }
               });
               createUpload();
-              uploadWrapper.redraw();
+              uploadWrapper.bbn("redraw", true);
             }
             else if ( (e.operation === 'remove') ){
               $.each(e.files, function(i, f){
@@ -424,7 +424,7 @@ $("input[name=link]", ele).keydown(function(e){
       '</div>' +
       '</td></tr>'
     );
-    $target.redraw();
+    $target.bbn("redraw", true);
     $input.val("");
     $li = $target.find("tr:last").parent().closest("tr");
     bbn.fn.post(data.root + "link_preview", {url: v, ref: data.ref}, function(d){

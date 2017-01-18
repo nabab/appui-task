@@ -116,7 +116,7 @@
 
       <div class="appui-line-breaker"> </div>
       <!--onclick="$(this).next().toggle().redraw().next().toggle().redraw()">-->
-      <div class="appui-form-label appui-p" onclick="$(this).next().toggle().next().toggle().parent().redraw()">
+      <div class="appui-form-label appui-p" onclick="bbn.fn.redraw($(this).parent(), true)">
         <i class="fa fa-edit"> </i> &nbsp; <?=_("Add a comment")?>
       </div>
 
