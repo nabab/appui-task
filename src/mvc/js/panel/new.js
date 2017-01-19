@@ -100,7 +100,7 @@ kendo.bind(ele, {
                   del();
                 }
                 else{
-                  bbn.fn.(data.confirm_delete, function(){
+                  bbn.fn.confirm(data.confirm_delete, function(){
                     del();
                   })
                 }

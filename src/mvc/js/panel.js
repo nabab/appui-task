@@ -28,7 +28,7 @@ $.each(data.groups, function(i, v){
 });
 
 // All the following vars will be always accessible
-bbn.tasks = {
+$.extend(bbn.tasks, {
   priority_colors: ['#F00', '#F40', '#F90', '#FC0', '#9B3', '#7A4', '#5A5', '#396', '#284', '#063'],
   // Translations
   lng: data.lng,
@@ -145,7 +145,7 @@ bbn.tasks = {
               make_me: function(e){
                 var mvvm = this,
                     role = $(e.item).attr("data-task-role");
-                if ( role ){
+                if ( role && bbn.tasks.roles[role] ){
                   bbn.fn.post(data.root + 'actions/role/insert', {id_task: info.id, role: bbn.tasks.roles[role], id_user: bbn.env.userId}, function(d){
                     if ( app.userUID ){
                       // @todo Do something to update the roles tab
@@ -948,4 +948,4 @@ bbn.tasks = {
       }
     }
   }
-};
+});
