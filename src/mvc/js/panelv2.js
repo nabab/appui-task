@@ -27,6 +27,10 @@ $.each(data.groups, function(i, v){
   });
 });
 
+Vue.component('bbn-task-pane', {
+
+});
+
 // All the following vars will be always accessible
 $.extend(bbn.tasks, {
   priority_colors: [
