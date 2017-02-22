@@ -144,7 +144,7 @@
         </div>
 
         <div class="appui-form-label">
-          <?=_("Comment")?><!--br>
+          <?=_("Comment")?><br>
           <select class="comment_type" data-role="dropdownlist" data-bind="events: {change: change_comment_type}">
             <option value="text"><?=_("Simple text")?></option>
             <option value="html"><?=_("Rich text")?></option>
@@ -152,7 +152,7 @@
             <option value="php"><?=_("PHP code")?></option>
             <option value="js"><?=_("JavaScript code")?></option>
             <option value="css"><?=_("CSS code")?></option>
-          </select><br-->
+          </select><br>
         </div>
         <div class="appui-form-field">
           <textarea class="k-textbox" name="comment" style="width: 100%"></textarea>
