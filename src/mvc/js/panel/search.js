@@ -126,7 +126,7 @@ gant_container.kendoGrid({
         return apst.userAvatarImg(e.id_user);
       },
       width: 50,
-      values: bbn.app.apst.users
+      values: appui.apst.users
     }, {
       field: "priority",
       title: bbn.tasks.lng.priority,

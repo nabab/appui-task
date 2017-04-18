@@ -19,7 +19,7 @@ var tabnav = $("#appui_task_tabnav").tabNav({
 
 // Populates the group array with the users for each as item
 $.each(data.groups, function(i, v){
-  data.groups[i].items = $.map($.grep(bbn.app.apst.users, function(user){
+  data.groups[i].items = $.map($.grep(appui.apst.users, function(user){
     return user.active && (user.id_group === v.id);
   }), function(user){
     user.id = user.value;
