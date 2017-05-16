@@ -35,7 +35,7 @@ var ds = new kendo.data.TreeListDataSource({
         }
       }
     }),
-    gant_container = $("div.appui-task-gantt", ele);
+    gant_container = $("div.bbn-task-gantt", ele);
 
 gant_container.kendoTreeList({
   pageable: {

@@ -31,20 +31,20 @@ var ds = new kendo.data.TreeListDataSource({
     }
   }
 });
-$("div.appui-task-gantt", ele).kendoTreeList({
+$("div.bbn-task-gantt", ele).kendoTreeList({
   pageable: {
     refresh: true
   },
   dataBound: function(e){
-    $(e.sender.element).find("tbody tr[class*='appui-task-pr']").each(function(){
+    $(e.sender.element).find("tbody tr[class*='bbn-task-pr']").each(function(){
       var $$ = $(this);
       for ( var i = 1; i <= 10; i++ ){
-        $$.removeClass("appui-task-pr" + i);
+        $$.removeClass("bbn-task-pr" + i);
       }
     });
     $(e.sender.element).find("tbody tr").each(function(){
       var dataItem = e.sender.dataItem(this);
-      $(this).addClass("appui-task-pr" + dataItem.get("priority"));
+      $(this).addClass("bbn-task-pr" + dataItem.get("priority"));
       bbn.fn.log("Adding class");
     })
   },

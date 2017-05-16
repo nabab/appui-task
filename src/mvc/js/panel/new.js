@@ -84,17 +84,17 @@ kendo.bind(ele, {
         if ( d.res ){
           dataItem.users.push(id_user);
           rolePicker.value("");
-          $("div.appui-task-roles-container").append(
-            $('<div class="appui-nl"/>').append(
+          $("div.bbn-task-roles-container").append(
+            $('<div class="bbn-nl"/>').append(
               /** @todo Change this! */
               '<span>' + apst.fnom(d.res)  + ' (' + frole + ')</span> &nbsp; ',
-              $('<i class="fa fa-times appui-p"/>').click(function(e){
+              $('<i class="fa fa-times bbn-p"/>').click(function(e){
                 var del = function(){
                   var idx = $.inArray(dataItem.users, id_user);
                   if ( idx > -1 ){
                     dataItem.users.splice(idx, 1);
                   }
-                  $(this).closest("div.appui-nl").remove();
+                  $(this).closest("div.bbn-nl").remove();
                 };
                 if ( id_user !== bbn.env.userId ){
                   del();
@@ -145,7 +145,7 @@ var $tree,
     };
 
 
-$tree = $("div.appui-task-usertree", ele).kendoTreeView({
+$tree = $("div.bbn-task-usertree", ele).kendoTreeView({
   dataSource: treeDS,
   expand: function(e){
     bbn.fn.log(e.node);
@@ -193,8 +193,8 @@ $("input:first", ele).keyup(function(){
 
 $li.draggable(dragCfg);
 
-$("div.appui-task-assigned", ele).droppable({
-  accept: ".appui-task-usertree li",
+$("div.bbn-task-assigned", ele).droppable({
+  accept: ".bbn-task-usertree li",
   hoverClass: "bbn-dropable-hover",
   activeClass: "bbn-dropable-active",
   drop: function(e, ui){
@@ -230,7 +230,7 @@ $("div.appui-task-assigned", ele).droppable({
         $ele.hide();
         $ul.find("li.k-item:last span").append(
           '&nbsp;',
-          $('<i class="fa fa-times appui-p"/>').data("id", id).data("ele", $ele).click(function(){
+          $('<i class="fa fa-times bbn-p"/>').data("id", id).data("ele", $ele).click(function(){
             var $$ = $(this);
             $$.data("ele").show();
             v = $input.val();
@@ -277,7 +277,7 @@ var ddTree = $("input[name=type]", ele).kendoDropDownTreeView({
 }).data("kendoDropDownTreeView");
 
 var uploadedFiles = [],
-    uploadWrapper = $("div.appui-task-upload-wrapper", ele),
+    uploadWrapper = $("div.bbn-task-upload-wrapper", ele),
     iconClass = function(file){
       if ( file.extension ){
         var ext = file.extension.substr(1),
@@ -328,7 +328,7 @@ var uploadedFiles = [],
             size = e.size;
           }
           if ( e.files && e.files[0] ){
-            var st = '<div class="k-progress"><table><tbody><tr><td class="appui-task-link-image">',
+            var st = '<div class="k-progress"><table><tbody><tr><td class="bbn-task-link-image">',
                 done = false;
             if ( e.files[0].imgs ){
               $.each(e.files[0].imgs, function(i, v){
@@ -342,8 +342,8 @@ var uploadedFiles = [],
             if ( !done ){
               st += '<i class="fa fa-' + iconClass(e.files[0]) + '"> </i>';
             }
-            st += '</td><td class="appui-task-link-title">' + e.name + '</td>' +
-              '<td class="appui-task-link-actions">' +
+            st += '</td><td class="bbn-task-link-title">' + e.name + '</td>' +
+              '<td class="bbn-task-link-actions">' +
                 '<span class="k-upload-pct">' + kendo.toString(size, 'n0') + ' ' + unit + '</span>' +
                 '<button class="k-button k-button-bare k-upload-action" type="button">' +
                 '<span class="k-icon k-i-close k-delete" title="' + data.lng.delete + '"></span>' +
@@ -404,7 +404,7 @@ $("input[name=link]", ele).keydown(function(e){
     e.preventDefault();
     var $input = $(this),
         v = $input.val(),
-        $target = $("table.appui-task-links-container", ele),
+        $target = $("table.bbn-task-links-container", ele),
         $li;
     if ( v.toLowerCase().indexOf("http") !== 0 ){
       v = "http://" + v;
@@ -413,9 +413,9 @@ $("input[name=link]", ele).keydown(function(e){
       '<tr><td class="k-file k-file-progress">' +
       '<div class="k-progress">' +
       '<table><tr>' +
-      '<td class="appui-task-link-image"><i class="fa fa-link"> </i></td>' +
-      '<td class="appui-task-link-title"><div><strong><a href="' + v + '">' + v + '</a></strong><br></div></td>' +
-      '<td class="appui-task-link-actions">' +
+      '<td class="bbn-task-link-image"><i class="fa fa-link"> </i></td>' +
+      '<td class="bbn-task-link-title"><div><strong><a href="' + v + '">' + v + '</a></strong><br></div></td>' +
+      '<td class="bbn-task-link-actions">' +
         '<span class="k-upload-pct"> </span>' +
         '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
           '<span title="' + data.lng.delete + '" class="k-icon k-i-close k-delete"></span>' +
@@ -434,7 +434,7 @@ $("input[name=link]", ele).keydown(function(e){
         if ( d.res.pictures ){
           $.each(d.res.pictures, function(i, v){
             if ( v.h96 ){
-              $li.find("td.appui-task-link-image").html('<img src="pm/image/tmp/' + data.ref + '/' + v.h96 + '">');
+              $li.find("td.bbn-task-link-image").html('<img src="pm/image/tmp/' + data.ref + '/' + v.h96 + '">');
               return false;
             }
           });
@@ -445,7 +445,7 @@ $("input[name=link]", ele).keydown(function(e){
         if ( d.res.desc ){
           st += d.res.desc;
         }
-        $li.find("td.appui-task-link-title div").html(st);
+        $li.find("td.bbn-task-link-title div").html(st);
       }
       else{
         $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");

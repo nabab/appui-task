@@ -13,7 +13,7 @@ var tabnav = $("#appui_task_tabnav").tabNav({
     load: true,
     fcolor: '#000',
     bcolor: '#FFF',
-    title: '<i class="fa fa-home appui-lg" title="' + bbn._("Nouvelle tâche / Recherche") + '"> </i>'
+    title: '<i class="fa fa-home bbn-lg" title="' + bbn._("Nouvelle tâche / Recherche") + '"> </i>'
   }]
 });
 
@@ -465,7 +465,7 @@ $.extend(bbn.tasks, {
         createUpload: function(files){
           var uploader = $('<input name="file" type="file"/>'),
               uploadedFiles = files ? files : [],
-              uploadWrapper = $("div.appui-task-upload-wrapper", ele);
+              uploadWrapper = $("div.bbn-task-upload-wrapper", ele);
           uploadWrapper.empty().append(uploader);
           uploader.kendoUpload({
             localization: {
@@ -491,7 +491,7 @@ $.extend(bbn.tasks, {
                 size = e.size;
               }
               if ( e.files && e.files[0] ){
-                var st = '<div class="k-progress"><table><tbody><tr><td class="appui-task-link-image">',
+                var st = '<div class="k-progress"><table><tbody><tr><td class="bbn-task-link-image">',
                     done = false;
                 if ( e.files[0].imgs ){
                   $.each(e.files[0].imgs, function(i, v){
@@ -505,8 +505,8 @@ $.extend(bbn.tasks, {
                 if ( !done ){
                   st += '<i class="fa fa-' + app.fileIconClass(e.files[0]) + '"> </i>';
                 }
-                st += '</td><td class="appui-task-link-title">' + e.name + '</td>' +
-                  '<td class="appui-task-link-actions">' +
+                st += '</td><td class="bbn-task-link-title">' + e.name + '</td>' +
+                  '<td class="bbn-task-link-actions">' +
                   '<span class="k-upload-pct">' + kendo.toString(size, 'n0') + ' ' + unit + '</span>' +
                   '<button class="k-button k-button-bare k-upload-action" type="button">' +
                   '<span class="k-icon k-i-close k-delete" title="Supprimer"></span>' +
@@ -523,7 +523,7 @@ $.extend(bbn.tasks, {
                 var idx = bbn.fn.search(uploadedFiles, "name", e.files[0].name);
                 if ( idx > -1 ){
                   e.preventDefault();
-                  uploadWrapper = $("div.appui-task-upload-wrapper", ele);
+                  uploadWrapper = $("div.bbn-task-upload-wrapper", ele);
                   bbn.fn.analyzeContent(uploadWrapper);
                   bbn.fn.alert(bbn.tasks.lng.file_exists);
                   return false;
@@ -591,7 +591,7 @@ $.extend(bbn.tasks, {
               e.preventDefault();
               var $input = $(this),
                   v = $input.val(),
-                  $target = $("table.appui-task-links-container", ele),
+                  $target = $("table.bbn-task-links-container", ele),
                   $li;
               if ( v.toLowerCase().indexOf("http") !== 0 ){
                 v = "http://" + v;
@@ -600,9 +600,9 @@ $.extend(bbn.tasks, {
                 '<tr><td class="k-file k-file-progress">' +
                 '<div class="k-progress">' +
                 '<table><tr>' +
-                '<td class="appui-task-link-image"><i class="fa fa-link"> </i></td>' +
-                '<td class="appui-task-link-title"><div><strong><a href="' + v + '">' + v + '</a></strong><br></div></td>' +
-                '<td class="appui-task-link-actions">' +
+                '<td class="bbn-task-link-image"><i class="fa fa-link"> </i></td>' +
+                '<td class="bbn-task-link-title"><div><strong><a href="' + v + '">' + v + '</a></strong><br></div></td>' +
+                '<td class="bbn-task-link-actions">' +
                 '<span class="k-upload-pct"> </span>' +
                 '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
                 '<span title="Supprimer" class="k-icon k-i-close k-delete"></span>' +
@@ -620,7 +620,7 @@ $.extend(bbn.tasks, {
                   if ( d.res.pictures ){
                     $.each(d.res.pictures, function(i, v){
                       if ( v.h96 ){
-                        $li.find("td.appui-task-link-image").html('<img src="pm/image/tmp/' + info.ref + '/' + v.h96 + '">');
+                        $li.find("td.bbn-task-link-image").html('<img src="pm/image/tmp/' + info.ref + '/' + v.h96 + '">');
                         return false;
                       }
                     });
@@ -631,7 +631,7 @@ $.extend(bbn.tasks, {
                   if ( d.res.desc ){
                     st += d.res.desc;
                   }
-                  bbn.fn.insertContent(st, $li.find("td.appui-task-link-title div"));
+                  bbn.fn.insertContent(st, $li.find("td.bbn-task-link-title div"));
                 }
                 else{
                   $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");
@@ -683,7 +683,7 @@ $.extend(bbn.tasks, {
               };
 
 
-          app.roleTree = $("div.appui-task-usertree", ele).kendoTreeView({
+          app.roleTree = $("div.bbn-task-usertree", ele).kendoTreeView({
             dataSource: treeDS,
             loadOnDemand: false,
             select: function (e) {
@@ -735,14 +735,14 @@ $.extend(bbn.tasks, {
               }
               for ( var n in roles ){
                 if ( $.inArray(dataItem.id, roles[n]) > -1 ){
-                  app.addUser(dataItem, $(".appui-task-" + n, ele)[0], false);
+                  app.addUser(dataItem, $(".bbn-task-" + n, ele)[0], false);
                 }
               }
             }
           });
 
-          $("div.appui-task-assigned", ele).droppable({
-            accept: ".appui-task-usertree li",
+          $("div.bbn-task-assigned", ele).droppable({
+            accept: ".bbn-task-usertree li",
             hoverClass: "bbn-dropable-hover",
             activeClass: "bbn-dropable-active",
             drop: function(e, ui){
@@ -846,7 +846,7 @@ $.extend(bbn.tasks, {
               $ul = $cont.find("ul"),
               $input = $cont.find("input"),
               prop = $input.attr("name"),
-              $container = $cont.closest(".appui-task-roles-container"),
+              $container = $cont.closest(".bbn-task-roles-container"),
               $ele = app.roleTree.findByUid(dataItem.get("uid"));
           if ( $ele.css("display") !== 'none' ){
             var v = info.roles.get(prop);
@@ -875,7 +875,7 @@ $.extend(bbn.tasks, {
             );
             $ele.hide();
             if ( prop !== 'managers' ){
-              var $closer = $('<i class="fa fa-times appui-p"/>');
+              var $closer = $('<i class="fa fa-times bbn-p"/>');
               $ul.find("li.k-item:last span:last").append(
                 '&nbsp;',
                 $closer.click(function(){
@@ -948,7 +948,7 @@ $.extend(bbn.tasks, {
           }, {
             url: "logs",
             title: '<i class="fa fa-list"> </i> &nbsp; ' + bbn.tasks.lng.journal,
-            content: '<div class="tab-logs appui-full-height"></div>',
+            content: '<div class="tab-logs bbn-full-height"></div>',
             static: true,
             callonce: function(ele){
               app.logsView();

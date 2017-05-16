@@ -1,6 +1,6 @@
 // Javascript Document
 // Splitter between searchbar and list
-$(".appui-task-splitter", ele).kendoSplitter({
+$(".bbn-task-splitter", ele).kendoSplitter({
   orientation: "vertical",
   panes: [
     { collapsible: false, resizable: false, size: "50px", scrollable: false },
@@ -9,7 +9,7 @@ $(".appui-task-splitter", ele).kendoSplitter({
 });
 
 var operators = kendo.ui.FilterCell.fn.options.operators,
-    gant_container = $("div.appui-task-gantt", ele),
+    gant_container = $("div.bbn-task-gantt", ele),
     ds = new kendo.data.DataSource({
       serverFiltering: true,
       serverSorting: true,
@@ -43,7 +43,7 @@ var operators = kendo.ui.FilterCell.fn.options.operators,
           var myData = {
                 selection: $("select[name=selection]", ele).data("kendoDropDownList").value()
               },
-              v = $(".appui-task-search-container input[name=title]", ele).val();
+              v = $(".bbn-task-search-container input[name=title]", ele).val();
           if ( v ){
             myData.title = v;
           }
@@ -189,7 +189,7 @@ gant_container.kendoGrid({
           icon = 'pause';
           color = 'grey';
         }
-        return '<i class="appui-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(bbn.tasks.options.states, "value", e.state, "text") + '"> </i>';
+        return '<i class="bbn-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(bbn.tasks.options.states, "value", e.state, "text") + '"> </i>';
       }
     }, {
       field: "last_action",
@@ -361,12 +361,12 @@ $(ele).closest(".ui-tabNav").tabNav("addCallback", function(cont){
 }, ele);
 
 var timer;
-$(".appui-task-search-container input[name=title]", ele).keyup(function(e){
+$(".bbn-task-search-container input[name=title]", ele).keyup(function(e){
   if ( timer ){
     clearTimeout(timer);
   }
   if ( e.key === "Enter" ){
-    $(this).closest(".appui-form-full").find("button").click();
+    $(this).closest(".bbn-form-full").find("button").click();
     setTimeout(function(){
       bbn.fn.get_popup().find("input[name=title]").focus();
     }, 200);
