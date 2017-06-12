@@ -6,9 +6,9 @@
 
 /** @var $ctrl \bbn\mvc\controller */
 if ( !isset($ctrl->post['search']) ){
-  $ctrl->combo('<i class="fa fa-home bbn-lg" title="'._("New task").' / '._("Search").'"> </i>', [
-    'root' => $ctrl->data['root'],
-    'lng' => $ctrl->get_model('./lng/search')
+  $ctrl->combo(_("New task").' / '._("Search"), [
+    'root' => APPUI_TASKS_ROOT.'panel/',
+    'lng' => $ctrl->get_model('../lng/search')
   ]);
 }
 else{

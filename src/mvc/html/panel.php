@@ -1,4 +1,13 @@
-<div class="bbn-full-height" id="appui_task_tabnav"></div>
+<div class="bbn-100 appui-tasks">
+<bbn-tabnav class="appui_task_tabnav" :scrollable="false" :autoload="true" url="panel/">
+  <bbn-tab url="search"
+           :static="true"
+           :load="true"
+           icon="fa fa-home"
+  ></bbn-tab>
+</bbn-tabnav>
+</div>
+<!--<div class="bbn-full-height" id="appui_task_tabnav"></div>-->
 
 <script type="text/x-kendo-template" id="tpl-task_tab_main">
   <div class="bbn-margin">
@@ -257,9 +266,11 @@
     </div>
   </div>
 </script>
+
 <script type="text/x-kendo-template" id="tpl-task_info_ppl">
 <li>#= apst.userFull(data) #</li>
 </script>
+
 <script type="text/x-kendo-template" id="tpl-task_form_new">
 	<form method="post">
     <label class="bbn-form-label" for="appui_task_form_title"><?=_("Title")?></label>

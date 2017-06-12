@@ -17,6 +17,7 @@ if ( !empty($ctrl->arguments) ){
   echo $ctrl->get_view('', 'php', false);
   $ctrl->obj->data = $ctrl->get_model();
   if ( isset($ctrl->obj->data['info']) ){
+    $ctrl->obj->data['root'] = APPUI_TASKS_ROOT;
     $ctrl->add_js()->set_title($ctrl->obj->data['info']['title']);
   }
   $ctrl->obj->url = 'tasks/'.$ctrl->data['id'];
