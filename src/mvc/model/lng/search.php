@@ -16,5 +16,8 @@ return [
   'start' => _("Start"),
   'last' => _("Last"),
   'dead' => _("Deadline"),
-  'see_task' => _("See task")
+  'see_task' => _("See task"),
+  'mine' => _("Mine"),
+  'my_groups' => _("My groups"),
+  'all' => _("All")
 ];
