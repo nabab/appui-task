@@ -8,7 +8,7 @@
 $s =& $model->inc->session;
 $pm = new \bbn\appui\tasks($model->db);
 return [
-  'root' => $model->data['root'],
+  'root' => APPUI_TASKS_ROOT,
   'roles' => \bbn\appui\tasks::get_options_ids('roles'),
   'states' => \bbn\appui\tasks::get_options_ids('states'),
   'options' => [
@@ -56,6 +56,12 @@ return [
     'sure_to_resume' => _("Are you sure you want to resume this task?"),
     'sure_to_close' => _("Are you sure you want to close this task?"),
     'sure_to_unfollow' => _("Are you sure you want to unfollow this task?"),
+    'simple_text' => _("Simple text"),
+    'rich_text' => _("Rich text"),
+    'markdown' => _("Markdown"),
+    'php_code' => _("PHP code"),
+    'javascript_code' => _("JavaScript code"),
+    'css_code' => _("CSS code"),
   ],
   'groups' => array_map(function($a) use ($s){
     if ( $a['id'] !== $s->get('user', 'id_group') ){

@@ -1,46 +1,13 @@
 /* LESS Document */
 
-#appui_task_tabnav{
+div.appui_task_tabnav{
   .k-file-success .k-progress {
     background-color: inherit;
   }
   div.bbn-task-search-container{
     overflow: hidden;
   }
-  .bbn-task-info-ppl{
-    padding: 1em;
-    overflow: auto;
-    div.bbn-block{
-      width: 30%;
-      img{
-        width: 16px;
-        height: auto;
-      }
-      ul{
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      .bbn-block{
-        white-space: nowrap;
-        width: inherit;
-      }
-    }
-    div.bbn-block:nth-child(even) {
-      padding-left: 5%;
-      padding-right: 5%;
-    }
-  }
-  .bbn-task-comments.ui.comments{
-    margin: 2em 0;
-    max-width: inherit;
-    *{
-      color: inherit !important;
-    }
-    a.media{
-      color: blue !important;
-    }
-  }
+
   padding: 0;
   .bbn-task-pr1{
     background-color: #F00 !important;
@@ -72,7 +39,7 @@
   .bbn-task-pr10{
     background-color: #063 !important;
   }
-  
+
   div.container-placeholder{
     position: absolute;
     bottom: 20px;
@@ -88,14 +55,63 @@
     left: 25%;
   }
 
-  .bbn-task-form-container{
-    input.title{
-      width: 100%;
+
+
+
+
+  .bbn-task-results-container{
+    .bbn-avatar {
+      img{
+        width: 36px;
+      }
     }
+  }}
+
+.appui-task-tab-main {
+  .bbn-task-info-ppl{
+    padding: 1em;
+    overflow: auto;
+    div.bbn-block{
+      width: 30%;
+      img{
+        width: 16px;
+        height: auto;
+      }
+      ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .bbn-block{
+        white-space: nowrap;
+        width: inherit;
+      }
+    }
+    div.bbn-block:nth-child(even) {
+      //padding-left: 5%;
+      //padding-right: 5%;
+    }
+  }
+  .bbn-task-comments {
+    margin: 2em 0;
+    max-width: inherit;
+    *{
+      color: inherit !important;
+    }
+    a.media{
+      color: blue !important;
+    }
+    .bbn-task-comment-author {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+  }
+  .bbn-task-form-container{
     .bbn-form-label{
       padding-right: 20px
     }
-    .bbn-form-field,.bbn-form-label{
+    .bbn-form-field, .bbn-form-label{
       margin-top: 1em;
       textarea{
         font-size: small;
@@ -145,6 +161,15 @@
       }
     }
   }
+  div.bbn-task-actions{
+    vertical-align: middle;
+    *{
+      vertical-align: middle;
+    }
+  }
+}
+
+.appui-task-tab-people {
   div.bbn-task-roles-container{
     div.k-header{
       font-size: 1em;
@@ -153,45 +178,36 @@
         padding: 0 1.5em;
       }
     }
-    div.k-content{
-      div.bbn-spacer{
-        width: 2%;
+    div.bbn-spacer{
+      width: 2%;
+    }
+    div.bbn-task-assigned{
+      width: 32%;
+      float: left;
+      div.k-header{
+        text-align: center;
       }
-      div.bbn-task-assigned{
-        width: 32%;
-        float: left;
-        div.k-header{
-          text-align: center;
-        }
-        div.k-content{
-          background-color: inherit;
-        }
-        ul{
-          list-style: none;
+      div.k-content{
+        background-color: inherit;
+        img{
+          width: 16px;
+          height: auto;
         }
       }
-      div.bbn-task-roles-desc{
-        right: 30px;
+      ul{
+        list-style: none;
       }
+    }
+    div.bbn-task-roles-desc{
+      right: 30px;
     }
   }
-  div.tab-logs{
-    .bbn-avatar {
-      img{
-        width: 36px;
-      }
+}
+
+.appui-task-tab-logs{
+  .bbn-avatar {
+    img{
+      width: 36px;
     }
   }
-  div.bbn-task-actions{
-    vertical-align: middle;
-    *{
-      vertical-align: middle;
-    }
-  }
-  .bbn-task-results-container{
-    .bbn-avatar {
-      img{
-        width: 36px;
-      }
-    }
-  }}
+}
