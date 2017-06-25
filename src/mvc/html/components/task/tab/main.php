@@ -92,14 +92,12 @@
           <bbn-button v-if="canHold()" @click="hold" title="<?=_("Put on hold")?>" icon="fa fa-pause"></bbn-button>
           <bbn-button v-if="canResume()" @click="resume" title="<?=_("Resume")?>" icon="fa fa-play"></bbn-button>
           <bbn-button v-if="canClose()" @click="close" title="<?=_("Close") ?>" icon="fa fa-check"></bbn-button>
-
-            <bbn-menu v-if="isAdded()"
-                      class="bbn-iblock"
-                      :source="rolesMenu"
-                      @select="makeMe"
-                      style="vertical-align: middle"
-            ></bbn-menu>
-
+          <bbn-menu v-if="isAdded()"
+                    class="bbn-iblock"
+                    :source="rolesMenu"
+                    @select="makeMe"
+                    style="vertical-align: middle"
+          ></bbn-menu>
           <bbn-button v-if="canPing()" @click="ping" title="<?=_("Ping workers")?>" icon="fa fa-hand-o-up"></bbn-button>
           <bbn-button v-if="isAdded()" @click="unmakeMe" title="<?=_("Unfollow the task")?>" icon="fa fa-user-times"></bbn-button>
         </div>
@@ -181,16 +179,14 @@
           </div>
         </div>
       </div>
-      <div class="content">
-        <div class="title bbn-lg" v-if="n.title" v-html="n.title"></div>
-        <div class="text">
-          <div v-if="n.content" v-html="n.content"></div>
-          <p v-for="m in n.medias">
-            <span style="margin-right: 2em">
-              <a class="media" v-text="m.title" @click="appui_tasks.download_media(m.id)"></a>
-            </span>
-          </p>
-        </div>
+      <div class="title bbn-lg" v-if="n.title" v-html="n.title"></div>
+      <div class="text">
+        <div v-if="n.content" v-html="n.content"></div>
+        <p v-for="m in n.medias">
+          <span style="margin-right: 2em">
+            <a class="media" v-text="m.title" @click="downloadMedia(m.id)"></a>
+          </span>
+        </p>
       </div>
     </div>
   </div>

@@ -78,7 +78,6 @@
             if ( !vm.roles[roleType] ){
               vm.roles[roleType] = [];
             }
-            bbn.fn.log(idUser, $.inArray(idUser, vm.roles[roleType]));
             if ( $.inArray(idUser, vm.roles[roleType]) === -1 ){
               bbn.fn.post(vm.appui_tasks.root + 'actions/role/insert', {
                 id_task: vm.id,

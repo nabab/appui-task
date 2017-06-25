@@ -166,14 +166,13 @@
         });
       },
       canPing(){
-        /** @todo ???? */
-        return true;
+        return this.isManager() && !this.isClosed();
       },
       ping(){
         /** @todo ??? */
       },
       canOpen(){
-        /** @todo ????? */
+        /** @todo ??? */
       },
       reopen(){
         /** @todo ???? */
@@ -181,28 +180,32 @@
       canChang(){
         return !this.isClosed() && this.isMaster();
       },
-
       makeMe(e){
-        /** @todo Fix it */
         const vm = this,
-            role = e.sender.options.dataSource[0].items[$(e.target).parent().index()].role;
+              role = e.sender.options.dataSource[0].items[$(e.target).parent().index()].role;
+        let exists = false;
+
         if ( role && vm.appui_tasks.roles[role] ){
-          bbn.fn.post(vm.appui_tasks.root + 'actions/role/insert', {
-            id_task: vm.id,
-            role: vm.appui_tasks.roles[role],
-            id_user: bbn.env.userId
-          }, (d) => {
-            if ( d.success ){
-              /*if ( app.userUID ){
-               // @todo Do something to update the roles tab
-               app.tree.findByUid(app.userUID);
-               }*/
-              if ( !vm.roles[role] ){
-                vm.roles[role] = [];
-              }
-              vm.roles[role].push(bbn.env.userId);
+          $.each(vm.roles, (i, v) => {
+            if ( $.inArray(bbn.env.userId, v) > -1 ){
+              exists = true;
+              return false;
             }
           });
+          if ( !exists ){
+            bbn.fn.post(vm.appui_tasks.root + 'actions/role/insert', {
+              id_task: vm.id,
+              role: vm.appui_tasks.roles[role],
+              id_user: bbn.env.userId
+            }, (d) => {
+              if ( d.success ){
+                if ( !vm.roles[role] ){
+                  vm.roles[role] = [];
+                }
+                vm.roles[role].push(bbn.env.userId);
+              }
+            });
+          }
         }
       },
       unmakeMe(){
@@ -218,7 +221,7 @@
           prop = "workers";
         }
         if ( prop ){
-          bbn.fn.confirm(vm.appui_tasks.lng.sure_to_unfollow, () => {
+          bbn.fn.confirm(bbn._('Are you sure you want to unfollow this task?'), () => {
             bbn.fn.post(vm.appui_tasks.root + "actions/role/delete", {
               id_task: vm.id,
               id_user: bbn.env.userId,
@@ -227,8 +230,6 @@
               const idx = $.inArray(bbn.env.userId, vm.roles[prop]);
               if ( idx > -1 ){
                 vm.roles[prop].splice(idx, 1);
-                /** @todo Fix it */
-                tabstrip.tabNav("disable", 1);
               }
             });
           });
@@ -265,6 +266,11 @@
       },
       hasComments(){
         return !!this.notes.length;
+      },
+      downloadMedia(id){
+        if ( id ){
+          bbn.fn.post_out(this.appui_tasks.root + 'download/media/' + id);
+        }
       },
       /** @todo It is not used but maybe think about redoing the comment part */
       changeCommentType(){
@@ -402,9 +408,11 @@
         if ( vm.titleTimeout ){
           clearTimeout(vm.titleTimeout);
         }
-        vm.titleTimeout = setTimeout(() => {
-          return vm.update('title', val);
-        }, 1000);
+        if ( val.length ){
+          vm.titleTimeout = setTimeout(() => {
+            vm.update('title', val);
+          }, 1000);
+        }
       },
       type(val){
         return this.update('type', val);

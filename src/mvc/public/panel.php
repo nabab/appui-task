@@ -41,4 +41,4 @@ else if ( !empty($ctrl->arguments) ){
 $ctrl->combo('<i class="fa fa-bug"> </i> &nbsp; '._("Projects"), true);
 $ctrl->obj->bcolor = '#000000';
 $ctrl->obj->fcolor = '#FFFFFF';
-$ctrl->obj->url = $ctrl->say_path();
+$ctrl->obj->url = APPUI_TASKS_ROOT . 'panel';

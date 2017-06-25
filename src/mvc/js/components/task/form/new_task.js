@@ -23,8 +23,9 @@
         setTimeout(function(){
           $(vm.$refs.new_task_form.$el).data('script', function(d){
             if ( d.success ){
+
               vm.$parent.close(vm.$parent.num-1);
-              bbn.fn.link(vm.root + 'tasks/' + d.success);
+              bbn.fn.link(vm.appui_tasks.root + 'panel/tasks/' + d.success);
             }
             else {
               bbn.fn.alert();

@@ -5,8 +5,9 @@
  **/
 
 /** @var $model \bbn\mvc\model*/
+$res = [];
 $pm = new \bbn\appui\tasks($model->db);
-$grid = new \bbn\appui\grid($model->db, $model->data, 'bbn_tasks', [
+/*$grid = new \bbn\appui\grid($model->db, $model->data, 'bbn_tasks', [
   'reference',
   'role',
   'last_action'
@@ -23,7 +24,7 @@ $ops = [
   'isnotnull' => 'IS NOT NULL',
   'isnull' => 'IS NULL',
 ];
-$res = [];
+
 $done = [];
 if ( isset($model->data['filter'], $model->data['filter']['filters']) ){
   $fs =& $model->data['filter']['filters'];
@@ -56,7 +57,7 @@ if ( !empty($model->data['sort']) ){
       $sort[$s['field']] = $s['dir'];
     }
   }
-}
+}*/
 if ( isset($model->data['selection']) ){
   if ( $model->data['selection'] === 'user' ){
     array_push($res, ['my_user', '=', $model->inc->user->get_id()]);
@@ -65,4 +66,8 @@ if ( isset($model->data['selection']) ){
     array_push($res, ['my_group', '=', $model->inc->user->get_group()]);
   }
 }
-return $pm->search($res, $sort, $model->data['skip'] ?? 0, $model->data['take'] ?? 25);
+if ( !empty($model->data['title']) ){
+  $res['title'] = $model->data['title'];
+}
+//return $pm->search($res, $sort, $model->data['skip'] ?? 0, $model->data['take'] ?? 25);
+return $pm->search($res, $sort, $model->data['skip'] ?? 0, $model->data['take'] ?? 500);

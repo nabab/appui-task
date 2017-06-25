@@ -64,7 +64,6 @@
     <div class="bbn-form-full">
       <bbn-tree class="bbn-task-usertree"
                 :source="appui_tasks.groups"
-                :transform-data="true"
                 ref="task_usertree"
                 :cfg="{
                   expand: liDraggable,
