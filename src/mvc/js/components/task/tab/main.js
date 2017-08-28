@@ -177,7 +177,7 @@
       reopen(){
         /** @todo ???? */
       },
-      canChang(){
+      canChange(){
         return !this.isClosed() && this.isMaster();
       },
       makeMe(e){
@@ -291,25 +291,43 @@
             $input = $(vm.$refs.link.$refs.input),
             $target = $(vm.$refs.links_container);
         let v = vm.$refs.link.$refs.input.value,
-            $li;
+            $li,
+            $code;
         if ( v.toLowerCase().indexOf("http") !== 0 ){
           v = "http://" + v;
         }
-        $target.append(
-          '<tr><td class="k-file k-file-progress">' +
-            '<div class="k-progress">' +
-              '<table><tr>' +
-                '<td class="bbn-task-link-image"><i class="fa fa-link"> </i></td>' +
-                '<td class="bbn-task-link-title"><div><strong><a href="' + v + '">' + v + '</a></strong><br></div></td>' +
-                '<td class="bbn-task-link-actions">' +
-                  '<span class="k-upload-pct"> </span>' +
-                  '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
-                    '<span title="Supprimer" class="k-icon k-i-close k-delete"></span>' +
-                  '</button>' +
-              '</tr></table>' +
-            '</div>' +
-          '</td></tr>'
+        $code = $(
+          '<tr class="link-row">' +
+            '<td class="k-file k-file-progress">' +
+              '<div class="k-progress">' +
+                '<table>' +
+                  '<tr>' +
+                    '<td class="bbn-task-link-image">' +
+                      '<i class="fa fa-link"> </i>' +
+                    '</td>' +
+                    '<td class="bbn-task-link-title">' +
+                      '<div>' +
+                        '<strong><a href="' + v + '">' + v + '</a></strong>' +
+                        '<br>' +
+                      '</div>' +
+                    '</td>' +
+                    '<td class="bbn-task-link-actions">' +
+                      '<span class="k-upload-pct"> </span>' +
+                      '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
+                        '<span title="Supprimer" class="k-icon k-i-close k-delete"></span>' +
+                      '</button>' +
+                  '</tr>' +
+                '</table>' +
+              '</div>' +
+            '</td>' +
+          '</tr>'
         );
+        if ( $("tr.link-row", $target).length ){
+          $("tr.link-row:last", $target).after($code);
+        }
+        else {
+          $target.append($code);
+        }
         bbn.fn.analyzeContent($target, true);
         $input.val("");
         $li = $target.find("tr:last").parent().closest("tr");
@@ -319,13 +337,13 @@
             if ( d.res.pictures ){
               $.each(d.res.pictures, (i, v) => {
                 if ( v.h96 ){
-                  $li.find("td.bbn-task-link-image").html('<img src="pm/image/tmp/' + info.ref + '/' + v.h96 + '">');
+                  $li.find("td.bbn-task-link-image").html('<img src="pm/image/tmp/' + vm.ref + '/' + v.h96 + '">');
                   return false;
                 }
               });
             }
-            let st = '<strong><a href="' + d.res.realurl + '">' +
-              ( d.res.title ? d.res.title : d.res.realurl ) +
+            let st = '<strong><a href="' + d.res.url + '">' +
+              ( d.res.title ? d.res.title : d.res.url ) +
               '</a></strong><br>';
             if ( d.res.desc ){
               st += d.res.desc;
@@ -336,48 +354,6 @@
             $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");
           }
         });
-      },
-      renderUpload(e){
-        /** @todo Fix it */
-        const vm = this;
-        let size,
-            unit;
-        if ( e.size > 5000000 ){
-          unit = 'Mb';
-          size = Math.floor(e.size / 1024 / 1024).toString();
-        }
-        else if ( e.size > 1024 ){
-          unit = 'Kb';
-          size = Math.floor(e.size / 1024).toString();
-        }
-        else{
-          unit = 'b';
-          size = e.size;
-        }
-        if ( e.files && e.files[0] ){
-          let st = '<div class="k-progress"><table><tbody><tr><td class="bbn-task-link-image">',
-              done = false;
-          if ( e.files[0].imgs ){
-            $.each(e.files[0].imgs, (i, v) => {
-              if ( v.h96 ){
-                st += '<img src="' + vm.appui_tasks.root + 'image/tmp/' + vm.ref + v.h96 + '">';
-                done = 1;
-                return false;
-              }
-            });
-          }
-          if ( !done ){
-            st += '<i class="fa fa-' + vm.fileIconClass(e.files[0]) + '"> </i>';
-          }
-          st += '</td><td class="bbn-task-link-title">' + e.name + '</td>' +
-            '<td class="bbn-task-link-actions">' +
-            '<span class="k-upload-pct">' + kendo.toString(size, 'n0') + ' ' + unit + '</span>' +
-            '<button class="k-button k-button-bare k-upload-action" type="button">' +
-            '<span class="k-icon k-i-close k-delete" title="Supprimer"></span>' +
-            '</button>' +
-            '</td></tr></tbody></table></div>';
-          return st;
-        }
       },
       fileIconClass(file){
         if ( file.extension ){

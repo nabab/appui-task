@@ -1,16 +1,17 @@
-div.bbn-task-roles-container{
-  div.k-header{
-    font-size: 1em;
-    height: auto;
-    div{
-      padding: 0 1.5em;
+.appui-task-tab-people {
+  div.bbn-task-roles-container{
+    div.k-header{
+      font-size: 1em;
+      height: auto;
+      div{
+        padding: 0 1.5em;
+      }
     }
-  }
-  div.k-content{
     div.bbn-spacer{
       width: 2%;
     }
     div.bbn-task-assigned{
+      min-height: 80px;
       width: 32%;
       float: left;
       div.k-header{
@@ -18,9 +19,16 @@ div.bbn-task-roles-container{
       }
       div.k-content{
         background-color: inherit;
+        img{
+          width: 16px;
+          height: auto;
+        }
       }
       ul{
         list-style: none;
+      }
+      &.ui-droppable-active {
+        background-color: lightgreen;
       }
     }
     div.bbn-task-roles-desc{

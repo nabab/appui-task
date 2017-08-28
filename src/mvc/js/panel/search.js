@@ -52,7 +52,7 @@
       },
       readTable(){
         const vm = this;
-        bbn.fn.post(vm.root + 'treelist', {
+        bbn.fn.post(vm.root + 'list', {
           selection: vm.typeSelected,
           title: vm.taskTitle
         }, (d) => {

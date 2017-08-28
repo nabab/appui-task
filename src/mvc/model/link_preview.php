@@ -11,12 +11,13 @@ if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model-
   $path = BBN_USER_PATH.'tmp/'.$model->data['ref'].'/';
   $root = strval(time());
   \bbn\file\dir::create_path($path.$root);
+
   foreach ($parsed as $parserName => $link) {
     if ( $parserName === 'general' ){
       $r = [
         'url' => $link->getUrl(),
         'realurl' => $link->getRealUrl(),
-        'title' => $link->getPageTitle(),
+        'title' => $link->getTitle(),
         'desc' => $link->getDescription(),
         'pictures' => []
       ];

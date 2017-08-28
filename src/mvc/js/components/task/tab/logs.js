@@ -22,7 +22,7 @@
         });
       },
       renderAvatar(val){
-        return '<bbn-initial user-id="' + val + '"></bbn-initial>';
+        return '<bbn-initial :user-id="' + val + '" :width="25" :height="25"></bbn-initial>';
       },
       renderUser(val){
         return this.appui_tasks.userName(val);

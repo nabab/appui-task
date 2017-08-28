@@ -17,7 +17,7 @@
 // msgfmt -o appui_task.mo appui_task.po
 
 define('APPUI_TASKS_ROOT', $ctrl->plugin_url('appui-task').'/');
-bindtextdomain('appui_task', BBN_LIB_PATH.'bbn/bbn-task/src/locale');
+bindtextdomain('appui_task', BBN_LIB_PATH.'bbn/appui-task/src/locale');
 setlocale(LC_ALL, "fr_FR.utf8");
 textdomain('appui_task');
 

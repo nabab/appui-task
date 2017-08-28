@@ -3,7 +3,7 @@
           style="width: 100% !important;"
           ref="new_task_form"
 >
-  <div class="bbn-full-height bbn-w-100">
+  <div class="bbn-w-100" v-bbn-fill-height>
     <div class="bbn-form-label"><?=_("Title")?></div>
     <div class="bbn-form-field">
       <bbn-input id="appui_task_form_title"
@@ -19,7 +19,7 @@
     <div class="bbn-form-field">
       <bbn-dropdowntreeview id="appui_task_form_type"
                             name="type"
-                            style="width: 100%"
+                            style="width: 60%"
                             required="required"
                             placeholder="<?=_('Select a type...')?>"
                             :source="appui_tasks.categories"

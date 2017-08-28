@@ -46,6 +46,7 @@
                  v-model="title"
                  @keydown.enter.prevent.stop
                  style="width: 100%"
+                 :disabled="!canChange()"
       ></bbn-input>
 
 
@@ -57,6 +58,7 @@
                               v-model="type"
                               :source="appui_tasks.categories"
                               data-value-field="id"
+                              :disabled="!canChange()"
         ></bbn-dropdowntreeview>
       </div>
 
@@ -64,7 +66,12 @@
       <div class="bbn-form-field">
         <div class="bbn-form-label" style="width: 140px">
           <div class="bbn-block">
-            <bbn-dropdown v-model="priority" name="priority" style="width: 80px" :source="[1,2,3,4,5,6,7,8,9]"></bbn-dropdown>
+            <bbn-dropdown v-model="priority"
+                          name="priority"
+                          style="width: 80px"
+                          :source="[1,2,3,4,5,6,7,8,9]"
+                          :disabled="!canChange()"
+            ></bbn-dropdown>
           </div>
         </div>
         <div class="bbn-form-field">
@@ -74,6 +81,7 @@
                             v-model="deadline"
                             @keydown="preventAll($event)"
                             format="yyyy-MM-dd"
+                            :disabled="!canChange()"
             ></bbn-datepicker>
             <bbn-button v-if="deadline"
                         @click="removeDeadline"
@@ -138,10 +146,11 @@
 
       <div class="bbn-form-label"><?=_("Files")?></div>
       <div class="bbn-form-field bbn-task-files-container">
-        <bbn-upload :save-url="appui_tasks.root + 'upload/' + ref"
-                    :remove-url="appui_tasks.root + 'unupload/' + ref"
+        <bbn-upload :save-url="appui_tasks.root + 'actions/file/upload/' + ref"
+                    :remove-url="appui_tasks.root + 'actions/file/unupload/' + ref"
                     :localization="{select: 'Fichiers / Images'}"
-                    :template="renderUpload"
+                    thumb-not="<?php echo BBN_STATIC_PATH.'img/not_available-generic.png'?>"
+                    thumb-waiting="<?php echo BBN_STATIC_PATH.'img/waiting-generic.png'?>"
         ></bbn-upload>
       </div>
 
@@ -183,7 +192,7 @@
       <div class="text">
         <div v-if="n.content" v-html="n.content"></div>
         <p v-for="m in n.medias">
-          <span style="margin-right: 2em">
+          <span style="margin-left: 2em">
             <a class="media" v-text="m.title" @click="downloadMedia(m.id)"></a>
           </span>
         </p>
