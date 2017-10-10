@@ -7,8 +7,10 @@
 /** @var $model \bbn\mvc\model*/
 $s =& $model->inc->session;
 $pm = new \bbn\appui\tasks($model->db);
+
 return [
   'root' => APPUI_TASKS_ROOT,
+  'templates' => $model->data['templates'],
   'roles' => \bbn\appui\tasks::get_options_ids('roles'),
   'states' => \bbn\appui\tasks::get_options_ids('states'),
   'options' => [
@@ -17,6 +19,7 @@ return [
     'cats' => \bbn\appui\tasks::cat_correspondances()
   ],
   'categories' => \bbn\appui\tasks::get_options_tree('cat'),
+  'usergroup' => $model->inc->user->get_group(),
   'lng' => [
     'title' => _("Title"),
     'type' => _("Type"),
@@ -75,5 +78,6 @@ return [
       $a['expanded'] = true;
     }
     return $a;
-  }, $pm->categories(), 1)
+  }, $pm->categories(), 1),
+  'media_types' => $model->inc->options->code_options('media', 'notes', 'appui')
 ];

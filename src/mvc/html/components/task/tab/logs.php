@@ -1,14 +1,26 @@
-<div class="appui-task-tab-logs bbn-w-100" v-bbn-fill-height>
-  <bbn-table class="bbn-h-100 bbn-w-100" :source="tableData">
-    <table>
-      <thead>
-        <tr>
-          <th field="id_user" render="renderAvatar" style="padding: 1px; width: 38px"></th>
-          <th field="id_user" style="width: 150px" render="renderUser"><?=_("User")?></th>
-          <th field="chrono" style="width: 150px" render="renderDate"><?=_("Date")?></th>
-          <th field="action"><?=_("Action")?></th>
-        </tr>
-      </thead>
-    </table>
+<div class="appui-task-tab-logs">
+  <bbn-table class="bbn-100"
+             :source="root + 'panel/logs'"
+             :data="{
+              id_task: source.id
+             }"
+  >
+    <bbn-column field="id_user"
+                :component="$options.components['appui-tasks-user-avatar']"
+                :width="38"
+    ></bbn-column>
+    <bbn-column title="<?=_("User")?>"
+                field="id_user"
+                :width="150"
+                :render="renderUser"
+    ></bbn-column>
+    <bbn-column title="<?=_("Date")?>"
+                field="chrono"
+                :width="150"
+                :render="renderDate"
+    ></bbn-column>
+    <bbn-column title="<?=_("Action")?>"
+                field="action"
+    ></bbn-column>
   </bbn-table>
 </div>

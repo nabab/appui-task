@@ -1,15 +1,11 @@
 (() => {
+  var cp;
   return {
-    beforeMount(){
-      const vm = this;
-      bbn.vue.setComponentRule(vm.appui_tasks.root + 'components/', 'appui');
-      bbn.vue.addComponent('task/form/new_task');
-      bbn.vue.unsetComponentRule();
+    created(){
+      cp = this;
     },
     data(){
-      const vm = this;
-      bbn.fn.log("BEFOER CRASH", vm);
-      return $.extend({}, vm.source, {
+      return {
         typeSelection: [{
           text: bbn._('Mine'),
           value: 'user'
@@ -22,104 +18,94 @@
         }],
         typeSelected: 'user',
         tableData: [],
-        taskTitle: '',
-        appui_tasks: $.extend({}, bbn.vue.closest(bbn.vue.closest(vm, '.bbn-tabnav'), '.bbn-tab').$children[0].$data)
-      });
+        taskTitle: ''
+      };
     },
     methods: {
       createTask(){
-        const vm = this;
-        if ( vm.taskTitle.length ){
-          vm.formNew();
+        if ( this.taskTitle.length ){
+          bbn.vue.closest(this, '.bbn-tab').popup().open({
+            title: bbn._('New task'),
+            width: 500,
+            height: 200,
+            component: this.$options.components['appui-tasks-create-form'],
+            source: {
+              title: this.taskTitle,
+              type: ''
+            }
+          });
         }
       },
-      formNew(){
-        const vm = this;
-        appui.popup({
-          title: bbn._('New task'),
-          width: 800,
-          height: 250,
-          component: 'appui-task-form-new_task',
-          source: {
-            appui_tasks: vm.appui_tasks,
-            taskTitle: vm.taskTitle
-          },
-          close(){
-            vm.taskTitle = '';
-            vm.readTable();
-          }
-        });
+      openTask(row){
+        bbn.fn.link(this.source.root + 'task/' + (typeof row === 'object' ? row.id : row) + '/main');
       },
-      readTable(){
-        const vm = this;
-        bbn.fn.post(vm.root + 'list', {
-          selection: vm.typeSelected,
-          title: vm.taskTitle
-        }, (d) => {
-          vm.tableData = d.tasks || [];
-        });
+      refreshTable(){
+        this.$refs.tasksTable.updateData();
       },
-      renderUserAvatar(val, text, row){
-        /** @todo Render a bbn-component into column */
-        return '<bbn-initial :user-id="' + val + '"></bbn-initial>';
+      renderPriority(row){
+        return '<div class="bbn-100" style="background-color: ' + appui.tasks.priority_colors[row.priority] + '">' + row.priority + '</div>';
       },
-      renderPriority(val, text, row){
-        /** @todo  */
-        return '<div class="bbn-h-100" style="background-color: ' + this.appui_tasks.priority_colors[val] + '">' + val + '</div>';
-      },
-      renderState(val, text, row){
-        const vm = this;
+      renderState(row){
         let icon,
             color;
-        if ( val === vm.appui_tasks.states.opened ){
+        if ( row.state === appui.tasks.source.states.opened ){
           icon = 'clock-o';
           color = 'orange';
         }
-        else if ( val === vm.appui_tasks.states.pending ){
+        else if ( row.state === appui.tasks.source.states.pending ){
           icon = 'clock-o';
           color = 'red';
         }
-        else if ( val === vm.appui_tasks.states.ongoing ){
+        else if ( row.state === appui.tasks.source.states.ongoing ){
           icon = 'play';
           color = 'blue';
         }
-        else if ( val === vm.appui_tasks.states.closed ){
+        else if ( row.state === appui.tasks.source.states.closed ){
           icon = 'check';
           color = 'green';
         }
-        else if ( val === vm.appui_tasks.states.holding ){
+        else if ( row.state === appui.tasks.source.states.holding ){
           icon = 'pause';
           color = 'grey';
         }
-        return '<i class="bbn-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(vm.appui_tasks.options.states, "value", val, "text") + '"> </i>';
+        return '<i class="bbn-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(appui.tasks.source.options.states, "value", row.state, "text") + '"> </i>';
       },
-      renderLast(val){
-        bbn.fn.log('vallll', val);
-        return moment(val).calendar(null, {sameElse: 'DD/MM/YYYY'});
+      renderLast(row){
+        return moment(row.last_action).calendar(null, {sameElse: 'DD/MM/YYYY'});
       },
-      renderRole(val){
-        return bbn.fn.get_field(this.appui_tasks.options.roles, "value", val, "text") || '-';
+      renderRole(row){
+        return bbn.fn.get_field(appui.tasks.source.options.roles, "value", row.role, "text") || '-';
       },
-      renderType(val){
-        return bbn.fn.get_field(this.appui_tasks.options.cats, "value", val, "text");
+      renderType(row){
+        return bbn.fn.get_field(appui.tasks.source.options.cats, "value", row.type, "text");
       },
-      renderDuration(val, text, row){
+      renderDuration(row){
         let start = moment(row.creation_date),
             end = moment(row.last_action);
-        if ( row.state === this.appui_tasks.states.closed ){
+        if ( row.state === appui.tasks.source.states.closed ){
           end = moment();
+          return end.from(start, true);
         }
-        return end.from(start, true);
+        if ( !row.duration ){
+          return bbn._('Inconnu');
+        }
+        if ( row.duration < 3600 ){
+          return Math.round(row.duration/60) + ' ' + bbn._('months');
+        }
+        if ( row.duration < (24*3600) ){
+          return Math.round(row.duration/3600) + ' ' + bbn._('hours');
+        }
+        return Math.round(row.duration/(24*3600)) + ' ' + bbn._('days');
       },
-      renderCreationDate(val){
-        return moment(val).calendar(null, {sameElse: 'DD/MM/YYYY'});
+      renderCreationDate(row){
+        return moment(row.creation_date).calendar(null, {sameElse: 'DD/MM/YYYY'});
       },
-      renderDeadline(val, text, row){
-        let t = moment(val),
+      renderDeadline(row){
+        let t = moment(row.deadline),
             now = moment(),
             diff = t.unix() - now.unix(),
             col = 'green',
-            d = row.state === this.appui_tasks.states.closed ? t.calendar(null, {sameElse: 'DD/MM/YYYY'}) : t.fromNow();
+            d = row.state === appui.tasks.source.states.closed ? t.calendar(null, {sameElse: 'DD/MM/YYYY'}) : t.fromNow();
 
         if ( !t.isValid() ){
           return '-';
@@ -137,30 +123,57 @@
           col = 'orange'
         }
         return '<strong style="color: ' + col + '">' + d + '</strong>';
-      },
-      renderId(val){
-        return '<a href="' + this.root + 'tasks/' + val + '/main" title="' + bbn._('See task') + '"><button class="k-button"><i class="fa fa-eye"></i></button></a>';
       }
     },
     watch: {
       typeSelected(val){
-        this.readTable();
+        this.refreshTable();
       },
       taskTitle(val){
-        const vm = this;
-        if ( vm.titleTimeout ){
-          clearTimeout(vm.titleTimeout);
+        if ( this.titleTimeout ){
+          clearTimeout(this.titleTimeout);
         }
-        vm.titleTimeout = setTimeout(() => {
-          vm.readTable();
+        this.titleTimeout = setTimeout(() => {
+          this.refreshTable();
         }, 500);
       }
     },
-    mounted(){
-      const vm = this;
-      vm.$nextTick(() => {
-        vm.readTable();
-      });
+    components: {
+      'appui-tasks-user-avatar': {
+        template: '#appui-tasks-user-avatar',
+        props: ['source'],
+        methods: {
+          userName: appui.tasks.userName,
+        }
+      },
+      'appui-tasks-create-form': {
+        template: '#appui-tasks-create-form',
+        props: ['source'],
+        data(){
+          return {
+            root: appui.tasks.source.root,
+            categories: appui.tasks.fullCategories
+          }
+        },
+        methods: {
+          refreshTable(d){
+            cp.taskTitle = '';
+            if ( d.success ){
+              cp.openTask(d.success);
+            }
+          }
+        },
+        mounted(){
+          this.$nextTick(() => {
+            bbn.fn.analyzeContent(this.$el, true);
+          });
+        },
+        updated(){
+          this.$nextTick(() => {
+            bbn.fn.analyzeContent(this.$el, true);
+          });
+        },
+      }
     }
   }
 })();

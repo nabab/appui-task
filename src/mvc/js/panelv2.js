@@ -948,7 +948,7 @@ $.extend(bbn.tasks, {
           }, {
             url: "logs",
             title: '<i class="fa fa-list"> </i> &nbsp; ' + bbn.tasks.lng.journal,
-            content: '<div class="tab-logs" v-bbn-fill-height></div>',
+            content: '<div class="tab-logs bbn-full-screen"></div>',
             static: true,
             callonce: function(ele){
               app.logsView();

@@ -1,9 +1,9 @@
-<bbn-form class="bbn-h-100"
+<bbn-form class="bbn-full-screen bbn-flex-height"
           :action="appui_tasks.root + 'actions/task/insert'"
           style="width: 100% !important;"
           ref="new_task_form"
 >
-  <div class="bbn-w-100" v-bbn-fill-height>
+  <div class="bbn-w-100 bbn-flex-fill">
     <div class="bbn-form-label"><?=_("Title")?></div>
     <div class="bbn-form-field">
       <bbn-input id="appui_task_form_title"

@@ -7,6 +7,11 @@
 /** @var $model \bbn\mvc\model*/
 $res = [];
 $pm = new \bbn\appui\tasks($model->db);
+if ( !empty($model->data['data']) ){
+  $model->data = \bbn\x::merge_arrays($model->data, $model->data['data']);
+  unset($model->data['data']);
+}
+
 /*$grid = new \bbn\appui\grid($model->db, $model->data, 'bbn_tasks', [
   'reference',
   'role',
@@ -70,4 +75,4 @@ if ( !empty($model->data['title']) ){
   $res['title'] = $model->data['title'];
 }
 //return $pm->search($res, $sort, $model->data['skip'] ?? 0, $model->data['take'] ?? 25);
-return $pm->search($res, $sort, $model->data['skip'] ?? 0, $model->data['take'] ?? 500);
+return $pm->search($res, $sort, $model->data['start'] ?? 0, $model->data['limit'] ?? 500);

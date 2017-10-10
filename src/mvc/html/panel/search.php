@@ -1,42 +1,107 @@
 <!-- HTML Document -->
-
-<bbn-splitter orientation="vertical" class="bbn-full-screen" ref="task_splitter">
+<bbn-splitter orientation="vertical"
+              ref="task_splitter"
+>
   <div class="bbn-task-search-container" style="height: 50px">
-    <div class="bbn-form-full bbn-c">
-      <div class="bbn-block" style="margin: 0 2em">
-        <bbn-dropdown name="selection" class="bbn-xl" :source="typeSelection" v-model="typeSelected"></bbn-dropdown>
-      </div>
-      <div class="bbn-block" v-bbn-fill-width>
-        <bbn-input name="title" class="bbn-xl bbn-w-100" ref="title" placeholder="<?=_("Search or Title for the new 
-        task")?>" v-model="taskTitle"></bbn-input>
-      </div>
-      <div class="bbn-block" style="margin: 0 2em">
-        <bbn-button class="bbn-xl" icon="fa fa-flag-checkered" @click="createTask"><?=_("Create a task")?></bbn-button>
-      </div>
+    <div class="bbn-task-toolbar bbn-middle bbn-h-100 bbn-flex-width">
+      <bbn-dropdown name="selection"
+                    class="bbn-xl"
+                    :source="typeSelection"
+                    v-model="typeSelected"
+                    style="margin: 0 2em"
+      ></bbn-dropdown>
+      <bbn-input name="title"
+                 class="bbn-xl bbn-flex-fill"
+                 ref="title"
+                 placeholder="<?=_("Search or Title for the new task")?>"
+                 v-model="taskTitle"
+      ></bbn-input>
+      <bbn-button class="bbn-xl"
+                  icon="fa fa-flag-checkered"
+                  @click="createTask"
+                  style="margin: 0 2em"
+                  :disabled="!taskTitle"
+      >
+        <?=_("Create a task")?>
+      </bbn-button>
     </div>
   </div>
-  <div class="bbn-task-results-container">
-    <bbn-table class="bbn-w-100" v-bbn-fill-height :source="tableData">
-      <table>
-        <thead>
-          <tr>
-            <th field="id_user" render="renderUserAvatar" style="width: 50px"><?=_("User")?></th>
-            <th field="priority" render="renderPriority"><?=_("Priority")?></th>
-            <th field="num_notes" style="width: 50px"><?=_("#Notes")?></th>
-            <th field="state" render="renderState" style="width: 50px; text-align: center"><?=_("States")
-            ?></th>
-            <th field="last_action" render="renderLast" style="width: 100px"><?=_("Last")?></th>
-            <th field="role" render="renderRole" style="width: 80px"><?=_("Role")?></th>
-            <th field="type" render="renderType" style="width: 150px; max-width: 300px"><?=_("Type")?></th>
-            <th field="duration" render="renderDuration" style="width: 70px"><?=_("Duration")?></th>
-            <th field="title"><?=_("Title")?></th>
-            <th field="reference"><?=_("Reference")?></th>
-            <th field="creation_date" render="renderCreationDate"><?=_("Creation Date")?></th>
-            <th field="deadline" render="renderDeadline"><?=_("Deadline")?></th>
-            <th field="id" render="renderId" style="width: 50px"></th>
-          </tr>
-        </thead>
-      </table>
+  <div class="bbn-flex-height">
+    <bbn-table class="bbn-flex-fill"
+               :source="source.root + 'list'"
+               :data="{
+                 selection: typeSelected,
+                 title: taskTitle
+               }"
+               ref="tasksTable"
+               :info="true"
+               :pageable="true"
+    >
+      <bbn-column title="<?=_("User")?>"
+                  field="id_user"
+                  :component="$options.components['appui-tasks-user-avatar']"
+                  :width="38"
+      ></bbn-column>
+      <bbn-column title="<?=_("Priority")?>"
+                  field="priority"
+                  :render="renderPriority"
+                  :width="54"
+      ></bbn-column>
+      <bbn-column title="<?=_("#Notes")?>"
+                  field="num_notes"
+                  :width="50"
+      ></bbn-column>
+      <bbn-column title="<?=_("States")?>"
+                  field="state"
+                  :render="renderState"
+                  :width="50"
+      ></bbn-column>
+      <bbn-column title="<?=_("Last")?>"
+                  field="last_action"
+                  :render="renderLast"
+                  :width="100"
+      ></bbn-column>
+      <bbn-column title="<?=_("Role")?>"
+                  field="role"
+                  :render="renderRole"
+                  :width="80"
+      ></bbn-column>
+      <bbn-column title="<?=_("Type")?>"
+                  field="type"
+                  :render="renderType"
+                  :width="150"
+                  style="max-width: 300px"
+      ></bbn-column>
+      <bbn-column title="<?=_("Duration")?>"
+                  field="duration"
+                  :render="renderDuration"
+                  :width="70"
+      ></bbn-column>
+      <bbn-column title="<?=_("Title")?>"
+                  field="title"
+      ></bbn-column>
+      <bbn-column title="<?=_("Reference")?>"
+                  field="reference"
+      ></bbn-column>
+      <bbn-column title="<?=_("Creation Date")?>"
+                  field="creation_date"
+                  :render="renderCreationDate"
+                  :width="100"
+      ></bbn-column>
+      <bbn-column title="<?=_("Deadline")?>"
+                  field="deadline"
+                  :render="renderDeadline"
+      ></bbn-column>
+      <bbn-column title=""
+                  :width="40"
+                  :buttons="[{
+                    title: '<?=_('See task')?>',
+                    icon: 'fa fa-eye',
+                    command: openTask,
+                    notext: true
+                  }]"
+                  fixed="right"
+      ></bbn-column>
     </bbn-table>
   </div>
 </bbn-splitter>

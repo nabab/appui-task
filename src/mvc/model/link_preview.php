@@ -19,7 +19,7 @@ if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model-
         'realurl' => $link->getRealUrl(),
         'title' => $link->getTitle(),
         'desc' => $link->getDescription(),
-        'pictures' => []
+        'picture' => ''
       ];
       $img = $link->getImage();
       $pictures = $link->getPictures();
@@ -36,14 +36,14 @@ if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model-
           file_put_contents($path.$root.'/'.$new, $saved);
           unset($saved);
           $img = new \bbn\file\image($path.$root.'/'.$new);
-          if ( $img->test() && ($imgs = $img->thumbs($path.$root)) ){
-            array_push($r['pictures'], array_map(function($a) use($path){
-              return substr($a, strlen($path));
-            }, $imgs));
+          if ( $img->test() && ($img->get_height() > 96) ){
+            $img->resize(false, 96)->save();
+            $r['picture'] = $root.'/'.$new;
+            break;
           }
         }
       }
-      return $r;
+      return ['data' => $r];
     }
   }
 }

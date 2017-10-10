@@ -9,9 +9,8 @@
     template: '#bbn-tpl-component-appui-task-tab-main',
     props: ['source'],
     data(){
-      const vm = this;
-      return $.extend({}, vm.source, {
-        creation: bbn.fn.fdate(vm.source.creation_date),
+      return {
+        creation: bbn.fn.fdate(this.source.creation_date),
         ref: moment().unix(),
         commentTypes: [{
           text: bbn._('Simple text'),
@@ -38,43 +37,106 @@
         commentType: 'bbn-textarea',
         commentText: '',
         commentTitle: '',
-        rolesMenu: [{
-          text: '<i class="fa fa-user-plus"></i>',
-          encoded: false,
-          items: [{
-            text: bbn._('Make me a supervisor'),
-            role: 'managers',
-            select(e){
-              return vm.makeMe(e);
-            }
-          }, {
-            text: bbn._('Make me a worker'),
-            role: 'workers',
-            select(e){
-              return vm.makeMe(e);
-            }
-          }, {
-            text: bbn._('Make me a viewer'),
-            role: 'viewers',
-            select(e){
-              return vm.makeMe(e);
-            }
-          }]
-        }],
-        showCommentAdder: false
-      });
+        commentLinks: [],
+        showCommentAdder: false,
+        root: appui.tasks.source.root,
+        categories: appui.tasks.fullCategories,
+        userId: bbn.env.userId,
+        mediaFileType: bbn.fn.get_field(appui.tasks.source.media_types, 'code', 'file', 'id'),
+        mediaLinkType: bbn.fn.get_field(appui.tasks.source.media_types, 'code', 'link', 'id')
+      }
     },
     computed: {
       stateText(){
-        const vm = this;
-        return bbn.fn.get_field(vm.appui_tasks.options.states, "value", vm.state, "text");
+        return bbn.fn.get_field(appui.tasks.source.options.states, "value", this.source.state, "text");
+      },
+      isAdded(){
+        return this.isManager || this.isWorker || this.isViewer;
+      },
+      isMaster(){
+        if ( this.isManager ){
+          return true;
+        }
+        return bbn.env.userId === this.source.id_user;
+      },
+      isViewer(){
+        return $.inArray(this.userId, this.source.roles.viewers) > -1;
+      },
+      isManager(){
+        return $.inArray(this.userId, this.source.roles.managers) > -1;
+      },
+      isWorker(){
+        return $.inArray(this.userId, this.source.roles.workers) > -1;
+      },
+      isHolding(){
+        return this.source.state === appui.tasks.source.states.holding;
+      },
+      isClosed(){
+        return this.source.state === appui.tasks.source.states.closed;
+      },
+      isOpened(){
+        return this.source.state === appui.tasks.source.states.opened;
+      },
+      isOngoing(){
+        return this.source.state === appui.tasks.source.states.ongoing;
+      },
+      isOpenedOrOngoing(){
+        return this.isOngoing || this.isOpened;
+      },
+      isActive(){
+        return !this.isClosed && !this.isHolding;
+      },
+      isHoldingOrOpened(){
+        return this.isHolding || this.isOpened;
+      },
+      canStart(){
+        return this.isOpened && (this.isManager || this.isWorker);
+      },
+      canHold(){
+        return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker);
+      },
+      canClose(){
+        return this.isManager && !this.isClosed;
+      },
+      canResume(){
+        return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker);
+      },
+      canPing(){
+        return this.isManager && !this.isClosed;
+      },
+      canOpen(){
+        /** @todo ??? */
+        return false;
+      },
+      canChange(){
+        return !this.isClosed && this.isMaster;
+      },
+      hasComments(){
+        return !!this.source.notes.length;
+      },
+      canMakeMe(){
+        /** @todo to create a configuration interface */
+        return (appui.tasks.source.usergroup === 1) ||
+          (appui.tasks.source.usergroup === 7) ||
+          (appui.tasks.source.usergroup === 18);
+      },
+      canUnmakeMe(){
+        if ( this.isManager && (this.numManagers < 2) ){
+          return false;
+        }
+        return true;
+      },
+      numManagers(){
+        if ( this.source.roles.managers ){
+          return this.source.roles.managers.length;
+        }
+        return 0;
       }
     },
     methods: {
       update(prop, val){
-        const vm = this;
-        bbn.fn.post(vm.appui_tasks.root + 'actions/task/update', {
-          id_task: vm.id,
+        bbn.fn.post(this.root + 'actions/task/update', {
+          id_task: this.source.id,
           prop: prop,
           val: val
         }, (d) => {
@@ -83,7 +145,7 @@
             return false;
           }
           if ( prop === 'state' ){
-            vm.state = val;
+            this.source.state = val;
           }
         });
       },
@@ -94,169 +156,128 @@
         }
       },
       removeDeadline(){
-        this.deadline = null;
+        this.source.deadline = null;
       },
-      isAdded(){
-        return this.isManager() || this.isWorker() || this.isViewer();
-      },
-      isMaster(){
-        if ( this.isManager() ){
-          return true;
-        }
-        return bbn.env.userId === this.id_user;
-      },
-      isViewer(){
-        const viewers = this.roles.viewers;
-        return viewers && ($.inArray(bbn.env.userId, viewers) > -1);
-      },
-      isManager(){
-        const managers = this.roles.managers;
-        return managers && ($.inArray(bbn.env.userId, managers) > -1);
-      },
-      isWorker(){
-        const workers = this.roles.workers;
-        return workers && ($.inArray(bbn.env.userId, workers) > -1);
-      },
-      isHolding(){
-        return this.state === appui.tasks.states.holding;
-      },
-      isClosed(){
-        return this.state === this.appui_tasks.states.closed;
-      },
-      isOpened(){
-        return this.state === appui.tasks.states.opened;
-      },
-      isOngoing(){
-        return this.state === appui.tasks.states.ongoing;
-      },
-      isOpenedOrOngoing(){
-        return this.isOngoing() || this.isOpened();
-      },
-      isActive(){
-        return !this.isClosed() && !this.isHolding();
-      },
-      isHoldingOrOpened(){
-        return this.isHolding() || this.isOpened();
-      },
-      canHold(){
-        return (this.isOngoing() || this.isOpened()) && (this.isManager() || this.isWorker());
+      start(){
+        bbn.fn.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
+          this.update('state', appui.tasks.source.states.ongoing);
+        });
       },
       hold(){
-        const vm = this;
         bbn.fn.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
-          vm.update('state', vm.appui_tasks.states.holding);
+          this.update('state', appui.tasks.source.states.holding);
         });
-      },
-      canClose(){
-        return this.isManager() && !this.isClosed();
       },
       close(){
-        const vm = this;
-        bbn.fn.confirm(vm.appui_tasks.lng.sure_to_close, () => {
-          vm.update(vm.id, 'state', vm.appui_tasks.states.closed);
+        bbn.fn.confirm(bbn._("Are you sure you want to close this task?"), () => {
+          this.update(this.source.id, 'state', appui.tasks.source.states.closed);
         });
-      },
-      canResume(){
-        return (this.isHolding() || this.isOpened()) && (this.isManager() || this.isWorker());
       },
       resume(){
-        const vm = this;
         bbn.fn.confirm(bbn._('Are you sure you want to resume this task?'), () => {
-          vm.update('state', vm.appui_tasks.states.ongoing);
+          this.update('state', appui.tasks.source.states.ongoing);
         });
       },
-      canPing(){
-        return this.isManager() && !this.isClosed();
-      },
       ping(){
-        /** @todo ??? */
-      },
-      canOpen(){
-        /** @todo ??? */
+        bbn.fn.confirm(bbn._('Are you sure you want to ping the task?'), () => {
+          bbn.fn.post(this.root + 'actions/task/ping', {id_task: this.source.id}, (d) => {
+            if ( d.success ){
+              appui.success(bbn._('Pinged'));
+            }
+            else {
+              appui.error(bbn._('Error'));
+            }
+          });
+        });
       },
       reopen(){
         /** @todo ???? */
       },
-      canChange(){
-        return !this.isClosed() && this.isMaster();
-      },
-      makeMe(e){
-        const vm = this,
-              role = e.sender.options.dataSource[0].items[$(e.target).parent().index()].role;
+      makeMe(role){
         let exists = false;
-
-        if ( role && vm.appui_tasks.roles[role] ){
-          $.each(vm.roles, (i, v) => {
-            if ( $.inArray(bbn.env.userId, v) > -1 ){
-              exists = true;
-              return false;
+        const setRole = () => {
+          return bbn.fn.post(this.root + 'actions/role/insert', {
+            id_task: this.source.id,
+            role: appui.tasks.source.roles[role],
+            id_user: bbn.env.userId
+          }, (d) => {
+            if ( d.success ){
+              this.source.roles[role].push(bbn.env.userId);
+              return true;
             }
           });
+        };
+        if ( this.canUnmakeMe && role && appui.tasks.source.roles[role] ){
+          $.each(this.source.roles, (i, v) => {
+            if ( $.inArray(bbn.env.userId, v) > -1 ){
+              exists = true;
+            }
+          });
+          if ( exists && this.unmakeMe(true) ){
+            setTimeout(() => {
+              setRole();
+            }, 100);
+          }
           if ( !exists ){
-            bbn.fn.post(vm.appui_tasks.root + 'actions/role/insert', {
-              id_task: vm.id,
-              role: vm.appui_tasks.roles[role],
-              id_user: bbn.env.userId
-            }, (d) => {
-              if ( d.success ){
-                if ( !vm.roles[role] ){
-                  vm.roles[role] = [];
-                }
-                vm.roles[role].push(bbn.env.userId);
-              }
-            });
+            setRole();
           }
         }
       },
-      unmakeMe(){
-        const vm = this;
+      unmakeMe(force){
         let prop;
-        if ( vm.isManager() ){
+        const removeRole = () => {
+          return bbn.fn.post(this.root + "actions/role/delete", {
+            id_task: this.source.id,
+            id_user: bbn.env.userId,
+            role: appui.tasks.source.roles[prop]
+          }, (d) => {
+            const idx = $.inArray(bbn.env.userId, this.source.roles[prop]);
+            if ( idx > -1 ){
+              this.source.roles[prop].splice(idx, 1);
+              return true;
+            }
+          });
+        };
+        if ( this.isManager ){
+          if ( this.numManagers < 2 ){
+            return false;
+          }
           prop = "managers";
         }
-        if ( vm.isViewer() ){
+        if ( this.isViewer ){
           prop = "viewers";
         }
-        if ( vm.isWorker() ){
+        if ( this.isWorker ){
           prop = "workers";
         }
         if ( prop ){
-          bbn.fn.confirm(bbn._('Are you sure you want to unfollow this task?'), () => {
-            bbn.fn.post(vm.appui_tasks.root + "actions/role/delete", {
-              id_task: vm.id,
-              id_user: bbn.env.userId,
-              role: vm.appui_tasks.roles[prop]
-            }, (d) => {
-              const idx = $.inArray(bbn.env.userId, vm.roles[prop]);
-              if ( idx > -1 ){
-                vm.roles[prop].splice(idx, 1);
-              }
-            });
-          });
+          if ( force ){
+            return removeRole();
+          }
+          bbn.fn.confirm(bbn._('Are you sure you want to unfollow this task?'), removeRole);
         }
       },
       addComment(e){
-				const vm = this;
         let v = {
-          id: vm.id,
-          title: vm.commentTitle,
-          text: vm.commentText,
-          ref: vm.$refs.ref.$refs.input.value
+          id: this.source.id,
+          title: this.commentTitle,
+          text: this.commentText,
+          ref: this.ref,
+          links: $.grep(this.commentLinks, (l) => {
+            return l.error === false;
+          })
         };
         if ( !v.title && !v.text ){
-          bbn.fn.alert(bbn.tasks.lng.no_comment_text)
+          bbn.fn.alert(bbn._("You have to enter a comment, a link, or a file"))
         }
         else{
-          bbn.fn.post(vm.appui_tasks.root + 'actions/comment/insert', v, (d) => {
+          bbn.fn.post(this.root + 'actions/comment/insert', v, (d) => {
             if ( d.success && d.comment ){
               d.comment.creation = new Date().getSQL(1);
               let m = new moment(d.comment.creation);
               d.comment.since = m.fromNow();
-              vm.notes.push(d.comment);
-              //app.createUpload();
-              vm.commentText = '';
-              vm.commentTitle = '';
-              vm.showCommentAdder = false;
+              this.source.notes.push(d.comment);
+              this.clearComment();
             }
             else{
               bbn.fn.alert();
@@ -264,22 +285,26 @@
           });
         }
       },
-      hasComments(){
-        return !!this.notes.length;
+      clearComment(){
+        this.showCommentAdder = false;
+        this.commentText = '';
+        this.commentTitle = '';
+        this.commentLinks = [];
+        this.commentType = 'bbn-textarea';
       },
+
       downloadMedia(id){
         if ( id ){
-          bbn.fn.post_out(this.appui_tasks.root + 'download/media/' + id);
+          bbn.fn.post_out(this.root + 'download/media/' + id);
         }
       },
       /** @todo It is not used but maybe think about redoing the comment part */
       changeCommentType(){
-        const vm = this;
         let mode;
-        vm.commentType = vm.$refs.comment_type.widget.value();
-        if ( (vm.commentType === 'bbn-code') && (mode = vm.$refs.comment_type.widget.dataItem()['mode']) ){
+        this.commentType = this.$refs.comment_type.widget.value();
+        if ( (this.commentType === 'bbn-code') && (mode = this.$refs.comment_type.widget.dataItem()['mode']) ){
           setTimeout(() => {
-            vm.$refs.comment.widget.setOption('mode', mode);
+            this.$refs.comment.widget.setOption('mode', mode);
           }, 500);
         }
       },
@@ -287,73 +312,55 @@
         return moment(d).fromNow();
       },
       linkEnter(){
-        const vm = this,
-            $input = $(vm.$refs.link.$refs.input),
-            $target = $(vm.$refs.links_container);
-        let v = vm.$refs.link.$refs.input.value,
-            $li,
-            $code;
-        if ( v.toLowerCase().indexOf("http") !== 0 ){
-          v = "http://" + v;
-        }
-        $code = $(
-          '<tr class="link-row">' +
-            '<td class="k-file k-file-progress">' +
-              '<div class="k-progress">' +
-                '<table>' +
-                  '<tr>' +
-                    '<td class="bbn-task-link-image">' +
-                      '<i class="fa fa-link"> </i>' +
-                    '</td>' +
-                    '<td class="bbn-task-link-title">' +
-                      '<div>' +
-                        '<strong><a href="' + v + '">' + v + '</a></strong>' +
-                        '<br>' +
-                      '</div>' +
-                    '</td>' +
-                    '<td class="bbn-task-link-actions">' +
-                      '<span class="k-upload-pct"> </span>' +
-                      '<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;">' +
-                        '<span title="Supprimer" class="k-icon k-i-close k-delete"></span>' +
-                      '</button>' +
-                  '</tr>' +
-                '</table>' +
-              '</div>' +
-            '</td>' +
-          '</tr>'
-        );
-        if ( $("tr.link-row", $target).length ){
-          $("tr.link-row:last", $target).after($code);
-        }
-        else {
-          $target.append($code);
-        }
-        bbn.fn.analyzeContent($target, true);
-        $input.val("");
-        $li = $target.find("tr:last").parent().closest("tr");
-        bbn.fn.post(vm.appui_tasks.root + "link_preview", {url: v, ref: vm.ref}, (d) => {
-          if ( d.res && d.res.realurl ){
-            $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-success");
-            if ( d.res.pictures ){
-              $.each(d.res.pictures, (i, v) => {
-                if ( v.h96 ){
-                  $li.find("td.bbn-task-link-image").html('<img src="pm/image/tmp/' + vm.ref + '/' + v.h96 + '">');
-                  return false;
-                }
-              });
+        const link = this.$refs.link.$refs.element.value,
+              idx = this.commentLinks.push({
+                inProgress: true,
+                url: link,
+                image: false,
+                desc: false,
+                title: false,
+                error: false
+              }) - 1;
+        bbn.fn.post(this.root + "link_preview", {
+          url: link,
+          ref: this.ref
+        }, (d) => {
+          if ( d.data && d.data.realurl ){
+            if ( d.data.picture ){
+              this.commentLinks[idx].image = d.data.picture;
             }
-            let st = '<strong><a href="' + d.res.url + '">' +
-              ( d.res.title ? d.res.title : d.res.url ) +
-              '</a></strong><br>';
-            if ( d.res.desc ){
-              st += d.res.desc;
+            if ( d.data.title ){
+              this.commentLinks[idx].title = d.data.title;
             }
-            bbn.fn.insertContent(st, $li.find("td.bbn-task-link-title div"));
+            if ( d.data.desc ){
+              this.commentLinks[idx].desc = d.data.desc;
+            }
+            this.commentLinks[idx].inProgress = false;
+            this.$refs.link.$refs.element.value = '';
           }
           else{
-            $li.find("td.k-file").removeClass("k-file-progress").addClass("k-file-error");
+            this.commentLinks[idx].error = true;
           }
         });
+      },
+      linkRemove(idx){
+        if ( idx !== undefined){
+          bbn.fn.confirm(bbn._('Are you sure you want to remove this link?'), () => {
+            this.commentLinks.splice(idx, 1);
+          });
+        }
+      },
+      hasFiles(medias){
+        if ( Array.isArray(medias) && this.mediaFileType ){
+          return bbn.fn.search(medias, 'type', this.mediaFileType) > -1;
+        }
+        return false;
+      },
+      hasLinks(medias){
+        if ( Array.isArray(medias) && this.mediaLinkType ){
+          return bbn.fn.search(medias, 'type', this.mediaLinkType) > -1;
+        }
+        return false;
       },
       fileIconClass(file){
         if ( file.extension ){
@@ -376,43 +383,34 @@
           return "file-o";
         }
         return false;
-      }
+      },
+      userName: appui.tasks.userName
     },
     watch: {
-      title(val){
-        const vm = this;
-        if ( vm.titleTimeout ){
-          clearTimeout(vm.titleTimeout);
+      'source.title'(val){
+        if ( this.titleTimeout ){
+          clearTimeout(this.titleTimeout);
         }
         if ( val.length ){
-          vm.titleTimeout = setTimeout(() => {
-            vm.update('title', val);
+          this.titleTimeout = setTimeout(() => {
+            this.update('title', val);
           }, 1000);
         }
       },
-      type(val){
+      'source.type'(val){
         return this.update('type', val);
       },
-      priority(val){
+      'source.priority'(val){
         return this.update('priority', val);
       },
-      deadline(val){
+      'source.deadline'(val){
         return this.update('deadline', moment(val).format('YYYY-MM-DD'));
       },
       showCommentAdder(val){
-        const vm = this;
-        if ( val === true ){
-          setTimeout(() => {
-            $(vm.$el).bbn('analyzeContent', true);
-          }, 50);
+        if ( val === false ){
+          this.clearComment();
         }
       }
-    },
-    mounted(){
-      const vm = this;
-      vm.$nextTick(() => {
-        $(vm.$el).bbn('analyzeContent', true);
-      });
     }
   });
 })();

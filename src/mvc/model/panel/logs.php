@@ -5,8 +5,12 @@
  **/
 
 /** @var $model \bbn\mvc\model*/
-if ( isset($model->data['id_task']) ){
-	$pm = new \bbn\appui\tasks($model->db);
-  return $pm->get_log($model->data['id_task']);
+if ( !empty($model->data['data']['id_task']) ){
+	$task = new \bbn\appui\tasks($model->db);
+	$d = $task->get_log($model->data['data']['id_task']);
+  return [
+    'data' => $d,
+    'total' => count($d)
+  ];
 }
 return [];

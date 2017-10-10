@@ -5,9 +5,7 @@
  **/
 
 /** @var $ctrl \bbn\mvc\controller */
-if ( isset($ctrl->post['ref']) ){
-  $path = BBN_USER_PATH.'tmp/'.$ctrl->post['ref'];
-  $files = \bbn\file\dir::get_files($path);
-  $ctrl->post['files'] = $files;
+if ( !empty($ctrl->post['id'] && $ctrl->post['ref']) ){
+  $ctrl->data = $ctrl->post;
+  $ctrl->obj = $ctrl->get_object_model($ctrl->data);
 }
-$ctrl->obj = $ctrl->get_object_model($ctrl->post);

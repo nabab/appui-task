@@ -9,34 +9,31 @@
     template: '#bbn-tpl-component-appui-task-tab-logs',
     props: ['source'],
     data(){
-      return $.extend({}, this.source, {
-        tableData: []
-      });
+      return {
+        root: appui.tasks.source.root
+      };
     },
     methods: {
-      readTable(){
-        /** @todo add sort chrono desc */
-        const vm = this;
-        bbn.fn.post(vm.appui_tasks.root + 'panel/logs', {id_task: vm.id}, (d) => {
-          vm.tableData = d.data || [];
-        });
+      renderUser(row){
+        return appui.tasks.userName(row.id_user);
       },
-      renderAvatar(val){
-        return '<bbn-initial :user-id="' + val + '" :width="25" :height="25"></bbn-initial>';
-      },
-      renderUser(val){
-        return this.appui_tasks.userName(val);
-      },
-      renderDate(val){
-        return bbn.fn.fdate(val);
+      renderDate(row){
+        return bbn.fn.fdate(row.chrono);
       }
     },
     mounted(){
-      const vm = this;
-      vm.readTable();
-      vm.$nextTick(() => {
-        $(vm.$el).bbn('analyzeContent', true);
+      this.$nextTick(() => {
+        bbn.fn.analyzeContent(this.$el, true);
       });
+    },
+    components: {
+      'appui-tasks-user-avatar': {
+        template: '#appui-tasks-user-avatar',
+        props: ['source'],
+        methods: {
+          userName: appui.tasks.userName,
+        }
+      }
     }
   });
 })();

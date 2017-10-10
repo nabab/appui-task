@@ -6,7 +6,7 @@
 
 /** @var $ctrl \bbn\mvc\controller */
 if ( !isset($ctrl->post['search']) ){
-  $ctrl->combo(_("New task").' / '._("Search"), [
+  $ctrl->combo('', [
     'root' => APPUI_TASKS_ROOT.'panel/',
     'lng' => $ctrl->get_model('../lng/search')
   ]);

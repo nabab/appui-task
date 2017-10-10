@@ -1,7 +1,6 @@
 .appui-task-tab-main {
   .bbn-task-info-ppl{
     padding: 1em;
-    overflow: auto;
     div.bbn-block{
       width: 30%;
       img{
@@ -24,8 +23,6 @@
     }
   }
   .bbn-task-comments {
-    margin: 2em 0;
-    max-width: inherit;
     *{
       color: inherit !important;
     }
@@ -37,62 +34,66 @@
       display: inline-block;
       vertical-align: middle;
     }
-
+    .k-header.title {
+      height: inherit;
+      font-size: inherit;
+      .title {
+        display: inline-block;
+        vertical-align: middle;
+        border-left: 1px solid white;
+        margin-left: 2em;
+        padding-left: 2em;
+      }
+    }
   }
   .bbn-task-form-container{
-    .bbn-form-label{
-      padding-right: 20px
-    }
-    .bbn-form-field, .bbn-form-label{
-      margin-top: 1em;
-      textarea{
-        font-size: small;
-        margin-top: 0.5em;
-        width: 100%;
-        min-height: 15em;
+    .bbn-task-form-adder {
+      .bbn-grid-fields {
+        padding: 0 5em;
       }
-    }
-    table.bbn-task-links-container{
-      padding-bottom: 0;
-      tr, li{
-        height: 120px;
-      }
-    }
-    .bbn-task-files-container, .bbn-task-links-container{
-      width: 100%;
-      .k-progress{
-        height: 100%;
-        width: 100%;
-      }
-      .k-upload-status{
-        top: 0px;
-        height: 100%;
-      }
-      table{
+      min-height: 450px;
+      table.bbn-task-links-container{
         padding-bottom: 0;
+        tr, li{
+          height: 120px;
+        }
+      }
+      .bbn-task-files-container, .bbn-task-links-container{
         width: 100%;
-        td{
-          padding-top: 2px;
-          padding-bottom: 2px;
-          vertical-align: middle;
+        .k-progress{
+          height: 100%;
+          width: 100%;
         }
-        td.bbn-task-link-image{
-          width: 150px;
-          padding-left: 15px;
-          i{
-            font-size: 64px;
+        .k-upload-status{
+          top: 0px;
+          height: 100%;
+        }
+        table{
+          padding-bottom: 0;
+          width: 100%;
+          td{
+            padding-top: 2px;
+            padding-bottom: 2px;
+            vertical-align: middle;
           }
-        }
-        td.bbn-task-link-title{
-          div{
-            overflow: hidden;
-            width: 100%;
-            height: 96px;
-            line-height: normal;
+          td.bbn-task-link-image{
+            width: 150px;
+            padding-left: 15px;
+            i{
+              font-size: 64px;
+            }
           }
-        }
-        td.bbn-task-link-actions{
-          width: 80px;
+          td.bbn-task-link-title{
+            div{
+              overflow: hidden;
+              width: 100%;
+              height: 96px;
+              line-height: normal;
+            }
+          }
+          td.bbn-task-link-actions{
+            width: 80px;
+          }
         }
       }
     }
