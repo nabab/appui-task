@@ -23,11 +23,7 @@
     }
   }
   .bbn-task-comments {
-    *{
-      color: inherit !important;
-    }
     a.media{
-      color: blue !important;
       cursor: pointer;
     }
     .bbn-task-comment-author {
@@ -37,63 +33,60 @@
     .k-header.title {
       height: inherit;
       font-size: inherit;
+      padding: 0 .3em 0 0 ;
       .title {
         display: inline-block;
         vertical-align: middle;
-        border-left: 1px solid white;
-        margin-left: 2em;
-        padding-left: 2em;
+        text-transform: uppercase;
       }
+      .hseparator {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 2em;
+        width: 1px;
+        height: 20px;
+      }
+    }
+    .bbn-task-link-title {
+      overflow: hidden;
+      height: 96px;
+      line-height: normal;
+      margin-left: 1em;
     }
   }
   .bbn-task-form-container{
     .bbn-task-form-adder {
       .bbn-grid-fields {
         padding: 0 5em;
+        > * {
+          white-space: normal;
+        }
       }
       min-height: 450px;
-      table.bbn-task-links-container{
-        padding-bottom: 0;
-        tr, li{
-          height: 120px;
+      .bbn-task-links-container {
+        .bbn-task-link-title {
+          margin-left: 15px;
         }
-      }
-      .bbn-task-files-container, .bbn-task-links-container{
-        width: 100%;
-        .k-progress{
-          height: 100%;
-          width: 100%;
-        }
-        .k-upload-status{
-          top: 0px;
-          height: 100%;
-        }
-        table{
-          padding-bottom: 0;
-          width: 100%;
-          td{
-            padding-top: 2px;
-            padding-bottom: 2px;
+        .bbn-task-link-image {
+          i {
+            font-size: 64px;
+          }
+          img {
             vertical-align: middle;
           }
-          td.bbn-task-link-image{
-            width: 150px;
-            padding-left: 15px;
-            i{
-              font-size: 64px;
-            }
-          }
-          td.bbn-task-link-title{
-            div{
-              overflow: hidden;
-              width: 100%;
-              height: 96px;
-              line-height: normal;
-            }
-          }
-          td.bbn-task-link-actions{
-            width: 80px;
-          }
+        }
+        .bbn-task-link-actions{
+          width: 80px;
+          justify-content: center;
+        }
+        .link-progress {
+          background-color: lightblue;
+        }
+        .link-success {
+          background-color: inherit;
+        }
+        .link-error {
+          background-color: lightcoral;
         }
       }
     }

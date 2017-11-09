@@ -15,15 +15,15 @@
     },
     computed: {
       isMaster(){
-        if ( this.isManager ){
-          return true;
-        }
         return bbn.env.userId === this.source.id_user;
       },
       isClosed(){
         return this.source.state === appui.tasks.source.states.closed;
       },
       isManager(){
+        if ( this.isMaster ){
+          return true;
+        }
         return this.source.roles.managers && ($.inArray(bbn.env.userId, this.source.roles.managers) > -1);
       },
       canChange(){

@@ -54,15 +54,15 @@
         return this.isManager || this.isWorker || this.isViewer;
       },
       isMaster(){
-        if ( this.isManager ){
-          return true;
-        }
         return bbn.env.userId === this.source.id_user;
       },
       isViewer(){
         return $.inArray(this.userId, this.source.roles.viewers) > -1;
       },
       isManager(){
+        if ( this.isMaster ){
+          return true;
+        }
         return $.inArray(this.userId, this.source.roles.managers) > -1;
       },
       isWorker(){
@@ -312,7 +312,8 @@
         return moment(d).fromNow();
       },
       linkEnter(){
-        const link = this.$refs.link.$refs.element.value,
+        const link = (this.$refs.link.$refs.element.value.indexOf('http') !== 0 ? 'http://' : '') +
+                this.$refs.link.$refs.element.value,
               idx = this.commentLinks.push({
                 inProgress: true,
                 url: link,

@@ -30,7 +30,12 @@ if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model-
         array_unshift($pictures, $img);
       }
       foreach ( $pictures as $pic ){
-        $saved = @file_get_contents($pic);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $pic);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $saved = curl_exec($curl);
         if ( $saved && (strlen($saved) > 1000) ){
           $new = \bbn\str::encode_filename(basename($pic), \bbn\str::file_ext(basename($pic)));
           file_put_contents($path.$root.'/'.$new, $saved);

@@ -5,9 +5,10 @@
  **/
 
 /** @var $ctrl \bbn\mvc\controller */
-if ( isset($ctrl->files['qqfile'], $ctrl->arguments[0]) &&
-        \bbn\str::is_integer($ctrl->arguments[0]) ){
-  $f =& $ctrl->files['qqfile'];
+if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
+  \bbn\str::is_integer($ctrl->arguments[0])
+){
+  $f =& $ctrl->files['file'];
   $path = BBN_USER_PATH.'tmp/'.$ctrl->arguments[0];
   $new = \bbn\str::encode_filename($f['name'], \bbn\str::file_ext($f['name']));
   $file = $path.'/'.$new;
@@ -57,7 +58,4 @@ if ( isset($ctrl->files['qqfile'], $ctrl->arguments[0]) &&
       array_push($ctrl->obj->files, $res);
     }
   }
-}
-if ( !isset($ctrl->obj->success) ){
-  $ctrl->obj->success = 0;
 }

@@ -36,6 +36,7 @@
                ref="tasksTable"
                :info="true"
                :pageable="true"
+               :sortable="true"
     >
       <bbn-column title="<?=_("User")?>"
                   field="id_user"

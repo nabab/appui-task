@@ -55,14 +55,15 @@ if ( isset($model->data['filter'], $model->data['filter']['filters']) ){
     }
   }
 }
+*/
 $sort = [];
-if ( !empty($model->data['sort']) ){
-  foreach ( $model->data['sort'] as $s ){
+if ( !empty($model->data['order']) ){
+  foreach ( $model->data['order'] as $s ){
     if ( isset($s['dir'], $s['field']) ){
       $sort[$s['field']] = $s['dir'];
     }
   }
-}*/
+}
 if ( isset($model->data['selection']) ){
   if ( $model->data['selection'] === 'user' ){
     array_push($res, ['my_user', '=', $model->inc->user->get_id()]);

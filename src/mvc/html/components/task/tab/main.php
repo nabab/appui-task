@@ -164,102 +164,94 @@
       >
         <bbn-scroll>
           <div class="bbn-grid-fields">
-            <div><?=_("Title")?></div>
-            <bbn-input name="comment_title"
-                       ref="comment_title"
-                       v-model="commentTitle"
-                       class="bbn-w-100"
-            ></bbn-input>
+              <div><?=_("Title")?></div>
+              <bbn-input name="comment_title"
+                         ref="comment_title"
+                         v-model="commentTitle"
+                         style="width: 100%"
+              ></bbn-input>
 
-            <div>
-              <?=_("Comment")?>
-              <br>
-              <bbn-dropdown class="comment_type"
-                            :source="commentTypes"
-                            ref="comment_type"
-                            @change="changeCommentType"
-              ></bbn-dropdown>
-            </div>
-            <div>
-              <component :is="commentType"
-                         name="comment"
-                         v-model="commentText"
-                         class="bbn-w-100"
-                         style="min-height: 200px"
-              ></component>
-            </div>
-
-            <div><?=_("Files")?></div>
-            <div class="bbn-task-files-container">
-              <bbn-upload :save-url="root + 'actions/file/upload/' + ref"
-                          :remove-url="root + 'actions/file/unupload/' + ref"
-                          :localization="{select: 'Fichiers / Images'}"
-              ></bbn-upload>
-            </div>
-
-            <div><?=_("Links")?></div>
-            <div class="k-widget k-upload k-header">
-              <div class="k-dropzone">
-                <bbn-input name="link"
-                           ref="link"
-                           @keydown.enter.prevent="linkEnter"
-                           class="bbn-w-100"
-                           placeholder="<?=_("Type or paste your URL and press Enter to valid")?>"
-                ></bbn-input>
+              <div>
+                <?=_("Comment")?>
+                <br>
+                <bbn-dropdown class="comment_type"
+                              :source="commentTypes"
+                              ref="comment_type"
+                              @change="changeCommentType"
+                ></bbn-dropdown>
               </div>
-              <table class="k-upload-files bbn-task-links-container" ref="links_container">
-                <tr v-for="(cl, idx) in commentLinks"
-                    class="link-row"
+              <div>
+                <component :is="commentType"
+                           name="comment"
+                           v-model="commentText"
+                           class="bbn-w-100"
+                           style="min-height: 200px"
+                ></component>
+              </div>
+
+              <div><?=_("Files")?></div>
+              <div class="bbn-task-files-container">
+                <bbn-upload :save-url="root + 'actions/file/upload/' + ref"
+                            :remove-url="root + 'actions/file/unupload/' + ref"
+                            :localization="{select: 'Fichiers / Images'}"
+                ></bbn-upload>
+              </div>
+
+              <div><?=_("Links")?></div>
+              <div>
+                <div>
+                  <bbn-input name="link"
+                             ref="link"
+                             @keydown.enter.prevent="linkEnter"
+                             placeholder="<?=_("Type or paste your URL and press Enter to valid")?>"
+                             style="width: 100%"
+                  ></bbn-input>
+                </div>
+                <div class="bbn-task-links-container k-widget"
+                     ref="links_container"
+                     v-if="commentLinks.length"
                 >
-                  <td :class="{
-                      'k-file': true,
-                      'k-file-progress': cl.inProgress && !cl.error,
-                      'k-file-success': !cl.inProgress && !cl.error,
-                      'k-file-error': cl.error
-                    }"
+                  <div v-for="(cl, idx) in commentLinks"
+                       :class="{
+                        'k-file': true,
+                        'link-progress': cl.inProgress && !cl.error,
+                        'link-success': !cl.inProgress && !cl.error,
+                        'link-error': cl.error
+                      }"
                   >
-                    <div class="k-progress">
-                      <table>
-                        <tr>
-                          <td class="bbn-task-link-image">
-                            <img v-if="cl.image" :src="root + '/image/tmp/' + ref + '/' + cl.image">
-                            <i v-else class="fa fa-link"> </i>
-                          </td>
-                          <td class="bbn-task-link-title">
-                            <div>
-                              <strong><a :href="cl.url" v-text="cl.title || cl.url"></a></strong>
-                              <br>
-                              <span v-if="cl.desc" v-text="cl.desc"></span>
-                            </div>
-                          </td>
-                          <td class="bbn-task-link-actions">
-                            <span class="k-upload-pct"> </span>
-                            <bbn-button class="k-button-bare k-upload-action"
-                                        style="display: inline-block;"
-                                        @click="linkRemove(idx)"
-                                        icon="fa fa-close"
-                                        title="<?=_('Supprimer')?>"
-                            >
-                            </bbn-button>
-                          </td>
-                        </tr>
-                      </table>
+                    <div class="bbn-flex-width">
+                      <div class="bbn-task-link-image">
+                        <img v-if="cl.image" :src="root + 'image/tmp/' + ref + '/' + cl.image">
+                        <i v-else class="fa fa-link"> </i>
+                      </div>
+                      <div class="bbn-task-link-title bbn-flex-fill">
+                        <strong><a :href="cl.url" v-text="cl.title || cl.url"></a></strong>
+                        <br>
+                        <span v-if="cl.desc" v-text="cl.desc"></span>
+                      </div>
+                      <div class="bbn-task-link-actions bbn-vmiddle">
+                        <bbn-button class="k-button-bare k-upload-action"
+                                    style="display: inline-block;"
+                                    @click="linkRemove(idx)"
+                                    icon="fa fa-close"
+                                    title="<?=_('Supprimer')?>"
+                        ></bbn-button>
+                      </div>
                     </div>
-                  </td>
-                </tr>
-              </table>
+                  </div>
+                </div>
+              </div>
+              <div class="bbn-grid-full bbn-vpadded">
+                <bbn-button class="bbn-task-comment-button"
+                            @click="addComment"
+                            icon="fa fa-save"
+                ><?=_('Save comment')?></bbn-button>
+                <bbn-button class="bbn-task-comment-button"
+                            @click="showCommentAdder = false"
+                            icon="fa fa-close"
+                ><?=_('Cancel')?></bbn-button>
+              </div>
             </div>
-            <div class="bbn-grid-full bbn-vpadded">
-              <bbn-button class="bbn-task-comment-button"
-                          @click="addComment"
-                          icon="fa fa-save"
-              ><?=_('Save comment')?></bbn-button>
-              <bbn-button class="bbn-task-comment-button"
-                          @click="showCommentAdder = false"
-                          icon="fa fa-close"
-              ><?=_('Cancel')?></bbn-button>
-            </div>
-          </div>
         </bbn-scroll>
       </div>
       <div class="bbn-task-comments bbn-flex-fill bbn-w-100" v-if="!showCommentAdder">
@@ -270,13 +262,13 @@
                  style="margin-bottom: 1em"
             >
               <div class="k-header title">
-                <div class="bbn-task-comment-author" style="margin: .2em; height: 40px">
+                <div class="bbn-task-comment-author" style="height: 40px">
                   <bbn-initial :user-id="n.id_user"
                                :title="userName(n.id_user)"
                   ></bbn-initial>
                 </div>
                 <div class="bbn-task-comment-author" style="margin-left: 5px">
-                  <a class="author" v-text="userName(n.id_user)"></a>
+                  <span class="author" v-text="userName(n.id_user)"></span>
                   <div class="metadata">
                     <div class="date" v-text="renderSince(n.creation)"></div>
                     <!--<div class="rating">
@@ -285,43 +277,70 @@
                     </div>-->
                   </div>
                 </div>
+                <hr class="hseparator">
                 <div v-if="n.title"
                      class="title"
                      v-html="n.title"
                 ></div>
               </div>
-              <div class="bbn-w-50 bbn-iblock">
+              <div class="bbn-padded bbn-w-100">
                 <div v-if="n.content"
                      v-html="n.content"
-                     class="bbn-padded"
+                     class="bbn-w-100"
                 ></div>
-              </div>
-              <div class="bbn-w-50 bbn-iblock">
-                <div v-if="hasFiles(n.medias)" class="bbn-w-100 k-block">
-                  <div class="k-header bbn-c"><?=_('Files')?></div>
-                  <div v-for="m in n.medias">
-                    <span v-if="m.type === mediaFileType" style="margin-left: 2em">
+                <div class="bbn-w-100" style="margin-top: 10px">
+                  <div v-if="hasLinks(n.medias)" class="bbn-w-100">
+                    <div v-for="m in n.medias" style="margin-top: 10px">
+                      <div v-if="m.type === mediaLinkType"
+                           style="margin-left: 2em"
+                           class="bbn-flex-width"
+                      >
+                        <div style="height: 96px">
+                          <img v-if="m.name" :src="root + 'image/' + m.id + '/' + m.name">
+                          <i v-else class="fa fa-link"></i>
+                        </div>
+                        <div class="bbn-task-link-title bbn-flex-fill bbn-vmiddle">
+                          <div>
+                            <strong>
+                              <a :href="m.content.url"
+                                 v-text="m.title || m.content.url"
+                                 target="_blank"
+                              ></a>
+                            </strong>
+                            <br>
+                            <a v-if="m.title"
+                               :href="m.content.url"
+                               v-text="m.content.url"
+                               target="_blank"
+                            ></a>
+                            <br v-if="m.title">
+                            <span v-if="m.content.description" v-text="m.content.description"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div v-if="hasFiles(n.medias)"
+                       class="bbn-w-100"
+                       :style="{'margin-top': (hasLinks(n.medias) ? 10 : 0) + 'px'}"
+                  >
+                    <div v-for="m in n.medias">
+                    <span v-if="m.type === mediaFileType"
+                          style="margin-left: 2em"
+                          :title="m.title"
+                    >
                       <a class="media"
-                         v-text="m.title"
                          @click="downloadMedia(m.id)"
-                      ></a>
+                      >
+                        <i class="fa fa-download" style="margin-right: 5px"></i>
+                        {{m.name}}
+                      </a>
                     </span>
+                    </div>
                   </div>
                 </div>
-                <div v-if="hasLinks(n.medias)" class="bbn-w-100 k-block">
-                  <div class="k-header bbn-c"><?=_('Links')?></div>
-                  <div v-for="m in n.medias">
-                    <span v-if="m.type === mediaLinkType" style="margin-left: 2em">
-                      <a class="media"
-                         v-text="m.title"
-                         @click="downloadMedia(m.id)"
-                      ></a>
-                    </span>
-                  </div>
-                </div>
               </div>
-
-
             </div>
           </div>
         </bbn-scroll>

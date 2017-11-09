@@ -11,7 +11,9 @@ if ( !empty($model->data['id']) && !empty($model->data['ref']) ){
   $model->data['files'] = \bbn\file\dir::get_files($path);
   if ( !empty($model->data['links']) ){
     foreach ( $model->data['links'] as $i => $link ){
-      $model->data['links'][$i]['image'] = $path.'/'.$model->data['links'][$i]['image'];
+      if ( !empty($link['image']) ){
+        $model->data['links'][$i]['image'] = $path.'/'.$model->data['links'][$i]['image'];
+      }
     }
   }
   $res = $pm->comment($model->data['id'], [
