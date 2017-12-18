@@ -4,7 +4,7 @@
  *
  **/
 /** @var $ctrl \bbn\mvc\controller */
-if ( count($ctrl->arguments) > 1 ){
+if ( \count($ctrl->arguments) > 1 ){
   switch ( $ctrl->arguments[0] ){
     case 'media':
       $path = BBN_DATA_PATH.'media/'.$ctrl->arguments[1];

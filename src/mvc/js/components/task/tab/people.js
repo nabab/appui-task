@@ -5,20 +5,19 @@
  * Time: 19:38
  */
 (() => {
-  Vue.component('appui-task-tab-people', {
-    template: '#bbn-tpl-component-appui-task-tab-people',
+  return {
     props: ['source'],
     data(){
       return {
-        groups: appui.tasks.groups
-      };
+        targetContainer: false
+      }
     },
     computed: {
       isMaster(){
         return bbn.env.userId === this.source.id_user;
       },
       isClosed(){
-        return this.source.state === appui.tasks.source.states.closed;
+        return this.source.state === this.tasks.source.states.closed;
       },
       isManager(){
         if ( this.isMaster ){
@@ -31,52 +30,55 @@
       },
       managers(){
         if ( this.source.roles && this.source.roles.managers ){
-          return $.map(this.source.roles.managers, (v) => {
+          return bbn.fn.order($.map(this.source.roles.managers, (v) => {
             let user = bbn.fn.get_row(bbn.users, 'value', v);
               return user || undefined;
-          });
+          }), 'text', 'asc');
         }
         return [];
       },
       viewers(){
         if ( this.source.roles && this.source.roles.viewers ){
-          return $.map(this.source.roles.viewers, (v) => {
+          return bbn.fn.order($.map(this.source.roles.viewers, (v) => {
             let user = bbn.fn.get_row(bbn.users, 'value', v);
             return user || undefined;
-          });
+          }), 'text', 'asc');
         }
         return [];
       },
       workers(){
         if ( this.source.roles && this.source.roles.workers ){
-          return $.map(this.source.roles.workers, (v) => {
+          return bbn.fn.order($.map(this.source.roles.workers, (v) => {
             let user = bbn.fn.get_row(bbn.users, 'value', v);
             return user || undefined;
-          });
+          }), 'text', 'asc');
         }
         return [];
+      },
+      groupsFiltered(){
+        return bbn.fn.order($.map(this.tasks.groups, (g) => {
+          let a = $.extend(true, {}, g);
+          a.items = a.items.filter((u) => {
+            let ok = true;
+            $.each(this.source.roles, (j, r) => {
+              if ( $.inArray(u.id, r) > -1 ){
+                ok = false;
+                return false;
+              }
+            });
+            return ok;
+          }, a.items);
+          if ( a.items.length ) {
+            return a;
+          }
+          return null;
+        }), 'text', 'asc');
       }
     },
     methods: {
-      filterTree(){
-        this.$refs.task_usertree.widget.filterNodes((node) => {
-          let ok = true;
-          if ( !node.children && this.source.roles ){
-            $.each(this.source.roles, (i, v) => {
-              if ( $.inArray(node.data.id, v) > -1 ){
-                ok = false;
-              }
-            });
-          }
-          return ok;
-        });
-      },
-      addUser(node, cont){
-        if ( this.canChange() ){
-          let idUser = node.data.id,
-              roleType = $(cont).attr("data-role-type"),
-              exists = false;
-
+      addUser(idUser, roleType){
+        if ( this.canChange ){
+          let exists = false;
           $.each(this.source.roles, (i, v) => {
             if ( $.inArray(idUser, v) > -1 ){
               exists = true;
@@ -84,90 +86,65 @@
             }
           });
           if ( !exists ){
-            if ( !this.source.roles[roleType] ){
-              this.source.roles[roleType] = [];
-            }
-            if ( $.inArray(idUser, this.source.roles[roleType]) === -1 ){
-              bbn.fn.post(appui.tasks.source.root + 'actions/role/insert', {
-                id_task: this.source.id,
-                role: roleType,
-                id_user: idUser
-              }, (d) => {
-                if ( d.success ){
-                  this.source.roles[roleType].push(idUser);
-                  this[roleType].push(bbn.fn.get_row(bbn.users, 'id', idUser));
-                  this.filterTree();
-                }
-                else {
-                  bbn.fn.alert(bbn._('Error during user insert'));
-                }
-              });
-            }
+            bbn.fn.post(this.tasks.source.root + 'actions/role/insert', {
+              id_task: this.source.id,
+              role: roleType,
+              id_user: idUser
+            }, (d) => {
+              if ( d.success ){
+                this.source.roles[roleType].push(idUser);
+              }
+              else {
+                bbn.fn.alert(bbn._('Error during user insert'));
+              }
+            });
           }
         }
       },
       removeUser(idUser, roleType){
-        if ( this.canChange() ){
+        if ( this.canChange ){
           bbn.fn.confirm(bbn._('Are you sure you want to remove this user?'), () => {
             const idx = $.inArray(idUser, this.source.roles[roleType]);
-            if ( !this.canChange() ){
-              bbn.fn.alert(bbn._('You have no right to modify the roles in this task'));
-              return;
-            }
             if ( (idx > -1) ){
-              bbn.fn.post(appui.tasks.source.root + 'actions/role/delete', {
+              bbn.fn.post(this.tasks.source.root + 'actions/role/delete', {
                 id_task: this.source.id,
                 role: roleType,
                 id_user: idUser
               }, (d) => {
                 if ( !d.success ){
-                  return bbn.fn.alert(bbn._('Error during the user remove'));
+                  bbn.fn.alert(bbn._('Error during the user remove'));
+                  return false;
                 }
                 this.source.roles[roleType].splice(idx, 1);
-                this[roleType].splice(bbn.fn.search(this[roleType], 'id', idUser), 1);
-                this.filterTree();
               });
             }
           });
         }
+        else {
+          bbn.fn.alert(bbn._('You have no right to modify the roles in this task'));
+          return false;
+        }
       },
-      liDraggable(){
-        $("div.bbn-task-usertree li", this.$el).draggable({
-          helper: "clone",
-          containment: $(this.$el),
-          scroll: false,
-          start(e){
-            let item = $.ui.fancytree.getNode(e.target);
-            if (  item.children && !item.data.expanded ){
-              item.setExpanded();
-            }
-          }
-        });
-      }
-    },
-    mounted(){
-      this.liDraggable();
-      //this.filterTree();
-      $("div.bbn-task-assigned", this.$el).droppable({
-        accept: ".bbn-task-usertree li",
-        hoverClass: "bbn-dropable-hover",
-        activeClass: "bbn-dropable-active",
-        drop(e, ui){
-          if ( this.canChange() ){
-            let item = $.ui.fancytree.getNode(ui.draggable[0]),
-                items = [];
-            if ( item.children && item.children.length ){
-              items = item.children;
-            }
-            else {
-              items.push(item);
-            }
-            $.each(items, (i, v) => {
-              this.addUser(v, $("div.k-content", e.target));
+      dragEnd(d, ev){
+        ev.preventDefault();
+        if ( this.targetContainer ){
+          if ( d.data.is_parent && Array.isArray(d.items) && d.items.length ){
+            $.each(d.items, (i, v) => {
+              if ( v.id ){
+                this.addUser(v.id, this.targetContainer);
+              }
             });
           }
+          else if ( !d.data.is_parent && d.data.id ){
+            this.addUser(d.data.id, this.targetContainer);
+          }
         }
-      });
+      },
+      setTargetContainer(role){
+        if ( this.canChange && this.$refs.task_usertree.realDragging && role ){
+          this.targetContainer = role;
+        }
+      }
     }
-  });
+  };
 })();

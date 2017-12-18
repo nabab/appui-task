@@ -9,7 +9,7 @@ if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model-
   $linkPreview = new \LinkPreview\LinkPreview($model->data['url']);
   $parsed = $linkPreview->getParsed();
   $path = BBN_USER_PATH.'tmp/'.$model->data['ref'].'/';
-  $root = strval(time());
+  $root = \strval(time());
   \bbn\file\dir::create_path($path.$root);
 
   foreach ($parsed as $parserName => $link) {
@@ -23,7 +23,7 @@ if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model-
       ];
       $img = $link->getImage();
       $pictures = $link->getPictures();
-      if ( !is_array($pictures) ){
+      if ( !\is_array($pictures) ){
         $pictures = [];
       }
       if ( !empty($img) ){
@@ -36,7 +36,7 @@ if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model-
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         $saved = curl_exec($curl);
-        if ( $saved && (strlen($saved) > 1000) ){
+        if ( $saved && (\strlen($saved) > 1000) ){
           $new = \bbn\str::encode_filename(basename($pic), \bbn\str::file_ext(basename($pic)));
           file_put_contents($path.$root.'/'.$new, $saved);
           unset($saved);

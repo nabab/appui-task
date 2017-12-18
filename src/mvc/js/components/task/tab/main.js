@@ -5,8 +5,7 @@
  * Time: 19:37
  */
 (() => {
-  Vue.component('appui-task-tab-main', {
-    template: '#bbn-tpl-component-appui-task-tab-main',
+  return {
     props: ['source'],
     data(){
       return {
@@ -39,16 +38,16 @@
         commentTitle: '',
         commentLinks: [],
         showCommentAdder: false,
-        root: appui.tasks.source.root,
-        categories: appui.tasks.fullCategories,
+        root: this.tasks.source.root,
+        categories: this.tasks.fullCategories,
         userId: bbn.env.userId,
-        mediaFileType: bbn.fn.get_field(appui.tasks.source.media_types, 'code', 'file', 'id'),
-        mediaLinkType: bbn.fn.get_field(appui.tasks.source.media_types, 'code', 'link', 'id')
+        mediaFileType: bbn.fn.get_field(this.tasks.source.media_types, 'code', 'file', 'id'),
+        mediaLinkType: bbn.fn.get_field(this.tasks.source.media_types, 'code', 'link', 'id')
       }
     },
     computed: {
       stateText(){
-        return bbn.fn.get_field(appui.tasks.source.options.states, "value", this.source.state, "text");
+        return bbn.fn.get_field(this.tasks.source.options.states, "value", this.source.state, "text");
       },
       isAdded(){
         return this.isManager || this.isWorker || this.isViewer;
@@ -69,16 +68,16 @@
         return $.inArray(this.userId, this.source.roles.workers) > -1;
       },
       isHolding(){
-        return this.source.state === appui.tasks.source.states.holding;
+        return this.source.state === this.tasks.source.states.holding;
       },
       isClosed(){
-        return this.source.state === appui.tasks.source.states.closed;
+        return this.source.state === this.tasks.source.states.closed;
       },
       isOpened(){
-        return this.source.state === appui.tasks.source.states.opened;
+        return this.source.state === this.tasks.source.states.opened;
       },
       isOngoing(){
-        return this.source.state === appui.tasks.source.states.ongoing;
+        return this.source.state === this.tasks.source.states.ongoing;
       },
       isOpenedOrOngoing(){
         return this.isOngoing || this.isOpened;
@@ -116,9 +115,9 @@
       },
       canMakeMe(){
         /** @todo to create a configuration interface */
-        return (appui.tasks.source.usergroup === 1) ||
-          (appui.tasks.source.usergroup === 7) ||
-          (appui.tasks.source.usergroup === 18);
+        return (this.tasks.source.usergroup === 1) ||
+          (this.tasks.source.usergroup === 7) ||
+          (this.tasks.source.usergroup === 18);
       },
       canUnmakeMe(){
         if ( this.isManager && (this.numManagers < 2) ){
@@ -160,22 +159,22 @@
       },
       start(){
         bbn.fn.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
-          this.update('state', appui.tasks.source.states.ongoing);
+          this.update('state', this.tasks.source.states.ongoing);
         });
       },
       hold(){
         bbn.fn.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
-          this.update('state', appui.tasks.source.states.holding);
+          this.update('state', this.tasks.source.states.holding);
         });
       },
       close(){
         bbn.fn.confirm(bbn._("Are you sure you want to close this task?"), () => {
-          this.update(this.source.id, 'state', appui.tasks.source.states.closed);
+          this.update(this.source.id, 'state', this.tasks.source.states.closed);
         });
       },
       resume(){
         bbn.fn.confirm(bbn._('Are you sure you want to resume this task?'), () => {
-          this.update('state', appui.tasks.source.states.ongoing);
+          this.update('state', this.tasks.source.states.ongoing);
         });
       },
       ping(){
@@ -198,7 +197,7 @@
         const setRole = () => {
           return bbn.fn.post(this.root + 'actions/role/insert', {
             id_task: this.source.id,
-            role: appui.tasks.source.roles[role],
+            role: this.tasks.source.roles[role],
             id_user: bbn.env.userId
           }, (d) => {
             if ( d.success ){
@@ -207,7 +206,7 @@
             }
           });
         };
-        if ( this.canUnmakeMe && role && appui.tasks.source.roles[role] ){
+        if ( this.canUnmakeMe && role && this.tasks.source.roles[role] ){
           $.each(this.source.roles, (i, v) => {
             if ( $.inArray(bbn.env.userId, v) > -1 ){
               exists = true;
@@ -229,7 +228,7 @@
           return bbn.fn.post(this.root + "actions/role/delete", {
             id_task: this.source.id,
             id_user: bbn.env.userId,
-            role: appui.tasks.source.roles[prop]
+            role: this.tasks.source.roles[prop]
           }, (d) => {
             const idx = $.inArray(bbn.env.userId, this.source.roles[prop]);
             if ( idx > -1 ){
@@ -384,8 +383,7 @@
           return "file-o";
         }
         return false;
-      },
-      userName: appui.tasks.userName
+      }
     },
     watch: {
       'source.title'(val){
@@ -413,5 +411,5 @@
         }
       }
     }
-  });
+  };
 })();

@@ -2,7 +2,23 @@
 (() => {
   return {
     created(){
-      appui.tasks = this;
+      let tasks = this,
+          mixins = [{
+            props: {
+              tasks: {
+                type: Object,
+                default(){
+                  return tasks;
+                }
+              }
+            }
+          }];
+      bbn.vue.setComponentRule(this.source.root + 'components/', 'appui');
+      bbn.vue.addComponent('task', mixins);
+      bbn.vue.addComponent('task/tab/main', mixins);
+      bbn.vue.addComponent('task/tab/people', mixins);
+      bbn.vue.addComponent('task/tab/logs', mixins);
+      bbn.vue.unsetComponentRule();
     },
     data(){
       return {
@@ -45,6 +61,7 @@
       groups(){
         let res = [];
         $.each(this.source.groups, (i, v) => {
+          v.expanded = false;
           v.items = $.map(
             $.grep(bbn.users, (user) => {
               return user.active && (user.id_group === v.id);

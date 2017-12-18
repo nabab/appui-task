@@ -36,17 +36,17 @@ if ( isset($model->data['filter'], $model->data['filter']['filters']) ){
   foreach ( $fs as $f ){
     if ( isset($f['field'], $f['operator'], $ops[$f['operator']]) ){
       if ( !isset($done[$f['field']]) ){
-        $done[$f['field']] = count($res);
+        $done[$f['field']] = \count($res);
         array_push($res, [$f['field'], $ops[$f['operator']], $f['value']]);
       }
       else{
-        if ( !is_array($res[$done[$f['field']]][2]) ){
+        if ( !\is_array($res[$done[$f['field']]][2]) ){
           $res[$done[$f['field']]][2] = [$res[$done[$f['field']]][2]];
         }
         array_push($res[$done[$f['field']]][2], $f['value']);
       }
     }
-    else if ( isset($f['filters']) && count($f['filters']) ){
+    else if ( isset($f['filters']) && \count($f['filters']) ){
       $r = [$f['filters'][0]['field'], '=', []];
       foreach ( $f['filters'] as $f2 ){
         array_push($r[2], $f2['value']);

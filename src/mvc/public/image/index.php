@@ -11,14 +11,14 @@ if ( isset($ctrl->arguments[0]) ){
   $is_tmp = false;
   if ( ($ctrl->arguments[0] === 'tmp') &&
     \bbn\str::is_uid($ctrl->arguments[1]) &&
-    defined('BBN_USER_PATH')
+    \defined('BBN_USER_PATH')
   ){
     array_shift($ctrl->arguments);
     $is_tmp = 1;
     $path = BBN_USER_PATH.'tmp/'.array_shift($ctrl->arguments).'/';
   }
   else if ( \bbn\str::is_uid($ctrl->arguments[0]) &&
-    defined('BBN_DATA_PATH')
+    \defined('BBN_DATA_PATH')
   ){
     $path = BBN_DATA_PATH.'media/'.$ctrl->arguments[0].'/';
     array_shift($ctrl->arguments);

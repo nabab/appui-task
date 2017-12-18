@@ -1,9 +1,7 @@
 <div class="appui-task-tab-logs">
   <bbn-table class="bbn-100"
-             :source="root + 'panel/logs'"
-             :data="{
-              id_task: source.id
-             }"
+             :source="tasks.source.root + 'panel/logs'"
+             :data="{id_task: source.id}"
   >
     <bbn-column field="id_user"
                 :component="$options.components['appui-tasks-user-avatar']"

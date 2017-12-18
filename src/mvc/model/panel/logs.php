@@ -10,7 +10,7 @@ if ( !empty($model->data['data']['id_task']) ){
 	$d = $task->get_log($model->data['data']['id_task']);
   return [
     'data' => $d,
-    'total' => count($d)
+    'total' => \count($d)
   ];
 }
 return [];

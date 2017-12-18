@@ -18,7 +18,8 @@
         }],
         typeSelected: 'user',
         tableData: [],
-        taskTitle: ''
+        taskTitle: '',
+        tasks: bbn.vue.closest(this, 'bbn-tabnav').$parent
       };
     },
     methods: {
@@ -43,46 +44,46 @@
         this.$refs.tasksTable.updateData();
       },
       renderPriority(row){
-        return '<div class="bbn-100" style="background-color: ' + appui.tasks.priority_colors[row.priority] + '">' + row.priority + '</div>';
+        return '<div class="bbn-100" style="background-color: ' + this.tasks.priority_colors[row.priority] + '">' + row.priority + '</div>';
       },
       renderState(row){
         let icon,
             color;
-        if ( row.state === appui.tasks.source.states.opened ){
+        if ( row.state === this.tasks.source.states.opened ){
           icon = 'clock-o';
           color = 'orange';
         }
-        else if ( row.state === appui.tasks.source.states.pending ){
+        else if ( row.state === this.tasks.source.states.pending ){
           icon = 'clock-o';
           color = 'red';
         }
-        else if ( row.state === appui.tasks.source.states.ongoing ){
+        else if ( row.state === this.tasks.source.states.ongoing ){
           icon = 'play';
           color = 'blue';
         }
-        else if ( row.state === appui.tasks.source.states.closed ){
+        else if ( row.state === this.tasks.source.states.closed ){
           icon = 'check';
           color = 'green';
         }
-        else if ( row.state === appui.tasks.source.states.holding ){
+        else if ( row.state === this.tasks.source.states.holding ){
           icon = 'pause';
           color = 'grey';
         }
-        return '<i class="bbn-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(appui.tasks.source.options.states, "value", row.state, "text") + '"> </i>';
+        return '<i class="bbn-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(this.tasks.source.options.states, "value", row.state, "text") + '"> </i>';
       },
       renderLast(row){
         return moment(row.last_action).calendar(null, {sameElse: 'DD/MM/YYYY'});
       },
       renderRole(row){
-        return bbn.fn.get_field(appui.tasks.source.options.roles, "value", row.role, "text") || '-';
+        return bbn.fn.get_field(this.tasks.source.options.roles, "value", row.role, "text") || '-';
       },
       renderType(row){
-        return bbn.fn.get_field(appui.tasks.source.options.cats, "value", row.type, "text");
+        return bbn.fn.get_field(this.tasks.source.options.cats, "value", row.type, "text");
       },
       renderDuration(row){
         let start = moment(row.creation_date),
             end = moment(row.last_action);
-        if ( row.state === appui.tasks.source.states.closed ){
+        if ( row.state === this.tasks.source.states.closed ){
           end = moment();
           return end.from(start, true);
         }
@@ -105,7 +106,7 @@
             now = moment(),
             diff = t.unix() - now.unix(),
             col = 'green',
-            d = row.state === appui.tasks.source.states.closed ? t.calendar(null, {sameElse: 'DD/MM/YYYY'}) : t.fromNow();
+            d = row.state === this.tasks.source.states.closed ? t.calendar(null, {sameElse: 'DD/MM/YYYY'}) : t.fromNow();
 
         if ( !t.isValid() ){
           return '-';
@@ -143,7 +144,9 @@
         template: '#appui-tasks-user-avatar',
         props: ['source'],
         methods: {
-          userName: appui.tasks.userName,
+          userName(id){
+            return cp.tasks.userName(id);
+          },
         }
       },
       'appui-tasks-create-form': {
@@ -151,8 +154,8 @@
         props: ['source'],
         data(){
           return {
-            root: appui.tasks.source.root,
-            categories: appui.tasks.fullCategories
+            root: cp.tasks.source.root,
+            categories: cp.tasks.fullCategories
           }
         },
         methods: {
@@ -162,17 +165,7 @@
               cp.openTask(d.success);
             }
           }
-        },
-        mounted(){
-          this.$nextTick(() => {
-            bbn.fn.analyzeContent(this.$el, true);
-          });
-        },
-        updated(){
-          this.$nextTick(() => {
-            bbn.fn.analyzeContent(this.$el, true);
-          });
-        },
+        }
       }
     }
   }

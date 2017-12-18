@@ -5,8 +5,7 @@
  * Time: 12:06
  */
 (() => {
-  Vue.component('appui-task', {
-    template: '#bbn-tpl-component-appui-task',
+  return  {
     props: ['source'],
     created(){
       if ( this.source.roles ){
@@ -21,5 +20,5 @@
         }
       }
     }
-  });
+  }
 })();

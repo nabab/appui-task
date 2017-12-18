@@ -11,7 +11,7 @@
           </div>
           <div class="bbn-block">
             <bbn-initial :user-id="source.id_user"></bbn-initial>
-            <span v-text="userName(source.id_user)"></span>
+            <span v-text="tasks.userName(source.id_user)"></span>
             <br>
             <span v-text="creation"></span>
           </div>
@@ -21,7 +21,7 @@
           <ul class="bbn-block">
             <li v-for="r in source.roles.workers">
               <bbn-initial :user-id="r"></bbn-initial>
-              <span v-text="userName(r)"></span>
+              <span v-text="tasks.userName(r)"></span>
             </li>
           </ul>
         </div>
@@ -30,7 +30,7 @@
           <ul class="bbn-block">
             <li v-for="r in source.roles.managers">
               <bbn-initial :user-id="r"></bbn-initial>
-              <span v-text="userName(r)"></span>
+              <span v-text="tasks.userName(r)"></span>
             </li>
           </ul>
         </div>
@@ -264,11 +264,11 @@
               <div class="k-header title">
                 <div class="bbn-task-comment-author" style="height: 40px">
                   <bbn-initial :user-id="n.id_user"
-                               :title="userName(n.id_user)"
+                               :title="tasks.userName(n.id_user)"
                   ></bbn-initial>
                 </div>
                 <div class="bbn-task-comment-author" style="margin-left: 5px">
-                  <span class="author" v-text="userName(n.id_user)"></span>
+                  <span class="author" v-text="tasks.userName(n.id_user)"></span>
                   <div class="metadata">
                     <div class="date" v-text="renderSince(n.creation)"></div>
                     <!--<div class="rating">

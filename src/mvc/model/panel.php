@@ -66,12 +66,7 @@ return [
     'javascript_code' => _("JavaScript code"),
     'css_code' => _("CSS code"),
   ],
-  'groups' => array_map(function($a) use ($s){
-    if ( $a['id'] !== $s->get('user', 'id_group') ){
-      $a['expanded'] = false;
-    }
-    return $a;
-  }, $model->get_model('usergroup/picker')),
+  'groups' => $model->get_model('usergroup/picker'),
   'categories' => $model->inc->options->map(function($a){
     $a['is_parent'] = !empty($a['items']);
     if ( $a['is_parent'] ){

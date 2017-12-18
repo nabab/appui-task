@@ -21,7 +21,7 @@ if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
     $archives = ['zip', 'rar', 'tar', 'gzip', 'iso'];
     $images = ['jpg','gif','jpeg','png','svg'];
     $files = [basename($file)];
-    if ( in_array($ext, $archives) ){
+    if ( \in_array($ext, $archives) ){
       $archive = \wapmorgan\UnifiedArchive\UnifiedArchive::open($file);
       \bbn\file\dir::create_path($path.'/'.$fname);
       if ( $num = $archive->extractNode($path.'/'.$fname, '/') ){
@@ -44,16 +44,16 @@ if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
         'size' => filesize($path.'/'.$f),
         'extension' => '.'.$ext
       ];
-      /*if ( in_array($ext, $images) ){
+      /*if ( \in_array($ext, $images) ){
         // Creating thumbnails
         $res['imgs'] = [];
         $img = new \bbn\file\image($path.'/'.$f);
         if ( $img->test() && ($imgs = $img->thumbs($path)) ){
           array_push($res['imgs'], array_map(function($a) use($path){
-            return substr($a, strlen($path)+1);
+            return substr($a, \strlen($path)+1);
           }, $imgs));
         }
-        $res['imgs']['length'] = count($res['imgs']);
+        $res['imgs']['length'] = \count($res['imgs']);
       }*/
       array_push($ctrl->obj->files, $res);
     }
