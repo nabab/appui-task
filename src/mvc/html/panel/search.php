@@ -2,7 +2,7 @@
 <bbn-splitter orientation="vertical"
               ref="task_splitter"
 >
-  <div class="bbn-task-search-container" style="height: 50px">
+  <bbn-pane class="bbn-task-search-container" :size="50">
     <div class="bbn-task-toolbar bbn-middle bbn-h-100 bbn-flex-width">
       <bbn-dropdown name="selection"
                     class="bbn-xl"
@@ -25,10 +25,9 @@
         <?=_("Create a task")?>
       </bbn-button>
     </div>
-  </div>
-  <div class="bbn-flex-height">
-    <bbn-table class="bbn-flex-fill"
-               :source="source.root + 'list'"
+  </bbn-pane>
+  <bbn-pane>
+    <bbn-table :source="source.root + 'list'"
                :data="{
                  selection: typeSelected,
                  title: taskTitle
@@ -104,5 +103,5 @@
                   fixed="right"
       ></bbn-column>
     </bbn-table>
-  </div>
+  </bbn-pane>
 </bbn-splitter>
