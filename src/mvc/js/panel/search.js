@@ -44,7 +44,11 @@
         this.$refs.tasksTable.updateData();
       },
       renderPriority(row){
+        return row.priority;
         return '<div class="bbn-100" style="background-color: ' + this.tasks.priority_colors[row.priority] + '">' + row.priority + '</div>';
+      },
+      priorityClass(row){
+        return 'bbn-task-pr' + row.priority;
       },
       renderState(row){
         let icon,

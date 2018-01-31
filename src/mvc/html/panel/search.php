@@ -45,6 +45,7 @@
       <bbn-column title="<?=_("Priority")?>"
                   field="priority"
                   :render="renderPriority"
+                  :cls="priorityClass"
                   :width="54"
       ></bbn-column>
       <bbn-column title="<?=_("#Notes")?>"
