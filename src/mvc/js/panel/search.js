@@ -44,8 +44,7 @@
         this.$refs.tasksTable.updateData();
       },
       renderPriority(row){
-        return row.priority;
-        return '<div class="bbn-100" style="background-color: ' + this.tasks.priority_colors[row.priority] + '">' + row.priority + '</div>';
+        return '<div class="bbn-full-screen bbn-middle">' + row.priority + '</div>';
       },
       priorityClass(row){
         return 'bbn-task-pr' + row.priority;
@@ -73,7 +72,7 @@
           icon = 'pause';
           color = 'grey';
         }
-        return '<i class="bbn-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(this.tasks.source.options.states, "value", row.state, "text") + '"> </i>';
+        return '<div class="bbn-full-screen bbn-middle"><i class="bbn-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(this.tasks.source.options.states, "value", row.state, "text") + '"> </i></div>';
       },
       renderLast(row){
         return moment(row.last_action).calendar(null, {sameElse: 'DD/MM/YYYY'});

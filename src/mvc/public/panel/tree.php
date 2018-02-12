@@ -8,7 +8,7 @@
 if ( !isset($ctrl->arguments[0]) ){
   $ctrl->add_data([
     'cat' => '0',
-    'is_admin' => $ctrl->inc->user->is_admin(),
+    'is_dev' => $ctrl->inc->user->is_dev(),
     'lng' => [
       'problem_while_moving' => _("Sorry, a problem occured while moving this item, and although the tree says otherwise the item has not been moved."),
       'please_refresh' => _("Please refresh the tab in order to see the awful truth..."),

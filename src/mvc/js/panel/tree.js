@@ -35,7 +35,7 @@ var $tree,
         return st;
       }
     };
-if ( data.is_admin ){
+if ( data.is_dev ){
   $.extend(treeCfg, {
     dragAndDrop: true,
     drag: function(e){
