@@ -184,8 +184,7 @@
                 <component :is="commentType"
                            name="comment"
                            v-model="commentText"
-                           class="bbn-w-100"
-                           style="min-height: 200px"
+                           style="min-height: 200px; width: 100%;"
                 ></component>
               </div>
 
