@@ -183,6 +183,7 @@
               <div>
                 <component :is="commentType"
                            name="comment"
+                           ref="comment"
                            v-model="commentText"
                            style="min-height: 200px; width: 100%;"
                 ></component>

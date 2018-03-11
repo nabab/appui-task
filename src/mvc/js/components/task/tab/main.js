@@ -300,11 +300,13 @@
       /** @todo It is not used but maybe think about redoing the comment part */
       changeCommentType(){
         let mode;
-        this.commentType = this.$refs.comment_type.widget.value();
-        if ( (this.commentType === 'bbn-code') && (mode = this.$refs.comment_type.widget.dataItem()['mode']) ){
-          setTimeout(() => {
-            this.$refs.comment.widget.setOption('mode', mode);
-          }, 500);
+        if ( this.$refs.comment_type.widget ){
+          this.commentType = this.$refs.comment_type.widget.value();
+          if ( (this.commentType === 'bbn-code') && (mode = this.$refs.comment_type.widget.dataItem()['mode']) ){
+            setTimeout(() => {
+              this.$refs.comment.widget.setOption('mode', mode);
+            }, 500);
+          }
         }
       },
       renderSince(d){

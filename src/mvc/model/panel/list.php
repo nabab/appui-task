@@ -75,5 +75,5 @@ if ( isset($model->data['selection']) ){
 if ( !empty($model->data['title']) ){
   $res['title'] = $model->data['title'];
 }
-//return $pm->search($res, $sort, $model->data['skip'] ?? 0, $model->data['take'] ?? 25);
+
 return $pm->search($res, $sort, $model->data['start'] ?? 0, $model->data['limit'] ?? 500);
