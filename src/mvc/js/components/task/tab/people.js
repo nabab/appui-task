@@ -14,7 +14,7 @@
     },
     computed: {
       isMaster(){
-        return bbn.env.userId === this.source.id_user;
+        return appui.app.userId === this.source.id_user;
       },
       isClosed(){
         return this.source.state === this.tasks.source.states.closed;
@@ -23,7 +23,7 @@
         if ( this.isMaster ){
           return true;
         }
-        return this.source.roles.managers && ($.inArray(bbn.env.userId, this.source.roles.managers) > -1);
+        return this.source.roles.managers && ($.inArray(appui.app.userId, this.source.roles.managers) > -1);
       },
       canChange(){
         return !this.isClosed && this.isMaster;
@@ -31,7 +31,7 @@
       managers(){
         if ( this.source.roles && this.source.roles.managers ){
           return bbn.fn.order($.map(this.source.roles.managers, (v) => {
-            let user = bbn.fn.get_row(bbn.users, 'value', v);
+            let user = bbn.fn.get_row(appui.app.users, 'value', v);
               return user || undefined;
           }), 'text', 'asc');
         }
@@ -40,7 +40,7 @@
       viewers(){
         if ( this.source.roles && this.source.roles.viewers ){
           return bbn.fn.order($.map(this.source.roles.viewers, (v) => {
-            let user = bbn.fn.get_row(bbn.users, 'value', v);
+            let user = bbn.fn.get_row(appui.app.users, 'value', v);
             return user || undefined;
           }), 'text', 'asc');
         }
@@ -49,7 +49,7 @@
       workers(){
         if ( this.source.roles && this.source.roles.workers ){
           return bbn.fn.order($.map(this.source.roles.workers, (v) => {
-            let user = bbn.fn.get_row(bbn.users, 'value', v);
+            let user = bbn.fn.get_row(appui.app.users, 'value', v);
             return user || undefined;
           }), 'text', 'asc');
         }

@@ -40,7 +40,7 @@
         showCommentAdder: false,
         root: this.tasks.source.root,
         categories: this.tasks.fullCategories,
-        userId: bbn.env.userId,
+        userId: appui.app.userId,
         mediaFileType: bbn.fn.get_field(this.tasks.source.media_types, 'code', 'file', 'id'),
         mediaLinkType: bbn.fn.get_field(this.tasks.source.media_types, 'code', 'link', 'id')
       }
@@ -53,7 +53,7 @@
         return this.isManager || this.isWorker || this.isViewer;
       },
       isMaster(){
-        return bbn.env.userId === this.source.id_user;
+        return appui.app.userId === this.source.id_user;
       },
       isViewer(){
         return $.inArray(this.userId, this.source.roles.viewers) > -1;
@@ -198,17 +198,17 @@
           return bbn.fn.post(this.root + 'actions/role/insert', {
             id_task: this.source.id,
             role: this.tasks.source.roles[role],
-            id_user: bbn.env.userId
+            id_user: appui.app.userId
           }, (d) => {
             if ( d.success ){
-              this.source.roles[role].push(bbn.env.userId);
+              this.source.roles[role].push(appui.app.userId);
               return true;
             }
           });
         };
         if ( this.canUnmakeMe && role && this.tasks.source.roles[role] ){
           $.each(this.source.roles, (i, v) => {
-            if ( $.inArray(bbn.env.userId, v) > -1 ){
+            if ( $.inArray(appui.app.userId, v) > -1 ){
               exists = true;
             }
           });
@@ -227,10 +227,10 @@
         const removeRole = () => {
           return bbn.fn.post(this.root + "actions/role/delete", {
             id_task: this.source.id,
-            id_user: bbn.env.userId,
+            id_user: appui.app.userId,
             role: this.tasks.source.roles[prop]
           }, (d) => {
-            const idx = $.inArray(bbn.env.userId, this.source.roles[prop]);
+            const idx = $.inArray(appui.app.userId, this.source.roles[prop]);
             if ( idx > -1 ){
               this.source.roles[prop].splice(idx, 1);
               return true;

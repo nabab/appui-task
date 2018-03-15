@@ -63,7 +63,7 @@
         $.each(this.source.groups, (i, v) => {
           v.expanded = false;
           v.items = $.map(
-            $.grep(bbn.users, (user) => {
+            $.grep(appui.app.users, (user) => {
               return user.active && (user.id_group === v.id);
             }),
             (user) => {
@@ -82,13 +82,13 @@
     },
     methods: {
       userName(id){
-        return bbn.fn.get_field(bbn.users, "value", id, "text");
+        return bbn.fn.get_field(appui.app.users, "value", id, "text");
       },
       userGroup(id){
-        return bbn.fn.get_field(bbn.users, "value", id, "id_group");
+        return bbn.fn.get_field(appui.app.users, "value", id, "id_group");
       },
       userAvatar(id){
-        const av = bbn.fn.get_field(bbn.users, "value", id, "avatar");
+        const av = bbn.fn.get_field(appui.app.users, "value", id, "avatar");
         return av ? av : bbn.var.defaultAvatar;
       },
       userAvatarImg(id){
@@ -97,7 +97,7 @@
         return '<span class="appui-avatar"><img src="' + av + '" alt="' + name + '" title="' + name + '"></span>';
       },
       userFull(id){
-        const user = bbn.fn.get_row(bbn.users, "value", id);
+        const user = bbn.fn.get_row(appui.app.users, "value", id);
         return '<span class="appui-avatar"><img src="' + user.avatar + '" alt="' + user.text + '"> ' + user.text + '</span>';
       },
 

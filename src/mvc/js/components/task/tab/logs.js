@@ -21,7 +21,7 @@
         props: ['source'],
         methods: {
           userName(id){
-            return bbn.fn.get_field(bbn.users, "value", id, "text");
+            return bbn.fn.get_field(appui.app.users, "value", id, "text");
           }
         }
       }
