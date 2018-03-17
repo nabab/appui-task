@@ -3,36 +3,38 @@
   <div class="bbn-task-form-container bbn-h-100">
     <div class="bbn-flex-height">
       <div class="bbn-task-info-ppl k-widget">
-        <div class="bbn-block">
-          <div class="bbn-block">
-            <?=_("Created by")?>
-            <br>
-            <?=_("On")?>
+        <div class="bbn-flex-width">
+          <div class="bbn-flex-fill">
+            <div class="bbn-block">
+              <?=_("Created by")?>
+              <br>
+              <?=_("On")?>
+            </div>
+            <div class="bbn-block">
+              <bbn-initial :width="16" :user-id="source.id_user"></bbn-initial>
+              <span v-text="tasks.userName(source.id_user)"></span>
+              <br>
+              <span v-text="creation"></span>
+            </div>
           </div>
-          <div class="bbn-block">
-            <bbn-initial :user-id="source.id_user"></bbn-initial>
-            <span v-text="tasks.userName(source.id_user)"></span>
-            <br>
-            <span v-text="creation"></span>
+          <div class="bbn-flex-fill" v-if="source.roles.workers && source.roles.workers.length">
+            <div class="bbn-block"><?=_("Assigned to")?></div>
+            <ul class="bbn-block">
+              <li v-for="r in source.roles.workers">
+                <bbn-initial :width="16" :user-id="r"></bbn-initial>
+                <span v-text="tasks.userName(r)"></span>
+              </li>
+            </ul>
           </div>
-        </div>
-        <div class="bbn-block" v-if="source.roles.workers && source.roles.workers.length">
-          <div class="bbn-block"><?=_("Assigned to")?></div>
-          <ul class="bbn-block">
-            <li v-for="r in source.roles.workers">
-              <bbn-initial :user-id="r"></bbn-initial>
-              <span v-text="tasks.userName(r)"></span>
-            </li>
-          </ul>
-        </div>
-        <div class="bbn-block" v-if="source.roles.managers && source.roles.managers.length">
-          <div class="bbn-block"><?=_("Supervised by")?></div>
-          <ul class="bbn-block">
-            <li v-for="r in source.roles.managers">
-              <bbn-initial :user-id="r"></bbn-initial>
-              <span v-text="tasks.userName(r)"></span>
-            </li>
-          </ul>
+          <div class="bbn-flex-fill" v-if="source.roles.managers && source.roles.managers.length">
+            <div class="bbn-block"><?=_("Supervised by")?></div>
+            <ul class="bbn-block">
+              <li v-for="r in source.roles.managers">
+                <bbn-initial :width="16" :user-id="r"></bbn-initial>
+                <span v-text="tasks.userName(r)"></span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 

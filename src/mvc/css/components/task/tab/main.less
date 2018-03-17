@@ -1,8 +1,11 @@
 .appui-task-tab-main {
   .bbn-task-info-ppl{
     padding: 1em;
-    div.bbn-block{
-      width: 30%;
+    div.bbn-flex-fill{
+      white-space: nowrap;
+      > .bbn-block{
+        padding-right: 2em
+      }
       img{
         width: 16px;
         height: auto;
@@ -12,14 +15,6 @@
         padding: 0;
         margin: 0;
       }
-      .bbn-block{
-        white-space: nowrap;
-        width: inherit;
-      }
-    }
-    div.bbn-block:nth-child(even) {
-      //padding-left: 5%;
-      //padding-right: 5%;
     }
   }
   .bbn-task-comments {
