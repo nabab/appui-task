@@ -236,7 +236,7 @@
                                     style="display: inline-block;"
                                     @click="linkRemove(idx)"
                                     icon="fa fa-close"
-                                    title="<?=_('Supprimer')?>"
+                                    title="<?=_('Remove')?>"
                         ></bbn-button>
                       </div>
                     </div>

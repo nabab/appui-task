@@ -91,7 +91,7 @@
           return end.from(start, true);
         }
         if ( !row.duration ){
-          return bbn._('Inconnu');
+          return bbn._('Unknown');
         }
         if ( row.duration < 3600 ){
           return Math.round(row.duration/60) + ' ' + bbn._('months');
