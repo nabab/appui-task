@@ -16,21 +16,8 @@
 // find ../../../mvc -iname "*.php" | xargs xgettext -d appui_task -j
 // msgfmt -o appui_task.mo appui_task.po
 //textdomain(NULL);
-clearstatcache();
 //textdomain(NULL);
 if ( !\defined('APPUI_TASKS_ROOT') ){
   define('APPUI_TASKS_ROOT', $ctrl->plugin_url('appui-task').'/');
 }
-$domain = 'appui-task';
-bindtextdomain($domain, BBN_LIB_PATH.'bbn/appui-task/src/locale');
-bind_textdomain_codeset($domain, 'UTF-8');
-putenv ("LANG=fr");
-putenv("LC_ALL=fr_FR.utf8");
-setlocale(LC_MESSAGES, "fr_FR.utf8");
-textdomain($domain);
-
-
-
-
-
 return 1;
