@@ -17,5 +17,8 @@ if ( !empty($templates) ){
   }, $templates);
 }
 
-$ctrl->set_color('#000', '#FFF')->set_icon('fa fa-bug')->combo(_("Projects"), true);
 $ctrl->obj->url = APPUI_TASKS_ROOT . 'panel';
+$ctrl
+  ->set_color('#000', '#FFF')
+  ->set_icon('fa fa-bug')
+  ->combo(_("Projects"), true);
