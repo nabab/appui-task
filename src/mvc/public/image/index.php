@@ -10,7 +10,7 @@ if ( isset($ctrl->arguments[0]) ){
   $ctrl->set_mode("image");
   $is_tmp = false;
   if ( ($ctrl->arguments[0] === 'tmp') &&
-    \bbn\str::is_uid($ctrl->arguments[1]) &&
+    \bbn\str::is_integer($ctrl->arguments[1]) &&
     \defined('BBN_USER_PATH')
   ){
     array_shift($ctrl->arguments);
