@@ -10,7 +10,9 @@ if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
 ){
   $f =& $ctrl->files['file'];
   $path = BBN_USER_PATH.'tmp/'.$ctrl->arguments[0];
-  $new = \bbn\str::encode_filename($f['name'], \bbn\str::file_ext($f['name']));
+  $new = !empty($_REQUEST['name']) && ($_REQUEST['name'] !== $f['name']) ?
+    \bbn\str::encode_filename($_REQUEST['name'], \bbn\str::file_ext($_REQUEST['name'])) :
+    \bbn\str::encode_filename($f['name'], \bbn\str::file_ext($f['name']));
   $file = $path.'/'.$new;
   if ( \bbn\file\dir::create_path($path) &&
     move_uploaded_file($f['tmp_name'], $file) ){
