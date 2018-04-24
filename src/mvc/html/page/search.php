@@ -56,6 +56,7 @@
                   ftitle="<?=_('#Notes')?>"
                   field="num_notes"
                   :width="50"
+                  cls="bbn-c"
       ></bbn-column>
       <bbn-column title="<i class='fa fa-tasks'></i>"
                   ftitle="<?=_("States")?>"
