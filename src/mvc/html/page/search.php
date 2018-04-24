@@ -37,6 +37,7 @@
                :pageable="true"
                :sortable="true"
                :order="[{field: 'last_action', dir: 'DESC'}]"
+               class="appui-tasks-search-table"
     >
       <bbn-column title="<i class='fa fa-user'></i>"
                   ftitle="<?=_('User')?>"
@@ -61,6 +62,7 @@
                   field="state"
                   :render="renderState"
                   :width="50"
+                  cls="bbn-h-100"
       ></bbn-column>
       <bbn-column title="<?=_("Last")?>"
                   field="last_action"

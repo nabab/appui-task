@@ -7,7 +7,7 @@
 /** @var $ctrl \bbn\mvc\controller */
 if ( !isset($ctrl->post['search']) ){
   $ctrl->combo('', [
-    'root' => APPUI_TASKS_ROOT.'panel/',
+    'root' => APPUI_TASKS_ROOT.'page/',
     'lng' => $ctrl->get_model('../lng/search')
   ]);
 }

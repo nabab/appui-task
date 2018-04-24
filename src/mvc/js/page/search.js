@@ -47,7 +47,7 @@
         return '<div class="bbn-full-screen bbn-middle">' + row.priority + '</div>';
       },
       priorityClass(row){
-        return 'bbn-task-pr' + row.priority;
+        return 'bbn-h-100 bbn-task-pr' + row.priority;
       },
       renderState(row){
         let icon,

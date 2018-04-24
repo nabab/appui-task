@@ -17,7 +17,7 @@ if ( !empty($templates) ){
   }, $templates);
 }
 
-$ctrl->obj->url = APPUI_TASKS_ROOT . 'panel';
+$ctrl->obj->url = APPUI_TASKS_ROOT . 'page';
 $ctrl
   ->set_color('#000', '#FFF')
   ->set_icon('fa fa-bug')
