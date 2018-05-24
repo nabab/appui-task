@@ -3,7 +3,8 @@
              :source="tasks.source.root + 'page/logs'"
              :data="{id_task: source.id}"
   >
-    <bbn-column field="id_user"
+    <bbn-column title=" "
+                field="id_user"
                 :component="$options.components['appui-tasks-user-avatar']"
                 :width="38"
     ></bbn-column>
@@ -16,6 +17,7 @@
                 field="chrono"
                 :width="150"
                 :render="renderDate"
+                cls="bbn-c"
     ></bbn-column>
     <bbn-column title="<?=_("Action")?>"
                 field="action"

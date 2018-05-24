@@ -17,11 +17,18 @@
     },
     components: {
       'appui-tasks-user-avatar': {
-        template: '#appui-tasks-user-avatar',
+        template: `
+<bbn-initial v-if="source.id_user"
+             :user-id="source.id_user"
+             :title="userName"
+             :height="20"
+             :width="20"
+></bbn-initial>
+        `,
         props: ['source'],
-        methods: {
-          userName(id){
-            return bbn.fn.get_field(appui.app.users, "value", id, "text");
+        computed: {
+          userName(){
+            return appui.app.getUserName(this.source.id_user);
           }
         }
       }

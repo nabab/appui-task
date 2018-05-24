@@ -18,6 +18,12 @@
       bbn.vue.addComponent('task/tab/main', mixins);
       bbn.vue.addComponent('task/tab/people', mixins);
       bbn.vue.addComponent('task/tab/logs', mixins);
+      bbn.vue.addComponent('task/tab/messages', mixins);
+      bbn.vue.addComponent('task/tab/tracker', mixins);
+      bbn.vue.addComponent('task/widget/info', mixins);
+      bbn.vue.addComponent('task/widget/roles', mixins);
+      bbn.vue.addComponent('task/widget/tracker', mixins);
+      bbn.vue.addComponent('task/widget/messages', mixins);
       bbn.vue.unsetComponentRule();
     },
     data(){

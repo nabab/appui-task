@@ -158,27 +158,27 @@
         this.source.deadline = null;
       },
       start(){
-        bbn.fn.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
+        this.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
           this.update('state', this.tasks.source.states.ongoing);
         });
       },
       hold(){
-        bbn.fn.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
+        this.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
           this.update('state', this.tasks.source.states.holding);
         });
       },
       close(){
-        bbn.fn.confirm(bbn._("Are you sure you want to close this task?"), () => {
+        this.confirm(bbn._("Are you sure you want to close this task?"), () => {
           this.update(this.source.id, 'state', this.tasks.source.states.closed);
         });
       },
       resume(){
-        bbn.fn.confirm(bbn._('Are you sure you want to resume this task?'), () => {
+        this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
           this.update('state', this.tasks.source.states.ongoing);
         });
       },
       ping(){
-        bbn.fn.confirm(bbn._('Are you sure you want to ping the task?'), () => {
+        this.confirm(bbn._('Are you sure you want to ping the task?'), () => {
           bbn.fn.post(this.root + 'actions/task/ping', {id_task: this.source.id}, (d) => {
             if ( d.success ){
               appui.success(bbn._('Pinged'));
@@ -253,7 +253,7 @@
           if ( force ){
             return removeRole();
           }
-          bbn.fn.confirm(bbn._('Are you sure you want to unfollow this task?'), removeRole);
+          this.confirm(bbn._('Are you sure you want to unfollow this task?'), removeRole);
         }
       },
       addComment(e){
@@ -347,7 +347,7 @@
       },
       linkRemove(idx){
         if ( idx !== undefined){
-          bbn.fn.confirm(bbn._('Are you sure you want to remove this link?'), () => {
+          this.confirm(bbn._('Are you sure you want to remove this link?'), () => {
             this.commentLinks.splice(idx, 1);
           });
         }

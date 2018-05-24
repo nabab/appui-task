@@ -144,16 +144,47 @@
     },
     components: {
       'appui-tasks-user-avatar': {
-        template: '#appui-tasks-user-avatar',
+        template: `
+<bbn-initial v-if="source.id_user"
+             :user-id="source.id_user"
+             :title="userName"
+             :height="25"
+             :width="25"
+></bbn-initial>
+        `,
         props: ['source'],
-        methods: {
-          userName(id){
-            return cp.tasks.userName(id);
-          },
+        computed: {
+          userName(){
+            return appui.app.getUserName(this.source.id_user);
+          }
         }
       },
       'appui-tasks-create-form': {
-        template: '#appui-tasks-create-form',
+        template: `
+<bbn-form :action="root + 'actions/task/insert'"
+          :source="source"
+          @success="refreshTable"
+          class="bbn-full-screen"
+>
+  <div class="bbn-padded bbn-grid-fields">
+    <div>` + bbn._('Title') + `</div>
+    <bbn-input maxlength="255"
+               required="required"
+               v-model="source.title"
+               class="bbn-w-100"
+    ></bbn-input>
+    <div>` + bbn._('Type') + `</div>
+    <bbn-dropdown :source="categories"
+                  v-model="source.type"
+                  group="group"
+                  :cfg="{dataValueField: 'id'}"
+                  required="required"
+                  placeholder="` + bbn._('Select a type...') + `"
+                  class="bbn-w-100"
+    ></bbn-dropdown>
+  </div>
+</bbn-form>
+        `,
         props: ['source'],
         data(){
           return {

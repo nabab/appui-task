@@ -10,6 +10,7 @@ $pm = new \bbn\appui\tasks($model->db);
 
 return [
   'root' => APPUI_TASKS_ROOT,
+  'root_notes' => $model->plugin_url('appui-notes').'/',
   'templates' => $model->data['templates'],
   'roles' => \bbn\appui\tasks::get_options_ids('roles'),
   'states' => \bbn\appui\tasks::get_options_ids('states'),

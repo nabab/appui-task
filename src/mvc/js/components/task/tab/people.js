@@ -103,7 +103,7 @@
       },
       removeUser(idUser, roleType){
         if ( this.canChange ){
-          bbn.fn.confirm(bbn._('Are you sure you want to remove this user?'), () => {
+          this.confirm(bbn._('Are you sure you want to remove this user?'), () => {
             const idx = $.inArray(idUser, this.source.roles[roleType]);
             if ( (idx > -1) ){
               bbn.fn.post(this.tasks.source.root + 'actions/role/delete', {

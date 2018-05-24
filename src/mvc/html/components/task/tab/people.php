@@ -5,17 +5,29 @@
            @mouseover="setTargetContainer('managers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header"><?=_("Supervisors")?></div>
+        <div class="k-header bbn-b"><?=_("Supervisors")?></div>
         <div class="k-content bbn-task-managers">
           <ul>
             <li v-for="e in managers"
                 v-bind="{'id-user': e.value, 'id-group': e.id_group}"
+                class="bbn-vsmargin bbn-hlmargin"
             >
-              <span>
-                <span :class="e.icon"></span>
-                <bbn-initial :user-id="e.value"></bbn-initial>
-                <span v-text="e.text"></span>
-              </span>
+              <div class="bbn-flex-width bbn-vmiddle">
+                <i :class="e.icon"></i>
+                <bbn-initial :user-id="e.value"
+                             :height="20"
+                             :width="20"
+                             class="bbn-hsmargin"
+                ></bbn-initial>
+                <span v-text="e.text"
+                      class="bbn-flex-fill"
+                ></span>
+                <i class="fa fa-trash-o bbn-p bbn-red"
+                   v-if="isMaster && (source.id_user !== e.value)"
+                   @click="removeUser(e.value, 'managers')"
+                   :title="'<?=_('Remove')?> ' + e.text"
+                ></i>
+              </div>
             </li>
           </ul>
         </div>
@@ -25,21 +37,29 @@
            @mouseover="setTargetContainer('workers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header"><?=_("Workers")?></div>
+        <div class="k-header bbn-b"><?=_("Workers")?></div>
         <div class="k-content bbn-task-workers">
           <ul>
             <li v-for="e in workers"
                 v-bind="{'id-user': e.value, 'id-group': e.id_group}"
+                class="bbn-vsmargin bbn-hlmargin"
             >
-              <span>
-                <span :class="e.icon"></span>
-                <bbn-initial :user-id="e.value"></bbn-initial>
-                <span v-text="e.text"></span>
-                <i class="fa fa-times bbn-p"
+              <div class="bbn-flex-width bbn-vmiddle">
+                <i :class="e.icon"></i>
+                <bbn-initial :user-id="e.value"
+                             :height="20"
+                             :width="20"
+                             class="bbn-hsmargin"
+                ></bbn-initial>
+                <span v-text="e.text"
+                      class="bbn-flex-fill"
+                ></span>
+                <i class="fa fa-trash-o bbn-p bbn-red"
                    v-if="canChange"
                    @click="removeUser(e.value, 'workers')"
+                   :title="'<?=_('Remove')?> ' + e.text"
                 ></i>
-              </span>
+              </div>
             </li>
           </ul>
         </div>
@@ -49,21 +69,29 @@
            @mouseover="setTargetContainer('viewers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header"><?=_("Spectators")?></div>
+        <div class="k-header bbn-b"><?=_("Spectators")?></div>
         <div class="k-content bbn-task-viewers">
           <ul>
             <li v-for="e in viewers"
                 v-bind="{'id-user': e.value, 'id-group': e.id_group}"
+                class="bbn-vsmargin bbn-hlmargin"
             >
-              <span>
-                <span :class="e.icon"></span>
-                <bbn-initial :user-id="e.value"></bbn-initial>
-                <span v-text="e.text"></span>
-                <i class="fa fa-times bbn-p"
+              <div class="bbn-flex-width bbn-vmiddle">
+                <i :class="e.icon"></i>
+                <bbn-initial :user-id="e.value"
+                             :height="20"
+                             :width="20"
+                             class="bbn-hsmargin"
+                ></bbn-initial>
+                <span v-text="e.text"
+                      class="bbn-flex-fill"
+                ></span>
+                <i class="fa fa-trash-o bbn-p bbn-red"
                    v-if="canChange"
                    @click="removeUser(e.value, 'viewers')"
+                   :title="'<?=_('Remove')?> ' + e.text"
                 ></i>
-              </span>
+              </div>
             </li>
           </ul>
         </div>
