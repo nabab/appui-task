@@ -140,7 +140,7 @@
           val: val
         }, (d) => {
           if ( !d.success ){
-            bbn.fn.alert(bbn._('Error'));
+            this.alert(bbn._('Error'));
             return false;
           }
           if ( prop === 'state' ){
@@ -267,7 +267,7 @@
           })
         };
         if ( !v.title && !v.text ){
-          bbn.fn.alert(bbn._("You have to enter a comment, a link, or a file"))
+          this.alert(bbn._("You have to enter a comment, a link, or a file"))
         }
         else{
           bbn.fn.post(this.root + 'actions/comment/insert', v, (d) => {
@@ -279,7 +279,7 @@
               this.clearComment();
             }
             else{
-              bbn.fn.alert();
+              this.alert();
             }
           });
         }

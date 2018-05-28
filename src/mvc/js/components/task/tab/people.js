@@ -4,7 +4,7 @@
  * Date: 08/06/2017
  * Time: 19:38
  */
-(() => {
+((bbn) => {
   return {
     props: ['source'],
     data(){
@@ -95,7 +95,7 @@
                 this.source.roles[roleType].push(idUser);
               }
               else {
-                bbn.fn.alert(bbn._('Error during user insert'));
+                this.alert(bbn._('Error during user insert'));
               }
             });
           }
@@ -112,7 +112,7 @@
                 id_user: idUser
               }, (d) => {
                 if ( !d.success ){
-                  bbn.fn.alert(bbn._('Error during the user remove'));
+                  this.alert(bbn._('Error during the user remove'));
                   return false;
                 }
                 this.source.roles[roleType].splice(idx, 1);
@@ -121,7 +121,7 @@
           });
         }
         else {
-          bbn.fn.alert(bbn._('You have no right to modify the roles in this task'));
+          this.alert(bbn._('You have no right to modify the roles in this task'));
           return false;
         }
       },
@@ -147,4 +147,4 @@
       }
     }
   };
-})();
+})(window.bbn);

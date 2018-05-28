@@ -81,7 +81,7 @@ if ( data.is_dev ){
           if ( !d.res ){
             e.setValid(false);
             e.preventDefault();
-            bbn.fn.alert(data.lng.problem_while_moving, bbn.lng.error, 400);
+            appui.alert(data.lng.problem_while_moving, bbn.lng.error, 400);
             tree.dataSource.read();
           }
         });
