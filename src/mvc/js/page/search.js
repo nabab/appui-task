@@ -25,7 +25,7 @@
     methods: {
       createTask(){
         if ( this.taskTitle.length ){
-          bbn.vue.closest(this, '.bbn-tab').popup().open({
+          bbn.vue.closest(this, '.bbns-tab').popup().open({
             title: bbn._('New task'),
             width: 500,
             height: 200,

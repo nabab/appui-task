@@ -10,6 +10,9 @@ if ( isset($ctrl->arguments[0], $ctrl->post['file']) ){
   $new = \bbn\str::encode_filename($ctrl->post['file'], \bbn\str::file_ext($ctrl->post['file']));
   $file = $path.'/'.$new;
   if ( is_file($file) && unlink($file) ){
-    $ctrl->obj->success = 1;
+    $ctrl->obj->success = true;
+  }
+  else {
+    $ctrl->obj->success = false;
   }
 }

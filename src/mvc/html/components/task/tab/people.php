@@ -22,7 +22,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="fa fa-trash-o bbn-p bbn-red"
+                <i class="far fa-trash-alt bbn-p bbn-red"
                    v-if="isMaster && (source.id_user !== e.value)"
                    @click="removeUser(e.value, 'managers')"
                    :title="'<?=_('Remove')?> ' + e.text"
@@ -54,7 +54,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="fa fa-trash-o bbn-p bbn-red"
+                <i class="far fa-trash-alt bbn-p bbn-red"
                    v-if="canChange"
                    @click="removeUser(e.value, 'workers')"
                    :title="'<?=_('Remove')?> ' + e.text"
@@ -86,7 +86,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="fa fa-trash-o bbn-p bbn-red"
+                <i class="far fa-trash-alt bbn-p bbn-red"
                    v-if="canChange"
                    @click="removeUser(e.value, 'viewers')"
                    :title="'<?=_('Remove')?> ' + e.text"

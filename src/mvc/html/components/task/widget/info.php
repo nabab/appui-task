@@ -23,36 +23,36 @@
       <bbn-button v-if="main.canStart"
                   @click="main.start"
                   title="<?=_("Put on ongoing")?>"
-                  icon="fa fa-play"
+                  icon="fas fa-play"
       ></bbn-button>
       <bbn-button v-if="main.canHold"
                   @click="main.hold"
                   title="<?=_("Put on hold")?>"
-                  icon="fa fa-pause"
+                  icon="fas fa-pause"
       ></bbn-button>
       <bbn-button v-if="main.canResume"
                   @click="main.resume"
                   title="<?=_("Resume")?>"
-                  icon="fa fa-play"
+                  icon="fas fa-play"
       ></bbn-button>
       <bbn-button v-if="main.canClose"
                   @click="main.close"
                   title="<?=_("Close") ?>"
-                  icon="fa fa-check"
+                  icon="fas fa-check"
       ></bbn-button>
     </div>
     <div v-else-if="main.isHolding">
       <bbn-button v-if="main.canResume"
                   @click="main.resume"
                   title="<?=_("Resume")?>"
-                  icon="fa fa-play"
+                  icon="fas fa-play"
       ></bbn-button>
     </div>
     <div v-else-if="main.isClosed">
       <bbn-button v-if="main.canOpen"
                   @click="main.reopen"
                   title="<?=_("Reopen")?>"
-                  icon="fa fa-hand-o-left"
+                  icon="far fa-hand-left"
       ></bbn-button>
     </div>
   </div>
@@ -83,38 +83,38 @@
     ></bbn-datepicker>
     <bbn-button v-if="source.deadline && main.canChange"
                 @click="main.removeDeadline"
-                icon="fa fa-times"
+                icon="fas fa-times"
     ></bbn-button>
   </div>
   <label><?=_('Actions')?></label>
   <div>
     <bbn-button v-if="main.canMakeMe && !main.isManager"
                 @click="main.makeMe('managers')"
-                icon="fa fa-user-plus"
+                icon="fas fa-user-plus"
                 title="<?=_('Make me a supervisor')?>"
                 style="color: green"
     ></bbn-button>
     <bbn-button v-if="main.canMakeMe && !main.isWorker"
                 @click="main.makeMe('workers')"
-                icon="fa fa-user-plus"
+                icon="fas fa-user-plus"
                 title="<?=_('Make me a worker')?>"
                 style="color: orange"
     ></bbn-button>
     <bbn-button v-if="!main.isViewer"
                 @click="main.makeMe('viewers')"
-                icon="fa fa-user-plus"
+                icon="fas fa-user-plus"
                 title="<?=_('Make me a viewer')?>"
                 style="color: yellow"
     ></bbn-button>
     <bbn-button v-if="main.canPing"
                 @click="main.ping"
                 title="<?=_("Ping workers")?>"
-                icon="fa fa-hand-o-up"
+                icon="far fa-hand-pointer"
     ></bbn-button>
     <bbn-button v-if="main.isAdded && main.canUnmakeMe"
                 @click="main.unmakeMe"
                 title="<?=_("Unfollow the task")?>"
-                icon="fa fa-user-times"
+                icon="fas fa-user-times"
                 style="color: red"
     ></bbn-button>
   </div>

@@ -39,69 +39,69 @@
                :order="[{field: 'last_action', dir: 'DESC'}]"
                class="appui-tasks-search-table"
     >
-      <bbn-column title="<i class='fa fa-user'></i>"
+      <bbns-column title="<i class='fa fa-user'></i>"
                   ftitle="<?=_('User')?>"
                   field="id_user"
                   :component="$options.components['appui-tasks-user-avatar']"
                   :width="38"
-      ></bbn-column>
-      <bbn-column title="<i class='fa fa-exclamation'></i>"
+      ></bbns-column>
+      <bbns-column title="<i class='fa fa-exclamation'></i>"
                   ftitle="<?=_('Priority')?>"
                   field="priority"
                   :render="renderPriority"
                   :cls="priorityClass"
                   :width="40"
-      ></bbn-column>
-      <bbn-column title="<i class='fa fa-comment'></i>"
+      ></bbns-column>
+      <bbns-column title="<i class='fa fa-comment'></i>"
                   ftitle="<?=_('#Notes')?>"
                   field="num_notes"
                   :width="50"
                   cls="bbn-c"
-      ></bbn-column>
-      <bbn-column title="<i class='fa fa-tasks'></i>"
+      ></bbns-column>
+      <bbns-column title="<i class='fa fa-tasks'></i>"
                   ftitle="<?=_("States")?>"
                   field="state"
                   :render="renderState"
                   :width="50"
                   cls="bbn-h-100"
-      ></bbn-column>
-      <bbn-column title="<?=_("Last")?>"
+      ></bbns-column>
+      <bbns-column title="<?=_("Last")?>"
                   field="last_action"
                   :render="renderLast"
                   :width="100"
-      ></bbn-column>
-      <bbn-column title="<?=_("Role")?>"
+      ></bbns-column>
+      <bbns-column title="<?=_("Role")?>"
                   field="role"
                   :render="renderRole"
                   :width="80"
-      ></bbn-column>
-      <bbn-column title="<?=_("Type")?>"
+      ></bbns-column>
+      <bbns-column title="<?=_("Type")?>"
                   field="type"
                   :render="renderType"
                   :width="150"
                   style="max-width: 300px"
-      ></bbn-column>
-      <bbn-column title="<?=_("Duration")?>"
+      ></bbns-column>
+      <bbns-column title="<?=_("Duration")?>"
                   field="duration"
                   :render="renderDuration"
                   :width="70"
-      ></bbn-column>
-      <bbn-column title="<?=_("Title")?>"
+      ></bbns-column>
+      <bbns-column title="<?=_("Title")?>"
                   field="title"
-      ></bbn-column>
-      <bbn-column title="<?=_("Reference")?>"
+      ></bbns-column>
+      <bbns-column title="<?=_("Reference")?>"
                   field="reference"
-      ></bbn-column>
-      <bbn-column title="<?=_("Creation Date")?>"
+      ></bbns-column>
+      <bbns-column title="<?=_("Creation Date")?>"
                   field="creation_date"
                   :render="renderCreationDate"
                   :width="100"
-      ></bbn-column>
-      <bbn-column title="<?=_("Deadline")?>"
+      ></bbns-column>
+      <bbns-column title="<?=_("Deadline")?>"
                   field="deadline"
                   :render="renderDeadline"
-      ></bbn-column>
-      <bbn-column title=""
+      ></bbns-column>
+      <bbns-column title=""
                   :width="40"
                   :buttons="[{
                     title: '<?=_('See task')?>',
@@ -110,7 +110,7 @@
                     notext: true
                   }]"
                   fixed="right"
-      ></bbn-column>
+      ></bbns-column>
     </bbn-table>
   </bbn-pane>
 </bbn-splitter>

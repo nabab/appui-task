@@ -24,7 +24,7 @@
     },
     methods: {
       insert(){
-        bbn.vue.closest(this, 'bbn-tab').popup().open({
+        this.getPopup().open({
           title: bbn._('New message'),
           width: 800,
           height: 600,
@@ -53,7 +53,7 @@
         });
       },
       edit(n, v){
-        bbn.vue.closest(this, 'bbn-tab').popup().open({
+        this.getPopup().open({
           title: bbn._('Edit'),
           width: 800,
           height: 600,
@@ -90,7 +90,7 @@
         });
       },
       reply(n, v){
-        bbn.vue.closest(this, 'bbn-tab').popup().open({
+        this.getPopup().open({
           title: bbn._('Reply to') + ' ' + appui.app.getUserName(n.creator),
           width: 800,
           height: 600,
@@ -151,12 +151,6 @@
           });
         });
       }
-    },
-    created(){
-      bbn.vue.setComponentRule(this.tasks.source.root_notes + 'components/', 'appui-notes');
-      bbn.vue.addComponent('forum');
-      bbn.vue.addComponent('forum/form');
-      bbn.vue.unsetComponentRule();
     }
   }
 })();

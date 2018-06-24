@@ -15,28 +15,34 @@ if (
   // Add the new note's version if the title|content is changed
   if (
     ($old['title'] !== $model->data['title']) ||
-    ($old['content'] !== $model->data['text'])
+    ($old['content'] !== $model->data['text']) ||
+    ($old['locked'] != $model->data['locked'])
   ){
     if ( $notes->update($model->data['id'], $model->data['title'] ?: '', $model->data['text'], null, $model->data['locked']) ){
-      // Copy the files to the new version
-      if ( !empty($model->data['files']) ){
-        array_walk($model->data['files'], function($f) use($notes, $model, &$ok){
-          if ( !empty($f['id']) ){
-            if ( !$notes->media2version($f['id'], $model->data['id']) ){
-              $ok = false;
+      if (
+        ($old['title'] !== $model->data['title']) ||
+        ($old['content'] !== $model->data['text'])
+      ){
+        // Copy the files to the new version
+        if ( !empty($model->data['files']) ){
+          array_walk($model->data['files'], function($f) use($notes, $model, &$ok){
+            if ( !empty($f['id']) ){
+              if ( !$notes->media2version($f['id'], $model->data['id']) ){
+                $ok = false;
+              }
             }
-          }
-        });
-      }
-      // Copy the links to the new version
-      if ( !empty($model->data['links']) ){
-        array_walk($model->data['links'], function($l) use($notes, $model, &$ok){
-          if ( !empty($l['id']) ){
-            if ( !$notes->media2version($l['id'], $model->data['id']) ){
-              $ok = false;
+          });
+        }
+        // Copy the links to the new version
+        if ( !empty($model->data['links']) ){
+          array_walk($model->data['links'], function($l) use($notes, $model, &$ok){
+            if ( !empty($l['id']) ){
+              if ( !$notes->media2version($l['id'], $model->data['id']) ){
+                $ok = false;
+              }
             }
-          }
-        });
+          });
+        }
       }
     }
     else {

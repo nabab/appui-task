@@ -2,29 +2,29 @@
 	<bbn-dashboard class="appui-task-tab-main"
 	               :sortable="true"
 	>
-	  <bbn-widget title="<?=_("Info")?>"
+	  <bbns-widget title="<?=_("Info")?>"
 	              component="appui-task-widget-info"
 	              uid="info"
 	              :closable="false"
 	              :source="source"
-	  ></bbn-widget>
-	  <bbn-widget title="<?=_("Roles")?>"
+	  ></bbns-widget>
+	  <bbns-widget title="<?=_("Roles")?>"
 	              component="appui-task-widget-roles"
 	              uid="roles"
 	              :closable="false"
 	              :source="source"
-	  ></bbn-widget>
-	  <bbn-widget title="<?=_("Tracker")?>"
+	  ></bbns-widget>
+	  <bbns-widget title="<?=_("Tracker")?>"
 	              component="appui-task-widget-tracker"
 	              uid="tracker"
 	              :closable="false"
 	              :source="source"
-	  ></bbn-widget>
-	  <bbn-widget title="<?=_("Last messages")?>"
+	  ></bbns-widget>
+	  <bbns-widget title="<?=_("Last messages")?>"
 	              component="appui-task-widget-messages"
 	              uid="messages"
 	              :closable="false"
 	              :source="source"
-	  ></bbn-widget>
+	  ></bbns-widget>
 	</bbn-dashboard>
 </div>

@@ -5,7 +5,7 @@
                    :toolbar="[{
                      text: '<?=_('Ajouter une Note')?>',
                      command: insert,
-                     icon: 'fa fa-file'
+                     icon: 'fas fa-pencil-alt'
                    }]"
                    :edit="edit"
                    :reply="reply"

@@ -3,24 +3,24 @@
              :source="tasks.source.root + 'page/logs'"
              :data="{id_task: source.id}"
   >
-    <bbn-column title=" "
+    <bbns-column title=" "
                 field="id_user"
                 :component="$options.components['appui-tasks-user-avatar']"
                 :width="38"
-    ></bbn-column>
-    <bbn-column title="<?=_("User")?>"
+    ></bbns-column>
+    <bbns-column title="<?=_("User")?>"
                 field="id_user"
                 :width="150"
                 :render="renderUser"
-    ></bbn-column>
-    <bbn-column title="<?=_("Date")?>"
+    ></bbns-column>
+    <bbns-column title="<?=_("Date")?>"
                 field="chrono"
                 :width="150"
                 :render="renderDate"
                 cls="bbn-c"
-    ></bbn-column>
-    <bbn-column title="<?=_("Action")?>"
+    ></bbns-column>
+    <bbns-column title="<?=_("Action")?>"
                 field="action"
-    ></bbn-column>
+    ></bbns-column>
   </bbn-table>
 </div>
