@@ -1,8 +1,10 @@
 // Javascript Document
 (() => {
   return {
-    data(){
-      return this.source;
+    computed: {
+      tasks(){
+        return this.closest('bbn-tabnav').$parent;
+      }
     }
   }
 })();

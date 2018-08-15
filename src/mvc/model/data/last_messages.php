@@ -6,115 +6,85 @@
  * Time: 17:33
  */
 if ( !empty($model->data['id_task']) ){
-  $cfg = [
-    'query' => "
-      SELECT bbn_notes.*, bbn_notes.id AS idnote,
-        (
-          SELECT content
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        ) AS content,
-        (
-          SELECT title
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        ) AS title,
-        (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version ASC
-          LIMIT 1
-        ) AS creation,
-        (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        ) AS last_edit,
-        (
-          SELECT COUNT(id)
+  $all = [];
+  $topics = $model->db->get_rows("
+    SELECT bbn_notes.*, first_version.creation, last_version.title, last_version.content,
+      last_version.creation AS last_edit, COUNT(DISTINCT replies.id) AS num_replies,
+      IFNULL(MAX(replies_versions.creation), last_version.creation) AS last_reply,
+      GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ',') AS users
+    FROM bbn_notes
+      JOIN bbn_notes_versions AS versions
+        ON versions.id_note = bbn_notes.id
+      JOIN bbn_notes_versions AS last_version
+        ON last_version.id_note = bbn_notes.id
+      LEFT JOIN bbn_notes_versions AS test_version
+        ON test_version.id_note = bbn_notes.id
+        AND last_version.version < test_version.version
+      JOIN bbn_notes_versions AS first_version
+        ON first_version.id_note = bbn_notes.id
+        AND first_version.version = 1
+      LEFT JOIN bbn_notes AS replies
+        ON replies.id_alias = bbn_notes.id
+      LEFT JOIN bbn_notes_versions AS replies_versions
+        ON replies_versions.id_note = replies.id
+      JOIN bbn_tasks_notes
+        ON bbn_tasks_notes.id_note = bbn_notes.id
+      JOIN bbn_tasks
+        ON bbn_tasks.id = bbn_tasks_notes.id_task
+        AND bbn_tasks.active = 1
+    WHERE bbn_tasks.id = ?
+      AND bbn_notes.active = 1
+      AND bbn_notes.id_parent IS NULL
+      AND test_version.version IS NULL
+      AND bbn_notes.id_alias IS NULL
+    GROUP BY bbn_notes.id
+    ORDER BY last_reply DESC, last_edit DESC
+    LIMIT 0, 20",
+    hex2bin($model->data['id_task'])
+  );
+  if ( !empty($topics) ){
+    foreach ( $topics as $top ){
+      $all[strtotime($top['last_edit'])] = $top;
+      if ( !empty($top['num_replies']) ){
+        $replies = $model->db->get_rows("
+          SELECT bbn_notes.*, first_version.creation, last_version.title, last_version.content,
+            last_version.creation AS last_edit, COUNT(DISTINCT replies.id) AS num_replies,
+            IFNULL(MAX(replies_versions.creation), last_version.creation) AS last_reply,
+            GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ',') AS users
           FROM bbn_notes
-          WHERE id_alias = idnote
-            AND active = 1
-        ) AS num_replies,
-        IFNULL((
-          SELECT creation
-          FROM bbn_notes_versions
-            JOIN bbn_notes
-              ON bbn_notes_versions.id_note = bbn_notes.id
-          WHERE bbn_notes.id_alias = idnote
-          ORDER BY bbn_notes_versions.creation DESC
-          LIMIT 1
-        ), (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        )) AS last_reply
-      FROM bbn_notes_versions
-        JOIN bbn_notes
-          ON (bbn_notes_versions.id_note = bbn_notes.id_alias OR bbn_notes_versions.id_note = bbn_notes.id)
-          AND bbn_notes.active = 1
-        JOIN bbn_tasks_notes
-          ON bbn_tasks_notes.id_note = bbn_notes_versions.id_note
-          AND bbn_tasks_notes.active = 1
-        JOIN bbn_tasks
-          ON bbn_tasks.id = bbn_tasks_notes.id_task
-          AND bbn_tasks.active = 1",
-    'count' => "
-      SELECT COUNT(bbn_tasks_notes.id_note)
-      FROM bbn_tasks_notes
-        JOIN bbn_notes
-          ON bbn_tasks_notes.id_note = bbn_notes.id_alias
-          AND bbn_notes.active = 1
-        JOIN bbn_tasks
-          ON bbn_tasks.id = bbn_tasks_notes.id_task
-          AND bbn_tasks.active = 1",
-    'filters' => [[
-      'field' => 'bbn_tasks.id',
-      'operator' => 'eq',
-      'value' => $model->data['id_task']
-    ]],
-    'group_by' => 'bbn_notes.id',
-    'order' => [[
-      'field' => 'last_edit',
-      'dir' => 'DESC'
-    ]]
-  ];
-}
-
-$grid = new \bbn\appui\grid($model->db, $model->data, $cfg);
-if ( $grid->check() ){
-  $d = $grid->get_datatable();
-  $notes = new \bbn\appui\notes($model->db);
-  if ( is_array($d['data']) && !empty($d['data']) ){
-    $ftype = $model->inc->options->from_code('file', 'media', 'notes', 'appui');
-    $ltype = $model->inc->options->from_code('link', 'media', 'notes', 'appui');
-    foreach ($d['data'] as $i => $n ){
-      $d['data'][$i]['files'] = [];
-      $d['data'][$i]['links'] = [];
-      $medias = $notes->get_medias($n['id']);
-      foreach ( $medias as $m ){
-        if ( $m['type'] === $ftype ){
-          $d['data'][$i]['files'][] = [
-            'id' => $m['id'],
-            'name' => $m['name'],
-            'title' => $m['title'],
-            'extension' => '.'.\bbn\str::file_ext($m['name'])
-          ];
-        }
-        if ( $m['type'] === $ltype ){
-          $d['data'][$i]['links'][] = $m;
+            JOIN bbn_notes_versions AS versions
+              ON versions.id_note = bbn_notes.id
+            JOIN bbn_notes_versions AS last_version
+              ON last_version.id_note = bbn_notes.id
+            LEFT JOIN bbn_notes_versions AS test_version
+              ON test_version.id_note = bbn_notes.id
+              AND last_version.version < test_version.version
+            JOIN bbn_notes_versions AS first_version
+              ON first_version.id_note = bbn_notes.id
+              AND first_version.version = 1
+            LEFT JOIN bbn_notes AS replies
+              ON replies.id_alias = bbn_notes.id
+            LEFT JOIN bbn_notes_versions AS replies_versions
+              ON replies_versions.id_note = replies.id
+          WHERE bbn_notes.id_alias = ?
+            AND bbn_notes.active = 1
+            AND test_version.version IS NULL
+          GROUP BY bbn_notes.id
+          ORDER BY last_edit DESC
+          LIMIT 0, 20",
+          hex2bin($top['id'])
+        );
+        if ( !empty($replies) ){
+          foreach ( $replies as $rep ){
+            $all[strtotime($rep['last_edit'])] = $rep;
+          }
         }
       }
     }
   }
-  return $d;
+  if ( !empty($all) ){
+    krsort($all, SORT_NUMERIC);
+    $all = array_slice(array_values($all), 0, 20);
+  }
+  return $all;
 }

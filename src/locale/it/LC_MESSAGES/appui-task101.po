@@ -1,0 +1,597 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: BBN Solutions <support@bbn.solutions>\n"
+"Language-Team: IT <IT@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2018-07-06 09:58+0200\n"
+"PO-Revision-Date: 2018-07-06 09:58+0200\n"
+"Language: it\n"
+"X-Domain: appui-task101\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "New task"
+msgstr "Nuovo obiettivo"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Search"
+msgstr "Ricerca"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/test_lore.php:1
+msgid "Languages configfasdfaaaured for options translation:"
+msgstr "this is a string of test"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/test_lore.php:1
+msgid "Languages configured for options tranfdasrerfrslation:"
+msgstr "this also"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/test_lore.php:1
+msgid "Languages configured for options translation:"
+msgstr "Lingue configurate per la traduzione delle opzioni"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/test_lore.php:1
+msgid "Languages configured for options transfaslation:"
+msgstr "test ulterio"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/test_lore.php:1
+msgid "pallepallepalle"
+msgstr "balll"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/task.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Global view"
+msgstr "Vista globale"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/task.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/main.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Roles"
+msgstr "Ruoli"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/task.php:1
+msgid "Messages"
+msgstr "Messaggi"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/task.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/main.php:1
+msgid "Tracker"
+msgstr "Tracker"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/task.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Events journal"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/logs.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "User"
+msgstr "Utente"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/logs.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Date"
+msgstr "Data"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/logs.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Action"
+msgstr "Azione"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/main.php:1
+msgid "Info"
+msgstr "Info"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/main.php:1
+msgid "Budget"
+msgstr "Budget"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/main.php:1
+msgid "Last messages"
+msgstr "Ultimi messaggi"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/messages.php:1
+msgid "Add a note"
+msgstr "Aggiungi una nota"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/people.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/roles.php:1
+msgid "Supervisors"
+msgstr "Supervisori"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/people.php:1
+msgid "Remove"
+msgstr "Eliminare"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/people.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/roles.php:1
+msgid "Workers"
+msgstr "Esecutori"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/people.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/roles.php:1
+msgid "Spectators"
+msgstr "Spettatori"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/people.php:1
+msgid "Drag and drop the users into the corresponding role block"
+msgstr "test di prova"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/people.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/people.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "You have no right to modify the roles in this task"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/tab/people.php:1
+msgid "You cannot change the roles because the task is closed"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Price"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Save"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Cancel"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Edit price"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Remove price"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Approve price"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Status"
+msgstr "Stato"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Approved"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Unapproved"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Approved on"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Approved by"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Deciders"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/budget.php:1
+msgid "Remove decider"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Title"
+msgstr "Titolo"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Created by"
+msgstr "Creato da"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Created on"
+msgstr "Creato  su"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Put on ongoing"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Put on hold"
+msgstr "Mettere in pausa"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Resume"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Close"
+msgstr "Chiudi"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Reopen"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "External reference"
+msgstr "Referenze esterne"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Category"
+msgstr "Categoria"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Priority"
+msgstr "Priorità"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Deadline"
+msgstr "Data limite"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Actions"
+msgstr "Azioni"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Make me a supervisor"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Make me a worker"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Make me a viewer"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Ping workers"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/info.php:1
+msgid "Unfollow the task"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/tracker.php:1
+msgid "CURRENT SESSION"
+msgstr "SESSIONE CORRENTE"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/tracker.php:1
+msgid "Stop tracker"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/tracker.php:1
+msgid "Start tracker"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/tracker.php:1
+msgid "IN PROGRESS"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/tracker.php:1
+msgid "Inactive"
+msgstr "Inattivo"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/components/widget/tracker.php:1
+msgid "SUMMARY"
+msgstr "SOMMARIO"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+msgid "Search or Title for the new task"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+msgid "Create a task"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+msgid "#Notes"
+msgstr "#Notes"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+msgid "States"
+msgstr "Stati"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Last"
+msgstr "Ultimo"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Role"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Type"
+msgstr "Tipi"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Duration"
+msgstr "Durata"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+msgid "Reference"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+msgid "Creation Date"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "See task"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Simple text"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Rich text"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Markdown"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "PHP code"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "JavaScript code"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "CSS code"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/messages.js:1
+msgid "Error"
+msgstr "Errore"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+msgid "Are you sure you want to put this task on ongoing?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Are you sure you want to put this task on hold?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Are you sure you want to close this task?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Are you sure you want to resume this task?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+msgid "Are you sure you want to ping the task?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+msgid "Pinged"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Are you sure you want to unfollow this task?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "You have to enter a comment, a link, or a file"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+msgid "Are you sure you want to remove this link?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/main.js:1
+msgid "Add budget"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/messages.js:1
+msgid "New message"
+msgstr "Nuovo messaggio"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/messages.js:1
+msgid "Inserted"
+msgstr "Inserito"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/messages.js:1
+msgid "Edit"
+msgstr "Modifica"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/messages.js:1
+msgid "Edited"
+msgstr "Modificato"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/messages.js:1
+msgid "Reply to"
+msgstr "Rispondi a"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/messages.js:1
+msgid "Are you sure you want to delete this message?"
+msgstr "Sei sicuro di voler eliminare questo messaggio?"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/messages.js:1
+msgid "Deleted"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/people.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/widget/budget.js:1
+msgid "Error during user insert"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/people.js:1
+msgid "Are you sure you want to remove this user?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/tab/people.js:1
+msgid "Error during the user remove"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/widget/budget.js:1
+msgid "Are you sure you want to save this price?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/widget/budget.js:1
+msgid "Are you sure you want to remove the price?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/widget/budget.js:1
+msgid "Select deciders"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/widget/budget.js:1
+msgid "Are you sure you want to remove this decider?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/components/widget/budget.js:1
+msgid "Are you sure you want to approve this price?"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Mine"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "My groups"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "All"
+msgstr "Tutti"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Unknown"
+msgstr "Sconosciuto"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+msgid "months"
+msgstr "mesi"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+msgid "hours"
+msgstr "ore"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js:1
+msgid "days"
+msgstr "giorni"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "State"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php:1
+msgid "Start"
+msgstr "Inizio"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Opened tasks"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Demo task form"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "My ongoing tasks"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Timeline"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Soon"
+msgstr "Presto"
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "All tasks"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Are you sure you want to remove yourself from this task??"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "File"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Link"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Problem with the file..."
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "Problem during the upload"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/page.php:1
+msgid "A file with this name already exists"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page.php:1
+msgid "Tasks"
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php:1
+msgid "Sorry, a problem occured while moving this item, and although the tree says otherwise the item has not been moved."
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php:1
+msgid "Please refresh the tab in order to see the awful truth..."
+msgstr ""
+
+#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php:1
+msgid "Are you sure you want to move this task?"
+msgstr ""

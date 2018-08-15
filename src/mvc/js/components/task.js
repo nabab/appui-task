@@ -6,18 +6,14 @@
  */
 (() => {
   return  {
-    props: ['source'],
+    props: ['source', 'tasks'],
     created(){
       if ( this.source.roles ){
-        if ( !this.source.roles.managers ){
-          this.$set(this.source.roles, 'managers', []);
-        }
-        if ( !this.source.roles.workers ){
-          this.$set(this.source.roles, 'workers', []);
-        }
-        if ( !this.source.roles.viewers ){
-          this.$set(this.source.roles, 'viewers', []);
-        }
+        $.each(this.tasks.source.roles, (n, i) => {
+          if ( !this.source.roles[n] ){
+            this.$set(this.source.roles, n, []);
+          }
+        });
       }
     }
   }

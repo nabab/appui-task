@@ -1,19 +1,6 @@
 // Javascript Document
 (() => {
   return {
-    created(){
-      let tasks = this,
-          mixins = [{
-            props: {
-              tasks: {
-                type: Object,
-                default(){
-                  return tasks;
-                }
-              }
-            }
-          }];
-    },
     data(){
       return {
         priority_colors: [
@@ -62,12 +49,12 @@
             }),
             (user) => {
               user.id = user.value;
-              user.icon = 'fa fa-user';
+              user.icon = 'fas fa-user';
               return user;
             }
           );
           if ( v.is_parent ){
-            v.icon = 'fa fa-users';
+            v.icon = 'fas fa-users';
           }
           res.push(v);
         });

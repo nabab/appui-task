@@ -35,7 +35,6 @@
              component="appui-task-tab-tracker"
              icon="fa fa-hourglass-half"
              title="<?=_("Tracker")?>"
-             :disabled="true"
     ></bbns-tab>
     <bbns-tab url="logs"
              :static="true"

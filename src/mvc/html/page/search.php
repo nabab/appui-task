@@ -40,76 +40,76 @@
                class="appui-tasks-search-table"
     >
       <bbns-column title="<i class='fa fa-user'></i>"
-                  ftitle="<?=_('User')?>"
-                  field="id_user"
-                  :component="$options.components['appui-tasks-user-avatar']"
-                  :width="38"
+                   ftitle="<?=_('User')?>"
+                   field="id_user"
+                   :component="$options.components['appui-tasks-user-avatar']"
+                   :width="38"
       ></bbns-column>
       <bbns-column title="<i class='fa fa-exclamation'></i>"
-                  ftitle="<?=_('Priority')?>"
-                  field="priority"
-                  :render="renderPriority"
-                  :cls="priorityClass"
-                  :width="40"
+                   ftitle="<?=_('Priority')?>"
+                   field="priority"
+                   :render="renderPriority"
+                   :cls="priorityClass"
+                   :width="40"
       ></bbns-column>
       <bbns-column title="<i class='fa fa-comment'></i>"
-                  ftitle="<?=_('#Notes')?>"
-                  field="num_notes"
-                  :width="50"
-                  cls="bbn-c"
+                   ftitle="<?=_('#Notes')?>"
+                   field="num_notes"
+                   :width="50"
+                   cls="bbn-c"
       ></bbns-column>
       <bbns-column title="<i class='fa fa-tasks'></i>"
-                  ftitle="<?=_("States")?>"
-                  field="state"
-                  :render="renderState"
-                  :width="50"
-                  cls="bbn-h-100"
+                   ftitle="<?=_("States")?>"
+                   field="state"
+                   :render="renderState"
+                   :width="50"
+                   cls="bbn-h-100"
       ></bbns-column>
       <bbns-column title="<?=_("Last")?>"
-                  field="last_action"
-                  :render="renderLast"
-                  :width="100"
+                   field="last_action"
+                   :render="renderLast"
+                   :width="100"
       ></bbns-column>
       <bbns-column title="<?=_("Role")?>"
-                  field="role"
-                  :render="renderRole"
-                  :width="80"
+                   field="role"
+                   :render="renderRole"
+                   :width="80"
       ></bbns-column>
       <bbns-column title="<?=_("Type")?>"
-                  field="type"
-                  :render="renderType"
-                  :width="150"
-                  style="max-width: 300px"
+                   field="type"
+                   :render="renderType"
+                   :width="150"
+                   style="max-width: 300px"
       ></bbns-column>
       <bbns-column title="<?=_("Duration")?>"
-                  field="duration"
-                  :render="renderDuration"
-                  :width="70"
+                   field="duration"
+                   :render="renderDuration"
+                   :width="70"
       ></bbns-column>
       <bbns-column title="<?=_("Title")?>"
-                  field="title"
+                   field="title"
       ></bbns-column>
       <bbns-column title="<?=_("Reference")?>"
-                  field="reference"
+                   field="reference"
       ></bbns-column>
       <bbns-column title="<?=_("Creation Date")?>"
-                  field="creation_date"
-                  :render="renderCreationDate"
-                  :width="100"
+                   field="creation_date"
+                   :render="renderCreationDate"
+                   :width="100"
       ></bbns-column>
       <bbns-column title="<?=_("Deadline")?>"
-                  field="deadline"
-                  :render="renderDeadline"
+                   field="deadline"
+                   :render="renderDeadline"
       ></bbns-column>
       <bbns-column title=""
-                  :width="40"
-                  :buttons="[{
-                    title: '<?=_('See task')?>',
-                    icon: 'fa fa-eye',
-                    command: openTask,
-                    notext: true
-                  }]"
-                  fixed="right"
+                   :width="40"
+                   :buttons="[{
+                     title: '<?=_('See task')?>',
+                     icon: 'fa fa-eye',
+                     command: openTask,
+                     notext: true
+                   }]"
+                   fixed="right"
       ></bbns-column>
     </bbn-table>
   </bbn-pane>

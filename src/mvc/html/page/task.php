@@ -1,2 +1,2 @@
 <!-- HTML Document -->
-<appui-task :source="info"></appui-task>
+<appui-task-task :source="source" :tasks="tasks"></appui-task-task>

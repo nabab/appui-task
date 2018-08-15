@@ -1,9 +1,5 @@
 (() => {
-  var cp;
   return {
-    created(){
-      cp = this;
-    },
     data(){
       return {
         typeSelection: [{
@@ -53,11 +49,11 @@
         let icon,
             color;
         if ( row.state === this.tasks.source.states.opened ){
-          icon = 'clock-o';
+          icon = 'clock';
           color = 'orange';
         }
         else if ( row.state === this.tasks.source.states.pending ){
-          icon = 'clock-o';
+          icon = 'clock';
           color = 'red';
         }
         else if ( row.state === this.tasks.source.states.ongoing ){
@@ -72,7 +68,7 @@
           icon = 'pause';
           color = 'grey';
         }
-        return '<div class="bbn-full-screen bbn-middle"><i class="bbn-lg fa fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(this.tasks.source.options.states, "value", row.state, "text") + '"> </i></div>';
+        return '<div class="bbn-full-screen bbn-middle"><i class="bbn-lg fas fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(this.tasks.source.options.states, "value", row.state, "text") + '"> </i></div>';
       },
       renderLast(row){
         return moment(row.last_action).calendar(null, {sameElse: 'DD/MM/YYYY'});
@@ -161,7 +157,7 @@
       },
       'appui-tasks-create-form': {
         template: `
-<bbn-form :action="root + 'actions/task/insert'"
+<bbn-form :action="cp.tasks.source.root + 'actions/task/insert'"
           :source="source"
           @success="refreshTable"
           class="bbn-full-screen"
@@ -174,7 +170,7 @@
                class="bbn-w-100"
     ></bbn-input>
     <div>` + bbn._('Type') + `</div>
-    <bbn-dropdown :source="categories"
+    <bbn-dropdown :source="cp.tasks.fullCategories"
                   v-model="source.type"
                   group="group"
                   :cfg="{dataValueField: 'id'}"
@@ -188,15 +184,14 @@
         props: ['source'],
         data(){
           return {
-            root: cp.tasks.source.root,
-            categories: cp.tasks.fullCategories
+            cp: bbn.vue.closest(this, 'bbns-tab').getComponent()
           }
         },
         methods: {
           refreshTable(d){
-            cp.taskTitle = '';
+            this.cp.taskTitle = '';
             if ( d.success ){
-              cp.openTask(d.success);
+              this.cp.openTask(d.success);
             }
           }
         }

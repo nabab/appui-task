@@ -1,0 +1,32 @@
+.appui-task-tracker {
+    .appui-task-tracker-list {
+      position: absolute;
+      right: 3rem;
+      z-index: 10;
+      bottom: 25px;
+      height: 300px;
+      width: 300px;
+      .k-header {
+        &.active-header {
+          margin-bottom: 2px;
+          .progress-text {
+            padding-left: 0.5rem;
+          }
+          .progress-time {
+            padding-right: 0.5rem;
+          }
+        }
+        .window-icons {
+          position: absolute;
+          right: 9px;
+        }
+      }
+      .active-container {
+        background-color: lightgreen;
+        padding-left: 0.5rem;
+      }
+      .real-list-item {
+        padding: 0.25rem 0 0.25rem 0.5rem;
+      }
+    }
+}

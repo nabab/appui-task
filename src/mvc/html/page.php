@@ -10,4 +10,3 @@
     ></bbns-tab>
   </bbn-tabnav>
 </div>
-<script v-for="temp in source.templates" :id="temp.id" type="text/x-template" v-html="temp.html"></script>

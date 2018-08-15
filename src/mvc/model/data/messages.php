@@ -8,82 +8,49 @@
 if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_alias']) ){
   $cfg = [
     'query' => "
-      SELECT bbn_notes.*, bbn_notes.id AS idnote,
-        (
-          SELECT content
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        ) AS content,
-        (
-          SELECT title
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        ) AS title,
-        (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version ASC
-          LIMIT 1
-        ) AS creation,
-        (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        ) AS last_edit,
-        (
-          SELECT COUNT(id)
-          FROM bbn_notes
-          WHERE id_alias = idnote
-            AND active = 1
-        ) AS num_replies,
-        IFNULL((
-          SELECT creation
-          FROM bbn_notes_versions
-            JOIN bbn_notes
-              ON bbn_notes_versions.id_note = bbn_notes.id
-          WHERE bbn_notes.id_alias = idnote
-          ORDER BY bbn_notes_versions.creation DESC
-          LIMIT 1
-        ), (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        )) AS last_reply,
-        (
-          SELECT GROUP_CONCAT(DISTINCT HEX(bbn_notes_versions.id_user) SEPARATOR ',')
-          FROM bbn_notes_versions
-            JOIN bbn_notes
-              ON bbn_notes_versions.id_note = bbn_notes.id
-          WHERE bbn_notes_versions.id_note = idnote
-            AND bbn_notes.creator != bbn_notes_versions.id_user 
-          GROUP BY bbn_notes_versions.id_note
-          LIMIT 1
-        ) AS users
-      FROM bbn_notes_versions
-        JOIN bbn_notes
-          ON bbn_notes_versions.id_note = bbn_notes.id
-          AND bbn_notes.active = 1
+      SELECT bbn_notes.*, first_version.creation, last_version.title, last_version.content,
+			  last_version.creation AS last_edit, COUNT(DISTINCT replies.id) AS num_replies,
+			  IFNULL(MAX(replies_versions.creation), last_version.creation) AS last_reply,
+			  GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ',') AS users
+      FROM bbn_notes
+        JOIN bbn_notes_versions AS versions
+          ON versions.id_note = bbn_notes.id
+        JOIN bbn_notes_versions AS last_version
+          ON last_version.id_note = bbn_notes.id
+        LEFT JOIN bbn_notes_versions AS test_version
+          ON test_version.id_note = bbn_notes.id
+          AND last_version.version < test_version.version
+        JOIN bbn_notes_versions AS first_version
+          ON first_version.id_note = bbn_notes.id
+          AND first_version.version = 1
+        LEFT JOIN bbn_notes AS replies
+          ON replies.id_alias = bbn_notes.id
+        LEFT JOIN bbn_notes_versions AS replies_versions
+          ON replies_versions.id_note = replies.id
         JOIN bbn_tasks_notes
-          ON bbn_tasks_notes.id_note = bbn_notes_versions.id_note
-          AND bbn_tasks_notes.active = 1
+          ON bbn_tasks_notes.id_note = bbn_notes.id
         JOIN bbn_tasks
           ON bbn_tasks.id = bbn_tasks_notes.id_task
           AND bbn_tasks.active = 1",
     'count' => "
-      SELECT COUNT(bbn_tasks_notes.id_note)
-      FROM bbn_tasks_notes
-        JOIN bbn_notes
+      SELECT COUNT(DISTINCT bbn_notes.id)
+      FROM bbn_notes
+        JOIN bbn_notes_versions AS versions
+          ON versions.id_note = bbn_notes.id
+        JOIN bbn_notes_versions AS last_version
+          ON last_version.id_note = bbn_notes.id
+        LEFT JOIN bbn_notes_versions AS test_version
+          ON test_version.id_note = bbn_notes.id
+          AND last_version.version < test_version.version
+        JOIN bbn_notes_versions AS first_version
+          ON first_version.id_note = bbn_notes.id
+          AND first_version.version = 1
+        LEFT JOIN bbn_notes AS replies
+          ON replies.id_alias = bbn_notes.id
+        LEFT JOIN bbn_notes_versions AS replies_versions
+          ON replies_versions.id_note = replies.id
+        JOIN bbn_tasks_notes
           ON bbn_tasks_notes.id_note = bbn_notes.id
-          AND bbn_notes.active = 1
         JOIN bbn_tasks
           ON bbn_tasks.id = bbn_tasks_notes.id_task
           AND bbn_tasks.active = 1",
@@ -92,7 +59,14 @@ if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_
       'operator' => 'eq',
       'value' => $model->data['data']['id_task']
     ], [
+      'field' => 'bbn_notes.active',
+      'operator' => 'eq',
+      'value' => 1
+    ], [
       'field' => 'bbn_notes.id_parent',
+      'operator' => 'isnull'
+    ], [
+      'field' => 'test_version.version',
       'operator' => 'isnull'
     ], [
       'field' => 'bbn_notes.id_alias',
@@ -111,67 +85,62 @@ if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_
 else if ( !empty($model->data['data']['id_alias']) ){
   $cfg = [
     'query' => "
-      SELECT bbn_notes.*, bbn_notes.id AS idnote, bbn_notes.id_parent AS idparent, n.creator AS parent_creator, 
-        n.active AS parent_active,
-        (
-          SELECT content
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        ) AS content,
-        (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version ASC
-          LIMIT 1
-        ) AS creation,
-        (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idnote
-          ORDER BY version DESC
-          LIMIT 1
-        ) AS last_edit,
-        (
-          SELECT COUNT(id)
-          FROM bbn_notes
-          WHERE id_parent = idnote
-            AND active = 1
-        ) AS num_replies,
-        (
-          SELECT creation
-          FROM bbn_notes_versions
-          WHERE id_note = idparent
-          ORDER BY version ASC
-          LIMIT 1
-        ) AS parent_creation,
-        (
-          SELECT GROUP_CONCAT(DISTINCT HEX(bbn_notes_versions.id_user) SEPARATOR ',')
-          FROM bbn_notes_versions
-            JOIN bbn_notes
-              ON bbn_notes_versions.id_note = bbn_notes.id
-          WHERE bbn_notes_versions.id_note = idnote
-            AND bbn_notes.creator != bbn_notes_versions.id_user 
-          GROUP BY bbn_notes_versions.id_note
-          LIMIT 1
-        ) AS users
+      SELECT bbn_notes.*, first_version.creation, last_version.content,
+        last_version.creation AS last_edit, COUNT(DISTINCT replies.id) AS num_replies,
+        GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ',') AS users,
+        parent_version.creation AS parent_creation, parent_version.id_user AS parent_creator,
+        parent.active AS parent_active
       FROM bbn_notes
-        JOIN bbn_notes AS n
-          ON bbn_notes.id_parent = n.id",
+        JOIN bbn_notes_versions AS versions
+          ON versions.id_note = bbn_notes.id
+        JOIN bbn_notes_versions AS last_version
+          ON last_version.id_note = bbn_notes.id
+        LEFT JOIN bbn_notes_versions AS test_version
+          ON test_version.id_note = bbn_notes.id
+          AND last_version.version < test_version.version
+        JOIN bbn_notes_versions AS first_version
+          ON first_version.id_note = bbn_notes.id
+          AND first_version.version = 1
+        LEFT JOIN bbn_notes AS replies
+          ON replies.id_parent = bbn_notes.id
+        LEFT JOIN bbn_notes AS parent
+          ON parent.id = bbn_notes.id_parent
+        LEFT JOIN bbn_notes_versions AS parent_version
+          ON parent_version.id_note = parent.id
+          AND parent_version.version = 1",
     'count' => "
-      SELECT COUNT(bbn_notes.id)
-      FROM bbn_notes",
+      SELECT COUNT(DISTINCT bbn_notes.id)
+      FROM bbn_notes
+        JOIN bbn_notes_versions AS versions
+          ON versions.id_note = bbn_notes.id
+        JOIN bbn_notes_versions AS last_version
+          ON last_version.id_note = bbn_notes.id
+        LEFT JOIN bbn_notes_versions AS test_version
+          ON test_version.id_note = bbn_notes.id
+          AND last_version.version < test_version.version
+        JOIN bbn_notes_versions AS first_version
+          ON first_version.id_note = bbn_notes.id
+          AND first_version.version = 1
+        LEFT JOIN bbn_notes AS replies
+          ON replies.id_parent = bbn_notes.id
+        LEFT JOIN bbn_notes AS parent
+          ON parent.id = bbn_notes.id_parent
+        LEFT JOIN bbn_notes_versions AS parent_version
+          ON parent_version.id_note = parent.id
+          AND parent_version.version = 1",
     'filters' => [[
       'field' => 'bbn_notes.id_alias',
       'operator' => 'eq',
       'value' => $model->data['data']['id_alias']
     ], [
+      'field' => 'test_version.version',
+      'operator' => 'isnull'
+    ], [
       'field' => 'bbn_notes.active',
       'operator' => 'eq',
       'value' => 1
     ]],
+    'group_by' => 'bbn_notes.id',
     'order' => [/*[
       'field' => 'last_edit',
       'dir' => 'DESC'
