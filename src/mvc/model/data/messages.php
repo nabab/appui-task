@@ -7,53 +7,127 @@
  */
 if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_alias']) ){
   $cfg = [
-    'query' => "
-      SELECT bbn_notes.*, first_version.creation, last_version.title, last_version.content,
-			  last_version.creation AS last_edit, COUNT(DISTINCT replies.id) AS num_replies,
-			  IFNULL(MAX(replies_versions.creation), last_version.creation) AS last_reply,
-			  GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ',') AS users
-      FROM bbn_notes
-        JOIN bbn_notes_versions AS versions
-          ON versions.id_note = bbn_notes.id
-        JOIN bbn_notes_versions AS last_version
-          ON last_version.id_note = bbn_notes.id
-        LEFT JOIN bbn_notes_versions AS test_version
-          ON test_version.id_note = bbn_notes.id
-          AND last_version.version < test_version.version
-        JOIN bbn_notes_versions AS first_version
-          ON first_version.id_note = bbn_notes.id
-          AND first_version.version = 1
-        LEFT JOIN bbn_notes AS replies
-          ON replies.id_alias = bbn_notes.id
-        LEFT JOIN bbn_notes_versions AS replies_versions
-          ON replies_versions.id_note = replies.id
-        JOIN bbn_tasks_notes
-          ON bbn_tasks_notes.id_note = bbn_notes.id
-        JOIN bbn_tasks
-          ON bbn_tasks.id = bbn_tasks_notes.id_task
-          AND bbn_tasks.active = 1",
-    'count' => "
-      SELECT COUNT(DISTINCT bbn_notes.id)
-      FROM bbn_notes
-        JOIN bbn_notes_versions AS versions
-          ON versions.id_note = bbn_notes.id
-        JOIN bbn_notes_versions AS last_version
-          ON last_version.id_note = bbn_notes.id
-        LEFT JOIN bbn_notes_versions AS test_version
-          ON test_version.id_note = bbn_notes.id
-          AND last_version.version < test_version.version
-        JOIN bbn_notes_versions AS first_version
-          ON first_version.id_note = bbn_notes.id
-          AND first_version.version = 1
-        LEFT JOIN bbn_notes AS replies
-          ON replies.id_alias = bbn_notes.id
-        LEFT JOIN bbn_notes_versions AS replies_versions
-          ON replies_versions.id_note = replies.id
-        JOIN bbn_tasks_notes
-          ON bbn_tasks_notes.id_note = bbn_notes.id
-        JOIN bbn_tasks
-          ON bbn_tasks.id = bbn_tasks_notes.id_task
-          AND bbn_tasks.active = 1",
+		'table' => 'bbn_notes',
+		'fields' => [
+			'bbn_notes.id',
+			'bbn_notes.id_parent',
+			'bbn_notes.id_alias',
+			'bbn_notes.id_type',
+			'bbn_notes.private',
+			'bbn_notes.locked',
+			'bbn_notes.pinned',
+			'bbn_notes.creator',
+			'bbn_notes.active',
+			'first_version.creation',
+			'last_version.title',
+			'last_version.content',
+			'last_edit' => 'last_version.creation',
+			'num_replies' => 'COUNT(DISTINCT replies.id)',
+			'last_reply' => 'IFNULL(MAX(replies_versions.creation), last_version.creation)',
+			'users' => 'GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ",")'
+		],
+		'join' => [[
+			'table' => 'bbn_notes_versions',
+			'alias' => 'versions',
+			'on' => [
+				'logic' => 'AND',
+				'conditions' => [[
+					'field' => 'versions.id_note',
+					'operator' => '=',
+					'exp' => 'bbn_notes.id'
+				]]
+			]
+		], [
+			'table' => 'bbn_notes_versions',
+			'alias' => 'last_version',
+			'on' => [
+				'logic' => 'AND',
+				'conditions' => [[
+					'field' => 'last_version.id_note',
+					'operator' => '=',
+					'exp' => 'bbn_notes.id'
+				]]
+			]
+		], [
+			'table' => 'bbn_notes_versions',
+			'alias' => 'test_version',
+			'type' => 'left',
+			'on' => [
+				'logic' => 'AND',
+				'conditions' => [[
+					'field' => 'test_version.id_note',
+					'operator' => '=',
+					'exp' => 'bbn_notes.id'
+				], [
+					'field' => 'last_version.version',
+					'operator' => '<',
+					'exp' => 'test_version.version'
+				]]
+			]
+		], [
+			'table' => 'bbn_notes_versions',
+			'alias' => 'first_version',
+			'on' => [
+				'logic' => 'AND',
+				'conditions' => [[
+					'field' => 'first_version.id_note',
+					'operator' => '=',
+					'exp' => 'bbn_notes.id'
+				], [
+					'field' => 'first_version.version',
+					'operator' => '=',
+					'value' => 1
+				]]
+			]
+		], [
+			'table' => 'bbn_notes',
+			'alias' => 'replies',
+			'type' => 'left',
+			'on' => [
+				'logic' => 'AND',
+				'conditions' => [[
+					'field' => 'replies.id_alias',
+					'operator' => '=',
+					'exp' => 'bbn_notes.id'
+				]]
+			]
+		], [
+			'table' => 'bbn_notes_versions',
+			'alias' => 'replies_versions',
+			'type' => 'left',
+			'on' => [
+				'logic' => 'AND',
+				'conditions' => [[
+					'field' => 'replies_versions.id_note',
+					'operator' => '=',
+					'exp' => 'replies.id'
+				]]
+			]
+		], [
+			'table' => 'bbn_tasks_notes',
+			'on' => [
+				'logic' => 'AND',
+				'conditions' => [[
+					'field' => 'bbn_tasks_notes.id_note',
+					'operator' => '=',
+					'exp' => 'bbn_notes.id'
+				]]
+			]
+		], [
+			'table' => 'bbn_tasks',
+			'on' => [
+				'logic' => 'AND',
+				'conditions' => [[
+					'field' => 'bbn_tasks.id',
+					'operator' => '=',
+					'exp' => 'bbn_tasks_notes.id_task'
+				], [
+					'field' => 'bbn_tasks.active',
+					'operator' => '=',
+					'value' => 1
+				]]
+			]
+		]],
     'filters' => [[
       'field' => 'bbn_tasks.id',
       'operator' => 'eq',
@@ -84,50 +158,120 @@ if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_
 }
 else if ( !empty($model->data['data']['id_alias']) ){
   $cfg = [
-    'query' => "
-      SELECT bbn_notes.*, first_version.creation, last_version.content,
-        last_version.creation AS last_edit, COUNT(DISTINCT replies.id) AS num_replies,
-        GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ',') AS users,
-        parent_version.creation AS parent_creation, parent_version.id_user AS parent_creator,
-        parent.active AS parent_active
-      FROM bbn_notes
-        JOIN bbn_notes_versions AS versions
-          ON versions.id_note = bbn_notes.id
-        JOIN bbn_notes_versions AS last_version
-          ON last_version.id_note = bbn_notes.id
-        LEFT JOIN bbn_notes_versions AS test_version
-          ON test_version.id_note = bbn_notes.id
-          AND last_version.version < test_version.version
-        JOIN bbn_notes_versions AS first_version
-          ON first_version.id_note = bbn_notes.id
-          AND first_version.version = 1
-        LEFT JOIN bbn_notes AS replies
-          ON replies.id_parent = bbn_notes.id
-        LEFT JOIN bbn_notes AS parent
-          ON parent.id = bbn_notes.id_parent
-        LEFT JOIN bbn_notes_versions AS parent_version
-          ON parent_version.id_note = parent.id
-          AND parent_version.version = 1",
-    'count' => "
-      SELECT COUNT(DISTINCT bbn_notes.id)
-      FROM bbn_notes
-        JOIN bbn_notes_versions AS versions
-          ON versions.id_note = bbn_notes.id
-        JOIN bbn_notes_versions AS last_version
-          ON last_version.id_note = bbn_notes.id
-        LEFT JOIN bbn_notes_versions AS test_version
-          ON test_version.id_note = bbn_notes.id
-          AND last_version.version < test_version.version
-        JOIN bbn_notes_versions AS first_version
-          ON first_version.id_note = bbn_notes.id
-          AND first_version.version = 1
-        LEFT JOIN bbn_notes AS replies
-          ON replies.id_parent = bbn_notes.id
-        LEFT JOIN bbn_notes AS parent
-          ON parent.id = bbn_notes.id_parent
-        LEFT JOIN bbn_notes_versions AS parent_version
-          ON parent_version.id_note = parent.id
-          AND parent_version.version = 1",
+    'table' => 'bbn_notes',
+    'fields' => [
+      'bbn_notes.id',
+      'bbn_notes.id_parent',
+      'bbn_notes.id_alias',
+      'bbn_notes.id_type',
+      'bbn_notes.private',
+      'bbn_notes.locked',
+      'bbn_notes.pinned',
+      'bbn_notes.creator',
+      'bbn_notes.active',
+      'first_version.creation',
+      'last_version.content',
+      'last_edit' => 'last_version.creation',
+      'num_replies' => 'COUNT(DISTINCT replies.id)',
+      'users' => 'GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ",")',
+      'parent_creation' => 'parent_version.creation',
+      'parent_creator' => 'parent_version.id_user',
+      'parent_active' => 'parent.active'
+    ],
+    'join' => [[
+      'table' => 'bbn_notes_versions',
+      'alias' => 'versions',
+      'on' => [
+        'logic' => 'AND',
+        'conditions' => [[
+          'field' => 'versions.id_note',
+          'operator' => '=',
+          'exp' => 'bbn_notes.id'
+        ]]
+      ]
+    ], [
+      'table' => 'bbn_notes_versions',
+      'alias' => 'last_version',
+      'on' => [
+        'logic' => 'AND',
+        'conditions' => [[
+          'field' => 'last_version.id_note',
+          'operator' => '=',
+          'exp' => 'bbn_notes.id'
+        ]]
+      ]
+    ], [
+      'table' => 'bbn_notes_versions',
+      'type' => 'left',
+      'alias' => 'test_version',
+      'on' => [
+        'logic' => 'AND',
+        'conditions' => [[
+          'field' => 'test_version.id_note',
+          'operator' => '=',
+          'exp' => 'bbn_notes.id'
+        ], [
+          'field' => 'last_version.version',
+          'operator' => '<',
+          'exp' => 'test_version.version'
+        ]]
+      ]
+    ], [
+      'table' => 'bbn_notes_versions',
+      'alias' => 'first_version',
+      'on' => [
+        'logic' => 'AND',
+        'conditions' => [[
+          'field' => 'first_version.id_note',
+          'operator' => '=',
+          'exp' => 'bbn_notes.id'
+        ], [
+          'field' => 'first_version.version',
+          'operator' => '=',
+          'value' => 1
+        ]]
+      ]
+    ], [
+      'table' => 'bbn_notes',
+      'type' => 'left',
+      'alias' => 'replies',
+      'on' => [
+        'logic' => 'AND',
+        'conditions' => [[
+          'field' => 'replies.id_parent',
+          'operator' => '=',
+          'exp' => 'bbn_notes.id'
+        ]]
+      ]
+    ], [
+      'table' => 'bbn_notes',
+      'type' => 'left',
+      'alias' => 'parent',
+      'on' => [
+        'logic' => 'AND',
+        'conditions' => [[
+          'field' => 'parent.id',
+          'operator' => '=',
+          'exp' => 'bbn_notes.id_parent'
+        ]]
+      ]
+    ], [
+      'table' => 'bbn_notes_versions',
+      'type' => 'left',
+      'alias' => 'parent_version',
+      'on' => [
+        'logic' => 'AND',
+        'conditions' => [[
+          'field' => 'parent_version.id_note',
+          'operator' => '=',
+          'exp' => 'parent.id'
+        ], [
+          'field' => 'parent_version.version',
+          'operatort' => '=',
+          'value' => 1
+        ]]
+      ]
+    ]],
     'filters' => [[
       'field' => 'bbn_notes.id_alias',
       'operator' => 'eq',

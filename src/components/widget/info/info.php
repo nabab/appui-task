@@ -20,7 +20,14 @@
   <div v-text="main.stateText"></div>
   <div></div>
   <div>
-    <div v-if="main.isActive">
+    <div v-if="main.isUnapproved">
+      <bbn-button v-if="main.canClose"
+                  @click="main.close"
+                  title="<?=_("Close") ?>"
+                  icon="fas fa-check"
+      ></bbn-button>
+    </div>
+    <div v-else-if="main.isActive">
       <bbn-button v-if="main.canStart"
                   @click="main.start"
                   title="<?=_("Put on ongoing")?>"

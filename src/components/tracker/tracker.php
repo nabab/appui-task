@@ -15,13 +15,15 @@
     <div class="k-header bbn-c"
          style="margin-bottom: 0"
     >
+      <span class="window-icons-left">
+        <i class="fas fa-window-minimize bbn-p"
+           @click="openWindow"
+        ></i>
+      </span>
       <span class="bbn-b"><?=_('Tasks list')?></span>
-      <span class="window-icons">
+      <span class="window-icons-right">
         <i class="fas fa-sync bbn-p"
            @click="refreshList(false)"
-        ></i>
-        <i class="fas fa-times bbn-p"
-           @click="openWindow"
         ></i>
       </span>
     </div>

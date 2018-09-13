@@ -42,6 +42,9 @@
             summary: totUser
           }
         }));
+        ret = ret.filter((obj, pos, arr) => {
+          return arr.map(mapObj => mapObj['idUser']).indexOf(obj['idUser']) === pos;
+        });
         return bbn.fn.order(ret, 'userName', 'ASC');
       },
       trackerComp(){

@@ -96,6 +96,9 @@
       isHoldingOrOpened(){
         return this.isHolding || this.isOpened;
       },
+      isUnapproved(){
+        return this.source.price && ( !this.source.approved.chrono || (this.source.approved.chrono < this.source.lastChangePrice.chrono));
+      },
       isApproved(){
         return !!(this.source.price &&
         (this.source.approved.chrono !== undefined) &&

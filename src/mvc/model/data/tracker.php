@@ -1,18 +1,19 @@
 <?php
 if ( !empty($model->data['data']['id_task']) ){
   $grid = new \bbn\appui\grid($model->db, $model->data, [
-    'query' => "
-      SELECT id, id_task, id_user, id_note, start,
-        IFNULL(`length`, 0) AS `length`, end
-      FROM bbn_tasks_sessions
-    ",
-    'count' => "
-      SELECT COUNT(id)
-      FROM bbn_tasks_sessions
-    ",
+    'table' => 'bbn_tasks_sessions',
+    'fields' => [
+      'id',
+      'id_task',
+      'id_user',
+      'id_note',
+      'start',
+      'length' => "IFNULL(`length`, 0)",
+      'end'
+    ],
     'filters' => [[
       'field' => 'id_task',
-      'operator' => 'eq',
+      'operator' => '=',
       'value' => $model->data['data']['id_task']
     ]],
     'order' => [[

@@ -2,7 +2,7 @@
   <bbn-tabnav class="info-tabstrip"
               :scrollable="false"
               :autoload="false"
-              root="tasks/<?=$id?>/"
+              :root="'tasks/' + source.id + '/'"
   >
     <bbns-tab url="main"
              :static="true"

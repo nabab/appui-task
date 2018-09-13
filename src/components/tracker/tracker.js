@@ -120,7 +120,7 @@
         }, obj);
         bbn.fn.post(appui.plugins['appui-task'] + '/actions/tracker/stop', obj, d => {
           if ( d.success ){
-            let tasks = bbn.vue.findAll(appui, 'appui-task-widget-tracker');
+            let tasks = bbn.vue.findAll(appui, 'appui-task-task');
             if ( tasks.length ){
               $.each(tasks, (i, t) => {
                 if ( t.source.id === this.active.id_task ){
@@ -167,7 +167,7 @@
 >
   <bbn-textarea v-model="source.message"
                 class="bbn-full-screen"
-                style="width: 100%"
+                style="width: 100%; padding: 10px"
   ></bbn-textarea>
 </bbn-form>
         `,
