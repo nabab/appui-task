@@ -4,7 +4,7 @@
   <div class="bbn-block bbn-p"
        @click="openWindow"
   >
-    <i class="bbn-lg fas fa-stopwatch"></i>
+    <i :class="['bbn-lg', 'fas', 'fa-stopwatch', {'bbn-green': active && progress}]"></i>
     <span v-if="active && progress"
           v-text="progress"
     ></span>
@@ -34,7 +34,8 @@
         <div class="k-header active-header">
           <div class="bbn-flex-width">
             <div class="bbn-flex-fill bbn-b progress-text"><?=_('In progress')?></div>
-            <div class="progress-time bbn-b"
+            <div v-if="progress"
+                 class="progress-time bbn-b"
                  v-text="progress"
             ></div>
           </div>
@@ -47,7 +48,7 @@
                  title="<?=_('Open task')?>"
             ></div>
             <bbn-button @click="stop"
-                        icon="fa fa-stop"
+                        icon="fas fa-stop"
                         title="<?=_('Stop tracker')?>"
                         style="color: red; margin-right: 0"
             ></bbn-button>
@@ -65,7 +66,7 @@
                    title="<?=_('Open task')?>"
               ></div>
               <bbn-button @click="start(l.id)"
-                          icon="fa fa-play"
+                          icon="fas fa-play"
                           title="<?=_('Play tracker')?>"
                           style="color: green"
               ></bbn-button>

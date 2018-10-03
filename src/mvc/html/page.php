@@ -4,9 +4,10 @@
               :autoload="true"
   >
     <bbns-tab url="search"
-             :static="true"
-             :load="true"
-             :title="'<i class=\'fa fa-home\'> </i>&nbsp;<?=_("New task")?> / <?=_("Search")?>'"
+              :static="true"
+              :load="true"
+              icon="fas fa-home"
+              title="<?=_("New task")?> / <?=_("Search")?>"
     ></bbns-tab>
   </bbn-tabnav>
 </div>

@@ -17,7 +17,7 @@
                  v-model="taskTitle"
       ></bbn-input>
       <bbn-button class="bbn-xl"
-                  icon="fa fa-flag-checkered"
+                  icon="fas fa-flag-checkered"
                   @click="createTask"
                   style="margin: 0 2em"
                   :disabled="!taskTitle"
@@ -39,26 +39,26 @@
                :order="[{field: 'last_action', dir: 'DESC'}]"
                class="appui-tasks-search-table"
     >
-      <bbns-column title="<i class='fa fa-user'></i>"
+      <bbns-column title="<i class='fas fa-user'></i>"
                    ftitle="<?=_('User')?>"
                    field="id_user"
                    :component="$options.components['appui-tasks-user-avatar']"
                    :width="38"
       ></bbns-column>
-      <bbns-column title="<i class='fa fa-exclamation'></i>"
+      <bbns-column title="<i class='fas fa-exclamation'></i>"
                    ftitle="<?=_('Priority')?>"
                    field="priority"
                    :render="renderPriority"
                    :cls="priorityClass"
                    :width="40"
       ></bbns-column>
-      <bbns-column title="<i class='fa fa-comment'></i>"
+      <bbns-column title="<i class='fas fa-comment'></i>"
                    ftitle="<?=_('#Notes')?>"
                    field="num_notes"
                    :width="50"
                    cls="bbn-c"
       ></bbns-column>
-      <bbns-column title="<i class='fa fa-tasks'></i>"
+      <bbns-column title="<i class='fas fa-tasks'></i>"
                    ftitle="<?=_("States")?>"
                    field="state"
                    :render="renderState"
@@ -105,7 +105,7 @@
                    :width="40"
                    :buttons="[{
                      title: '<?=_('See task')?>',
-                     icon: 'fa fa-eye',
+                     icon: 'fas fa-eye',
                      command: openTask,
                      notext: true
                    }]"

@@ -108,16 +108,16 @@
       ></bbn-tree>
       <div class="bbn-task-roles-desc bbn-lg" v-if="!isClosed">
         <span v-if="canChange">
-          <i class="fa fa-question-circle"> </i>
+          <i class="fas fa-question-circle"> </i>
           <?=_("Drag and drop the users into the corresponding role block")?>
         </span>
         <span v-if="!canChange">
-          <i class="fa fa-exclamation-circle"> </i>
+          <i class="fas fa-exclamation-circle"> </i>
           <?=_("You have no right to modify the roles in this task")?>
         </span>
       </div>
       <div class="bbn-task-roles-desc bbn-lg" v-if="isClosed">
-        <i class="fa fa-exclamation-circle"> </i>
+        <i class="fas fa-exclamation-circle"> </i>
         <?=_("You cannot change the roles because the task is closed")?>
       </div>
     </div>

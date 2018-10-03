@@ -9,7 +9,7 @@
              :load="false"
              :source="source"
              component="appui-task-tab-main"
-             icon="fa fa-eye"
+             icon="fas fa-eye"
              title="<?=_("Global view")?>"
     ></bbns-tab>
     <bbns-tab url="people"
@@ -17,7 +17,7 @@
              :load="false"
              :source="source"
              component="appui-task-tab-people"
-             icon="fa fa-users"
+             icon="fas fa-users"
              title="<?=_("Roles")?>"
     ></bbns-tab>
     <bbns-tab url="messages"
@@ -25,7 +25,7 @@
              :load="false"
              :source="source"
              component="appui-task-tab-messages"
-             icon="fa fa-comments"
+             icon="fas fa-comments"
              title="<?=_("Messages")?>"
     ></bbns-tab>
     <bbns-tab url="tracker"
@@ -33,7 +33,7 @@
              :load="false"
              :source="source"
              component="appui-task-tab-tracker"
-             icon="fa fa-hourglass-half"
+             icon="fas fa-hourglass-half"
              title="<?=_("Tracker")?>"
     ></bbns-tab>
     <bbns-tab url="logs"
@@ -41,7 +41,7 @@
              :load="false"
              :source="source"
              component="appui-task-tab-logs"
-             icon="fa fa-history"
+             icon="fas fa-history"
              title="<?=_("Events journal")?>"
     ></bbns-tab>
   </bbn-tabnav>
