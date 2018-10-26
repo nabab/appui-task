@@ -7,10 +7,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2018-10-24 17:32+0200\n"
-"POT-Revision-Date: 2018-10-24 17:32+0200\n"
+"POT-Creation-Date: 2018-10-26 13:18+0200\n"
+"POT-Revision-Date: 2018-10-26 13:18+0200\n"
 "Language: en\n"
-"X-Domain: appui-task292\n"
+"X-Domain: appui-task148\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.js
