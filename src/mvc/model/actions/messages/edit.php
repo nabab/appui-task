@@ -8,7 +8,7 @@
 $notes = new \bbn\appui\notes($model->db);
 if (
   !empty($model->data['id']) &&
-  ($old = $notes->get($model->data['id']))
+  ($old = $notes->get_full($model->data['id']))
 ){
   $ok = true;
   $path = BBN_USER_PATH.'tmp/'.$model->data['ref'].'/';

@@ -3,597 +3,798 @@ msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: info@bbn.so\n"
 "last-Translator: BBN Solutions <support@bbn.solutions>\n"
-"Language-Team: DE <DE@li.org>\n"
+"Language-Team: EN <EN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2018-10-26 16:55+0200\n"
-"POT-Revision-Date: 2018-10-26 16:55+0200\n"
-"Language: de\n"
-"X-Domain: appui-task143\n"
+"POT-Creation-Date: 2018-12-11 06:18+0100\n"
+"POT-Revision-Date: 2018-12-11 06:18+0100\n"
+"Language: en\n"
+"X-Domain: appui-task155\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.js
 msgid "Billed"
-msgstr ""
+msgstr "Billed"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 msgid "Ref."
-msgstr ""
+msgstr "Ref."
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/logs/logs.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Tax"
-msgstr ""
+msgstr "Tax"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Taxable"
-msgstr ""
+msgstr "Taxable"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Amount"
-msgstr ""
+msgstr "Amount"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "User"
-msgstr ""
+msgstr "User"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/logs/logs.php
 msgid "Action"
-msgstr ""
+msgstr "Action"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Simple text"
-msgstr ""
+msgstr "Simple text"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Rich text"
-msgstr ""
+msgstr "Rich text"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Markdown"
-msgstr ""
+msgstr "Markdown"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "PHP code"
-msgstr ""
+msgstr "PHP code"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "JavaScript code"
-msgstr ""
+msgstr "JavaScript code"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "CSS code"
-msgstr ""
+msgstr "CSS code"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to put this task on ongoing?"
-msgstr ""
+msgstr "Are you sure you want to put this task on ongoing?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to put this task on hold?"
-msgstr ""
+msgstr "Are you sure you want to put this task on hold?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to close this task?"
-msgstr ""
+msgstr "Are you sure you want to close this task?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to resume this task?"
-msgstr ""
+msgstr "Are you sure you want to resume this task?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to ping the task?"
-msgstr ""
+msgstr "Are you sure you want to ping the task?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Pinged"
-msgstr ""
+msgstr "Pinged"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to unfollow this task?"
-msgstr ""
+msgstr "Are you sure you want to unfollow this task?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "You have to enter a comment, a link, or a file"
-msgstr ""
+msgstr "You have to enter a comment, a link, or a file"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to remove this link?"
-msgstr ""
+msgstr "Are you sure you want to remove this link?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Add budget"
-msgstr ""
+msgstr "Add budget"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 msgid "Budget"
-msgstr ""
+msgstr "Budget"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Roles"
-msgstr ""
+msgstr "Roles"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/task/task.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "Tracker"
-msgstr ""
+msgstr "Tracker"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 msgid "Last messages"
-msgstr ""
+msgstr "Last messages"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 msgid "New message"
-msgstr ""
+msgstr "New message"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 msgid "Inserted"
-msgstr ""
+msgstr "Inserted"
 
-#: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
-#: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Edited"
-msgstr ""
+msgstr "Edited"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 msgid "Reply to"
-msgstr ""
+msgstr "Reply to"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 msgid "Are you sure you want to delete this message?"
-msgstr ""
+msgstr "Are you sure you want to delete this message?"
 
-#: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
-#: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
 msgid "Deleted"
-msgstr ""
+msgstr "Deleted"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.php
 msgid "Add a note"
-msgstr ""
+msgstr "Add a note"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Error during user insert"
-msgstr ""
+msgstr "Error during user insert"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.js
 msgid "Are you sure you want to remove this user?"
-msgstr ""
+msgstr "Are you sure you want to remove this user?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.js
 msgid "Error during the user remove"
-msgstr ""
+msgstr "Error during the user remove"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 msgid "You have no right to modify the roles in this task"
-msgstr ""
+msgstr "You have no right to modify the roles in this task"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/roles/roles.php
 msgid "Supervisors"
-msgstr ""
+msgstr "Supervisors"
 
-#: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
-#: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
 msgid "Remove"
-msgstr ""
+msgstr "Remove"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/roles/roles.php
 msgid "Workers"
-msgstr ""
+msgstr "Workers"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/roles/roles.php
 msgid "Spectators"
-msgstr ""
+msgstr "Spectators"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 msgid "Drag and drop the users into the corresponding role block"
-msgstr ""
+msgstr "Drag and drop the users into the corresponding role block"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 msgid "You cannot change the roles because the task is closed"
-msgstr ""
+msgstr "You cannot change the roles because the task is closed"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "In progress..."
-msgstr ""
+msgstr "In progress..."
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Are you sure you want to delete this track?"
-msgstr ""
+msgstr "Are you sure you want to delete this track?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.php
 msgid "End"
-msgstr ""
+msgstr "End"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.php
 msgid "Message"
-msgstr ""
+msgstr "Message"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "The end date must be more recent than the start date"
-msgstr ""
+msgstr "The end date must be more recent than the start date"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.php
 msgid "Worker"
-msgstr ""
+msgstr "Worker"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Duration"
-msgstr ""
+msgstr "Duration"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Global view"
-msgstr ""
+msgstr "Global view"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Events journal"
-msgstr ""
+msgstr "Events journal"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.js
 msgid "Are you sure you want to stop the tracker in progress?"
-msgstr ""
+msgstr "Are you sure you want to stop the tracker in progress?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.js
 msgid "Do you want to write a message?"
-msgstr ""
+msgstr "Do you want to write a message?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.js
 msgid "Tracker message"
-msgstr ""
+msgstr "Tracker message"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "Tasks list"
-msgstr ""
+msgstr "Tasks list"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "In progress"
-msgstr ""
+msgstr "In progress"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "Open task"
-msgstr ""
+msgstr "Open task"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "Stop tracker"
-msgstr ""
+msgstr "Stop tracker"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "Play tracker"
-msgstr ""
+msgstr "Play tracker"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Are you sure you want to save this price?"
-msgstr ""
+msgstr "Are you sure you want to save this price?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Are you sure you want to remove the price?"
-msgstr ""
+msgstr "Are you sure you want to remove the price?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Select deciders"
-msgstr ""
+msgstr "Select deciders"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Are you sure you want to remove this decider?"
-msgstr ""
+msgstr "Are you sure you want to remove this decider?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Are you sure you want to approve this price?"
-msgstr ""
+msgstr "Are you sure you want to approve this price?"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Invoice creation"
-msgstr ""
+msgstr "Invoice creation"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Price"
-msgstr ""
+msgstr "Price"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Edit price"
-msgstr ""
+msgstr "Edit price"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Remove price"
-msgstr ""
+msgstr "Remove price"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Approve price"
-msgstr ""
+msgstr "Approve price"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Approved"
-msgstr ""
+msgstr "Approved"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Unapproved"
-msgstr ""
+msgstr "Unapproved"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Approved on"
-msgstr ""
+msgstr "Approved on"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Approved by"
-msgstr ""
+msgstr "Approved by"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Deciders"
-msgstr ""
+msgstr "Deciders"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Remove decider"
-msgstr ""
+msgstr "Remove decider"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Invoice"
-msgstr ""
+msgstr "Invoice"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Ref"
-msgstr ""
+msgstr "Ref"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Title"
-msgstr ""
+msgstr "Title"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Created by"
-msgstr ""
+msgstr "Created by"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Created on"
-msgstr ""
+msgstr "Created on"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Close"
-msgstr ""
+msgstr "Close"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Put on ongoing"
-msgstr ""
+msgstr "Put on ongoing"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Put on hold"
-msgstr ""
+msgstr "Put on hold"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Resume"
-msgstr ""
+msgstr "Resume"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Reopen"
-msgstr ""
+msgstr "Reopen"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "External reference"
-msgstr ""
+msgstr "External reference"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Category"
-msgstr ""
+msgstr "Category"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Priority"
-msgstr ""
+msgstr "Priority"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Deadline"
-msgstr ""
+msgstr "Deadline"
 
-#: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Make me a supervisor"
-msgstr ""
+msgstr "Make me a supervisor"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Make me a worker"
-msgstr ""
+msgstr "Make me a worker"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Make me a spectator"
-msgstr ""
+msgstr "Make me a spectator"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Ping workers"
-msgstr ""
+msgstr "Ping workers"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Unfollow the task"
-msgstr ""
+msgstr "Unfollow the task"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "CURRENT SESSION"
-msgstr ""
+msgstr "CURRENT SESSION"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "Start tracker"
-msgstr ""
+msgstr "Start tracker"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "IN PROGRESS"
-msgstr ""
+msgstr "In progress"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "Inactive"
-msgstr ""
+msgstr "Inactive"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "SUMMARY"
-msgstr ""
+msgstr "SUMMARY"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/groups.php
+msgid "New group"
+msgstr "New group"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/groups.php
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "ID"
+msgstr "ID"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/groups.php
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Name"
+msgstr "Name"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/groups.php
+msgid "Users"
+msgstr "Users"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/main.php
+msgid "Informations"
+msgstr "Informations"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/main.php
+msgid "Mot de passe"
+msgstr "Mot de passe"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 msgid "New task"
-msgstr ""
+msgstr "New task"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page.php
 msgid "Search"
-msgstr ""
+msgstr "Search"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "New user"
+msgstr "New user"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Group"
+msgstr "Group"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "Function"
+msgstr "Function"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "Login"
+msgstr "Login"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "eMail"
+msgstr "eMail"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "Last activity of the user"
+msgstr "Last activity of the user"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "Phone"
+msgstr "Phone"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "Theme"
+msgstr "Theme"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "Developer"
+msgstr "Developer"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "Administrator"
+msgstr "Administrator"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/users.php
+msgid "Active"
+msgstr "Active"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "Search or Title for the new task"
-msgstr ""
+msgstr "Search or Title for the new task"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "Create a task"
-msgstr ""
+msgstr "Create a task"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "#Notes"
-msgstr ""
+msgstr "#Notes"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "States"
-msgstr ""
+msgstr "States"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Last"
-msgstr ""
+msgstr "Last"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Role"
-msgstr ""
+msgstr "Role"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "Reference"
-msgstr ""
+msgstr "Reference"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "Creation Date"
-msgstr ""
+msgstr "Creation date"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "See task"
+msgstr "See task"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+msgid "Delete"
+msgstr "Delete"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
+msgid "Permissions"
+msgstr "Permissions"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+msgid "Name is required!"
+msgstr "Name is required!"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/main/profile.js
+msgid "Saved"
+msgstr "Saved"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
+msgid "Error!"
+msgstr "Error!"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/groups.js
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
+msgid "Are you sure you want to delete this entry?"
+msgstr "Are you sure you want to delete this entry?"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/preferences.js
+msgid "Setting preferences"
+msgstr "Setting preferences"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
+msgid "Creating a user"
+msgstr "Creating a user"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/users.js
+msgid "Editing a user"
+msgstr "Editing a user"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/main/password.js
+msgid "Password successfully changed"
+msgstr "Password successfully changed"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/main/profile.js
+msgid ""
+"You have changed the theme. Do you want to refresh the app to apply the new them"
+"e?"
 msgstr ""
+"You have changed the theme. Do you want to refresh the app to apply the new them"
+"e?"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/main/profile.js
+msgid "A problem has occurred"
+msgstr "A problem has occurred"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Mine"
-msgstr ""
+msgstr "Mine"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "My groups"
-msgstr ""
+msgstr "My groups"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "All"
-msgstr ""
+msgstr "All"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Unknown"
-msgstr ""
+msgstr "Unknown"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 msgid "months"
-msgstr ""
+msgstr "months"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 msgid "hours"
-msgstr ""
+msgstr "hours"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 msgid "days"
-msgstr ""
+msgstr "days"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/permissions.php
+msgid "User permissions "
+msgstr "User permissions"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "State"
-msgstr ""
+msgstr "State"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "User Groups"
+msgstr "User Groups"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Quality"
+msgstr "Quality"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Generate a PDF"
+msgstr "Generate a PDF"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "First name"
+msgstr "First name"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Email addresses"
+msgstr "Email addresses"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Last seen"
+msgstr "Last seen"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Deactivate"
+msgstr "Deactivate"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Reset password"
+msgstr "Reset password"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Manage user permissions"
+msgstr "Manage user permissions"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "An eMail has been sent to"
+msgstr "An email has been sent to"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/groups.php
+msgid "Can not reset password"
+msgstr "Can not reset password"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/main.php
+msgid "Profile and preferences"
+msgstr "Profile and preferences"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/page.php
 msgid "Tasks"
-msgstr ""
+msgstr "Tasks"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/preferences.php
+msgid "My preferences"
+msgstr "My preferences"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/users.php
+msgid "User Management"
+msgstr "User Management"
+
+#: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/main/profile.php
+msgid "My profile"
+msgstr "My profile"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
 msgid ""
 "Sorry, a problem occured while moving this item, and although the tree says othe"
 "rwise the item has not been moved."
 msgstr ""
+"Sorry, a problem occured while moving this item, and although the tree says othe"
+"rwise the item has not been moved."
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
 msgid "Please refresh the tab in order to see the awful truth..."
-msgstr ""
+msgstr "Please refresh the tab"
 
 #: /home/app2/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
 msgid "Are you sure you want to move this task?"
-msgstr ""
+msgstr "Are you sure you want to move this task?"

@@ -1,6 +1,7 @@
 (() => {
   return {
     data(){
+      let tasks = bbn.vue.closest(this, 'bbn-tabnav').$parent;
       return {
         typeSelection: [{
           text: bbn._('Mine'),
@@ -15,7 +16,16 @@
         typeSelected: 'user',
         tableData: [],
         taskTitle: '',
-        tasks: bbn.vue.closest(this, 'bbn-tabnav').$parent
+        tasks: tasks,
+        users: bbn.fn.order(appui.app.users, 'text', 'ASC'),
+        priority: Array.apply(null, { length: 9 }).map(Function.call, a => { return a + 1 }),
+        filters: {
+          conditions: [{
+            field: 'state',
+            operator: '!=',
+            value: tasks.source.states.closed
+          }]
+        }
       };
     },
     methods: {

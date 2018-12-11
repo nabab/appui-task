@@ -38,12 +38,15 @@
                :sortable="true"
                :order="[{field: 'last_action', dir: 'DESC'}]"
                class="appui-tasks-search-table"
+               :filterable="true"
+               :filters="filters"
     >
       <bbns-column title="<i class='fas fa-user'></i>"
                    ftitle="<?=_('User')?>"
                    field="id_user"
                    :component="$options.components['appui-tasks-user-avatar']"
                    :width="38"
+                   :source="users"
       ></bbns-column>
       <bbns-column title="<i class='fas fa-exclamation'></i>"
                    ftitle="<?=_('Priority')?>"
@@ -51,12 +54,14 @@
                    :render="renderPriority"
                    :cls="priorityClass"
                    :width="40"
+                   :source="priority"
       ></bbns-column>
       <bbns-column title="<i class='fas fa-comment'></i>"
                    ftitle="<?=_('#Notes')?>"
                    field="num_notes"
                    :width="50"
                    cls="bbn-c"
+                   :filterable="false"
       ></bbns-column>
       <bbns-column title="<i class='fas fa-tasks'></i>"
                    ftitle="<?=_("States")?>"
@@ -64,42 +69,50 @@
                    :render="renderState"
                    :width="50"
                    cls="bbn-h-100"
+                   :source="tasks.source.options.states"
       ></bbns-column>
       <bbns-column title="<?=_("Last")?>"
                    field="last_action"
                    :render="renderLast"
                    :width="100"
+                   type="datetime"
       ></bbns-column>
       <bbns-column title="<?=_("Role")?>"
                    field="role"
                    :render="renderRole"
                    :width="80"
+                   :source="tasks.source.options.roles"
       ></bbns-column>
       <bbns-column title="<?=_("Type")?>"
                    field="type"
                    :render="renderType"
                    :width="150"
                    style="max-width: 300px"
+                   :source="tasks.source.options.cats"
       ></bbns-column>
       <bbns-column title="<?=_("Duration")?>"
                    field="duration"
                    :render="renderDuration"
                    :width="70"
+                   :filterable="false"
       ></bbns-column>
       <bbns-column title="<?=_("Title")?>"
                    field="title"
       ></bbns-column>
       <bbns-column title="<?=_("Reference")?>"
                    field="reference"
+                   :filterable="false"
       ></bbns-column>
       <bbns-column title="<?=_("Creation Date")?>"
                    field="creation_date"
                    :render="renderCreationDate"
                    :width="100"
+                   type="datetime"
       ></bbns-column>
       <bbns-column title="<?=_("Deadline")?>"
                    field="deadline"
                    :render="renderDeadline"
+                   type="datetime"
       ></bbns-column>
       <bbns-column title=""
                    :width="40"
