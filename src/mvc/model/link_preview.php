@@ -5,6 +5,7 @@
  **/
 
 /** @var $model \bbn\mvc\model*/
+
 if ( isset($model->data['url'], $model->data['ref']) && \bbn\str::is_url($model->data['url']) ){
   $linkPreview = new \LinkPreview\LinkPreview($model->data['url']);
   $parsed = $linkPreview->getParsed();

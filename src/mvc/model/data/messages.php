@@ -89,7 +89,10 @@ if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_
 					'field' => 'replies.id_alias',
 					'operator' => '=',
 					'exp' => 'bbn_notes.id'
-				]]
+				], [
+          'field' => 'replies.active',
+          'value' => 1
+        ]]
 			]
 		], [
 			'table' => 'bbn_notes_versions',
