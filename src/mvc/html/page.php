@@ -3,11 +3,11 @@
               :scrollable="true"
               :autoload="true"
   >
-    <bbns-tab url="search"
+    <bbns-container url="search"
               :static="true"
               :load="true"
-              icon="fas fa-home"
+              icon="nf nf-fa-home"
               title="<?=_("New task")?> / <?=_("Search")?>"
-    ></bbns-tab>
+    ></bbns-container>
   </bbn-tabnav>
 </div>

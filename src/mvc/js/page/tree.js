@@ -31,7 +31,7 @@ var $tree,
     treeCfg = {
       dataSource: treeDS,
       template: function (e) {
-        var st = '<i class="fa fa-' + (e.item.icon ? e.item.icon : 'cog') + '"></i> ' + e.item.text;
+        var st = '<i class="nf nf-fa-' + (e.item.icon ? e.item.icon : 'cog') + '"></i> ' + e.item.text;
         return st;
       }
     };

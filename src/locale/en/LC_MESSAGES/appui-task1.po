@@ -3,30 +3,30 @@ msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: info@bbn.so\n"
 "last-Translator: BBN Solutions <support@bbn.solutions>\n"
-"Language-Team: FR <FR@li.org>\n"
+"Language-Team: EN <EN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-02-08 15:12+0100\n"
-"POT-Revision-Date: 2019-02-08 15:12+0100\n"
-"Language: fr\n"
-"X-Domain: appui-task156\n"
+"POT-Creation-Date: 2019-04-01 12:06+0200\n"
+"POT-Revision-Date: 2019-04-01 12:06+0200\n"
+"Language: en\n"
+"X-Domain: appui-task1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.js
 msgid "Billed"
-msgstr "Facturé"
+msgstr "Billed"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Error"
-msgstr "Erreur"
+msgstr "Error"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 msgid "Ref."
-msgstr "Réf."
+msgstr "Ref."
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/logs/logs.php
@@ -41,7 +41,7 @@ msgstr "Description"
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Tax"
-msgstr "Taxes"
+msgstr "Tax"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
@@ -51,12 +51,12 @@ msgstr "Taxable"
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Amount"
-msgstr "Montant"
+msgstr "Amount"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/logs/logs.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "User"
-msgstr "Utilisateur"
+msgstr "User"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/logs/logs.php
 msgid "Action"
@@ -64,67 +64,67 @@ msgstr "Action"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Simple text"
-msgstr "Texte simple"
+msgstr "Simple text"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Rich text"
-msgstr "Texte riche (HTML)"
+msgstr "Rich text"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Markdown"
-msgstr "Texte riche (Markdown)"
+msgstr "Markdown"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "PHP code"
-msgstr "Code PHP"
+msgstr "PHP code"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "JavaScript code"
-msgstr "Code JavaScript"
+msgstr "JavaScript code"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "CSS code"
-msgstr "Code CSS"
+msgstr "CSS code"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to put this task on ongoing?"
-msgstr "Êtes-vous sûr de vouloir démarrer cette tâche?"
+msgstr "Are you sure you want to put this task on ongoing?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to put this task on hold?"
-msgstr "Êtes-vous sûr de vouloir mettre cette tâche en pause?"
+msgstr "Are you sure you want to put this task on hold?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to close this task?"
-msgstr "Êtes-vous sûr de vouloir fermer cette tâche?"
+msgstr "Are you sure you want to close this task?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to resume this task?"
-msgstr "Êtes-vous sûr de vouloir reprendre cette tâche?"
+msgstr "Are you sure you want to resume this task?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to ping the task?"
-msgstr "Êtes-vous sûr de vouloir envoyer un rappel?"
+msgstr "Are you sure you want to ping the task?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Pinged"
-msgstr "Envoyé"
+msgstr "Pinged"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to unfollow this task?"
-msgstr "êtes-vous sûr de ne plus vouloir suivre cette tâche?"
+msgstr "Are you sure you want to unfollow this task?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "You have to enter a comment, a link, or a file"
-msgstr "Vous devez entrer un commentaire, un lien ou un fichier"
+msgstr "You have to enter a comment, a link, or a file"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Are you sure you want to remove this link?"
-msgstr "Êtes-vous sûr de vouloir supprimer ce lien?"
+msgstr "Are you sure you want to remove this link?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
 msgid "Add budget"
-msgstr "Ajouter un budget"
+msgstr "Add budget"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 msgid "Info"
@@ -137,7 +137,7 @@ msgstr "Budget"
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Roles"
-msgstr "Rôles"
+msgstr "Roles"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/task/task.php
@@ -147,107 +147,107 @@ msgstr "Tracker"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.php
 msgid "Last messages"
-msgstr "Derniers messages"
+msgstr "Last messages"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 msgid "New message"
-msgstr "Nouveau message"
+msgstr "New message"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 msgid "Inserted"
-msgstr "Ajouté"
+msgstr "Inserted"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Edit"
-msgstr "Modifier"
+msgstr "Edit"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Edited"
-msgstr "Modifié"
+msgstr "Edited"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 msgid "Reply to"
-msgstr "Répondre à"
+msgstr "Reply to"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 msgid "Are you sure you want to delete this message?"
-msgstr "Êtes-vous sûr de vouloir supprimer ce message?"
+msgstr "Are you sure you want to delete this message?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Deleted"
-msgstr "Supprimé"
+msgstr "Deleted"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/messages/messages.php
 msgid "Add a note"
-msgstr "Ajouter une note"
+msgstr "Add a note"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Error during user insert"
-msgstr "Erreur durant l'ajout d'utilisateurs"
+msgstr "Error during user insert"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.js
 msgid "Are you sure you want to remove this user?"
-msgstr "Êtes-vous sûr de vouloir supprimer cet utilisateur?"
+msgstr "Are you sure you want to remove this user?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.js
 msgid "Error during the user remove"
-msgstr "Erreur durant la suppression de l'utilisateur"
+msgstr "Error during the user remove"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 msgid "You have no right to modify the roles in this task"
-msgstr "Vous n'avez pas le droit de modifier les rôles de cette tâche"
+msgstr "You have no right to modify the roles in this task"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/roles/roles.php
 msgid "Supervisors"
-msgstr "Superviseurs"
+msgstr "Supervisors"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Remove"
-msgstr "Supprimer"
+msgstr "Remove"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/roles/roles.php
 msgid "Workers"
-msgstr "Éxécutants"
+msgstr "Workers"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/roles/roles.php
 msgid "Spectators"
-msgstr "Spectateurs"
+msgstr "Spectators"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 msgid "Drag and drop the users into the corresponding role block"
-msgstr "Faites glisser les utilisateurs souhaités dans les blocs de rôle correspondants"
+msgstr "Drag and drop the users into the corresponding role block"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/people/people.php
 msgid "You cannot change the roles because the task is closed"
-msgstr "Vous ne pouvez pas changer les rôles car la tâche est close"
+msgstr "You cannot change the roles because the task is closed"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "In progress..."
-msgstr "En cours...."
+msgstr "In progress..."
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "Are you sure you want to delete this track?"
-msgstr "Êtes-vous sûr de vouloir supprimer les logs de ce travail?"
+msgstr "Are you sure you want to delete this track?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Start"
-msgstr "Début"
+msgstr "Start"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.php
 msgid "End"
-msgstr "Fin"
+msgstr "End"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.php
@@ -256,21 +256,21 @@ msgstr "Message"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.js
 msgid "The end date must be more recent than the start date"
-msgstr "La date de début doit être antérieure à la date de fin"
+msgstr "The end date must be more recent than the start date"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.php
 msgid "Worker"
-msgstr "Travailleur"
+msgstr "Worker"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/tracker/tracker.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Duration"
-msgstr "Durée"
+msgstr "Duration"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Global view"
-msgstr "Vue globale"
+msgstr "Global view"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Messages"
@@ -278,121 +278,121 @@ msgstr "Messages"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Events journal"
-msgstr "Journal des évènements"
+msgstr "Events journal"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.js
 msgid "Are you sure you want to stop the tracker in progress?"
-msgstr "Êtes"
+msgstr "Are you sure you want to stop the tracker in progress?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.js
 msgid "Do you want to write a message?"
-msgstr "Voulez-vous écrire un message?"
+msgstr "Do you want to write a message?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.js
 msgid "Tracker message"
-msgstr "Message du tracker"
+msgstr "Tracker message"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "Tasks list"
-msgstr "Liste des tâches"
+msgstr "Tasks list"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "In progress"
-msgstr "En cours"
+msgstr "In progress"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "Open task"
-msgstr "Ouvrir la tâche"
+msgstr "Open task"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "Stop tracker"
-msgstr "Arrêter le tracker"
+msgstr "Stop tracker"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.php
 msgid "Play tracker"
-msgstr "Lancer le tracker"
+msgstr "Play tracker"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Are you sure you want to save this price?"
-msgstr "Êtes-vous sûr de vouloir sauvegarder ce prix?"
+msgstr "Are you sure you want to save this price?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Are you sure you want to remove the price?"
-msgstr "Êtes-vous sûr de vouloir supprimer ce prix?"
+msgstr "Are you sure you want to remove the price?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Select deciders"
-msgstr "Sélectionner le(s) décideur(s)"
+msgstr "Select deciders"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Are you sure you want to remove this decider?"
-msgstr "Êtes-vous sûr de vouloir supprimer ce décideur?"
+msgstr "Are you sure you want to remove this decider?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Are you sure you want to approve this price?"
-msgstr "Êtes-vous sûr de vouloir approuver ce prix?"
+msgstr "Are you sure you want to approve this price?"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.js
 msgid "Invoice creation"
-msgstr "Création de facture"
+msgstr "Invoice creation"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Price"
-msgstr "Prix"
+msgstr "Price"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Save"
-msgstr "Sauvegarder"
+msgstr "Save"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Cancel"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Edit price"
-msgstr "Modifier le prix"
+msgstr "Edit price"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Remove price"
-msgstr "Enlever le prix"
+msgstr "Remove price"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Approve price"
-msgstr "Approuver le devis"
+msgstr "Approve price"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Status"
-msgstr "Statut"
+msgstr "Status"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Approved"
-msgstr "Approuvé"
+msgstr "Approved"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Unapproved"
-msgstr "En attente d'approbation"
+msgstr "Unapproved"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Approved on"
-msgstr "Approuvé le"
+msgstr "Approved on"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Approved by"
-msgstr "Approuvé par"
+msgstr "Approved by"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Deciders"
-msgstr "Décideurs"
+msgstr "Deciders"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Remove decider"
-msgstr "Supprimer décideur"
+msgstr "Remove decider"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Invoice"
-msgstr "Facture"
+msgstr "Invoice"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/budget/budget.php
 msgid "Ref"
@@ -403,55 +403,55 @@ msgstr "Ref"
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Title"
-msgstr "Titre"
+msgstr "Title"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Created by"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Created on"
-msgstr "Créé le"
+msgstr "Created on"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Close"
-msgstr "Fermer"
+msgstr "Close"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Put on ongoing"
-msgstr "Démarrer la tâche"
+msgstr "Put on ongoing"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Put on hold"
-msgstr "Mettre en pause"
+msgstr "Put on hold"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Resume"
-msgstr "Reprendre la tâche"
+msgstr "Resume"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Reopen"
-msgstr "Ré-ouvrir"
+msgstr "Reopen"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "External reference"
-msgstr "Référence externe"
+msgstr "External reference"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Category"
-msgstr "Catégorie"
+msgstr "Category"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Priority"
-msgstr "Priorité"
+msgstr "Priority"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Deadline"
-msgstr "Date limite"
+msgstr "Deadline"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Actions"
@@ -459,78 +459,78 @@ msgstr "Actions"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Make me a supervisor"
-msgstr "Faire de moi un superviseur"
+msgstr "Make me a supervisor"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Make me a worker"
-msgstr "M'assigner à cette tâche"
+msgstr "Make me a worker"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Make me a spectator"
-msgstr "Faire de moi un spectateur"
+msgstr "Make me a spectator"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Ping workers"
-msgstr "Envoyer un rappel (ping)"
+msgstr "Ping workers"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/info/info.php
 msgid "Unfollow the task"
-msgstr "Ne plus suivre la tâche"
+msgstr "Unfollow the task"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "CURRENT SESSION"
-msgstr "SESSION EN COURS"
+msgstr "CURRENT SESSION"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "Start tracker"
-msgstr "Démarrer le tracker"
+msgstr "Start tracker"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "IN PROGRESS"
-msgstr "En cours"
+msgstr "In progress"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "Inactive"
-msgstr "inactif"
+msgstr "Inactive"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/widget/tracker/tracker.php
 msgid "SUMMARY"
-msgstr "SOMMAIRE"
+msgstr "SUMMARY"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 msgid "New task"
-msgstr "Nouvelle tâche"
+msgstr "New task"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page.php
 msgid "Search"
-msgstr "Recherche"
+msgstr "Search"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "Search or Title for the new task"
-msgstr "Recherche ou titre de la nouvelle tâche"
+msgstr "Search or Title for the new task"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "Create a task"
-msgstr "Créer une tâche"
+msgstr "Create a task"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "#Notes"
-msgstr "Nb Notes"
+msgstr "#Notes"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "States"
-msgstr "États"
+msgstr "States"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Last"
-msgstr "Dernier"
+msgstr "Last"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Role"
-msgstr "Rôle"
+msgstr "Role"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
@@ -540,69 +540,69 @@ msgstr "Type"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "Reference"
-msgstr "Référence"
+msgstr "Reference"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 msgid "Creation Date"
-msgstr "Date de création"
+msgstr "Creation date"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/html/page/search.php
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "See task"
-msgstr "Ouvrir la tâche"
+msgstr "See task"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Mine"
-msgstr "Les miennes"
+msgstr "Mine"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "My groups"
-msgstr "Celles de mon groupe"
+msgstr "My groups"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "All"
-msgstr "Toutes"
+msgstr "All"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Unknown"
-msgstr "Inconnu"
+msgstr "Unknown"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 msgid "months"
-msgstr "mois"
+msgstr "months"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 msgid "hours"
-msgstr "heures"
+msgstr "hours"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/js/page/search.js
 msgid "days"
-msgstr "jours"
+msgstr "days"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "State"
-msgstr "État"
+msgstr "State"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page.php
 msgid "Tasks"
-msgstr "Tâches"
+msgstr "Tasks"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
 msgid ""
 "Sorry, a problem occured while moving this item, and although the tree says othe"
 "rwise the item has not been moved."
 msgstr ""
-"Désolé un problème est survenu pendant le déplacement de l'élément, et bien que "
-"l'arborescence se soit mis à jour, l'élément n'a pas été déplacé"
+"Sorry, a problem occured while moving this item, and although the tree says othe"
+"rwise the item has not been moved."
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
 msgid "Please refresh the tab in order to see the awful truth..."
-msgstr "Rafraîchissez cet onglet SVP"
+msgstr "Please refresh the tab"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
 msgid "Are you sure you want to move this task?"
-msgstr "Êtes-vous sûr de vouloir déplacer cette tâche?"
+msgstr "Are you sure you want to move this task?"

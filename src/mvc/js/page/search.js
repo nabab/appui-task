@@ -22,7 +22,7 @@
         filters: {
           conditions: [{
             field: 'state',
-            operator: '!=',
+            operator: 'neq',
             value: tasks.source.states.closed
           }]
         }
@@ -31,7 +31,7 @@
     methods: {
       createTask(){
         if ( this.taskTitle.length ){
-          bbn.vue.closest(this, '.bbns-tab').popup().open({
+          bbn.vue.closest(this, '.bbn-container').popup().open({
             title: bbn._('New task'),
             width: 500,
             height: 200,
@@ -78,7 +78,7 @@
           icon = 'pause';
           color = 'grey';
         }
-        return '<div class="bbn-full-screen bbn-middle"><i class="bbn-lg fas fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(this.tasks.source.options.states, "value", row.state, "text") + '"> </i></div>';
+        return '<i class="bbn-lg nf nf-fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(this.tasks.source.options.states, "value", row.state, "text") + '"> </i>';
       },
       renderLast(row){
         return moment(row.last_action).calendar(null, {sameElse: 'DD/MM/YYYY'});
@@ -137,7 +137,9 @@
     },
     watch: {
       typeSelected(val){
-        this.refreshTable();
+        this.$nextTick(() => {
+          this.refreshTable();
+        });
       },
       taskTitle(val){
         if ( this.titleTimeout ){
@@ -194,7 +196,7 @@
         props: ['source'],
         data(){
           return {
-            cp: bbn.vue.closest(this, 'bbns-tab').getComponent()
+            cp: bbn.vue.closest(this, 'bbn-container').getComponent()
           }
         },
         methods: {

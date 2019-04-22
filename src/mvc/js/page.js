@@ -49,12 +49,12 @@
             }),
             (user) => {
               user.id = user.value;
-              user.icon = 'fas fa-user';
+              user.icon = 'nf nf-fa-user';
               return user;
             }
           );
           if ( v.is_parent ){
-            v.icon = 'fas fa-users';
+            v.icon = 'nf nf-fa-users';
           }
           res.push(v);
         });

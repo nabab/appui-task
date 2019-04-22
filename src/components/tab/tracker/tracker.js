@@ -63,7 +63,7 @@
         ){
           ret.push({
             title: bbn._('Edit'),
-            icon: 'fas fa-edit',
+            icon: 'nf nf-fa-edit',
             notext: true,
             command: this.edit
           });
@@ -71,7 +71,7 @@
         if ( appui.app.user.isAdmin ){
           ret.push({
             title: bbn._('Remove'),
-            icon: 'fas fa-trash',
+            icon: 'nf nf-fa-trash',
             notext: true,
             command: this.remove
           });
@@ -112,7 +112,7 @@
         `,
         data(){
           return {
-            tracker: bbn.vue.closest(this, 'bbns-tab').getComponent(),
+            tracker: bbn.vue.closest(this, 'bbn-container').getComponent(),
             maxEnd: moment().format('YYYY-MM-DD')
           }
         },

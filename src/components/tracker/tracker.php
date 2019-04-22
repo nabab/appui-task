@@ -16,13 +16,13 @@
          style="margin-bottom: 0"
     >
       <span class="window-icons-left">
-        <i class="fas fa-window-minimize bbn-p"
+        <i class="nf nf-fa-window_minimize bbn-p"
            @click="openWindow"
         ></i>
       </span>
       <span class="bbn-b"><?=_('Tasks list')?></span>
       <span class="window-icons-right">
-        <i class="fas fa-sync bbn-p"
+        <i class="nf nf-fa-sync bbn-p"
            @click="refreshList(false)"
         ></i>
       </span>
@@ -48,7 +48,7 @@
                  title="<?=_('Open task')?>"
             ></div>
             <bbn-button @click="stop"
-                        icon="fas fa-stop"
+                        icon="nf nf-fa-stop"
                         title="<?=_('Stop tracker')?>"
                         style="color: red; margin-right: 0"
             ></bbn-button>
@@ -66,7 +66,7 @@
                    title="<?=_('Open task')?>"
               ></div>
               <bbn-button @click="start(l.id)"
-                          icon="fas fa-play"
+                          icon="nf nf-fa-play"
                           title="<?=_('Play tracker')?>"
                           style="color: green"
               ></bbn-button>

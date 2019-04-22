@@ -2,7 +2,7 @@
   <div v-if="source.roles.managers.length"
        class="k-block"
   >
-    <div class="k-header bbn-b"><i class="fas fa-user-tie bbn-hsmargin"></i><?=_('Supervisors')?></div>
+    <div class="k-header bbn-b"><i class="nf nf-fa-user_tie bbn-hsmargin"></i><?=_('Supervisors')?></div>
     <div v-for="r in source.roles.managers"
          class="bbn-vmiddle bbn-smargin"
     >
@@ -18,7 +18,7 @@
   <div v-if="source.roles.workers.length"
        class="k-block"
   >
-    <div class="k-header bbn-b"><i class="fas fa-user-astronaut bbn-hsmargin"></i><?=_('Workers')?></div>
+    <div class="k-header bbn-b"><i class="nf nf-fa-user_astronaut bbn-hsmargin"></i><?=_('Workers')?></div>
     <div v-for="r in source.roles.workers"
          class="bbn-vmiddle bbn-smargin"
     >
@@ -34,7 +34,7 @@
   <div v-if="source.roles.viewers.length"
        class="k-block"
   >
-    <div class="k-header bbn-b"><i class="fas fa-user-secret bbn-hsmargin"></i><?=_('Spectators')?></div>
+    <div class="k-header bbn-b"><i class="nf nf-fa-user_secret bbn-hsmargin"></i><?=_('Spectators')?></div>
     <div v-for="r in source.roles.viewers"
          class="bbn-vmiddle bbn-smargin"
     >

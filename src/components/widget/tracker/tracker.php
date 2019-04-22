@@ -6,13 +6,13 @@
     <div class="bbn-spadded">
       <div class="bbn-flex-width bbn-vmiddle">
         <bbn-button v-if="source.tracker"
-                    icon="fas fa-stop"
+                    icon="nf nf-fa-stop"
                     title="<?=_('Stop tracker')?>"
                     style="color: red"
                     @click="trackerComp.stop"
         ></bbn-button>
         <bbn-button v-else
-                    icon="fas fa-play"
+                    icon="nf nf-fa-play"
                     title="<?=_('Start tracker')?>"
                     style="color: green"
                     @click="start"
@@ -24,7 +24,7 @@
               class="bbn-flex-fill"
         ><?=_('Inactive')?></span>
         <div v-if="progress">
-          <i class="fas fa-clock bbn-hsmargin"></i>
+          <i class="nf nf-fa-clock bbn-hsmargin"></i>
           <span v-text="progress"
                 class="bbn-green"
           ></span>
@@ -45,7 +45,7 @@
         <span v-text="s.userName"
               class="bbn-flex-fill bbn-hsmargin"
         ></span>
-        <i class="fas fa-clock bbn-hsmargin"></i>
+        <i class="nf nf-fa-clock bbn-hsmargin"></i>
         <span v-text="s.summary"></span>
       </div>
     </div>

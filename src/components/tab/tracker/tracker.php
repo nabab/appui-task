@@ -6,6 +6,7 @@
            :pageable="false"
            class="bbn-100"
            editable="popup"
+           aggregate="tot"
            :editor="$options.components.editor"
            ref="table"
 >
@@ -14,26 +15,26 @@
                :render="renderUser"
   ></bbns-column>
   <bbns-column field="start"
-               title="<i class='fas fa-calendar-alt'></i> <?=_('Start')?>"
+               title="<i class='nf nf-fa-calendar_alt'></i> <?=_('Start')?>"
                :render="renderStart"
                cls="bbn-c"
                :width="200"
   ></bbns-column>
   <bbns-column field="end"
-               title="<i class='fas fa-calendar-check'></i> <?=_('End')?>"
+               title="<i class='nf nf-fa-calendar_check'></i> <?=_('End')?>"
                :render="renderEnd"
                cls="bbn-c"
                :width="200"
   ></bbns-column>
   <bbns-column field="length"
-               title="<i class='fas fa-clock'></i> <?=_('Duration')?>"
+               title="<i class='nf nf-fa-clock'></i> <?=_('Duration')?>"
                :render="renderLength"
                cls="bbn-c"
                :width="150"
-               aggregate="tot"
+               :aggregate="true"
   ></bbns-column>
   <bbns-column field="message"
-               title="<i class='fas fa-clock'></i> <?=_('Message')?>"
+               title="<i class='nf nf-fa-clock'></i> <?=_('Message')?>"
   ></bbns-column>
   <bbns-column :buttons="gridButtons"
                :width="100"

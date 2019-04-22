@@ -302,8 +302,8 @@ if ( $grid->check() ){
   $d = $grid->get_datatable();
   $notes = new \bbn\appui\notes($model->db);
   if ( is_array($d['data']) && !empty($d['data']) ){
-    $ftype = $model->inc->options->from_code('file', 'media', 'notes', 'appui');
-    $ltype = $model->inc->options->from_code('link', 'media', 'notes', 'appui');
+    $ftype = \bbn\appui\notes::get_option_id('file', 'media');
+    $ltype = \bbn\appui\notes::get_option_id('link', 'media');
     foreach ($d['data'] as $i => $n ){
       $d['data'][$i]['files'] = [];
       $d['data'][$i]['links'] = [];

@@ -43,8 +43,8 @@
                 categories: tasks.fullCategories,
                 userId: appui.app.user.id,
                 isAdmin: appui.app.user.isAdmin,
-                mediaFileType: bbn.fn.get_field(tasks.source.media_types, 'code', 'file', 'id'),
-                mediaLinkType: bbn.fn.get_field(tasks.source.media_types, 'code', 'link', 'id')
+                mediaFileType: tasks.source.media_types && tasks.source.media_types.file ? tasks.source.media_types.file.id : '',
+                mediaLinkType: tasks.source.media_types && tasks.source.media_types.link ? tasks.source.media_types.link.id : ''
             }
         },
         computed: {
@@ -423,7 +423,7 @@
             budgetButtons() {
                 return !this.source.price && this.isAdmin && this.isOpened ? [{
                     text: bbn._('Add budget'),
-                    icon: 'fas fa-plus',
+                    icon: 'nf nf-fa-plus',
                     action: this.addBudget
                 }] : [];
             }

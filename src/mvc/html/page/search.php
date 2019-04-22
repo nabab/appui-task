@@ -17,7 +17,7 @@
                  v-model="taskTitle"
       ></bbn-input>
       <bbn-button class="bbn-xl"
-                  icon="fas fa-flag-checkered"
+                  icon="nf nf-fa-flag_checkered"
                   @click="createTask"
                   style="margin: 0 2em"
                   :disabled="!taskTitle"
@@ -41,29 +41,28 @@
                :filterable="true"
                :filters="filters"
     >
-      <bbns-column title="<i class='fas fa-user'></i>"
+      <bbns-column title="<i class='nf nf-fa-user'></i>"
                    ftitle="<?=_('User')?>"
                    field="id_user"
                    :component="$options.components['appui-tasks-user-avatar']"
                    :width="38"
                    :source="users"
       ></bbns-column>
-      <bbns-column title="<i class='fas fa-exclamation'></i>"
+      <bbns-column title="<i class='nf nf-fa-exclamation'></i>"
                    ftitle="<?=_('Priority')?>"
                    field="priority"
-                   :render="renderPriority"
                    :cls="priorityClass"
                    :width="40"
                    :source="priority"
       ></bbns-column>
-      <bbns-column title="<i class='fas fa-comment'></i>"
+      <bbns-column title="<i class='nf nf-fa-comment'></i>"
                    ftitle="<?=_('#Notes')?>"
                    field="num_notes"
                    :width="50"
                    cls="bbn-c"
                    :filterable="false"
       ></bbns-column>
-      <bbns-column title="<i class='fas fa-tasks'></i>"
+      <bbns-column title="<i class='nf nf-fa-tasks'></i>"
                    ftitle="<?=_("States")?>"
                    field="state"
                    :render="renderState"
@@ -118,7 +117,7 @@
                    :width="40"
                    :buttons="[{
                      title: '<?=_('See task')?>',
-                     icon: 'fas fa-eye',
+                     icon: 'nf nf-fa-eye',
                      command: openTask,
                      notext: true
                    }]"

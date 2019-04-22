@@ -5,7 +5,7 @@
            @mouseover="setTargetContainer('managers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header bbn-b"><i class="fas fa-user-tie bbn-hsmargin"></i><?=_("Supervisors")?></div>
+        <div class="k-header bbn-b"><i class="nf nf-fa-user_tie bbn-hsmargin"></i><?=_("Supervisors")?></div>
         <div class="k-content bbn-task-managers">
           <ul>
             <li v-for="e in managers"
@@ -22,7 +22,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="far fa-trash-alt bbn-p bbn-red"
+                <i class="nf nf-fa-trash_alt bbn-p bbn-red"
                    v-if="isMaster && (source.id_user !== e.value)"
                    @click="removeUser(e.value, 'managers')"
                    :title="'<?=_('Remove')?> ' + e.text"
@@ -37,7 +37,7 @@
            @mouseover="setTargetContainer('workers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header bbn-b"><i class="fas fa-user-astronaut bbn-hsmargin"></i><?=_("Workers")?></div>
+        <div class="k-header bbn-b"><i class="nf nf-fa-user_astronaut bbn-hsmargin"></i><?=_("Workers")?></div>
         <div class="k-content bbn-task-workers">
           <ul>
             <li v-for="e in workers"
@@ -54,7 +54,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="far fa-trash-alt bbn-p bbn-red"
+                <i class="nf nf-fa-trash_alt bbn-p bbn-red"
                    v-if="canChange"
                    @click="removeUser(e.value, 'workers')"
                    :title="'<?=_('Remove')?> ' + e.text"
@@ -69,7 +69,7 @@
            @mouseover="setTargetContainer('viewers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header bbn-b"><i class="fas fa-user-secret bbn-hsmargin"></i><?=_("Spectators")?></div>
+        <div class="k-header bbn-b"><i class="nf nf-fa-user_secret bbn-hsmargin"></i><?=_("Spectators")?></div>
         <div class="k-content bbn-task-viewers">
           <ul>
             <li v-for="e in viewers"
@@ -86,7 +86,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="far fa-trash-alt bbn-p bbn-red"
+                <i class="nf nf-fa-trash_alt bbn-p bbn-red"
                    v-if="canChange"
                    @click="removeUser(e.value, 'viewers')"
                    :title="'<?=_('Remove')?> ' + e.text"
@@ -108,16 +108,16 @@
       ></bbn-tree>
       <div class="bbn-task-roles-desc bbn-lg" v-if="!isClosed">
         <span v-if="canChange">
-          <i class="fas fa-question-circle"> </i>
+          <i class="nf nf-fa-question_circle"> </i>
           <?=_("Drag and drop the users into the corresponding role block")?>
         </span>
         <span v-if="!canChange">
-          <i class="fas fa-exclamation-circle"> </i>
+          <i class="nf nf-fa-exclamation_circle"> </i>
           <?=_("You have no right to modify the roles in this task")?>
         </span>
       </div>
       <div class="bbn-task-roles-desc bbn-lg" v-if="isClosed">
-        <i class="fas fa-exclamation-circle"> </i>
+        <i class="nf nf-fa-exclamation_circle"> </i>
         <?=_("You cannot change the roles because the task is closed")?>
       </div>
     </div>

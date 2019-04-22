@@ -9,6 +9,6 @@ if ( strpos($ctrl->baseURL, APPUI_TASKS_ROOT . 'page/') !== 0 ){
   $ctrl->obj->url = APPUI_TASKS_ROOT . 'page';
   $ctrl
     ->set_color('#000', '#FFF')
-    ->set_icon('fas fa-bug')
+    ->set_icon('nf nf-fa-bug')
     ->combo(_("Tasks"), true);
 }

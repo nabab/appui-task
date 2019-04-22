@@ -11,12 +11,12 @@
                    v-model="source.price"
                    style="margin-right: 5px"
       ></bbn-numeric>
-      <bbn-button icon="fas fa-save"
+      <bbn-button icon="nf nf-fa-save"
                   :disabled="!source.price || (source.price == oldPrice)"
                   @click="saveForm"
                   title="<?=_('Save')?>"
       ></bbn-button>
-      <bbn-button icon="fas fa-times"
+      <bbn-button icon="nf nf-fa-times"
                   @click="cancelForm"
                   title="<?=_('Cancel')?>"
       ></bbn-button>
@@ -29,17 +29,17 @@
            v-text="price"
       ></div>
       <bbn-button v-if="main.isAdmin && !main.isClosed"
-                  icon="fas fa-edit"
+                  icon="nf nf-fa-edit"
                   title="<?=_('Edit price')?>"
                   @click="showPriceForm = true"
       ></bbn-button>
       <bbn-button v-if="main.isAdmin && !main.isClosed"
-                  icon="fas fa-trash"
+                  icon="nf nf-fa-trash"
                   title="<?=_('Remove price')?>"
                   @click="removePrice"
       ></bbn-button>
       <bbn-button v-if="main.canApprove && !main.isApproved"
-                  icon="far fa-thumbs-up"
+                  icon="nf nf-fa-thumbs_up"
                   @click="approve"
                   title="<?=_('Approve price')?>"
       ></bbn-button>
@@ -72,8 +72,8 @@
        style="margin-top: 10px"
   >
     <div class="k-header">
-      <span class="bbn-b"><i class="fas fa-gavel bbn-hsmargin"></i><?=_('Deciders')?></span>
-      <i class="fas fa-plus bbn-p"
+      <span class="bbn-b"><i class="nf nf-fa-gavel bbn-hsmargin"></i><?=_('Deciders')?></span>
+      <i class="nf nf-fa-plus bbn-p"
          style="position: absolute; top: 7px; right: 7px;"
          @click="addDecider"
          v-if="main.canChangeDecider && !main.isApproved"
@@ -90,7 +90,7 @@
         <span v-text="getUserName(decider)"
               class="bbn-flex-fill bbn-hsmargin"
         ></span>
-        <i class="far fa-trash-alt bbn-p bbn-red"
+        <i class="nf nf-fa-trash_alt bbn-p bbn-red"
            v-if="main.canChangeDecider && (main.userId !== decider) && !main.isApproved"
            @click="removeDecider(decider)"
            title="<?=_('Remove decider')?>"
@@ -103,14 +103,14 @@
        style="margin-top: 10px"
   >
     <div class="k-header">
-      <span class="bbn-b"><i class="fas fa-file-invoice bbn-hsmargin"></i><?=_('Invoice')?></span>
-      <i class="fas fa-plus bbn-p"
+      <span class="bbn-b"><i class="nf nf-fa-file_invoice bbn-hsmargin"></i><?=_('Invoice')?></span>
+      <i class="nf nf-fa-plus bbn-p"
          style="position: absolute; top: 7px; right: 7px;"
          @click="makeInvoice"
          v-if="!main.hasInvoice"
       ></i>
       <i v-if="main.hasInvoice && source.invoice.id_media"
-         class="fas fa-file-pdf bbn-p"
+         class="nf nf-fa-file_pdf bbn-p"
          style="position: absolute; top: 7px; right: 7px;"
          @click="getInvoicePDF"
       ></i>
