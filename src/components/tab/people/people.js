@@ -26,14 +26,14 @@
         if ( this.isMaster ){
           return true;
         }
-        return this.source.roles.managers && ($.inArray(appui.app.user.id, this.source.roles.managers) > -1);
+        return this.source.roles.managers && ( this.source.roles.managers.indexOf(appui.app.user.id) > -1 );
       },
       canChange(){
         return !this.isClosed && this.isMaster;
       },
       managers(){
         if ( this.source.roles && this.source.roles.managers ){
-          return bbn.fn.order($.map(this.source.roles.managers, (v) => {
+          return bbn.fn.order(bbn.fn.map(this.source.roles.managers, v => {
             let user = bbn.fn.get_row(appui.app.users, 'value', v);
               return user || undefined;
           }), 'text', 'asc');
@@ -42,7 +42,8 @@
       },
       viewers(){
         if ( this.source.roles && this.source.roles.viewers ){
-          return bbn.fn.order($.map(this.source.roles.viewers, (v) => {
+          //return bbn.fn.order($.map(this.source.roles.viewers, (v) => {
+          return bbn.fn.order(bbn.fn.map(this.source.roles.viewers, v => {  
             let user = bbn.fn.get_row(appui.app.users, 'value', v);
             return user || undefined;
           }), 'text', 'asc');
@@ -51,7 +52,8 @@
       },
       workers(){
         if ( this.source.roles && this.source.roles.workers ){
-          return bbn.fn.order($.map(this.source.roles.workers, (v) => {
+          //return bbn.fn.order($.map(this.source.roles.workers, (v) => {
+          return bbn.fn.order(bbn.fn.map(this.source.roles.workers, v => {  
             let user = bbn.fn.get_row(appui.app.users, 'value', v);
             return user || undefined;
           }), 'text', 'asc');
@@ -59,14 +61,16 @@
         return [];
       },
       groupsFiltered(){
-        return bbn.fn.order($.map(this.tasks.groups, (g) => {
-          let a = $.extend(true, {}, g);
+        //return bbn.fn.order($.map(this.tasks.groups, (g) => {
+        return bbn.fn.order(bbn.fn.map(this.tasks.groups, g => { 
+          let a = bbn.fn.extend(true, {}, g);
           a.items = a.items.filter((u) => {
             let ok = true;
-            $.each(this.source.roles, (j, r) => {
+            bbn.fn.each(this.source.roles, (r, j) => {
               if (
                 ((u.id !== this.source.id_user) || (j !== 'managers')) &&
-                ($.inArray(u.id, r) > -1 )
+                //($.inArray(u.id, r) > -1 )
+                ( r.indexOf(u.id) > -1 )
               ){
                 ok = false;
                 return false;
@@ -89,10 +93,11 @@
             exists = true;
           }
           else {
-            $.each(this.source.roles, (i, v) => {
+            bbn.fn.each(this.source.roles, (v, i) => {
               if (
                 ((idUser !== this.source.id_user) || (i !== 'managers')) &&
-                ($.inArray(idUser, v) > -1)
+                //($.inArray(idUser, v) > -1)
+                ( v.indexOf(idUser) > -1)
               ){
                 exists = true;
                 return false;
@@ -118,7 +123,8 @@
       removeUser(idUser, roleType){
         if ( this.canChange ){
           this.confirm(bbn._('Are you sure you want to remove this user?'), () => {
-            const idx = $.inArray(idUser, this.source.roles[roleType]);
+            //const idx = $.inArray(idUser, this.source.roles[roleType]);
+            const idx = this.source.roles[roleType].indexOf(idUser);
             if ( (idx > -1) ){
               bbn.fn.post(this.tasks.source.root + 'actions/role/delete', {
                 id_task: this.source.id,
@@ -143,7 +149,7 @@
         ev.preventDefault();
         if ( this.targetContainer ){
           if ( d.data.is_parent && Array.isArray(d.items) && d.items.length ){
-            $.each(d.items, (i, v) => {
+            bbn.fn.each(d.items, ( v, i ) => {
               if ( v.id ){
                 this.addUser(v.id, this.targetContainer);
               }

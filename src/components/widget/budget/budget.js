@@ -184,10 +184,10 @@
         props: ['source'],
         template: `
 <bbn-form :scrollable="false"
-          class="bbn-full-screen"
+          class="bbn-overlay"
           :source="source"
 >
-  <div class="bbn-full-screen bbn-hpadded bbn-vspadded">
+  <div class="bbn-overlay bbn-hpadded bbn-vspadded">
     <appui-usergroup-picker :multi="true"
                             class="bbn-h-100"
                             v-model="source.deciders"

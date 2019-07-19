@@ -1,4 +1,4 @@
-<div class="bbn-full-screen">
+<div class="bbn-overlay">
 	<bbn-dashboard class="appui-task-tab-main"
 	               :sortable="true"
 	>
@@ -9,7 +9,7 @@
                  :source="source"
 	  ></bbns-widget>
     <bbns-widget v-if="(isAdmin || isDecider) && ((isClosed && source.price) || isOpened)"
-                 title="<i class='nf nf-fa-money_bill_alt bbn-hmargin'></i><?=_("Budget")?>"
+                 title="<i class='nf nf-fa-money bbn-hmargin'></i><?=_("Budget")?>"
                  component="appui-task-widget-budget"
                  uid="budget"
                  :closable="false"

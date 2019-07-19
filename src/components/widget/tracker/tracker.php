@@ -1,8 +1,8 @@
 <div>
   <div v-if="main.isOngoing && (main.isWorker || main.isManager)"
-       class="k-block"
+       class="bbn-block"
   >
-    <div class="k-header bbn-b"><?=_('CURRENT SESSION')?></div>
+    <div class="bbn-header bbn-b"><?=_('CURRENT SESSION')?></div>
     <div class="bbn-spadded">
       <div class="bbn-flex-width bbn-vmiddle">
         <bbn-button v-if="source.tracker"
@@ -32,8 +32,8 @@
       </div>
     </div>
   </div>
-  <div class="k-block">
-    <div class="k-header bbn-b"><?=_('SUMMARY')?></div>
+  <div class="bbn-block">
+    <div class="bbn-header bbn-b"><?=_('SUMMARY')?></div>
     <div class="bbn-spadded">
       <div v-for="s in summary"
            class="bbn-vmiddle bbn-vsmargin bbn-flex-width"

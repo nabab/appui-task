@@ -85,7 +85,7 @@
         template: `
 <bbn-form :source="source.row"
           :action="tracker.tasks.source.root + 'actions/tracker/edit'"
-          class="bbn-full-screen"
+          class="bbn-overlay"
           :scrollable="false"
           :validation="validation"
           @success="success"

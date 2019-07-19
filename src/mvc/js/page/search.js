@@ -50,7 +50,7 @@
         this.$refs.tasksTable.updateData();
       },
       renderPriority(row){
-        return '<div class="bbn-full-screen bbn-middle">' + row.priority + '</div>';
+        return '<div class="bbn-overlay bbn-middle">' + row.priority + '</div>';
       },
       priorityClass(row){
         return 'bbn-h-100 bbn-task-pr' + row.priority;
@@ -172,7 +172,7 @@
 <bbn-form :action="cp.tasks.source.root + 'actions/task/insert'"
           :source="source"
           @success="refreshTable"
-          class="bbn-full-screen"
+          class="bbn-overlay"
 >
   <div class="bbn-padded bbn-grid-fields">
     <div>` + bbn._('Title') + `</div>

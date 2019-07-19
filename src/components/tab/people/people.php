@@ -1,12 +1,12 @@
-<div class="appui-task-tab-people bbn-full-screen">
+<div class="appui-task-tab-people bbn-overlay">
   <div class="bbn-task-roles-container bbn-flex-height">
     <div class="bbn-padded">
-      <div :class="['k-block', 'bbn-task-assigned', {over: targetContainer === 'managers'}]"
+      <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {over: targetContainer === 'managers'}]"
            @mouseover="setTargetContainer('managers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header bbn-b"><i class="nf nf-fa-user_tie bbn-hsmargin"></i><?=_("Supervisors")?></div>
-        <div class="k-content bbn-task-managers">
+        <div class="bbn-header bbn-b"><i class="nf nf-fa-black_tie bbn-hsmargin"></i><?=_("Supervisors")?></div>
+        <div class="bbn-task-managers">
           <ul>
             <li v-for="e in managers"
                 v-bind="{'id-user': e.value, 'id-group': e.id_group}"
@@ -33,12 +33,12 @@
         </div>
       </div>
       <div class="bbn-spacer"></div>
-      <div :class="['k-block', 'bbn-task-assigned', {over: targetContainer === 'workers'}]"
+      <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {over: targetContainer === 'workers'}]"
            @mouseover="setTargetContainer('workers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header bbn-b"><i class="nf nf-fa-user_astronaut bbn-hsmargin"></i><?=_("Workers")?></div>
-        <div class="k-content bbn-task-workers">
+        <div class="bbn-header bbn-b"><i class="nf nf-fa-user_circle_o bbn-hsmargin"></i><?=_("Workers")?></div>
+        <div class="bbn-task-workers">
           <ul>
             <li v-for="e in workers"
                 v-bind="{'id-user': e.value, 'id-group': e.id_group}"
@@ -65,12 +65,12 @@
         </div>
       </div>
       <div class="bbn-spacer"> </div>
-      <div :class="['k-block', 'bbn-task-assigned', {over: targetContainer === 'viewers'}]"
+      <div :class="['bbn-block','bbn-widget', 'bbn-task-assigned', {over: targetContainer === 'viewers'}]"
            @mouseover="setTargetContainer('viewers')"
            @mouseleave="targetContainer = false"
       >
-        <div class="k-header bbn-b"><i class="nf nf-fa-user_secret bbn-hsmargin"></i><?=_("Spectators")?></div>
-        <div class="k-content bbn-task-viewers">
+        <div class="bbn-header bbn-b"><i class="nf nf-fa-user_secret bbn-hsmargin"></i><?=_("Spectators")?></div>
+        <div class="bbn-task-viewers">
           <ul>
             <li v-for="e in viewers"
                 v-bind="{'id-user': e.value, 'id-group': e.id_group}"

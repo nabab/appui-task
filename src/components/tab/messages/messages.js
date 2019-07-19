@@ -35,7 +35,7 @@
           width: 800,
           height: 750,
           component: 'appui-notes-forum-form',
-          source: $.extend(true, {
+          source: bbn.fn.extend(true, {
             props: {
               formAction: this.tasks.source.root + 'actions/messages/insert',
               formSuccess: (d) => {
@@ -64,7 +64,7 @@
           width: 800,
           height: 600,
           component: 'appui-notes-forum-form',
-          source: $.extend(true, {
+          source: bbn.fn.extend(true, {
             props: {
               formAction: this.tasks.source.root + 'actions/messages/edit',
               formSuccess: (d) => {
@@ -101,7 +101,7 @@
           width: 800,
           height: 600,
           component: 'appui-notes-forum-form',
-          source: $.extend(true, {
+          source: bbn.fn.extend(true, {
             props: {
               formAction: this.tasks.source.root + 'actions/messages/reply',
               formSuccess: (d) => {

@@ -82,9 +82,9 @@
               id_task: idTask
             }, d => {
               if ( d.success && d.tracker ){
-                let tasks = bbn.vue.findAll(appui, 'appui-task-widget-tracker');
+                let tasks = bbn.vue.findAll(appui, 'appui-task-tracker');
                 if ( tasks.length ){
-                  $.each(tasks, (i, t) => {
+                  bbn.fn.each(tasks, (t, i) => {
                     if ( t.source.id === idTask ){
                       t.source.tracker = d.tracker;
                       return false;
@@ -115,14 +115,14 @@
         }
       },
       stopPost(obj){
-        obj = $.extend({
+        obj = bbn.fn.extend({
           id_task: this.active.id_task
         }, obj);
         bbn.fn.post(appui.plugins['appui-task'] + '/actions/tracker/stop', obj, d => {
           if ( d.success ){
             let tasks = bbn.vue.findAll(appui, 'appui-task-task');
             if ( tasks.length ){
-              $.each(tasks, (i, t) => {
+              bbn.fn.each(tasks, (t, i) => {
                 if ( t.source.id === this.active.id_task ){
                   t.source.tracker = false;
                   t.$set(t.source, 'trackers', d.trackers);
@@ -161,12 +161,12 @@
       trackerMessage: {
         props: ['source'],
         template: `
-<bbn-form class="bbn-full-screen"
+<bbn-form
           :source="source"
           @submit="save"
 >
   <bbn-textarea v-model="source.message"
-                class="bbn-full-screen"
+                class="bbn-overlay"
                 style="width: 100%; padding: 10px"
   ></bbn-textarea>
 </bbn-form>

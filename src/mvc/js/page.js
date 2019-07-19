@@ -27,13 +27,13 @@
           cat.group = group || (items ? cat.text : '');
           res.push(cat);
           if ( items ){
-            $.each(items, (i, c) => {
+           bbn.fn.each(items, (c, i) => {
               getItem(c, cat.text);
             });
           }
         };
         if ( this.source.categories ){
-          $.each(Object.assign({}, this.source.categories), (i, cat) => {
+          bbn.fn.each(Object.assign({}, this.source.categories), (cat, i) => {
             getItem(cat);
           });
         }
@@ -41,18 +41,35 @@
       },
       groups(){
         let res = [];
-        $.each(this.source.groups, (i, v) => {
+        bbn.fn.each(this.source.groups, (v, i) => {
           v.expanded = false;
-          v.items = $.map(
+
+          /*v.items = bbn.fn.map(
             $.grep(appui.app.users, (user) => {
               return user.active && (user.id_group === v.id);
             }),
-            (user) => {
+            ( user, i ) => {
               user.id = user.value;
               user.icon = 'nf nf-fa-user';
               return user;
             }
-          );
+          );*/
+
+
+          let arr = [];  
+          bbn.fn.each(appui.app.users, (user,i) =>{
+            if ( user.active && (user.id_group === v.id) ){
+              arr.push(user)
+            }
+          });
+
+          v.items = bbn.fn.map(arr,( user, i ) => {
+            user.id = user.value;
+            user.icon = 'nf nf-fa-user';
+            return user;
+          });
+          
+
           if ( v.is_parent ){
             v.icon = 'nf nf-fa-users';
           }
@@ -100,7 +117,7 @@
       },
 
       // The special field for the type of task (tree inside a dropdown)
-      typeField(container, info){
+      /*typeField(container, info){
         return $("input[name=type]", container).kendoDropDownTreeView({
           treeview: {
             select: function(e){
@@ -127,7 +144,7 @@
             })
           }
         }).data("kendoDropDownTreeView");
-      }
+      }*/
     }
   };
 })();

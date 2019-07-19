@@ -1,4 +1,4 @@
-<bbn-form class="bbn-full-screen"
+<bbn-form
           :source="formData"
           :action="source.root + 'actions/task/bill'"
           @success="afterSubmit"

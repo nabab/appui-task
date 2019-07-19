@@ -68,10 +68,10 @@
     </div>
   </div>
   <div v-if="source.price"
-       class="k-block"
+       class="bbn-block"
        style="margin-top: 10px"
   >
-    <div class="k-header">
+    <div class="bbn-header">
       <span class="bbn-b"><i class="nf nf-fa-gavel bbn-hsmargin"></i><?=_('Deciders')?></span>
       <i class="nf nf-fa-plus bbn-p"
          style="position: absolute; top: 7px; right: 7px;"
@@ -99,10 +99,10 @@
     </div>
   </div>
   <div v-if="main.canBill"
-       class="k-block"
+       class="bbn-block"
        style="margin-top: 10px"
   >
-    <div class="k-header">
+    <div class="bbn-header">
       <span class="bbn-b"><i class="nf nf-fa-file_invoice bbn-hsmargin"></i><?=_('Invoice')?></span>
       <i class="nf nf-fa-plus bbn-p"
          style="position: absolute; top: 7px; right: 7px;"

@@ -60,7 +60,7 @@
       <bbn-button v-if="main.canOpen"
                   @click="main.reopen"
                   title="<?=_("Reopen")?>"
-                  icon="nf nf-fa-hand_left"
+                  icon="nf nf-fa-hand_pointer_o"
       ></bbn-button>
     </div>
   </div>
@@ -84,9 +84,9 @@
   <label><?=_("Deadline")?></label>
   <div>
     <bbn-datetimepicker v-model="source.deadline"
-                    @keydown="main.preventAll($event)"
-                    :disabled="!main.canChange"
-                    :min="minDate()"
+                        @keydown="main.preventAll($event)"
+                        :disabled="!main.canChange"
+                        :min="minDate()"
     ></bbn-datetimepicker>
     <bbn-button v-if="source.deadline && main.canChange"
                 @click="main.removeDeadline"
@@ -116,7 +116,7 @@
     <bbn-button v-if="main.canPing"
                 @click="main.ping"
                 title="<?=_("Ping workers")?>"
-                icon="nf nf-fa-hand_pointer"
+                icon="nf nf-fa-hand_pointer_o"
     ></bbn-button>
     <bbn-button v-if="main.isAdded && main.canUnmakeMe"
                 @click="main.unmakeMe"

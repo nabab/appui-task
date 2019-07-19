@@ -1,4 +1,4 @@
-<div class="appui-tasks bbn-full-screen">
+<div class="appui-tasks bbn-overlay">
   <bbn-tabnav class="appui_task_tabnav"
               :scrollable="true"
               :autoload="true"

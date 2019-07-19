@@ -10,9 +10,9 @@
     ></span>
   </div>
   <div v-if="isVisible"
-       class="appui-task-tracker-list k-block bbn-flex-height"
+       class="appui-task-tracker-list bbn-block bbn-flex-height"
   >
-    <div class="k-header bbn-c"
+    <div class="bbn-header bbn-c"
          style="margin-bottom: 0"
     >
       <span class="window-icons-left">
@@ -29,9 +29,9 @@
     </div>
     <div class="bbn-flex-fill bbn-flex-height">
       <div v-if="active"
-           class="k-block"
+           class="bbn-block"
       >
-        <div class="k-header active-header">
+        <div class="bbn-header active-header">
           <div class="bbn-flex-width">
             <div class="bbn-flex-fill bbn-b progress-text"><?=_('In progress')?></div>
             <div v-if="progress"
