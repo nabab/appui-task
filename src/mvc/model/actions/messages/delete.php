@@ -13,7 +13,7 @@ if (
   if ( $notes->remove($model->data['id'], true) ){
     /** @todo To remove this and add an apposite function in grid */
     $model->get_model($model->plugin_url('appui-ide').'/data_cache', [
-      'deleteCache' => 'bbn_cache/bbn/appui/grid',
+      'deleteCache' => 'bbn/appui/grid',
       'deleteContent' => 0
     ]);
     return [

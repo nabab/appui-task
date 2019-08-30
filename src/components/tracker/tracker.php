@@ -4,13 +4,13 @@
   <div class="bbn-block bbn-p"
        @click="openWindow"
   >
-    <i :class="['bbn-lg', 'fas', 'fa-stopwatch', {'bbn-green': active && progress}]"></i>
+    <i :class="['bbn-lg', 'bbn-b','nf', 'nf-mdi-timer', {'bbn-green': active && progress}]"></i>
     <span v-if="active && progress"
           v-text="progress"
     ></span>
   </div>
   <div v-if="isVisible"
-       class="appui-task-tracker-list bbn-block bbn-flex-height"
+       class="appui-task-tracker-list bbn-block bbn-flex-height bbn-box"
   >
     <div class="bbn-header bbn-c"
          style="margin-bottom: 0"
@@ -58,7 +58,7 @@
       <div class="bbn-flex-fill">
         <bbn-scroll>
           <div v-for="(l,i) in realList"
-               :class="['real-list-item', {'k-alt': i%2}]">
+               :class="['real-list-item', {'bbn-alt': i%2}]">
             <div class="bbn-flex-width bbn-vmiddle">
               <div class="bbn-flex-fill bbn-p"
                    v-text="shorten(l.title)"

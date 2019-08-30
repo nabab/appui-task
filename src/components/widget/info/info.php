@@ -23,8 +23,9 @@
     <div v-if="main.isUnapproved">
       <bbn-button v-if="main.canClose"
                   @click="main.close"
-                  title="<?=_("Close") ?>"
+                  title="<?=_("Close")?>"
                   icon="nf nf-fa-check"
+                  :notext="true"
       ></bbn-button>
     </div>
     <div v-else-if="main.isActive">
@@ -32,21 +33,25 @@
                   @click="main.start"
                   title="<?=_("Put on ongoing")?>"
                   icon="nf nf-fa-play"
+                  :notext="true"
       ></bbn-button>
       <bbn-button v-if="main.canHold"
                   @click="main.hold"
                   title="<?=_("Put on hold")?>"
                   icon="nf nf-fa-pause"
+                  :notext="true"
       ></bbn-button>
       <bbn-button v-if="main.canResume"
                   @click="main.resume"
                   title="<?=_("Resume")?>"
                   icon="nf nf-fa-play"
+                  :notext="true"
       ></bbn-button>
       <bbn-button v-if="main.canClose"
                   @click="main.close"
                   title="<?=_("Close") ?>"
                   icon="nf nf-fa-check"
+                  :notext="true"
       ></bbn-button>
     </div>
     <div v-else-if="main.isHolding">
@@ -54,6 +59,7 @@
                   @click="main.resume"
                   title="<?=_("Resume")?>"
                   icon="nf nf-fa-play"
+                  :notext="true"
       ></bbn-button>
     </div>
     <div v-else-if="main.isClosed">
@@ -61,6 +67,7 @@
                   @click="main.reopen"
                   title="<?=_("Reopen")?>"
                   icon="nf nf-fa-hand_pointer_o"
+                  :notext="true"
       ></bbn-button>
     </div>
   </div>
@@ -91,6 +98,7 @@
     <bbn-button v-if="source.deadline && main.canChange"
                 @click="main.removeDeadline"
                 icon="nf nf-fa-times"
+                :notext="true"
     ></bbn-button>
   </div>
   <label><?=_('Actions')?></label>
@@ -99,30 +107,36 @@
                 @click="main.makeMe('managers')"
                 icon="nf nf-fa-user_plus"
                 title="<?=_('Make me a supervisor')?>"
-                style="color: green"
+                class="bbn-green"
+                :notext="true"
     ></bbn-button>
     <bbn-button v-if="main.canMakeMe && !main.isWorker"
                 @click="main.makeMe('workers')"
                 icon="nf nf-fa-user_plus"
                 title="<?=_('Make me a worker')?>"
-                style="color: orange"
+                class="bbn-orange"
+                :notext="true"
     ></bbn-button>
     <bbn-button v-if="!main.isViewer"
                 @click="main.makeMe('viewers')"
                 icon="nf nf-fa-user_plus"
                 title="<?=_('Make me a spectator')?>"
                 style="color: yellow"
+                class="bbn-yellow"
+                :notext="true"
     ></bbn-button>
     <bbn-button v-if="main.canPing"
                 @click="main.ping"
                 title="<?=_("Ping workers")?>"
                 icon="nf nf-fa-hand_pointer_o"
+                :notext="true"
     ></bbn-button>
     <bbn-button v-if="main.isAdded && main.canUnmakeMe"
                 @click="main.unmakeMe"
                 title="<?=_("Unfollow the task")?>"
                 icon="nf nf-fa-user_times"
-                style="color: red"
+                class="bbn-red"
+                :notext="true"
     ></bbn-button>
   </div>
 </div>

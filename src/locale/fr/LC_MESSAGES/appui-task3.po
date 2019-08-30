@@ -7,15 +7,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-04-01 12:06+0200\n"
-"POT-Revision-Date: 2019-04-01 12:06+0200\n"
+"POT-Creation-Date: 2019-07-17 13:01+0200\n"
+"POT-Revision-Date: 2019-07-17 13:01+0200\n"
 "Language: fr\n"
-"X-Domain: appui-task1\n"
+"X-Domain: appui-task3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.js
 msgid "Billed"
-msgstr "Facturé"
+msgstr ""
 
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/invoice/invoice.js
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tab/main/main.js
@@ -590,19 +590,3 @@ msgstr "État"
 #: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page.php
 msgid "Tasks"
 msgstr "Tâches"
-
-#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
-msgid ""
-"Sorry, a problem occured while moving this item, and although the tree says othe"
-"rwise the item has not been moved."
-msgstr ""
-"Désolé un problème est survenu pendant le déplacement de l'élément, et bien que "
-"l'arborescence se soit mis à jour, l'élément n'a pas été déplacé"
-
-#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
-msgid "Please refresh the tab in order to see the awful truth..."
-msgstr "Rafraîchissez cet onglet SVP"
-
-#: /home/thomas/domains/apstapp2.thomas.lan/_appui/vendor/bbn/appui-task/src/mvc/public/page/tree.php
-msgid "Are you sure you want to move this task?"
-msgstr "Êtes-vous sûr de vouloir déplacer cette tâche?"

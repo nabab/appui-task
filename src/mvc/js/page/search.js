@@ -31,10 +31,9 @@
     methods: {
       createTask(){
         if ( this.taskTitle.length ){
-          bbn.vue.closest(this, '.bbn-container').popup().open({
+          this.getPopup().open({
             title: bbn._('New task'),
             width: 500,
-            height: 200,
             component: this.$options.components['appui-tasks-create-form'],
             source: {
               title: this.taskTitle,
@@ -172,7 +171,6 @@
 <bbn-form :action="cp.tasks.source.root + 'actions/task/insert'"
           :source="source"
           @success="refreshTable"
-          class="bbn-overlay"
 >
   <div class="bbn-padded bbn-grid-fields">
     <div>` + bbn._('Title') + `</div>
@@ -185,9 +183,9 @@
     <bbn-dropdown :source="cp.tasks.fullCategories"
                   v-model="source.type"
                   group="group"
-                  :cfg="{dataValueField: 'id'}"
+                  source-value="id"
                   required="required"
-                  placeholder="` + bbn._('Select a type...') + `"
+                  placeholder="${bbn._('Select a type...')}"
                   class="bbn-w-100"
     ></bbn-dropdown>
   </div>
@@ -196,7 +194,7 @@
         props: ['source'],
         data(){
           return {
-            cp: bbn.vue.closest(this, 'bbn-container').getComponent()
+            cp: this.closest('bbn-container').getComponent()
           }
         },
         methods: {

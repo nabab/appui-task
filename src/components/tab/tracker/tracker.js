@@ -27,7 +27,7 @@
       },
       renderEnd(row){
         if ( !row.end ){
-          return bbn._('In progress...');
+          return bbn._('In progress') + '...';
         }
         return moment(row.end).format('DD/MM/YYYY HH:mm:ss');
       },

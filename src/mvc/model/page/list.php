@@ -30,7 +30,7 @@ $fields = [
   'bbn_tasks.price',
   'bbn_tasks.private',
   'bbn_tasks.active',
-  'role' => 'my_role.role',
+  'role' => 'bbn_tasks_roles.role',
   'last_action' => 'FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono))',
   'num_children' => 'COUNT(children.id)',
   'num_notes' => 'COUNT(DISTINCT bbn_tasks_notes.id_note)',
@@ -177,95 +177,5 @@ if ( $grid->check() ){
       }
     }
   }
-  //\bbn\x::log($data, 'mirko2');
   return $data;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if ( !empty($model->data['data']) ){
-  $model->data = \bbn\x::merge_arrays($model->data, $model->data['data']);
-  unset($model->data['data']);
-}
-
-/*$grid = new \bbn\appui\grid($model->db, $model->data, 'bbn_tasks', [
-  'reference',
-  'role',
-  'last_action'
-]);
-$where1 = $grid->filter($model->data['filter'], true);
-$ops = [
-  'eq' => '=',
-  'neq' => '!=',
-  'gt' => '>',
-  'gte' => '>=',
-  'lt' => '<',
-  'lte' => '<=',
-  'contains' => 'LIKE',
-  'isnotnull' => 'IS NOT NULL',
-  'isnull' => 'IS NULL',
-];
-
-$done = [];
-if ( isset($model->data['filter'], $model->data['filter']['filters']) ){
-  $fs =& $model->data['filter']['filters'];
-  foreach ( $fs as $f ){
-    if ( isset($f['field'], $f['operator'], $ops[$f['operator']]) ){
-      if ( !isset($done[$f['field']]) ){
-        $done[$f['field']] = \count($res);
-        array_push($res, [$f['field'], $ops[$f['operator']], $f['value']]);
-      }
-      else{
-        if ( !\is_array($res[$done[$f['field']]][2]) ){
-          $res[$done[$f['field']]][2] = [$res[$done[$f['field']]][2]];
-        }
-        array_push($res[$done[$f['field']]][2], $f['value']);
-      }
-    }
-    else if ( isset($f['filters']) && \count($f['filters']) ){
-      $r = [$f['filters'][0]['field'], '=', []];
-      foreach ( $f['filters'] as $f2 ){
-        array_push($r[2], $f2['value']);
-      }
-      array_push($res, $r);
-    }
-  }
-}
-*/
-$sort = [];
-if ( !empty($model->data['order']) ){
-  foreach ( $model->data['order'] as $s ){
-    if ( isset($s['dir'], $s['field']) ){
-      $sort[$s['field']] = $s['dir'];
-    }
-  }
-}
-if ( isset($model->data['selection']) ){
-  if ( $model->data['selection'] === 'user' ){
-    array_push($res, ['my_user', '=', $model->inc->user->get_id()]);
-  }
-  else if ( $model->data['selection'] === 'group' ){
-    array_push($res, ['my_group', '=', $model->inc->user->get_group()]);
-  }
-}
-if ( !empty($model->data['title']) ){
-  $res['title'] = $model->data['title'];
-}
-
-return $pm->search($res, $sort, $model->data['start'] ?? 0, $model->data['limit'] ?? 500);

@@ -111,7 +111,7 @@
           <i class="nf nf-fa-question_circle"> </i>
           <?=_("Drag and drop the users into the corresponding role block")?>
         </span>
-        <span v-if="!canChange">
+        <span v-else>
           <i class="nf nf-fa-exclamation_circle"> </i>
           <?=_("You have no right to modify the roles in this task")?>
         </span>
