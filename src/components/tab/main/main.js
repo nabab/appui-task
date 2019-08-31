@@ -432,11 +432,11 @@
         return false;
       },
       addBudget() {
-        if (this.isAdmin) {
-          bbn.vue.find(this, 'appui-task-budget').showPriceForm = true;
+        if ( this.isAdmin ){
+          this.find('appui-task-widget-budget').showPriceForm = true;
         }
       },
-      budgetButtons() {
+      budgetButtons(){
         return !this.source.price && this.isAdmin && this.isOpened ? [{
           text: bbn._('Add budget'),
           icon: 'nf nf-fa-plus',

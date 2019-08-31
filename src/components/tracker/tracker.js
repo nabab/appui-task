@@ -83,7 +83,7 @@
               id_task: idTask
             }, d => {
               if ( d.success && d.tracker ){
-                let tasks = bbn.vue.findAll(appui, 'appui-task-tracker');
+                let tasks = bbn.vue.findAll(appui, 'appui-task-widget-tracker');
                 if ( tasks.length ){
                   bbn.fn.each(tasks, (t, i) => {
                     if ( t.source.id === idTask ){

@@ -9,7 +9,8 @@
     props: ['source'],
     data(){
       return {
-        targetContainer: false
+        targetContainer: false,
+        coloredContainers : false
       }
     },
     computed: {
@@ -61,28 +62,31 @@
         return [];
       },
       groupsFiltered(){
-        //return bbn.fn.order($.map(this.tasks.groups, (g) => {
-        return bbn.fn.order(bbn.fn.map(this.tasks.groups, g => { 
-          let a = bbn.fn.extend(true, {}, g);
-          a.items = a.items.filter((u) => {
-            let ok = true;
-            bbn.fn.each(this.source.roles, (r, j) => {
-              if (
-                ((u.id !== this.source.id_user) || (j !== 'managers')) &&
-                //($.inArray(u.id, r) > -1 )
-                ( r.indexOf(u.id) > -1 )
-              ){
-                ok = false;
-                return false;
-              }
-            });
-            return ok;
-          }, a.items);
-          if ( a.items.length ) {
-            return a;
-          }
-          return null;
-        }), 'text', 'asc');
+        return bbn.fn.order(
+          bbn.fn.filter(
+            bbn.fn.map(this.tasks.groups, g => { 
+              let a = bbn.fn.extend(true, {}, g);
+              a.items = a.items.filter((u) => {
+                let ok = true;
+                bbn.fn.each(this.source.roles, (r, j) => {
+                  if (
+                    ((u.id !== this.source.id_user) || (j !== 'managers')) &&
+                    (r.indexOf(u.id) > -1)
+                  ){
+                    ok = false;
+                    return false;
+                  }
+                });
+                return ok;
+              });
+              return a;
+            }),
+            g => {
+              return !!g.items.length
+            }
+          ),
+          'text', 'asc'
+        );
       }
     },
     methods: {
@@ -146,24 +150,36 @@
         }
       },
       dragEnd(d, ev){
+        let target = this.targetContainer;
         ev.preventDefault();
-        if ( this.targetContainer ){
-          if ( d.data.is_parent && Array.isArray(d.items) && d.items.length ){
+        if ( target ){
+          if ( Array.isArray(d.items) && d.items.length ){
             bbn.fn.each(d.items, ( v, i ) => {
               if ( v.id ){
-                this.addUser(v.id, this.targetContainer);
+                this.addUser(v.id, target);
               }
             });
           }
-          else if ( !d.data.is_parent && d.data.id ){
-            this.addUser(d.data.id, this.targetContainer);
+          else if ( d.data.id_group && d.data.id ){
+            this.addUser(d.data.id, target);
           }
+          this.targetContainer = false;
         }
       },
       setTargetContainer(role){
-        if ( this.canChange && this.$refs.task_usertree.realDragging && role ){
+        if ( this.canChange  && role && this.coloredContainers ){
           this.targetContainer = role;
         }
+      },
+      setWatch(){
+        this.$watch('$refs.task_usertree.realDragging', (newVal) => {
+          this.coloredContainers = newVal;
+          if ( !newVal ){
+            setTimeout(() => {
+              this.targetContainer = false;
+            }, 300)
+          }
+        })
       }
     }
   };

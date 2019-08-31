@@ -7,7 +7,10 @@
 /** @var $model \bbn\mvc\model*/
 $s =& $model->inc->session;
 $pm = new \bbn\appui\tasks($model->db);
-
+$mgr = $model->inc->user->get_manager();
+$arch = $model->inc->user->get_class_cfg()['arch']['groups'];
+$groups = $mgr->groups();
+\bbn\x::sort_by($groups, $arch['group'], 'ASC');
 return [
   'root' => APPUI_TASKS_ROOT,
   'root_notes' => $model->plugin_url('appui-notes').'/',
@@ -20,7 +23,7 @@ return [
   ],
   'categories' => \bbn\appui\tasks::get_options_tree('cats'),
   'usergroup' => $model->inc->user->get_group(),
-  'groups' => $model->get_model('usergroup/picker'),
+  'groups' => $groups,
   'categories' => $model->inc->options->map(function($a){
     $a['is_parent'] = !empty($a['items']);
     if ( $a['is_parent'] ){

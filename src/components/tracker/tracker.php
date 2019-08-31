@@ -51,6 +51,7 @@
                         icon="nf nf-fa-stop"
                         title="<?=_('Stop tracker')?>"
                         style="color: red; margin-right: 0"
+                        :notext="true"
             ></bbn-button>
           </div>
         </div>
@@ -69,6 +70,7 @@
                           icon="nf nf-fa-play"
                           title="<?=_('Play tracker')?>"
                           style="color: green"
+                          :notext="true"
               ></bbn-button>
             </div>
           </div>

@@ -1,20 +1,23 @@
 <div>
-  <div class="bbn-grid-fields bbn-vmiddle">
-    <label v-if="showPriceForm && main.isAdmin"><?=_('Price')?></label>
+  <div class="bbn-grid-fields">
+    <label v-if="showPriceForm && main.isAdmin"
+           class="bbn-vmiddle"
+    ><?=_('Price')?></label>
     <div v-if="showPriceForm && main.isAdmin"
          class="bbn-flex-width bbn-vmiddle"
     >
       <bbn-numeric class="bbn-flex-fill"
                    :decimals="2"
-                   format="c2"
                    :min="0"
                    v-model="source.price"
                    style="margin-right: 5px"
+                   
       ></bbn-numeric>
       <bbn-button icon="nf nf-fa-save"
                   :disabled="!source.price || (source.price == oldPrice)"
                   @click="saveForm"
                   title="<?=_('Save')?>"
+                  class="bbn-hsmargin"
       ></bbn-button>
       <bbn-button icon="nf nf-fa-times"
                   @click="cancelForm"

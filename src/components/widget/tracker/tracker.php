@@ -1,7 +1,6 @@
 <div>
   <div v-if="main.isOngoing && (main.isWorker || main.isManager)"
-       class="bbn-w-100 bbn-box"
-       style="margin-bottom: .5em"
+       class="bbn-w-100 bbn-box bbn-bottom-space"
   >
     <div class="bbn-header bbn-b bbn-no-border-top bbn-no-hborder bbn-radius-top"><?=_('CURRENT SESSION')?></div>
     <div class="bbn-spadded">

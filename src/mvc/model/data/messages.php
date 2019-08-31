@@ -299,7 +299,7 @@ else if ( !empty($model->data['data']['id_alias']) ){
 }
 $grid = new \bbn\appui\grid($model->db, $model->data, $cfg);
 if ( $grid->check() ){
-  $d = $grid->get_datatable();
+  $d = $grid->get_datatable(true);
   $notes = new \bbn\appui\notes($model->db);
   if ( is_array($d['data']) && !empty($d['data']) ){
     $ftype = \bbn\appui\notes::get_option_id('file', 'media');

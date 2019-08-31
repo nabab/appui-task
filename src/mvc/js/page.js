@@ -40,40 +40,25 @@
         return res;
       },
       groups(){
-        let res = [];
-        bbn.fn.each(this.source.groups, (v, i) => {
+        let res = [],
+            users = bbn.fn.extend(true, [], appui.app.users);
+        return bbn.fn.map(this.source.groups, (v, i) => {
+          v.text = v.nom || v.text
           v.expanded = false;
-
-          /*v.items = bbn.fn.map(
-            $.grep(appui.app.users, (user) => {
+          v.items = bbn.fn.map(
+            bbn.fn.filter(users, (user) => {
               return user.active && (user.id_group === v.id);
             }),
-            ( user, i ) => {
+            (user) => {
               user.id = user.value;
               user.icon = 'nf nf-fa-user';
               return user;
             }
-          );*/
-
-
-          let arr = [];  
-          bbn.fn.each(appui.app.users, (user,i) =>{
-            if ( user.active && (user.id_group === v.id) ){
-              arr.push(user)
-            }
-          });
-
-          v.items = bbn.fn.map(arr,( user, i ) => {
-            user.id = user.value;
-            user.icon = 'nf nf-fa-user';
-            return user;
-          });
-          
-
+          );
           if ( v.is_parent ){
             v.icon = 'nf nf-fa-users';
           }
-          res.push(v);
+          return v;
         });
         return res;
       }

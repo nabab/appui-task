@@ -1,9 +1,8 @@
 <div class="appui-task-tab-people bbn-overlay">
   <div class="bbn-task-roles-container bbn-flex-height">
     <div class="bbn-padded">
-      <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {over: targetContainer === 'managers'}]"
+      <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {'bbn-primary': targetContainer === 'managers', over: coloredContainers}]"
            @mouseover="setTargetContainer('managers')"
-           @mouseleave="targetContainer = false"
       >
         <div class="bbn-header bbn-b"><i class="nf nf-fa-black_tie bbn-hsmargin"></i><?=_("Supervisors")?></div>
         <div class="bbn-task-managers">
@@ -22,7 +21,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="nf nf-fa-trash_alt bbn-p bbn-red"
+                <i class="nf nf-fa-trash bbn-p bbn-red bbn-hsmargin"
                    v-if="isMaster && (source.id_user !== e.value)"
                    @click="removeUser(e.value, 'managers')"
                    :title="'<?=_('Remove')?> ' + e.text"
@@ -33,9 +32,9 @@
         </div>
       </div>
       <div class="bbn-spacer"></div>
-      <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {over: targetContainer === 'workers'}]"
+      <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {'bbn-primary': targetContainer === 'workers', over: coloredContainers}]"
            @mouseover="setTargetContainer('workers')"
-           @mouseleave="targetContainer = false"
+
       >
         <div class="bbn-header bbn-b"><i class="nf nf-fa-user_circle_o bbn-hsmargin"></i><?=_("Workers")?></div>
         <div class="bbn-task-workers">
@@ -54,7 +53,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="nf nf-fa-trash_alt bbn-p bbn-red"
+                <i class="nf nf-fa-trash bbn-p bbn-red bbn-hsmargin"
                    v-if="canChange"
                    @click="removeUser(e.value, 'workers')"
                    :title="'<?=_('Remove')?> ' + e.text"
@@ -65,9 +64,8 @@
         </div>
       </div>
       <div class="bbn-spacer"> </div>
-      <div :class="['bbn-block','bbn-widget', 'bbn-task-assigned', {over: targetContainer === 'viewers'}]"
+      <div :class="['bbn-block','bbn-widget', 'bbn-task-assigned', {'bbn-primary': targetContainer === 'viewers', over: coloredContainers}]"
            @mouseover="setTargetContainer('viewers')"
-           @mouseleave="targetContainer = false"
       >
         <div class="bbn-header bbn-b"><i class="nf nf-fa-user_secret bbn-hsmargin"></i><?=_("Spectators")?></div>
         <div class="bbn-task-viewers">
@@ -86,7 +84,7 @@
                 <span v-text="e.text"
                       class="bbn-flex-fill"
                 ></span>
-                <i class="nf nf-fa-trash_alt bbn-p bbn-red"
+                <i class="nf nf-fa-trash bbn-p bbn-red bbn-hsmargin"
                    v-if="canChange"
                    @click="removeUser(e.value, 'viewers')"
                    :title="'<?=_('Remove')?> ' + e.text"
@@ -97,7 +95,7 @@
         </div>
       </div>
     </div>
-    <div class="bbn-w-100 bbn-flex-fill bbn-flex-height bbn-padded">
+    <div class="bbn-w-100 bbn-flex-height bbn-padded bbn-flex-fill">
       <bbn-tree v-if="canChange"
                 class="bbn-task-usertree bbn-flex-fill"
                 :source="groupsFiltered"
@@ -105,6 +103,7 @@
                 :draggable="true"
                 :self-drop="false"
                 @dragEnd="dragEnd"
+                @hook:mounted="setWatch"
       ></bbn-tree>
       <div class="bbn-task-roles-desc bbn-lg" v-if="!isClosed">
         <span v-if="canChange">
