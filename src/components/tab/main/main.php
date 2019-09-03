@@ -8,7 +8,7 @@
                  :closable="false"
                  :source="source"
 	  ></bbns-widget>
-    <bbns-widget v-if="(isAdmin || isDecider) && ((isClosed && source.price) || isOpened)"
+    <bbns-widget v-if="(isAdmin || isDecider) && ((isClosed && source.price) || !isClosed)"
                  title="<i class='nf nf-fa-money bbn-hmargin'></i><?=_("Budget")?>"
                  component="appui-task-widget-budget"
                  uid="budget"

@@ -18,10 +18,12 @@
                   @click="saveForm"
                   title="<?=_('Save')?>"
                   class="bbn-hsmargin"
+                  :notext="true"
       ></bbn-button>
       <bbn-button icon="nf nf-fa-times"
                   @click="cancelForm"
                   title="<?=_('Cancel')?>"
+                  :notext="true"
       ></bbn-button>
     </div>
     <label v-if="!showPriceForm && source.price"><?=_('Price')?></label>
@@ -35,16 +37,19 @@
                   icon="nf nf-fa-edit"
                   title="<?=_('Edit price')?>"
                   @click="showPriceForm = true"
+                  :notext="true"
       ></bbn-button>
       <bbn-button v-if="main.isAdmin && !main.isClosed"
                   icon="nf nf-fa-trash"
                   title="<?=_('Remove price')?>"
                   @click="removePrice"
+                  :notext="true"
       ></bbn-button>
       <bbn-button v-if="main.canApprove && !main.isApproved"
                   icon="nf nf-fa-thumbs_up"
                   @click="approve"
                   title="<?=_('Approve price')?>"
+                  :notext="true"
       ></bbn-button>
     </div>
     <label v-if="source.price"><?=_('Status')?></label>
@@ -71,16 +76,17 @@
     </div>
   </div>
   <div v-if="source.price"
-       class="bbn-block"
+       class="bbn-box"
        style="margin-top: 10px"
   >
-    <div class="bbn-header">
-      <span class="bbn-b"><i class="nf nf-fa-gavel bbn-hsmargin"></i><?=_('Deciders')?></span>
-      <i class="nf nf-fa-plus bbn-p"
-         style="position: absolute; top: 7px; right: 7px;"
-         @click="addDecider"
-         v-if="main.canChangeDecider && !main.isApproved"
-      ></i>
+    <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top">
+      <div class="bbn-vmiddle bbn-flex-width">
+        <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-gavel bbn-hsmargin"></i><?=_('Deciders')?></span>
+        <i class="nf nf-fa-plus bbn-p bbn-hsmargin"
+          @click="addDecider"
+          v-if="main.canChangeDecider && !main.isApproved"
+        ></i>
+      </div>
     </div>
     <div class="bbn-hspadded">
       <div v-for="decider in source.roles.deciders"
@@ -93,7 +99,7 @@
         <span v-text="getUserName(decider)"
               class="bbn-flex-fill bbn-hsmargin"
         ></span>
-        <i class="nf nf-fa-trash_alt bbn-p bbn-red"
+        <i class="nf nf-fa-trash bbn-p bbn-red"
            v-if="main.canChangeDecider && (main.userId !== decider) && !main.isApproved"
            @click="removeDecider(decider)"
            title="<?=_('Remove decider')?>"
@@ -102,24 +108,24 @@
     </div>
   </div>
   <div v-if="main.canBill"
-       class="bbn-block"
+       class="bbn-box"
        style="margin-top: 10px"
   >
-    <div class="bbn-header">
-      <span class="bbn-b"><i class="nf nf-fa-file_invoice bbn-hsmargin"></i><?=_('Invoice')?></span>
-      <i class="nf nf-fa-plus bbn-p"
-         style="position: absolute; top: 7px; right: 7px;"
-         @click="makeInvoice"
-         v-if="!main.hasInvoice"
-      ></i>
-      <i v-if="main.hasInvoice && source.invoice.id_media"
-         class="nf nf-fa-file_pdf bbn-p"
-         style="position: absolute; top: 7px; right: 7px;"
-         @click="getInvoicePDF"
-      ></i>
+    <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top">
+      <div class="bbn-vmiddle bbn-flex-width">
+        <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-file_invoice bbn-hsmargin"></i><?=_('Invoice')?></span>
+        <i class="nf nf-fa-plus bbn-p bbn-hsmargin"
+          @click="makeInvoice"
+          v-if="!main.hasInvoice"
+        ></i>
+        <i v-if="main.hasInvoice && source.invoice.id_media"
+          class="nf nf-fa-file_pdf_o bbn-p bbn-hsmargin"
+          @click="getInvoicePDF"
+        ></i>
+      </div>
     </div>
     <div v-if="main.hasInvoice"
-         class="bbn-hspadded bbn-grid-fields"
+         class="bbn-spadded bbn-grid-fields"
     >
       <label><?=_('Ref')?></label>
       <div v-text="getInvoiceRef()"></div>
