@@ -67,7 +67,7 @@
                    field="state"
                    :render="renderState"
                    :width="50"
-                   cls="bbn-h-100"
+                   cls="bbn-h-100 bbn-c"
                    :source="tasks.source.options.states"
       ></bbns-column>
       <bbns-column title="<?=_("Last")?>"
@@ -105,7 +105,6 @@
       <bbns-column title="<?=_("Creation Date")?>"
                    field="creation_date"
                    :render="renderCreationDate"
-                   :width="100"
                    type="datetime"
       ></bbns-column>
       <bbns-column title="<?=_("Deadline")?>"
