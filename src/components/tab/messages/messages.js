@@ -139,7 +139,7 @@
       },
       remove(n, v){
         this.confirm(bbn._('Are you sure you want to delete this message?'), () => {
-          bbn.fn.post(this.tasks.source.root + 'actions/messages/delete', {
+          this.post(this.tasks.source.root + 'actions/messages/delete', {
             id: n.id
           }, (d) => {
             if ( d.success ){

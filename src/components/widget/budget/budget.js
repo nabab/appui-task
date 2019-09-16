@@ -95,7 +95,7 @@
       approve(){
         if ( this.main.canApprove ){
           this.confirm(bbn._('Are you sure you want to approve this price?'), () => {
-            bbn.fn.post(`${this.main.tasks.source.root}actions/task/approve`, {
+            this.post(`${this.main.tasks.source.root}actions/task/approve`, {
               id_task: this.source.id
             }, d => {
               if ( d.success && d.data.approved ){
@@ -136,7 +136,7 @@
       },
       getInvoicePDF(){
         if ( this.source.invoice && this.source.invoice.id_media ){
-          bbn.fn.post_out(appui.plugins['appui-billing'] + '/actions/pdf', {
+          this.post_out(appui.plugins['appui-billing'] + '/actions/pdf', {
             id_media: this.source.invoice.id_media
           });
         }
@@ -152,7 +152,7 @@
                 return newVal.indexOf(d) === -1;
               }),
               deciderAction = (idUser, action) => {
-                bbn.fn.post(`${this.main.tasks.source.root}actions/role/${action}`, {
+                this.post(`${this.main.tasks.source.root}actions/role/${action}`, {
                   id_task: this.source.id,
                   role: 'deciders',
                   id_user: idUser

@@ -40,7 +40,7 @@
       remove(row){
         if ( appui.app.user.isAdmin ){
           this.confirm(bbn._('Are you sure you want to delete this track?'), () => {
-            bbn.fn.post(this.tasks.source.root + 'actions/tracker/remove', {id: row.id}, d => {
+            this.post(this.tasks.source.root + 'actions/tracker/remove', {id: row.id}, d => {
               if ( d.success ){
                 this.getRef('table').updateData();
                 appui.success(bbn._('Deleted'));

@@ -29,7 +29,7 @@
         this.isVisible = !this.isVisible;
       },
       refreshList(startAfter){
-        bbn.fn.post(appui.plugins['appui-task'] + '/data/tasks', {
+        this.post(appui.plugins['appui-task'] + '/data/tasks', {
           id_user: appui.app.user.id
         }, d => {
           if ( d.success && (d.data.list !== undefined) && (d.data.active !== undefined) ){
@@ -79,7 +79,7 @@
             this.refreshList(idTask);
           }
           else {
-            bbn.fn.post(appui.plugins['appui-task'] + '/actions/tracker/start', {
+            this.post(appui.plugins['appui-task'] + '/actions/tracker/start', {
               id_task: idTask
             }, d => {
               if ( d.success && d.tracker ){
@@ -119,7 +119,7 @@
         obj = bbn.fn.extend({
           id_task: this.active.id_task
         }, obj);
-        bbn.fn.post(appui.plugins['appui-task'] + '/actions/tracker/stop', obj, d => {
+        this.post(appui.plugins['appui-task'] + '/actions/tracker/stop', obj, d => {
           if ( d.success ){
             let tasks = bbn.vue.findAll(appui, 'appui-task-task');
             if ( tasks.length ){

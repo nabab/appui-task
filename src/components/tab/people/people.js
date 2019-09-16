@@ -109,7 +109,7 @@
             });
           }
           if ( !exists ){
-            bbn.fn.post(this.tasks.source.root + 'actions/role/insert', {
+            this.post(this.tasks.source.root + 'actions/role/insert', {
               id_task: this.source.id,
               role: roleType,
               id_user: idUser
@@ -130,7 +130,7 @@
             //const idx = $.inArray(idUser, this.source.roles[roleType]);
             const idx = this.source.roles[roleType].indexOf(idUser);
             if ( (idx > -1) ){
-              bbn.fn.post(this.tasks.source.root + 'actions/role/delete', {
+              this.post(this.tasks.source.root + 'actions/role/delete', {
                 id_task: this.source.id,
                 role: roleType,
                 id_user: idUser

@@ -170,7 +170,7 @@
     },
     methods: {
       update(prop, val) {
-        bbn.fn.post(this.root + 'actions/task/update', {
+        this.post(this.root + 'actions/task/update', {
             id_task: this.source.id,
             prop: prop,
             val: val
@@ -220,7 +220,7 @@
       },
       ping(){
         this.confirm(bbn._('Are you sure you want to ping the task?'), () => {
-          bbn.fn.post(this.root + 'actions/task/ping', { id_task: this.source.id }, (d) => {
+          this.post(this.root + 'actions/task/ping', { id_task: this.source.id }, (d) => {
             if ( d.success ){
               appui.success(bbn._('Pinged'));
             }
@@ -236,7 +236,7 @@
       makeMe(role) {
         let exists = false;
         const setRole = () => {
-            return bbn.fn.post(this.root + 'actions/role/insert', {
+            return this.post(this.root + 'actions/role/insert', {
                 id_task: this.source.id,
                 role: this.tasks.source.roles[role],
                 id_user: appui.app.user.id
@@ -266,7 +266,7 @@
       unmakeMe(force) {
         let prop;
         const removeRole = () => {
-          return bbn.fn.post(this.root + "actions/role/delete", {
+          return this.post(this.root + "actions/role/delete", {
             id_task: this.source.id,
             id_user: appui.app.user.id,
             role: this.tasks.source.roles[prop]
@@ -313,7 +313,7 @@
           this.alert(bbn._("You have to enter a comment, a link, or a file"))
         }
         else {
-          bbn.fn.post(this.root + 'actions/comment/insert', v, (d) => {
+          this.post(this.root + 'actions/comment/insert', v, (d) => {
             if (d.success && d.comment) {
               d.comment.creation = new Date().getSQL(1);
               let m = new moment(d.comment.creation);
@@ -336,7 +336,7 @@
       },
       downloadMedia(id) {
         if ( id ){
-          bbn.fn.post_out(this.root + 'download/media/' + id);
+          this.post_out(this.root + 'download/media/' + id);
         }
       },
       /** @todo It is not used but maybe think about redoing the comment part */
@@ -364,7 +364,7 @@
                   title: false,
                   error: false
                }) - 1;
-         bbn.fn.post(this.root + "link_preview", {
+         this.post(this.root + "link_preview", {
            url: link,
            ref: this.ref
          }, (d) => {

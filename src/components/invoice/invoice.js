@@ -37,7 +37,7 @@
       afterSubmit(d){
         if ( d.success && d.data ){
           if ( d.data.id_media ){
-            bbn.fn.post_out(appui.plugins['appui-billing'] + '/actions/pdf', {
+            this.post_out(appui.plugins['appui-billing'] + '/actions/pdf', {
               id_media: d.data.id_media
             });
           }
