@@ -4,10 +4,11 @@
               :autoload="true"
   >
     <bbns-container url="search"
-              :static="true"
-              :load="true"
-              icon="nf nf-fa-home"
-              title="<?=_("New task")?> / <?=_("Search")?>"
+                    :static="true"
+                    :load="true"
+                    icon="nf nf-fa-home"
+                    title="<?=_("New task")?> / <?=_("Search")?>"
+                    :notext="true"
     ></bbns-container>
   </bbn-tabnav>
 </div>

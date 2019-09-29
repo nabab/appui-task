@@ -113,7 +113,7 @@
                    type="datetime"
       ></bbns-column>
       <bbns-column title=""
-                   :width="40"
+                   :width="50"
                    :buttons="[{
                      title: '<?=_('See task')?>',
                      icon: 'nf nf-fa-eye',

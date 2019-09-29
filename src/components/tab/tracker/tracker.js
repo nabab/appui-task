@@ -85,12 +85,11 @@
         template: `
 <bbn-form :source="source.row"
           :action="tracker.tasks.source.root + 'actions/tracker/edit'"
-          class="bbn-overlay"
           :scrollable="false"
           :validation="validation"
           @success="success"
 >
-  <div class="bbn-grid-fields bbn-spadded">
+  <div class="bbn-grid-fields bbn-padded">
     <label>${bbn._('Start')}</label>
     <bbn-datetimepicker v-model="source.row.start"
                         :max="maxStart"
@@ -100,7 +99,7 @@
                         :min="source.row.start"
                         :max="maxEnd"
     ></bbn-datetimepicker>
-    <label>${bbn._('Message')}</label>
+    <label>`+ bbn._('Message')+`</label>
     <div style="height: 300px">
       <bbn-textarea v-model="source.row.message"
                     class="bbn-h-100"
