@@ -8,6 +8,7 @@
 if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
   \bbn\str::is_integer($ctrl->arguments[0])
 ){
+  
   $f =& $ctrl->files['file'];
   $path = BBN_USER_PATH.'tmp/'.$ctrl->arguments[0];
   $new = !empty($_REQUEST['name']) && ($_REQUEST['name'] !== $f['name']) ?
