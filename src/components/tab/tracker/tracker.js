@@ -99,7 +99,7 @@
                         :min="source.row.start"
                         :max="maxEnd"
     ></bbn-datetimepicker>
-    <label>`+ bbn._('Message')+`</label>
+    <label>`+ bbn._('Message') + `</label>
     <div style="height: 300px">
       <bbn-textarea v-model="source.row.message"
                     class="bbn-h-100"
