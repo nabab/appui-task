@@ -185,7 +185,7 @@
                   group="group"
                   source-value="id"
                   required="required"
-                  placeholder="${bbn._('Select a type...')}"
+                  placeholder="`+ bbn._('Select a type...') +`"
                   class="bbn-w-100"
     ></bbn-dropdown>
   </div>

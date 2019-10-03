@@ -90,11 +90,11 @@
           @success="success"
 >
   <div class="bbn-grid-fields bbn-padded">
-    <label>${bbn._('Start')}</label>
+    <label>` + bbn._('Start') + `</label>
     <bbn-datetimepicker v-model="source.row.start"
                         :max="maxStart"
     ></bbn-datetimepicker>
-    <label>${bbn._('End')}</label>
+    <label>` + bbn._('End') + `</label>
     <bbn-datetimepicker v-model="source.row.end"
                         :min="source.row.start"
                         :max="maxEnd"
