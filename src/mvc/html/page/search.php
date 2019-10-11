@@ -117,7 +117,7 @@
                    :buttons="[{
                      title: '<?=_('See task')?>',
                      icon: 'nf nf-fa-eye',
-                     command: openTask,
+                     action: openTask,
                      notext: true
                    }]"
                    fixed="right"

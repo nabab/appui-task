@@ -4,7 +4,7 @@
                    :pageable="true"
                    :toolbar="[{
                      text: '<?=_('Add a note')?>',
-                     command: insert,
+                     action: insert,
                      icon: 'nf nf-fa-pencil'
                    }]"
                    :edit="edit"

@@ -1,5 +1,4 @@
-<bbn-form
-          :source="formData"
+<bbn-form :source="formData"
           :action="source.root + 'actions/task/bill'"
           @success="afterSubmit"
 >
@@ -16,37 +15,44 @@
       ></bbn-masked>
     </div>
     <label><?=_('Date')?></label>
-    <bbn-datetimepicker v-model="formData.creation"
-                        :max="currentYear + '12-31 23:59:59'"
-                        :min="currentYear + '01-01 00:00:00'"
-                        required
-    ></bbn-datetimepicker>
+    <div>
+      <bbn-datetimepicker v-model="formData.creation"
+                          :max="currentYear + '12-31 23:59:59'"
+                          :min="currentYear + '01-01 00:00:00'"
+                          required
+      ></bbn-datetimepicker>
+    </div>
     <label><?=_('Description')?></label>
     <bbn-rte v-model="formData.description"
              required
     ></bbn-rte>
     <label><?=_('Tax')?></label>
-    <div>
+    <div class="bbn-vmiddle">
       <bbn-numeric v-model="formData.tax"
-                   format="# \%"
                    required
+                   :min="0"
+                   :max="100"
       ></bbn-numeric>
+      <i class="nf nf-fa-percent bbn-left-sspace"></i>
     </div>
     <label><?=_('Taxable')?></label>
-    <div>
+    <div class="bbn-vmiddle">
       <bbn-numeric v-model="formData.taxable"
-                   format="c2"
                    required
+                   :min="0"
+                   :decimals="2"
       ></bbn-numeric>
+      <i class="nf nf-fa-euro bbn-left-sspace"></i>
     </div>
     <label><?=_('Amount')?></label>
-    <div>
+    <div class="bbn-vmiddle">
       <bbn-numeric :value="formData.amount"
                    readonly
                    required
-                   format="c2"
                    :spinners="false"
+                   :decimals="2"
       ></bbn-numeric>
+      <i class="nf nf-fa-euro bbn-left-sspace"></i>
     </div>
   </div>
 </bbn-form>

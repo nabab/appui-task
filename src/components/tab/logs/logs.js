@@ -19,9 +19,6 @@
       renderUser(row){
         return this.tasks.userName(row.id_user);
       },
-      renderDate(row){
-        return bbn.fn.fdate(row.chrono);
-      }
     },
     components: {
       'appui-tasks-user-avatar': {

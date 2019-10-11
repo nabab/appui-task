@@ -65,7 +65,7 @@
             title: bbn._('Edit'),
             icon: 'nf nf-fa-edit',
             notext: true,
-            command: this.edit
+            action: this.edit
           });
         }
         if ( appui.app.user.isAdmin ){
@@ -73,7 +73,7 @@
             title: bbn._('Remove'),
             icon: 'nf nf-fa-trash',
             notext: true,
-            command: this.remove
+            action: this.remove
           });
         }
         return ret;

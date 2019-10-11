@@ -11,7 +11,7 @@
     <bbns-column title="<i class='nf nf-fa-calendar bbn-hsmargin'></i><?=_("Date")?>"
                  field="chrono"
                  :width="150"
-                 :render="renderDate"
+                 type="datetime"
                  cls="bbn-c"
     ></bbns-column>
     <bbns-column title="<i class='nf nf-fa-history bbn-hsmargin'></i><?=_("Action")?>"
