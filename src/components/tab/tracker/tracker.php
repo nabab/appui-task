@@ -1,7 +1,7 @@
 <bbn-table :source="tasks.source.root+'data/tracker'"
            :data="{id_task: source.id}"
            :groupable="true"
-           :server-grouping="false"
+           :server-grouping="true"
            :group-by="0"
            :pageable="false"
            class="bbn-100"
