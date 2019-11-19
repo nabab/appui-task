@@ -26,7 +26,7 @@
                   :notext="true"
       ></bbn-button>
     </div>
-    <label v-if="!showPriceForm && source.price"><?=_('Price')?></label>
+    <label v-if="!showPriceForm && source.price" class="bbn-vmiddle"><?=_('Price')?></label>
     <div v-if="!showPriceForm && source.price"
          class="bbn-flex-width bbn-vmiddle"
     >
