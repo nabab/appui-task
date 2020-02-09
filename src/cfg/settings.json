@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "appui-usergroup",
+    "appui-options",
+    "appui-notes"
+  ]
+}
