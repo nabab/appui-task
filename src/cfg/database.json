@@ -782,5 +782,147 @@
                 "default": "NULL"
             }
         }
+    },
+    "bbn_invoices": {
+        "keys": {
+            "PRIMARY": {
+                "columns": [
+                    "id"
+                ],
+                "ref_db": null,
+                "ref_table": null,
+                "ref_column": null,
+                "constraint": null,
+                "update": null,
+                "delete": null,
+                "unique": 1
+            },
+            "id_media": {
+                "columns": [
+                    "id_media"
+                ],
+                "ref_db": "apst_app",
+                "ref_table": "bbn_medias",
+                "ref_column": "id",
+                "constraint": "bbn_invoices_ibfk_1",
+                "update": "SET NULL",
+                "delete": "SET NULL",
+                "unique": 0
+            }
+        },
+        "cols": {
+            "id": [
+                "PRIMARY"
+            ],
+            "id_media": [
+                "id_media"
+            ]
+        },
+        "fields": {
+            "id": {
+                "position": 1,
+                "type": "binary",
+                "null": 0,
+                "key": "PRI",
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "maxlength": 16
+            },
+            "id_media": {
+                "position": 2,
+                "type": "binary",
+                "null": 1,
+                "key": "MUL",
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL",
+                "maxlength": 16
+            },
+            "ref": {
+                "position": 3,
+                "type": "int",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": false,
+                "virtual": false,
+                "generation": "",
+                "maxlength": 5
+            },
+            "ref_year": {
+                "position": 4,
+                "type": "year",
+                "null": 1,
+                "key": null,
+                "extra": "VIRTUAL GENERATED",
+                "signed": true,
+                "virtual": true,
+                "generation": "year(`creation`)",
+                "default": "NULL",
+                "maxlength": 4
+            },
+            "creation": {
+                "position": 5,
+                "type": "datetime",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": ""
+            },
+            "description": {
+                "position": 6,
+                "type": "text",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": ""
+            },
+            "tax": {
+                "position": 7,
+                "type": "int",
+                "null": 1,
+                "key": null,
+                "extra": "",
+                "signed": false,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL",
+                "maxlength": 10
+            },
+            "taxable": {
+                "position": 8,
+                "type": "decimal",
+                "null": 1,
+                "key": null,
+                "extra": "",
+                "signed": false,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL",
+                "maxlength": 14,
+                "decimals": 2
+            },
+            "amount": {
+                "position": 9,
+                "type": "decimal",
+                "null": 1,
+                "key": null,
+                "extra": "",
+                "signed": false,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL",
+                "maxlength": 14,
+                "decimals": 2
+            }
+        }
     }
 }
