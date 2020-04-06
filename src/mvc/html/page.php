@@ -1,7 +1,8 @@
 <div class="appui-tasks bbn-overlay">
-  <bbn-tabnav class="appui_task_tabnav"
+  <bbn-router class="appui_task_nav"
               :scrollable="true"
               :autoload="true"
+              :nav="true"
   >
     <bbns-container url="search"
                     :static="true"
@@ -10,5 +11,5 @@
                     title="<?=_("New task")?> / <?=_("Search")?>"
                     :notext="true"
     ></bbns-container>
-  </bbn-tabnav>
+  </bbn-router>
 </div>

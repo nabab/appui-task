@@ -3,7 +3,7 @@
   return {
     computed: {
       tasks(){
-        return this.closest('bbn-tabnav').$parent;
+        return this.closest('bbn-router').$parent;
       }
     }
   }

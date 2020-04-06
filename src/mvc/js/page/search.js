@@ -1,7 +1,7 @@
 (() => {
   return {
     data(){
-      let tasks = bbn.vue.closest(this, 'bbn-tabnav').$parent;
+      let tasks = this.closest('bbn-router').$parent;
       return {
         typeSelection: [{
           text: bbn._('Mine'),

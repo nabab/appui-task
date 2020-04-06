@@ -1,8 +1,9 @@
 <div class="bbn-100">
-  <bbn-tabnav class="info-tabstrip"
+  <bbn-router class="info-tabstrip"
               :scrollable="false"
               :autoload="false"
               :root="'tasks/' + source.id + '/'"
+              :nav="true"
   >
     <bbns-container url="main"
                     :static="true"
@@ -44,5 +45,5 @@
                     icon="nf nf-fa-history"
                     title="<?=_("Events journal")?>"
     ></bbns-container>
-  </bbn-tabnav>
+  </bbn-router>
 </div>
