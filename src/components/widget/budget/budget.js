@@ -30,7 +30,7 @@
       },
       approvedBy(){
         if ( this.main.isApproved ){
-          return bbn.fn.get_field(appui.app.users, 'value', this.source.approved.id_user, 'text');
+          return bbn.fn.getField(appui.app.users, 'text', 'value', this.source.approved.id_user);
         }
         return '';
       }

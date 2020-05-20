@@ -17,7 +17,7 @@
     },
     methods: {
       renderUser(row){
-        return bbn.fn.get_field(appui.app.users, 'value', row.id_user, 'text');
+        return bbn.fn.getField(appui.app.users, 'text', 'value', row.id_user);
       },
       renderLength(row){
         return this.trackerComp.secToTime(row.length);

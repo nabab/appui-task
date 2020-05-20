@@ -52,7 +52,7 @@
         return this.closest('appui-task-task').tasks;
       },
       stateText() {
-        return bbn.fn.get_field(this.tasks.source.options.states, "value", this.source.state, "text");
+        return bbn.fn.getField(this.tasks.source.options.states, "text", "value", this.source.state);
       },
       isAdded() {
         return this.isManager || this.isWorker || this.isViewer;

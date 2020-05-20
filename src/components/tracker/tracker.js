@@ -20,7 +20,7 @@
       }
     },
     methods: {
-      get_field: bbn.fn.get_field,
+      getField: bbn.fn.getField,
       shorten: bbn.fn.shorten,
       openWindow(){
         if ( !this.isVisible && !this.list.length ){
@@ -75,7 +75,7 @@
           });
         }
         else {
-          if ( !bbn.fn.get_row(this.list, 'id', idTask) ){
+          if ( !bbn.fn.getRow(this.list, 'id', idTask) ){
             this.refreshList(idTask);
           }
           else {

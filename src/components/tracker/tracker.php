@@ -47,7 +47,7 @@
             </div>
             <div class="bbn-primary">
               <div class="bbn-flex-width bbn-vmiddle bbn-vxspadded">
-                <div v-text="shorten(get_field(list, 'id', active.id_task, 'title'))"
+                <div v-text="shorten(getField(list, 'title', 'id', active.id_task))"
                      class="bbn-flex-fill bbn-p bbn-b bbn-hspadded"
                      @click="openTask(active.id_task)"
                      title="<?=_('Open task')?>"

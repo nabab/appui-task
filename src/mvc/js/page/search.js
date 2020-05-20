@@ -77,16 +77,16 @@
           icon = 'pause';
           color = 'grey';
         }
-        return '<i class="bbn-lg nf nf-fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.get_field(this.tasks.source.options.states, "value", row.state, "text") + '"> </i>';
+        return '<i class="bbn-lg nf nf-fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.getField(this.tasks.source.options.states, "text", "value", row.state) + '"> </i>';
       },
       renderLast(row){
         return moment(row.last_action).calendar(null, {sameElse: 'DD/MM/YYYY'});
       },
       renderRole(row){
-        return bbn.fn.get_field(this.tasks.source.options.roles, "value", row.role, "text") || '-';
+        return bbn.fn.getField(this.tasks.source.options.roles, "text", "value", row.role) || '-';
       },
       renderType(row){
-        return bbn.fn.get_field(this.tasks.source.options.cats, "value", row.type, "text");
+        return bbn.fn.getField(this.tasks.source.options.cats, "text", "value", row.type);
       },
       renderDuration(row){
         let start = moment(row.creation_date),

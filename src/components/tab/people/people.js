@@ -35,7 +35,7 @@
       managers(){
         if ( this.source.roles && this.source.roles.managers ){
           return bbn.fn.order(bbn.fn.map(this.source.roles.managers, v => {
-            let user = bbn.fn.get_row(appui.app.users, 'value', v);
+            let user = bbn.fn.getRow(appui.app.users, 'value', v);
               return user || undefined;
           }), 'text', 'asc');
         }
@@ -45,7 +45,7 @@
         if ( this.source.roles && this.source.roles.viewers ){
           //return bbn.fn.order($.map(this.source.roles.viewers, (v) => {
           return bbn.fn.order(bbn.fn.map(this.source.roles.viewers, v => {  
-            let user = bbn.fn.get_row(appui.app.users, 'value', v);
+            let user = bbn.fn.getRow(appui.app.users, 'value', v);
             return user || undefined;
           }), 'text', 'asc');
         }
@@ -55,7 +55,7 @@
         if ( this.source.roles && this.source.roles.workers ){
           //return bbn.fn.order($.map(this.source.roles.workers, (v) => {
           return bbn.fn.order(bbn.fn.map(this.source.roles.workers, v => {  
-            let user = bbn.fn.get_row(appui.app.users, 'value', v);
+            let user = bbn.fn.getRow(appui.app.users, 'value', v);
             return user || undefined;
           }), 'text', 'asc');
         }
@@ -140,6 +140,9 @@
                   return false;
                 }
                 this.source.roles[roleType].splice(idx, 1);
+                this.$nextTick(() => {
+                  this.getRef('task_usertree').updateData();
+                });
               });
             }
           });
@@ -157,12 +160,14 @@
             bbn.fn.each(d.items, ( v, i ) => {
               if ( v.id ){
                 this.addUser(v.id, target);
+                v.remove();
               }
             });
           }
           else if ( d.data.id_group && d.data.id ){
             this.addUser(d.data.id, target);
           }
+          d.remove();
           this.targetContainer = false;
         }
       },
@@ -180,7 +185,7 @@
             }, 300)
           }
         })
-      }
+      },
     }
   };
 })(window.bbn);

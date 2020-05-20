@@ -65,13 +65,13 @@
     },
     methods: {
       userName(id){
-        return bbn.fn.get_field(appui.app.users, "value", id, "text");
+        return bbn.fn.getField(appui.app.users, "text", "value", id);
       },
       userGroup(id){
-        return bbn.fn.get_field(appui.app.users, "value", id, "id_group");
+        return bbn.fn.getField(appui.app.users, "id_group", "value", id);
       },
       userAvatar(id){
-        const av = bbn.fn.get_field(appui.app.users, "value", id, "avatar");
+        const av = bbn.fn.getField(appui.app.users, "avatar", "value", id);
         return av ? av : bbn.var.defaultAvatar;
       },
       userAvatarImg(id){
@@ -80,7 +80,7 @@
         return '<span class="appui-avatar"><img src="' + av + '" alt="' + name + '" title="' + name + '"></span>';
       },
       userFull(id){
-        const user = bbn.fn.get_row(appui.app.users, "value", id);
+        const user = bbn.fn.getRow(appui.app.users, "value", id);
         return '<span class="appui-avatar"><img src="' + user.avatar + '" alt="' + user.text + '"> ' + user.text + '</span>';
       },
 
