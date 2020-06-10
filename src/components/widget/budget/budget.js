@@ -136,7 +136,7 @@
       },
       getInvoicePDF(){
         if ( this.source.invoice && this.source.invoice.id_media ){
-          this.post_out(appui.plugins['appui-billing'] + '/actions/pdf', {
+          this.postOut(appui.plugins['appui-billing'] + '/actions/pdf', {
             id_media: this.source.invoice.id_media
           });
         }

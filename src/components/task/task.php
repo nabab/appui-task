@@ -1,4 +1,4 @@
-<div class="bbn-100">
+<div class="bbn-overlay">
   <bbn-router class="info-tabstrip"
               :scrollable="false"
               :autoload="false"

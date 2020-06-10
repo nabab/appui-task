@@ -97,7 +97,7 @@
       // Function on the media links in the comments of the task main view
       download_media(id){
         if ( id ){
-          this.post_out(this.root + 'download/media/' + id);
+          this.postOut(this.root + 'download/media/' + id);
         }
       },
 

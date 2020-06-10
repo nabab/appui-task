@@ -336,7 +336,7 @@
       },
       downloadMedia(id) {
         if ( id ){
-          this.post_out(this.root + 'download/media/' + id);
+          this.postOut(this.root + 'download/media/' + id);
         }
       },
       /** @todo It is not used but maybe think about redoing the comment part */
