@@ -7,6 +7,7 @@
                  uid="info"
                  :closable="false"
                  :source="source"
+                 :padding="true"
 	  ></bbns-widget>
     <bbns-widget v-if="(isAdmin || isDecider) && ((isClosed && source.price) || !isClosed)"
                  title="<i class='nf nf-fa-money bbn-hmargin'></i><?=_("Budget")?>"
@@ -15,18 +16,21 @@
                  :closable="false"
                  :source="source"
 								 :buttonsRight="budgetButtons"
+                 :padding="true"
     ></bbns-widget>
 	  <bbns-widget title="<i class='nf nf-fa-users bbn-hmargin'></i><?=_("Roles")?>"
                  component="appui-task-widget-roles"
                  uid="roles"
                  :closable="false"
                  :source="source"
+                 :padding="true"
 	  ></bbns-widget>
 	  <bbns-widget title="<i class='nf nf-fa-hourglass_half bbn-hmargin'></i><?=_("Tracker")?>"
                  component="appui-task-widget-tracker"
                  uid="tracker"
                  :closable="false"
                  :source="source"
+                 :padding="true"
 	  ></bbns-widget>
 	  <bbns-widget v-if="hasComments"
                  title="<i class='nf nf-fa-comments bbn-hmargin'></i><?=_("Last messages")?>"
@@ -34,6 +38,7 @@
                  uid="messages"
                  :closable="false"
                  :source="source"
+                 :padding="true"
 	  ></bbns-widget>
 	</bbn-dashboard>
 </div>
