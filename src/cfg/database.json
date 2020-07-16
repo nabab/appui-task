@@ -17,7 +17,7 @@
                 "columns": [
                     "type"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_2",
@@ -29,7 +29,7 @@
                 "columns": [
                     "id_parent"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_3",
@@ -41,7 +41,7 @@
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_6",
@@ -53,7 +53,7 @@
                 "columns": [
                     "id_alias"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_4",
@@ -65,7 +65,7 @@
                 "columns": [
                     "state"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_5",
@@ -265,7 +265,7 @@
                 "columns": [
                     "id_invoice"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_invoices",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_invoices_ibfk_1",
@@ -326,7 +326,7 @@
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_logs_ibfk_3",
@@ -338,7 +338,7 @@
                 "columns": [
                     "id_task"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_logs_ibfk_2",
@@ -445,7 +445,7 @@
                 "columns": [
                     "id_task"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_notes_ibfk_2",
@@ -457,7 +457,7 @@
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_notes_ibfk_3",
@@ -543,7 +543,7 @@
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_roles_ibfk_3",
@@ -555,7 +555,7 @@
                 "columns": [
                     "id_task"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_roles_ibfk_2",
@@ -567,7 +567,7 @@
                 "columns": [
                     "role"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_roles_ibfk_4",
@@ -655,7 +655,7 @@
                 "columns": [
                     "id_task"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_sessions_ibfk_1",
@@ -667,7 +667,7 @@
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_sessions_ibfk_2",
@@ -679,7 +679,7 @@
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_sessions_ibfk_3",
@@ -801,7 +801,7 @@
                 "columns": [
                     "id_media"
                 ],
-                "ref_db": "apst_app",
+                "ref_db": null,
                 "ref_table": "bbn_medias",
                 "ref_column": "id",
                 "constraint": "bbn_invoices_ibfk_1",
