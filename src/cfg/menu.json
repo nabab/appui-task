@@ -1,0 +1,9 @@
+{
+  "text": "Task",
+  "icon": "nf nf-fa-gift",
+  "items": [{
+    "text": "List",
+    "icon": "nf nf-fa-th_list",
+    "link": "page"
+  }]
+}
