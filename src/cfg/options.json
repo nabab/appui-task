@@ -16,7 +16,7 @@
               "show_code": 1,
               "allow_children": 1,
               "inheritance": "cascade",
-              "inherit_from": "tasks, appui",
+              "inherit_from": ["___appui-plugin-url___","appui"],
               "frozen": 1
           },
           "items": [
@@ -27,7 +27,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -38,7 +38,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -49,7 +49,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -60,7 +60,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -71,7 +71,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -82,7 +82,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -93,7 +93,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -104,7 +104,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -115,7 +115,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -126,7 +126,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -137,7 +137,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -148,7 +148,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -159,7 +159,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -170,7 +170,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -181,7 +181,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -192,7 +192,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -203,7 +203,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -214,7 +214,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -225,7 +225,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -236,7 +236,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -247,7 +247,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -258,7 +258,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -269,7 +269,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -280,7 +280,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -291,7 +291,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -302,7 +302,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -313,7 +313,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -324,7 +324,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -335,7 +335,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               }
@@ -348,7 +348,7 @@
               "show_code": 1,
               "allow_children": 1,
               "inheritance": "cascade",
-              "inherit_from": "tasks, appui",
+              "inherit_from": ["___appui-plugin-url___","appui"],
               "frozen": 1
           },
           "items": [
@@ -359,7 +359,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -370,7 +370,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -381,7 +381,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -392,7 +392,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               }
@@ -405,7 +405,7 @@
               "show_code": 1,
               "allow_children": 1,
               "inheritance": "cascade",
-              "inherit_from": "tasks, appui",
+              "inherit_from": ["___appui-plugin-url___","appui"],
               "frozen": 1
           },
           "items": [
@@ -416,7 +416,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -427,7 +427,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -438,7 +438,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -449,7 +449,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -460,7 +460,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -471,7 +471,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               },
@@ -482,7 +482,7 @@
                       "show_code": 1,
                       "allow_children": 1,
                       "inheritance": "cascade",
-                      "inherit_from": "tasks, appui",
+                      "inherit_from": ["___appui-plugin-url___","appui"],
                       "frozen": 1
                   }
               }
@@ -495,7 +495,7 @@
               "show_code": 1,
               "allow_children": 1,
               "inheritance": "cascade",
-              "inherit_from": "tasks, appui",
+              "inherit_from": ["___appui-plugin-url___","appui"],
               "frozen": 1
           }
       }
