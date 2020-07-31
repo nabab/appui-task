@@ -1,503 +1,636 @@
 {
   "text": "Task",
   "code": "tasks",
+  "id_parent": "appui",
   "icon": "nf nf-oct-tasklist",
   "tekname": "tasks",
   "cfg": {
-      "show_code": 1,
-      "allow_children": 1,
-      "inheritance": "cascade"
+    "show_code": 1,
+    "allow_children": 1,
+    "inheritance": "cascade"
   },
   "items": [
-      {
-          "text": "Actions",
-          "code": "actions",
-          "cfg": {
-              "show_code": 1,
-              "allow_children": 1,
-              "inheritance": "cascade",
-              "inherit_from": ["___appui-plugin-url___","appui"],
-              "frozen": 1
-          },
-          "items": [
-              {
-                  "text": "Added %s as %s",
-                  "code": "role_insert",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Added a comment",
-                  "code": "comment_insert",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Added a deadline for %s",
-                  "code": "deadline_insert",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Added the file %s",
-                  "code": "file_insert",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Added the link %s",
-                  "code": "link_insert",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Added the price %s €",
-                  "code": "price_insert",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Approved the price %s €",
-                  "code": "price_approved",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Auto-added as %s",
-                  "code": "role_sinsert",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Auto-removed as %s",
-                  "code": "role_sdelete",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Changed the deadline from %s to %s",
-                  "code": "deadline_update",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Changed the price from %s € to %s €",
-                  "code": "price_update",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Changed the priority from %s to %s",
-                  "code": "priority_update",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Changed the status from %s to %s",
-                  "code": "status_update",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Changed the title from %s to %s",
-                  "code": "title_update",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Changed the type from %s to %s",
-                  "code": "type_update",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Closed the task",
-                  "code": "task_close",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Created the task",
-                  "code": "insert",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Deleted the file %s",
-                  "code": "file_delele",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Deleted the link %s",
-                  "code": "link_delete",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Deleted the task",
-                  "code": "delete",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Deleted the task's price (%s €)",
-                  "code": "price_delete",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Put the task on hold",
-                  "code": "task_hold",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Removed %s as %s",
-                  "code": "role_delete",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Removed the comment %s",
-                  "code": "comment_delete",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Removed the deadline for %s",
-                  "code": "deadline_delete",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Reopened the task",
-                  "code": "task_reopen",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Set the task as waiting for approval",
-                  "code": "task_unapproved",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Started the task",
-                  "code": "task_start",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Task ping",
-                  "code": "task_ping",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              }
-          ]
+    {
+      "text": "Actions",
+      "code": "actions",
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1,
+        "inheritance": "cascade",
+        "inherit_from": [
+          "tasks",
+          "appui"
+        ],
+        "frozen": 1
       },
-      {
-          "text": "Roles",
-          "code": "roles",
+      "items": [
+        {
+          "text": "Added %s as %s",
+          "code": "role_insert",
           "cfg": {
-              "show_code": 1,
-              "allow_children": 1,
-              "inheritance": "cascade",
-              "inherit_from": ["___appui-plugin-url___","appui"],
-              "frozen": 1
-          },
-          "items": [
-              {
-                  "text": "Deciders",
-                  "code": "deciders",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Managers",
-                  "code": "managers",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Viewers",
-                  "code": "viewers",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Workers",
-                  "code": "workers",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              }
-          ]
-      },
-      {
-          "text": "States",
-          "code": "states",
-          "cfg": {
-              "show_code": 1,
-              "allow_children": 1,
-              "inheritance": "cascade",
-              "inherit_from": ["___appui-plugin-url___","appui"],
-              "frozen": 1
-          },
-          "items": [
-              {
-                  "text": "Approved",
-                  "code": "approved",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Closed",
-                  "code": "closed",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "On hold",
-                  "code": "holding",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Ongoing",
-                  "code": "ongoing",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Opened",
-                  "code": "opened",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Postponed",
-                  "code": "postponed",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              },
-              {
-                  "text": "Unapproved",
-                  "code": "unapproved",
-                  "cfg": {
-                      "show_code": 1,
-                      "allow_children": 1,
-                      "inheritance": "cascade",
-                      "inherit_from": ["___appui-plugin-url___","appui"],
-                      "frozen": 1
-                  }
-              }
-          ]
-      },
-      {
-          "text": "Task types",
-          "code": "cats",
-          "cfg": {
-              "show_code": 1,
-              "allow_children": 1,
-              "inheritance": "cascade",
-              "inherit_from": ["___appui-plugin-url___","appui"],
-              "frozen": 1
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
           }
+        },
+        {
+          "text": "Added a comment",
+          "code": "comment_insert",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Added a deadline for %s",
+          "code": "deadline_insert",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Added the file %s",
+          "code": "file_insert",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Added the link %s",
+          "code": "link_insert",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Added the price %s €",
+          "code": "price_insert",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Approved the price %s €",
+          "code": "price_approved",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Auto-added as %s",
+          "code": "role_sinsert",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Auto-removed as %s",
+          "code": "role_sdelete",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Changed the deadline from %s to %s",
+          "code": "deadline_update",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Changed the price from %s € to %s €",
+          "code": "price_update",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Changed the priority from %s to %s",
+          "code": "priority_update",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Changed the status from %s to %s",
+          "code": "status_update",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Changed the title from %s to %s",
+          "code": "title_update",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Changed the type from %s to %s",
+          "code": "type_update",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Closed the task",
+          "code": "task_close",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Created the task",
+          "code": "insert",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Deleted the file %s",
+          "code": "file_delele",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Deleted the link %s",
+          "code": "link_delete",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Deleted the task",
+          "code": "delete",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Deleted the task's price (%s €)",
+          "code": "price_delete",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Put the task on hold",
+          "code": "task_hold",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Removed %s as %s",
+          "code": "role_delete",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Removed the comment %s",
+          "code": "comment_delete",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Removed the deadline for %s",
+          "code": "deadline_delete",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Reopened the task",
+          "code": "task_reopen",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Set the task as waiting for approval",
+          "code": "task_unapproved",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Started the task",
+          "code": "task_start",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Task ping",
+          "code": "task_ping",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        }
+      ]
+    },
+    {
+      "text": "Roles",
+      "code": "roles",
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1,
+        "inheritance": "cascade",
+        "inherit_from": [
+          "tasks",
+          "appui"
+        ],
+        "frozen": 1
+      },
+      "items": [
+        {
+          "text": "Deciders",
+          "code": "deciders",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Managers",
+          "code": "managers",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Viewers",
+          "code": "viewers",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Workers",
+          "code": "workers",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        }
+      ]
+    },
+    {
+      "text": "States",
+      "code": "states",
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1,
+        "inheritance": "cascade",
+        "inherit_from": [
+          "tasks",
+          "appui"
+        ],
+        "frozen": 1
+      },
+      "items": [
+        {
+          "text": "Approved",
+          "code": "approved",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Closed",
+          "code": "closed",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "On hold",
+          "code": "holding",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Ongoing",
+          "code": "ongoing",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Opened",
+          "code": "opened",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Postponed",
+          "code": "postponed",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        },
+        {
+          "text": "Unapproved",
+          "code": "unapproved",
+          "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "inherit_from": [
+              "tasks",
+              "appui"
+            ],
+            "frozen": 1
+          }
+        }
+      ]
+    },
+    {
+      "text": "Task types",
+      "code": "cats",
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1,
+        "inheritance": "cascade",
+        "inherit_from": [
+          "tasks",
+          "appui"
+        ],
+        "frozen": 1
       }
+    }
   ]
 }
