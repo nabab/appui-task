@@ -1,0 +1,16 @@
+[{
+  "text": "Plugins",
+  "code": "plugins",
+  "id_parent": ["|*appui-task*|/","page","permissions","appui"],
+  "items": [{
+    "text": "appui-dashboard",
+    "code": "appui-dashboard",
+    "items": [{
+      "text": "My current bugs",
+      "code": "tasks"
+    }, {
+      "text": "Last bugs",
+      "code": "all_tasks"
+    }]
+  }]
+}]

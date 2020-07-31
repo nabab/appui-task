@@ -1,4 +1,4 @@
-{
+[{
   "text": "Task",
   "code": "tasks",
   "id_parent": "appui",
@@ -633,4 +633,18 @@
       }
     }
   ]
-}
+}, {
+  "text": "Mes bugs en cours",
+  "code": "tasks",
+  "id_parent": ["default","dashboard","appui"],
+  "id_alias": ["tasks","appui-dashboard","plugins","|*appui-task*|/","page","permissions","appui"],
+  "value": "{\"limit\":5,\"observe\":false,\"options\":[],\"closable\":true,\"buttonsLeft\":[],\"buttonsRight\":[],\"itemComponent\":\"appui-task-widget-task\"}",
+  "after": 1
+}, {
+  "text": "Derniers Bugs",
+  "code": "all_tasks",
+  "id_parent": ["default","dashboard","appui"],
+  "id_alias": ["all_tasks","appui-dashboard","plugins","|*appui-task*|/","page","permissions","appui"],
+  "value": "{\"limit\":5,\"observe\":false,\"options\":[],\"closable\":true,\"buttonsLeft\":[],\"buttonsRight\":[],\"itemComponent\":\"appui-task-widget-task\"}",
+  "after": 1
+}]
