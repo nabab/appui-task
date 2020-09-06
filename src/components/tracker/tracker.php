@@ -1,7 +1,7 @@
 <div class="appui-task-tracker bbn-iblock"
      title="<?=_('Tracker')?>"
 >
-  <div class="bbn-block bbn-p"
+  <div class="bbn-block bbn-p bbn-no-wrap"
        @click="openWindow"
   >
     <span v-if="active && progress"
