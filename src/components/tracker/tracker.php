@@ -1,4 +1,4 @@
-<div class="appui-task-tracker bbn-iblock"
+<div class="appui-task-tracker"
      title="<?=_('Tracker')?>"
 >
   <div class="bbn-block bbn-p bbn-no-wrap"
