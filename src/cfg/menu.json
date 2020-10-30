@@ -1,9 +1,13 @@
 {
-  "text": "Task",
+  "text": "Tasks",
+  "num": 4,
   "icon": "nf nf-fa-gift",
-  "items": [{
-    "text": "List",
-    "icon": "nf nf-fa-th_list",
-    "link": "page"
-  }]
+  "items": [
+    {
+      "text": "Tasks panel",
+      "num": 1,
+      "icon": "nf nf-fa-columns",
+      "link": "page"
+    }
+  ]
 }
