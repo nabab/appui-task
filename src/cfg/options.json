@@ -7,22 +7,14 @@
   "cfg": {
     "show_code": 1,
     "allow_children": 1,
-    "inheritance": "cascade"
+    "frozen": 1,
+    "inheritance": "cascade",
+    "i18n": "en"
   },
   "items": [
     {
       "text": "Actions",
       "code": "actions",
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1,
-        "inheritance": "cascade",
-        "inherit_from": [
-          "tasks",
-          "appui"
-        ],
-        "frozen": 1
-      },
       "items": [
         {
           "text": "Added %s as %s",
@@ -431,20 +423,9 @@
           }
         }
       ]
-    },
-    {
+    }, {
       "text": "Roles",
       "code": "roles",
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1,
-        "inheritance": "cascade",
-        "inherit_from": [
-          "tasks",
-          "appui"
-        ],
-        "frozen": 1
-      },
       "items": [
         {
           "text": "Deciders",
@@ -503,20 +484,9 @@
           }
         }
       ]
-    },
-    {
+    }, {
       "text": "States",
       "code": "states",
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1,
-        "inheritance": "cascade",
-        "inherit_from": [
-          "tasks",
-          "appui"
-        ],
-        "frozen": 1
-      },
       "items": [
         {
           "text": "Approved",
@@ -617,20 +587,42 @@
           }
         }
       ]
-    },
-    {
+    }, {
       "text": "Task types",
       "code": "cats",
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1,
-        "inheritance": "cascade",
-        "inherit_from": [
-          "tasks",
-          "appui"
-        ],
-        "frozen": 1
-      }
+      "items": [
+        {
+          "text": "Marketing",
+          "code": "marketing"
+        }, {
+          "text": "Sales",
+          "code": "sales"
+        }, {
+          "text": "Meeting",
+          "code": "meeting"
+        }, {
+          "text": "Human ressources",
+          "code": "hr"
+        }, {
+          "text": "Personal",
+          "code": "personal"
+        }, {
+          "text": "Technical",
+          "code": "technical",
+          "items": [
+            {
+              "text": "Functionality enhancement",
+              "code": "enhancement"
+            }, {
+              "text": "New feature",
+              "code": "new"
+            }, {
+              "text": "Bugfix",
+              "code": "bug"
+            }
+          ]
+        }
+      ]
     }
   ]
 }, {
@@ -638,13 +630,17 @@
   "code": "tasks",
   "id_parent": ["default","dashboard","appui"],
   "id_alias": ["tasks","appui-dashboard","plugins","|*appui-task*|/","page","permissions","appui"],
-  "value": "{\"limit\":5,\"observe\":false,\"options\":[],\"closable\":true,\"buttonsLeft\":[],\"buttonsRight\":[],\"itemComponent\":\"appui-task-widget-task\"}",
+  "limit": 5,
+  "closable": true,
+  "itemComponent": "appui-task-widget-task",
   "after": 1
 }, {
   "text": "Derniers Bugs",
   "code": "all_tasks",
   "id_parent": ["default","dashboard","appui"],
   "id_alias": ["all_tasks","appui-dashboard","plugins","|*appui-task*|/","page","permissions","appui"],
-  "value": "{\"limit\":5,\"observe\":false,\"options\":[],\"closable\":true,\"buttonsLeft\":[],\"buttonsRight\":[],\"itemComponent\":\"appui-task-widget-task\"}",
+  "limit": 5,
+  "closable": true,
+  "itemComponent": "appui-task-widget-task",
   "after": 1
 }]
