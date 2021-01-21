@@ -6,22 +6,22 @@
 
 /** @var $model \bbn\mvc\model*/
 $s =& $model->inc->session;
-$pm = new \bbn\appui\tasks($model->db);
+$pm = new \bbn\appui\task($model->db);
 $mgr = $model->inc->user->get_manager();
 $arch = $model->inc->user->get_class_cfg()['arch']['groups'];
 $groups = $mgr->groups();
 \bbn\x::sort_by($groups, $arch['group'], 'ASC');
 return [
   'root' => APPUI_TASKS_ROOT,
-  'root_notes' => $model->plugin_url('appui-notes').'/',
-  'roles' => \bbn\appui\tasks::get_appui_options_ids('roles'),
-  'states' => \bbn\appui\tasks::get_appui_options_ids('states'),
+  'root_notes' => $model->plugin_url('appui-note').'/',
+  'roles' => \bbn\appui\task::get_appui_options_ids('roles'),
+  'states' => \bbn\appui\task::get_appui_options_ids('states'),
   'options' => [
-    'states' => \bbn\appui\tasks::get_appui_options_text_value('states'),
-    'roles' => \bbn\appui\tasks::get_appui_options_text_value('roles'),
-    'cats' => \bbn\appui\tasks::cat_correspondances()
+    'states' => \bbn\appui\task::get_appui_options_text_value('states'),
+    'roles' => \bbn\appui\task::get_appui_options_text_value('roles'),
+    'cats' => \bbn\appui\task::cat_correspondances()
   ],
-  'categories' => \bbn\appui\tasks::get_options_tree('cats'),
+  'categories' => \bbn\appui\task::get_options_tree('cats'),
   'usergroup' => $model->inc->user->get_group(),
   'groups' => $groups,
   'categories' => $model->inc->options->map(function($a){
@@ -31,5 +31,5 @@ return [
     }
     return $a;
   }, $pm->categories(), 1),
-  'media_types' => $model->inc->options->code_options(\bbn\appui\notes::get_appui_option_id('media'))
+  'media_types' => $model->inc->options->code_options(\bbn\appui\note::get_appui_option_id('media'))
 ];

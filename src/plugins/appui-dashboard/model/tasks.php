@@ -3,7 +3,7 @@
 
 $model->data['limit'] = isset($model->data['limit']) && is_int($model->data['limit']) ? $model->data['limit'] : 5;
 $model->data['start'] = isset($model->data['start']) && is_int($model->data['start']) ? $model->data['start'] : 0;
-$closed_state = $model->inc->options->from_root_code('closed', 'states', 'tasks', 'appui');
+$closed_state = $model->inc->options->from_root_code('closed', 'states', 'task', 'appui');
 $id_user = $model->inc->user->get_id();
 $grid = new \bbn\appui\grid($model->db, $model->data, [
   'tables' => ['bbn_tasks'],

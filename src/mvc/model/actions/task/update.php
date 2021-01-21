@@ -5,7 +5,7 @@
  **/
 
 /** @var $model \bbn\mvc\model*/
-$tasks = new \bbn\appui\tasks($model->db);
+$tasks = new \bbn\appui\task($model->db);
 $res = [
   'success' => !empty($model->data['id_task']) && !empty($model->data['prop']) ?
     $tasks->update(

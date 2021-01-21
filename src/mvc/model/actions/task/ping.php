@@ -9,6 +9,6 @@
  */
 
 if ( !empty($model->data['id_task']) ){
-  $pm = new \bbn\appui\tasks($model->db);
+  $pm = new \bbn\appui\task($model->db);
   return ['success' => $pm->ping($model->data['id_task'])];
 }

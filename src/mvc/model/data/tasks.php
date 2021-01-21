@@ -1,6 +1,6 @@
 <?php
 if ( !empty($model->data['id_user']) ){
-  $tasks = new \bbn\appui\tasks($model->db);
+  $tasks = new \bbn\appui\task($model->db);
   return [
     'success' => true,
     'data' => [

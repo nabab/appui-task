@@ -7,7 +7,7 @@
 /** @var $model \bbn\mvc\model*/
 
 if ( isset($model->data['search']) ){
-  $pm = new \bbn\appui\tasks($model->db);
+  $pm = new \bbn\appui\task($model->db);
   if ( $rows = $pm->search($model->data['search']) ){
     return ['rows' => $rows];
   }

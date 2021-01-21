@@ -1,7 +1,7 @@
 <?php
 /** @var $model \bbn\mvc\model */
 if ( !empty($model->data['id']) ){
-  $task = new \bbn\appui\tasks($model->db);
+  $task = new \bbn\appui\task($model->db);
   return \bbn\x::merge_arrays(
     $task->info($model->data['id']),
     [

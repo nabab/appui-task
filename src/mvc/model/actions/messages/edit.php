@@ -5,7 +5,7 @@
  * Date: 19/04/2018
  * Time: 13:03
  */
-$notes = new \bbn\appui\notes($model->db);
+$notes = new \bbn\appui\note($model->db);
 if (
   !empty($model->data['id']) &&
   ($old = $notes->get_full($model->data['id']))

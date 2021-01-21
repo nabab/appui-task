@@ -4,9 +4,9 @@ if (
 	!empty($model->data['text']) &&
 	!empty($model->data['id_parent']) &&
 	!empty($model->data['id_alias']) &&
-	($id_type = $model->inc->options->from_code('tasks', 'types', 'notes', 'appui'))
+	($id_type = $model->inc->options->from_code('tasks', 'types', 'note', 'appui'))
 ){
-	$notes = new \bbn\appui\notes($model->db);
+	$notes = new \bbn\appui\note($model->db);
   if ( $id_note = $notes->insert(
 		$model->data['title'] ?: '',
 		$model->data['text'],

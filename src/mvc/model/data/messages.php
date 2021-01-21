@@ -300,10 +300,10 @@ else if ( !empty($model->data['data']['id_alias']) ){
 $grid = new \bbn\appui\grid($model->db, $model->data, $cfg);
 if ( $grid->check() ){
   $d = $grid->get_datatable(true);
-  $notes = new \bbn\appui\notes($model->db);
+  $notes = new \bbn\appui\note($model->db);
   if ( is_array($d['data']) && !empty($d['data']) ){
-    $ftype = \bbn\appui\notes::get_option_id('file', 'media');
-    $ltype = \bbn\appui\notes::get_option_id('link', 'media');
+    $ftype = \bbn\appui\note::get_option_id('file', 'media');
+    $ltype = \bbn\appui\note::get_option_id('link', 'media');
     foreach ($d['data'] as $i => $n ){
       $d['data'][$i]['files'] = [];
       $d['data'][$i]['links'] = [];

@@ -9,9 +9,9 @@ if (
   !empty($model->data['ref']) &&
   !empty($model->data['id_task']) &&
   !empty($model->data['text']) &&
-  ($id_type = $model->inc->options->from_code('tasks', 'types', 'notes', 'appui'))
+  ($id_type = $model->inc->options->from_code('tasks', 'types', 'note', 'appui'))
 ){
-  $notes = new \bbn\appui\notes($model->db);
+  $notes = new \bbn\appui\note($model->db);
   if ( ($id_note = $notes->insert($model->data['title'] ?: '', $model->data['text'], $id_type, false, $model->data['locked'])) &&
     $model->db->insert('bbn_tasks_notes', [
       'id_task' => $model->data['id_task'],

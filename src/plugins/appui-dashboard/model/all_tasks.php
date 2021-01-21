@@ -1,8 +1,8 @@
 <?php
 $model->data['limit'] = isset($model->data['limit']) && is_int($model->data['limit']) ? $model->data['limit'] : 5;
 $model->data['start'] = isset($model->data['start']) && is_int($model->data['start']) ? $model->data['start'] : 0;
-$closed_state = $model->inc->options->from_root_code('closed', 'states', 'tasks', 'appui');
-$executant = $model->inc->options->from_root_code('workers', 'roles', 'tasks', 'appui');
+$closed_state = $model->inc->options->from_root_code('closed', 'states', 'task', 'appui');
+$executant = $model->inc->options->from_root_code('workers', 'roles', 'task', 'appui');
 $grid = new \bbn\appui\grid($model->db, $model->data, [
   'table' => 'bbn_tasks',
   'fields' => [

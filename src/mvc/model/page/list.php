@@ -6,7 +6,7 @@
 
 /** @var $model \bbn\mvc\model*/
 $res = [];
-$pm = new \bbn\appui\tasks($model->db);
+$pm = new \bbn\appui\task($model->db);
 $id_user = $model->inc->user->get_id();
 $id_group = $model->inc->user->get_group();
 $state_closed = $pm->id_state('closed');

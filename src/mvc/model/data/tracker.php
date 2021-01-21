@@ -24,7 +24,7 @@ if ( !empty($model->data['data']['id_task']) ){
   if ( $grid->check() ){
     $tracks = $grid->get_datatable();
     if ( !empty($tracks['data']) ){
-      $notes = new \bbn\appui\notes($model->db);
+      $notes = new \bbn\appui\note($model->db);
       foreach ( $tracks['data'] as $i => $t ){
         if (
           !empty($t['id_note']) &&

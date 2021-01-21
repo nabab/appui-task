@@ -9,7 +9,7 @@ if (
   !empty($model->data['id']) &&
   \bbn\str::is_uid($model->data['id'])
 ){
-  $notes = new \bbn\appui\notes($model->db);
+  $notes = new \bbn\appui\note($model->db);
   if ( $notes->remove($model->data['id'], true) ){
     /** @todo To remove this and add an apposite function in grid */
     $model->get_model($model->plugin_url('appui-ide').'/data_cache', [
