@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $model \bbn\mvc\model*/
+/** @var $model \bbn\Mvc\Model*/
 return [
   'title' => _("Title"),
   'type' => _("Type"),

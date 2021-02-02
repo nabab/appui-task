@@ -1,11 +1,11 @@
 <?php
-/** @var $model \bbn\mvc\model */
+/** @var $model \bbn\Mvc\Model */
 
 $model->data['limit'] = isset($model->data['limit']) && is_int($model->data['limit']) ? $model->data['limit'] : 5;
 $model->data['start'] = isset($model->data['start']) && is_int($model->data['start']) ? $model->data['start'] : 0;
-$closed_state = $model->inc->options->from_root_code('closed', 'states', 'task', 'appui');
-$id_user = $model->inc->user->get_id();
-$grid = new \bbn\appui\grid($model->db, $model->data, [
+$closed_state = $model->inc->options->fromRootCode('closed', 'states', 'task', 'appui');
+$id_user = $model->inc->user->getId();
+$grid = new \bbn\Appui\Grid($model->db, $model->data, [
   'tables' => ['bbn_tasks'],
   'fields' => [
     'bbn_tasks.id',
@@ -79,5 +79,5 @@ $grid = new \bbn\appui\grid($model->db, $model->data, [
   ]
 ]);
 if ( $grid->check() ) {
-  return $grid->get_datatable();
+  return $grid->getDatatable();
 }

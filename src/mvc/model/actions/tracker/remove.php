@@ -1,10 +1,10 @@
 <?php
 $ok = false;
 if ( !empty($model->data['id']) ){
-  $notes = new \bbn\appui\note($model->db);
+  $notes = new \bbn\Appui\Note($model->db);
   $ok = true;
   if (
-    ($note = $model->db->select_one('bbn_tasks_sessions', 'id_note', ['id' => $model->data['id']])) &&
+    ($note = $model->db->selectOne('bbn_tasks_sessions', 'id_note', ['id' => $model->data['id']])) &&
     !$notes->remove($note)
   ){
     $ok = false;

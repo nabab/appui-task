@@ -11,7 +11,7 @@ if (
 
   // Message
   if ( !empty($model->data['id_note']) ){
-    $notes = new \bbn\appui\note($model->db);
+    $notes = new \bbn\Appui\Note($model->db);
     if (
       empty($model->data['message']) &&
       !$notes->remove($model->data['id_note'], true)

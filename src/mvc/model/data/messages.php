@@ -297,24 +297,24 @@ else if ( !empty($model->data['data']['id_alias']) ){
     ]]
   ];
 }
-$grid = new \bbn\appui\grid($model->db, $model->data, $cfg);
+$grid = new \bbn\Appui\Grid($model->db, $model->data, $cfg);
 if ( $grid->check() ){
-  $d = $grid->get_datatable(true);
-  $notes = new \bbn\appui\note($model->db);
+  $d = $grid->getDatatable(true);
+  $notes = new \bbn\Appui\Note($model->db);
   if ( is_array($d['data']) && !empty($d['data']) ){
-    $ftype = \bbn\appui\note::get_option_id('file', 'media');
-    $ltype = \bbn\appui\note::get_option_id('link', 'media');
+    $ftype = \bbn\Appui\Note::getOptionId('file', 'media');
+    $ltype = \bbn\Appui\Note::getOptionId('link', 'media');
     foreach ($d['data'] as $i => $n ){
       $d['data'][$i]['files'] = [];
       $d['data'][$i]['links'] = [];
-      $medias = $notes->get_medias($n['id']);
+      $medias = $notes->getMedias($n['id']);
       foreach ( $medias as $m ){
         if ( $m['type'] === $ftype ){
           $d['data'][$i]['files'][] = [
             'id' => $m['id'],
             'name' => $m['name'],
             'title' => $m['title'],
-            'extension' => '.'.\bbn\str::file_ext($m['name'])
+            'extension' => '.'.\bbn\Str::fileExt($m['name'])
           ];
         }
         if ( $m['type'] === $ltype ){

@@ -4,18 +4,18 @@
  *
  **/
 
-/** @var $ctrl \bbn\mvc\controller */
+/** @var $ctrl \bbn\Mvc\Controller */
 
 if ( isset($ctrl->files['filename'], $ctrl->arguments[0]) &&
-  \bbn\str::is_integer($ctrl->arguments[0])
+  \bbn\Str::isInteger($ctrl->arguments[0])
 ){
   $f =& $ctrl->files['filename'];
   $path = BBN_USER_PATH.'tmp/'.$ctrl->arguments[0];
-  $new = \bbn\str::encode_filename($f['name'], \bbn\str::file_ext($f['name']));
+  $new = \bbn\Str::encodeFilename($f['name'], \bbn\Str::fileExt($f['name']));
   $file = $path.'/'.$new;
-  if ( \bbn\file\dir::create_path($path) &&
+  if ( \bbn\File\Dir::createPath($path) &&
     move_uploaded_file($f['tmp_name'], $file) ){
-    $tmp = \bbn\str::file_ext($new, 1);
+    $tmp = \bbn\Str::fileExt($new, 1);
     $fname = $tmp[0];
     $ext = $tmp[1];
     $ctrl->obj->success = 1;
@@ -24,11 +24,11 @@ if ( isset($ctrl->files['filename'], $ctrl->arguments[0]) &&
     $files = [basename($file)];
     if ( \in_array($ext, $archives) ){
       $archive = \wapmorgan\UnifiedArchive\UnifiedArchive::open($file);
-      \bbn\file\dir::create_path($path.'/'.$fname);
+      \bbn\File\Dir::createPath($path.'/'.$fname);
       if ( $num = $archive->extractNode($path.'/'.$fname, '/') ){
         $tmp = getcwd();
         chdir($path);
-        $all = \bbn\file\dir::scan($fname, 'file');
+        $all = \bbn\File\Dir::scan($fname, 'file');
         foreach ( $all as $a ){
           array_push($files, $a);
         }
@@ -37,7 +37,7 @@ if ( isset($ctrl->files['filename'], $ctrl->arguments[0]) &&
     }
     $ctrl->obj->files = [];
     foreach ( $files as $f ){
-      $tmp = \bbn\str::file_ext($f, 1);
+      $tmp = \bbn\Str::fileExt($f, 1);
       $fname = $tmp[0];
       $ext = $tmp[1];
       $res = [
@@ -48,7 +48,7 @@ if ( isset($ctrl->files['filename'], $ctrl->arguments[0]) &&
       if ( \in_array($ext, $images) ){
         // Creating thumbnails
         $res['imgs'] = [];
-        $img = new \bbn\file\image($path.'/'.$f);
+        $img = new \bbn\File\Image($path.'/'.$f);
         if ( $img->test() && ($imgs = $img->thumbs($path)) ){
           array_push($res['imgs'], array_map(function($a) use($path){
             return substr($a, \strlen($path));

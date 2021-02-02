@@ -1,8 +1,8 @@
 <?php
 if (
   !empty($model->data['id_task']) &&
-  $model->has_plugin('appui-billing') &&
-  ($invoice = $model->get_model($model->plugin_url('appui-billing') . '/actions/bill', $model->data)) &&
+  $model->hasPlugin('appui-billing') &&
+  ($invoice = $model->getModel($model->pluginUrl('appui-billing') . '/actions/bill', $model->data)) &&
   !empty($invoice['success']) &&
   !empty($invoice['data']) &&
   $model->db->insert('bbn_tasks_invoices', [

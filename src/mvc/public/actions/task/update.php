@@ -4,5 +4,5 @@
  *
  **/
 
-/** @var $ctrl \bbn\mvc\controller */
-$ctrl->obj = $ctrl->get_object_model($ctrl->post);
+/** @var $ctrl \bbn\Mvc\Controller */
+$ctrl->obj = $ctrl->getObjectModel($ctrl->post);

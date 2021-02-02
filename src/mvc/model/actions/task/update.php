@@ -4,8 +4,8 @@
  *
  **/
 
-/** @var $model \bbn\mvc\model*/
-$tasks = new \bbn\appui\task($model->db);
+/** @var $model \bbn\Mvc\Model*/
+$tasks = new \bbn\Appui\Task($model->db);
 $res = [
   'success' => !empty($model->data['id_task']) && !empty($model->data['prop']) ?
     $tasks->update(
@@ -15,10 +15,10 @@ $res = [
     false
 ];
 if ( ($model->data['prop'] === 'price') && !empty($model->data['id_task']) ){
-  $res['lastChangePrice'] = $tasks->get_price_log($model->data['id_task']);
+  $res['lastChangePrice'] = $tasks->getPriceLog($model->data['id_task']);
 }
 if ( $model->data['prop'] === 'state' ){
-  $res['tracker'] = $tasks->get_track($model->data['id_task']);
-  $res['trackers'] = $tasks->get_tracks($model->data['id_task']);
+  $res['tracker'] = $tasks->getTrack($model->data['id_task']);
+  $res['trackers'] = $tasks->getTracks($model->data['id_task']);
 }
 return $res;

@@ -7,7 +7,7 @@
  */
 if ( !empty($model->data['id_task']) ){
   $all = [];
-  $topics = $model->db->get_rows("
+  $topics = $model->db->getRows("
     SELECT bbn_notes.*, first_version.creation, last_version.title, last_version.content,
       last_version.creation AS last_edit, COUNT(DISTINCT replies.id) AS num_replies,
       IFNULL(MAX(replies_versions.creation), last_version.creation) AS last_reply,
@@ -46,7 +46,7 @@ if ( !empty($model->data['id_task']) ){
     foreach ( $topics as $top ){
       $all[strtotime($top['last_edit'])] = $top;
       if ( !empty($top['num_replies']) ){
-        $replies = $model->db->get_rows("
+        $replies = $model->db->getRows("
           SELECT bbn_notes.*, first_version.creation, last_version.title, last_version.content,
             last_version.creation AS last_edit, COUNT(DISTINCT replies.id) AS num_replies,
             IFNULL(MAX(replies_versions.creation), last_version.creation) AS last_reply,

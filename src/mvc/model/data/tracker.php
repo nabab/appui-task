@@ -1,6 +1,6 @@
 <?php
 if ( !empty($model->data['data']['id_task']) ){
-  $grid = new \bbn\appui\grid($model->db, $model->data, [
+  $grid = new \bbn\Appui\Grid($model->db, $model->data, [
     'table' => 'bbn_tasks_sessions',
     'fields' => [
       'id',
@@ -22,9 +22,9 @@ if ( !empty($model->data['data']['id_task']) ){
     ]]
   ]);
   if ( $grid->check() ){
-    $tracks = $grid->get_datatable();
+    $tracks = $grid->getDatatable();
     if ( !empty($tracks['data']) ){
-      $notes = new \bbn\appui\note($model->db);
+      $notes = new \bbn\Appui\Note($model->db);
       foreach ( $tracks['data'] as $i => $t ){
         if (
           !empty($t['id_note']) &&

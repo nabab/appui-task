@@ -3,13 +3,13 @@
  * Describe what it does to show you're not that dumb!
  *
  **/
-/** @var $ctrl \bbn\mvc\controller */
+/** @var $ctrl \bbn\Mvc\Controller */
 if ( \count($ctrl->arguments) > 1 ){
   switch ( $ctrl->arguments[0] ){
     case 'media':
       if (
-        ($m = new \bbn\appui\medias($ctrl->db)) &&
-        ($media = $m->get_media($ctrl->arguments[1]))
+        ($m = new \bbn\Appui\Medias($ctrl->db)) &&
+        ($media = $m->getMedia($ctrl->arguments[1]))
        ){
         $ctrl->obj->file = $media;
       }

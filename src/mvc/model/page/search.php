@@ -4,10 +4,10 @@
  *
  **/
 
-/** @var $model \bbn\mvc\model*/
+/** @var $model \bbn\Mvc\Model*/
 
 if ( isset($model->data['search']) ){
-  $pm = new \bbn\appui\task($model->db);
+  $pm = new \bbn\Appui\Task($model->db);
   if ( $rows = $pm->search($model->data['search']) ){
     return ['rows' => $rows];
   }

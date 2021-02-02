@@ -1,9 +1,9 @@
 <?php
 $model->data['limit'] = isset($model->data['limit']) && is_int($model->data['limit']) ? $model->data['limit'] : 5;
 $model->data['start'] = isset($model->data['start']) && is_int($model->data['start']) ? $model->data['start'] : 0;
-$closed_state = $model->inc->options->from_root_code('closed', 'states', 'task', 'appui');
-$executant = $model->inc->options->from_root_code('workers', 'roles', 'task', 'appui');
-$grid = new \bbn\appui\grid($model->db, $model->data, [
+$closed_state = $model->inc->options->fromRootCode('closed', 'states', 'task', 'appui');
+$executant = $model->inc->options->fromRootCode('workers', 'roles', 'task', 'appui');
+$grid = new \bbn\Appui\Grid($model->db, $model->data, [
   'table' => 'bbn_tasks',
   'fields' => [
     'bbn_tasks.id',
@@ -116,5 +116,5 @@ $grid = new \bbn\appui\grid($model->db, $model->data, [
   ]
 ]);
 if ( $grid->check() ){
-  return $grid->get_datatable(true);
+  return $grid->getDatatable(true);
 }

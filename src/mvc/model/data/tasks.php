@@ -1,11 +1,11 @@
 <?php
 if ( !empty($model->data['id_user']) ){
-  $tasks = new \bbn\appui\task($model->db);
+  $tasks = new \bbn\Appui\Task($model->db);
   return [
     'success' => true,
     'data' => [
-      'active' => $tasks->get_active_track($model->data['id_user']),
-      'list' => $tasks->get_tasks_tracks($model->data['id_user'])
+      'active' => $tasks->getActiveTrack($model->data['id_user']),
+      'list' => $tasks->getTasksTracks($model->data['id_user'])
     ]
   ];
 }

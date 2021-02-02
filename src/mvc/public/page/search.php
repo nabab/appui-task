@@ -4,13 +4,13 @@
  *
  **/
 
-/** @var $ctrl \bbn\mvc\controller */
+/** @var $ctrl \bbn\Mvc\Controller */
 if ( !isset($ctrl->post['search']) ){
   $ctrl->combo('', [
     'root' => APPUI_TASKS_ROOT.'page/',
-    'lng' => $ctrl->get_model('../lng/search')
+    'lng' => $ctrl->getModel('../lng/search')
   ]);
 }
 else{
-  $ctrl->obj->data = $ctrl->get_model($ctrl->post);
+  $ctrl->obj->data = $ctrl->getModel($ctrl->post);
 }

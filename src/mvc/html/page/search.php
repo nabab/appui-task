@@ -36,7 +36,7 @@
                :info="true"
                :pageable="true"
                :sortable="true"
-               :order="[{field: 'last_action', dir: 'DESC'}]"
+               :order="[{field: 'last_action', Dir: 'DESC'}]"
                class="appui-tasks-search-table"
                :filterable="true"
                :filters="filters"

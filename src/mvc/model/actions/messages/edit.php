@@ -5,10 +5,10 @@
  * Date: 19/04/2018
  * Time: 13:03
  */
-$notes = new \bbn\appui\note($model->db);
+$notes = new \bbn\Appui\Note($model->db);
 if (
   !empty($model->data['id']) &&
-  ($old = $notes->get_full($model->data['id']))
+  ($old = $notes->getFull($model->data['id']))
 ){
   $ok = true;
   $path = BBN_USER_PATH.'tmp/'.$model->data['ref'].'/';
@@ -53,7 +53,7 @@ if (
   if ( !empty($model->data['files']) ){
     array_walk($model->data['files'], function($f) use($notes, $model, &$ok, $path){
       if ( empty($f['id']) && is_file($path.$f['name']) ){
-        if ( !$notes->add_media($model->data['id'], $path.$f['name']) ){
+        if ( !$notes->addMedia($model->data['id'], $path.$f['name']) ){
           $ok = false;
         }
       }
@@ -63,7 +63,7 @@ if (
   if ( !empty($model->data['links']) ){
     array_walk($model->data['links'], function($l) use($notes, $model, &$ok, $path){
       if ( empty($l['id']) && is_file($path.$l['image']) ){
-        if ( !$notes->add_media(
+        if ( !$notes->addMedia(
           $model->data['id'],
           $path.$l['image'],
           json_encode([
@@ -82,9 +82,9 @@ if (
   if ( !empty($old['medias']) ){
     array_walk($old['medias'], function($m) use($model, &$ok, $notes){
       if (
-        (\bbn\x::find($model->data['files'], ['id' => $m['id']]) === null) &&
-        (\bbn\x::find($model->data['links'], ['id' => $m['id']]) === null) &&
-        !$notes->remove_media($m['id'], $model->data['id'])
+        (\bbn\X::find($model->data['files'], ['id' => $m['id']]) === null) &&
+        (\bbn\X::find($model->data['links'], ['id' => $m['id']]) === null) &&
+        !$notes->removeMedia($m['id'], $model->data['id'])
       ){
         $ok = false;
       }

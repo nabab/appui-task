@@ -1,17 +1,17 @@
 <?php
-/** @var $model \bbn\mvc\model */
+/** @var $model \bbn\Mvc\Model */
 if ( !empty($model->data['id']) ){
-  $task = new \bbn\appui\task($model->db);
-  return \bbn\x::merge_arrays(
+  $task = new \bbn\Appui\Task($model->db);
+  return \bbn\X::mergeArrays(
     $task->info($model->data['id']),
     [
       'root' => APPUI_TASKS_ROOT,
-      'notes' => $model->get_model(APPUI_TASKS_ROOT . 'data/last_messages', ['id_task' => $model->data['id']]),
-      'approved' => $task->get_approved_log($model->data['id']),
-      'lastChangePrice' => $task->get_price_log($model->data['id']),
-      'tracker' => $task->get_track($model->data['id']),
-      'trackers' => $task->get_tracks($model->data['id']),
-      'invoice' => $task->get_invoice($model->data['id'])
+      'notes' => $model->getModel(APPUI_TASKS_ROOT . 'data/last_messages', ['id_task' => $model->data['id']]),
+      'approved' => $task->getApprovedLog($model->data['id']),
+      'lastChangePrice' => $task->getPriceLog($model->data['id']),
+      'tracker' => $task->getTrack($model->data['id']),
+      'trackers' => $task->getTracks($model->data['id']),
+      'invoice' => $task->getInvoice($model->data['id'])
     ]
   );
 }

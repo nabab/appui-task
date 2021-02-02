@@ -4,12 +4,12 @@
  *
  **/
 
-/** @var $model \bbn\mvc\model*/
+/** @var $model \bbn\Mvc\Model*/
 $res = [];
-$pm = new \bbn\appui\task($model->db);
-$id_user = $model->inc->user->get_id();
-$id_group = $model->inc->user->get_group();
-$state_closed = $pm->id_state('closed');
+$pm = new \bbn\Appui\Task($model->db);
+$id_user = $model->inc->user->getId();
+$id_group = $model->inc->user->getGroup();
+$state_closed = $pm->idState('closed');
 
 if ( !empty($model->data['data']) ){
   $ext_filters = $model->data['data'];
@@ -147,20 +147,20 @@ if ( !empty($ext_filters['title']) ){
   ];
 }
 
-if ( $plugin_model = $model->get_plugin_model('reference') ){
+if ( $plugin_model = $model->getPluginModel('reference') ){
   if ( !empty($plugin_model['fields']) ){
-    $fields = \bbn\x::merge_arrays($fields, $plugin_model['fields']);
+    $fields = \bbn\X::mergeArrays($fields, $plugin_model['fields']);
   }
   if ( !empty($plugin_model['join']) ){
-    $join = \bbn\x::merge_arrays($join, $plugin_model['join']);
+    $join = \bbn\X::mergeArrays($join, $plugin_model['join']);
   }
   if ( !empty($plugin_model['filters']) ){
-    $filters = \bbn\x::merge_arrays($filters, $plugin_model['filters']);
+    $filters = \bbn\X::mergeArrays($filters, $plugin_model['filters']);
   }
 }
 
 
-$grid = new \bbn\appui\grid($model->db, $model->data, [
+$grid = new \bbn\Appui\Grid($model->db, $model->data, [
   'table' => 'bbn_tasks',
   'fields' => $fields,
   'join' => $join,
@@ -169,7 +169,7 @@ $grid = new \bbn\appui\grid($model->db, $model->data, [
 ]);
 
 if ( $grid->check() ){
-  $data = $grid->get_datatable();
+  $data = $grid->getDatatable();
   if ( !empty($data['data']) && !empty($plugin_model['template']) && is_callable($plugin_model['template']) ){
     foreach ( $data['data'] as $i => $d ){
       if ( !empty($d['reference']) ){

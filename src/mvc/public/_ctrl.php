@@ -4,8 +4,8 @@
  *
  **/
 
-/** @var $ctrl \bbn\mvc\controller */
+/** @var $ctrl \bbn\Mvc\Controller */
 if ( !\defined('APPUI_TASKS_ROOT') ){
-  define('APPUI_TASKS_ROOT', $ctrl->plugin_url('appui-task').'/');
+  define('APPUI_TASKS_ROOT', $ctrl->pluginUrl('appui-task').'/');
 }
 return 1;
