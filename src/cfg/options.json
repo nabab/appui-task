@@ -1,4 +1,4 @@
-[{
+{
   "text": "Task",
   "code": "tasks",
   "id_parent": "appui",
@@ -623,24 +623,46 @@
           ]
         }
       ]
+    }, {
+      "text": "Permissions",
+      "code": "permissions",
+      "cfg": {
+        "allow_children": 1
+      },
+      "items": [
+        {
+          "text": "Access",
+          "code": "access"
+        }, {
+          "text": "Options",
+          "code": "options"
+        }, {
+          "text": "Plugins",
+          "code": "plugins",
+          "items": [
+            {
+              "text": "Dashboard",
+              "code": "appui-dashboard",
+              "id_alias": ["list", "dashboard", "appui"],
+              "items": [
+                {
+                  "text": "My current bugs",
+                  "code": "tasks",
+                  "itemComponent": "appui-task-widget-task",
+                  "limit":5
+                }, {
+                  "text": "Derniers Bugs",
+                  "code": "all_tasks",
+                  "limit":5,
+                  "observe":false,
+                  "closable":true,
+                  "itemComponent": "appui-task-widget-task"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
-}, {
-  "text": "Mes bugs en cours",
-  "code": "tasks",
-  "id_parent": ["default","dashboard","appui"],
-  "id_alias": ["tasks","appui-dashboard","plugins","|*appui-task*|/","page","permissions","appui"],
-  "limit": 5,
-  "closable": true,
-  "itemComponent": "appui-task-widget-task",
-  "after": 1
-}, {
-  "text": "Derniers Bugs",
-  "code": "all_tasks",
-  "id_parent": ["default","dashboard","appui"],
-  "id_alias": ["all_tasks","appui-dashboard","plugins","|*appui-task*|/","page","permissions","appui"],
-  "limit": 5,
-  "closable": true,
-  "itemComponent": "appui-task-widget-task",
-  "after": 1
-}]
+}
