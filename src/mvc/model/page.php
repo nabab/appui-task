@@ -23,7 +23,11 @@ return [
   ],
   'categories' => \bbn\Appui\Task::getOptionsTree('cats'),
   'usergroup' => $model->inc->user->getGroup(),
-  'groups' => $groups,
+  'groups' => array_map(function($g) use($arch){
+    $g['text'] = $g[$arch['group']];
+    unset($g[$arch['group']]);
+    return $g;
+  }, $groups),
   'categories' => $model->inc->options->map(function($a){
     $a['is_parent'] = !empty($a['items']);
     if ( $a['is_parent'] ){

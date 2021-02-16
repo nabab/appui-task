@@ -27,8 +27,9 @@
   <bbn-initial v-if="source.id_user"
                :user-id="source.id_user"
                :title="userName"
-               :height="20"
-               :width="20"
+               :height="25"
+               :width="25"
+               font-size="1em"
   ></bbn-initial>
   <span v-text="userName" class="bbn-hsmargin"></span>
 </div>

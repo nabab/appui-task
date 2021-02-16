@@ -10,7 +10,7 @@
       return {
         main: this.closest('appui-task-tab-main'),
         showPriceForm: false,
-        deciders: this.source.roles.deciders.slice(),
+        deciders: this.source.roles.deciders ? this.source.roles.deciders.slice() : [],
         oldPrice: 0,
         oldLastChangePrice: {}
       }

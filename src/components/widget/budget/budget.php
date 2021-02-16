@@ -66,9 +66,10 @@
          class="bbn-vmiddle"
     >
       <bbn-initial :user-id="source.approved.id_user"
-                   :height="20"
-                   :width="20"
+                   :height="25"
+                   :width="25"
                    title="approvedBy"
+                   font-size="1em"
       ></bbn-initial>
       <span v-text="approvedBy"
             style="margin-left: 0.5rem"
@@ -93,8 +94,9 @@
            class="bbn-flex-width bbn-vmiddle bbn-vsmargin"
       >
         <bbn-initial :user-id="decider"
-                     :height="20"
-                     :width="20"
+                     :height="25"
+                     :width="25"
+                     font-size="1em"
         ></bbn-initial>
         <span v-text="getUserName(decider)"
               class="bbn-flex-fill bbn-hsmargin"

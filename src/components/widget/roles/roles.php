@@ -9,8 +9,9 @@
          class="bbn-vmiddle bbn-smargin"
     >
       <bbn-initial :user-id="r"
-                   :height="20"
-                   :width="20"
+                   :height="25"
+                   :width="25"
+                   font-size="1em"
       ></bbn-initial>
       <span v-text="main.tasks.userName(r)"
             class="bbn-hsmargin"
@@ -27,8 +28,9 @@
          class="bbn-vmiddle bbn-smargin"
     >
       <bbn-initial :user-id="r"
-                   :height="20"
-                   :width="20"
+                   :height="25"
+                   :width="25"
+                   font-size="1em"
       ></bbn-initial>
       <span v-text="main.tasks.userName(r)"
             class="bbn-hsmargin"
@@ -45,8 +47,9 @@
          class="bbn-vmiddle bbn-smargin"
     >
       <bbn-initial :user-id="r"
-                   :height="20"
-                   :width="20"
+                   :height="25"
+                   :width="25"
+                   font-size="1em"
       ></bbn-initial>
       <span v-text="main.tasks.userName(r)"
             class="bbn-hsmargin"

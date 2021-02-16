@@ -4,7 +4,7 @@
       <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {'bbn-primary': targetContainer === 'managers', over: coloredContainers}]"
            @mouseover="setTargetContainer('managers')"
       >
-        <div class="bbn-header bbn-b"><i class="nf nf-fa-black_tie bbn-hsmargin"></i><?=_("Supervisors")?></div>
+        <div class="bbn-header bbn-b bbn-spadded"><i class="nf nf-fa-black_tie bbn-hsmargin"></i><?=_("Supervisors")?></div>
         <div class="bbn-task-managers">
           <ul>
             <li v-for="e in managers"
@@ -14,9 +14,10 @@
               <div class="bbn-flex-width bbn-vmiddle">
                 <i :class="e.icon"></i>
                 <bbn-initial :user-id="e.value"
-                             :height="20"
-                             :width="20"
+                             :height="25"
+                             :width="25"
                              class="bbn-hsmargin"
+                             font-size="1em"
                 ></bbn-initial>
                 <span v-text="e.text"
                       class="bbn-flex-fill"
@@ -36,7 +37,7 @@
            @mouseover="setTargetContainer('workers')"
 
       >
-        <div class="bbn-header bbn-b"><i class="nf nf-fa-user_circle_o bbn-hsmargin"></i><?=_("Workers")?></div>
+        <div class="bbn-header bbn-b bbn-spadded"><i class="nf nf-fa-user_circle_o bbn-hsmargin"></i><?=_("Workers")?></div>
         <div class="bbn-task-workers">
           <ul>
             <li v-for="e in workers"
@@ -46,9 +47,10 @@
               <div class="bbn-flex-width bbn-vmiddle">
                 <i :class="e.icon"></i>
                 <bbn-initial :user-id="e.value"
-                             :height="20"
-                             :width="20"
+                             :height="25"
+                             :width="25"
                              class="bbn-hsmargin"
+                             font-size="1em"
                 ></bbn-initial>
                 <span v-text="e.text"
                       class="bbn-flex-fill"
@@ -67,7 +69,7 @@
       <div :class="['bbn-block','bbn-widget', 'bbn-task-assigned', {'bbn-primary': targetContainer === 'viewers', over: coloredContainers}]"
            @mouseover="setTargetContainer('viewers')"
       >
-        <div class="bbn-header bbn-b"><i class="nf nf-fa-user_secret bbn-hsmargin"></i><?=_("Spectators")?></div>
+        <div class="bbn-header bbn-b bbn-spadded"><i class="nf nf-fa-user_secret bbn-hsmargin"></i><?=_("Spectators")?></div>
         <div class="bbn-task-viewers">
           <ul>
             <li v-for="e in viewers"
@@ -77,9 +79,10 @@
               <div class="bbn-flex-width bbn-vmiddle">
                 <i :class="e.icon"></i>
                 <bbn-initial :user-id="e.value"
-                             :height="20"
-                             :width="20"
+                             :height="25"
+                             :width="25"
                              class="bbn-hsmargin"
+                             font-size="1em"
                 ></bbn-initial>
                 <span v-text="e.text"
                       class="bbn-flex-fill"

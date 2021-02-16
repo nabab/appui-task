@@ -5,26 +5,18 @@
     <div class="bbn-header bbn-b bbn-no-border-top bbn-no-hborder bbn-radius-top"><?=_('CURRENT SESSION')?></div>
     <div class="bbn-spadded">
       <div class="bbn-flex-width bbn-vmiddle">
-        <bbn-button v-if="source.tracker"
-                    icon="nf nf-fa-stop"
-                    title="<?=_('Stop tracker')?>"
-                    style="color: red"
-                    @click="trackerComp.stop"
+        <bbn-button :icon="source.tracker ? 'nf nf-fa-stop' : 'nf nf-fa-play'"
+                    :title="source.tracker ? '<?=_('Stop tracker')?>' : '<?=_('Start tracker')?>'"
+                    :class="{
+                      'bbn-green': !source.tracker,
+                      'bbn-red': source.tracker
+                    }"
+                    @click="source.tracker ? trackerComp.stop() : start()"
                     :notext="true"
         ></bbn-button>
-        <bbn-button v-else
-                    icon="nf nf-fa-play"
-                    title="<?=_('Start tracker')?>"
-                    style="color: green"
-                    @click="start"
-                    :notext="true"
-        ></bbn-button>
-        <span v-if="source.tracker"
-              class="bbn-flex-fill bbn-green bbn-hsmargin"
-        ><?=_('IN PROGRESS')?></span>
-        <span v-else
-              class="bbn-flex-fill  bbn-hsmargin"
-        ><?=_('Inactive')?></span>
+        <span :class="['bbn-flex-fill', 'bbn-hsmargin', {'bbn-green': source.tracker}]"
+              v-text="source.tracker ? '<?=_('IN PROGRESS')?>' : '<?=_('Inactive')?>'"
+        ></span>
         <div v-if="progress">
           <i class="nf nf-fa-clock bbn-hsmargin"></i>
           <span v-text="progress"
@@ -41,8 +33,9 @@
            class="bbn-vmiddle bbn-vsmargin bbn-flex-width"
       >
         <bbn-initial :user-id="s.idUser"
-                     :height="20"
-                     :width="20"
+                     :height="25"
+                     :width="25"
+                     font-size="1em"
         ></bbn-initial>
         <span v-text="s.userName"
               class="bbn-flex-fill bbn-hsmargin"

@@ -7,8 +7,9 @@
   <label><?=_('Created by')?></label>
   <div class="bbn-vmiddle">
     <bbn-initial :user-id="source.id_user"
-                 :height="20"
-                 :width="20"
+                 :height="25"
+                 :width="25"
+                 font-size="1em"
     ></bbn-initial>
     <span v-text="main.tasks.userName(source.id_user)"
           style="margin-left: 5px"
