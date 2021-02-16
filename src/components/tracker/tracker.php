@@ -16,27 +16,29 @@
                :scrollable="false"
                :auto-hide="200"
                @close="isVisible = false"
+               :container="$root.$el"
   >
     <div class="bbn-overlay">
       <div class="appui-task-tracker-list bbn-w-100 bbn-flex-height">
-        <div class="bbn-header bbn-c bbn-no-hborder bbn-no-border-top bbn-no-margin bbn-flex-width bbn-spadded">
-          <span class="bbn-hsmargin">
-            <i class="nf nf-fa-refresh bbn-p bbn-lg"
+        <div class="bbn-header bbn-spadded bbn-no-border-top bbn-no-hborder bbn-flex-width">
+          <div class="bbn-flex-fill bbn-l bbn-unselectable">
+            <span class="bbn-b"><?=_('Tasks list')?></span>
+          </div>
+          <div>
+            <i class="nf nf-mdi-refresh bbn-p"
                @click="refreshList(false)"
             ></i>
-          </span>
-          <span class="bbn-b bbn-flex-fill"><?=_('Tasks list')?></span>
-          <span class="bbn-hsmargin">
-            <i class="nf nf-fa-window_close bbn-p bbn-lg"
+            &nbsp;
+            <i class="bbn-p nf nf-mdi-window_close"
                @click="openWindow"
             ></i>
-          </span>
+          </div>
         </div>
         <div class="bbn-flex-fill bbn-flex-height">
           <div v-if="active"
                class="bbn-block"
           >
-            <div class="bbn-header bbn-bottom-xspace">
+            <div class="bbn-header bbn-no-border-top bbn-no-border-left bbn-no-border-right bbn-xspadded">
               <div class="bbn-flex-width">
                 <div class="bbn-flex-fill bbn-b bbn-hspadded"><?=_('In progress')?></div>
                 <div v-if="progress"
@@ -66,7 +68,7 @@
           <div class="bbn-flex-fill">
             <bbn-scroll>
               <div v-for="(l,i) in realList"
-                   :class="['bbn-vxspadded', 'bbn-hspadded', {'bbn-alt': i%2}]">
+                   :class="['bbn-vxspadded', 'bbn-hspadded', 'bbn-no-border-left', 'bbn-no-border-right', {'bbn-alt': i%2}]">
                 <div class="bbn-flex-width bbn-vmiddle">
                   <div class="bbn-flex-fill bbn-p"
                        v-text="shorten(l.title)"

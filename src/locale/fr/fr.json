@@ -61,7 +61,7 @@
         "Invoice creation": "Cr\u00e9ation de facture"
     },
     "components\/tracker": {
-        "Are you sure you want to stop the tracker in progress?": "\u00cates",
+        "Are you sure you want to stop the tracker in progress": "",
         "Do you want to write a message?": "Voulez-vous \u00e9crire un message?",
         "Tracker message": "Message du tracker"
     },

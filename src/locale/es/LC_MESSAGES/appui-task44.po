@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: info@bbn.so\n"
 "last-Translator: BBN Solutions <support@bbn.solutions>\n"
-"Language-Team: DE <DE@li.org>\n"
+"Language-Team: ES <ES@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-02-16 15:11+0100\n"
-"POT-Revision-Date: 2021-02-16 15:11+0100\n"
-"Language: de\n"
+"POT-Creation-Date: 2021-02-16 17:30+0100\n"
+"POT-Revision-Date: 2021-02-16 17:30+0100\n"
+"Language: es\n"
 "X-Domain: appui-task\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -282,7 +282,7 @@ msgid "Events journal"
 msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.js
-msgid "Are you sure you want to stop the tracker in progress?"
+msgid "Are you sure you want to stop the tracker in progress"
 msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-task/src/components/tracker/tracker.js

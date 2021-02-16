@@ -70,7 +70,7 @@
       start(idTask){
         bbn.fn.warning(idTask)
         if ( this.active ){
-          this.confirm(bbn._('Are you sure you want to stop the tracker in progress?'), () => {
+          this.confirm(bbn._('Are you sure you want to stop the tracker in progress') + '?', () => {
             this.stop();
           });
         }
