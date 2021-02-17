@@ -30,7 +30,7 @@ $fields = [
   'bbn_tasks.price',
   'bbn_tasks.private',
   'bbn_tasks.active',
-  'role' => 'bbn_tasks_roles.role',
+  'role' => 'my_role.role',
   'last_action' => 'FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono))',
   'num_children' => 'COUNT(children.id)',
   'num_notes' => 'COUNT(DISTINCT bbn_tasks_notes.id_note)',

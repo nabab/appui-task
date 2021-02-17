@@ -2,7 +2,7 @@
   <div v-if="main.isOngoing && (main.isWorker || main.isManager)"
        class="bbn-w-100 bbn-box bbn-bottom-space"
   >
-    <div class="bbn-header bbn-b bbn-no-border-top bbn-no-hborder bbn-radius-top"><?=_('CURRENT SESSION')?></div>
+    <div class="bbn-header bbn-b bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded"><?=_('CURRENT SESSION')?></div>
     <div class="bbn-spadded">
       <div class="bbn-flex-width bbn-vmiddle">
         <bbn-button :icon="source.tracker ? 'nf nf-fa-stop' : 'nf nf-fa-play'"
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="bbn-w-100 bbn-box">
-    <div class="bbn-header bbn-b bbn-no-border-top bbn-no-hborder bbn-radius-top"><?=_('SUMMARY')?></div>
+    <div class="bbn-header bbn-b bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded"><?=_('SUMMARY')?></div>
     <div class="bbn-spadded">
       <div v-for="s in summary"
            class="bbn-vmiddle bbn-vsmargin bbn-flex-width"

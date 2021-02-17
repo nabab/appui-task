@@ -11,7 +11,6 @@
                    :min="0"
                    v-model="source.price"
                    style="margin-right: 5px"
-                   
       ></bbn-numeric>
       <bbn-button icon="nf nf-fa-save"
                   :disabled="!source.price || (source.price == oldPrice)"
@@ -80,7 +79,7 @@
        class="bbn-box"
        style="margin-top: 10px"
   >
-    <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top">
+    <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded">
       <div class="bbn-vmiddle bbn-flex-width">
         <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-gavel bbn-hsmargin"></i><?=_('Deciders')?></span>
         <i class="nf nf-fa-plus bbn-p bbn-hsmargin"
@@ -113,7 +112,7 @@
        class="bbn-box"
        style="margin-top: 10px"
   >
-    <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top">
+    <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded">
       <div class="bbn-vmiddle bbn-flex-width">
         <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-file_invoice bbn-hsmargin"></i><?=_('Invoice')?></span>
         <i class="nf nf-fa-plus bbn-p bbn-hsmargin"
