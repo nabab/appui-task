@@ -100,10 +100,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "type": {
@@ -111,10 +108,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_parent": {
@@ -122,10 +116,7 @@
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 16
             },
@@ -134,10 +125,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "title": {
@@ -145,10 +133,7 @@
                 "type": "varchar",
                 "null": 0,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 100
             },
             "state": {
@@ -156,10 +141,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "priority": {
@@ -167,10 +149,6 @@
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "default": 3,
                 "maxlength": 1
             },
@@ -179,10 +157,7 @@
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 16
             },
@@ -191,9 +166,7 @@
                 "type": "datetime",
                 "null": 0,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
                 "generation": ""
             },
             "deadline": {
@@ -201,10 +174,7 @@
                 "type": "datetime",
                 "null": 1,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL"
             },
             "price": {
@@ -212,10 +182,7 @@
                 "type": "decimal",
                 "null": 1,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 14,
                 "decimals": 2
@@ -225,10 +192,6 @@
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "default": 0,
                 "maxlength": 1
             },
@@ -237,10 +200,6 @@
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "default": 1,
                 "maxlength": 1
             }
@@ -289,10 +248,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_invoice": {
@@ -300,10 +256,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             }
         }
@@ -364,10 +317,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_task": {
@@ -375,10 +325,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_user": {
@@ -386,10 +333,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "action": {
@@ -397,10 +341,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "chrono": {
@@ -408,10 +349,6 @@
                 "type": "decimal",
                 "null": 0,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 14,
                 "decimals": 4
             },
@@ -420,9 +357,7 @@
                 "type": "text",
                 "null": 0,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
                 "generation": ""
             }
         }
@@ -483,10 +418,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_task": {
@@ -494,10 +426,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_note": {
@@ -505,10 +434,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "active": {
@@ -516,10 +442,6 @@
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "default": 1,
                 "maxlength": 1
             }
@@ -596,10 +518,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_user": {
@@ -607,10 +526,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_task": {
@@ -618,10 +534,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "role": {
@@ -629,10 +542,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             }
         }
@@ -708,10 +618,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_task": {
@@ -719,10 +626,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_user": {
@@ -730,10 +634,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_note": {
@@ -741,10 +642,7 @@
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 16
             },
@@ -753,9 +651,7 @@
                 "type": "datetime",
                 "null": 0,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
                 "generation": ""
             },
             "length": {
@@ -763,10 +659,7 @@
                 "type": "int",
                 "null": 1,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 10
             },
@@ -824,10 +717,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_media": {
@@ -835,10 +725,7 @@
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "extra": "",
                 "signed": true,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 16
             },
@@ -847,10 +734,6 @@
                 "type": "int",
                 "null": 0,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "maxlength": 5
             },
             "ref_year": {
@@ -870,9 +753,7 @@
                 "type": "datetime",
                 "null": 0,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
                 "generation": ""
             },
             "description": {
@@ -880,9 +761,7 @@
                 "type": "text",
                 "null": 0,
                 "key": null,
-                "extra": "",
                 "signed": true,
-                "virtual": false,
                 "generation": ""
             },
             "tax": {
@@ -890,10 +769,6 @@
                 "type": "int",
                 "null": 1,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 10
             },
@@ -902,10 +777,6 @@
                 "type": "decimal",
                 "null": 1,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 14,
                 "decimals": 2
@@ -915,10 +786,6 @@
                 "type": "decimal",
                 "null": 1,
                 "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 14,
                 "decimals": 2
