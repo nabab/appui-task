@@ -118,13 +118,13 @@
       },
       getInvoiceRef(){
         if ( this.source.invoice ){
-          return moment(this.source.invoice.creation).format('YYYY') + '-' + this.source.invoice.ref;
+          return dayjs(this.source.invoice.creation).format('YYYY') + '-' + this.source.invoice.ref;
         }
         return '';
       },
       getInvoiceDate(){
         if ( this.source.invoice ){
-          return moment(this.source.invoice.creation).format('DD/MM/YYYY');
+          return dayjs(this.source.invoice.creation).format('DD/MM/YYYY');
         }
         return '';
       },

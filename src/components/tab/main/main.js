@@ -11,7 +11,7 @@
       let tasks = this.closest('appui-task-task').tasks;
       return {
         creation: bbn.fn.fdate(this.source.creation_date),
-        ref: moment().unix(),
+        ref: dayjs().unix(),
         commentTypes: [{
           text: bbn._('Simple text'),
           value: 'bbn-textarea'
@@ -316,7 +316,7 @@
           this.post(this.root + 'actions/comment/insert', v, (d) => {
             if (d.success && d.comment) {
               d.comment.creation = new Date().getSQL(1);
-              let m = new moment(d.comment.creation);
+              let m = new dayjs(d.comment.creation);
               d.comment.since = m.fromNow();
               this.source.notes.push(d.comment);
               this.clearComment();
@@ -352,7 +352,7 @@
          }
       },
       renderSince(d) {
-        return moment(d).fromNow();
+        return dayjs(d).fromNow();
       },
       linkEnter() {
          const link = (this.$refs.link.$refs.element.value.indexOf('http') !== 0 ? 'http://' : '') + this.$refs.link.$refs.element.value,

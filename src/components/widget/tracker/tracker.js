@@ -72,7 +72,7 @@
         }, 1000);
       },
       getProgress(){
-        this.progress = this.trackerComp.secToTime(moment().unix() - moment(this.source.tracker.start).unix());
+        this.progress = this.trackerComp.secToTime(dayjs().unix() - dayjs(this.source.tracker.start).unix());
       }
     },
     watch: {

@@ -14,7 +14,7 @@
     },
     methods: {
       minDate(){
-        return moment().format('YYYY-MM-DD');
+        return dayjs().format('YYYY-MM-DD');
       }
     }
   }

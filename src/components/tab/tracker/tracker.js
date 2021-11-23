@@ -23,13 +23,13 @@
         return this.trackerComp.secToTime(row.length);
       },
       renderStart(row){
-        return moment(row.start).format('DD/MM/YYYY HH:mm:ss');
+        return dayjs(row.start).format('DD/MM/YYYY HH:mm:ss');
       },
       renderEnd(row){
         if ( !row.end ){
           return bbn._('In progress') + '...';
         }
-        return moment(row.end).format('DD/MM/YYYY HH:mm:ss');
+        return dayjs(row.end).format('DD/MM/YYYY HH:mm:ss');
       },
       edit(row, col, idx){
         return this.$refs.table.edit(row, {
@@ -58,7 +58,7 @@
           appui.app.user.isAdmin ||
           (
             (row.id_user === appui.app.user.id) &&
-            (moment().diff(moment(row.end), 'hours') < 48)
+            (dayjs().diff(dayjs(row.end), 'hours') < 48)
           )
         ){
           ret.push({
@@ -112,19 +112,19 @@
         data(){
           return {
             tracker: bbn.vue.closest(this, 'bbn-container').getComponent(),
-            maxEnd: moment().format('YYYY-MM-DD')
+            maxEnd: dayjs().format('YYYY-MM-DD')
           }
         },
         computed: {
           maxStart(){
-            let end = moment(this.source.row.end).unix(),
-                now = moment().unix();
-            return end > now ? moment().format('YYYY-MM-DD HH:mm:ss') : this.source.row.end;
+            let end = dayjs(this.source.row.end).unix(),
+                now = dayjs().unix();
+            return end > now ? dayjs().format('YYYY-MM-DD HH:mm:ss') : this.source.row.end;
           }
         },
         methods: {
           validation(){
-            if ( moment(this.source.row.end).unix() < moment(this.source.row.start).unix() ){
+            if ( dayjs(this.source.row.end).unix() < dayjs(this.source.row.start).unix() ){
               this.alert(bbn._('The end date must be more recent than the start date'));
               return false;
             }
@@ -143,7 +143,7 @@
         watch: {
           'source.row.start'(newVal){
             if ( newVal && this.source.row.end ){
-              this.$set(this.source.row, 'length', moment(this.source.row.end).unix() - moment(this.source.row.start).unix());
+              this.$set(this.source.row, 'length', dayjs(this.source.row.end).unix() - dayjs(this.source.row.start).unix());
             }
             else {
               this.$set(this.source.row, 'length', 0);
@@ -151,7 +151,7 @@
           },
           'source.row.end'(newVal){
             if ( newVal && this.source.row.start ){
-              this.$set(this.source.row, 'length', moment(this.source.row.end).unix() - moment(this.source.row.start).unix());
+              this.$set(this.source.row, 'length', dayjs(this.source.row.end).unix() - dayjs(this.source.row.start).unix());
             }
             else {
               this.$set(this.source.row, 'length', 0);
