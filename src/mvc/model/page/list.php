@@ -1,6 +1,6 @@
 <?php
 /*
- * Describe what it does or you're a pussy
+ * Describe what it does
  *
  **/
 

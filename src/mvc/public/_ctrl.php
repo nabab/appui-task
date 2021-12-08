@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does or get another gastro-enterite!
- *
- **/
 
 /** @var $ctrl \bbn\Mvc\Controller */
 if ( !\defined('APPUI_TASKS_ROOT') ){
