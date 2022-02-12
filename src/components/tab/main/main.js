@@ -407,7 +407,7 @@
       },
       fileIconClass(file) {
         if ( file.extension ){
-          const ext = file.extension.substr(1);
+          const ext = file.extension.substring(1);
           if ( ext === "pdf" ){
             return "file-pdf-o";
           } 
