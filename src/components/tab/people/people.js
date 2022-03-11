@@ -91,7 +91,7 @@
     },
     methods: {
       addUser(idUser, roleType){
-        if ( this.canChange ){
+        if (this.canChange && !!idUser && !!roleType) {
           let exists = false;
           if ( (idUser === this.source.id_user) && (roleType === 'managers') ){
             exists = true;
@@ -153,39 +153,42 @@
         }
       },
       dragEnd(d, ev){
-        let target = this.targetContainer;
-        ev.preventDefault();
-        if ( target ){
-          if ( Array.isArray(d.items) && d.items.length ){
-            bbn.fn.each(d.items, ( v, i ) => {
-              if ( v.id ){
-                this.addUser(v.id, target);
-                v.remove();
-              }
-            });
-          }
-          else if ( d.data.id_group && d.data.id ){
-            this.addUser(d.data.id, target);
-          }
-          d.remove();
-          this.targetContainer = false;
-        }
+        this.coloredContainers = false;
+        this.targetContainer = false;
       },
       setTargetContainer(role){
         if ( this.canChange  && role && this.coloredContainers ){
           this.targetContainer = role;
         }
       },
-      setWatch(){
-        this.$watch('$refs.task_usertree.realDragging', (newVal) => {
-          this.coloredContainers = newVal;
-          if ( !newVal ){
-            setTimeout(() => {
-              this.targetContainer = false;
-            }, 300)
-          }
-        })
+      startDrag(){
+        this.coloredContainers = true;
       },
+      drop(ev){
+        bbn.fn.log('drop', ev);
+        ev.preventDefault();
+        if (this.canChange) {
+          let target = this.targetContainer,
+              node = ev.detail.from.data.node;
+          if (!!target && !!node) {
+            if (!!node.numChildren
+              && !!node.data
+              && bbn.fn.isArray(node.data.items)
+              && node.data.items.length
+            ) {
+              bbn.fn.each(node.data.items, v => {
+                if (v.id) {
+                  this.addUser(v.id, target);
+                }
+              });
+            }
+            else if (node.data.id_group && node.data.id) {
+              this.addUser(node.data.id, target);
+            }
+            node.remove();
+          }
+        }
+      }
     }
   };
 })(window.bbn);
