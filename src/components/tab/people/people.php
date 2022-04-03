@@ -2,8 +2,9 @@
   <div class="bbn-task-roles-container bbn-flex-height">
     <div class="bbn-padded">
       <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {'bbn-primary': targetContainer === 'managers', over: coloredContainers}]"
-           @mouseover="setTargetContainer('managers')"
-      >
+           @dragover="setTargetContainer('managers')"
+           v-droppable="canChange"
+           @drop="drop">
         <div class="bbn-header bbn-b bbn-spadded"><i class="nf nf-fa-black_tie bbn-hsmargin"></i><?=_("Supervisors")?></div>
         <div class="bbn-task-managers">
           <ul>
@@ -34,9 +35,9 @@
       </div>
       <div class="bbn-spacer"></div>
       <div :class="['bbn-block', 'bbn-widget', 'bbn-task-assigned', {'bbn-primary': targetContainer === 'workers', over: coloredContainers}]"
-           @mouseover="setTargetContainer('workers')"
-
-      >
+           @dragover="setTargetContainer('workers')"
+           v-droppable="canChange"
+           @drop="drop">
         <div class="bbn-header bbn-b bbn-spadded"><i class="nf nf-fa-user_circle_o bbn-hsmargin"></i><?=_("Workers")?></div>
         <div class="bbn-task-workers">
           <ul>
@@ -67,8 +68,9 @@
       </div>
       <div class="bbn-spacer"> </div>
       <div :class="['bbn-block','bbn-widget', 'bbn-task-assigned', {'bbn-primary': targetContainer === 'viewers', over: coloredContainers}]"
-           @mouseover="setTargetContainer('viewers')"
-      >
+           @dragover="setTargetContainer('viewers')"
+           v-droppable="canChange"
+           @drop="drop">
         <div class="bbn-header bbn-b bbn-spadded"><i class="nf nf-fa-user_secret bbn-hsmargin"></i><?=_("Spectators")?></div>
         <div class="bbn-task-viewers">
           <ul>
@@ -105,8 +107,8 @@
                 ref="task_usertree"
                 :draggable="true"
                 :self-drop="false"
-                @dragEnd="dragEnd"
-                @hook:mounted="setWatch"
+                @dragend="dragEnd"
+                @dragstart="startDrag"
       ></bbn-tree>
       <div class="bbn-task-roles-desc bbn-lg" v-if="!isClosed">
         <span v-if="canChange">
