@@ -96,7 +96,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -104,7 +103,6 @@
                 "maxlength": 16
             },
             "type": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -112,7 +110,6 @@
                 "maxlength": 16
             },
             "id_parent": {
-                "position": 3,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -121,7 +118,6 @@
                 "maxlength": 16
             },
             "id_user": {
-                "position": 4,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -129,7 +125,6 @@
                 "maxlength": 16
             },
             "title": {
-                "position": 5,
                 "type": "varchar",
                 "null": 0,
                 "key": null,
@@ -137,7 +132,6 @@
                 "maxlength": 100
             },
             "state": {
-                "position": 6,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -145,7 +139,6 @@
                 "maxlength": 16
             },
             "priority": {
-                "position": 7,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -153,7 +146,6 @@
                 "maxlength": 1
             },
             "id_alias": {
-                "position": 8,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -162,7 +154,6 @@
                 "maxlength": 16
             },
             "creation_date": {
-                "position": 9,
                 "type": "datetime",
                 "null": 0,
                 "key": null,
@@ -244,7 +235,6 @@
         },
         "fields": {
             "id_task": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -252,7 +242,6 @@
                 "maxlength": 16
             },
             "id_invoice": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -313,7 +302,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -321,7 +309,6 @@
                 "maxlength": 16
             },
             "id_task": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -329,7 +316,6 @@
                 "maxlength": 16
             },
             "id_user": {
-                "position": 3,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -337,7 +323,6 @@
                 "maxlength": 16
             },
             "action": {
-                "position": 4,
                 "type": "binary",
                 "null": 0,
                 "key": null,
@@ -345,7 +330,6 @@
                 "maxlength": 16
             },
             "chrono": {
-                "position": 5,
                 "type": "decimal",
                 "null": 0,
                 "key": null,
@@ -353,7 +337,6 @@
                 "decimals": 4
             },
             "value": {
-                "position": 6,
                 "type": "text",
                 "null": 0,
                 "key": null,
@@ -414,7 +397,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -422,7 +404,6 @@
                 "maxlength": 16
             },
             "id_task": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -430,7 +411,6 @@
                 "maxlength": 16
             },
             "id_note": {
-                "position": 3,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -438,7 +418,6 @@
                 "maxlength": 16
             },
             "active": {
-                "position": 4,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -514,7 +493,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -522,7 +500,6 @@
                 "maxlength": 16
             },
             "id_user": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -530,7 +507,6 @@
                 "maxlength": 16
             },
             "id_task": {
-                "position": 3,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -538,7 +514,6 @@
                 "maxlength": 16
             },
             "role": {
-                "position": 4,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -614,7 +589,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -622,7 +596,6 @@
                 "maxlength": 16
             },
             "id_task": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -630,7 +603,6 @@
                 "maxlength": 16
             },
             "id_user": {
-                "position": 3,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -638,7 +610,6 @@
                 "maxlength": 16
             },
             "id_note": {
-                "position": 4,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -647,7 +618,6 @@
                 "maxlength": 16
             },
             "start": {
-                "position": 5,
                 "type": "datetime",
                 "null": 0,
                 "key": null,
@@ -655,7 +625,6 @@
                 "generation": ""
             },
             "length": {
-                "position": 6,
                 "type": "int",
                 "null": 1,
                 "key": null,
@@ -664,7 +633,6 @@
                 "maxlength": 10
             },
             "end": {
-                "position": 7,
                 "type": "datetime",
                 "null": 1,
                 "key": null,
@@ -713,7 +681,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -721,7 +688,6 @@
                 "maxlength": 16
             },
             "id_media": {
-                "position": 2,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -730,14 +696,12 @@
                 "maxlength": 16
             },
             "ref": {
-                "position": 3,
                 "type": "int",
                 "null": 0,
                 "key": null,
                 "maxlength": 5
             },
             "ref_year": {
-                "position": 4,
                 "type": "year",
                 "null": 1,
                 "key": null,
@@ -749,7 +713,6 @@
                 "maxlength": 4
             },
             "creation": {
-                "position": 5,
                 "type": "datetime",
                 "null": 0,
                 "key": null,
@@ -757,7 +720,6 @@
                 "generation": ""
             },
             "description": {
-                "position": 6,
                 "type": "text",
                 "null": 0,
                 "key": null,
@@ -765,7 +727,6 @@
                 "generation": ""
             },
             "tax": {
-                "position": 7,
                 "type": "int",
                 "null": 1,
                 "key": null,
@@ -773,7 +734,6 @@
                 "maxlength": 10
             },
             "taxable": {
-                "position": 8,
                 "type": "decimal",
                 "null": 1,
                 "key": null,
@@ -782,7 +742,6 @@
                 "decimals": 2
             },
             "amount": {
-                "position": 9,
                 "type": "decimal",
                 "null": 1,
                 "key": null,
