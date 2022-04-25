@@ -27,7 +27,7 @@ if (
         if ( !empty($model->data['files']) ){
           array_walk($model->data['files'], function($f) use($notes, $model, &$ok){
             if ( !empty($f['id']) ){
-              if ( !$notes->media2version($f['id'], $model->data['id']) ){
+              if ( !$notes->addMediaToNote($f['id'], $model->data['id']) ){
                 $ok = false;
               }
             }
@@ -37,7 +37,7 @@ if (
         if ( !empty($model->data['links']) ){
           array_walk($model->data['links'], function($l) use($notes, $model, &$ok){
             if ( !empty($l['id']) ){
-              if ( !$notes->media2version($l['id'], $model->data['id']) ){
+              if ( !$notes->addMediaToNote($l['id'], $model->data['id']) ){
                 $ok = false;
               }
             }

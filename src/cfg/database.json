@@ -5,19 +5,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "type": {
                 "columns": [
                     "type"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_2",
@@ -29,7 +22,6 @@
                 "columns": [
                     "id_parent"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_3",
@@ -41,7 +33,6 @@
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_6",
@@ -53,7 +44,6 @@
                 "columns": [
                     "id_alias"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_4",
@@ -65,7 +55,6 @@
                 "columns": [
                     "state"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_ibfk_5",
@@ -203,19 +192,12 @@
                     "id_task",
                     "id_invoice"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": "bbn_tasks_invoices_ibfk_2",
-                "update": "CASCADE",
-                "delete": "CASCADE",
                 "unique": 1
             },
             "id_invoice": {
                 "columns": [
                     "id_invoice"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_invoices",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_invoices_ibfk_1",
@@ -256,19 +238,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "id_user": {
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_logs_ibfk_3",
@@ -280,7 +255,6 @@
                 "columns": [
                     "id_task"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_logs_ibfk_2",
@@ -351,19 +325,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "id_task": {
                 "columns": [
                     "id_task"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_notes_ibfk_2",
@@ -375,7 +342,6 @@
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_notes_ibfk_3",
@@ -432,19 +398,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "id_user": {
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_roles_ibfk_3",
@@ -456,7 +415,6 @@
                 "columns": [
                     "id_task"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_roles_ibfk_2",
@@ -468,7 +426,6 @@
                 "columns": [
                     "role"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_roles_ibfk_4",
@@ -528,19 +485,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "id_task": {
                 "columns": [
                     "id_task"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_tasks",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_sessions_ibfk_1",
@@ -552,7 +502,6 @@
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_sessions_ibfk_2",
@@ -564,7 +513,6 @@
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
                 "constraint": "bbn_tasks_sessions_ibfk_3",
@@ -650,19 +598,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "id_media": {
                 "columns": [
                     "id_media"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_medias",
                 "ref_column": "id",
                 "constraint": "bbn_invoices_ibfk_1",
