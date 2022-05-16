@@ -30,7 +30,7 @@
         return this.source.roles.managers && ( this.source.roles.managers.indexOf(appui.app.user.id) > -1 );
       },
       canChange(){
-        return !this.isClosed && this.isMaster;
+        return !this.isClosed && (this.isMaster || (!this.source.private && this.isManager));
       },
       managers(){
         if ( this.source.roles && this.source.roles.managers ){

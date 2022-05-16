@@ -26,7 +26,7 @@
         }
         ret = this.source.roles.workers.map(w => {
           let totUser = bbn.fn.getField(trackers, 'total_time', 'id_user', w);
-          totUser = this.trackerComp.secToTime((totUser !== null) && (totUser !== false) ? totUser : 0, true);
+          totUser = this.trackerComp.secToTime(bbn.fn.isNumber(totUser) ? totUser : 0, true);
           return {
             idUser: w,
             userName: this.main.tasks.userName(w),
@@ -35,7 +35,7 @@
         });
         ret = ret.concat(this.source.roles.managers.map(w => {
           let totUser = bbn.fn.getField(trackers, 'total_time', 'id_user', w);
-          totUser = this.trackerComp.secToTime((totUser !== null) && (totUser !== false) ? totUser : 0, true);
+          totUser = this.trackerComp.secToTime(bbn.fn.isNumber(totUser) ? totUser : 0, true);
           return {
             idUser: w,
             userName: this.main.tasks.userName(w),

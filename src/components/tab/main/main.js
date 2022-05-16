@@ -129,7 +129,7 @@
         return false;
       },
       canChange() {
-        return !this.isClosed && this.isMaster;
+        return !this.isClosed && (this.isMaster || (!this.source.private && this.isManager));
       },
       canApprove() {
         return this.isDecider && !this.isClosed;
