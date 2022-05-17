@@ -145,6 +145,7 @@
              :title="userName"
              :height="25"
              :width="25"
+             :font-size="15"
 ></bbn-initial>
         `,
         props: ['source'],

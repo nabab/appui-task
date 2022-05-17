@@ -25,7 +25,10 @@
                   :notext="true"
       ></bbn-button>
     </div>
-    <label v-if="!showPriceForm && source.price" class="bbn-vmiddle"><?=_('Price')?></label>
+    <div v-if="!showPriceForm && !source.price"
+         class="bbn-grid-full bbn-c"><?=_('No price set')?></div>
+    <label v-if="!showPriceForm && source.price"
+           class="bbn-vmiddle"><?=_('Price')?></label>
     <div v-if="!showPriceForm && source.price"
          class="bbn-flex-width bbn-vmiddle"
     >
