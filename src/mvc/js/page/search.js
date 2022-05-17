@@ -38,7 +38,8 @@
             source: {
               title: this.taskTitle,
               type: ''
-            }
+            },
+            opener: this
           });
         }
       },
