@@ -44,7 +44,7 @@
       viewers(){
         if ( this.source.roles && this.source.roles.viewers ){
           //return bbn.fn.order($.map(this.source.roles.viewers, (v) => {
-          return bbn.fn.order(bbn.fn.map(this.source.roles.viewers, v => {  
+          return bbn.fn.order(bbn.fn.map(this.source.roles.viewers, v => {
             let user = bbn.fn.getRow(appui.app.users, 'value', v);
             return user || undefined;
           }), 'text', 'asc');
@@ -54,7 +54,7 @@
       workers(){
         if ( this.source.roles && this.source.roles.workers ){
           //return bbn.fn.order($.map(this.source.roles.workers, (v) => {
-          return bbn.fn.order(bbn.fn.map(this.source.roles.workers, v => {  
+          return bbn.fn.order(bbn.fn.map(this.source.roles.workers, v => {
             let user = bbn.fn.getRow(appui.app.users, 'value', v);
             return user || undefined;
           }), 'text', 'asc');
@@ -64,15 +64,15 @@
       groupsFiltered(){
         return bbn.fn.order(
           bbn.fn.filter(
-            bbn.fn.map(this.tasks.groups, g => { 
+            bbn.fn.map(this.tasks.groups, g => {
               let a = bbn.fn.extend(true, {}, g);
               a.items = a.items.filter((u) => {
                 let ok = true;
                 bbn.fn.each(this.source.roles, (r, j) => {
-                  if (
-                    ((u.id !== this.source.id_user) || (j !== 'managers')) &&
-                    (r.indexOf(u.id) > -1)
-                  ){
+                  if ((j !== 'deciders')
+                    && ((u.id !== this.source.id_user) || (j !== 'managers'))
+                    && r.includes(u.id)
+                  ) {
                     ok = false;
                     return false;
                   }
