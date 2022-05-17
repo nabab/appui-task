@@ -80,7 +80,7 @@
         return '<i class="bbn-lg nf nf-fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.getField(this.tasks.source.options.states, "text", "value", row.state) + '"> </i>';
       },
       renderLast(row){
-        return dayjs(row.last_action).calendar(null, {sameElse: 'DD/MM/YYYY'});
+        return dayjs(row.last_action).calendar();
       },
       renderRole(row){
         return bbn.fn.getField(this.tasks.source.options.roles, "text", "value", row.role) || '-';
@@ -89,32 +89,20 @@
         return bbn.fn.getField(this.tasks.source.options.cats, "text", "value", row.type);
       },
       renderDuration(row){
-        let start = dayjs(row.creation_date),
-            end = dayjs(row.last_action);
-        if ( row.state === this.tasks.source.states.closed ){
-          end = dayjs();
-          return end.from(start, true);
-        }
-        if ( !row.duration ){
-          return bbn._('Unknown');
-        }
-        if ( row.duration < 3600 ){
-          return Math.round(row.duration/60) + ' ' + bbn._('months');
-        }
-        if ( row.duration < (24*3600) ){
-          return Math.round(row.duration/3600) + ' ' + bbn._('hours');
-        }
-        return Math.round(row.duration/(24*3600)) + ' ' + bbn._('days');
+        let start = dayjs(row.creation_date);
+        return row.state === this.tasks.source.states.closed ?
+          dayjs(row.last_action).from(start, true) :
+          dayjs().from(start, true);
       },
       renderCreationDate(row){
-        return dayjs(row.creation_date).calendar(null, {sameElse: 'DD/MM/YYYY'});
+        return dayjs(row.creation_date).calendar();
       },
       renderDeadline(row){
         let t = dayjs(row.deadline),
             now = dayjs(),
             diff = t.unix() - now.unix(),
             col = 'green',
-            d = row.state === this.tasks.source.states.closed ? t.calendar(null, {sameElse: 'DD/MM/YYYY'}) : t.fromNow();
+            d = row.state === this.tasks.source.states.closed ? t.calendar() : t.fromNow();
 
         if ( !t.isValid() ){
           return '-';
