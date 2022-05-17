@@ -98,10 +98,9 @@
           }
           else {
             bbn.fn.each(this.source.roles, (v, i) => {
-              if (
-                ((idUser !== this.source.id_user) || (i !== 'managers')) &&
-                //($.inArray(idUser, v) > -1)
-                ( v.indexOf(idUser) > -1)
+              if ((i !== 'deciders')
+                && ((idUser !== this.source.id_user) || (i !== 'managers'))
+                && v.includes(idUser)
               ){
                 exists = true;
                 return false;
