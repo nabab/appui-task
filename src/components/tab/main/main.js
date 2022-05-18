@@ -61,26 +61,22 @@
         return this.userId === this.source.id_user;
       },
       isViewer() {
-        //return $.inArray(this.userId, this.source.roles.viewers) > -1;
-        return this.source.roles.viewers.indexOf(this.userId) > -1;
+        return this.source.roles.viewers.includes(this.userId);
       },
       isManager() {
         if (this.isMaster) {
           return true;
         }
-        //return $.inArray(this.userId, this.source.roles.managers) > -1;
-        return this.source.roles.managers.indexOf(this.userId) > -1;
+        return this.source.roles.managers.includes(this.userId);
       },
       isWorker() {
-        //return $.inArray(this.userId, this.source.roles.workers) > -1;
-        return this.source.roles.workers.indexOf(this.userId) > -1;
+        return this.source.roles.workers.includes(this.userId);
       },
       isDecider() {
-        //return $.inArray(this.userId, this.source.roles.deciders) > -1;
-        return this.source.roles.deciders.indexOf(this.userId) > -1;
+        return this.source.roles.deciders.includes(this.userId);
       },
       isHolding() {
-        return this.source.state === this.tasks.source.states.holding;              
+        return this.source.state === this.tasks.source.states.holding;
       },
       isClosed() {
         return this.source.state === this.tasks.source.states.closed;
@@ -302,7 +298,7 @@
           id: this.source.id,
           title: this.commentTitle,
           text: this.commentText,
-          ref: this.ref,          
+          ref: this.ref,
           /*links: $.grep(this.commentLinks, (l) => {
             return l.error === false;
           })*/
@@ -410,21 +406,21 @@
           const ext = file.extension.substring(1);
           if ( ext === "pdf" ){
             return "file-pdf-o";
-          } 
+          }
           //else if ( $.inArray(ext, ["xls", "xlsx", "csv", "ods"]) > -1) {
-          else if ( ["xls", "xlsx", "csv", "ods"].indexOf(ext) > -1 ){    
+          else if ( ["xls", "xlsx", "csv", "ods"].indexOf(ext) > -1 ){
             return "file-excel-o";
           }
           //else if ($.inArray(ext, ["rtf", "doc", "docx", "odt"]) > -1) {
-          else if ( ["rtf", "doc", "docx", "odt"].indexOf(ext) > -1 ){    
+          else if ( ["rtf", "doc", "docx", "odt"].indexOf(ext) > -1 ){
             return "file-word-o";
           }
           //else if ($.inArray(ext, ["svg", "gif", "png", "jpg", "jpeg"]) > -1) {
-          else if ( ["svg", "gif", "png", "jpg", "jpeg"].indexOf(ext) > -1 ){    
+          else if ( ["svg", "gif", "png", "jpg", "jpeg"].indexOf(ext) > -1 ){
             return "file-picture-o";
           }
           //else if ($.inArray(ext, ["zip", "gz", "rar", "7z", "bz2", "xz"]) > -1) {
-          else if ( ["zip", "gz", "rar", "7z", "bz2", "xz"].indexOf(ext) > -1 ){    
+          else if ( ["zip", "gz", "rar", "7z", "bz2", "xz"].indexOf(ext) > -1 ){
             return "file-archive-o";
           }
           return "file-o";
@@ -442,6 +438,43 @@
           icon: 'nf nf-fa-plus',
           action: this.addBudget
         }] : [];
+      },
+      tasksButtons(){
+        return this.canChange ? [{
+          text: bbn._('Add task'),
+          icon: 'nf nf-fa-plus',
+          action: this.addTask
+        }] : [];
+      },
+      addTask(){
+        if (this.canChange && !!this.source.id) {
+          this.getPopup().open({
+            title: bbn._('New task'),
+            width: 500,
+            component: 'appui-task-form-new',
+            source: {
+              title: '',
+              type: '',
+              id_parent: this.source.id
+            },
+            opener: this
+          });
+        }
+      },
+      openTask(task){
+        if (!!task) {
+          bbn.fn.link(this.root + 'page/task/' + task);
+        }
+      },
+      todoButtons(){
+        return this.canChange ? [{
+          text: bbn._('Add'),
+          icon: 'nf nf-fa-plus',
+          action: this.addTodo
+        }] : [];
+      },
+      addTodo(){
+        
       }
     },
     watch: {

@@ -34,11 +34,12 @@
           this.getPopup().open({
             title: bbn._('New task'),
             width: 500,
-            component: this.$options.components['appui-tasks-create-form'],
+            component: 'appui-task-form-new',
             source: {
               title: this.taskTitle,
               type: ''
-            }
+            },
+            opener: this
           });
         }
       },
@@ -99,10 +100,10 @@
       },
       renderDeadline(row){
         let t = dayjs(row.deadline),
-            now = dayjs(),
-            diff = t.unix() - now.unix(),
+            diff = t.unix() - dayjs().unix(),
             col = 'green',
-            d = row.state === this.tasks.source.states.closed ? t.calendar() : t.fromNow();
+            isClosed = row.state === appui.options.tasks.states.closed,
+            d = isClosed ? t.calendar() : t.fromNow();
 
         if ( !t.isValid() ){
           return '-';
@@ -116,10 +117,7 @@
         else if ( diff < (7*24*3600) ){
           col = 'orange'
         }
-        else if ( diff < (7*24*3600) ){
-          col = 'orange'
-        }
-        return '<strong style="color: ' + col + '">' + d + '</strong>';
+        return `<span class="${isClosed ? '' : 'bbn-b '}bbn-${col}">${d}</span>`;
       }
     },
     watch: {
@@ -152,46 +150,6 @@
         computed: {
           userName(){
             return appui.app.getUserName(this.source.id_user);
-          }
-        }
-      },
-      'appui-tasks-create-form': {
-        template: `
-<bbn-form :action="cp.tasks.source.root + 'actions/task/insert'"
-          :source="source"
-          @success="refreshTable"
->
-  <div class="bbn-padded bbn-grid-fields">
-    <div>` + bbn._('Title') + `</div>
-    <bbn-input maxlength="255"
-               required="required"
-               v-model="source.title"
-               class="bbn-w-100"
-    ></bbn-input>
-    <div>` + bbn._('Type') + `</div>
-    <bbn-dropdown :source="cp.tasks.fullCategories"
-                  v-model="source.type"
-                  group="group"
-                  source-value="id"
-                  required="required"
-                  placeholder="`+ bbn._('Select a type...') +`"
-                  class="bbn-w-100"
-    ></bbn-dropdown>
-  </div>
-</bbn-form>
-        `,
-        props: ['source'],
-        data(){
-          return {
-            cp: this.closest('bbn-container').getComponent()
-          }
-        },
-        methods: {
-          refreshTable(d){
-            this.cp.taskTitle = '';
-            if ( d.success ){
-              this.cp.openTask(d.success);
-            }
           }
         }
       }

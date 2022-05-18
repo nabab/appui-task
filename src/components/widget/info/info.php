@@ -19,6 +19,11 @@
   <div v-text="main.creation"></div>
   <label><?=_('Status')?></label>
   <div v-text="main.stateText"></div>
+  <template v-if="!!source.id_parent && !!source.parent">
+    <label><?=_('Parent task')?></label>
+    <a v-text="source.parent.title"
+       :href="main.root + 'page/task/' + source.id_parent"/>
+  </template>
   <div></div>
   <div>
     <div v-if="main.isUnapproved">
