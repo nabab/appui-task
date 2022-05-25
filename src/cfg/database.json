@@ -104,6 +104,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "id_user": {
@@ -140,6 +141,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "creation_date": {
@@ -164,6 +166,7 @@
                 "key": null,
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 14,
                 "decimals": 2
             },
@@ -563,6 +566,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "start": {
@@ -578,6 +582,7 @@
                 "key": null,
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 10
             },
             "end": {
@@ -634,6 +639,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "ref": {
@@ -651,6 +657,7 @@
                 "virtual": true,
                 "generation": "year(`creation`)",
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 4
             },
             "creation": {
@@ -672,6 +679,7 @@
                 "null": 1,
                 "key": null,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 10
             },
             "taxable": {
@@ -679,6 +687,7 @@
                 "null": 1,
                 "key": null,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 14,
                 "decimals": 2
             },
@@ -687,6 +696,7 @@
                 "null": 1,
                 "key": null,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 14,
                 "decimals": 2
             }
