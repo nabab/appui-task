@@ -117,8 +117,7 @@
             "title": {
                 "type": "varchar",
                 "null": 0,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "maxlength": 100
             },
             "state": {
@@ -131,8 +130,7 @@
             "priority": {
                 "type": "tinyint",
                 "null": 0,
-                "key": null,
-                "default": 3,
+                        "default": 3,
                 "maxlength": 1
             },
             "id_alias": {
@@ -147,24 +145,22 @@
             "creation_date": {
                 "type": "datetime",
                 "null": 0,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "generation": ""
             },
             "deadline": {
                 "position": 10,
                 "type": "datetime",
                 "null": 1,
-                "key": null,
-                "signed": true,
-                "default": "NULL"
+                        "signed": true,
+                "default": "NULL",
+                "defaultExpression": 1
             },
             "price": {
                 "position": 11,
                 "type": "decimal",
                 "null": 1,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 14,
@@ -174,16 +170,14 @@
                 "position": 12,
                 "type": "tinyint",
                 "null": 0,
-                "key": null,
-                "default": 0,
+                        "default": 0,
                 "maxlength": 1
             },
             "active": {
                 "position": 13,
                 "type": "tinyint",
                 "null": 0,
-                "key": null,
-                "default": 1,
+                        "default": 1,
                 "maxlength": 1
             }
         }
@@ -302,22 +296,19 @@
             "action": {
                 "type": "binary",
                 "null": 0,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "maxlength": 16
             },
             "chrono": {
                 "type": "decimal",
                 "null": 0,
-                "key": null,
-                "maxlength": 14,
+                        "maxlength": 14,
                 "decimals": 4
             },
             "value": {
                 "type": "text",
                 "null": 0,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "generation": ""
             }
         }
@@ -389,8 +380,7 @@
             "active": {
                 "type": "tinyint",
                 "null": 0,
-                "key": null,
-                "default": 1,
+                        "default": 1,
                 "maxlength": 1
             }
         }
@@ -572,15 +562,13 @@
             "start": {
                 "type": "datetime",
                 "null": 0,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "generation": ""
             },
             "length": {
                 "type": "int",
                 "null": 1,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 10
@@ -588,12 +576,12 @@
             "end": {
                 "type": "datetime",
                 "null": 1,
-                "key": null,
-                "extra": "VIRTUAL GENERATED",
+                        "extra": "VIRTUAL GENERATED",
                 "signed": true,
                 "virtual": true,
                 "generation": "addtime(`start`,sec_to_time(`length`))",
-                "default": "NULL"
+                "default": "NULL",
+                "defaultExpression": 1
             }
         }
     },
@@ -645,14 +633,12 @@
             "ref": {
                 "type": "int",
                 "null": 0,
-                "key": null,
-                "maxlength": 5
+                        "maxlength": 5
             },
             "ref_year": {
                 "type": "year",
                 "null": 1,
-                "key": null,
-                "extra": "VIRTUAL GENERATED",
+                        "extra": "VIRTUAL GENERATED",
                 "signed": true,
                 "virtual": true,
                 "generation": "year(`creation`)",
@@ -663,30 +649,26 @@
             "creation": {
                 "type": "datetime",
                 "null": 0,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "generation": ""
             },
             "description": {
                 "type": "text",
                 "null": 0,
-                "key": null,
-                "signed": true,
+                        "signed": true,
                 "generation": ""
             },
             "tax": {
                 "type": "int",
                 "null": 1,
-                "key": null,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 10
             },
             "taxable": {
                 "type": "decimal",
                 "null": 1,
-                "key": null,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 14,
                 "decimals": 2
@@ -694,8 +676,7 @@
             "amount": {
                 "type": "decimal",
                 "null": 1,
-                "key": null,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 14,
                 "decimals": 2
