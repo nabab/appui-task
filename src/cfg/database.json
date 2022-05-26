@@ -88,21 +88,18 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "type": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "id_parent": {
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
@@ -111,33 +108,29 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "title": {
                 "type": "varchar",
                 "null": 0,
-                        "signed": true,
                 "maxlength": 100
             },
             "state": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "priority": {
                 "type": "tinyint",
                 "null": 0,
-                        "default": 3,
+                "default": 3,
                 "maxlength": 1
             },
             "id_alias": {
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
@@ -145,39 +138,32 @@
             "creation_date": {
                 "type": "datetime",
                 "null": 0,
-                        "signed": true,
                 "generation": ""
             },
             "deadline": {
-                "position": 10,
                 "type": "datetime",
                 "null": 1,
-                        "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1
             },
             "price": {
-                "position": 11,
                 "type": "decimal",
                 "null": 1,
-                        "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 14,
                 "decimals": 2
             },
             "private": {
-                "position": 12,
                 "type": "tinyint",
                 "null": 0,
-                        "default": 0,
+                "default": 0,
                 "maxlength": 1
             },
             "active": {
-                "position": 13,
                 "type": "tinyint",
                 "null": 0,
-                        "default": 1,
+                "default": 1,
                 "maxlength": 1
             }
         }
@@ -217,14 +203,12 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "id_invoice": {
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             }
         }
@@ -276,39 +260,34 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "id_task": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "id_user": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "action": {
                 "type": "binary",
                 "null": 0,
-                        "signed": true,
                 "maxlength": 16
             },
             "chrono": {
                 "type": "decimal",
                 "null": 0,
-                        "maxlength": 14,
+                "maxlength": 14,
                 "decimals": 4
             },
             "value": {
                 "type": "text",
                 "null": 0,
-                        "signed": true,
                 "generation": ""
             }
         }
@@ -360,27 +339,24 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "id_task": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "id_note": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "active": {
                 "type": "tinyint",
                 "null": 0,
-                        "default": 1,
+                "default": 1,
                 "maxlength": 1
             }
         }
@@ -446,28 +422,24 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "id_user": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "id_task": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "role": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             }
         }
@@ -533,28 +505,24 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "id_task": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "id_user": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "id_note": {
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
@@ -562,13 +530,11 @@
             "start": {
                 "type": "datetime",
                 "null": 0,
-                        "signed": true,
                 "generation": ""
             },
             "length": {
                 "type": "int",
                 "null": 1,
-                        "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 10
@@ -576,8 +542,7 @@
             "end": {
                 "type": "datetime",
                 "null": 1,
-                        "extra": "VIRTUAL GENERATED",
-                "signed": true,
+                "extra": "VIRTUAL GENERATED",
                 "virtual": true,
                 "generation": "addtime(`start`,sec_to_time(`length`))",
                 "default": "NULL",
@@ -618,14 +583,12 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "id_media": {
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
@@ -633,13 +596,12 @@
             "ref": {
                 "type": "int",
                 "null": 0,
-                        "maxlength": 5
+                "maxlength": 5
             },
             "ref_year": {
                 "type": "year",
                 "null": 1,
-                        "extra": "VIRTUAL GENERATED",
-                "signed": true,
+                "extra": "VIRTUAL GENERATED",
                 "virtual": true,
                 "generation": "year(`creation`)",
                 "default": "NULL",
@@ -649,26 +611,24 @@
             "creation": {
                 "type": "datetime",
                 "null": 0,
-                        "signed": true,
                 "generation": ""
             },
             "description": {
                 "type": "text",
                 "null": 0,
-                        "signed": true,
                 "generation": ""
             },
             "tax": {
                 "type": "int",
                 "null": 1,
-                        "default": "NULL",
+                "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 10
             },
             "taxable": {
                 "type": "decimal",
                 "null": 1,
-                        "default": "NULL",
+                "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 14,
                 "decimals": 2
@@ -676,7 +636,7 @@
             "amount": {
                 "type": "decimal",
                 "null": 1,
-                        "default": "NULL",
+                "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 14,
                 "decimals": 2
