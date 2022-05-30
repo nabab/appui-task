@@ -1,12 +1,11 @@
 <?php
-if (
-  !empty($model->data['ref']) &&
-	!empty($model->data['text']) &&
-	!empty($model->data['id_parent']) &&
-	!empty($model->data['id_alias']) &&
-	($id_type = $model->inc->options->fromCode('task', 'types', 'note', 'appui'))
+
+use bbn\Appui\Note;
+
+if ($model->hasData(['ref', 'text', 'id_parent', 'id_alias'], true) &&
+	($id_type = $model->inc->options->fromCode('tasks', 'types', 'note', 'appui'))
 ){
-	$notes = new \bbn\Appui\Note($model->db);
+	$notes = new Note($model->db);
   if ( $id_note = $notes->insert(
 		$model->data['title'] ?: '',
 		$model->data['text'],
@@ -17,7 +16,7 @@ if (
 		$model->data['id_alias']
 	) ){
     $ok = true;
-    $path = BBN_USER_PATH.'tmp/'.$model->data['ref'].'/';
+    $path = BBN_USER_PATH . 'tmp/'.$model->data['ref'] . '/';
     if ( is_array($model->data['files']) && !empty($model->data['files']) ){
       foreach ($model->data['files'] as $f ){
         if ( is_file($path.$f['name']) &&
@@ -27,6 +26,7 @@ if (
         }
       }
     }
+
     if ( is_array($model->data['links']) && !empty($model->data['links']) ){
       foreach ($model->data['links'] as $l ){
         if ( is_file($path.$l['image']) &&
@@ -45,6 +45,7 @@ if (
         }
       }
     }
+
     if ( $ok ){
       /** @todo To remove this and add an apposite function in grid */
       $model->getModel($model->pluginUrl('appui-ide').'/data_cache', [
