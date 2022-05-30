@@ -1,0 +1,17 @@
+[
+  {
+    "text": "Plugins dashboard",
+    "code": "plugins",
+    "id_option": ["list", "dashboard", "appui"],
+    "items": [
+      {
+        "code": "tasks",
+        "id_option": ["tasks", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      },
+      {
+        "code": "all_tasks",
+        "id_option": ["all_tasks", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      }
+    ]
+  }
+]
