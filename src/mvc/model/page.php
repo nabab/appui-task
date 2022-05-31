@@ -10,8 +10,7 @@ $pm = new \bbn\Appui\Task($model->db);
 $mgr = $model->inc->user->getManager();
 $arch = $model->inc->user->getClassCfg()['arch']['groups'];
 $groups = $mgr->groups();
-\bbn\X::sortBy($groups, $arch['group'], 'ASC');
-return [
+$d = [
   'root' => APPUI_TASKS_ROOT,
   'root_notes' => $model->pluginUrl('appui-note').'/',
   'roles' => \bbn\Appui\Task::getAppuiOptionsIds('roles'),
@@ -35,5 +34,21 @@ return [
     }
     return $a;
   }, $pm->categories(), 1),
-  'media_types' => $model->inc->options->codeOptions(\bbn\Appui\Note::getAppuiOptionId('media'))
+  'media_types' => $model->inc->options->codeOptions(\bbn\Appui\Note::getAppuiOptionId('media')),
+  'dashboard' => [
+    'widgets' => [],
+    'order' => []
+  ]
 ];
+try {
+  $dashboard = new \bbn\Appui\Dashboard('appui-task');
+  if (($widgets = $dashboard->getUserWidgetsCode())) {
+    $d['dashboard']['widgets'] = $widgets;
+    $d['dashboard']['order'] = $dashboard->getOrder($widgets);
+  }
+}
+catch (Exception $e) {
+  return ['error' => $e->getMessage()];
+}
+\bbn\X::sortBy($groups, $arch['group'], 'ASC');
+return $d;

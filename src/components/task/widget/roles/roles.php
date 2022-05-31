@@ -1,4 +1,4 @@
-<div>
+<div class="bbn-padded">
   <div v-if="source.roles.managers.length"
        class="bbn-w-100 bbn-box bbn-bottom-space"
   >
@@ -13,7 +13,7 @@
                    :width="25"
                    font-size="1em"
       ></bbn-initial>
-      <span v-text="main.tasks.userName(r)"
+      <span v-text="userName(r)"
             class="bbn-hsmargin"
       ></span>
     </div>
@@ -32,7 +32,7 @@
                    :width="25"
                    font-size="1em"
       ></bbn-initial>
-      <span v-text="main.tasks.userName(r)"
+      <span v-text="userName(r)"
             class="bbn-hsmargin"
       ></span>
     </div>
@@ -51,7 +51,7 @@
                    :width="25"
                    font-size="1em"
       ></bbn-initial>
-      <span v-text="main.tasks.userName(r)"
+      <span v-text="userName(r)"
             class="bbn-hsmargin"
       ></span>
     </div>

@@ -8,7 +8,6 @@
   return {
       data(){
       return {
-        main: this.closest('appui-task-tab-main'),
         showPriceForm: false,
         deciders: this.source.roles.deciders ? this.source.roles.deciders.slice() : [],
         oldPrice: 0,
@@ -23,13 +22,13 @@
         return '';
       },
       approvedOn(){
-        if ( this.main.isApproved ){
+        if ( this.task.isApproved ){
           return bbn.fn.fdate(this.source.approved.chrono);
         }
         return '';
       },
       approvedBy(){
-        if ( this.main.isApproved ){
+        if ( this.task.isApproved ){
           return bbn.fn.getField(appui.app.users, 'text', 'value', this.source.approved.id_user);
         }
         return '';
@@ -48,11 +47,11 @@
         this.showPriceForm = false;
       },
       saveForm(){
-        if ( this.source.price && this.main.isAdmin && !this.main.isClosed ){
+        if ( this.source.price && this.task.isAdmin && !this.task.isClosed ){
           this.confirm(bbn._('Are you sure you want to save this price?'), () => {
-            this.main.update('price', this.source.price);
-            if ( this.source.state !== this.main.tasks.source.states.unapproved ){
-              this.main.update('state', this.main.tasks.source.states.unapproved);
+            this.task.update('price', this.source.price);
+            if ( this.source.state !== this.states.unapproved ){
+              this.task.update('state', this.states.unapproved);
             }
             this.showPriceForm = false;
             this.$parent.updateButtons();
@@ -60,10 +59,10 @@
         }
       },
       removePrice(){
-        if ( this.main.isAdmin && !this.main.isClosed ){
+        if ( this.task.isAdmin && !this.task.isClosed ){
           this.confirm(bbn._('Are you sure you want to remove the price?'), () => {
-            this.main.update('price', null);
-            this.main.update('state', this.main.tasks.source.states.opened);
+            this.task.update('price', null);
+            this.task.update('state', this.states.opened);
             this.source.price = null;
             this.source.roles.deciders = [];
             this.showPriceForm = false;
@@ -72,7 +71,7 @@
         }
       },
       addDecider(){
-        if ( this.main.canChangeDecider ){
+        if ( this.task.canChangeDecider ){
           this.getPopup().open({
             component: this.$options.components.deciderPicker,
             source: this.source.roles,
@@ -83,7 +82,7 @@
         }
       },
       removeDecider(decider){
-        if ( this.main.canChangeDecider ){
+        if ( this.task.canChangeDecider ){
           this.confirm(bbn._('Are you sure you want to remove this decider?'), () => {
             let idx = this.source.roles.deciders.indexOf(decider);
             if ( idx > -1 ){
@@ -93,14 +92,14 @@
         }
       },
       approve(){
-        if ( this.main.canApprove ){
+        if ( this.task.canApprove ){
           this.confirm(bbn._('Are you sure you want to approve this price?'), () => {
-            this.post(`${this.main.tasks.source.root}actions/task/approve`, {
+            this.post(`${this.root}actions/task/approve`, {
               id_task: this.source.id
             }, d => {
               if ( d.success && d.data.approved ){
                 this.source.approved = d.data.approved;
-                this.main.update('state', this.main.tasks.source.states.opened);
+                this.task.update('state', this.states.opened);
                 appui.success('Price approved');
               }
             });
@@ -144,7 +143,7 @@
     },
     watch: {
       'source.roles.deciders'(newVal){
-        if ( this.main.canChangeDecider ){
+        if ( this.task.canChangeDecider ){
           let added = newVal.filter(a => {
                 return this.deciders.indexOf(a) === -1;
               }),
@@ -152,7 +151,7 @@
                 return newVal.indexOf(d) === -1;
               }),
               deciderAction = (idUser, action) => {
-                this.post(`${this.main.tasks.source.root}actions/role/${action}`, {
+                this.post(`${this.root}actions/role/${action}`, {
                   id_task: this.source.id,
                   role: 'deciders',
                   id_user: idUser

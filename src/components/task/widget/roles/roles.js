@@ -6,11 +6,6 @@
  */
 (() => {
   return {
-    props: ['source'],
-    data(){
-      return {
-        main: this.closest('appui-task-tab-main')
-      }
-    }
+    props: ['source']
   }
 })();

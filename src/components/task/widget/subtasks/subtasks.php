@@ -1,4 +1,4 @@
-<div class="appui-task-widget-tasks bbn-box bbn-flex-width">
+<div class="appui-task-task-widget-subtasks bbn-box bbn-flex-width">
   <div class="bbn-spadded bbn-flex-fill">
     <div class="bbn-grid-fields">
       <label class="bbn-label"><?=_('Title')?></label>

@@ -6,13 +6,9 @@
       }
     },
     computed: {
-      main(){
-        let main = this.closest('appui-task-tab-main');
-        return bbn.fn.isVue(main) ? main : false;
-      },
       state(){
-        if (this.main && bbn.fn.isVue(this.main.tasks)) {
-          return bbn.fn.getField(this.main.tasks.source.options.states, 'text', 'value', this.source.state);
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'text', 'value', this.source.state);
         }
         return '';
       },
@@ -20,10 +16,7 @@
         return dayjs(this.source.creationDate).format('DD/MM/YYYY');
       },
       role(){
-        if (this.main
-          && bbn.fn.isVue(this.main.tasks)
-          && bbn.fn.numProperties(this.source.roles)
-        ) {
+        if (bbn.fn.numProperties(this.source.roles)) {
           let code = false
           bbn.fn.iterate(this.source.roles, (ids, role) => {
             if (ids.includes(appui.app.user.id)) {
@@ -31,7 +24,7 @@
             }
           });
           if (code) {
-            return bbn.fn.getField(this.main.tasks.source.options.roles, 'text', 'code', code) || '';
+            return bbn.fn.getField(this.optionsRoles, 'text', 'code', code) || '';
           }
         }
         return '';

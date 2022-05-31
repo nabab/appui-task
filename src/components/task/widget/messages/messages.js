@@ -7,15 +7,10 @@
 (() => {
   return {
     props: ['source'],
-    data(){
-      return {
-        main: this.closest('appui-task-tab-main')
-      }
-    },
     methods: {
-      minDate(){
-        return dayjs().format('YYYY-MM-DD');
-      }
+      shorten: bbn.fn.shorten,
+      html2text: bbn.fn.html2text,
+      fdate: bbn.fn.fdate
     }
   }
 })();

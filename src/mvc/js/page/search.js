@@ -44,7 +44,7 @@
         }
       },
       openTask(row){
-        bbn.fn.link(this.source.root + 'task/' + (typeof row === 'object' ? row.id : row) + '/main');
+        bbn.fn.link(this.source.root + 'task/' + (typeof row === 'object' ? row.id : row));
       },
       refreshTable(){
         this.$refs.tasksTable.updateData();

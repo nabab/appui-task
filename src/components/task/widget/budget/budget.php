@@ -1,146 +1,122 @@
-<div>
-  <div class="bbn-grid-fields">
-    <label v-if="showPriceForm && main.isAdmin"
+<div class="bbn-padded">
+  <div class="bbn-grid-fields bbn-padded">
+    <label v-if="showPriceForm && task.isAdmin"
            class="bbn-vmiddle"
     ><?=_('Price')?></label>
-    <div v-if="showPriceForm && main.isAdmin"
-         class="bbn-flex-width bbn-vmiddle"
-    >
+    <div v-if="showPriceForm && task.isAdmin"
+         class="bbn-flex-width bbn-vmiddle">
       <bbn-numeric class="bbn-flex-fill"
                    :decimals="2"
                    :min="0"
                    v-model="source.price"
-                   style="margin-right: 5px"
-      ></bbn-numeric>
+                   style="margin-right: 5px"/>
       <bbn-button icon="nf nf-fa-save"
                   :disabled="!source.price || (source.price == oldPrice)"
                   @click="saveForm"
                   title="<?=_('Save')?>"
                   class="bbn-hsmargin"
-                  :notext="true"
-      ></bbn-button>
+                  :notext="true"/>
       <bbn-button icon="nf nf-fa-times"
                   @click="cancelForm"
                   title="<?=_('Cancel')?>"
-                  :notext="true"
-      ></bbn-button>
+                  :notext="true"/>
     </div>
     <div v-if="!showPriceForm && !source.price"
          class="bbn-grid-full bbn-c"><?=_('No price set')?></div>
     <label v-if="!showPriceForm && source.price"
            class="bbn-vmiddle"><?=_('Price')?></label>
     <div v-if="!showPriceForm && source.price"
-         class="bbn-flex-width bbn-vmiddle"
-    >
+         class="bbn-flex-width bbn-vmiddle">
       <div class="bbn-flex-fill"
-           v-text="price"
-      ></div>
-      <bbn-button v-if="main.isAdmin && !main.isClosed"
+           v-text="price"/>
+      <bbn-button v-if="task.isAdmin && !task.isClosed"
                   icon="nf nf-fa-edit"
                   title="<?=_('Edit price')?>"
                   @click="showPriceForm = true"
-                  :notext="true"
-      ></bbn-button>
-      <bbn-button v-if="main.isAdmin && !main.isClosed"
+                  :notext="true"/>
+      <bbn-button v-if="task.isAdmin && !task.isClosed"
                   icon="nf nf-fa-trash"
                   title="<?=_('Remove price')?>"
                   @click="removePrice"
-                  :notext="true"
-      ></bbn-button>
-      <bbn-button v-if="main.canApprove && !main.isApproved"
+                  :notext="true"/>
+      <bbn-button v-if="task.canApprove && !task.isApproved"
                   icon="nf nf-fa-thumbs_up"
                   @click="approve"
                   title="<?=_('Approve price')?>"
-                  :notext="true"
-      ></bbn-button>
+                  :notext="true"/>
     </div>
     <label v-if="source.price"><?=_('Status')?></label>
-    <div v-if="main.isApproved && source.price"
-         class="bbn-green"
-    ><?=_('Approved')?></div>
-    <div v-else-if="!main.isApproved && source.price" class="bbn-orange"><?=_('Unapproved')?></div>
-    <label v-if="main.isApproved"><?=_('Approved on')?></label>
-    <div v-if="main.isApproved"
-         v-text="approvedOn"
-    ></div>
-    <label v-if="main.isApproved"><?=_('Approved by')?></label>
-    <div v-if="main.isApproved"
-         class="bbn-vmiddle"
-    >
+    <div v-if="task.isApproved && source.price"
+         class="bbn-green"><?=_('Approved')?></div>
+    <div v-else-if="!task.isApproved && source.price" class="bbn-orange"><?=_('Unapproved')?></div>
+    <label v-if="task.isApproved"><?=_('Approved on')?></label>
+    <div v-if="task.isApproved"
+         v-text="approvedOn"/>
+    <label v-if="task.isApproved"><?=_('Approved by')?></label>
+    <div v-if="task.isApproved"
+         class="bbn-vmiddle">
       <bbn-initial :user-id="source.approved.id_user"
                    :height="25"
                    :width="25"
                    title="approvedBy"
-                   font-size="1em"
-      ></bbn-initial>
+                   font-size="1em"/>
       <span v-text="approvedBy"
-            style="margin-left: 0.5rem"
-      ></span>
+            style="margin-left: 0.5rem"/>
     </div>
   </div>
   <div v-if="source.price"
        class="bbn-box"
-       style="margin-top: 10px"
-  >
+       style="margin-top: 10px">
     <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded">
       <div class="bbn-vmiddle bbn-flex-width">
-        <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-gavel bbn-hsmargin"></i><?=_('Deciders')?></span>
+        <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-gavel bbn-hsmargin"/><?=_('Deciders')?></span>
         <i class="nf nf-fa-plus bbn-p bbn-hsmargin"
           @click="addDecider"
-          v-if="main.canChangeDecider && !main.isApproved"
-        ></i>
+          v-if="task.canChangeDecider && !task.isApproved"/>
       </div>
     </div>
     <div class="bbn-hspadded">
       <div v-for="decider in source.roles.deciders"
-           class="bbn-flex-width bbn-vmiddle bbn-vsmargin"
-      >
+           class="bbn-flex-width bbn-vmiddle bbn-vsmargin">
         <bbn-initial :user-id="decider"
                      :height="25"
                      :width="25"
-                     font-size="1em"
-        ></bbn-initial>
+                     font-size="1em"/>
         <span v-text="getUserName(decider)"
-              class="bbn-flex-fill bbn-hsmargin"
-        ></span>
+              class="bbn-flex-fill bbn-hsmargin"/>
         <i class="nf nf-fa-trash bbn-p bbn-red"
-           v-if="main.canChangeDecider && (main.userId !== decider) && !main.isApproved"
+           v-if="task.canChangeDecider && (task.userId !== decider) && !task.isApproved"
            @click="removeDecider(decider)"
-           title="<?=_('Remove decider')?>"
-        ></i>
+           title="<?=_('Remove decider')?>"/>
       </div>
     </div>
   </div>
-  <div v-if="main.canBill"
+  <div v-if="task.canBill"
        class="bbn-box"
-       style="margin-top: 10px"
-  >
+       style="margin-top: 10px">
     <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded">
       <div class="bbn-vmiddle bbn-flex-width">
         <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-file_invoice bbn-hsmargin"></i><?=_('Invoice')?></span>
         <i class="nf nf-fa-plus bbn-p bbn-hsmargin"
-          @click="makeInvoice"
-          v-if="!main.hasInvoice"
-        ></i>
-        <i v-if="main.hasInvoice && source.invoice.id_media"
+           @click="makeInvoice"
+           v-if="!task.hasInvoice"/>
+        <i v-if="task.hasInvoice && source.invoice.id_media"
           class="nf nf-fa-file_pdf_o bbn-p bbn-hsmargin"
-          @click="getInvoicePDF"
-        ></i>
+          @click="getInvoicePDF"/>
       </div>
     </div>
-    <div v-if="main.hasInvoice"
-         class="bbn-spadded bbn-grid-fields"
-    >
+    <div v-if="task.hasInvoice"
+         class="bbn-spadded bbn-grid-fields">
       <label><?=_('Ref')?></label>
-      <div v-text="getInvoiceRef()"></div>
+      <div v-text="getInvoiceRef()"/>
       <label><?=_('Date')?></label>
-      <div v-text="getInvoiceDate()"></div>
+      <div v-text="getInvoiceDate()"/>
       <label><?=_('Taxable')?></label>
-      <div v-text="money(source.invoice.taxable)"></div>
+      <div v-text="money(source.invoice.taxable)"/>
       <label><?=_('Tax')?></label>
-      <div v-text="getInvoiceTax()"></div>
+      <div v-text="getInvoiceTax()"/>
       <label><?=_('Amount')?></label>
-      <div v-text="money(source.invoice.amount)"></div>
+      <div v-text="money(source.invoice.amount)"/>
     </div>
   </div>
 </div>

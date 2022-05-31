@@ -9,7 +9,6 @@
     props: ['source'],
     data(){
       return {
-        main: this.closest('appui-task-tab-main'),
         interval: false,
         progress: false
       }
@@ -29,7 +28,7 @@
           totUser = this.trackerComp.secToTime(bbn.fn.isNumber(totUser) ? totUser : 0, true);
           return {
             idUser: w,
-            userName: this.main.tasks.userName(w),
+            userName: this.userName(w),
             summary: totUser
           }
         });
@@ -38,7 +37,7 @@
           totUser = this.trackerComp.secToTime(bbn.fn.isNumber(totUser) ? totUser : 0, true);
           return {
             idUser: w,
-            userName: this.main.tasks.userName(w),
+            userName: this.userName(w),
             summary: totUser
           }
         }));
@@ -55,8 +54,8 @@
       start(){
         if (
           !this.source.tracker &&
-          this.main.isOngoing &&
-          (this.main.isWorker || this.main.isManager) &&
+          this.task.isOngoing &&
+          (this.task.isWorker || this.task.isManager) &&
           this.trackerComp
         ){
           this.trackerComp.start(this.source.id);
