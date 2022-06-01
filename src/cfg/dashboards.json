@@ -12,5 +12,39 @@
         "id_option": ["all_tasks", "widgets", "appui-dashboard", "plugins", "task", "appui"]
       }
     ]
+  },
+  {
+    "text": "Task",
+    "code": "appui-task",
+    "items": [
+      {
+        "code": "info",
+        "id_option": ["info", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      },
+      {
+        "code": "actions",
+        "id_option": ["actions", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      },
+      {
+        "code": "budget",
+        "id_option": ["budget", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      },
+      {
+        "code": "roles",
+        "id_option": ["roles", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      },
+      {
+        "code": "tracker",
+        "id_option": ["tracker", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      },
+      {
+        "code": "subtasks",
+        "id_option": ["subtasks", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      },
+      {
+        "code": "messages",
+        "id_option": ["messages", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      }
+    ]
   }
 ]

@@ -212,18 +212,67 @@
               "icon": "nf nf-mdi-widgets",
               "items": [
                 {
-                  "text": "My current bugs",
-                  "code": "tasks",
-                  "itemComponent": "appui-task-widget-task",
-                  "limit":5
+                  "text": "Actions",
+                  "code": "actions",
+                  "closable": false,
+                  "component": "appui-task-task-widget-actions",
+                  "icon": "nf nf-mdi-play_pause"
+                },
+                {
+                  "text": "Budget",
+                  "code": "budget",
+                  "closable": true,
+                  "component": "appui-task-task-widget-budget",
+                  "icon": "nf nf-fa-money"
                 },
                 {
                   "text": "Last Bugs",
                   "code": "all_tasks",
-                  "limit":5,
-                  "observe":false,
-                  "closable":true,
+                  "limit": 5,
+                  "closable": true,
                   "itemComponent": "appui-task-widget-task"
+                },
+                {
+                  "text": "Info",
+                  "code": "info",
+                  "closable": false,
+                  "component": "appui-task-task-widget-info",
+                  "icon": "nf nf-fa-info bbn-s"
+                },
+                {
+                  "text": "Messages",
+                  "code": "messages",
+                  "closable": true,
+                  "component": "appui-task-task-widget-messages",
+                  "icon": "nf nf-fa-comments"
+                },
+                {
+                  "text": "My current bugs",
+                  "code": "tasks",
+                  "itemComponent": "appui-task-widget-task",
+                  "limit": 5
+                },
+                {
+                  "text": "Roles",
+                  "code": "roles",
+                  "closable": true,
+                  "component": "appui-task-task-widget-roles",
+                  "icon": "nf nf-fa-users"
+                },
+                {
+                  "text": "Sub-Tasks",
+                  "code": "subtasks",
+                  "closable": true,
+                  "itemComponent": "appui-task-task-subtasks",
+                  "limit": 10,
+                  "icon": "nf nf-oct-tasklist"
+                },
+                {
+                  "text": "Tracker",
+                  "code": "tracker",
+                  "closable": true,
+                  "component": "appui-task-task-widget-tracker",
+                  "icon": "nf nf-fa-hourglass_half"
                 }
               ]
             }

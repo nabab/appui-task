@@ -105,35 +105,42 @@
         commentTitle: '',
         commentLinks: [],
         showCommentAdder: false,
-        //categories: this.mainPage.fullCategories,
         userId: appui.app.user.id,
-        isAdmin: appui.app.user.isAdmin,
-        /*mediaFileType: this.mainPage.source.media_types
-          && this.mainPage.source.media_types.file ?
-            this.mainPage.source.media_types.file.id :
-            '',
-        mediaLinkType: this.mainPage.source.media_types
-          && this.mainPage.source.media_types.link ?
-            this.mainPage.source.media_types.link.id :
-            ''*/
+        isAdmin: appui.app.user.isAdmin
       }
     },
     computed: {
       dashboard(){
         return this.mainPage.source.dashboard;
       },
-      currentConfig(){
-        return {};
+      currentConfig: {
+        get(){
+          let cfg = {}
+          if (this.source.cfg && bbn.fn.isString(this.source.cfg)) {
+            let c = JSON.parse(this.source.cfg);
+            cfg = c.widgets || {};
+          }
+          return cfg;
+        },
+        set(widgets){
+          let cfg = {}
+          if (this.source.cfg) {
+            if (bbn.fn.isString(this.source.cfg)) {
+              cfg = bbn.fn.isString(this.source.cfg) ? JSON.parse(this.source.cfg) : bbn.fn.extend(true, {},this.source.cfg);
+            }
+          }
+          cfg.widgets = widgets;
+          this.$set(this.source, 'cfg', JSON.stringify(cfg));
+        }
       },
       widgetsAvailable(){
         return bbn.fn.order(bbn.fn.filter(Object.values(this.dashboard.widgets), w => {
-          bbn.fn.log('asdasdsa', w.code);
+
           if (w.code === 'budget') {
             return (this.isAdmin || this.isDecider)
               && ((this.isClosed && this.source.price) || !this.isClosed)
           }
-          if ((w.code === 'info') || (w.code === 'actions')) {
-            bbn.fn.log('yesssss');
+          if ((w.code === 'info') || (w.code === 'actions') || (w.code === 'messages')) {
             return false;
           }
           return !this.currentConfig[w.code];
@@ -546,6 +553,13 @@
           action: this.addTask
         }] : [];
       },
+      closeButton(){
+        return this.canChange ? [{
+          text: bbn._('Close'),
+          icon: 'nf nf-fa-close',
+          action: this.removeWidgetFromTask
+        }] : [];
+      },
       addTask(){
         if (this.canChange && !!this.source.id) {
           this.getPopup().open({
@@ -576,8 +590,33 @@
       addTodo(){
         
       },
-      addToTask(code){
-
+      addWidgetToTask(code){
+        this.post(this.root + 'actions/widget/add', {
+          id: this.source.id,
+          code: code
+        }, d => {
+          if (d.success) {
+            this.currentConfig = bbn.fn.extend(true, {}, this.currentConfig, {[code]: 1});
+            this.getRef('dashboard').showWidget(code);
+          }
+          else {
+            appui.error();
+          }
+        })
+      },
+      removeWidgetFromTask(widget){
+        this.post(this.root + 'actions/widget/remove', {
+          id: this.source.id,
+          code: widget.uid
+        }, d => {
+          if (d.success) {
+            this.currentConfig = bbn.fn.extend(true, {}, this.currentConfig, {[widget.uid]: 0});
+            widget.close();
+          }
+          else {
+            appui.error();
+          }
+        })
       }
     },
     created(){
