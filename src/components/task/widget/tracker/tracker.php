@@ -1,4 +1,4 @@
-<div class="bbn-padded">
+<div class="appui-task-task-widget-tracker">
   <div v-if="task.isOngoing && (task.isWorker || task.isManager)"
        class="bbn-w-100 bbn-box bbn-bottom-space">
     <div class="bbn-header bbn-b bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded"><?=_('CURRENT SESSION')?></div>

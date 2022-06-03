@@ -1,4 +1,4 @@
-<div class="bbn-padded">
+<div class="appui-task-task-widget-budget">
   <div class="bbn-grid-fields bbn-padded">
     <label v-if="showPriceForm && task.isAdmin"
            class="bbn-vmiddle"
@@ -39,32 +39,28 @@
                   title="<?=_('Remove price')?>"
                   @click="removePrice"
                   :notext="true"/>
-      <bbn-button v-if="task.canApprove && !task.isApproved"
-                  icon="nf nf-fa-thumbs_up"
-                  @click="approve"
-                  title="<?=_('Approve price')?>"
-                  :notext="true"/>
     </div>
-    <label v-if="source.price"><?=_('Status')?></label>
-    <div v-if="task.isApproved && source.price"
-         class="bbn-green"><?=_('Approved')?></div>
-    <div v-else-if="!task.isApproved && source.price" class="bbn-orange"><?=_('Unapproved')?></div>
-    <label v-if="task.isApproved"><?=_('Approved on')?></label>
-    <div v-if="task.isApproved"
-         v-text="approvedOn"/>
-    <label v-if="task.isApproved"><?=_('Approved by')?></label>
-    <div v-if="task.isApproved"
-         class="bbn-vmiddle">
-      <bbn-initial :user-id="source.approved.id_user"
-                   :height="25"
-                   :width="25"
-                   title="approvedBy"
-                   font-size="1em"/>
-      <span v-text="approvedBy"
-            style="margin-left: 0.5rem"/>
-    </div>
+    <template v-if="source.price && ((source.state === states.unapproved) || (source.state === states.approved))">
+      <label><?=_('Status')?></label>
+      <template v-if="task.isApproved">
+        <div class="bbn-green"><?=_('Approved')?></div>
+        <label><?=_('Approved on')?></label>
+        <div v-text="approvedOn"/>
+        <label><?=_('Approved by')?></label>
+        <div class="bbn-vmiddle">
+          <bbn-initial :user-id="source.approved.id_user"
+                       :height="25"
+                       :width="25"
+                       title="approvedBy"
+                       font-size="1em"/>
+          <span v-text="approvedBy"
+                style="margin-left: 0.5rem"/>
+        </div>
+      </template>
+      <div v-else class="bbn-orange"><?=_('Unapproved')?></div>
+    </template>
   </div>
-  <div v-if="source.price"
+  <div v-if="source.price && ((source.state === states.unapproved) || (source.state === states.approved))"
        class="bbn-box"
        style="margin-top: 10px">
     <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded">
@@ -88,6 +84,10 @@
            v-if="task.canChangeDecider && (task.userId !== decider) && !task.isApproved"
            @click="removeDecider(decider)"
            title="<?=_('Remove decider')?>"/>
+      </div>
+      <div v-if="!source.roles.deciders.length"
+           class="bbn-middle bbn-spadded">
+        <?=_('Not set')?>
       </div>
     </div>
   </div>

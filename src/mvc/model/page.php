@@ -5,22 +5,32 @@
  **/
 
 /** @var $model \bbn\Mvc\Model*/
+
+use \bbn\Appui\Task;
+use \bbn\Appui\Note;
+use \bbn\Appui\Dashboard;
+use \bbn\X;
+
 $s =& $model->inc->session;
-$pm = new \bbn\Appui\Task($model->db);
+$pm = new Task($model->db);
 $mgr = $model->inc->user->getManager();
 $arch = $model->inc->user->getClassCfg()['arch']['groups'];
 $groups = $mgr->groups();
 $d = [
   'root' => APPUI_TASKS_ROOT,
   'root_notes' => $model->pluginUrl('appui-note').'/',
-  'roles' => \bbn\Appui\Task::getAppuiOptionsIds('roles'),
-  'states' => \bbn\Appui\Task::getAppuiOptionsIds('states'),
+  'roles' => Task::getAppuiOptionsIds('roles'),
+  'states' => Task::getAppuiOptionsIds('states'),
   'options' => [
-    'states' => \bbn\Appui\Task::getAppuiOptionsTextValue('states'),
-    'roles' => \bbn\Appui\Task::getAppuiOptionsTextValue('roles'),
-    'cats' => \bbn\Appui\Task::catCorrespondances()
+    'states' => array_map(function($s){
+      return X::mergeArrays($s, Task::getOptionsObject()->getValue($s['value']) ?: []);
+    }, Task::getAppuiOptionsTextValue('states')),
+    'roles' => array_map(function($r){
+      return X::mergeArrays($r, Task::getOptionsObject()->getValue($r['value']) ?: []);
+    }, Task::getAppuiOptionsTextValue('roles')),
+    'cats' => Task::catCorrespondances()
   ],
-  'categories' => \bbn\Appui\Task::getOptionsTree('cats'),
+  'categories' => Task::getOptionsTree('cats'),
   'usergroup' => $model->inc->user->getGroup(),
   'groups' => array_map(function($g) use($arch){
     $g['text'] = $g[$arch['group']];
@@ -34,14 +44,15 @@ $d = [
     }
     return $a;
   }, $pm->categories(), 1),
-  'media_types' => $model->inc->options->codeOptions(\bbn\Appui\Note::getAppuiOptionId('media')),
+  'media_types' => $model->inc->options->codeOptions(Note::getAppuiOptionId('media')),
   'dashboard' => [
     'widgets' => [],
     'order' => []
   ]
 ];
+
 try {
-  $dashboard = new \bbn\Appui\Dashboard('appui-task');
+  $dashboard = new Dashboard('appui-task');
   if (($widgets = $dashboard->getUserWidgetsCode())) {
     $d['dashboard']['widgets'] = $widgets;
     $d['dashboard']['order'] = $dashboard->getOrder($widgets);
@@ -50,5 +61,5 @@ try {
 catch (Exception $e) {
   return ['error' => $e->getMessage()];
 }
-\bbn\X::sortBy($groups, $arch['group'], 'ASC');
+X::sortBy($groups, $arch['group'], 'ASC');
 return $d;

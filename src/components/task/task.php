@@ -11,14 +11,16 @@
                  :uid="dashboard.widgets.info.code"
                  :closable="dashboard.widgets.info.closable"
                  :source="source"
-                 :showable="false"/>
+                 :showable="false"
+                 :padding="true"/>
     <bbns-widget :title="dashboard.widgets.actions.text"
                  :icon="dashboard.widgets.actions.icon"
                  :component="dashboard.widgets.actions.component"
                  :uid="dashboard.widgets.actions.code"
                  :closable="dashboard.widgets.actions.closable"
                  :source="source"
-                 :showable="false"/>
+                 :showable="false"
+                 :padding="true"/>
     <bbns-widget v-if="(isAdmin || isDecider) && ((isClosed && source.price) || !isClosed)"
                  :hidden="!currentConfig.budget"
                  :title="dashboard.widgets.budget.text"
@@ -29,7 +31,8 @@
                  :source="source"
                  :showable="false"
 								 :buttonsRight="budgetButtons"
-                 :buttonsLeft="closeButton"/>
+                 :buttonsLeft="closeButton"
+                 :padding="true"/>
 	  <bbns-widget :hidden="!currentConfig.roles"
                  :title="dashboard.widgets.roles.text"
                  :icon="dashboard.widgets.roles.icon"
@@ -38,7 +41,8 @@
                  :closable="dashboard.widgets.roles.closable"
                  :source="source"
                  :showable="false"
-                 :buttonsLeft="closeButton"/>
+                 :buttonsLeft="closeButton"
+                 :padding="true"/>
 	  <bbns-widget :hidden="!currentConfig.tracker"
                  :title="dashboard.widgets.tracker.text"
                  :icon="dashboard.widgets.tracker.icon"
@@ -47,7 +51,8 @@
                  :closable="dashboard.widgets.tracker.closable"
                  :source="source"
                  :showable="false"
-                 :buttonsLeft="closeButton"/>
+                 :buttonsLeft="closeButton"
+                 :padding="true"/>
 	  <!--<bbns-widget v-if="hasComments"
                  :title="dashboard.widgets.messages.text"
                  :icon="dashboard.widgets.messages.icon"
@@ -82,7 +87,7 @@
   </bbn-pane>
   <bbn-pane :size="200"
             :scrollable="false"
-            v-if="!!widgetsAvailable && widgetsAvailable.length">
+            v-if="!!widgetsAvailable && widgetsAvailable.length && !!canChange">
     <div class="bbn-flex-height bbn-alt-background bbn-bordered-left">
       <div class="bbn-spadded bbn-header bbn-c bbn-b bbn-no-border"><?=_('Add to task')?></div>
       <div class="bbn-flex-fill">

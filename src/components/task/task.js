@@ -50,6 +50,36 @@
       },
       userFull(id){
         return this.mainPage.userFull(id);
+      },
+      getRoleColor(code){
+        if (this.optionsRoles) {
+          return bbn.fn.getField(this.optionsRoles, 'color', {code: code});
+        }
+        return '';
+      },
+      getRoleBgColor(code){
+        if (this.optionsRoles) {
+          return bbn.fn.getField(this.optionsRoles, 'backgroundColor', {code: code});
+        }
+        return '';
+      },
+      getStatusColor(code){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'color', {code: code});
+        }
+        return '';
+      },
+      getStatusBgColor(code){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'backgroundColor', {code: code});
+        }
+        return '';
+      },
+      getStatusCode(idStatus){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'code', {value: idStatus});
+        }
+        return '';
       }
     },
     created(){
@@ -113,12 +143,22 @@
       dashboard(){
         return this.mainPage.source.dashboard;
       },
+      hasConfig(){
+        if (this.source.cfg && bbn.fn.isString(this.source.cfg)) {
+          let c = JSON.parse(this.source.cfg);
+          return !!c.widgets;
+        }
+        return false;
+      },
       currentConfig: {
         get(){
           let cfg = {}
-          if (this.source.cfg && bbn.fn.isString(this.source.cfg)) {
+          if (this.hasConfig) {
             let c = JSON.parse(this.source.cfg);
-            cfg = c.widgets || {};
+            cfg = c.widgets;
+          }
+          else {
+            bbn.fn.each(Object.keys(this.dashboard.widgets), code => cfg[code] = 1);
           }
           return cfg;
         },
@@ -135,10 +175,10 @@
       },
       widgetsAvailable(){
         return bbn.fn.order(bbn.fn.filter(Object.values(this.dashboard.widgets), w => {
-
           if (w.code === 'budget') {
             return (this.isAdmin || this.isDecider)
               && ((this.isClosed && this.source.price) || !this.isClosed)
+              && !this.currentConfig[w.code]
           }
           if ((w.code === 'info') || (w.code === 'actions') || (w.code === 'messages')) {
             return false;
@@ -535,8 +575,8 @@
         return false;
       },
       addBudget() {
-        if ( this.isAdmin ){
-          this.find('appui-task-widget-budget').showPriceForm = true;
+        if (this.isAdmin) {
+          this.find('appui-task-task-widget-budget').showPriceForm = true;
         }
       },
       budgetButtons(){
@@ -617,6 +657,21 @@
             appui.error();
           }
         })
+      },
+      approve(){
+        if (this.canApprove) {
+          this.confirm(bbn._('Are you sure you want to approve this price?'), () => {
+            this.post(`${this.root}actions/task/approve`, {
+              id_task: this.source.id
+            }, d => {
+              if (d.success && d.data.approved) {
+                this.source.approved = d.data.approved;
+                this.update('state', this.states.opened);
+                appui.success(bbn._('Price approved'));
+              }
+            });
+          });
+        }
       }
     },
     created(){

@@ -91,21 +91,6 @@
           });
         }
       },
-      approve(){
-        if ( this.task.canApprove ){
-          this.confirm(bbn._('Are you sure you want to approve this price?'), () => {
-            this.post(`${this.root}actions/task/approve`, {
-              id_task: this.source.id
-            }, d => {
-              if ( d.success && d.data.approved ){
-                this.source.approved = d.data.approved;
-                this.task.update('state', this.states.opened);
-                appui.success('Price approved');
-              }
-            });
-          });
-        }
-      },
       makeInvoice(){
         this.getPopup().open({
           title: bbn._('Invoice creation'),
@@ -191,8 +176,7 @@
                             class="bbn-h-100"
                             v-model="source.deciders"
                             :as-array="true"
-                            :self-excluded="true"
-    ></appui-usergroup-picker>
+                            :self-excluded="true"/>
   </div>
 </bbn-form>
         `

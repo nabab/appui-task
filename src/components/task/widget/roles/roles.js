@@ -6,6 +6,14 @@
  */
 (() => {
   return {
-    props: ['source']
+    props: ['source'],
+    methods: {
+      addRole(code){
+
+      },
+      removeRole(user, group){
+        
+      }
+    }
   }
 })();

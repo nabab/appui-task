@@ -142,19 +142,27 @@
       "items": [
         {
           "text": "Deciders",
-          "code": "deciders"
+          "code": "deciders",
+          "backgroundColor": "teal",
+          "color": "white"
         },
         {
           "text": "Managers",
-          "code": "managers"
+          "code": "managers",
+          "backgroundColor": "coral",
+          "color": "white"
         },
         {
           "text": "Viewers",
-          "code": "viewers"
+          "code": "viewers",
+          "backgroundColor": "wheat",
+          "color": "white"
         },
         {
           "text": "Workers",
-          "code": "workers"
+          "code": "workers",
+          "backgroundColor": "darkseagreen",
+          "color": "white"
         }
       ]
     },
@@ -164,31 +172,45 @@
       "items": [
         {
           "text": "Approved",
-          "code": "approved"
+          "code": "approved",
+          "backgroundColor": "darkseagreen",
+          "color": "white"
         },
         {
           "text": "Closed",
-          "code": "closed"
+          "code": "closed",
+          "backgroundColor": "green",
+          "color": "white"
         },
         {
           "text": "On hold",
-          "code": "holding"
+          "code": "holding",
+          "backgroundColor": "orange",
+          "color": "white"
         },
         {
           "text": "Ongoing",
-          "code": "ongoing"
+          "code": "ongoing",
+          "backgroundColor": "dodgerblue",
+          "color": "white"
         },
         {
           "text": "Opened",
-          "code": "opened"
+          "code": "opened",
+          "backgroundColor": "darkgray",
+          "color": "white"
         },
         {
           "text": "Postponed",
-          "code": "postponed"
+          "code": "postponed",
+          "backgroundColor": "salmon",
+          "color": "white"
         },
         {
           "text": "Unapproved",
-          "code": "unapproved"
+          "code": "unapproved",
+          "backgroundColor": "orangered",
+          "color": "white"
         }
       ]
     },
