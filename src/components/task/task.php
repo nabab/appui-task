@@ -52,6 +52,7 @@
                  :source="source"
                  :showable="false"
                  :buttonsLeft="closeButton"
+                 :buttonsRight="trackerButtons"
                  :padding="true"/>
 	  <!--<bbns-widget v-if="hasComments"
                  :title="dashboard.widgets.messages.text"
@@ -95,7 +96,7 @@
           <div class="bbn-padded">
             <div v-for="(w, i) in widgetsAvailable"
                  @click="addWidgetToTask(w.code)"
-                 :class="['bbn-spadded', 'bbn-c', 'bbn-background', 'bbn-m', 'bbn-p', {
+                 :class="['bbn-spadded', 'bbn-c', 'bbn-background', 'bbn-m', 'bbn-p', 'bbn-radius', {
                    'bbn-bottom-space': !!widgetsAvailable[i+1]
                  }]">
               <i :class="w.icon"/>

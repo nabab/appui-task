@@ -152,6 +152,9 @@
         }
       }
     },
+    created(){
+      appui.register('appui-task-tracker', this);
+    },
     mounted(){
       this.refreshList();
     },

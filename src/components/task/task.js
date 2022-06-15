@@ -586,6 +586,13 @@
           action: this.addBudget
         }] : [];
       },
+      trackerButtons(){
+        return [{
+          text: bbn._('See tracker detail'),
+          icon: 'nf nf-mdi-chart_timeline',
+          action: this.operTrackerDetail
+        }];
+      },
       tasksButtons(){
         return this.canChange ? [{
           text: bbn._('Add task'),
@@ -620,16 +627,6 @@
           bbn.fn.link(this.root + 'page/task/' + task);
         }
       },
-      todoButtons(){
-        return this.canChange ? [{
-          text: bbn._('Add'),
-          icon: 'nf nf-fa-plus',
-          action: this.addTodo
-        }] : [];
-      },
-      addTodo(){
-        
-      },
       addWidgetToTask(code){
         this.post(this.root + 'actions/widget/add', {
           id: this.source.id,
@@ -656,6 +653,15 @@
           else {
             appui.error();
           }
+        })
+      },
+      operTrackerDetail(){
+        this.getPopup({
+          title: bbn._('Tracker detail'),
+          component: 'appui-task-task-widget-tracker-detail',
+          source: this.source,
+          width: '90%',
+          height: '90%'
         })
       },
       approve(){
