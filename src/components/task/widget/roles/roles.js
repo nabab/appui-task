@@ -6,7 +6,37 @@
  */
 (() => {
   return {
-    props: ['source'],
+    props: {
+      source: {
+        type: Object
+      }
+    },
+    computed: {
+      managers(){
+        return bbn.fn.order(bbn.fn.map(this.source.roles.managers.slice(), u => {
+          return {
+            idUser: u,
+            userName: this.userName(u)
+          }
+        }), 'userName');
+      },
+      workers(){
+        return bbn.fn.order(bbn.fn.map(this.source.roles.workers.slice(), u => {
+          return {
+            idUser: u,
+            userName: this.userName(u)
+          }
+        }), 'userName');
+      },
+      viewers(){
+        return bbn.fn.order(bbn.fn.map(this.source.roles.viewers.slice(), u => {
+          return {
+            idUser: u,
+            userName: this.userName(u)
+          }
+        }), 'userName');
+      }
+    },
     methods: {
       addRole(role){
         if (this.task.canChange && !!role) {

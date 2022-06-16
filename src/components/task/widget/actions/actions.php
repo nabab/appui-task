@@ -123,6 +123,24 @@
     </div>
   </div>
   <div class="bbn-box bbn-iflex bbn-bottom-sspace"
+       v-if="showTracker">
+    <div class="bbn-b bbn-c bbn-spadded bbn-vmiddle"><?=_('Tracker')?></div>
+    <div class="bbn-c bbn-spadded bbn-vmiddle">
+      <bbn-button v-if="source.tracker"
+                  @click="task.stopTracker"
+                  :title="_('Stop tracker')"
+                  icon="nf nf-mdi-timer_off"
+                  class="bbn-bg-red bbn-white"
+                  :notext="true"/>
+      <bbn-button v-else
+                  @click="task.startTracker"
+                  :title="_('Start tracker')"
+                  icon="nf nf-mdi-timer"
+                  class="bbn-bg-green bbn-white"
+                  :notext="true"/>
+    </div>
+  </div>
+  <div class="bbn-box bbn-iflex bbn-bottom-sspace"
        v-if="showOther">
     <div class="bbn-b bbn-c bbn-spadded bbn-vmiddle"><?=_('Other')?></div>
     <div class="bbn-c bbn-spadded">

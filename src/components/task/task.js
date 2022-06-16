@@ -33,6 +33,10 @@
       },
       optionsRoles(){
         return this.mainPage.source.options.roles;
+      },
+      trackerComp(){
+        let a = appui;
+        return a.getRegistered('appui-task-tracker');
       }
     },
     methods: {
@@ -80,6 +84,19 @@
           return bbn.fn.getField(this.optionsStates, 'code', {value: idStatus});
         }
         return '';
+      },
+      secToTime(seconds, cut){
+        let h = Math.floor(seconds / 3600),
+            m,
+            s;
+
+        seconds %= 3600;
+        m = Math.floor(seconds / 60);
+        s = seconds % 60;
+        h = (h < 10) ? '0' + h : h;
+        m = (m < 10) ? '0' + m : m;
+        s = (s < 10) ? '0' + s : s;
+        return h + ':' + m + (cut ? '' : ':'+ s);
       }
     },
     created(){
@@ -678,6 +695,18 @@
             });
           });
         }
+      },
+      startTracker(){
+        if (!this.source.tracker
+          && this.isOngoing
+          && (this.isWorker || this.isManager)
+          && this.trackerComp
+        ){
+          this.trackerComp.start(this.source.id);
+        }
+      },
+      stopTracker(){
+        this.trackerComp.stop();
       }
     },
     created(){

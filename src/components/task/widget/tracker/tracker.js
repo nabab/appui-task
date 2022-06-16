@@ -6,92 +6,88 @@
  */
 (() => {
   return {
-    props: ['source'],
+    props: {
+      source: {
+        type: Object
+      }
+    },
     data(){
       return {
-        interval: false,
-        progress: false
+        progress: false,
+        currentUserID: appui.app.user.id
       }
     },
     computed: {
       summary(){
-        let trackers = [],
-            ret = [];
-        if ( Array.isArray(this.source.trackers) ){
-          trackers = this.source.trackers.filter(t => {
-            return (this.source.roles.workers.indexOf(t.id_user) > -1) ||
-              (this.source.roles.managers.indexOf(t.id_user) > -1);
-          });
-        }
-        ret = this.source.roles.workers.map(w => {
-          let totUser = bbn.fn.getField(trackers, 'total_time', 'id_user', w);
-          totUser = this.trackerComp.secToTime(bbn.fn.isNumber(totUser) ? totUser : 0, true);
-          return {
-            idUser: w,
-            userName: this.userName(w),
-            summary: totUser
+        let roles = this.source.roles.managers.concat(this.source.roles.workers);
+        let res = bbn.fn.map(
+          bbn.fn.extend(true, [], bbn.fn.isArray(this.source.trackers) ? this.source.trackers : []),
+          t => {
+            let time = bbn.fn.isNumber(t.total_time) ? t.total_time : 0;
+            if (!!this.progress && (t.id_user === appui.app.user.id)) {
+              time += this.getProgress();
+            }
+            return {
+              idUser: t.id_user,
+              userName: this.userName(t.id_user),
+              total: this.secToTime(time, true),
+              notes: t.num_notes
+            }
+          }
+        );
+        bbn.fn.each(roles, r => {
+          if (!bbn.fn.getRow(res, 'idUser', r)) {
+            let time = 0;
+            if (!!this.progress && (r === appui.app.user.id)) {
+              time += this.getProgress();
+            }
+            res.push({
+              idUser: r,
+              userName: this.userName(r),
+              total: this.secToTime(time, true),
+              notes: 0
+            });
           }
         });
-        ret = ret.concat(this.source.roles.managers.map(w => {
-          let totUser = bbn.fn.getField(trackers, 'total_time', 'id_user', w);
-          totUser = this.trackerComp.secToTime(bbn.fn.isNumber(totUser) ? totUser : 0, true);
-          return {
-            idUser: w,
-            userName: this.userName(w),
-            summary: totUser
-          }
-        }));
-        ret = ret.filter((obj, pos, arr) => {
-          return arr.map(mapObj => mapObj['idUser']).indexOf(obj['idUser']) === pos;
-        });
-        return bbn.fn.order(ret, 'userName', 'ASC');
-      },
-      trackerComp(){
-        return bbn.vue.find(appui, 'appui-task-tracker');
+        return bbn.fn.order(res, 'userName');
       }
     },
     methods: {
-      start(){
-        if (
-          !this.source.tracker &&
-          this.task.isOngoing &&
-          (this.task.isWorker || this.task.isManager) &&
-          this.trackerComp
-        ){
-          this.trackerComp.start(this.source.id);
+      clearTrackerInterval(){
+        if (this.interval) {
+          clearInterval(this.interval);
         }
       },
-      clearInt(){
-        clearInterval(this.interval);
-        this.interval = false;
-      },
-      setInt(){
+      setTrackerInterval(){
         this.interval = setInterval(() => {
-          this.getProgress();
+          this.setProgress();
         }, 1000);
       },
       getProgress(){
-        this.progress = this.trackerComp.secToTime(dayjs().unix() - dayjs(this.source.tracker.start).unix());
-      }
-    },
-    watch: {
-      'source.tracker'(newVal){
-        if ( newVal ){
-          this.setInt();
-        }
-        else {
-          this.clearInt();
-          this.progress = false;
-        }
+        return dayjs().unix() - dayjs(this.source.tracker.start).unix();
+      },
+      setProgress(){
+        this.progress = this.secToTime(this.getProgress());
       }
     },
     mounted(){
       if ( this.source.tracker ){
-        this.setInt();
+        this.setTrackerInterval();
       }
     },
     beforeDestroy(){
-      this.clearInt();
+      this.clearTrackerInterval();
+    },
+    watch: {
+      'source.tracker'(newVal){
+        if ( newVal ){
+          this.setTrackerInterval();
+        }
+        else {
+          this.clearTrackerInterval();
+          this.progress = false;
+        }
+      }
     }
   }
 })();

@@ -12,17 +12,12 @@
         required: true
       }
     },
-    data(){
-      return {
-        trackerComp: appui.getRegistered('appui-task-tracker')
-      }
-    },
     methods: {
       renderUser(row){
         return bbn.fn.getField(appui.app.users, 'text', 'value', row.id_user);
       },
       renderLength(row){
-        return this.trackerComp.secToTime(row.length);
+        return this.secToTime(row.length);
       },
       renderStart(row){
         return dayjs(row.start).format('DD/MM/YYYY HH:mm:ss');

@@ -1,7 +1,7 @@
 <div class="appui-task-task-widget-info bbn-grid-fields">
   <label><?=_('Title')?></label>
   <bbn-textarea v-model="source.title"
-             class="bbn-flex-fill"
+             class="bbn-flex-fill bbn-xl"
              :readonly="!task.canChange"
              :maxlength="100"
              :rows="3"/>
