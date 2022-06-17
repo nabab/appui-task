@@ -9,7 +9,6 @@
       data(){
       return {
         showPriceForm: false,
-        deciders: this.source.roles.deciders ? this.source.roles.deciders.slice() : [],
         oldPrice: 0,
         oldLastChangePrice: {}
       }
@@ -32,6 +31,14 @@
           return bbn.fn.getField(appui.app.users, 'text', 'value', this.source.approved.id_user);
         }
         return '';
+      },
+      deciders(){
+        return bbn.fn.order(bbn.fn.map(this.source.roles.deciders.slice(), u => {
+          return {
+            idUser: u,
+            userName: this.userName(u)
+          }
+        }), 'userName');
       }
     },
     methods: {
@@ -73,9 +80,13 @@
       addDecider(){
         if ( this.task.canChangeDecider ){
           this.getPopup().open({
-            component: this.$options.components.deciderPicker,
-            source: this.source.roles,
-            title: bbn._('Select deciders'),
+            component: 'appui-task-form-role',
+            componentOptions: {
+              source: this.source.roles,
+              idTask: this.source.id,
+              role: 'deciders'
+            },
+            title: bbn._('Select decider(s)'),
             width: 400,
             height: 600
           });
@@ -84,9 +95,20 @@
       removeDecider(decider){
         if ( this.task.canChangeDecider ){
           this.confirm(bbn._('Are you sure you want to remove this decider?'), () => {
-            let idx = this.source.roles.deciders.indexOf(decider);
-            if ( idx > -1 ){
-              this.source.roles.deciders.splice(idx, 1);
+            const idx = this.source.roles.deciders.indexOf(user);
+            if (idx > -1) {
+              this.post(this.root + 'actions/role/delete', {
+                id_task: this.source.id,
+                id_user: user
+              }, d => {
+                if (d.success) {
+                  this.source.roles.deciders.splice(idx, 1);
+                  appui.success();
+                }
+                else {
+                  appui.error();
+                }
+              });
             }
           });
         }
@@ -127,59 +149,12 @@
       }
     },
     watch: {
-      'source.roles.deciders'(newVal){
-        if ( this.task.canChangeDecider ){
-          let added = newVal.filter(a => {
-                return this.deciders.indexOf(a) === -1;
-              }),
-              deleted = this.deciders.filter(d => {
-                return newVal.indexOf(d) === -1;
-              }),
-              deciderAction = (idUser, action) => {
-                this.post(`${this.root}actions/role/${action}`, {
-                  id_task: this.source.id,
-                  role: 'deciders',
-                  id_user: idUser
-                }, (d) => {
-                  if ( !d.success ){
-                    this.alert(bbn._('Error during user insert'));
-                  }
-                });
-              };
-          if ( added.length ){
-            added.forEach(a => deciderAction(a, 'insert'));
-          }
-          if ( deleted.length ){
-            deleted.forEach(d => deciderAction(d, 'delete'));
-          }
-          this.deciders = this.source.roles.deciders.slice();
-        }
-      },
       showPriceForm(newVal){
         if ( newVal ){
           this.oldPrice = this.source.price;
           this.oldLastChangePrice = this.source.lastChangePrice;
           this.source.lastChangePrice = {};
         }
-      }
-    },
-    components: {
-      deciderPicker: {
-        props: ['source'],
-        template: `
-<bbn-form :scrollable="false"
-          class="bbn-overlay"
-          :source="source"
->
-  <div class="bbn-overlay bbn-hpadded bbn-vspadded">
-    <appui-usergroup-picker :multi="true"
-                            class="bbn-h-100"
-                            v-model="source.deciders"
-                            :as-array="true"
-                            :self-excluded="true"/>
-  </div>
-</bbn-form>
-        `
       }
     }
   }

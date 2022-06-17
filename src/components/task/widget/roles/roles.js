@@ -41,7 +41,7 @@
       addRole(role){
         if (this.task.canChange && !!role) {
           this.getPopup({
-            component: this.$options.components.userPicker,
+            component: 'appui-task-form-role',
             componentOptions: {
               source: this.source.roles,
               idTask: this.source.id,
@@ -57,7 +57,7 @@
         if (this.task.canChange && !!role) {
           this.confirm(bbn._('Are you sure you want to remove this user?'), () => {
             const idx = this.source.roles[role].indexOf(user);
-            if ( (idx > -1) ){
+            if (idx > -1) {
               this.post(this.root + 'actions/role/delete', {
                 id_task: this.source.id,
                 id_user: user
@@ -72,88 +72,6 @@
               });
             }
           });
-        }
-      }
-    },
-    components: {
-      userPicker: {
-        template: `
-<bbn-form :scrollable="false"
-          class="bbn-overlay"
-          :source="source"
-          @submit.prevent="onSubmit"
-          ref="form">
-  <div class="bbn-overlay bbn-hpadded bbn-vspadded">
-    <appui-usergroup-picker :multi="true"
-                            class="bbn-h-100"
-                            v-model="source[role]"
-                            :as-array="true"
-                            :source="users"/>
-  </div>
-</bbn-form>`,
-        props: {
-          source: {
-            type: Object,
-            required: true
-          },
-          idTask: {
-            type: String,
-            required: true
-          },
-          role: {
-            type: String,
-            required: true
-          }
-        },
-        data(){
-          let groupsUsers = [];
-          if (appui.app.groups && appui.app.users) {
-            appui.app.groups.forEach(group => {
-              let users = appui.app.users.filter(u => {
-                  return (u.id_group === group.id)
-                    && (u.value !== appui.app.user.id)
-                    && !this.source[this.role].includes(u.value);
-              });
-              users = users.map(u => {
-                let user = bbn.fn.extend(true, {
-                  icon: 'nf nf-fa-user',
-                  id: u.value
-                }, u);
-                delete user.value;
-                return user;
-              });
-              groupsUsers.push({
-                id: group.id,
-                text: group.nom || group.group,
-                items: bbn.fn.order(users, 'text'),
-                num: users.length,
-                icon: 'nf nf-fa-users'
-              });
-            });
-          }
-          return {
-            users: bbn.fn.order(groupsUsers, 'text'),
-            root: appui.plugins['appui-task'] + '/'
-          }
-        },
-        methods: {
-          onSubmit(ev){
-            if (this.source[this.role].length && !!this.idTask) {
-              this.post(this.root + 'actions/role/insert', {
-                id_task: this.idTask,
-                role: this.role,
-                id_user: this.source[this.role]
-              }, d => {
-                if (d.success) {
-                  this.getRef('form').closePopup(true);
-                  appui.success();
-                }
-                else {
-                  appui.error();
-                }
-              });
-            }
-          }
         }
       }
     }

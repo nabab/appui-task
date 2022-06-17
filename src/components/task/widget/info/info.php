@@ -4,7 +4,7 @@
              class="bbn-flex-fill bbn-xl"
              :readonly="!task.canChange"
              :maxlength="100"
-             :rows="3"/>
+             :rows="4"/>
   <label><?=_('Created by')?></label>
   <div class="bbn-vmiddle">
     <bbn-initial :user-id="source.id_user"

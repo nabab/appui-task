@@ -1,10 +1,13 @@
 (() => {
   return {
-    props: ['source'],
+    props: {
+      source: {
+        type: Object
+      }
+    },
     data(){
       return {
-        root: appui.plugins['appui-task'] + '/',
-        cp: this.closest('bbn-container').getComponent()
+        root: appui.plugins['appui-task'] + '/'
       }
     },
     computed: {
@@ -12,13 +15,14 @@
         let floater = this.closest('bbn-floater');
         return bbn.fn.isVue(floater) ? floater.opener : false;
       },
+      mainPage(){
+        return this.closest('appui-task');
+      },
       fullCategories(){
-        if (bbn.fn.isVue(this.opener)) {
-          if (bbn.fn.isVue(this.opener.tasks)
-            && (this.opener.tasks.fullCategories !== undefined)
-          ) {
-            return this.opener.tasks.fullCategories;
-          }
+        if (bbn.fn.isVue(this.mainPage)
+          && (this.mainPage.fullCategories !== undefined)
+        ) {
+          return this.mainPage.fullCategories;
         }
         return [];
       }
@@ -38,7 +42,7 @@
             this.opener.source.children.splice(0, this.opener.source.children.length, ...d.children);
             this.opener.source.num_children = d.children.length;
             this.opener.source.has_children = !!d.children.length;
-            let widget = this.opener.findByKey('tasks', 'bbn-widget');
+            let widget = this.opener.findByKey('subtasks', 'bbn-widget');
             if (bbn.fn.isVue(widget)) {
               widget.reload();
             }

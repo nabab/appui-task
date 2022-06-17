@@ -1,8 +1,6 @@
 <div class="appui-task-task-widget-budget">
-  <div class="bbn-grid-fields bbn-padded">
-    <label v-if="showPriceForm && task.isAdmin"
-           class="bbn-vmiddle"
-    ><?=_('Price')?></label>
+  <div class="bbn-grid-fields">
+    <label v-if="showPriceForm && task.isAdmin"><?=_('Price')?></label>
     <div v-if="showPriceForm && task.isAdmin"
          class="bbn-flex-width bbn-vmiddle">
       <bbn-numeric class="bbn-flex-fill"
@@ -23,8 +21,7 @@
     </div>
     <div v-if="!showPriceForm && !source.price"
          class="bbn-grid-full bbn-c"><?=_('No price set')?></div>
-    <label v-if="!showPriceForm && source.price"
-           class="bbn-vmiddle"><?=_('Price')?></label>
+    <label v-if="!showPriceForm && source.price"><?=_('Price')?></label>
     <div v-if="!showPriceForm && source.price"
          class="bbn-flex-width bbn-vmiddle">
       <div class="bbn-flex-fill"
@@ -33,6 +30,7 @@
                   icon="nf nf-fa-edit"
                   title="<?=_('Edit price')?>"
                   @click="showPriceForm = true"
+                  class="bbn-hsmargin"
                   :notext="true"/>
       <bbn-button v-if="task.isAdmin && !task.isClosed"
                   icon="nf nf-fa-trash"
@@ -40,9 +38,9 @@
                   @click="removePrice"
                   :notext="true"/>
     </div>
-    <template v-if="source.price && ((source.state === states.unapproved) || (source.state === states.approved))">
+    <template v-if="source.price && ((source.state === states.unapproved) || !!source.approved)">
       <label><?=_('Status')?></label>
-      <template v-if="task.isApproved">
+      <template v-if="!!source.approved">
         <div class="bbn-green"><?=_('Approved')?></div>
         <label><?=_('Approved on')?></label>
         <div v-text="approvedOn"/>
@@ -62,8 +60,15 @@
   </div>
   <div v-if="source.price && ((source.state === states.unapproved) || (source.state === states.approved))"
        class="bbn-box"
-       style="margin-top: 10px">
-    <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded">
+       :style="{
+         marginTop: '10px',
+         backgroundColor: getRoleBgColor('deciders')
+       }">
+    <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded"
+         :style="{
+           backgroundColor: getRoleBgColor('deciders'),
+           color: getRoleColor('deciders')
+         }">
       <div class="bbn-vmiddle bbn-flex-width">
         <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-gavel bbn-hsmargin"/><?=_('Deciders')?></span>
         <i class="nf nf-fa-plus bbn-p bbn-hsmargin"
@@ -72,21 +77,25 @@
       </div>
     </div>
     <div class="bbn-hspadded">
-      <div v-for="decider in source.roles.deciders"
-           class="bbn-flex-width bbn-vmiddle bbn-vsmargin">
-        <bbn-initial :user-id="decider"
-                     :height="25"
-                     :width="25"
-                     font-size="1em"/>
-        <span v-text="getUserName(decider)"
-              class="bbn-flex-fill bbn-hsmargin"/>
-        <i class="nf nf-fa-trash bbn-p bbn-red"
-           v-if="task.canChangeDecider && (task.userId !== decider) && !task.isApproved"
-           @click="removeDecider(decider)"
-           title="<?=_('Remove decider')?>"/>
+      <div v-for="decider in deciders"
+           class="bbn-smargin">
+        <div class="bbn-vmiddle bbn-flex-width bbn-background"
+            style="border-radius: 3px">
+          <bbn-initial :user-id="decider.idUser"
+                       :height="25"
+                       :width="25"
+                       font-size="1em"/>
+          <span v-text="decider.userName"
+                class="bbn-hsmargin bbn-flex-fill"/>
+          <i class="nf nf-fa-trash bbn-p bbn-red bbn-right-sspace"
+            v-if="task.canChangeDecider && (task.userId !== decider.idUser) && !task.isApproved"
+            @click="removeDecider(decider.idUser)"
+            :title="_('Remove decider')"/>
+        </div>
       </div>
       <div v-if="!source.roles.deciders.length"
-           class="bbn-middle bbn-spadded">
+           class="bbn-middle bbn-spadded"
+           :style="{color: getRoleColor('deciders')}">
         <?=_('Not set')?>
       </div>
     </div>

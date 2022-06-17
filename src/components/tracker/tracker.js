@@ -6,7 +6,8 @@
         isVisible: false,
         active: false,
         interval: false,
-        progress: false
+        progress: false,
+        root: appui.plugins['appui-task'] + '/'
       }
     },
     computed:{
@@ -29,7 +30,7 @@
         this.isVisible = !this.isVisible;
       },
       refreshList(startAfter){
-        this.post(appui.plugins['appui-task'] + '/data/tasks', {
+        this.post(this.root + 'data/tasks', {
           id_user: appui.app.user.id
         }, d => {
           if ( d.success && (d.data.list !== undefined) && (d.data.active !== undefined) ){
@@ -68,29 +69,23 @@
         return h + ':' + m + (cut ? '' : ':'+ s);
       },
       start(idTask){
-        bbn.fn.warning(idTask)
-        if ( this.active ){
+        if (this.active) {
           this.confirm(bbn._('Are you sure you want to stop the tracker in progress') + '?', () => {
             this.stop();
           });
         }
         else {
-          if ( !bbn.fn.getRow(this.list, 'id', idTask) ){
+          if (!bbn.fn.getRow(this.list, 'id', idTask)) {
             this.refreshList(idTask);
           }
           else {
-            this.post(appui.plugins['appui-task'] + '/actions/tracker/start', {
+            this.post(this.root + 'actions/tracker/start', {
               id_task: idTask
             }, d => {
-              if ( d.success && d.tracker ){
-                let tasks = bbn.vue.findAll(appui, 'appui-task-widget-tracker');
-                if ( tasks.length ){
-                  bbn.fn.each(tasks, (t, i) => {
-                    if ( t.source.id === idTask ){
-                      t.source.tracker = d.tracker;
-                      return false;
-                    }
-                  });
+              if (d.success && d.tracker) {
+                let task = appui.getRegistered('appui-task-' + idTask);
+                if (bbn.fn.isVue(task)) {
+                  task.$set(task.source, 'tracker', d.tracker);
                 }
                 this.active = d.tracker;
               }
@@ -99,7 +94,7 @@
         }
       },
       stop(){
-        if ( this.active ){
+        if (this.active) {
           this.confirm(bbn._('Do you want to write a message?'), () => {
             this.getPopup().open({
               component: this.$options.components.trackerMessage,
@@ -119,27 +114,31 @@
         obj = bbn.fn.extend({
           id_task: this.active.id_task
         }, obj);
-        this.post(appui.plugins['appui-task'] + '/actions/tracker/stop', obj, d => {
-          if ( d.success ){
-            let tasks = bbn.vue.findAll(appui, 'appui-task-task');
-            if ( tasks.length ){
-              bbn.fn.each(tasks, (t, i) => {
-                if ( t.source.id === this.active.id_task ){
-                  t.source.tracker = false;
-                  t.$set(t.source, 'trackers', d.trackers);
-                  return false;
+        this.post(this.root + 'actions/tracker/stop', obj, d => {
+          if (d.success) {
+            let task = appui.getRegistered('appui-task-' + this.active.id_task);
+            if (bbn.fn.isVue(task)) {
+              task.$set(task.source, 'tracker', false);
+              task.$set(task.source, 'trackers', d.trackers);
+              if (!!obj.message) {
+                let notes = task.find(task.dashboard.widgets.notes.component);
+                if (bbn.fn.isVue(notes)) {
+                  notes.getRef('forum').updateData();
                 }
-              });
+              }
             }
-            this.clearInt();
-            this.progress = false;
-            this.active = false;
+            this.clear();
           }
         });
       },
       openTask(idTask){
         this.isVisible = false;
-        bbn.fn.link(appui.plugins['appui-task'] + '/page/task/' + idTask);
+        bbn.fn.link(this.root + 'page/task/' + idTask);
+      },
+      clear(){
+        this.clearInt();
+        this.progress = false;
+        this.active = false;
       }
     },
     watch: {
@@ -160,6 +159,7 @@
     },
     beforeDestroy(){
       this.clearInt();
+      appui.unregister('appui-task-tracker');
     },
     components: {
       trackerMessage: {

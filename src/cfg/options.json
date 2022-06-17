@@ -285,7 +285,7 @@
                   "text": "Sub-Tasks",
                   "code": "subtasks",
                   "closable": true,
-                  "itemComponent": "appui-task-task-subtasks",
+                  "itemComponent": "appui-task-task-widget-subtasks",
                   "limit": 10,
                   "icon": "nf nf-oct-tasklist"
                 },

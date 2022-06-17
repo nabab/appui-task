@@ -1,11 +1,12 @@
 (() => {
   return {
-    data(){
-      return {
-        root: appui.plugins['appui-task'] + '/'
-      }
-    },
     computed: {
+      stateCode(){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'code', 'value', this.source.state);
+        }
+        return false;
+      },
       state(){
         if (this.optionsStates) {
           return bbn.fn.getField(this.optionsStates, 'text', 'value', this.source.state);
@@ -15,17 +16,20 @@
       creationDate(){
         return dayjs(this.source.creationDate).format('DD/MM/YYYY');
       },
-      role(){
+      roleCode(){
+        let code = false
         if (bbn.fn.numProperties(this.source.roles)) {
-          let code = false
           bbn.fn.iterate(this.source.roles, (ids, role) => {
             if (ids.includes(appui.app.user.id)) {
               code = role;
             }
           });
-          if (code) {
-            return bbn.fn.getField(this.optionsRoles, 'text', 'code', code) || '';
-          }
+          return code;
+        }
+      },
+      role(){
+        if (this.roleCode) {
+          return bbn.fn.getField(this.optionsRoles, 'text', 'code', this.roleCode) || '';
         }
         return '';
       }

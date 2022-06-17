@@ -33,10 +33,6 @@
       },
       optionsRoles(){
         return this.mainPage.source.options.roles;
-      },
-      trackerComp(){
-        let a = appui;
-        return a.getRegistered('appui-task-tracker');
       }
     },
     methods: {
@@ -342,6 +338,15 @@
           if ( prop === 'state' ) {
             this.source.state = val;
             this.source.tracker = d.tracker;
+            if (!d.trakcer) {
+              let tracker = appui.getRegistered('appui-task-tracker');
+              if (bbn.fn.isVue(tracker)
+                && !!tracker.active
+                && (tracker.active.id === this.source.id)
+              ) {
+                tracker.clear();
+              }
+            }
             this.source.trackers = d.trackers;
           }
           if ((prop === 'price') && (d.lastChangePrice !== undefined)) {
@@ -409,13 +414,13 @@
         };
         if (this.canUnmakeMe && role && this.mainPage.source.roles[role]) {
           bbn.fn.each(this.source.roles, (v, i) => {
-            if ( v.indexOf(appui.app.user.id) > -1 ) {
+            if (v.includes(appui.app.user.id)) {
               exists = true;
             }
           });
           if (exists && this.unmakeMe(true)) {
             setTimeout(() => {
-                setRole();
+              setRole();
             }, 100);
           }
           if (!exists) {
@@ -597,7 +602,7 @@
         }
       },
       budgetButtons(){
-        return !this.source.price && this.isAdmin && this.isOpened ? [{
+        return !this.source.price && this.isAdmin && !this.isClosed ? [{
           text: bbn._('Add budget'),
           icon: 'nf nf-fa-plus',
           action: this.addBudget
@@ -700,13 +705,18 @@
         if (!this.source.tracker
           && this.isOngoing
           && (this.isWorker || this.isManager)
-          && this.trackerComp
         ){
-          this.trackerComp.start(this.source.id);
+          let tracker = appui.getRegistered('appui-task-tracker');
+          if (bbn.fn.isVue(tracker)) {
+            tracker.start(this.source.id);
+          }
         }
       },
       stopTracker(){
-        this.trackerComp.stop();
+        let tracker = appui.getRegistered('appui-task-tracker');
+        if (bbn.fn.isVue(tracker)) {
+          tracker.stop();
+        }
       }
     },
     created(){
@@ -717,6 +727,10 @@
           }
         });
       }
+      appui.register('appui-task-' + this.source.id, this);
+    },
+    beforeDestroy(){
+      appui.unregister('appui-task-' + this.source.id);
     },
     watch: {
       'source.title'(val){
