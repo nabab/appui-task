@@ -93,32 +93,77 @@
        v-if="showRoles">
     <div class="bbn-b bbn-c bbn-spadded bbn-vmiddle"><?=_('Roles')?></div>
     <div class="bbn-c bbn-spadded">
-      <bbn-button v-if="task.canMakeMe && !task.isManager"
+      <bbn-button v-if="task.canBecomeManager"
                   @click="task.makeMe('managers')"
-                  icon="nf nf-fa-user_plus"
+                  icon="nf nf-mdi-account_plus"
                   title="<?=_('Make me a supervisor')?>"
                   :notext="true"
                   :style="{
                     backgroundColor: getRoleBgColor('managers'),
                     color: getRoleColor('managers')
                   }"/>
-      <bbn-button v-if="task.canMakeMe && !task.isWorker"
+      <bbn-button v-if="task.canRevemoHimselfManager"
+                  @click="task.unmakeMe('managers')"
+                  icon="nf nf-mdi-account_minus"
+                  title="<?=_('Remove me from supervisors')?>"
+                  :notext="true"
+                  :style="{
+                    backgroundColor: getRoleBgColor('managers'),
+                    color: getRoleColor('managers')
+                  }"/>
+      <bbn-button v-if="task.canBecomeWorker"
                   @click="task.makeMe('workers')"
-                  icon="nf nf-fa-user_plus"
+                  icon="nf nf-mdi-account_plus"
                   title="<?=_('Make me a worker')?>"
                   :notext="true"
                   :style="{
                     backgroundColor: getRoleBgColor('workers'),
                     color: getRoleColor('workers')
                   }"/>
-      <bbn-button v-if="!task.isViewer"
+      <bbn-button v-if="task.canRevemoHimselfWorker"
+                  @click="task.unmakeMe('workers')"
+                  icon="nf nf-mdi-account_minus"
+                  title="<?=_('Remove me from workers')?>"
+                  :notext="true"
+                  :style="{
+                    backgroundColor: getRoleBgColor('workers'),
+                    color: getRoleColor('workers')
+                  }"/>
+      <bbn-button v-if="task.canBecomeViewer"
                   @click="task.makeMe('viewers')"
-                  icon="nf nf-fa-user_plus"
+                  icon="nf nf-mdi-account_plus"
                   title="<?=_('Make me a spectator')?>"
                   :notext="true"
                   :style="{
                     backgroundColor: getRoleBgColor('viewers'),
                     color: getRoleColor('viewers')
+                  }"/>
+      <bbn-button v-if="task.canRevemoHimselfViewer"
+                  @click="task.unmakeMe('viewers')"
+                  icon="nf nf-mdi-account_minus"
+                  title="<?=_('Remove me from viewers')?>"
+                  :notext="true"
+                  :style="{
+                    backgroundColor: getRoleBgColor('viewers'),
+                    color: getRoleColor('viewers')
+                  }"/>
+      <bbn-button v-if="task.canBecomeDecider"
+                  @click="task.makeMe('deciders')"
+                  icon="nf nf-mdi-account_plus"
+                  title="<?=_('Make me a decider')?>"
+                  :notext="true"
+                  :style="{
+                    backgroundColor: getRoleBgColor('deciders'),
+                    color: getRoleColor('deciders')
+                  }"/>
+      <bbn-button v-if="task.canRevemoHimselfDecider"
+                  @click="task.unmakeMe('deciders')"
+                  icon="nf nf-mdi-account_minus"
+                  title="<?=_('Remove me from deciders')?>"
+                  :notext="true"
+                  :style="{
+                    backgroundColor: getRoleBgColor('deciders'),
+                    color: getRoleColor('deciders')
                   }"/>
     </div>
   </div>
@@ -148,12 +193,6 @@
                   @click="task.ping"
                   title="<?=_("Ping workers")?>"
                   icon="nf nf-fa-hand_pointer_o"
-                  :notext="true"/>
-      <bbn-button v-if="task.isAdded && task.canUnmakeMe"
-                  @click="task.unmakeMe"
-                  title="<?=_("Unfollow the task")?>"
-                  icon="nf nf-fa-user_times"
-                  class="bbn-bg-red bbn-white"
                   :notext="true"/>
     </div>
   </div>

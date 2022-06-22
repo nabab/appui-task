@@ -1,6 +1,6 @@
 <bbn-splitter orientation="horizontal"
               class="appui-task-task">
-  <bbn-pane>
+  <bbn-pane :scrollable="true">
     <div class="bbn-overlay">
       <bbn-dashboard :sortable="true"
                      :order="dashboard.order"
@@ -72,6 +72,17 @@
                    :items="source.children"
                    :padding="true"
                    :buttonsRight="tasksButtons"
+                   :buttonsLeft="closeButton"
+                   :showable="false"/>
+      <bbns-widget :hidden="!currentConfig.logs"
+                   :title="dashboard.widgets.logs.text"
+                   :icon="dashboard.widgets.logs.icon"
+                   :component="dashboard.widgets.logs.component"
+                   :uid="dashboard.widgets.logs.code"
+                   :closable="dashboard.widgets.logs.closable"
+                   :source="source"
+                   :padding="true"
+                   :buttonsRight="logsButtons"
                    :buttonsLeft="closeButton"
                    :showable="false"/>
       <bbns-widget :hidden="!currentConfig.notes"

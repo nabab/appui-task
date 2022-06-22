@@ -1,11 +1,12 @@
 <?php
 /** @var $model \bbn\Mvc\Model*/
 $pm = new \bbn\Appui\Task($model->db);
-$newId = isset($model->data['title'], $model->data['type']) ? $pm->insert([
+$newId = $model->hasData(['title', 'type'], true) ? $pm->insert([
   'title' => $model->data['title'],
   'type' => $model->data['type'],
   'id_parent' => !empty($model->data['id_parent']) ? $model->data['id_parent'] : null,
-  'deadline' => empty($model->data['deadline']) ? null : $model->data['deadline']
+  'deadline' => empty($model->data['deadline']) ? null : $model->data['deadline'],
+  'private' => empty($model->data['private']) ? 0 : 1
  ]) : false;
 $ret = [
   'success' => $newId,

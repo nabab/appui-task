@@ -42,6 +42,10 @@
         "id_option": ["subtasks", "widgets", "appui-dashboard", "plugins", "task", "appui"]
       },
       {
+        "code": "logs",
+        "id_option": ["logs", "widgets", "appui-dashboard", "plugins", "task", "appui"]
+      },
+      {
         "code": "messages",
         "id_option": ["messages", "widgets", "appui-dashboard", "plugins", "task", "appui"]
       }

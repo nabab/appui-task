@@ -1,7 +1,8 @@
 <?php
 /** @var $model \bbn\Mvc\Model */
-if ( !empty($model->data['id']) ){
+if ($model->hasData('id', true)) {
   $task = new \bbn\Appui\Task($model->db);
+  $logs = $task->getLog($model->data['id']);
   return \bbn\X::mergeArrays(
     $task->info($model->data['id']),
     [
@@ -11,7 +12,9 @@ if ( !empty($model->data['id']) ){
       'lastChangePrice' => $task->getPriceLog($model->data['id']),
       'tracker' => $task->getTrack($model->data['id']),
       'trackers' => $task->getTracks($model->data['id']),
-      'invoice' => $task->getInvoice($model->data['id'])
+      'invoice' => $task->getInvoice($model->data['id']),
+      'lastLogs' => !empty($logs) ? array_slice($logs, 0, 5) : [],
+      'totLogs' => count($logs)
     ]
   );
 }

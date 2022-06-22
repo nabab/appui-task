@@ -26,4 +26,9 @@
     <span v-text="s.total"
           :class="{'bbn-green': !!progress && (currentUserID === s.idUser)}"/>
   </div>
+  <div class="bbn-background bbn-top-space bbn-c bbn-radius"
+       @click="task.openTrackerDetail"
+       :title="_('See tracker detail')">
+    <i class="nf nf-mdi-dots_horizontal bbn-xl bbn-p"/>
+  </div>
 </div>

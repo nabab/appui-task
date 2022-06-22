@@ -21,8 +21,8 @@
         return '';
       },
       approvedOn(){
-        if ( this.task.isApproved ){
-          return bbn.fn.fdate(this.source.approved.chrono);
+        if (!!this.source.approved && !!this.source.approved.chrono) {
+          return this.fdatetime(this.source.approved.chrono);
         }
         return '';
       },

@@ -1,4 +1,3 @@
-// Javascript Document
 (() => {
   return {}
 })();

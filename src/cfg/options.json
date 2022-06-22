@@ -216,7 +216,61 @@
     },
     {
       "text": "Task categories",
-      "code": "cats"
+      "code": "cats",
+      "items": [
+        {
+          "text": "Personal",
+          "code": "personal"
+        },
+        {
+          "text": "Technical service",
+          "code": "support",
+          "items": [
+            {
+              "text": "New feature",
+              "code": "new"
+            },
+            {
+              "text": "Improvement of an existing feature",
+              "code": "enhancement"
+            },
+            {
+              "text": "Report a bug",
+              "code": "bug"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Privileges",
+      "code": "privileges",
+      "items": [
+        {
+          "text": "Decider",
+          "code": "decider"
+        },
+        {
+          "text": "Global",
+          "code": "global"
+        },
+        {
+          "text": "Group",
+          "code": "group"
+        },
+        {
+          "text": "Manager",
+          "code": "manager"
+        },
+        {
+          "text": "Viewer",
+          "code": "viewer"
+        },
+        {
+          "text": "Worker",
+          "code": "worker"
+        }
+      ]
     },
     {
       "text": "Plugins",
@@ -295,6 +349,13 @@
                   "closable": true,
                   "component": "appui-task-task-widget-tracker",
                   "icon": "nf nf-fa-hourglass_half"
+                },
+                {
+                  "text": "Logs",
+                  "code": "logs",
+                  "closable": true,
+                  "component": "appui-task-task-widget-logs",
+                  "icon": "nf nf-mdi-file_document_box"
                 }
               ]
             }

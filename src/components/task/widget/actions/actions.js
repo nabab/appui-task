@@ -10,12 +10,13 @@
                 || (this.task.isClosed && this.task.canOpen)))
       },
       showRoles(){
-        return (this.task.canMakeMe
-            && (!this.task.isManager || !this.task.isWorker))
-          || !this.task.isViewer;
+        return this.task.canBecomeManager
+          || this.task.canBecomeWorker
+          || this.task.canBecomeViewer
+          || this.task.canBecomeDecider;
       },
       showOther(){
-        return this.task.canPing || (this.task.isAdded && this.task.canUnmakeMe);
+        return this.task.canPing;
       },
       showBudget(){
         return this.task.canApprove && !this.task.isApproved;

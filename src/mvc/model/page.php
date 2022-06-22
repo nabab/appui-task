@@ -48,7 +48,10 @@ $d = [
   'dashboard' => [
     'widgets' => [],
     'order' => []
-  ]
+  ],
+  'privileges' => array_map(function($p) use($model){
+    return $model->inc->perm->has($model->inc->perm->optionToPermission($p, 'options'));
+  }, $model->inc->options->codeIds('privileges', 'task', 'appui'))
 ];
 
 try {

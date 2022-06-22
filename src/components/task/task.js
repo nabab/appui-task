@@ -20,19 +20,22 @@
         return this._mainPage;
       },
       root(){
-        return this.mainPage.root;
+        return !!this.mainPage ? this.mainPage.root : '';
       },
       categories(){
-        return this.mainPage.fullCategories;
+        return !!this.mainPage ? this.mainPage.fullCategories : [];
       },
       states(){
-        return this.mainPage.source.states;
+        return !!this.mainPage ? this.mainPage.source.states : {};
       },
       optionsStates(){
-        return this.mainPage.source.options.states;
+        return !!this.mainPage ? this.mainPage.source.options.states : [];
       },
       optionsRoles(){
-        return this.mainPage.source.options.roles;
+        return !!this.mainPage ? this.mainPage.source.options.roles : [];
+      },
+      privileges(){
+        return!!this.mainPage ? this.mainPage.source.privileges : {};
       }
     },
     methods: {
@@ -93,6 +96,15 @@
         m = (m < 10) ? '0' + m : m;
         s = (s < 10) ? '0' + s : s;
         return h + ':' + m + (cut ? '' : ':'+ s);
+      },
+      fdatetime(d){
+        if (!!d) {
+          d = dayjs(bbn.fn.date(d));
+          if (d.isValid()) {
+            return d.format('DD/MM/YYYY HH:mm');
+          }
+        }
+        return '';
       }
     },
     created(){
@@ -303,10 +315,10 @@
           (this.mainPage.source.usergroup === 18);
       },
       canUnmakeMe() {
-        if ( this.isManager && (this.numManagers < 2) ){
-          return false;
-        }
-        return true;
+        return this.canRevemoHimselfManager
+          || this.canRevemoHimselfWorker
+          || this.canRevemoHimselfViewer
+          || this.canRevemoHimselfDecider
       },
       numManagers() {
         if (this.source.roles.managers) {
@@ -322,6 +334,45 @@
       },
       hasInvoice() {
         return !!this.source.invoice;
+      },
+      canBecomeManager(){
+        return !!this.privileges.manager && !this.isManager;
+      },
+      canBecomeWorker(){
+        return !!this.privileges.worker
+          && !this.isWorker
+          && (!this.isManager
+            || (this.source.roles.managers.length > 1));
+      },
+      canBecomeViewer(){
+        return !!this.privileges.viewer
+          && !this.isViewer
+          && (!this.isManager
+            || (this.source.roles.managers.length > 1));
+      },
+      canBecomeDecider(){
+        return !!this.privileges.decider
+          && !this.isDecider
+          && (!this.isManager
+            || (this.source.roles.managers.length > 1));
+      },
+      canRevemoHimselfManager(){
+        return !!this.privileges.manager
+          && !!this.isManager
+          && !this.isMaster
+          && (this.source.roles.managers.length > 1);
+      },
+      canRevemoHimselfWorker(){
+        return !!this.privileges.worker
+          && !!this.isWorker;
+      },
+      canRevemoHimselfViewer(){
+        return !!this.privileges.viewer
+          && !!this.isViewer;
+      },
+      canRevemoHimselfDecider(){
+        return !!this.privileges.decider
+          && !!this.isDecider;
       }
     },
     methods: {
@@ -398,69 +449,82 @@
       reopen() {
         /** @todo ???? */
       },
-      makeMe(role) {
-        let exists = false;
-        const setRole = () => {
-            return this.post(this.root + 'actions/role/insert', {
-                id_task: this.source.id,
-                role: this.mainPage.source.roles[role],
-                id_user: appui.app.user.id
-            }, (d) => {
-                if (d.success) {
-                    this.source.roles[role].push(appui.app.user.id);
-                    return true;
-                }
-            });
-        };
-        if (this.canUnmakeMe && role && this.mainPage.source.roles[role]) {
-          bbn.fn.each(this.source.roles, (v, i) => {
-            if (v.includes(appui.app.user.id)) {
-              exists = true;
+      _makeMe(role){
+        if (this.source.id
+          && !!role
+          && this.mainPage.source.roles[role]
+          && !this.source.roles[role].includes(appui.app.user.id)
+        ) {
+          return this.post(this.root + 'actions/role/insert', {
+            id_task: this.source.id,
+            role: this.mainPage.source.roles[role],
+            id_user: appui.app.user.id
+          }, d => {
+            if (d.success) {
+              this.source.roles[role].push(appui.app.user.id);
+              appui.success();
+            }
+            else {
+              appui.error();
             }
           });
-          if (exists && this.unmakeMe(true)) {
-            setTimeout(() => {
-              setRole();
-            }, 100);
+        }
+      },
+      makeMe(role) {
+        if (!!role && this.mainPage.source.roles[role]) {
+          this.confirm(bbn._('Are you sure?'), () => {
+            let exists = !!bbn.fn.filter([].concat(...Object.values(this.source.roles)), v => v.includes(appui.app.user.id)).length;
+            if (exists && this.canUnmakeMe) {
+              this._unmakeMe().then(d => {
+                if (d.data && d.data.success) {
+                  this.$nextTick(() => {
+                    this._makeMe(role);
+                  })
+                }
+              })
+            }
+            else if (!exists) {
+              this._makeMe(role);
+            }
+          });
+        }
+      },
+      _unmakeMe(prop){
+        if (this.canUnmakeMe
+          && !!this.source.id
+          && !!this.mainPage
+        ) {
+          let prop = false;
+          if (this.isManager) {
+            prop = 'managers';
           }
-          if (!exists) {
-            setRole();
+          else if (this.isWorker) {
+            prop = 'workers';
+          }
+          else if (this.isViewer) {
+            prop = 'viewers';
+          }
+          else if (this.isDecider) {
+            prop = 'deciders';
+          }
+          if (!!prop && !!this.mainPage.source.roles[prop]) {
+            return this.post(this.root + 'actions/role/delete', {
+              id_task: this.source.id,
+              id_user: appui.app.user.id,
+              role: this.mainPage.source.roles[prop]
+            }, d => {
+              if (d.success) {
+                const idx = this.source.roles[prop].indexOf(appui.app.user.id);
+                if (idx > -1) {
+                  this.source.roles[prop].splice(idx, 1);
+                }
+              }
+            });
           }
         }
       },
-      unmakeMe(force) {
-        let prop;
-        const removeRole = () => {
-          return this.post(this.root + "actions/role/delete", {
-            id_task: this.source.id,
-            id_user: appui.app.user.id,
-            role: this.mainPage.source.roles[prop]
-          }, (d) => {
-            const idx = this.source.roles[prop].indexOf(appui.app.user.id);
-            if ( idx > -1 ) {
-              this.source.roles[prop].splice(idx, 1);
-                return true;
-              }
-            });
-        };
-        if ( this.isManager ) {
-          if ( this.numManagers < 2 ) {
-            return false;
-          }
-          prop = "managers";
-        }
-        if ( this.isViewer ) {
-          prop = "viewers";
-        }
-        if ( this.isWorker ) {
-          prop = "workers";
-        }
-        if (prop) {
-          if (force) {
-            return removeRole();
-          }
-          this.confirm(bbn._('Are you sure you want to unfollow this task?'), removeRole);
-        }
+      unmakeMe() {
+        this.confirm(bbn._('Are you sure you want to remove your role from this task??'), this.unmakeMe);
       },
       addComment(e) {
         let v = {
@@ -612,7 +676,14 @@
         return [{
           text: bbn._('See tracker detail'),
           icon: 'nf nf-mdi-chart_timeline',
-          action: this.operTrackerDetail
+          action: this.openTrackerDetail
+        }];
+      },
+      logsButtons(){
+        return [{
+          text: bbn._('See all logs'),
+          icon: 'nf nf-mdi-chart_timeline',
+          action: this.openAllLogs
         }];
       },
       tasksButtons(){
@@ -638,7 +709,8 @@
             source: {
               title: '',
               type: '',
-              id_parent: this.source.id
+              id_parent: this.source.id,
+              private: !!this.source.private ? 1 : 0
             },
             opener: this
           });
@@ -677,10 +749,19 @@
           }
         })
       },
-      operTrackerDetail(){
+      openTrackerDetail(){
         this.getPopup({
           title: bbn._('Tracker detail'),
           component: 'appui-task-task-widget-tracker-detail',
+          source: this.source,
+          width: '90%',
+          height: '90%'
+        })
+      },
+      openAllLogs(){
+        this.getPopup({
+          title: bbn._('Logs'),
+          component: 'appui-task-task-widget-logs-detail',
           source: this.source,
           width: '90%',
           height: '90%'
