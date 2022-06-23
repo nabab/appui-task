@@ -11,9 +11,9 @@
         type: Object
       }
     },
-    data(){
-      return {
-        form: {
+    computed: {
+      form(){
+        return {
           props: {
             imageDom: this.root + 'image/tmp/',
             fileSave: this.root + 'actions/file/upload/',

@@ -11,14 +11,14 @@ if (
   ($old = $notes->getFull($model->data['id']))
 ){
   $ok = true;
-  $path = BBN_USER_PATH.'tmp/'.$model->data['ref'].'/';
+  $path = $model->userTmpPath() . $model->data['ref'].'/';
   // Add the new note's version if the title|content is changed
   if (
     ($old['title'] !== $model->data['title']) ||
     ($old['content'] !== $model->data['text']) ||
     ($old['locked'] != $model->data['locked'])
   ){
-    if ( $notes->update($model->data['id'], $model->data['title'] ?: '', $model->data['text'], null, $model->data['locked']) ){
+    if ( $notes->update($model->data['id'], $model->data['title'] ?: '', $model->data['text'], false, $model->data['locked']) ){
       if (
         ($old['title'] !== $model->data['title']) ||
         ($old['content'] !== $model->data['text'])

@@ -19,7 +19,8 @@
         return this.task.canPing;
       },
       showBudget(){
-        return this.task.canApprove && !this.task.isApproved;
+        return (this.task.canApprove && !this.task.isApproved)
+          || (!!this.source.price && this.task.isAdmin && !this.task.isClosed && !!this.source.lastChangePrice);
       },
       showTracker(){
         return this.task.currentConfig.tracker

@@ -367,6 +367,14 @@
                 "key": "MUL",
                 "maxlength": 16
             },
+            "id_git": {
+                "type": "int",
+                "null": 1,
+                "key": null,
+                "signed": 0,
+                "default": "NULL",
+                "maxlength": 255
+            },
             "active": {
                 "type": "tinyint",
                 "null": 0,

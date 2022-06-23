@@ -12,6 +12,18 @@
                     backgroundColor: getStatusBgColor('approved'),
                     color: getStatusColor('approved')
                   }"/>
+      <bbn-button v-if="task.isAdmin && !task.isClosed && !!source.lastChangePrice"
+                  icon="nf nf-fa-edit"
+                  title="<?=_('Edit price')?>"
+                  @click="task.editPrice"
+                  class="bbn-hsmargin"
+                  :notext="true"/>
+      <bbn-button v-if="task.isAdmin && !task.isClosed && !!source.lastChangePrice"
+                  icon="nf nf-fa-trash"
+                  title="<?=_('Remove price')?>"
+                  @click="task.removePrice"
+                  :notext="true"
+                  class="bbn-white bbn-bg-red"/>
     </div>
   </div>
   <div class="bbn-box bbn-iflex bbn-bottom-sspace"

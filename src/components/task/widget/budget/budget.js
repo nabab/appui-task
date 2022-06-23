@@ -153,7 +153,7 @@
         if ( newVal ){
           this.oldPrice = this.source.price;
           this.oldLastChangePrice = this.source.lastChangePrice;
-          this.source.lastChangePrice = {};
+          this.source.lastChangePrice = null;
         }
       }
     }

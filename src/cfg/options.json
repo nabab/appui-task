@@ -316,17 +316,17 @@
                   "icon": "nf nf-fa-info bbn-s"
                 },
                 {
-                  "text": "Messages",
-                  "code": "messages",
-                  "closable": true,
-                  "component": "appui-task-task-widget-messages",
-                  "icon": "nf nf-fa-comments"
-                },
-                {
                   "text": "My current bugs",
                   "code": "tasks",
                   "itemComponent": "appui-task-widget-task",
                   "limit": 5
+                },
+                {
+                  "text": "Notes",
+                  "code": "notes",
+                  "closable": true,
+                  "component": "appui-task-task-widget-notes",
+                  "icon": "nf nf-fa-comments"
                 },
                 {
                   "text": "Roles",

@@ -205,7 +205,7 @@
               && ((this.isClosed && this.source.price) || !this.isClosed)
               && !this.currentConfig[w.code]
           }
-          if ((w.code === 'info') || (w.code === 'actions') || (w.code === 'messages')) {
+          if ((w.code === 'info') || (w.code === 'actions')) {
             return false;
           }
           return !this.currentConfig[w.code];
@@ -269,13 +269,19 @@
         return this.isHolding || this.isOpened;
       },
       isUnapproved() {
-        return this.source.price && (!this.source.approved.chrono || (this.source.approved.chrono < this.source.lastChangePrice.chrono));
+        return this.source.price
+          && (!this.source.approved
+            || !this.source.lastChangePrice
+            || (!this.source.approved.chrono
+              || (this.source.approved.chrono < this.source.lastChangePrice.chrono)));
       },
       isApproved() {
-        return !!(this.source.price &&
-        (this.source.approved.chrono !== undefined) &&
-        (this.source.lastChangePrice.chrono !== undefined) &&
-        (this.source.approved.chrono > this.source.lastChangePrice.chrono));
+        return this.source.price
+          && !!this.source.approved
+          && !!this.source.lastChangePrice
+          && (this.source.approved.chrono !== undefined)
+          && (this.source.lastChangePrice.chrono !== undefined)
+          && (this.source.approved.chrono > this.source.lastChangePrice.chrono);
       },
       canStart() {
         return this.isOpened && (this.isManager || this.isWorker);
@@ -797,6 +803,32 @@
         let tracker = appui.getRegistered('appui-task-tracker');
         if (bbn.fn.isVue(tracker)) {
           tracker.stop();
+        }
+      },
+      editPrice(){
+        let cp = this.find('appui-task-task-widget-budget');
+        if (bbn.fn.isVue(cp)) {
+          cp.showPriceForm = true;
+        }
+      },
+      removePrice(){
+        if (this.isAdmin && !this.isClosed) {
+          this.confirm(bbn._('Are you sure you want to remove the price?'), () => {
+            if (!bbn.fn.isNull(this.source.price)) {
+              this.update('price', null);
+              this.source.price = null;
+            }
+            if (this.source.state !== this.states.opened) {
+              this.update('state', this.states.opened);
+            }
+            this.$set(this.source, 'approved', null);
+            this.$set(this.source, 'lastChangePrice', null);
+            let cp = this.find('appui-task-task-widget-budget');
+            if (bbn.fn.isVue(cp)) {
+              cp.showPriceForm = false;
+              cp.closest('bbn-widget').updateButtons();
+            }
+          });
         }
       }
     },

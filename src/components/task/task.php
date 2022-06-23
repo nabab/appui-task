@@ -55,13 +55,6 @@
                    :buttonsLeft="closeButton"
                    :buttonsRight="trackerButtons"
                    :padding="true"/>
-      <!--<bbns-widget v-if="hasComments"
-                   :title="dashboard.widgets.messages.text"
-                   :icon="dashboard.widgets.messages.icon"
-                   :component="dashboard.widgets.messages.component"
-                   :uid="dashboard.widgets.messages.code"
-                   :closable="dashboard.widgets.messages.closable"
-                   :source="source"/>-->
       <bbns-widget v-if="canChange"
                    :hidden="!currentConfig.subtasks"
                    :title="dashboard.widgets.subtasks.text"

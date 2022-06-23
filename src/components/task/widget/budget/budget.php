@@ -23,24 +23,15 @@
          class="bbn-grid-full bbn-c"><?=_('No price set')?></div>
     <label v-if="!showPriceForm && source.price"><?=_('Price')?></label>
     <div v-if="!showPriceForm && source.price"
-         class="bbn-flex-width bbn-vmiddle">
-      <div class="bbn-flex-fill"
-           v-text="price"/>
-      <bbn-button v-if="task.isAdmin && !task.isClosed"
-                  icon="nf nf-fa-edit"
-                  title="<?=_('Edit price')?>"
-                  @click="showPriceForm = true"
-                  class="bbn-hsmargin"
-                  :notext="true"/>
-      <bbn-button v-if="task.isAdmin && !task.isClosed"
-                  icon="nf nf-fa-trash"
-                  title="<?=_('Remove price')?>"
-                  @click="removePrice"
-                  :notext="true"/>
-    </div>
-    <template v-if="source.price && ((source.state === states.unapproved) || !!source.approved)">
+         class="bbn-flex-width bbn-vmiddle"
+         v-text="price"/>
+    <template v-if="source.price
+                && !!source.lastChangePrice
+                && ((source.state === states.unapproved) || !!source.approved)">
       <label><?=_('Status')?></label>
-      <template v-if="!!source.approved">
+      <template v-if="!!source.approved
+                  && !!source.lastChangePrice
+                  && (source.approved.chrono > source.lastChangePrice.chrono)">
         <div class="bbn-green"><?=_('Approved')?></div>
         <label><?=_('Approved on')?></label>
         <div v-text="approvedOn"/>

@@ -8,8 +8,14 @@
   return {
     props: ['source'],
     methods: {
+      shorten: bbn.fn.shorten,
       minDate(){
         return dayjs().format('YYYY-MM-DD');
+      },
+      downloadDoc(docId){
+        if (!!docId) {
+          this.postOut(this.root + 'download/media/' + docId);
+        }
       }
     }
   }
