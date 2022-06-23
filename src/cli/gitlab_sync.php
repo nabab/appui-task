@@ -1,15 +1,12 @@
 <?php
-$projectToken = '';
-$userToken = '';
-$host = '';
-$projectID = null;
-
-if (!empty($projectToken)
-  && !empty($userToken)
-  && !empty($host)
-  && !empty($projectID)
+if (defined('BBN_GIT_URL')
+  && !empty(BBN_GIT_URL)
+  && defined('BBN_GIT_PROJECT_TOKEN')
+  && !empty(BBN_GIT_PROJECT_TOKEN)
+  && defined('BBN_GIT_PROJECT_ID')
+  && !empty(BBN_GIT_PROJECT_ID)
 ) {
-  $gitlab = new \bbn\Api\GitLab($projectToken, $host);
+  $gitlab = new \bbn\Api\GitLab(BBN_GIT_PROJECT_TOKEN, BBN_GIT_URL);
   $task = new \bbn\Appui\Task($ctrl->db);
   $notes = new \bbn\Appui\Note($ctrl->db);
   $notesCfg = $notes->getClassCfg();
@@ -32,50 +29,77 @@ if (!empty($projectToken)
     return $userID;
   };
 
-  if ($issues = $gitlab->getIssues($projectID)) {
+  if ($issues = $gitlab->getIssues(BBN_GIT_PROJECT_ID)) {
     foreach ($issues as $issue) {
       if (!empty($issue->id)) {
-        if ($t = $ctrl->db->select('bbn_tasks', [], ['id_git' => $issue->id])) {
-          $idTask = $t->id;
-        }
-        else {
+        // Get the task ID if it already exists
+        $idTask = $ctrl->db->selectOne('bbn_tasks', 'id', ['id_git' => $issue->id, 'active' => 1]);
+        if (empty($idTask)) {
+          $userID = null;
+          // Get the issue author
           $author = $gitlab->getUser($issue->author->id);
+          // Check if the git user is an appui user
           if (!empty($author['email'])) {
-            if ($userID = $getUserID($author['email'])) {
-              $task->setUser($userID);
-              $task->setDate(date('Y-m-d H:i:s', strtotime($issue->created_at)));
-              if ($idTask = $task->insert([
-                'title' => $issue->title,
-                'type' => $ctrl->inc->options->fromCode('support', 'cats', 'task', 'appui'),
-                'state' => $ctrl->inc->options->fromCode($issue->state, 'states', 'task', 'appui')
-              ])) {
-                $ctrl->db->update('bbn_tasks', ['id_git' => $issue->id], ['id' => $idTask]);
-                $did++;
-              }
+            $userID = $getUserID($author['email']);
+          }
+          // Otherwise use the external user's ID
+          else if (defined('BBN_EXTERNAL_USER_ID')) {
+            $userID = BBN_EXTERNAL_USER_ID;
+          }
+          if (!empty($userID)) {
+            // Set the task's user
+            $task->setUser($userID);
+            // Set the task's date
+            $task->setDate(date('Y-m-d H:i:s', strtotime($issue->created_at)));
+            // Create the task
+            if ($idTask = $task->insert([
+              'title' => $issue->title,
+              'type' => $ctrl->inc->options->fromCode('support', 'cats', 'task', 'appui'),
+              'state' => $ctrl->inc->options->fromCode($issue->state, 'states', 'task', 'appui')
+            ])) {
+              $ctrl->db->update('bbn_tasks', ['id_git' => $issue->id], ['id' => $idTask]);
+              $did++;
             }
           }
         }
+        // Check if the issue has notes
         if (!empty($idTask)
           && (!empty($issue->user_notes_count))
         ) {
-          $issueNotes = $gitlab->getIssueNotes($projectID, $issue->iid);
+          // Get the issue's notes
+          $issueNotes = $gitlab->getIssueNotes(BBN_GIT_PROJECT_ID, $issue->iid);
           if (!empty($issueNotes)) {
             foreach ($issueNotes as $note) {
+              // Check if the note already exists on the task's notes
               if ($idNote = $ctrl->db->selectOne('bbn_tasks_notes', 'id_note', [
                 'id_git' => $note->id,
-                'id_task' => $idTask
+                'id_task' => $idTask,
+                'active' => 1
                 ])) {
+                  // Get the note's content
                 $n = $notes->get($idNote);
+                // Compare the note's content with the issue's note one
                 if ($n[$notesVersionsFields['content']] !== $note->body) {
+                  // Update the note's content
                   $notes->update($idNote, '', $note->body);
                 }
               }
               else {
+                $userID = null;
+                // Get the issue's note author
                 $author = $gitlab->getUser($note->author->id);
-                if (!empty($author['email'])
-                  && ($userID = $getUserID($author['email']))
-                ) {
+                // Check if the git user is an appui user
+                if (!empty($author['email'])) {
+                  $userID = $getUserID($author['email']);
+                }
+                // Otherwise use the external user's ID
+                else if (defined('BBN_EXTERNAL_USER_ID')) {
+                  $userID = BBN_EXTERNAL_USER_ID;
+                }
+                if (!empty($userID)) {
+                  // Set the task's user
                   $task->setUser($userID);
+                  // Add the note to the task
                   if ($idNote = $task->comment($idTask, [
                     'title' => '',
                     'text' => $note->body
