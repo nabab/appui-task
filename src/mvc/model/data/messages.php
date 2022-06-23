@@ -151,6 +151,9 @@ if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_
     ]],
     'group_by' => 'bbn_notes.id',
     'order' => [[
+      'field' => 'bbn_notes.pinned',
+      'dir' => 'DESC'
+    ], [
       'field' => 'last_reply',
       'dir' => 'DESC'
     ], [
