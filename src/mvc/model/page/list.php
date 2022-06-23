@@ -92,6 +92,20 @@ $filters = [
   'conditions' => [[
     'field' => 'bbn_tasks.active',
     'value' => 1
+  ], [
+    'logic' => 'OR',
+    'conditions' => [[
+      'field' => 'bbn_tasks.private',
+      'value' => 0
+    ], [
+      'conditions' => [[
+        'field' => 'bbn_tasks.private',
+        'value' => 1
+      ], [
+        'field' => 'bbn_tasks.id_user',
+        'value' => $id_user
+      ]]
+    ]]
   ]]
 ];
 

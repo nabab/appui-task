@@ -160,6 +160,20 @@
                 "default": 0,
                 "maxlength": 1
             },
+            "id_git": {
+                "type": "int",
+                "null": 1,
+                "key": null,
+                "signed": 0,
+                "default": "NULL",
+                "maxlength": 255
+            },
+            "cfg": {
+                "type": "longtext",
+                "null": 1,
+                "key": null,
+                "default": "NULL"
+            },
             "active": {
                 "type": "tinyint",
                 "null": 0,
@@ -352,6 +366,14 @@
                 "null": 0,
                 "key": "MUL",
                 "maxlength": 16
+            },
+            "id_git": {
+                "type": "int",
+                "null": 1,
+                "key": null,
+                "signed": 0,
+                "default": "NULL",
+                "maxlength": 255
             },
             "active": {
                 "type": "tinyint",

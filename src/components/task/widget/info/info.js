@@ -7,14 +7,15 @@
 (() => {
   return {
     props: ['source'],
-    data(){
-      return {
-        main: this.closest('appui-task-tab-main')
-      }
-    },
     methods: {
+      shorten: bbn.fn.shorten,
       minDate(){
         return dayjs().format('YYYY-MM-DD');
+      },
+      downloadDoc(docId){
+        if (!!docId) {
+          this.postOut(this.root + 'download/media/' + docId);
+        }
       }
     }
   }

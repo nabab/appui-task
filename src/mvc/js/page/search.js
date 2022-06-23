@@ -1,29 +1,36 @@
 (() => {
   return {
     data(){
-      let tasks = this.closest('bbn-router').$parent;
-      return {
-        typeSelection: [{
-          text: bbn._('Mine'),
-          value: 'user'
-        }, {
+      let mainPage = this.closest('appui-task'),
+          typeSelection = [{
+            text: bbn._('Mine'),
+            value: 'user'
+          }];
+      if (!!mainPage.source.privileges && !!mainPage.source.privileges.group) {
+        typeSelection.push({
           text: bbn._('My groups'),
           value: 'group'
-        }, {
+        });
+      }
+      if (!!mainPage.source.privileges && !!mainPage.source.privileges.global) {
+        typeSelection.push({
           text: bbn._('All'),
           value: 'all'
-        }],
+        });
+      }
+      return {
+        typeSelection: typeSelection,
         typeSelected: 'user',
         tableData: [],
         taskTitle: '',
-        tasks: tasks,
+        mainPage: mainPage,
         users: bbn.fn.order(appui.app.users, 'text', 'ASC'),
         priority: Array.apply(null, { length: 9 }).map(Function.call, a => { return a + 1 }),
         filters: {
           conditions: [{
             field: 'state',
             operator: 'neq',
-            value: tasks.source.states.closed
+            value: mainPage.source.states.closed
           }]
         }
       };
@@ -37,17 +44,18 @@
             component: 'appui-task-form-new',
             source: {
               title: this.taskTitle,
-              type: ''
+              type: '',
+              private: 0
             },
             opener: this
           });
         }
       },
       openTask(row){
-        bbn.fn.link(this.source.root + 'task/' + (typeof row === 'object' ? row.id : row) + '/main');
+        bbn.fn.link(this.source.root + 'task/' + (typeof row === 'object' ? row.id : row));
       },
       refreshTable(){
-        this.$refs.tasksTable.updateData();
+        this.getRef('tasksTable').updateData();
       },
       renderPriority(row){
         return '<div class="bbn-overlay bbn-middle">' + row.priority + '</div>';
@@ -58,40 +66,40 @@
       renderState(row){
         let icon,
             color;
-        if ( row.state === this.tasks.source.states.opened ){
+        if ( row.state === this.mainPage.source.states.opened ){
           icon = 'clock';
           color = 'orange';
         }
-        else if ( row.state === this.tasks.source.states.pending ){
+        else if ( row.state === this.mainPage.source.states.pending ){
           icon = 'clock';
           color = 'red';
         }
-        else if ( row.state === this.tasks.source.states.ongoing ){
+        else if ( row.state === this.mainPage.source.states.ongoing ){
           icon = 'play';
           color = 'blue';
         }
-        else if ( row.state === this.tasks.source.states.closed ){
+        else if ( row.state === this.mainPage.source.states.closed ){
           icon = 'check';
           color = 'green';
         }
-        else if ( row.state === this.tasks.source.states.holding ){
+        else if ( row.state === this.mainPage.source.states.holding ){
           icon = 'pause';
           color = 'grey';
         }
-        return '<i class="bbn-lg nf nf-fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.getField(this.tasks.source.options.states, "text", "value", row.state) + '"> </i>';
+        return '<i class="bbn-lg nf nf-fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.getField(this.mainPage.source.options.states, "text", "value", row.state) + '"> </i>';
       },
       renderLast(row){
         return dayjs(row.last_action).calendar();
       },
       renderRole(row){
-        return bbn.fn.getField(this.tasks.source.options.roles, "text", "value", row.role) || '-';
+        return bbn.fn.getField(this.mainPage.source.options.roles, "text", "value", row.role) || '-';
       },
       renderType(row){
-        return bbn.fn.getField(this.tasks.source.options.cats, "text", "value", row.type);
+        return bbn.fn.getField(this.mainPage.source.options.cats, "text", "value", row.type);
       },
       renderDuration(row){
         let start = dayjs(row.creation_date);
-        return row.state === this.tasks.source.states.closed ?
+        return row.state === this.mainPage.source.states.closed ?
           dayjs(row.last_action).from(start, true) :
           dayjs().from(start, true);
       },
@@ -102,7 +110,7 @@
         let t = dayjs(row.deadline),
             diff = t.unix() - dayjs().unix(),
             col = 'green',
-            isClosed = row.state === appui.options.tasks.states.closed,
+            isClosed = row.state === this.mainPage.source.states.closed,
             d = isClosed ? t.calendar() : t.fromNow();
 
         if ( !t.isValid() ){
@@ -136,15 +144,14 @@
       }
     },
     components: {
-      'appui-tasks-user-avatar': {
+      useravatar: {
         template: `
 <bbn-initial v-if="source.id_user"
              :user-id="source.id_user"
              :title="userName"
              :height="25"
              :width="25"
-             :font-size="15"
-></bbn-initial>
+             :font-size="15"/>
         `,
         props: ['source'],
         computed: {

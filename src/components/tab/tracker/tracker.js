@@ -10,9 +10,6 @@
     computed: {
       tasks(){
         return this.closest('appui-task-task').tasks;
-      },
-      trackerComp(){
-        return bbn.vue.find(appui, 'appui-task-tracker');
       }
     },
     methods: {
@@ -20,7 +17,10 @@
         return bbn.fn.getField(appui.app.users, 'text', 'value', row.id_user);
       },
       renderLength(row){
-        return this.trackerComp.secToTime(row.length);
+        let tracker = appui.getRegistered('appui-task-tracker');
+        if (bbn.fn.isVue(tracker)) {
+          return tracker.secToTime(row.length);
+        }
       },
       renderStart(row){
         return dayjs(row.start).format('DD/MM/YYYY HH:mm:ss');

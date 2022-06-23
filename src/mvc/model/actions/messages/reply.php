@@ -16,7 +16,7 @@ if ($model->hasData(['ref', 'text', 'id_parent', 'id_alias'], true) &&
 		$model->data['id_alias']
 	) ){
     $ok = true;
-    $path = BBN_USER_PATH . 'tmp/'.$model->data['ref'] . '/';
+    $path = $model->userTmpPath() . $model->data['ref'].'/';
     if ( is_array($model->data['files']) && !empty($model->data['files']) ){
       foreach ($model->data['files'] as $f ){
         if ( is_file($path.$f['name']) &&

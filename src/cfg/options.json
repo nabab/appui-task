@@ -142,19 +142,27 @@
       "items": [
         {
           "text": "Deciders",
-          "code": "deciders"
+          "code": "deciders",
+          "backgroundColor": "teal",
+          "color": "white"
         },
         {
           "text": "Managers",
-          "code": "managers"
+          "code": "managers",
+          "backgroundColor": "coral",
+          "color": "white"
         },
         {
           "text": "Viewers",
-          "code": "viewers"
+          "code": "viewers",
+          "backgroundColor": "skyblue",
+          "color": "white"
         },
         {
           "text": "Workers",
-          "code": "workers"
+          "code": "workers",
+          "backgroundColor": "darkseagreen",
+          "color": "white"
         }
       ]
     },
@@ -164,37 +172,105 @@
       "items": [
         {
           "text": "Approved",
-          "code": "approved"
+          "code": "approved",
+          "backgroundColor": "darkseagreen",
+          "color": "white"
         },
         {
           "text": "Closed",
-          "code": "closed"
+          "code": "closed",
+          "backgroundColor": "green",
+          "color": "white"
         },
         {
           "text": "On hold",
-          "code": "holding"
+          "code": "holding",
+          "backgroundColor": "orange",
+          "color": "white"
         },
         {
           "text": "Ongoing",
-          "code": "ongoing"
+          "code": "ongoing",
+          "backgroundColor": "dodgerblue",
+          "color": "white"
         },
         {
           "text": "Opened",
-          "code": "opened"
+          "code": "opened",
+          "backgroundColor": "darkgray",
+          "color": "white"
         },
         {
           "text": "Postponed",
-          "code": "postponed"
+          "code": "postponed",
+          "backgroundColor": "salmon",
+          "color": "white"
         },
         {
           "text": "Unapproved",
-          "code": "unapproved"
+          "code": "unapproved",
+          "backgroundColor": "orangered",
+          "color": "white"
         }
       ]
     },
     {
       "text": "Task categories",
-      "code": "cats"
+      "code": "cats",
+      "items": [
+        {
+          "text": "Personal",
+          "code": "personal"
+        },
+        {
+          "text": "Technical service",
+          "code": "support",
+          "items": [
+            {
+              "text": "New feature",
+              "code": "new"
+            },
+            {
+              "text": "Improvement of an existing feature",
+              "code": "enhancement"
+            },
+            {
+              "text": "Report a bug",
+              "code": "bug"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Privileges",
+      "code": "privileges",
+      "items": [
+        {
+          "text": "Decider",
+          "code": "decider"
+        },
+        {
+          "text": "Global",
+          "code": "global"
+        },
+        {
+          "text": "Group",
+          "code": "group"
+        },
+        {
+          "text": "Manager",
+          "code": "manager"
+        },
+        {
+          "text": "Viewer",
+          "code": "viewer"
+        },
+        {
+          "text": "Worker",
+          "code": "worker"
+        }
+      ]
     },
     {
       "text": "Plugins",
@@ -212,18 +288,74 @@
               "icon": "nf nf-mdi-widgets",
               "items": [
                 {
-                  "text": "My current bugs",
-                  "code": "tasks",
-                  "itemComponent": "appui-task-widget-task",
-                  "limit":5
+                  "text": "Actions",
+                  "code": "actions",
+                  "closable": false,
+                  "component": "appui-task-task-widget-actions",
+                  "icon": "nf nf-mdi-play_pause"
+                },
+                {
+                  "text": "Budget",
+                  "code": "budget",
+                  "closable": true,
+                  "component": "appui-task-task-widget-budget",
+                  "icon": "nf nf-fa-money"
                 },
                 {
                   "text": "Last Bugs",
                   "code": "all_tasks",
-                  "limit":5,
-                  "observe":false,
-                  "closable":true,
+                  "limit": 5,
+                  "closable": true,
                   "itemComponent": "appui-task-widget-task"
+                },
+                {
+                  "text": "Info",
+                  "code": "info",
+                  "closable": false,
+                  "component": "appui-task-task-widget-info",
+                  "icon": "nf nf-fa-info bbn-s"
+                },
+                {
+                  "text": "My current bugs",
+                  "code": "tasks",
+                  "itemComponent": "appui-task-widget-task",
+                  "limit": 5
+                },
+                {
+                  "text": "Notes",
+                  "code": "notes",
+                  "closable": true,
+                  "component": "appui-task-task-widget-notes",
+                  "icon": "nf nf-fa-comments"
+                },
+                {
+                  "text": "Roles",
+                  "code": "roles",
+                  "closable": true,
+                  "component": "appui-task-task-widget-roles",
+                  "icon": "nf nf-fa-users"
+                },
+                {
+                  "text": "Sub-Tasks",
+                  "code": "subtasks",
+                  "closable": true,
+                  "itemComponent": "appui-task-task-widget-subtasks",
+                  "limit": 10,
+                  "icon": "nf nf-oct-tasklist"
+                },
+                {
+                  "text": "Tracker",
+                  "code": "tracker",
+                  "closable": true,
+                  "component": "appui-task-task-widget-tracker",
+                  "icon": "nf nf-fa-hourglass_half"
+                },
+                {
+                  "text": "Logs",
+                  "code": "logs",
+                  "closable": true,
+                  "component": "appui-task-task-widget-logs",
+                  "icon": "nf nf-mdi-file_document_box"
                 }
               ]
             }
