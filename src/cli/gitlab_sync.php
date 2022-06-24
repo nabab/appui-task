@@ -55,7 +55,8 @@ if (defined('BBN_GIT_URL')
             if ($idTask = $task->insert([
               'title' => $issue->title,
               'type' => $ctrl->inc->options->fromCode('support', 'cats', 'task', 'appui'),
-              'state' => $ctrl->inc->options->fromCode($issue->state, 'states', 'task', 'appui')
+              'state' => $ctrl->inc->options->fromCode($issue->state, 'states', 'task', 'appui'),
+              'cfg' => \json_encode(['widgets' => ['notes' => 1]])
             ])) {
               $ctrl->db->update('bbn_tasks', ['id_git' => $issue->id], ['id' => $idTask]);
               $did++;
@@ -99,6 +100,8 @@ if (defined('BBN_GIT_URL')
                 if (!empty($userID)) {
                   // Set the task's user
                   $task->setUser($userID);
+                  // Set the task's date
+                  $task->setDate(date('Y-m-d H:i:s', strtotime(!empty($note->updated_at) ? $note->updated_at : $note->created_at)));
                   // Add the note to the task
                   if ($idNote = $task->comment($idTask, [
                     'title' => '',
