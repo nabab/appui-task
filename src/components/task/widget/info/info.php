@@ -34,7 +34,8 @@
                 v-model="source.type"
                 :value="source.type"
                 :disabled="!task.canChange"
-                group="group"/>
+                group="group"
+                :groupable="true"/>
   <label><?=_('Priority')?></label>
   <bbn-dropdown v-model="source.priority"
                 style="width: 80px"

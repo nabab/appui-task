@@ -15,6 +15,7 @@ if (defined('BBN_GIT_URL')
   $usersCfg = $ctrl->inc->user->getClassCfg();
   $usersFields = $usersCfg['arch']['users'];
   $idTypeNote = $ctrl->inc->options->fromCode('tasks', 'types', 'note', 'appui');
+  $idCatSupportTask = $ctrl->inc->options->fromCode('support', 'cats', 'task', 'appui');
   $did = 0;
 
   $getUserID = function($email) use($ctrl, $usersCfg, $usersFields){
@@ -54,7 +55,7 @@ if (defined('BBN_GIT_URL')
             // Create the task
             if ($idTask = $task->insert([
               'title' => $issue->title,
-              'type' => $ctrl->inc->options->fromCode('support', 'cats', 'task', 'appui'),
+              'type' => $idCatSupportTask,
               'state' => $ctrl->inc->options->fromCode($issue->state, 'states', 'task', 'appui'),
               'cfg' => \json_encode(['widgets' => ['notes' => 1]])
             ])) {
@@ -123,5 +124,47 @@ if (defined('BBN_GIT_URL')
     }
   }
 
+  if ($tasks = $ctrl->db->selectAll([
+      'table' => 'bbn_tasks',
+      'fields' => [],
+      'where' => [
+        'conditions' => [[
+          'logic' => 'OR',
+            'conditions' => [[
+            'field' => 'type',
+            'value' => $idCatSupportTask
+            ], ...array_map(function($o){
+              return [
+                'field' => 'type',
+                'value' => $o
+              ];
+            }, $ctrl->inc->options->items($idCatSupportTask))]
+        ], [
+          'field' => 'state',
+          'operator' => '!=',
+          'value' => $ctrl->inc->options->fromCode('closed', 'states', 'task', 'appui')
+        ], [
+          'field' => 'active',
+          'value' => 1
+        ]]
+      ]
+    ])
+  ) {
+    foreach ($tasks as $t) {
+      if (empty($t->id_git)) {
+        if (($idGit = $gitlab->createIssue(BBN_GIT_PROJECT_ID, $t->title, $t->creation_date))
+          && $task->setGit($t->id, $idGit)
+        ) {
+          $did++;
+        }
+      }
+      else {
+
+      }
+      if (!empty($idGit)) {
+
+      }
+    }
+  }
   echo sprintf(_('Did: %d'), $did) . PHP_EOL;
 }
