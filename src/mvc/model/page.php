@@ -30,7 +30,6 @@ $d = [
     }, Task::getAppuiOptionsTextValue('roles')),
     'cats' => Task::catCorrespondances()
   ],
-  'categories' => Task::getOptionsTree('cats'),
   'usergroup' => $model->inc->user->getGroup(),
   'groups' => array_map(function($g) use($arch){
     $g['text'] = $g[$arch['group']];
