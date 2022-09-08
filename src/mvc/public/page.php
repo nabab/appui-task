@@ -5,7 +5,7 @@
  **/
 
 /** @var $ctrl \bbn\Mvc\Controller */
-if ( strpos(BBN_BASEURL, APPUI_TASKS_ROOT . 'page/') !== 0 ){
+if (defined('BBN_BASEURL') && strpos(BBN_BASEURL, APPUI_TASKS_ROOT . 'page/') !== 0) {
   $ctrl->obj->url = APPUI_TASKS_ROOT . 'page';
   $ctrl
     ->setColor('#000', '#FFF')
