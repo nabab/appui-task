@@ -166,12 +166,14 @@
                 "key": null,
                 "signed": 0,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 255
             },
             "cfg": {
                 "type": "longtext",
                 "null": 1,
                 "key": null,
+                "defaultExpression": 1,
                 "default": "NULL"
             },
             "active": {
@@ -372,6 +374,7 @@
                 "null": 1,
                 "key": null,
                 "signed": 0,
+                "defaultExpression": 1,
                 "default": "NULL",
                 "maxlength": 255
             },
