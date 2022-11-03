@@ -44,6 +44,31 @@ if (
           });
         }
       }
+      $vcs = new \bbn\Appui\Vcs($model->db);
+      if ((($old['content'] !== $model->data['text'])
+          || ($old['locked'] != $model->data['locked']))
+        && ($vcsNote = $vcs->getAppuiTaskNoteByNote($model->data['id']))
+        && ($vcsTask = $vcs->getAppuiTaskById($vcsNote['id_parent']))
+      ) {
+        try {
+          $hasVcsToken = $vcs->getUserAccessToken($vcsTask['id_server']);
+        }
+        catch(\Exception $e) {
+          $hasVcsToken = false;
+        }
+        if (!empty($hasVcsToken)) {
+          $n = $notes->get($model->data['id']);
+          $vcs->changeServer($vcsTask['id_server'])
+            ->editProjectIssueComment(
+              $vcsTask['id_project'],
+              $vcsTask['id_issue'],
+              $vcsNote['id_comment'],
+              $model->data['text'],
+              (bool)$model->data['locked'],
+              $n['creation']
+            );
+        }
+      }
     }
     else {
       $ok = false;

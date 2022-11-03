@@ -11,6 +11,29 @@ if (
 ){
   $notes = new \bbn\Appui\Note($model->db);
   if ( $notes->remove($model->data['id'], true) ){
+
+    $vcs = new \bbn\Appui\Vcs($model->db);
+    if (($vcsNote = $vcs->getAppuiTaskNoteByNote($model->data['id']))
+      && ($vcsTask = $vcs->getAppuiTaskById($vcsNote['id_parent']))
+    ) {
+      try {
+        $hasVcsToken = $vcs->getUserAccessToken($vcsTask['id_server']);
+      }
+      catch(\Exception $e) {
+        $hasVcsToken = false;
+      }
+      if (!empty($hasVcsToken)) {
+        $vcs->changeServer($vcsTask['id_server']);
+        if ($vcs->deleteProjectIssueComment(
+          $vcsTask['id_project'],
+          $vcsTask['id_issue'],
+          $vcsNote['id_comment']
+        )) {
+          $vcs->removeAppuiTaskNoteLink($vcsTask['id'], $model->data['id']);
+        }
+      }
+    }
+
     /** @todo To remove this and add an apposite function in grid */
     $model->getModel($model->pluginUrl('appui-ide').'/data_cache', [
       'deleteCache' => 'bbn/appui/grid',
