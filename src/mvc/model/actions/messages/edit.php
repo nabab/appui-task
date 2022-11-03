@@ -58,15 +58,18 @@ if (
         }
         if (!empty($hasVcsToken)) {
           $n = $notes->get($model->data['id']);
-          $vcs->changeServer($vcsTask['id_server'])
-            ->editProjectIssueComment(
-              $vcsTask['id_project'],
-              $vcsTask['id_issue'],
-              $vcsNote['id_comment'],
-              $model->data['text'],
-              (bool)$model->data['locked'],
-              $n['creation']
-            );
+          $vcs->changeServer($vcsTask['id_server']);
+          $vcs->addToTasksQueue($vcsTask['id_project'], 'export', [
+            'type' => 'comment',
+            'action' => 'update',
+            'idUser' => $model->inc->user->getId(),
+            'idIssue' => $vcsTask['id_issue'],
+            'idNote' => $model->data['id'],
+            'text' => $model->data['text'],
+            'locked' => empty($model->data['locked']) ? 0 : 1,
+            'created' => $n['creation'],
+            'updated' => $n['creation']
+          ]);
         }
       }
     }

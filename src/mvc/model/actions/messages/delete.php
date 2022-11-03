@@ -24,13 +24,14 @@ if (
       }
       if (!empty($hasVcsToken)) {
         $vcs->changeServer($vcsTask['id_server']);
-        if ($vcs->deleteProjectIssueComment(
-          $vcsTask['id_project'],
-          $vcsTask['id_issue'],
-          $vcsNote['id_comment']
-        )) {
-          $vcs->removeAppuiTaskNoteLink($vcsTask['id'], $model->data['id']);
-        }
+        $vcs->addToTasksQueue($vcsTask['id_project'], 'export', [
+          'type' => 'comment',
+          'action' => 'delete',
+          'idUser' => $model->inc->user->getId(),
+          'idIssue' => $vcsTask['id_issue'],
+          'idNote' => $model->data['id'],
+          'idComment' => $vcsNote['id_comment']
+        ]);
       }
     }
 

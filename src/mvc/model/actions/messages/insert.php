@@ -55,17 +55,19 @@ if (!empty($model->data['ref'])
         $hasVcsToken = false;
       }
       if (!empty($hasVcsToken)) {
-        $vcs->changeServer($vcsTask['id_server']);
         $n = $notes->get($id_note);
-        if ($vcsNote = $vcs->insertProjectIssueComment(
-          $vcsTask['id_project'],
-          $vcsTask['id_issue'],
-          $model->data['text'],
-          (bool)$model->data['locked'],
-          $n['creation']
-        )) {
-          $vcs->addAppuiTaskNoteLink($vcsTask['id'], $id_note, $vcsTask['id_project'], $vcsNote['id']);
-        }
+        $vcs->changeServer($vcsTask['id_server']);
+        $vcs->addToTasksQueue($vcsTask['id_project'], 'export', [
+          'type' => 'comment',
+          'action' => 'insert',
+          'idUser' => $model->inc->user->getId(),
+          'idIssue' => $vcsTask['id_issue'],
+          'idNote' => $id_note,
+          'text' => $model->data['text'],
+          'locked' => empty($model->data['locked']) ? 0 : 1,
+          'created' => $n['creation'],
+          'updated' => $n['creation']
+        ]);
       }
     }
     if ($ok) {
