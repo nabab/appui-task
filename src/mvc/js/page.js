@@ -64,6 +64,7 @@
       }
     },
     methods: {
+      isMobile: bbn.fn.isMobile,
       userName(id){
         return bbn.fn.getField(appui.app.users, 'text', 'value', id);
       },
