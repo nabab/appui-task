@@ -16,6 +16,9 @@
         if (!!docId) {
           this.postOut(this.root + 'download/media/' + docId);
         }
+      },
+      isYou(id){
+        return appui.app.user.id === id;
       }
     }
   }

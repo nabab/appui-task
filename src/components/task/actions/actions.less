@@ -1,7 +1,16 @@
-.appui-task-task-widget-actions {
+.appui-task-task-actions {
   .bbn-button {
     height: 3rem !important;
     width: 3rem !important;
     font-size: x-large !important;
+  }
+  .appui-task-task-actions-item {
+    &:has(+ .appui-task-task-actions-title) {
+      border-bottom: 0 !important;
+    }
+    justify-content: center;
+    &:last-of-type {
+      border-bottom: 0 !important;
+    }
   }
 }

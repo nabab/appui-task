@@ -21,7 +21,8 @@ $fields = [
   'bbn_tasks.type',
   'bbn_tasks.id_parent',
   'bbn_tasks.id_user',
-  'bbn_tasks.title',
+  'bbn_notes_versions.title',
+  'bbn_notes_versions.content',
   'bbn_tasks.state',
   'bbn_tasks.priority',
   'bbn_tasks.id_alias',
@@ -38,6 +39,17 @@ $fields = [
 ];
 
 $join = [[
+  'table' => 'bbn_notes_versions',
+  'on' => [
+    'conditions' => [[
+      'field' => 'bbn_notes_versions.id_note',
+      'exp' => 'bbn_tasks.id_note'
+    ], [
+      'field' => 'bbn_notes_versions.latest',
+      'value' => 1
+    ]]
+  ]
+], [
   'table' => 'bbn_tasks_roles',
   'type' => 'left',
   'alias' => 'my_role',
@@ -155,7 +167,7 @@ if ( isset($ext_filters['selection']) ){
 
 if ( !empty($ext_filters['title']) ){
   $filters['conditions'][] = [
-    'field' => 'bbn_tasks.title',
+    'field' => 'bbn_notes_versions.title',
     'operator' => 'contains',
     'value' => $ext_filters['title']
   ];

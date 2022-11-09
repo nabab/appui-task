@@ -61,6 +61,17 @@
                 "update": "CASCADE",
                 "delete": "RESTRICT",
                 "unique": 0
+            },
+            "id_note": {
+                "columns": [
+                    "id_note"
+                ],
+                "ref_table": "bbn_notes",
+                "ref_column": "id",
+                "constraint": "bbn_tasks_ibfk_7",
+                "update": "CASCADE",
+                "delete": "RESTRICT",
+                "unique": 0
             }
         },
         "cols": {
@@ -81,6 +92,9 @@
             ],
             "state": [
                 "state"
+            ],
+            "id_note": [
+                "id_note"
             ]
         },
         "fields": {
@@ -108,6 +122,19 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
+                "maxlength": 16
+            },
+            "id_note": {
+                "position": 5,
+                "type": "binary",
+                "null": 1,
+                "key": "MUL",
+                "extra": "",
+                "signed": 1,
+                "virtual": false,
+                "generation": null,
+                "default": "NULL",
+                "defaultExpression": false,
                 "maxlength": 16
             },
             "title": {
@@ -159,15 +186,6 @@
                 "null": 0,
                 "default": 0,
                 "maxlength": 1
-            },
-            "id_git": {
-                "type": "int",
-                "null": 1,
-                "key": null,
-                "signed": 0,
-                "default": "NULL",
-                "defaultExpression": 1,
-                "maxlength": 255
             },
             "cfg": {
                 "type": "longtext",
@@ -368,15 +386,6 @@
                 "null": 0,
                 "key": "MUL",
                 "maxlength": 16
-            },
-            "id_git": {
-                "type": "int",
-                "null": 1,
-                "key": null,
-                "signed": 0,
-                "defaultExpression": 1,
-                "default": "NULL",
-                "maxlength": 255
             },
             "active": {
                 "type": "tinyint",

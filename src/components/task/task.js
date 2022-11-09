@@ -830,6 +830,12 @@
             }
           });
         }
+      },
+      toggleMobileMenu(){
+        let widgetPanel = this.getRef('slider');
+        if (widgetPanel) {
+          widgetPanel.toggle();
+        }
       }
     },
     created(){
