@@ -43,6 +43,10 @@
           "code": "price_insert"
         },
         {
+          "text": "Added the description %s",
+          "code": "content_insert"
+        },
+        {
           "text": "Approved the price %s \u20ac",
           "code": "price_approved"
         },
@@ -73,6 +77,10 @@
         {
           "text": "Changed the title from %s to %s",
           "code": "title_update"
+        },
+        {
+          "text": "Changed the description from %s to %s",
+          "code": "content_update"
         },
         {
           "text": "Changed the type from %s to %s",
@@ -117,6 +125,10 @@
         {
           "text": "Removed the deadline for %s",
           "code": "deadline_delete"
+        },
+        {
+          "text": "Removed the description",
+          "code": "content_delete"
         },
         {
           "text": "Reopened the task",

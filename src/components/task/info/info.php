@@ -13,12 +13,25 @@
          :title="_('Created at')"
          class="bbn-s"/>
   </div>
-  <bbn-textarea v-model="source.title"
-                class="bbn-xl"
+  <!--<bbn-textarea v-model="source.title"
+                class="bbn-lg"
                 :readonly="!task.canChange"
-                :maxlength="100"
-                :rows="4"
-                style="width: 100%"/>
+                :maxlength="255"
+                :rows="3"
+                style="width: 100%"
+                :placeholder="_('Title')"/>-->
+  <bbn-rte v-model="source.title"
+           :readonly="!task.canChange"
+           :maxlength="255"
+           style="width: 100%"
+           :placeholder="_('Title')"
+           height="12rem"/>
+  <bbn-rte v-model="source.content"
+           class="bbn-top-sspace"
+           :readonly="!task.canChange"
+           :placeholder="_('Description')"
+           style="width: 100%"
+           height="20rem"/>
   <div class="bbn-grid-fields bbn-top-space bbn-l"
        :style="{
          display: 'grid !important',

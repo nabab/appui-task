@@ -11,6 +11,13 @@
         type: Object
       }
     },
+    data(){
+      return {
+        isManagerOpen: false,
+        isWorkerOpen: true,
+        isViewerOpen: true
+      }
+    },
     computed: {
       managers(){
         return bbn.fn.order(bbn.fn.map(this.source.roles.managers.slice(), u => {

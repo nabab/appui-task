@@ -862,6 +862,14 @@
            }, 1000);
          }
       },
+      'source.content'(val){
+        if (this.descriptionTimeout) {
+          clearTimeout(this.descriptionTimeout);
+        }
+        this.descriptionTimeout = setTimeout(() => {
+          this.update('content', val);
+        }, 1000);
+     },
       'source.type'(val){
          return this.update('type', val);
       },

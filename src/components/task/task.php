@@ -162,7 +162,7 @@
            style="padding-left: 0">
         <div class="bbn-flex-height bbn-radius">
           <div class="bbn-bordered-top bbn-spadded bbn-radius-top bbn-alt-background bbn-bordered-left bbn-bordered-right">
-            <div class="bbn-spadded bbn-background bbn-c bbn-b bbn-radius bbn-secondary-text-alt bbn-upper bbn-bottom-sspace bbn-m"
+            <div class="bbn-spadded bbn-background bbn-c bbn-b bbn-radius bbn-tertiary-text-alt bbn-upper bbn-bottom-sspace bbn-lg"
                  v-text="_('Widgets')"/>
           </div>
           <div class="bbn-flex-fill">
