@@ -1,33 +1,30 @@
-<div class="appui-task-task-widget-subtasks bbn-box bbn-flex-width">
-  <div class="bbn-spadded bbn-flex-fill">
-    <div class="bbn-grid-fields">
-      <label class="bbn-label"
-             v-text="_('Title')"/>
-      <a class="bbn-flex-fill bbn-bordered-bottom"
-         v-text="source.title"
-         :href="root + 'page/task/' + source.id"/>
-      <label class="bbn-label"
-             v-text="_('Created on')"/>
-      <div v-text="creationDate"
-           class="bbn-bordered-bottom"/>
-      <label class="bbn-label"
-             v-text="_('Status')"/>
-      <div v-text="state"
-           :style="{color: !!stateCode ? getStatusBgColor(stateCode) : false}"
-           :class="{'bbn-bordered-bottom': !!role}"/>
-      <label v-if="!!role"
-             class="bbn-label"
-             v-text="_('Role')"/>
-      <div v-if="!!role"
-           v-text="role"
-           :style="{color: !!roleCode ? getRoleBgColor(roleCode) : false}"/>
+<div class="appui-task-task-widget-subtasks bbn-radius bbn-background bbn-spadded">
+  <div class="bbn-flex-width bbn-vmiddle">
+    <div class="bbn-flex-fill bbn-upper bbn-b bbn-spadded bbn-radius bbn-c bbn-right-sspace bbn-s"
+         v-text="state"
+         :style="{
+           color: getStatusColor(stateCode) + '!important',
+           backgroundColor: getStatusBgColor(stateCode) + '!important'
+         }"
+         :title="_('Status')"/>
+    <div v-if="!!role"
+         class="bbn-alt-background bbn-radius bbn-spadded bbn-right-sspace bbn-alt-text bbn-s bbn-b bbn-vmiddle"
+         :style="{color: !!roleCode ? getRoleBgColor(roleCode) + '!important' : false}"
+         :title="_('Role')">
+      <i class="nf nf-fa-users bbn-right-xsspace"/>
+      <span v-text="role"/>
     </div>
-  </div>
-  <div class="bbn-left-sspace">
-    <bbn-button icon="nf nf-fa-eye bbn-lg"
+    <div class="bbn-alt-background bbn-radius bbn-spadded bbn-right-sspace bbn-secondary-text-alt bbn-s bbn-b bbn-vmiddle"
+         :title="_('Created on')">
+      <i class="nf nf-mdi-calendar bbn-right-xsspace"/>
+      <span v-text="creationDate"/>
+    </div>
+    <bbn-button icon="nf nf-fa-eye"
                 :notext="true"
-                class="bbn-h-100 bbn-no-border-top bbn-no-border-right bbn-no-border-bottom bbn-primary"
+                class="bbn-no-border bbn-primary"
                 @click="openTask"
-                style="width: 2em"/>
+                :title="_('Open task')"/>
   </div>
+  <div class="bbn-radius bbn-top-sspace"
+       v-html="source.title"/>
 </div>

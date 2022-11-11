@@ -90,8 +90,7 @@
     <div v-if="isWorkerOpen"
          v-for="r in workers"
          class="bbn-smargin">
-      <div class="bbn-vmiddle bbn-flex-width bbn-alt-background bbn-alt-text"
-           style="border-radius: 3px">
+      <div class="bbn-vmiddle bbn-flex-width bbn-alt-background bbn-alt-text bbn-radius">
         <bbn-initial :user-id="r.idUser"
                      :height="25"
                      :width="25"
@@ -148,8 +147,7 @@
     <div v-if="isViewerOpen"
          v-for="r in viewers"
          class="bbn-smargin">
-      <div class="bbn-vmiddle bbn-flex-width bbn-alt-background bbn-alt-text"
-           style="border-radius: 3px">
+      <div class="bbn-vmiddle bbn-flex-width bbn-alt-background bbn-alt-text bbn-radius">
         <bbn-initial :user-id="r.idUser"
                      :height="25"
                      :width="25"

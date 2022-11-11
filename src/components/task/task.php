@@ -156,7 +156,7 @@
       </div>
     </div>
     <div class="bbn-rel"
-         style="width: 200px"
+         style="width: 300px"
          v-if="widgetsAvailable.length && !mainPage.isMobile()">
       <div class="bbn-overlay bbn-padded bbn-background"
            style="padding-left: 0">
