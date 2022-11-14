@@ -300,13 +300,6 @@
               "icon": "nf nf-mdi-widgets",
               "items": [
                 {
-                  "text": "Actions",
-                  "code": "actions",
-                  "closable": false,
-                  "component": "appui-task-task-widget-actions",
-                  "icon": "nf nf-mdi-play_pause"
-                },
-                {
                   "text": "Budget",
                   "code": "budget",
                   "closable": true,
@@ -319,13 +312,6 @@
                   "limit": 5,
                   "closable": true,
                   "itemComponent": "appui-task-widget-task"
-                },
-                {
-                  "text": "Info",
-                  "code": "info",
-                  "closable": false,
-                  "component": "appui-task-task-widget-info",
-                  "icon": "nf nf-fa-info bbn-s"
                 },
                 {
                   "text": "My current bugs",

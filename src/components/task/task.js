@@ -229,6 +229,9 @@
       isAdded() {
         return this.isManager || this.isWorker || this.isViewer;
       },
+      isGlobal(){
+        return !!this.privileges.global;
+      },
       isMaster() {
         return this.userId === this.source.id_user;
       },
@@ -284,10 +287,10 @@
           && (this.source.approved.chrono > this.source.lastChangePrice.chrono);
       },
       canStart() {
-        return this.isOpened && (this.isManager || this.isWorker);
+        return this.isOpened && (this.isManager || this.isWorker || this.isGlobal);
       },
       canHold() {
-        return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker);
+        return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
       },
       canClose() {
         return this.isManager && !this.isClosed;

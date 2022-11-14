@@ -46,7 +46,7 @@
         <span v-text="r.userName"
               class="bbn-hsmargin bbn-flex-fill"/>
         <i class="nf nf-fa-trash bbn-p bbn-red bbn-right-sspace"
-           v-if="task.canChange && (managers.length > 1) && (r.idUser !== source.id_user)"
+           v-if="task.canChange && (managers.length > 1) && (r.idUser !== source.id_user) && (task.isAdmin || task.isGlobal)"
            @click="removeRole(r.idUser, 'managers')"
            title="<?=_('Remove')?>"/>
       </div>
@@ -115,7 +115,8 @@
   <div class="bbn-w-100 bbn-radius bbn-bordered bbn-background"
        :style="{
          borderColor: getRoleBgColor('viewers') + '!important'
-       }">
+       }"
+       v-if="task.isManager || task.isGlobal">
     <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadded', {
            'bbn-radius-top': isViewerOpen,
            'bbn-radius': !isViewerOpen

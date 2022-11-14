@@ -13,19 +13,13 @@
          :title="_('Created at')"
          class="bbn-s"/>
   </div>
-  <!--<bbn-textarea v-model="source.title"
+  <bbn-textarea v-model="source.title"
                 class="bbn-lg"
                 :readonly="!task.canChange"
                 :maxlength="255"
                 :rows="3"
                 style="width: 100%"
-                :placeholder="_('Title')"/>-->
-  <bbn-rte v-model="source.title"
-           :readonly="!task.canChange"
-           :maxlength="255"
-           style="width: 100%"
-           :placeholder="_('Title')"
-           height="12rem"/>
+                :placeholder="_('Title')"/>
   <bbn-rte v-model="source.content"
            class="bbn-top-sspace"
            :readonly="!task.canChange"
