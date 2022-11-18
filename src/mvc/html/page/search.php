@@ -22,7 +22,7 @@
     </div>
   </bbn-pane>
   <bbn-pane>
-    <bbn-table :source="source.root + 'list'"
+    <bbn-table :source="root + '/data/list'"
                :data="{
                  selection: typeSelected,
                  title: taskTitle

@@ -1,27 +1,22 @@
 (() => {
   return {
+    props: {
+      source: {
+        type: Object,
+        required: true
+      },
+      filter: {
+        type: String,
+        required: true,
+        validation: f => ['user', 'group', 'all'].includes(f)
+      },
+      search: {
+        type: String
+      }
+    },
     data(){
-      let mainPage = this.closest('appui-task'),
-          typeSelection = [{
-            text: bbn._('Mine'),
-            value: 'user'
-          }];
-      if (!!mainPage.source.privileges && !!mainPage.source.privileges.group) {
-        typeSelection.push({
-          text: bbn._('My groups'),
-          value: 'group'
-        });
-      }
-      if (!!mainPage.source.privileges && !!mainPage.source.privileges.global) {
-        typeSelection.push({
-          text: bbn._('All'),
-          value: 'all'
-        });
-      }
+      const mainPage = this.closest('appui-task');
       return {
-        root: appui.plugins['appui-task'] + '/',
-        typeSelection: typeSelection,
-        typeSelected: 'user',
         tableData: [],
         taskTitle: '',
         mainPage: mainPage,
@@ -35,6 +30,14 @@
           }]
         }
       };
+    },
+    computed: {
+      currentData(){
+        return {
+          selection: this.filter,
+          title: this.search
+        }
+      }
     },
     methods: {
       createTask(){
@@ -53,41 +56,43 @@
         }
       },
       openTask(row){
-        bbn.fn.link(this.source.root + 'task/' + (typeof row === 'object' ? row.id : row));
+        bbn.fn.link(this.mainPage.root + 'page/task/' + (typeof row === 'object' ? row.id : row));
       },
       refreshTable(){
         this.getRef('tasksTable').updateData();
       },
       renderPriority(row){
-        return '<div class="bbn-overlay bbn-middle">' + row.priority + '</div>';
+        return `<div class="bbn-overlay bbn-middle">${row.priority}</div>`;
       },
       priorityClass(row){
-        return 'bbn-c bbn-task-pr' + row.priority;
+        return `bbn-c bbn-task-pr${row.priority}`;
       },
       renderState(row){
         let icon,
             color;
-        if ( row.state === this.mainPage.source.states.opened ){
-          icon = 'clock';
-          color = 'orange';
+        switch (row.state) {
+          case this.mainPage.source.states.opened:
+            icon = 'clock';
+            color = 'orange';
+            break;
+          case this.mainPage.source.states.pending:
+            icon = 'clock';
+            color = 'red';
+            break;
+          case this.mainPage.source.states.ongoing:
+            icon = 'play';
+            color = 'blue';
+            break;
+          case this.mainPage.source.states.closed:
+            icon = 'check';
+            color = 'green';
+            break;
+          case this.mainPage.source.states.holding:
+            icon = 'pause';
+            color = 'grey';
+            break;
         }
-        else if ( row.state === this.mainPage.source.states.pending ){
-          icon = 'clock';
-          color = 'red';
-        }
-        else if ( row.state === this.mainPage.source.states.ongoing ){
-          icon = 'play';
-          color = 'blue';
-        }
-        else if ( row.state === this.mainPage.source.states.closed ){
-          icon = 'check';
-          color = 'green';
-        }
-        else if ( row.state === this.mainPage.source.states.holding ){
-          icon = 'pause';
-          color = 'grey';
-        }
-        return '<i class="bbn-lg nf nf-fa-' + icon + '" style="color: ' + color + '" style="" title="' + bbn.fn.getField(this.mainPage.source.options.states, "text", "value", row.state) + '"> </i>';
+        return `<i class="bbn-lg nf nf-fa-${icon}" style="color: ${color}" title="${bbn.fn.getField(this.mainPage.source.options.states, "text", "value", row.state)}"/>`;
       },
       renderLast(row){
         return dayjs(row.last_action).calendar();
@@ -130,12 +135,12 @@
       }
     },
     watch: {
-      typeSelected(val){
+      'currentData.selection'(val){
         this.$nextTick(() => {
           this.refreshTable();
         });
       },
-      taskTitle(val){
+      'currenData.title'(val){
         if ( this.titleTimeout ){
           clearTimeout(this.titleTimeout);
         }

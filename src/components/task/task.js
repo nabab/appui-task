@@ -8,17 +8,11 @@
   let mixins = [{
     data(){
       return {
-        _task: null,
-        _mainPage: null
+        task: null,
+        mainPage: null
       };
     },
     computed:{
-      task(){
-        return this._task;
-      },
-      mainPage(){
-        return this._mainPage;
-      },
       root(){
         return !!this.mainPage ? this.mainPage.root : '';
       },
@@ -108,8 +102,8 @@
       }
     },
     created(){
-      this._mainPage = this.closest('appui-task');
-      this._task = this.closest('appui-task-task');
+      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'task', this.closest('appui-task-task'));
     }
   }];
   bbn.vue.addPrefix('appui-task-task-', (tag, resolve, reject) => {
@@ -293,35 +287,28 @@
         return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
       },
       canClose() {
-        return this.isManager && !this.isClosed;
+        return (this.isManager || this.isGlobal) && !this.isClosed;
       },
       canResume() {
-        return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker);
+        return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
       },
       canPing() {
-        return this.isManager && !this.isClosed;
+        return (this.isManager || this.isGlobal) && !this.isClosed;
       },
-      canOpen() {
-        /** @todo ??? */
-        return false;
+      canReopen() {
+        return (this.isManager || this.isGlobal) && this.isClosed;
       },
       canChange() {
-        return !this.isClosed && (this.isMaster || (!this.source.private && this.isManager));
+        return !this.isClosed && (this.isMaster || this.isGlobal || (!this.source.private && this.isManager));
       },
       canApprove() {
         return this.isDecider && !this.isClosed;
       },
       canChangeDecider() {
-        return (this.isDecider || this.isAdmin) && (this.source.roles.deciders !== undefined) && !this.isClosed;
+        return (this.isDecider || this.isAdmin || this.isGlobal) && (this.source.roles.deciders !== undefined) && !this.isClosed;
       },
       hasComments() {
         return !!this.source.notes.length;
-      },
-      canMakeMe() {
-        /** @todo to create a configuration interface */
-        return (this.mainPage.source.usergroup === 1) ||
-          (this.mainPage.source.usergroup === 7) ||
-          (this.mainPage.source.usergroup === 18);
       },
       canUnmakeMe() {
         return this.canRevemoHimselfManager
@@ -336,28 +323,26 @@
         return 0;
       },
       canBill() {
-        return (this.source.state === this.mainPage.source.states.closed) &&
-        this.isApproved &&
-          this.isAdmin &&
-          (appui.plugins['appui-billing'] !== undefined);
+        return (this.source.state === this.mainPage.source.states.closed)
+          && this.isApproved
+          && this.isAdmin
+          && (appui.plugins['appui-billing'] !== undefined);
       },
       hasInvoice() {
         return !!this.source.invoice;
       },
       canBecomeManager(){
-        return !!this.privileges.manager && !this.isManager;
+        return (!!this.privileges.manager || this.isGlobal) && !this.isManager;
       },
       canBecomeWorker(){
-        return !!this.privileges.worker
+        return (!!this.privileges.worker || this.isGlobal)
           && !this.isWorker
-          && (!this.isManager
-            || (this.source.roles.managers.length > 1));
+          && (!this.isManager || (this.source.roles.managers.length > 1));
       },
       canBecomeViewer(){
-        return !!this.privileges.viewer
+        return (!!this.privileges.viewer || this.isGlobal)
           && !this.isViewer
-          && (!this.isManager
-            || (this.source.roles.managers.length > 1));
+          && (!this.isManager || (this.source.roles.managers.length > 1));
       },
       canBecomeDecider(){
         return !!this.privileges.decider
@@ -366,21 +351,21 @@
             || (this.source.roles.managers.length > 1));
       },
       canRevemoHimselfManager(){
-        return !!this.privileges.manager
+        return (!!this.privileges.manager || this.isGlobal)
           && !!this.isManager
           && !this.isMaster
           && (this.source.roles.managers.length > 1);
       },
       canRevemoHimselfWorker(){
-        return !!this.privileges.worker
+        return (!!this.privileges.worker || this.isGlobal)
           && !!this.isWorker;
       },
       canRevemoHimselfViewer(){
-        return !!this.privileges.viewer
+        return (!!this.privileges.viewer || this.isGlobal)
           && !!this.isViewer;
       },
       canRevemoHimselfDecider(){
-        return !!this.privileges.decider
+        return (!!this.privileges.decider || this.isGlobal)
           && !!this.isDecider;
       }
     },
@@ -424,45 +409,60 @@
         this.source.deadline = null;
       },
       start() {
-        this.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
-          this.update('state', this.mainPage.source.states.ongoing);
-        });
+        if (this.canStart) {
+          this.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
+            this.update('state', this.mainPage.source.states.ongoing);
+          });
+        }
       },
       hold() {
-        this.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
-          this.update('state', this.mainPage.source.states.holding);
-        });
+        if (this.canHold) {
+          this.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
+            this.update('state', this.mainPage.source.states.holding);
+          });
+        }
       },
       close() {
-        this.confirm(bbn._("Are you sure you want to close this task?"), () => {
-          this.update('state', this.mainPage.source.states.closed);
-        });
+        if (this.canClose) {
+          this.confirm(bbn._("Are you sure you want to close this task?"), () => {
+            this.update('state', this.mainPage.source.states.closed);
+          });
+        }
       },
       resume() {
-        this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
-          this.update('state', this.mainPage.source.states.ongoing);
-        });
+        if (this.canResume) {
+          this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
+            this.update('state', this.mainPage.source.states.ongoing);
+          });
+        }
       },
       ping(){
-        this.confirm(bbn._('Are you sure you want to ping the task?'), () => {
-          this.post(this.root + 'actions/task/ping', { id_task: this.source.id }, (d) => {
-            if ( d.success ){
-              appui.success(bbn._('Pinged'));
-            }
-            else{
-              appui.error(bbn._('Error'));
-            }
+        if (this.canPing) {
+          this.confirm(bbn._('Are you sure you want to ping the task?'), () => {
+            this.post(this.root + 'actions/task/ping', { id_task: this.source.id }, (d) => {
+              if ( d.success ){
+                appui.success(bbn._('Pinged'));
+              }
+              else{
+                appui.error(bbn._('Error'));
+              }
+            });
           });
-        });
+        }
       },
       reopen() {
-        /** @todo ???? */
+        if (this.canReopen) {
+          this.confirm(bbn._("Are you sure you want to reopen this task?"), () => {
+            this.update('state', this.mainPage.source.states.opened);
+          });
+        }
       },
       _makeMe(role){
         if (this.source.id
           && !!role
           && this.mainPage.source.roles[role]
           && !this.source.roles[role].includes(appui.app.user.id)
+          && !!this['canBecome' + bbn.fn.correctCase(role)]
         ) {
           return this.post(this.root + 'actions/role/insert', {
             id_task: this.source.id,
@@ -480,7 +480,10 @@
         }
       },
       makeMe(role) {
-        if (!!role && this.mainPage.source.roles[role]) {
+        if (!!role
+          && this.mainPage.source.roles[role]
+          && !!this['canBecome' + bbn.fn.correctCase(role)]
+        ) {
           this.confirm(bbn._('Are you sure?'), () => {
             let exists = !!bbn.fn.filter([].concat(...Object.values(this.source.roles)), v => v.includes(appui.app.user.id)).length;
             if (exists && this.canUnmakeMe) {

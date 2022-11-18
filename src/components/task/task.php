@@ -37,7 +37,7 @@
                  title="<?=_("Close") ?>"
                  class="nf nf-fa-check bbn-p bbn-left-space bbn-xxxl"
                  :style="{color: getStatusBgColor('closed')}"/>
-              <i v-if="!isActive && !isUnapproved && canOpen"
+              <i v-if="isClosed && canReopen"
                  @click="reopen"
                  title="<?=_("Reopen")?>"
                  class="nf nf-fa-hand_pointer_o bbn-p bbn-left-space bbn-xxxl"/>
