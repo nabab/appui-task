@@ -83,6 +83,12 @@
       userFull(id){
         const user = bbn.fn.getRow(appui.app.users, 'value', id);
         return '<span class="appui-avatar"><img src="' + user.avatar + '" alt="' + user.text + '"> ' + user.text + '</span>';
+      },
+      isYou(id){
+        return id === appui.app.user.id;
+      },
+      formatDate(d){
+        return dayjs(d).format('DD/MM/YYYY HH:mm');
       }
     }
   };

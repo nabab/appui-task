@@ -49,7 +49,7 @@
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile()
              }, 'bbn-vxsmargin']">
           <div class="bbn-upper bbn-right-space bbn-b bbn-secondary-text-alt"
-               v-text="_('Cards')"/>
+               v-text="_('Columns')"/>
           <div class="bbn-vmiddle">
             <bbn-button icon="nf nf-mdi-arrow_collapse"
                         :text="_('Collapse all')"

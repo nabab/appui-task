@@ -27,15 +27,15 @@
         });
       },
       collapseAll(){
-        if (this.source.data.items && this.source.data.items.length) {
-          bbn.fn.each(this.source.data.items, item => item.collapsed = true);
+        const col = this.closest('column');
+        if (!!col && col.filteredData.length) {
+          bbn.fn.each(col.filteredData, item => col.$set(item, 'collapsed', true));
         }
       },
       expandAll(){
-        if (this.source.data.items && this.source.data.items.length) {
-          bbn.fn.each(this.source.data.items, item => {
-            item.collapsed = false
-          });
+        const col = this.closest('column');
+        if (!!col && col.filteredData.length) {
+          bbn.fn.each(col.filteredData, item => col.$set(item, 'collapsed', false));
         }
       }
     }
