@@ -6,10 +6,10 @@
 
 /** @var $model \bbn\Mvc\Model*/
 $res = [];
-$pm = new \bbn\Appui\Task($model->db);
+$taskCls = new \bbn\Appui\Task($model->db);
 $id_user = $model->inc->user->getId();
 $id_group = $model->inc->user->getGroup();
-$state_closed = $pm->idState('closed');
+$state_closed = $taskCls->idState('closed');
 
 if ( !empty($model->data['data']) ){
   $ext_filters = $model->data['data'];
@@ -194,13 +194,19 @@ $grid = new \bbn\Appui\Grid($model->db, $model->data, [
   'group_by' => ['bbn_tasks.id']
 ]);
 
-if ( $grid->check() ){
+if ($grid->check()) {
   $data = $grid->getDatatable();
-  if ( !empty($data['data']) && !empty($plugin_model['template']) && is_callable($plugin_model['template']) ){
-    foreach ( $data['data'] as $i => $d ){
-      if ( !empty($d['reference']) ){
+  if (!empty($data['data'])) {
+    foreach ($data['data'] as $i => $d) {
+      if (!empty($d['reference'])
+        && !empty($plugin_model['template'])
+        && is_callable($plugin_model['template'])
+      ) {
         $data['data'][$i]['reference'] = $plugin_model['template']($model->db, $d);
       }
+      $data['data'][$i]['roles'] = $taskCls->infoRoles($d['id']);
+      $data['data'][$i]['children'] = $taskCls->getChildren($d['id']);
+      $data['data'][$i]['num_children'] = count($data['data'][$i]['children']);
     }
   }
   return $data;

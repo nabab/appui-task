@@ -19,6 +19,38 @@
       },
       colObj(){
         return bbn.fn.getRow(this.closest('column').filteredData, 'index', this.index);
+      },
+      statusBgColor(){
+        return this.mainPage.getStatusBgColor(this.mainPage.getStatusCode(this.source.state));
+      },
+      statusColor(){
+        return this.mainPage.getStatusColor(this.mainPage.getStatusCode(this.source.state));
+      },
+      statusText(){
+        return bbn.fn.getField(this.mainPage.optionsStates, 'text', 'value', this.source.state);
+      },
+      closedChildren(){
+        return bbn.fn.filter(this.source.children, c => c.state === this.mainPage.states.closed);
+      },
+      managersTitle(){
+        let s = bbn._('Supervisors');
+        if (!!this.source.roles.managers) {
+          s += "\n";
+          bbn.fn.each(this.source.roles.managers, u => {
+            s += "\n" + appui.app.getUserName(u);
+          });
+        }
+        return s;
+      },
+      workersTitle(){
+        let s = bbn._('Workers');
+        if (!!this.source.roles.workers) {
+          s += "\n";
+          bbn.fn.each(this.source.roles.workers, u => {
+            s += "\n" + appui.app.getUserName(u);
+          });
+        }
+        return s;
       }
     },
     methods: {
@@ -63,14 +95,16 @@
         });
       },
       openNotes(){
-        this.getPopup({
-          title: false,
-          closable: false,
-          width: '90%',
-          height: '90%',
-          component: 'appui-task-columns-task-description',
-          source: this.source
-        });
+        if (this.source.num_notes) {
+          this.getPopup({
+            title: false,
+            closable: false,
+            width: '90%',
+            height: '90%',
+            component: 'appui-task-columns-task-notes',
+            source: this.source
+          });
+        }
       }
     },
     mounted(){

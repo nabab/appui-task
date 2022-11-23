@@ -5,6 +5,13 @@
     data(){
       return {
         root: appui.plugins['appui-task'] + '/',
+        priorities: Array.from({length: 10}, (v, n) => {
+          return {
+            text: n + 1,
+            value: n + 1,
+            class: 'bbn-task-pr' + (n + 1)
+          }
+        }),
         priority_colors: [
           '#F00',
           '#F40',
@@ -61,6 +68,18 @@
           }
           return v;
         });
+      },
+      states(){
+        return this.source.states;
+      },
+      optionsStates(){
+        return this.source.options.states;
+      },
+      optionsRoles(){
+        return this.source.options.roles;
+      },
+      privileges(){
+        return this.source.privileges;
       }
     },
     methods: {
@@ -89,6 +108,36 @@
       },
       formatDate(d){
         return dayjs(d).format('DD/MM/YYYY HH:mm');
+      },
+      getRoleColor(code){
+        if (this.optionsRoles) {
+          return bbn.fn.getField(this.optionsRoles, 'color', {code: code});
+        }
+        return '';
+      },
+      getRoleBgColor(code){
+        if (this.optionsRoles) {
+          return bbn.fn.getField(this.optionsRoles, 'backgroundColor', {code: code});
+        }
+        return '';
+      },
+      getStatusColor(code){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'color', {code: code});
+        }
+        return '';
+      },
+      getStatusBgColor(code){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'backgroundColor', {code: code});
+        }
+        return '';
+      },
+      getStatusCode(idStatus){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'code', {value: idStatus});
+        }
+        return '';
       }
     }
   };

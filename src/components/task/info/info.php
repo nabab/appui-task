@@ -50,7 +50,9 @@
     <label><?=_('Priority')?></label>
     <bbn-dropdown v-model="source.priority"
                   style="width: 80px"
-                  :source="[1,2,3,4,5,6,7,8,9]"
+                  :source="mainPage.priorities"
+                  source-cls="class"
+                  :component="$options.components.priority"
                   :disabled="!task.canChange"/>
     <label><?=_('Deadline')?></label>
     <div>

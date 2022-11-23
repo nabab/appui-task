@@ -20,16 +20,16 @@
         return !!this.mainPage ? this.mainPage.fullCategories : [];
       },
       states(){
-        return !!this.mainPage ? this.mainPage.source.states : {};
+        return !!this.mainPage ? this.mainPage.states : {};
       },
       optionsStates(){
-        return !!this.mainPage ? this.mainPage.source.options.states : [];
+        return !!this.mainPage ? this.mainPage.optionsStates : [];
       },
       optionsRoles(){
-        return !!this.mainPage ? this.mainPage.source.options.roles : [];
+        return !!this.mainPage ? this.mainPage.optionsRoles : [];
       },
       privileges(){
-        return!!this.mainPage ? this.mainPage.source.privileges : {};
+        return!!this.mainPage ? this.mainPage.privileges : {};
       }
     },
     methods: {
@@ -49,34 +49,19 @@
         return this.mainPage.userFull(id);
       },
       getRoleColor(code){
-        if (this.optionsRoles) {
-          return bbn.fn.getField(this.optionsRoles, 'color', {code: code});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getRoleColor(code) : '';
       },
       getRoleBgColor(code){
-        if (this.optionsRoles) {
-          return bbn.fn.getField(this.optionsRoles, 'backgroundColor', {code: code});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getRoleBgColor(code) : '';
       },
       getStatusColor(code){
-        if (this.optionsStates) {
-          return bbn.fn.getField(this.optionsStates, 'color', {code: code});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getStatusColor(code) : '';
       },
       getStatusBgColor(code){
-        if (this.optionsStates) {
-          return bbn.fn.getField(this.optionsStates, 'backgroundColor', {code: code});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getStatusBgColor(code) : '';
       },
       getStatusCode(idStatus){
-        if (this.optionsStates) {
-          return bbn.fn.getField(this.optionsStates, 'code', {value: idStatus});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getStatusCode(idStatus) : '';
       },
       secToTime(seconds, cut){
         let h = Math.floor(seconds / 3600),

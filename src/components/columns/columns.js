@@ -60,6 +60,9 @@
       }
     },
     computed: {
+      isOrderedByTypes(){
+        return this.order === 'types';
+      },
       sections(){
         let sec = [],
             vals;
@@ -132,7 +135,7 @@
         });
       },
       filter(newVal){
-        this.currentData.filter = newVal;
+        this.currentData.selection = newVal;
       },
       search(newVal){
         if (!!this.searchTimeout) {

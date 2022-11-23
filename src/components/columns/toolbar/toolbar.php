@@ -1,7 +1,9 @@
 <div class="appui-task-columns-toolbar bbn-vmiddle"
      :style="{'flex-direction': !source.opened ? 'column': ''}">
   <template v-if="!!source.opened">
-    <bbn-button v-if="!!source.data.canAdd && isTypes"
+    <bbn-button v-if="!!source.data.canAdd
+                  && !!columnsComp
+                  && columnsComp.isOrderedByTypes"
                 icon="nf nf-fa-plus"
                 :title="_('Create task')"
                 class="bbn-no-border bbn-right-sspace"

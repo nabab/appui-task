@@ -12,11 +12,22 @@
     <div v-if="source.creation_date === source.last_action"
          v-text="mainPage.formatDate(source.creation_date)"
          :title="_('Created at')"
-         class="bbn-s"/>
+         class="bbn-s bbn-vmiddle"/>
     <div v-else
          v-text="mainPage.formatDate(source.last_action)"
          :title="_('Updated at')"
-         class="bbn-s"/>
+         class="bbn-s bbn-vmiddle"/>
+    <div v-text="source.priority"
+         :class="['bbn-xspadded', 'bbn-radius', 'bbn-s', 'bbn-left-sspace', 'bbn-task-pr' + source.priority]"
+         :title="_('Priority')"/>
+    <div v-if="!!columnsComp && columnsComp.isOrderedByTypes"
+         v-text="statusText"
+         :style="{
+           color: statusColor,
+           backgroundColor: statusBgColor
+         }"
+         class="bbn-xspadded bbn-radius bbn-upper bbn-s bbn-left-sspace"
+         :title="_('States')"/>
   </div>
   <div class="bbn-flex-width appui-task-columns-task-titlebar">
     <bbn-button :icon="colObj.collapsed ? 'nf nf-fa-expand' : 'nf nf-fa-compress'"
@@ -44,7 +55,7 @@
     <div class="bbn-vsmargin bbn-w-100"
          ref="description">
       <div v-html="source.content"
-           class="appui-task-columns-task-content"/>
+           class="appui-task-columns-task-content bbn-w-100"/>
       <div class="bbn-c bbn-top-space"
             v-if="showOpenContent">
         <bbn-button class="bbn-no-border bbn-upper bbn-xs"
@@ -57,8 +68,25 @@
          v-html="source.reference"/>
     <div class="bbn-grid"
          style="grid-template-columns: repeat(3, 1fr)">
-      <div>
-        
+      <div class="bbn-vmiddle">
+        <div :style="{
+               color: mainPage.getRoleBgColor('managers'),
+               cursor: 'default !important'
+             }"
+             :title="managersTitle"
+             class="bbn-background bbn-no-border bbn-button">
+          <i class="nf nf-mdi-account_star bbn-xl"/>
+          <span v-text="!!source.roles.managers ? source.roles.managers.length : 0"/>
+        </div>
+        <div :style="{
+               color: mainPage.getRoleBgColor('workers'),
+               cursor: 'default !important'
+             }"
+             :title="workersTitle"
+             class="bbn-left-space bbn-background bbn-no-border bbn-button">
+          <i class="nf nf-mdi-worker"/>
+          <span v-text="!!source.roles.workers ? source.roles.workers.length : 0"/>
+        </div>
       </div>
       <div class="bbn-flex"
           style="justify-content: center">
@@ -76,16 +104,16 @@
       <div class="bbn-flex"
           style="justify-content: flex-end">
         <bbn-button class="bbn-background bbn-no-border"
-                    style="padding-left: 0.5rem; padding-right: 0.5rem"
+                    style="padding-left: 0.5rem; padding-right: 0.5rem; cursor: default !important"
                     :title="_('Sub-Tasks')">
           <div class="bbn-vmiddle">
             <template v-if="source.num_children">
-              <!--<i class="nf nf-mdi-playlist_check bbn-xl bbn-green"/>
-              <span v-text="source.tasks.completed"
+              <i class="nf nf-mdi-playlist_check bbn-xl bbn-green"/>
+              <span v-text="closedChildren.length"
                     class="bbn-left-sspace bbn-right-space bbn-green"/>
               <i class="nf nf-mdi-playlist_remove bbn-lg bbn-red"/>
-              <span v-text="source.tasks.count - source.tasks.completed"
-                    class="bbn-left-sspace bbn-red"/>-->
+              <span v-text="source.num_children - closedChildren.length"
+                    class="bbn-left-sspace bbn-red"/>
             </template>
             <template v-else>
               <i class="bbn-right-sspace nf nf-mdi-format_list_checks bbn-lg"/>

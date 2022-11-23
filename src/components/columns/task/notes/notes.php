@@ -1,4 +1,4 @@
-<div class="appui-task-columns-task-description bbn-background bbn-overlay bbn-flex-height">
+<div class="appui-task-columns-task-notes bbn-background bbn-overlay bbn-flex-height">
   <div :class="['bbn-spadded', 'bbn-background', 'bbn-radius', 'bbn-vmiddle', 'bbn-nowrap', {
           'bbn-flex-width': !mainPage.isMobile(),
           'bbn-flex-height': !!mainPage.isMobile()
@@ -15,11 +15,6 @@
     </div>
   </div>
   <div class="bbn-flex-fill bbn-top-xsspace bbn-xspadded">
-    <div class="bbn-100 bbn-radius bbn-alt-background">
-      <bbn-scroll axis="y">
-        <div v-html="source.content"
-             class="bbn-padded bbn-radius"/>
-      </bbn-scroll>
-    </div>
+    <appui-task-notes :source="source"/>
   </div>
 </div>

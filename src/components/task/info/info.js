@@ -20,6 +20,19 @@
       isYou(id){
         return appui.app.user.id === id;
       }
+    },
+    components: {
+      priority: {
+        template: `
+          <div :class="[source.class, 'bbn-spadded', 'bbn-c']"
+               v-text="source.text"/>
+        `,
+        props: {
+          source: {
+            type: Object
+          }
+        }
+      }
     }
   }
 })();

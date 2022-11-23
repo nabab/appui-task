@@ -1,5 +1,6 @@
 (() => {
   return {
+    name: 'appui-task-home',
     data(){
       const mainPage = this.closest('appui-task'),
       filterTypes = [{

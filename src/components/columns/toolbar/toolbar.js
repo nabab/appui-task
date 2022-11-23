@@ -8,11 +8,6 @@
         type: Number
       }
     },
-    computed: {
-      isTypes(){
-        return !!this.columnsComp && (this.columnsComp.order === 'types');
-      }
-    },
     methods: {
       addTask(){
         this.getPopup({
@@ -21,7 +16,7 @@
           component: 'appui-task-form-new',
           source: {
             title: '',
-            type: this.isTypes ? this.source.data.id : '',
+            type: this.columnsComp.isOrderedByTypes ? this.source.data.id : '',
             private: 0
           }
         });
