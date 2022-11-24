@@ -65,7 +65,7 @@
         return `<div class="bbn-overlay bbn-middle">${row.priority}</div>`;
       },
       priorityClass(row){
-        return `bbn-c bbn-task-pr${row.priority}`;
+        return `bbn-c appui-task-pr${row.priority}`;
       },
       renderState(row){
         let icon,

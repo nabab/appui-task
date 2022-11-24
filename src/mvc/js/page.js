@@ -9,7 +9,9 @@
           return {
             text: n + 1,
             value: n + 1,
-            class: 'bbn-task-pr' + (n + 1)
+            class: 'appui-task-pr' + (n + 1),
+            backgroundColor: 'var(--appui-task-pr' + (n + 1) + ')',
+            color: 'white'
           }
         }),
         priority_colors: [

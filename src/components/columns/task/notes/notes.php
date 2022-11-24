@@ -15,6 +15,7 @@
     </div>
   </div>
   <div class="bbn-flex-fill bbn-top-xsspace bbn-xspadded">
-    <appui-task-notes :source="source"/>
+    <appui-task-notes :source="source"
+                      class="bbn-no-border"/>
   </div>
 </div>

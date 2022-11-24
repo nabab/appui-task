@@ -38,7 +38,7 @@
       order: {
         type: String,
         required: true,
-        validation: o => ['types', 'status'].includes(o)
+        validation: o => ['types', 'status', 'priority'].includes(o)
       },
       filter: {
         type: String,
@@ -63,6 +63,12 @@
       isOrderedByTypes(){
         return this.order === 'types';
       },
+      isOrderedByPriority(){
+        return this.order === 'priority';
+      },
+      isOrderedByStatus(){
+        return this.order === 'status';
+      },
       sections(){
         let sec = [],
             vals;
@@ -72,6 +78,9 @@
             break;
           case 'status':
             vals = this.mainPage.source.options.states;
+            break;
+          case 'priority':
+            vals = this.mainPage.priorities;
             break;
         }
         if (bbn.fn.isArray(vals)) {
@@ -101,20 +110,31 @@
         switch (this.order) {
           case 'types':
             conditions.push({
-              field: 'type',
+              field: 'bbn_tasks.type',
               operator: '=',
               value: src.id
             }, {
-              field: 'state',
+              field: 'bbn_tasks.state',
               operator: 'neq',
               value: this.mainPage.source.states.closed
             });
             break;
           case 'status':
             conditions.push({
-              field: 'state',
+              field: 'bbn_tasks.state',
               operator: '=',
               value: src.id
+            });
+            break;
+          case 'priority':
+            conditions.push({
+              field: 'bbn_tasks.priority',
+              operator: '=',
+              value: src.id
+            }, {
+              field: 'bbn_tasks.state',
+              operator: 'neq',
+              value: this.mainPage.source.states.closed
             });
             break;
         }
@@ -135,6 +155,7 @@
         });
       },
       filter(newVal){
+        this.getRef('sections').setAllCheckCollapse();
         this.currentData.selection = newVal;
       },
       search(newVal){
@@ -142,6 +163,7 @@
           clearTimeout(this.searchTimeout);
         }
         this.searchTimeout = setTimeout(() => {
+          this.getRef('sections').setAllCheckCollapse();
           this.currentData.title = newVal;
         }, 500);
       }

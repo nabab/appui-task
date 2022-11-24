@@ -38,6 +38,9 @@
         }, {
           text: bbn._('Status'),
           value: 'status'
+        }, {
+          text: bbn._('Priority'),
+          value: 'priority'
         }],
         currentSearch: '',
       }
@@ -65,13 +68,6 @@
           }
         });
       },
-    },
-    watch: {
-      currentOrder(){
-        if (this.isColumnsView) {
-
-        }
-      }
     }
   }
 })();

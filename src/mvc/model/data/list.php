@@ -173,6 +173,13 @@ if ( !empty($ext_filters['title']) ){
   ];
 }
 
+if ( !empty($ext_filters['priority']) ){
+  $filters['conditions'][] = [
+    'field' => 'bbn_tasks.priority',
+    'value' => $ext_filters['priority']
+  ];
+}
+
 if ( $plugin_model = $model->getPluginModel('reference') ){
   if ( !empty($plugin_model['fields']) ){
     $fields = \bbn\X::mergeArrays($fields, $plugin_model['fields']);

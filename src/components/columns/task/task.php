@@ -17,10 +17,11 @@
          v-text="mainPage.formatDate(source.last_action)"
          :title="_('Updated at')"
          class="bbn-s bbn-vmiddle"/>
-    <div v-text="source.priority"
-         :class="['bbn-xspadded', 'bbn-radius', 'bbn-s', 'bbn-left-sspace', 'bbn-task-pr' + source.priority]"
+    <div v-if="!!columnsComp && !columnsComp.isOrderedByPriority"
+         v-text="source.priority"
+         :class="['bbn-xspadded', 'bbn-radius', 'bbn-s', 'bbn-left-sspace', 'appui-task-pr' + source.priority]"
          :title="_('Priority')"/>
-    <div v-if="!!columnsComp && columnsComp.isOrderedByTypes"
+    <div v-if="!!columnsComp && !columnsComp.isOrderedByStatus"
          v-text="statusText"
          :style="{
            color: statusColor,
