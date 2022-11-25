@@ -86,6 +86,7 @@
     <appui-task-list v-else
                      :source="source"
                      :filter="currentFilter"
+                     :search="currentSearch"
                      ref="listComponent"/>
   </div>
 </div>

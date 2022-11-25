@@ -68,6 +68,18 @@
           }
         });
       },
+      onTaskCreated(d){
+        if (d.success && !!d.id) {
+          this.currentSearch = '';
+          bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
+        }
+      }
+    },
+    mounted(){
+      this.$on('taskcreated', this.onTaskCreated);
+    },
+    beforeDestroy(){
+      this.$off('taskcreated', this.onTaskCreated);
     }
   }
 })();

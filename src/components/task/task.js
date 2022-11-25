@@ -827,6 +827,24 @@
         if (widgetPanel) {
           widgetPanel.toggle();
         }
+      },
+      onTaskCreated(d){
+        if (d.success && !!d.id) {
+          this.openTask(d.id);
+          if ((d.children !== undefined)
+            && bbn.fn.isArray(this.source.children)
+          ) {
+            this.source.children.splice(0, this.source.children.length, ...d.children);
+            this.source.num_children = d.children.length;
+            this.source.has_children = !!d.children.length;
+            if (!!this.dashboard.widgets && !!this.dashboard.widgets.subtasks) {
+              let widget = this.findByKey(this.dashboard.widgets.subtasks.code, 'bbn-widget');
+              if (bbn.fn.isVue(widget)) {
+                widget.reload();
+              }
+            }
+          }
+        }
       }
     },
     created(){
@@ -838,9 +856,11 @@
         });
       }
       appui.register('appui-task-' + this.source.id, this);
+      this.$on('taskcreated', this.onTaskCreated);
     },
     beforeDestroy(){
       appui.unregister('appui-task-' + this.source.id);
+      this.$off('taskcreated', this.onTaskCreated);
     },
     watch: {
       'source.title'(val){

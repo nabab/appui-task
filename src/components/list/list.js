@@ -140,7 +140,7 @@
           this.refreshTable();
         });
       },
-      'currenData.title'(val){
+      'currentData.title'(val){
         if ( this.titleTimeout ){
           clearTimeout(this.titleTimeout);
         }

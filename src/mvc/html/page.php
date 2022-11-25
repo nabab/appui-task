@@ -9,11 +9,5 @@
                     icon="nf nf-fa-home"
                     title="<?=_('Home')?>"
                     :notext="true"/>
-    <bbns-container url="search"
-                    :static="true"
-                    :load="true"
-                    icon="nf nf-fa-home"
-                    title="<?=_("New task")?> / <?=_("Search")?>"
-                    :notext="true"/>
   </bbn-router>
 </div>
