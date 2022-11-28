@@ -51,6 +51,12 @@
           });
         }
         return s;
+      },
+      role(){
+        if (this.mainPage && !!this.source.role) {
+          return bbn.fn.getRow(this.mainPage.optionsRoles, 'value', this.source.role);
+        }
+        return false;
       }
     },
     methods: {
@@ -88,8 +94,8 @@
         this.getPopup({
           title: false,
           closable: false,
-          width: '90%',
-          height: '90%',
+          width: bbn.fn.isMobile() ? '95%' : '90%',
+          height: bbn.fn.isMobile() ? '95%' : '90%',
           component: 'appui-task-columns-task-description',
           source: this.source
         });
@@ -99,8 +105,8 @@
           this.getPopup({
             title: false,
             closable: false,
-            width: '90%',
-            height: '90%',
+            width: bbn.fn.isMobile() ? '95%' : '90%',
+            height: bbn.fn.isMobile() ? '95%' : '90%',
             component: 'appui-task-columns-task-notes',
             source: this.source
           });

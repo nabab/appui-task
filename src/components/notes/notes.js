@@ -13,7 +13,8 @@
     },
     data(){
       return {
-        root: appui.plugins['appui-task'] + '/'
+        root: appui.plugins['appui-task'] + '/',
+        mainPage: this.closest('appui-task')
       }
     },
     computed: {
@@ -29,6 +30,14 @@
             id_task: this.source.id
           }
         }
+      },
+      canChange() {
+        return this.mainPage
+          && (this.source.state !== this.mainPage.source.states.closed)
+          && ((appui.app.user.id === this.source.id_user)
+            || !!this.mainPage.privileges.global
+            || (!this.source.private && this.source.roles.managers.includes(appui.app.user.id))
+          );
       }
     },
     methods: {

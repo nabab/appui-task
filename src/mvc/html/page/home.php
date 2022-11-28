@@ -4,12 +4,16 @@
            'bbn-flex-width': !mainPage.isMobile(),
            'bbn-flex-height': !!mainPage.isMobile()
          }]">
-      <div class="bbn-alt-background bbn-vmiddle bbn-hspadded bbn-radius bbn-flex-fill"
+      <div :class="['bbn-alt-background', 'bbn-vmiddle', 'bbn-radius', 'bbn-flex-fill', {
+             'bbn-hspadded': !mainPage.isMobile(),
+             'bbn-spadded': mainPage.isMobile()
+           }]"
            style="min-height: 2rem; flex-wrap: wrap">
         <div :class="[{
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
+               'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
-          <div class="bbn-upper bbn-right-space bbn-b bbn-secondary-text-alt"
+          <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
                v-text="_('Search')"/>
           <div class="bbn-vmiddle">
             <bbn-input v-model="currentSearch"
@@ -20,13 +24,15 @@
              <bbn-button @click="addTask"
                          :disabled="!currentSearch.length"
                          :text="_('Create a task')"
-                         icon="nf nf-fa-plus"/>
+                         icon="nf nf-fa-plus"
+                         :notext="mainPage.isMobile()"/>
           </div>
         </div>
         <div :class="[{
-               'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile()
+               'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
+               'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
-          <div class="bbn-upper bbn-right-space bbn-b bbn-secondary-text-alt"
+          <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
                v-text="_('Filter')"/>
           <div class="bbn-vmiddle">
             <bbn-radiobuttons :source="filterTypes"
@@ -35,9 +41,10 @@
         </div>
         <div v-if="isColumnsView"
              :class="[{
-               'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile()
+               'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
+               'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
-          <div class="bbn-upper bbn-right-space bbn-b bbn-secondary-text-alt"
+          <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
                v-text="_('Order')"/>
           <div class="bbn-vmiddle">
             <bbn-radiobuttons :source="orderTypes"
@@ -46,9 +53,10 @@
         </div>
         <div v-if="isColumnsView"
              :class="[{
-               'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile()
+               'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
+               'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
-          <div class="bbn-upper bbn-right-space bbn-b bbn-secondary-text-alt"
+          <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
                v-text="_('Columns')"/>
           <div class="bbn-vmiddle">
             <bbn-button icon="nf nf-mdi-arrow_collapse"
@@ -60,8 +68,11 @@
                         @click="getRef('columnsComponent').expandAll()"/>
           </div>
         </div>
-        <div :class="[{'bbn-vmiddle': !mainPage.isMobile()}, 'bbn-vxsmargin']">
-          <div class="bbn-upper bbn-right-space bbn-b bbn-secondary-text-alt"
+        <div :class="[{
+               'bbn-vmiddle': !mainPage.isMobile(),
+               'bbn-right-space': mainPage.isMobile()
+             }, 'bbn-vxsmargin']">
+          <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
                v-text="_('Mode')"/>
           <div class="bbn-vmiddle">
             <bbn-radiobuttons :source="viewModes"
@@ -76,7 +87,8 @@
            v-text="_('Tasks')"/>
     </div>
   </div>
-  <div class="bbn-flex-fill">
+  <div class="bbn-flex-fill bbn-alt-background"
+       :style="{minHeight: isColumnsView ? '40rem' : ''}">
     <appui-task-columns v-if="isColumnsView"
                         :source="source"
                         ref="columnsComponent"

@@ -1,22 +1,25 @@
 <div class="appui-task-columns-task">
   <div class="bbn-flex-width">
     <div class="bbn-vmiddle bbn-flex-fill">
-      <bbn-initial :user-name="author"
-                   width="1.2rem"
-                   height="1.2rem"
-                   font-size="0.7rem"/>
-      <span class="bbn-left-xsspace bbn-s bbn-unselectable"
-            v-text="mainPage.isYou(source.id_user) ? _('You') : author"
-            :title="author"/>
+      <span class="bbn-vmiddle bbn-right-spadded bbn-radius bbn-background">
+        <bbn-initial :user-name="author"
+                     width="1.2rem"
+                     height="1.2rem"
+                     font-size="0.7rem"
+                     style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important"/>
+        <span class="bbn-left-xsspace bbn-s bbn-unselectable"
+              v-text="mainPage.isYou(source.id_user) ? _('You') : author"
+              :title="author"/>
+      </span>
     </div>
     <div v-if="source.creation_date === source.last_action"
          v-text="mainPage.formatDate(source.creation_date)"
          :title="_('Created at')"
-         class="bbn-s bbn-vmiddle"/>
+         class="bbn-s bbn-vmiddle bbn-radius bbn-background bbn-hspadded"/>
     <div v-else
          v-text="mainPage.formatDate(source.last_action)"
          :title="_('Updated at')"
-         class="bbn-s bbn-vmiddle"/>
+         class="bbn-s bbn-vmiddle bbn-radius bbn-background bbn-hspadded"/>
     <div v-if="!!columnsComp && !columnsComp.isOrderedByPriority"
          v-text="source.priority"
          :class="['bbn-xspadded', 'bbn-radius', 'bbn-s', 'bbn-left-sspace', 'appui-task-pr' + source.priority]"
@@ -67,9 +70,17 @@
     <div v-if="source.reference"
          class="bbn-vsmargin bbn-w-100 bbn-spadded bbn-radius bbn-background"
          v-html="source.reference"/>
-    <div class="bbn-grid"
-         style="grid-template-columns: repeat(3, 1fr)">
+    <div class="bbn-vmiddle"
+         style="width: 100%; justify-content: space-between">
       <div class="bbn-vmiddle">
+        <div v-if="role"
+             class="bbn-radius bbn-right-space bbn-spadded bbn-upper bbn-s"
+             v-text="role.text"
+             :style="{
+               backgroundColor: role.backgroundColor + ' !important',
+               color: role.color + ' !important',
+               cursor: 'default !important'
+             }"/>
         <div :style="{
                color: mainPage.getRoleBgColor('managers'),
                cursor: 'default !important'
@@ -89,8 +100,7 @@
           <span v-text="!!source.roles.workers ? source.roles.workers.length : 0"/>
         </div>
       </div>
-      <div class="bbn-flex"
-          style="justify-content: center">
+      <div>
         <bbn-button :title="_('Notes')"
                     class="bbn-background bbn-no-border"
                     style="padding-left: 0.5rem; padding-right: 0.5rem"
@@ -102,8 +112,7 @@
           </div>
         </bbn-button>
       </div>
-      <div class="bbn-flex"
-          style="justify-content: flex-end">
+      <div>
         <bbn-button class="bbn-background bbn-no-border"
                     style="padding-left: 0.5rem; padding-right: 0.5rem; cursor: default !important"
                     :title="_('Sub-Tasks')">
