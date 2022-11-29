@@ -28,7 +28,8 @@
                          :notext="mainPage.isMobile()"/>
           </div>
         </div>
-        <div :class="[{
+        <div v-if="filterTypes.length > 1"
+             :class="[{
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
                'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">

@@ -33,24 +33,30 @@
         return bbn.fn.filter(this.source.children, c => c.state === this.mainPage.states.closed);
       },
       managersTitle(){
-        let s = bbn._('Supervisors');
-        if (!!this.source.roles.managers) {
-          s += "\n";
-          bbn.fn.each(this.source.roles.managers, u => {
-            s += "\n" + appui.app.getUserName(u);
-          });
+        if (this.mainPage) {
+          let s = bbn.fn.getField(this.mainPage.optionsRoles, 'text', 'code', 'managers');
+          if (!!this.source.roles.managers) {
+            s += "\n";
+            bbn.fn.each(this.source.roles.managers, u => {
+              s += "\n" + appui.app.getUserName(u);
+            });
+          }
+          return s;
         }
-        return s;
+        return '';
       },
       workersTitle(){
-        let s = bbn._('Workers');
-        if (!!this.source.roles.workers) {
-          s += "\n";
-          bbn.fn.each(this.source.roles.workers, u => {
-            s += "\n" + appui.app.getUserName(u);
-          });
+        if (this.mainPage) {
+          let s = bbn.fn.getField(this.mainPage.optionsRoles, 'text', 'code', 'workers');
+          if (!!this.source.roles.workers) {
+            s += "\n";
+            bbn.fn.each(this.source.roles.workers, u => {
+              s += "\n" + appui.app.getUserName(u);
+            });
+          }
+          return s;
         }
-        return s;
+        return '';
       },
       role(){
         if (this.mainPage && !!this.source.role) {

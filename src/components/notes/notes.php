@@ -6,10 +6,10 @@
                     text: '<?=_('Add a note')?>',
                     action: insert,
                     icon: 'nf nf-fa-pencil',
-                    disabled: !canChange
+                    disabled: isClosed
                   }]"
-                  :edit="canChange ? edit : false"
-                  :reply="canChange ? reply : false"
-                  :remove="canChange ? remove : false"
+                  :edit="!isClosed ? edit : false"
+                  :reply="!isClosed ? reply : false"
+                  :remove="!isClosed ? remove : false"
                   :image-dom="root + 'image/'"
                   :download-url="root + 'download/media/'"/>

@@ -43,7 +43,7 @@
     <bbns-column title="<?=_("Role")?>"
                   field="role"
                   :render="renderRole"
-                  :width="80"
+                  :width="100"
                   :source="mainPage.source.options.roles"/>
     <bbns-column title="<?=_("Type")?>"
                   field="type"

@@ -43,7 +43,7 @@
           "code": "price_insert"
         },
         {
-          "text": "Added the description %s",
+          "text": "Added the description",
           "code": "content_insert"
         },
         {
@@ -79,7 +79,7 @@
           "code": "title_update"
         },
         {
-          "text": "Changed the description from %s to %s",
+          "text": "Changed the description",
           "code": "content_update"
         },
         {
@@ -159,7 +159,7 @@
           "color": "white"
         },
         {
-          "text": "Managers",
+          "text": "Supervisors",
           "code": "managers",
           "backgroundColor": "coral",
           "color": "white"

@@ -1,6 +1,7 @@
 (() => {
   return {
     name: 'appui-task-home',
+    mixins: [bbn.vue.localStorageComponent],
     data(){
       const mainPage = this.closest('appui-task'),
       filterTypes = [{

@@ -31,143 +31,147 @@
           }
         }
       },
-      canChange() {
+      isClosed() {
         return this.mainPage
-          && (this.source.state !== this.mainPage.source.states.closed)
-          && ((appui.app.user.id === this.source.id_user)
-            || !!this.mainPage.privileges.global
-            || (!this.source.private && this.source.roles.managers.includes(appui.app.user.id))
-          );
+          && (this.source.state === this.mainPage.source.states.closed);
       }
     },
     methods: {
       insert(){
-        this.getPopup().open({
-          title: bbn._('New message'),
-          width: 800,
-          height: 750,
-          component: 'appui-note-forum-form',
-          source: bbn.fn.extend(true, {
-            props: {
-              formAction: this.root + 'actions/messages/insert',
-              formSuccess: (d) => {
-                if ( d.success ){
-                  this.getRef('forum').updateData();
-                  appui.success(bbn._('Inserted'));
+        if (!this.isClosed) {
+          this.getPopup().open({
+            title: bbn._('New message'),
+            width: 800,
+            height: 750,
+            component: 'appui-note-forum-form',
+            source: bbn.fn.extend(true, {
+              props: {
+                formAction: this.root + 'actions/messages/insert',
+                formSuccess: (d) => {
+                  if ( d.success ){
+                    this.getRef('forum').updateData();
+                    appui.success(bbn._('Inserted'));
+                  }
+                  else {
+                    appui.error(bbn._('Error'));
+                  }
                 }
-                else {
-                  appui.error(bbn._('Error'));
-                }
+              },
+              row: {
+                title: '',
+                text: '',
+                files: [],
+                links: [],
+                locked: 1
               }
-            },
-            row: {
-              title: '',
-              text: '',
-              files: [],
-              links: [],
-              locked: 1
-            }
-          }, this.form)
-        });
+            }, this.form)
+          });
+        }
       },
       edit(n, v){
-        this.getPopup().open({
-          title: bbn._('Edit'),
-          width: 800,
-          height: 600,
-          component: 'appui-note-forum-form',
-          source: bbn.fn.extend(true, {
-            props: {
-              formAction: this.root + 'actions/messages/edit',
-              formSuccess: (d) => {
-                if ( d.success ){
-                  if ( v.topic ){
-                    v.topic.getRef('pager').updateData();
-                  }
-                  else {
-                    this.getRef('forum').updateData();
-                  }
-                  appui.success(bbn._('Edited'));
-                }
-                else {
-                  appui.error(bbn._('Error'));
-                }
-              }
-            },
-            data: {
-              id: n.id
-            },
-            row: {
-              title: v.topic ? undefined : n.title,
-              text: n.content,
-              files: n.files,
-              links: n.links,
-              locked: n.locked
-            }
-          }, this.form)
-        });
-      },
-      reply(n, v){
-        this.getPopup().open({
-          title: bbn._('Reply to') + ' ' + appui.app.getUserName(n.creator),
-          width: 800,
-          height: 600,
-          component: 'appui-note-forum-form',
-          source: bbn.fn.extend(true, {
-            props: {
-              formAction: this.root + 'actions/messages/reply',
-              formSuccess: (d) => {
-                if ( d.success ){
-                  if ( v.topic ){
-                    v.topic.getRef('pager').updateData();
-                  }
-                  else {
-                    if ( v.getRef('pager') ){
-                      v.getRef('pager').updateData();
+        if (!this.isClosed) {
+          this.getPopup().open({
+            title: bbn._('Edit'),
+            width: 800,
+            height: 600,
+            component: 'appui-note-forum-form',
+            source: bbn.fn.extend(true, {
+              props: {
+                formAction: this.root + 'actions/messages/edit',
+                formSuccess: (d) => {
+                  if ( d.success ){
+                    if ( v.topic ){
+                      v.topic.getRef('pager').updateData();
                     }
                     else {
-                      n.num_replies++;
+                      this.getRef('forum').updateData();
                     }
+                    appui.success(bbn._('Edited'));
                   }
-                  appui.success(bbn._('Inserted'));
+                  else {
+                    appui.error(bbn._('Error'));
+                  }
                 }
-                else {
-                  appui.error(bbn._('Error'));
-                }
+              },
+              data: {
+                id: n.id
+              },
+              row: {
+                title: v.topic ? undefined : n.title,
+                text: n.content,
+                files: n.files,
+                links: n.links,
+                locked: n.locked
               }
-            },
-            data: {
-              id_parent: n.id,
-              id_alias: n.id_alias || n.id
-            },
-            row: {
-              text: '',
-              files: [],
-              links: [],
-              locked: 1
-            }
-          }, this.form)
-        });
+            }, this.form)
+          });
+        }
+      },
+      reply(n, v){
+        if (!this.isClosed) {
+          this.getPopup().open({
+            title: bbn._('Reply to') + ' ' + appui.app.getUserName(n.creator),
+            width: 800,
+            height: 600,
+            component: 'appui-note-forum-form',
+            source: bbn.fn.extend(true, {
+              props: {
+                formAction: this.root + 'actions/messages/reply',
+                formSuccess: (d) => {
+                  if ( d.success ){
+                    if ( v.topic ){
+                      v.topic.getRef('pager').updateData();
+                    }
+                    else {
+                      if ( v.getRef('pager') ){
+                        v.getRef('pager').updateData();
+                      }
+                      else {
+                        n.num_replies++;
+                      }
+                    }
+                    appui.success(bbn._('Inserted'));
+                  }
+                  else {
+                    appui.error(bbn._('Error'));
+                  }
+                }
+              },
+              data: {
+                id_parent: n.id,
+                id_alias: n.id_alias || n.id
+              },
+              row: {
+                text: '',
+                files: [],
+                links: [],
+                locked: 1
+              }
+            }, this.form)
+          });
+        }
       },
       remove(n, v){
-        this.confirm(bbn._('Are you sure you want to delete this message?'), () => {
-          this.post(this.root + 'actions/messages/delete', {
-            id: n.id
-          }, (d) => {
-            if ( d.success ){
-              if ( v.topic ){
-                v.topic.getRef('pager').updateData();
+        if (!this.isClosed) {
+          this.confirm(bbn._('Are you sure you want to delete this message?'), () => {
+            this.post(this.root + 'actions/messages/delete', {
+              id: n.id
+            }, (d) => {
+              if ( d.success ){
+                if ( v.topic ){
+                  v.topic.getRef('pager').updateData();
+                }
+                else {
+                  this.getRef('forum').updateData();
+                }
+                appui.success(bbn._('Deleted'));
               }
               else {
-                this.getRef('forum').updateData();
+                appui.error(bbn._('Error'));
               }
-              appui.success(bbn._('Deleted'));
-            }
-            else {
-              appui.error(bbn._('Error'));
-            }
+            });
           });
-        });
+        }
       }
     }
   }
