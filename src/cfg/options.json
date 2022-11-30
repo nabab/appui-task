@@ -111,6 +111,10 @@
           "code": "price_delete"
         },
         {
+          "text": "Edited a comment",
+          "code": "comment_update"
+        },
+        {
           "text": "Put the task on hold",
           "code": "task_hold"
         },
@@ -119,7 +123,7 @@
           "code": "role_delete"
         },
         {
-          "text": "Removed the comment %s",
+          "text": "Removed a comment",
           "code": "comment_delete"
         },
         {
@@ -133,6 +137,10 @@
         {
           "text": "Reopened the task",
           "code": "task_reopen"
+        },
+        {
+          "text": "Replied a comment",
+          "code": "comment_reply"
         },
         {
           "text": "Set the task as waiting for approval",

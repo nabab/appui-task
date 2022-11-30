@@ -94,7 +94,8 @@
                 }
               },
               data: {
-                id: n.id
+                id: n.id,
+                id_task: this.source.id
               },
               row: {
                 title: v.topic ? undefined : n.title,
@@ -139,7 +140,8 @@
               },
               data: {
                 id_parent: n.id,
-                id_alias: n.id_alias || n.id
+                id_alias: n.id_alias || n.id,
+                id_task: this.source.id
               },
               row: {
                 text: '',
@@ -155,7 +157,8 @@
         if (!this.isClosed) {
           this.confirm(bbn._('Are you sure you want to delete this message?'), () => {
             this.post(this.root + 'actions/messages/delete', {
-              id: n.id
+              id: n.id,
+              id_task: this.source.id
             }, (d) => {
               if ( d.success ){
                 if ( v.topic ){

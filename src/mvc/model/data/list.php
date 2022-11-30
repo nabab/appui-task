@@ -180,6 +180,15 @@ if ( !empty($ext_filters['priority']) ){
   ];
 }
 
+if (!empty($ext_filters['role'])
+  && ($ext_filters['role'] !== 'all')
+) {
+  $filters['conditions'][] = [
+    'field' => 'my_role.role',
+    'value' => $ext_filters['role']
+  ];
+}
+
 if ( $plugin_model = $model->getPluginModel('reference') ){
   if ( !empty($plugin_model['fields']) ){
     $fields = \bbn\X::mergeArrays($fields, $plugin_model['fields']);

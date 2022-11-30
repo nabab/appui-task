@@ -47,6 +47,9 @@
       },
       search: {
         type: String
+      },
+      role: {
+        type: String
       }
     },
     data(){
@@ -55,7 +58,8 @@
         mainPage: this.closest('appui-task'),
         currentData: {
           selection: this.filter,
-          title: this.search
+          title: this.search,
+          role: this.role
         }
       }
     },
@@ -157,6 +161,10 @@
       filter(newVal){
         this.getRef('sections').setAllCheckCollapse();
         this.currentData.selection = newVal;
+      },
+      role(newVal){
+        this.getRef('sections').setAllCheckCollapse();
+        this.currentData.role = newVal;
       },
       search(newVal){
         if (!!this.searchTimeout) {

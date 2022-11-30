@@ -52,6 +52,18 @@
                               v-model="currentOrder"/>
           </div>
         </div>
+        <div v-if="isColumnsView && !!roles && roles.length"
+             :class="[{
+               'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
+               'bbn-right-space': mainPage.isMobile()
+             }, 'bbn-vxsmargin']">
+          <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
+               v-text="_('Role')"/>
+          <div class="bbn-vmiddle">
+            <bbn-radiobuttons :source="roles"
+                              v-model="currentRole"/>
+          </div>
+        </div>
         <div v-if="isColumnsView"
              :class="[{
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
@@ -95,7 +107,8 @@
                         ref="columnsComponent"
                         :order="currentOrder"
                         :filter="currentFilter"
-                        :search="currentSearch"/>
+                        :search="currentSearch"
+                        :role="currentRole"/>
     <appui-task-list v-else
                      :source="source"
                      :filter="currentFilter"

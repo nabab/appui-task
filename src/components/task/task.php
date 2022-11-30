@@ -69,7 +69,7 @@
                         ref="dashboard"
                         class="bbn-w-100">
             <bbns-widget v-if="(isAdmin || isDecider) && ((isClosed && source.price) || !isClosed)"
-                        :hidden="!currentConfig.budget"
+                        :hidden="!currentWidgets.budget"
                         :title="dashboard.widgets.budget.text"
                         :icon="dashboard.widgets.budget.icon"
                         :component="dashboard.widgets.budget.component"
@@ -80,7 +80,7 @@
                         :buttonsRight="budgetButtons"
                         :buttonsLeft="closeButton"
                         :padding="true"/>
-            <bbns-widget :hidden="!currentConfig.roles"
+            <bbns-widget :hidden="!currentWidgets.roles"
                         :title="dashboard.widgets.roles.text"
                         :icon="dashboard.widgets.roles.icon"
                         :component="dashboard.widgets.roles.component"
@@ -90,7 +90,7 @@
                         :showable="false"
                         :buttonsLeft="closeButton"
                         :padding="true"/>
-            <bbns-widget :hidden="!currentConfig.tracker"
+            <bbns-widget :hidden="!currentWidgets.tracker"
                         :title="dashboard.widgets.tracker.text"
                         :icon="dashboard.widgets.tracker.icon"
                         :component="dashboard.widgets.tracker.component"
@@ -102,7 +102,7 @@
                         :buttonsRight="trackerButtons"
                         :padding="true"/>
             <bbns-widget v-if="canChange"
-                        :hidden="!currentConfig.subtasks"
+                        :hidden="!currentWidgets.subtasks"
                         :title="dashboard.widgets.subtasks.text"
                         :icon="dashboard.widgets.subtasks.icon"
                         :item-component="dashboard.widgets.subtasks.itemComponent"
@@ -113,7 +113,7 @@
                         :buttonsRight="tasksButtons"
                         :buttonsLeft="closeButton"
                         :showable="false"/>
-            <bbns-widget :hidden="!currentConfig.logs"
+            <bbns-widget :hidden="!currentWidgets.logs"
                         :title="dashboard.widgets.logs.text"
                         :icon="dashboard.widgets.logs.icon"
                         :component="dashboard.widgets.logs.component"
@@ -124,7 +124,7 @@
                         :buttonsRight="logsButtons"
                         :buttonsLeft="closeButton"
                         :showable="false"/>
-            <bbns-widget :hidden="!currentConfig.notes"
+            <bbns-widget :hidden="!currentWidgets.notes"
                         :title="dashboard.widgets.notes.text"
                         :icon="dashboard.widgets.notes.icon"
                         :component="dashboard.widgets.notes.component"

@@ -23,8 +23,7 @@
           || (!!this.source.price && this.task.isAdmin && !this.task.isClosed && !!this.source.lastChangePrice);
       },
       showTracker(){
-        return this.task.currentConfig.tracker
-          && this.task.isOngoing
+        return this.task.isOngoing
           && (this.task.isWorker || this.task.isManager)
       }
     }

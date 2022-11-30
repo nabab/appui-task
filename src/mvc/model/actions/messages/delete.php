@@ -6,11 +6,15 @@
  * Time: 13:03
  */
 if (
-  !empty($model->data['id']) &&
-  \bbn\Str::isUid($model->data['id'])
+  !empty($model->data['id'])
+  && \bbn\Str::isUid($model->data['id'])
+  && !empty($model->data['id_task'])
 ){
   $notes = new \bbn\Appui\Note($model->db);
   if ( $notes->remove($model->data['id'], true) ){
+
+    $taskCls = new \bbn\Appui\Task($model->db);
+    $taskCls->addLog($model->data['id_task'], 'comment_delete');
 
     $vcs = new \bbn\Appui\Vcs($model->db);
     if (($vcsNote = $vcs->getAppuiTaskNoteByNote($model->data['id']))

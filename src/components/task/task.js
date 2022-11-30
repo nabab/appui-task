@@ -102,7 +102,11 @@
   });
 
   return  {
-    mixins: mixins,
+    mixins: [
+      bbn.vue.basicComponent,
+      bbn.vue.localStorageComponent,
+      ...mixins
+    ],
     props: {
       source: {
         type: Object
@@ -140,7 +144,10 @@
         commentLinks: [],
         showCommentAdder: false,
         userId: appui.app.user.id,
-        isAdmin: appui.app.user.isAdmin
+        isAdmin: appui.app.user.isAdmin,
+        currentWidgets: {
+          notes: 1
+        }
       }
     },
     computed: {
@@ -150,44 +157,21 @@
       hasConfig(){
         if (this.source.cfg && bbn.fn.isString(this.source.cfg)) {
           let c = JSON.parse(this.source.cfg);
-          return !!c.widgets;
+          return bbn.fn.isObject(c) && Object.keys(c).length ;
         }
         return false;
-      },
-      currentConfig: {
-        get(){
-          let cfg = {}
-          if (this.hasConfig) {
-            let c = JSON.parse(this.source.cfg);
-            cfg = c.widgets;
-          }
-          else {
-            bbn.fn.each(Object.keys(this.dashboard.widgets), code => cfg[code] = 1);
-          }
-          return cfg;
-        },
-        set(widgets){
-          let cfg = {}
-          if (this.source.cfg) {
-            if (bbn.fn.isString(this.source.cfg)) {
-              cfg = bbn.fn.isString(this.source.cfg) ? JSON.parse(this.source.cfg) : bbn.fn.extend(true, {},this.source.cfg);
-            }
-          }
-          cfg.widgets = widgets;
-          this.$set(this.source, 'cfg', JSON.stringify(cfg));
-        }
       },
       widgetsAvailable(){
         return bbn.fn.order(bbn.fn.filter(Object.values(this.dashboard.widgets), w => {
           if (w.code === 'budget') {
             return (this.isAdmin || this.isDecider)
               && ((this.isClosed && this.source.price) || !this.isClosed)
-              && !this.currentConfig[w.code]
+              && !this.currentWidgets[w.code]
           }
           if ((w.code === 'info') || (w.code === 'actions')) {
             return false;
           }
-          return !this.currentConfig[w.code];
+          return !this.currentWidgets[w.code];
         }), 'text');
       },
       mediaFileType(){
@@ -447,7 +431,7 @@
           && !!role
           && this.mainPage.source.roles[role]
           && !this.source.roles[role].includes(appui.app.user.id)
-          && !!this['canBecome' + bbn.fn.correctCase(role)]
+          && !!this['canBecome' + bbn.fn.substr(bbn.fn.correctCase(role), 0, -1)]
         ) {
           return this.post(this.root + 'actions/role/insert', {
             id_task: this.source.id,
@@ -467,7 +451,7 @@
       makeMe(role) {
         if (!!role
           && this.mainPage.source.roles[role]
-          && !!this['canBecome' + bbn.fn.correctCase(role)]
+          && !!this['canBecome' + bbn.fn.substr(bbn.fn.correctCase(role), 0, -1)]
         ) {
           this.confirm(bbn._('Are you sure?'), () => {
             let exists = !!bbn.fn.filter([].concat(...Object.values(this.source.roles)), v => v.includes(appui.app.user.id)).length;
@@ -719,32 +703,16 @@
         }
       },
       addWidgetToTask(code){
-        this.post(this.root + 'actions/widget/add', {
-          id: this.source.id,
-          code: code
-        }, d => {
-          if (d.success) {
-            this.currentConfig = bbn.fn.extend(true, {}, this.currentConfig, {[code]: 1});
-            this.getRef('dashboard').showWidget(code);
-          }
-          else {
-            appui.error();
-          }
-        })
+        if (!this.currentWidgets[code]) {
+          this.$set(this.currentWidgets, code, 1);
+          this.getRef('dashboard').showWidget(code);
+        }
       },
       removeWidgetFromTask(widget){
-        this.post(this.root + 'actions/widget/remove', {
-          id: this.source.id,
-          code: widget.uid
-        }, d => {
-          if (d.success) {
-            this.currentConfig = bbn.fn.extend(true, {}, this.currentConfig, {[widget.uid]: 0});
-            widget.close();
-          }
-          else {
-            appui.error();
-          }
-        })
+        if (!!this.currentWidgets[widget.uid]) {
+          this.$set(this.currentWidgets, widget.uid, 0);
+          widget.close();
+        }
       },
       openTrackerDetail(){
         this.getPopup({
@@ -858,6 +826,14 @@
       appui.register('appui-task-' + this.source.id, this);
       this.$on('taskcreated', this.onTaskCreated);
     },
+    beforeMount(){
+      if (this.hasStorage) {
+        const storage = this.getStorage();
+        if (!!storage && (storage.widgets !== undefined)) {
+          this.$set(this, 'currentWidgets', storage.widgets);
+        }
+      }
+    },
     beforeDestroy(){
       appui.unregister('appui-task-' + this.source.id);
       this.$off('taskcreated', this.onTaskCreated);
@@ -893,6 +869,17 @@
       showCommentAdder(val) {
         if ( val === false ){
           this.clearComment();
+        }
+      },
+      currentWidgets: {
+        deep: true,
+        handler(newVal) {
+          let storage = this.getStorage();
+          if (!storage) {
+            storage = {};
+          }
+          storage.widgets = newVal;
+          this.setStorage(storage);
         }
       }
     }

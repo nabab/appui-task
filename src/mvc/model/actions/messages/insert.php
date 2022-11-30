@@ -18,6 +18,8 @@ if (!empty($model->data['ref'])
     ])
   ){
     $ok = true;
+    $taskCls = new \bbn\Appui\Task($model->db);
+    $taskCls->addLog($model->data['id_task'], 'comment_insert');
     $path = $model->userTmpPath() . $model->data['ref'].'/';
     if (is_array($model->data['files']) && !empty($model->data['files'])) {
       foreach ($model->data['files'] as $f) {

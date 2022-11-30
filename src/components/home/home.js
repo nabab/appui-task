@@ -1,13 +1,21 @@
 (() => {
   return {
-    name: 'appui-task-home',
-    mixins: [bbn.vue.localStorageComponent],
+    mixins: [bbn.vue.basicComponent, bbn.vue.localStorageComponent],
+    props: {
+      source: {
+        type: Object
+      },
+      storage: {
+        type: Boolean,
+        default: true
+      }
+    },
     data(){
       const mainPage = this.closest('appui-task'),
-      filterTypes = [{
-            text: bbn._('Mine'),
-            value: 'user'
-          }];
+            filterTypes = [{
+              text: bbn._('Mine'),
+              value: 'user'
+            }];
       if (!!mainPage.source.privileges && !!mainPage.source.privileges.group) {
         filterTypes.push({
           text: bbn._('My groups'),
@@ -33,6 +41,7 @@
         filterTypes: filterTypes,
         currentFilter: 'user',
         currentOrder: 'types',
+        currentRole: 'all',
         orderTypes: [{
           text: bbn._('Types'),
           value: 'types'
@@ -49,6 +58,17 @@
     computed: {
       isColumnsView(){
         return this.currentViewMode === 'columns';
+      },
+      roles(){
+        let ret = [];
+        if (this.mainPage) {
+          ret.push({
+            text: bbn._('All'),
+            value: 'all'
+          });
+          bbn.fn.each(this.mainPage.optionsRoles, r => ret.push(bbn.fn.extend(true, {}, r)));
+        }
+        return ret;
       }
     },
     methods: {
@@ -74,6 +94,22 @@
           this.currentSearch = '';
           bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
         }
+      },
+      setCfgToStorage(){
+        this.setStorage({
+          currentViewMode: this.currentViewMode,
+          currentFilter: this.currentFilter,
+          currentOrder: this.currentOrder,
+          currentRole: this.currentRole
+        });
+      }
+    },
+    beforeMount(){
+      if (this.hasStorage) {
+        const storage = this.getStorage();
+        bbn.fn.iterate(storage, (v, i) => {
+          this[i] = v;
+        })
       }
     },
     mounted(){
@@ -81,6 +117,20 @@
     },
     beforeDestroy(){
       this.$off('taskcreated', this.onTaskCreated);
+    },
+    watch: {
+      currentViewMode(newVal){
+        this.setCfgToStorage();
+      },
+      currentFilter(newVal){
+        this.setCfgToStorage();
+      },
+      currentOrder(newVal){
+        this.setCfgToStorage();
+      },
+      currentRole(newVal){
+        this.setCfgToStorage();
+      }
     }
   }
 })();
