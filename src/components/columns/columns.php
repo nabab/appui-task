@@ -8,6 +8,8 @@
                            :pageable="true"
                            :children-filterable="true"
                            :children-filters="getFilters"
+                           :children-sortable="true"
+                           :children-order="[{field: 'last_action', dir: 'DESC'}]"
                            :collapse-empty="true"/>
   <div v-else
         class="bbn-100 bbn-alt-background bbn-padded">

@@ -101,8 +101,7 @@
                         :buttonsLeft="closeButton"
                         :buttonsRight="trackerButtons"
                         :padding="true"/>
-            <bbns-widget v-if="canChange"
-                        :hidden="!currentWidgets.subtasks"
+            <bbns-widget :hidden="!currentWidgets.subtasks"
                         :title="dashboard.widgets.subtasks.text"
                         :icon="dashboard.widgets.subtasks.icon"
                         :item-component="dashboard.widgets.subtasks.itemComponent"
@@ -141,7 +140,7 @@
     </div>
     <div class="bbn-rel"
          style="width: 300px"
-         v-if="widgetsAvailable.length && !mainPage.isMobile() && canChange">
+         v-if="widgetsAvailable.length && !mainPage.isMobile()">
       <div class="bbn-overlay bbn-padded bbn-background"
            style="padding-left: 0">
         <div class="bbn-flex-height bbn-radius">

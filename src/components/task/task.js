@@ -675,11 +675,11 @@
         }] : [];
       },
       closeButton(){
-        return this.canChange ? [{
+        return [{
           text: bbn._('Close'),
           icon: 'nf nf-fa-close',
           action: this.removeWidgetFromTask
-        }] : [];
+        }];
       },
       addTask(){
         if (this.canChange && !!this.source.id) {
