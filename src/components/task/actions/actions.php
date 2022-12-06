@@ -72,10 +72,13 @@
         <span class="bbn-left-sspace"
               v-text="_('Close')"/>
       </div>
-      <div v-if="task.isClose && task.canReopen"
+      <div v-if="task.isClosed && task.canReopen"
            class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
-           @click="task.reopen">
-        <i class="bbn-m nf nf-fa-hand_pointer_o"/>
+           @click="task.reopen"
+           :style="{
+             color: getStatusBgColor('opened')
+           }">
+        <i class="bbn-m nf nf-oct-issue_reopened"/>
         <span class="bbn-left-sspace"
               v-text="_('Reopen')"/>
       </div>
@@ -267,11 +270,15 @@
                         backgroundColor: getStatusBgColor('closed'),
                         color: getStatusColor('closed')
                       }"/>
-          <bbn-button v-if="!task.isActive && !task.isUnapproved && task.canOpen"
+          <bbn-button v-if="task.isClosed && task.canReopen"
                       @click="task.reopen"
                       title="<?=_('Reopen')?>"
-                      icon="nf nf-fa-hand_pointer_o"
-                      :notext="true"/>
+                      icon="nf nf-oct-issue_reopened"
+                      :notext="true"
+                      :style="{
+                        backgroundColor: getStatusBgColor('opened'),
+                        color: getStatusColor('opened')
+                      }"/>
         </div>
       </div>
     </div>
