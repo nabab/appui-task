@@ -86,7 +86,7 @@ if ($model->hasData('id', true)) {
     $info,
     [
       'root' => APPUI_TASKS_ROOT,
-      'notes' => $model->getModel(APPUI_TASKS_ROOT . 'data/last_messages', ['id_task' => $model->data['id']]),
+      //'notes' => $model->getModel(APPUI_TASKS_ROOT . 'data/last_messages', ['id_task' => $model->data['id']]),
       'approved' => $approved,
       'lastChangePrice' => $lastChangePrice,
       'tracker' => $task->getTrack($model->data['id']),

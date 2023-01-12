@@ -18,14 +18,6 @@
     "code": "appui-task",
     "items": [
       {
-        "code": "info",
-        "id_option": ["info", "widgets", "appui-dashboard", "plugins", "task", "appui"]
-      },
-      {
-        "code": "actions",
-        "id_option": ["actions", "widgets", "appui-dashboard", "plugins", "task", "appui"]
-      },
-      {
         "code": "budget",
         "id_option": ["budget", "widgets", "appui-dashboard", "plugins", "task", "appui"]
       },

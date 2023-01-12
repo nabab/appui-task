@@ -1,6 +1,6 @@
 <div class="appui-task-task-widget-logs-detail">
   <bbn-table class="bbn-100"
-             :source="root + 'page/logs'"
+             :source="root + 'data/logs'"
              :data="{id_task: source.id}">
     <bbns-column title="<i class='nf nf-fa-user bbn-hsmargin'></i><?=_("User")?>"
                  field="id_user"

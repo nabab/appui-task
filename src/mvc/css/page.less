@@ -1,40 +1,142 @@
 /* LESS Document */
+:root {
+  --appui-task-pr1: #F00;
+  --appui-task-pr2: #F40;
+  --appui-task-pr3: #F90;
+  --appui-task-pr4: #FC0;
+  --appui-task-pr5: #9B3;
+  --appui-task-pr6: #7A4;
+  --appui-task-pr7: #5A5;
+  --appui-task-pr8: #396;
+  --appui-task-pr9: #284;
+  --appui-task-pr10: #063;
+}
 
-div.appui_task_nav{
+div.appui-task-nav{
   div.bbn-task-search-container{
     overflow: hidden;
   }
 
   padding: 0;
-  .bbn-task-pr1{
-    background-color: #F00 !important;
+  .appui-task-pr1{
+    background-color: var(--appui-task-pr1) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr1) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr2{
-    background-color: #F40 !important;
+  .appui-task-pr2{
+    background-color: var(--appui-task-pr2) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr2) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr3{
-    background-color: #F90 !important;
+  .appui-task-pr3{
+    background-color: var(--appui-task-pr3) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr3) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr4{
-    background-color: #FC0 !important;
+  .appui-task-pr4{
+    background-color: var(--appui-task-pr4) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr4) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr5{
-    background-color: #9B3 !important;
+  .appui-task-pr5{
+    background-color: var(--appui-task-pr5) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr5) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr6{
-    background-color: #7A4 !important;
+  .appui-task-pr6{
+    background-color: var(--appui-task-pr6) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr6) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr7{
-    background-color: #5A5 !important;
+  .appui-task-pr7{
+    background-color: var(--appui-task-pr7) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr7) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr8{
-    background-color: #396 !important;
+  .appui-task-pr8{
+    background-color: var(--appui-task-pr8) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr8) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr9{
-    background-color: #284 !important;
+  .appui-task-pr9{
+    background-color: var(--appui-task-pr9) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr9) !important;
+        color: white !important;
+      }
+    }
   }
-  .bbn-task-pr10{
-    background-color: #063 !important;
+  .appui-task-pr10{
+    background-color: var(--appui-task-pr10) !important;
+    color: white !important;
+    &.bbn-dropdown-container {
+      background-color: initial  !important;
+      color: initial  !important;
+      input {
+        background-color: var(--appui-task-pr10) !important;
+        color: white !important;
+      }
+    }
   }
 
   div.container-placeholder{
@@ -50,5 +152,8 @@ div.appui_task_nav{
   div.bbn-task-opened-desc{
     width: 50%;
     left: 25%;
+  }
+  .appui-task-box-shadow {
+    box-shadow: 2px 2px 10px 0 var(--default-border);
   }
 }

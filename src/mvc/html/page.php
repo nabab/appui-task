@@ -1,15 +1,15 @@
-<div class="appui-tasks bbn-overlay">
-  <bbn-router class="appui_task_nav"
+<div class="appui-task bbn-overlay">
+  <bbn-router class="appui-task-nav"
               :scrollable="true"
               :autoload="true"
-              :nav="true"
-  >
-    <bbns-container url="search"
+              :nav="true">
+    <bbns-container url="home"
                     :static="true"
-                    :load="true"
+                    :load="false"
+                    component="appui-task-home"
                     icon="nf nf-fa-home"
-                    title="<?=_("New task")?> / <?=_("Search")?>"
+                    title="<?=_('Home')?>"
                     :notext="true"
-    ></bbns-container>
+                    :source="source"/>
   </bbn-router>
 </div>

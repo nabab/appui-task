@@ -2,8 +2,8 @@
 
 use bbn\Appui\Note;
 
-if ($model->hasData(['ref', 'text', 'id_parent', 'id_alias'], true) &&
-	($id_type = $model->inc->options->fromCode('tasks', 'types', 'note', 'appui'))
+if ($model->hasData(['ref', 'text', 'id_parent', 'id_alias', 'id_task'], true)
+  && ($id_type = $model->inc->options->fromCode('tasks', 'types', 'note', 'appui'))
 ){
 	$notes = new Note($model->db);
   if ( $id_note = $notes->insert(
@@ -16,6 +16,10 @@ if ($model->hasData(['ref', 'text', 'id_parent', 'id_alias'], true) &&
 		$model->data['id_alias']
 	) ){
     $ok = true;
+
+    $taskCls = new \bbn\Appui\Task($model->db);
+    $taskCls->addLog($model->data['id_task'], 'comment_reply');
+
     $path = $model->userTmpPath() . $model->data['ref'].'/';
     if ( is_array($model->data['files']) && !empty($model->data['files']) ){
       foreach ($model->data['files'] as $f ){

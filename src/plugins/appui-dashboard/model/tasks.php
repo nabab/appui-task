@@ -9,13 +9,25 @@ $grid = new \bbn\Appui\Grid($model->db, $model->data, [
   'tables' => ['bbn_tasks'],
   'fields' => [
     'bbn_tasks.id',
-    'title',
+    'bbn_notes_versions.title',
+    'bbn_notes_versions.content',
     'status' => 'bbn_options.code',
     'bugclass' => 'bbn_options.code',
     'priority',
     'last_activity' => "FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono), '%Y-%m-%d %H:%i:%s')"
   ],
   'join' => [[
+    'table' => 'bbn_notes_versions',
+    'on' => [
+      'conditions' => [[
+        'field' => 'bbn_notes_versions.id_note',
+        'exp' => 'bbn_tasks.id_note'
+      ], [
+        'field' => 'bbn_notes_versions.latest',
+        'value' => 1
+      ]]
+    ]
+  ], [
     'table' => 'bbn_tasks_roles',
     'on' => [
       'logic' => 'AND',

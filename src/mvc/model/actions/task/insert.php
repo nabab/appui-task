@@ -1,21 +1,24 @@
 <?php
 /** @var $model \bbn\Mvc\Model*/
-$pm = new \bbn\Appui\Task($model->db);
-$newId = $model->hasData(['title', 'type'], true) ? $pm->insert([
-  'title' => $model->data['title'],
-  'type' => $model->data['type'],
-  'id_parent' => !empty($model->data['id_parent']) ? $model->data['id_parent'] : null,
-  'deadline' => empty($model->data['deadline']) ? null : $model->data['deadline'],
-  'private' => empty($model->data['private']) ? 0 : 1
- ]) : false;
+$taskCls = new \bbn\Appui\Task($model->db);
 $ret = [
-  'success' => $newId,
-  'id' => $newId
+  'success' => false
 ];
-if (!empty($newId)) {
-  $ret['id'] = $newId;
+if ($model->hasData(['title', 'type'], true)
+  && ($newId = $taskCls->insert([
+    'title' => $model->data['title'],
+    'type' => $model->data['type'],
+    'id_parent' => empty($model->data['id_parent']) ? null : $model->data['id_parent'],
+    'deadline' => empty($model->data['deadline']) ? null : $model->data['deadline'],
+    'private' => empty($model->data['private']) ? 0 : 1
+   ]))
+) {
+  $ret = [
+    'success' => true,
+    'id' => $newId
+  ];
   if (!empty($model->data['id_parent'])) {
-    $ret['children'] = $pm->getChildren($model->data['id_parent']);
+    $ret['children'] = $taskCls->getChildren($model->data['id_parent']);
   }
 }
 return $ret;

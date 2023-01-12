@@ -8,17 +8,11 @@
   let mixins = [{
     data(){
       return {
-        _task: null,
-        _mainPage: null
+        task: null,
+        mainPage: null
       };
     },
     computed:{
-      task(){
-        return this._task;
-      },
-      mainPage(){
-        return this._mainPage;
-      },
       root(){
         return !!this.mainPage ? this.mainPage.root : '';
       },
@@ -26,16 +20,16 @@
         return !!this.mainPage ? this.mainPage.fullCategories : [];
       },
       states(){
-        return !!this.mainPage ? this.mainPage.source.states : {};
+        return !!this.mainPage ? this.mainPage.states : {};
       },
       optionsStates(){
-        return !!this.mainPage ? this.mainPage.source.options.states : [];
+        return !!this.mainPage ? this.mainPage.optionsStates : [];
       },
       optionsRoles(){
-        return !!this.mainPage ? this.mainPage.source.options.roles : [];
+        return !!this.mainPage ? this.mainPage.optionsRoles : [];
       },
       privileges(){
-        return!!this.mainPage ? this.mainPage.source.privileges : {};
+        return!!this.mainPage ? this.mainPage.privileges : {};
       }
     },
     methods: {
@@ -55,34 +49,19 @@
         return this.mainPage.userFull(id);
       },
       getRoleColor(code){
-        if (this.optionsRoles) {
-          return bbn.fn.getField(this.optionsRoles, 'color', {code: code});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getRoleColor(code) : '';
       },
       getRoleBgColor(code){
-        if (this.optionsRoles) {
-          return bbn.fn.getField(this.optionsRoles, 'backgroundColor', {code: code});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getRoleBgColor(code) : '';
       },
       getStatusColor(code){
-        if (this.optionsStates) {
-          return bbn.fn.getField(this.optionsStates, 'color', {code: code});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getStatusColor(code) : '';
       },
       getStatusBgColor(code){
-        if (this.optionsStates) {
-          return bbn.fn.getField(this.optionsStates, 'backgroundColor', {code: code});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getStatusBgColor(code) : '';
       },
       getStatusCode(idStatus){
-        if (this.optionsStates) {
-          return bbn.fn.getField(this.optionsStates, 'code', {value: idStatus});
-        }
-        return '';
+        return !!this.mainPage ? this.mainPage.getStatusCode(idStatus) : '';
       },
       secToTime(seconds, cut){
         let h = Math.floor(seconds / 3600),
@@ -108,8 +87,8 @@
       }
     },
     created(){
-      this._mainPage = this.closest('appui-task');
-      this._task = this.closest('appui-task-task');
+      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'task', this.closest('appui-task-task'));
     }
   }];
   bbn.vue.addPrefix('appui-task-task-', (tag, resolve, reject) => {
@@ -123,7 +102,11 @@
   });
 
   return  {
-    mixins: mixins,
+    mixins: [
+      bbn.vue.basicComponent,
+      bbn.vue.localStorageComponent,
+      ...mixins
+    ],
     props: {
       source: {
         type: Object
@@ -161,7 +144,10 @@
         commentLinks: [],
         showCommentAdder: false,
         userId: appui.app.user.id,
-        isAdmin: appui.app.user.isAdmin
+        isAdmin: appui.app.user.isAdmin,
+        currentWidgets: {
+          notes: 1
+        }
       }
     },
     computed: {
@@ -171,44 +157,21 @@
       hasConfig(){
         if (this.source.cfg && bbn.fn.isString(this.source.cfg)) {
           let c = JSON.parse(this.source.cfg);
-          return !!c.widgets;
+          return bbn.fn.isObject(c) && Object.keys(c).length ;
         }
         return false;
-      },
-      currentConfig: {
-        get(){
-          let cfg = {}
-          if (this.hasConfig) {
-            let c = JSON.parse(this.source.cfg);
-            cfg = c.widgets;
-          }
-          else {
-            bbn.fn.each(Object.keys(this.dashboard.widgets), code => cfg[code] = 1);
-          }
-          return cfg;
-        },
-        set(widgets){
-          let cfg = {}
-          if (this.source.cfg) {
-            if (bbn.fn.isString(this.source.cfg)) {
-              cfg = bbn.fn.isString(this.source.cfg) ? JSON.parse(this.source.cfg) : bbn.fn.extend(true, {},this.source.cfg);
-            }
-          }
-          cfg.widgets = widgets;
-          this.$set(this.source, 'cfg', JSON.stringify(cfg));
-        }
       },
       widgetsAvailable(){
         return bbn.fn.order(bbn.fn.filter(Object.values(this.dashboard.widgets), w => {
           if (w.code === 'budget') {
             return (this.isAdmin || this.isDecider)
               && ((this.isClosed && this.source.price) || !this.isClosed)
-              && !this.currentConfig[w.code]
+              && !this.currentWidgets[w.code]
           }
           if ((w.code === 'info') || (w.code === 'actions')) {
             return false;
           }
-          return !this.currentConfig[w.code];
+          return !this.currentWidgets[w.code];
         }), 'text');
       },
       mediaFileType(){
@@ -228,6 +191,9 @@
       },
       isAdded() {
         return this.isManager || this.isWorker || this.isViewer;
+      },
+      isGlobal(){
+        return !!this.privileges.global;
       },
       isMaster() {
         return this.userId === this.source.id_user;
@@ -284,41 +250,34 @@
           && (this.source.approved.chrono > this.source.lastChangePrice.chrono);
       },
       canStart() {
-        return this.isOpened && (this.isManager || this.isWorker);
+        return this.isOpened && (this.isManager || this.isWorker || this.isGlobal);
       },
       canHold() {
-        return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker);
+        return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
       },
       canClose() {
-        return this.isManager && !this.isClosed;
+        return (this.isManager || this.isGlobal) && !this.isClosed;
       },
       canResume() {
-        return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker);
+        return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
       },
       canPing() {
-        return this.isManager && !this.isClosed;
+        return (this.isManager || this.isGlobal) && !this.isClosed;
       },
-      canOpen() {
-        /** @todo ??? */
-        return false;
+      canReopen() {
+        return (this.isManager || this.isGlobal) && this.isClosed;
       },
       canChange() {
-        return !this.isClosed && (this.isMaster || (!this.source.private && this.isManager));
+        return !this.isClosed && (this.isMaster || this.isGlobal || (!this.source.private && this.isManager));
       },
       canApprove() {
         return this.isDecider && !this.isClosed;
       },
       canChangeDecider() {
-        return (this.isDecider || this.isAdmin) && (this.source.roles.deciders !== undefined) && !this.isClosed;
+        return (this.isDecider || this.isAdmin || this.isGlobal) && (this.source.roles.deciders !== undefined) && !this.isClosed;
       },
       hasComments() {
         return !!this.source.notes.length;
-      },
-      canMakeMe() {
-        /** @todo to create a configuration interface */
-        return (this.mainPage.source.usergroup === 1) ||
-          (this.mainPage.source.usergroup === 7) ||
-          (this.mainPage.source.usergroup === 18);
       },
       canUnmakeMe() {
         return this.canRevemoHimselfManager
@@ -333,28 +292,26 @@
         return 0;
       },
       canBill() {
-        return (this.source.state === this.mainPage.source.states.closed) &&
-        this.isApproved &&
-          this.isAdmin &&
-          (appui.plugins['appui-billing'] !== undefined);
+        return (this.source.state === this.mainPage.source.states.closed)
+          && this.isApproved
+          && this.isAdmin
+          && (appui.plugins['appui-billing'] !== undefined);
       },
       hasInvoice() {
         return !!this.source.invoice;
       },
       canBecomeManager(){
-        return !!this.privileges.manager && !this.isManager;
+        return (!!this.privileges.manager || this.isGlobal) && !this.isManager;
       },
       canBecomeWorker(){
-        return !!this.privileges.worker
+        return (!!this.privileges.worker || this.isGlobal)
           && !this.isWorker
-          && (!this.isManager
-            || (this.source.roles.managers.length > 1));
+          && (!this.isManager || (this.source.roles.managers.length > 1));
       },
       canBecomeViewer(){
-        return !!this.privileges.viewer
+        return (!!this.privileges.viewer || this.isGlobal)
           && !this.isViewer
-          && (!this.isManager
-            || (this.source.roles.managers.length > 1));
+          && (!this.isManager || (this.source.roles.managers.length > 1));
       },
       canBecomeDecider(){
         return !!this.privileges.decider
@@ -363,21 +320,21 @@
             || (this.source.roles.managers.length > 1));
       },
       canRevemoHimselfManager(){
-        return !!this.privileges.manager
+        return (!!this.privileges.manager || this.isGlobal)
           && !!this.isManager
           && !this.isMaster
           && (this.source.roles.managers.length > 1);
       },
       canRevemoHimselfWorker(){
-        return !!this.privileges.worker
+        return (!!this.privileges.worker || this.isGlobal)
           && !!this.isWorker;
       },
       canRevemoHimselfViewer(){
-        return !!this.privileges.viewer
+        return (!!this.privileges.viewer || this.isGlobal)
           && !!this.isViewer;
       },
       canRevemoHimselfDecider(){
-        return !!this.privileges.decider
+        return (!!this.privileges.decider || this.isGlobal)
           && !!this.isDecider;
       }
     },
@@ -421,45 +378,60 @@
         this.source.deadline = null;
       },
       start() {
-        this.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
-          this.update('state', this.mainPage.source.states.ongoing);
-        });
+        if (this.canStart) {
+          this.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
+            this.update('state', this.mainPage.source.states.ongoing);
+          });
+        }
       },
       hold() {
-        this.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
-          this.update('state', this.mainPage.source.states.holding);
-        });
+        if (this.canHold) {
+          this.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
+            this.update('state', this.mainPage.source.states.holding);
+          });
+        }
       },
       close() {
-        this.confirm(bbn._("Are you sure you want to close this task?"), () => {
-          this.update('state', this.mainPage.source.states.closed);
-        });
+        if (this.canClose) {
+          this.confirm(bbn._("Are you sure you want to close this task?"), () => {
+            this.update('state', this.mainPage.source.states.closed);
+          });
+        }
       },
       resume() {
-        this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
-          this.update('state', this.mainPage.source.states.ongoing);
-        });
+        if (this.canResume) {
+          this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
+            this.update('state', this.mainPage.source.states.ongoing);
+          });
+        }
       },
       ping(){
-        this.confirm(bbn._('Are you sure you want to ping the task?'), () => {
-          this.post(this.root + 'actions/task/ping', { id_task: this.source.id }, (d) => {
-            if ( d.success ){
-              appui.success(bbn._('Pinged'));
-            }
-            else{
-              appui.error(bbn._('Error'));
-            }
+        if (this.canPing) {
+          this.confirm(bbn._('Are you sure you want to ping the task?'), () => {
+            this.post(this.root + 'actions/task/ping', { id_task: this.source.id }, (d) => {
+              if ( d.success ){
+                appui.success(bbn._('Pinged'));
+              }
+              else{
+                appui.error(bbn._('Error'));
+              }
+            });
           });
-        });
+        }
       },
       reopen() {
-        /** @todo ???? */
+        if (this.canReopen) {
+          this.confirm(bbn._("Are you sure you want to reopen this task?"), () => {
+            this.update('state', this.mainPage.source.states.opened);
+          });
+        }
       },
       _makeMe(role){
         if (this.source.id
           && !!role
           && this.mainPage.source.roles[role]
           && !this.source.roles[role].includes(appui.app.user.id)
+          && !!this['canBecome' + bbn.fn.substr(bbn.fn.correctCase(role), 0, -1)]
         ) {
           return this.post(this.root + 'actions/role/insert', {
             id_task: this.source.id,
@@ -477,7 +449,10 @@
         }
       },
       makeMe(role) {
-        if (!!role && this.mainPage.source.roles[role]) {
+        if (!!role
+          && this.mainPage.source.roles[role]
+          && !!this['canBecome' + bbn.fn.substr(bbn.fn.correctCase(role), 0, -1)]
+        ) {
           this.confirm(bbn._('Are you sure?'), () => {
             let exists = !!bbn.fn.filter([].concat(...Object.values(this.source.roles)), v => v.includes(appui.app.user.id)).length;
             if (exists && this.canUnmakeMe) {
@@ -700,11 +675,11 @@
         }] : [];
       },
       closeButton(){
-        return this.canChange ? [{
+        return [{
           text: bbn._('Close'),
           icon: 'nf nf-fa-close',
           action: this.removeWidgetFromTask
-        }] : [];
+        }];
       },
       addTask(){
         if (this.canChange && !!this.source.id) {
@@ -728,32 +703,16 @@
         }
       },
       addWidgetToTask(code){
-        this.post(this.root + 'actions/widget/add', {
-          id: this.source.id,
-          code: code
-        }, d => {
-          if (d.success) {
-            this.currentConfig = bbn.fn.extend(true, {}, this.currentConfig, {[code]: 1});
-            this.getRef('dashboard').showWidget(code);
-          }
-          else {
-            appui.error();
-          }
-        })
+        if (!this.currentWidgets[code]) {
+          this.$set(this.currentWidgets, code, 1);
+          this.getRef('dashboard').showWidget(code);
+        }
       },
       removeWidgetFromTask(widget){
-        this.post(this.root + 'actions/widget/remove', {
-          id: this.source.id,
-          code: widget.uid
-        }, d => {
-          if (d.success) {
-            this.currentConfig = bbn.fn.extend(true, {}, this.currentConfig, {[widget.uid]: 0});
-            widget.close();
-          }
-          else {
-            appui.error();
-          }
-        })
+        if (!!this.currentWidgets[widget.uid]) {
+          this.$set(this.currentWidgets, widget.uid, 0);
+          widget.close();
+        }
       },
       openTrackerDetail(){
         this.getPopup({
@@ -830,6 +789,30 @@
             }
           });
         }
+      },
+      toggleMobileMenu(){
+        let widgetPanel = this.getRef('slider');
+        if (widgetPanel) {
+          widgetPanel.toggle();
+        }
+      },
+      onTaskCreated(d){
+        if (d.success && !!d.id) {
+          this.openTask(d.id);
+          if ((d.children !== undefined)
+            && bbn.fn.isArray(this.source.children)
+          ) {
+            this.source.children.splice(0, this.source.children.length, ...d.children);
+            this.source.num_children = d.children.length;
+            this.source.has_children = !!d.children.length;
+            if (!!this.dashboard.widgets && !!this.dashboard.widgets.subtasks) {
+              let widget = this.findByKey(this.dashboard.widgets.subtasks.code, 'bbn-widget');
+              if (bbn.fn.isVue(widget)) {
+                widget.reload();
+              }
+            }
+          }
+        }
       }
     },
     created(){
@@ -841,9 +824,19 @@
         });
       }
       appui.register('appui-task-' + this.source.id, this);
+      this.$on('taskcreated', this.onTaskCreated);
+    },
+    beforeMount(){
+      if (this.hasStorage) {
+        const storage = this.getStorage();
+        if (!!storage && (storage.widgets !== undefined)) {
+          this.$set(this, 'currentWidgets', storage.widgets);
+        }
+      }
     },
     beforeDestroy(){
       appui.unregister('appui-task-' + this.source.id);
+      this.$off('taskcreated', this.onTaskCreated);
     },
     watch: {
       'source.title'(val){
@@ -856,6 +849,14 @@
            }, 1000);
          }
       },
+      'source.content'(val){
+        if (this.descriptionTimeout) {
+          clearTimeout(this.descriptionTimeout);
+        }
+        this.descriptionTimeout = setTimeout(() => {
+          this.update('content', val);
+        }, 1000);
+     },
       'source.type'(val){
          return this.update('type', val);
       },
@@ -868,6 +869,17 @@
       showCommentAdder(val) {
         if ( val === false ){
           this.clearComment();
+        }
+      },
+      currentWidgets: {
+        deep: true,
+        handler(newVal) {
+          let storage = this.getStorage();
+          if (!storage) {
+            storage = {};
+          }
+          storage.widgets = newVal;
+          this.setStorage(storage);
         }
       }
     }

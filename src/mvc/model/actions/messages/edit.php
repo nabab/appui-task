@@ -6,9 +6,9 @@
  * Time: 13:03
  */
 $notes = new \bbn\Appui\Note($model->db);
-if (
-  !empty($model->data['id']) &&
-  ($old = $notes->getFull($model->data['id']))
+if (!empty($model->data['id'])
+  && ($old = $notes->getFull($model->data['id']))
+  && !empty($model->data['id_task'])
 ){
   $ok = true;
   $path = $model->userTmpPath() . $model->data['ref'].'/';
@@ -109,6 +109,11 @@ if (
         $ok = false;
       }
     });
+  }
+
+  if ($ok) {
+    $taskCls = new \bbn\Appui\Task($model->db);
+    $taskCls->addLog($model->data['id_task'], 'comment_update');
   }
 
   return ['success' => $ok];

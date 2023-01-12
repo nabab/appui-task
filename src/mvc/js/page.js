@@ -5,6 +5,15 @@
     data(){
       return {
         root: appui.plugins['appui-task'] + '/',
+        priorities: Array.from({length: 10}, (v, n) => {
+          return {
+            text: n + 1,
+            value: n + 1,
+            class: 'appui-task-pr' + (n + 1),
+            backgroundColor: 'var(--appui-task-pr' + (n + 1) + ')',
+            color: 'white'
+          }
+        }),
         priority_colors: [
           '#F00',
           '#F40',
@@ -61,9 +70,22 @@
           }
           return v;
         });
+      },
+      states(){
+        return this.source.states;
+      },
+      optionsStates(){
+        return this.source.options.states;
+      },
+      optionsRoles(){
+        return this.source.options.roles;
+      },
+      privileges(){
+        return this.source.privileges;
       }
     },
     methods: {
+      isMobile: bbn.fn.isMobile,
       userName(id){
         return bbn.fn.getField(appui.app.users, 'text', 'value', id);
       },
@@ -82,6 +104,42 @@
       userFull(id){
         const user = bbn.fn.getRow(appui.app.users, 'value', id);
         return '<span class="appui-avatar"><img src="' + user.avatar + '" alt="' + user.text + '"> ' + user.text + '</span>';
+      },
+      isYou(id){
+        return id === appui.app.user.id;
+      },
+      formatDate(d){
+        return dayjs(d).format('DD/MM/YYYY HH:mm');
+      },
+      getRoleColor(code){
+        if (this.optionsRoles) {
+          return bbn.fn.getField(this.optionsRoles, 'color', {code: code});
+        }
+        return '';
+      },
+      getRoleBgColor(code){
+        if (this.optionsRoles) {
+          return bbn.fn.getField(this.optionsRoles, 'backgroundColor', {code: code});
+        }
+        return '';
+      },
+      getStatusColor(code){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'color', {code: code});
+        }
+        return '';
+      },
+      getStatusBgColor(code){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'backgroundColor', {code: code});
+        }
+        return '';
+      },
+      getStatusCode(idStatus){
+        if (this.optionsStates) {
+          return bbn.fn.getField(this.optionsStates, 'code', {value: idStatus});
+        }
+        return '';
       }
     }
   };

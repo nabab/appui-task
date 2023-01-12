@@ -35,7 +35,7 @@
             }
           }
         );
-        bbn.fn.each(roles, r => {
+        /* bbn.fn.each(roles, r => {
           if (!bbn.fn.getRow(res, 'idUser', r)) {
             let time = 0;
             if (!!this.progress && (r === appui.app.user.id)) {
@@ -48,7 +48,7 @@
               notes: 0
             });
           }
-        });
+        }); */
         return bbn.fn.order(res, 'userName');
       }
     },

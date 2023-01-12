@@ -14,6 +14,9 @@
       }
     },
     computed: {
+      statusText(){
+        return this.task.isApproved ? bbn._('Approved') : bbn._('Unapproved');
+      },
       price(){
         if ( this.source.price ){
           return bbn.fn.money(this.source.price);
