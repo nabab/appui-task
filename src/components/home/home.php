@@ -100,8 +100,7 @@
            v-text="_('Tasks')"/>
     </div>
   </div>
-  <div class="bbn-flex-fill bbn-alt-background"
-       :style="{minHeight: isColumnsView ? '40rem' : ''}">
+  <div class="bbn-flex-fill bbn-alt-background">
     <appui-task-columns v-if="isColumnsView"
                         :source="source"
                         ref="columnsComponent"
