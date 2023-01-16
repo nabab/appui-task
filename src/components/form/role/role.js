@@ -16,9 +16,10 @@
     },
     data(){
       let groupsUsers = [];
-      if (appui.app.groups && appui.app.users) {
+      let activeUsers = appui.app.getActiveUsers();
+      if (appui.app.groups && activeUsers) {
         appui.app.groups.forEach(group => {
-          let users = appui.app.users.filter(u => {
+          let users = activeUsers.filter(u => {
               return (u.id_group === group.id)
                 && (u.value !== appui.app.user.id)
                 && !this.source[this.role].includes(u.value);
