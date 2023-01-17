@@ -6,20 +6,30 @@
       },
       index:{
         type: Number
+      },
+      inverted: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
       return {
+        mainPage: {},
+        homePage: {},
+        columnsComp: {},
         showOpenContent: false,
         showSubtasks: false
       }
     },
     computed: {
+      root(){
+        return !!this.mainPage ? this.mainPage.root : '';
+      },
       author(){
         return this.mainPage.userName(this.source.id_user);
       },
       colObj(){
-        return bbn.fn.getRow(this.closest('column').filteredData, 'index', this.index);
+        return !!this.columnsComp ? bbn.fn.getRow(this.closest('column').filteredData, 'index', this.index) : [];
       },
       statusBgColor(){
         return this.mainPage.getStatusBgColor(this.mainPage.getStatusCode(this.source.state));
@@ -122,6 +132,11 @@
       toggleSubtasks(){
         this.showSubtasks = !!this.source.num_children && !this.showSubtasks;
       }
+    },
+    created(){
+      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'homePage', this.closest('appui-task-home'));
+      this.$set(this, 'columnsComp', this.closest('appui-task-columns'));
     },
     mounted(){
       this.$nextTick(() => {

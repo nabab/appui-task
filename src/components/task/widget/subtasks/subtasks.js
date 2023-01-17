@@ -14,7 +14,7 @@
         return '';
       },
       creationDate(){
-        return dayjs(this.source.creationDate).format('DD/MM/YYYY');
+        return dayjs(this.source.creationDate).format('DD/MM/YYYY HH:mm');
       },
       roleCode(){
         let code = false
@@ -32,6 +32,9 @@
           return bbn.fn.getField(this.optionsRoles, 'text', 'code', this.roleCode) || '';
         }
         return '';
+      },
+      author(){
+        return this.mainPage.userName(this.source.id_user);
       }
     },
     methods: {
