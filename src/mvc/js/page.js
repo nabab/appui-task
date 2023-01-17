@@ -5,7 +5,7 @@
     data(){
       return {
         root: appui.plugins['appui-task'] + '/',
-        priorities: Array.from({length: 7}, (v, n) => {
+        priorities: Array.from({length: 5}, (v, n) => {
           return {
             text: n + 1,
             value: n + 1,
@@ -13,19 +13,7 @@
             backgroundColor: 'var(--appui-task-pr' + (n + 1) + ')',
             color: 'white'
           }
-        }),
-        priority_colors: [
-          '#F00',
-          '#F40',
-          '#F90',
-          '#FC0',
-          '#9B3',
-          '#7A4',
-          '#5A5',
-          '#396',
-          '#284',
-          '#063'
-        ]
+        })
       };
     },
     computed: {
