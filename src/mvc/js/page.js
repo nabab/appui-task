@@ -5,7 +5,7 @@
     data(){
       return {
         root: appui.plugins['appui-task'] + '/',
-        priorities: Array.from({length: 10}, (v, n) => {
+        priorities: Array.from({length: 7}, (v, n) => {
           return {
             text: n + 1,
             value: n + 1,
