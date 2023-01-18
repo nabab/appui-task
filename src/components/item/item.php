@@ -32,11 +32,11 @@
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"/>
-    <div v-if="!!columnsComp && !columnsComp.isOrderedByPriority"
+    <div v-if="!columnsComp || !columnsComp.isOrderedByPriority"
          v-text="source.priority"
          :class="['bbn-xspadded', 'bbn-radius', 'bbn-s', 'bbn-left-sspace', 'appui-task-pr' + source.priority]"
          :title="_('Priority')"/>
-    <div v-if="!!columnsComp && !columnsComp.isOrderedByStatus"
+    <div v-if="!columnsComp || !columnsComp.isOrderedByStatus"
          v-text="statusText"
          :style="{
            color: statusColor,
@@ -46,9 +46,9 @@
          :title="_('Status')"/>
   </div>
   <div class="bbn-flex-width appui-task-item-titlebar">
-    <bbn-button :icon="colObj.collapsed ? 'nf nf-fa-expand' : 'nf nf-fa-compress'"
-                :title="colObj.collapsed ? _('Expand') : _('Collapse')"
-                @click="$set(colObj, 'collapsed', !!colObj.collapsed ? false : true)"
+    <bbn-button :icon="isCollapsed ? 'nf nf-fa-expand' : 'nf nf-fa-compress'"
+                :title="isCollapsed ? _('Expand') : _('Collapse')"
+                @click="toggleCollapsed"
                 :notext="true"
                 class="bbn-no-border bbn-right-sspace"/>
     <div :class="['bbn-middle', 'bbn-vsmargin', 'bbn-radius', 'bbn-spadded', 'bbn-flex-fill', {
@@ -70,12 +70,23 @@
                   class="bbn-no-border"/>
     </bbn-context>
   </div>
-  <template v-if="!colObj.collapsed">
+  <div v-if="!!showParent && source.parent"
+       :class="['bbn-middle', 'bbn-vsmargin', 'bbn-radius', 'bbn-spadded', {
+         'bbn-alt-background': inverted,
+         'bbn-background': !inverted
+       }]">
+    <i class="nf nf-mdi-subdirectory_arrow_right bbn-right-sspace"
+       :title="_('Parent task')"/>
+    <div class="bbn-b bbn-tertiary-text-alt bbn-upper bbn-p"
+          v-html="source.parent.title"
+          @click="seeParentTask"/>
+  </div>
+  <template v-if="!isCollapsed">
     <div class="bbn-vsmargin bbn-w-100"
          ref="description">
       <div v-html="source.content"
            class="appui-task-item-content bbn-w-100"/>
-      <div class="bbn-c bbn-top-space"
+      <div class="bbn-c bbn-top-space bbn-w-100"
             v-if="showOpenContent">
         <bbn-button class="bbn-no-border bbn-upper bbn-xs"
                     :text="_('Show more content')"

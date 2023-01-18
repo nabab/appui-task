@@ -223,6 +223,7 @@ if ($grid->check()) {
       $data['data'][$i]['roles'] = $taskCls->infoRoles($d['id']);
       $data['data'][$i]['children'] = $taskCls->getChildren($d['id']);
       $data['data'][$i]['num_children'] = count($data['data'][$i]['children']);
+      $data['data'][$i]['parent'] = !empty($d['id_parent']) ? $taskCls->info($d['id_parent'], false, false) : null;
     }
   }
   return $data;

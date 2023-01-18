@@ -82,9 +82,8 @@
           </div>
         </div>
         <div :class="[{
-               'bbn-vmiddle': !mainPage.isMobile(),
-               'bbn-right-space': mainPage.isMobile()
-             }, 'bbn-vxsmargin']">
+               'bbn-vmiddle': !mainPage.isMobile()
+             }, 'bbn-vxsmargin', 'bbn-right-space']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
                v-text="_('Mode')"/>
           <div class="bbn-vmiddle">
@@ -92,6 +91,10 @@
                               v-model="currentViewMode"/>
           </div>
         </div>
+        <bbn-button :title="_('Hierarchy')"
+                    :class="{'bbn-state-active': currentHierarchy}"
+                    @click="currentHierarchy = !currentHierarchy"
+                    icon="nf nf-mdi-file_tree"/>
       </div>
       <div :class="['bbn-upper', 'bbn-b', 'bbn-lg', 'bbn-tertiary-text-alt', {
              'bbn-left-lspace bbn-right-space': !mainPage.isMobile(),
@@ -107,11 +110,13 @@
                         :order="currentOrder"
                         :filter="currentFilter"
                         :search="currentSearch"
-                        :role="currentRole"/>
+                        :role="currentRole"
+                        :hierarchy="currentHierarchy"/>
     <appui-task-list v-else
                      :source="source"
                      :filter="currentFilter"
                      :search="currentSearch"
-                     ref="listComponent"/>
+                     ref="listComponent"
+                     :hierarchy="currentHierarchy"/>
   </div>
 </div>

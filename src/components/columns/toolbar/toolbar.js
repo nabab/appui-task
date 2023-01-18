@@ -23,14 +23,18 @@
       },
       collapseAll(){
         const col = this.closest('column');
-        if (!!col && col.filteredData.length) {
-          bbn.fn.each(col.filteredData, item => col.$set(item, 'collapsed', true));
+        if (!!col && col.currentData.length) {
+          bbn.fn.each(col.currentData, item => {
+            col.$set(item, 'collapsed', true)
+          });
         }
       },
       expandAll(){
         const col = this.closest('column');
-        if (!!col && col.filteredData.length) {
-          bbn.fn.each(col.filteredData, item => col.$set(item, 'collapsed', false));
+        if (!!col && col.currentData.length) {
+          bbn.fn.each(col.currentData, item => {
+            col.$set(item, 'collapsed', false)
+          });
         }
       },
       onTaskCreated(d){

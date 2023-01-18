@@ -50,6 +50,9 @@
       },
       role: {
         type: String
+      },
+      hierarchy: {
+        type: Boolean
       }
     },
     data(){
@@ -141,6 +144,12 @@
               value: this.mainPage.source.states.closed
             });
             break;
+        }
+        if (this.hierarchy) {
+          conditions.push({
+            field: 'bbn_tasks.id_parent',
+            operator: 'isnull'
+          });
         }
         return {
           conditions: conditions
