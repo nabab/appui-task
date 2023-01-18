@@ -16,7 +16,7 @@
                    backgroundColor: getStatusBgColor(getStatusCode(source.state))
                  }">
               <div class="bbn-upper bbn-b bbn-lg bbn-hspadded bbn-flex-fill"
-                   v-text="stateText"/>
+                   v-text="statusText"/>
               <i v-if="isActive && !isUnapproved && canStart"
                  @click="start"
                  title="<?=_("Put on ongoing")?>"
@@ -50,7 +50,7 @@
                    'bbn-left-lspace bbn-right-space': !mainPage.isMobile(),
                    'bbn-flex-fill': mainPage.isMobile()
                  }]"
-                 v-text="stateText"
+                 v-text="statusText"
                  :style="{
                    color: getStatusColor(getStatusCode(source.state)),
                    backgroundColor: getStatusBgColor(getStatusCode(source.state))

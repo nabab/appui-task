@@ -29,7 +29,7 @@
   });
 
   return {
-    mixins: mixins,
+    mixins: [...mixins, appuiTaskMixin],
     props: {
       source: {
         type: Object
@@ -57,6 +57,9 @@
       root(){
         return !!this.mainPage ? this.mainPage.root : '';
       },
+      privileges(){
+        return!!this.mainPage ? this.mainPage.privileges : {};
+      },
       author(){
         return !!this.mainPage ? this.mainPage.userName(this.source.id_user) : '';
       },
@@ -68,9 +71,6 @@
       },
       statusColor(){
         return !!this.mainPage ? this.mainPage.getStatusColor(this.mainPage.getStatusCode(this.source.state)) : '';
-      },
-      statusText(){
-        return !!this.mainPage ? bbn.fn.getField(this.mainPage.optionsStates, 'text', 'value', this.source.state) : '';
       },
       closedChildren(){
         return !!this.mainPage ? bbn.fn.filter(this.source.children, c => c.state === this.mainPage.states.closed) : [];
@@ -112,6 +112,15 @@
           return !!this.colObj.collapsed;
         }
         return this.collapsed;
+      },
+      canChangeStatus(){
+        return this.canReopen
+          || (this.canChange
+            && ((this.isUnapproved && this.canClose)
+              || (this.isActive
+                && (this.canStart || this.canHold || this.canResume || this.canClose)
+                  || (this.isHolding && this.canResume)
+                  || (this.isClosed && this.canReopen))))
       }
     },
     methods: {
@@ -123,11 +132,116 @@
         }, {
           text: this.isCollapsed ? bbn._('Expand') : bbn._('Collapse'),
           icon: this.isCollapsed ? 'nf nf-mdi-arrow_expand' : 'nf nf-mdi-arrow_collapse',
-          action: () => {
-            this.toggleCollapsed();
-          }
+          action: this.toggleCollapsed
         }];
+        if (this.source.num_notes) {
+          menu.push({
+            text: bbn._('Open notes in new window'),
+            icon: 'nf nf-mdi-comment_multiple_outline',
+            action: this.openNotes
+          });
+        }
+        let status = this.getStatusSource();
+        if (status.length) {
+          menu.push({
+            group: bbn._('Status')
+          }, ...status);
+        }
+        if (this.canChange) {
+          menu.push({
+            group: bbn._('Roles')
+          }, {
+            text: bbn._('Add or remove managers'),
+            icon: 'nf nf-mdi-account_star',
+            action: () => {
+              this.manageRole('managers');
+            },
+            backgroundColor: this.mainPage.getRoleBgColor('managers'),
+            color: this.mainPage.getRoleColor('managers')
+          }, {
+            text: bbn._('Add or remove workers'),
+            icon: 'nf nf-mdi-worker',
+            action: () => {
+              this.manageRole('workers');
+            },
+            backgroundColor: this.mainPage.getRoleBgColor('workers'),
+            color: this.mainPage.getRoleColor('workers')
+          }, {
+            text: bbn._('Add or remove viewers'),
+            icon: 'nf nf-fa-user_secret',
+            action: () => {
+              this.manageRole('viewers');
+            },
+            backgroundColor: this.mainPage.getRoleBgColor('viewers'),
+            color: this.mainPage.getRoleColor('viewers')
+          });
+          if (this.canChangeDecider) {
+            menu.push({
+              text: bbn._('Add or remove deciders'),
+              icon: 'nf nf-fa-gavel',
+              action: () => {
+                this.manageRole('deciders');
+              },
+              backgroundColor: this.mainPage.getRoleBgColor('deciders'),
+              color: this.mainPage.getRoleColor('deciders')
+            });
+          }
+        }
         return menu;
+      },
+      getStatusSource(){
+        let menu = [];
+        if (this.canChangeStatus) {
+          if (this.isActive && !this.isUnapproved && this.canStart) {
+            menu.push({
+              text: bbn._('Put on ongoing'),
+              icon: 'nf nf-fa-play',
+              action: this.start,
+              backgroundColor: this.mainPage.getStatusBgColor('ongoing'),
+              color: this.mainPage.getStatusColor('ongoing')
+            });
+          }
+          if (this.isActive && !this.isUnapproved && this.canHold) {
+            menu.push({
+              text: bbn._('Put on hold'),
+              icon: 'nf nf-fa-pause',
+              action: this.hold,
+              backgroundColor: this.mainPage.getStatusBgColor('holding'),
+              color: this.mainPage.getStatusColor('holding')
+            });
+          }
+          if ((this.isActive || this.isHolding) && !this.isUnapproved && this.canResume) {
+            menu.push({
+              text: bbn._('Resume'),
+              icon: 'nf nf-fa-play',
+              action: this.resume,
+              backgroundColor: this.mainPage.getStatusBgColor('ongoing'),
+              color: this.mainPage.getStatusColor('ongoing')
+            });
+          }
+          if ((this.isActive || this.isUnapproved) && this.canClose) {
+            menu.push({
+              text: bbn._('Close'),
+              icon: 'nf nf-fa-check',
+              action: this.close,
+              backgroundColor: this.mainPage.getStatusBgColor('closed'),
+              color: this.mainPage.getStatusColor('closed')
+            });
+          }
+          if (this.isClosed && this.canReopen) {
+            menu.push({
+              text: bbn._('Reopen'),
+              icon: 'nf nf-oct-issue_reopened',
+              action: this.reopen,
+              backgroundColor: this.mainPage.getStatusBgColor('opend'),
+              color: this.mainPage.getStatusColor('opend')
+            });
+          }
+        }
+        return menu;
+      },
+      manageRole(role){
+
       },
       seeTask(){
         bbn.fn.link(this.mainPage.root + 'page/task/' + this.source.id);

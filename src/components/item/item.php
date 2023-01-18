@@ -34,16 +34,23 @@
          }]"/>
     <div v-if="!columnsComp || !columnsComp.isOrderedByPriority"
          v-text="source.priority"
-         :class="['bbn-xspadded', 'bbn-radius', 'bbn-s', 'bbn-left-sspace', 'appui-task-pr' + source.priority]"
+         :class="['bbn-xspadded', 'bbn-radius', 'bbn-s', 'bbn-left-sspace', 'bbn-vmiddle', 'appui-task-pr' + source.priority]"
          :title="_('Priority')"/>
-    <div v-if="!columnsComp || !columnsComp.isOrderedByStatus"
-         v-text="statusText"
-         :style="{
-           color: statusColor,
-           backgroundColor: statusBgColor
-         }"
-         class="bbn-xspadded bbn-radius bbn-upper bbn-s bbn-left-sspace"
-         :title="_('Status')"/>
+    <bbn-context :source="getStatusSource"
+                 item-component="appui-task-item-menu">
+      <bbn-button v-if="!columnsComp || !columnsComp.isOrderedByStatus"
+                  v-text="statusText"
+                  :style="{
+                    color: statusColor,
+                    backgroundColor: statusBgColor,
+                    padding: 'var(--xsspace)',
+                    'line-height': 'inherit',
+                    'min-height': 'unset',
+                    'cursor': !canChangeStatus ? 'default !important' : ''
+                  }"
+                  class="bbn-upper bbn-s bbn-left-sspace bbn-no-border"
+                  :title="_('Status')"/>
+    </bbn-context>
   </div>
   <div class="bbn-flex-width appui-task-item-titlebar">
     <bbn-button :icon="isCollapsed ? 'nf nf-fa-expand' : 'nf nf-fa-compress'"
@@ -63,7 +70,8 @@
            @click="seeTask"/>
     </div>
     <bbn-context :source="getMenuSource"
-                  class="bbn-left-sspace">
+                 class="bbn-left-sspace"
+                 item-component="appui-task-item-menu">
       <bbn-button icon="nf nf-mdi-dots_vertical"
                   :title="_('Menu')"
                   :notext="true"
@@ -112,25 +120,27 @@
              }"/>
         <div :style="{
                color: mainPage.getRoleBgColor('managers'),
-               cursor: 'default !important'
+               cursor: !canChange ? 'default !important' : ''
              }"
              :title="managersTitle"
              :class="['bbn-no-border', 'bbn-button', {
                'bbn-alt-background': inverted,
                'bbn-background': !inverted
-             }]">
+             }]"
+             @click="manageRole('managers')">
           <i class="nf nf-mdi-account_star bbn-xl"/>
           <span v-text="!!source.roles.managers ? source.roles.managers.length : 0"/>
         </div>
         <div :style="{
                color: mainPage.getRoleBgColor('workers'),
-               cursor: 'default !important'
+               cursor: !canChange ? 'default !important' : ''
              }"
              :title="workersTitle"
              :class="['bbn-left-space', 'bbn-no-border', 'bbn-button', {
                'bbn-alt-background': inverted,
                'bbn-background': !inverted
-             }]">
+             }]"
+             @click="manageRole('workers')">
           <i class="nf nf-mdi-worker"/>
           <span v-text="!!source.roles.workers ? source.roles.workers.length : 0"/>
         </div>
@@ -155,7 +165,11 @@
                       'bbn-alt-background': inverted,
                       'bbn-background': !inverted
                     }]"
-                    style="padding-left: 0.5rem; padding-right: 0.5rem; cursor: default !important"
+                    :style="{
+                      'padding-left': '0.5rem',
+                      'padding-right': '0.5rem',
+                      'cursor': !source.num_children ? 'default !important' : ''
+                    }"
                     :title="_('Sub-Tasks')"
                     @click="toggleSubtasks">
           <div class="bbn-vmiddle">

@@ -8,7 +8,7 @@
               || (this.task.isActive
                 && (this.task.canStart || this.task.canHold || this.task.canResume || this.task.canClose)
                   || (this.task.isHolding && this.task.canResume)
-                  || (this.task.isClosed && this.task.canOpen))))
+                  || (this.task.isClosed && this.task.canReopen))))
       },
       showRoles(){
         return this.task.canBecomeManager
