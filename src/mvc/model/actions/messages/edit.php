@@ -44,25 +44,27 @@ if (!empty($model->data['id'])
           });
         }
       }
-      $vcs = new \bbn\Appui\Vcs($model->db);
-      if ((($old['content'] !== $model->data['text'])
-          || ($old['locked'] != $model->data['locked']))
-        && ($vcsNote = $vcs->getAppuiTaskNoteByNote($model->data['id']))
-        && ($vcsTask = $vcs->getAppuiTaskById($vcsNote['id_parent']))
-      ) {
-        $n = $notes->get($model->data['id']);
-        $vcs->addToTasksQueue($vcsTask['id_project'], 'export', [
-          'type' => 'comment',
-          'action' => 'update',
-          'idUser' => $model->inc->user->getId(),
-          'idIssue' => $vcsTask['id_issue'],
-          'idNote' => $model->data['id'],
-          'idComment' => $vcsNote['id_comment'],
-          'text' => $model->data['text'],
-          'locked' => empty($model->data['locked']) ? 0 : 1,
-          'created' => $n['creation'],
-          'updated' => $n['creation']
-        ], $vcsTask['id_server']);
+      if ($model->hasPlugin('appui-vcs')) {
+        $vcs = new \bbn\Appui\Vcs($model->db);
+        if ((($old['content'] !== $model->data['text'])
+            || ($old['locked'] != $model->data['locked']))
+          && ($vcsNote = $vcs->getAppuiTaskNoteByNote($model->data['id']))
+          && ($vcsTask = $vcs->getAppuiTaskById($vcsNote['id_parent']))
+        ) {
+          $n = $notes->get($model->data['id']);
+          $vcs->addToTasksQueue($vcsTask['id_project'], 'export', [
+            'type' => 'comment',
+            'action' => 'update',
+            'idUser' => $model->inc->user->getId(),
+            'idIssue' => $vcsTask['id_issue'],
+            'idNote' => $model->data['id'],
+            'idComment' => $vcsNote['id_comment'],
+            'text' => $model->data['text'],
+            'locked' => empty($model->data['locked']) ? 0 : 1,
+            'created' => $n['creation'],
+            'updated' => $n['creation']
+          ], $vcsTask['id_server']);
+        }
       }
     }
     else {
