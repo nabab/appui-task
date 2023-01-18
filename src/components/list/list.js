@@ -12,23 +12,33 @@
       },
       search: {
         type: String
+      },
+      hierarchy: {
+        type: Boolean
       }
     },
     data(){
       const mainPage = this.closest('appui-task');
+      let filters = {
+        conditions: [{
+          field: 'state',
+          operator: 'neq',
+          value: mainPage.source.states.closed
+        }]
+      };
+      if (this.hierarchy) {
+        filters.conditions.push({
+          field: 'bbn_tasks.id_parent',
+          operator: 'isnull'
+        });
+      }
       return {
         tableData: [],
         taskTitle: '',
         mainPage: mainPage,
         users: bbn.fn.order(appui.app.users, 'text', 'ASC'),
         priority: Array.apply(null, { length: 9 }).map(Function.call, a => { return a + 1 }),
-        filters: {
-          conditions: [{
-            field: 'state',
-            operator: 'neq',
-            value: mainPage.source.states.closed
-          }]
-        }
+        filters: filters
       };
     },
     computed: {
@@ -147,6 +157,26 @@
         this.titleTimeout = setTimeout(() => {
           this.refreshTable();
         }, 500);
+      },
+      hierarchy(newVal){
+        let idx = bbn.fn.search(this.filters.conditions, 'field', 'bbn_tasks.id_parent');
+        if (newVal) {
+          if (idx === -1) {
+            this.filters.conditions.push({
+              field: 'bbn_tasks.id_parent',
+              operator: 'isnull'
+            });
+          }
+          else {
+            this.filters.conditions.splice(idx, 1, {
+              field: 'bbn_tasks.id_parent',
+              operator: 'isnull'
+            });
+          }
+        }
+        else if (idx > -1){
+          this.filters.conditions.splice(idx, 1);
+        }
       }
     },
     components: {

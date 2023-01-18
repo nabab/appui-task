@@ -53,6 +53,7 @@
           value: 'priority'
         }],
         currentSearch: '',
+        currentHierarchy: true
       }
     },
     computed: {
@@ -100,7 +101,8 @@
           currentViewMode: this.currentViewMode,
           currentFilter: this.currentFilter,
           currentOrder: this.currentOrder,
-          currentRole: this.currentRole
+          currentRole: this.currentRole,
+          currentHierarchy: this.currentHierarchy
         });
       }
     },
@@ -129,6 +131,9 @@
         this.setCfgToStorage();
       },
       currentRole(newVal){
+        this.setCfgToStorage();
+      },
+      currentHierarchy(newVal){
         this.setCfgToStorage();
       }
     }

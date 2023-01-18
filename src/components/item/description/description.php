@@ -1,4 +1,4 @@
-<div class="appui-task-columns-task-description bbn-background bbn-overlay bbn-flex-height">
+<div class="appui-task-item-description bbn-background bbn-overlay bbn-flex-height">
   <div :class="['bbn-spadded', 'bbn-background', 'bbn-radius', 'bbn-vmiddle', 'bbn-nowrap', {
           'bbn-flex-width': !mainPage.isMobile(),
           'bbn-flex-height': !!mainPage.isMobile()
