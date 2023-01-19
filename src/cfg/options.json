@@ -283,6 +283,10 @@
           "code": "manager"
         },
         {
+          "text": "Project Manager",
+          "code": "project_manager"
+        },
+        {
           "text": "Viewer",
           "code": "viewer"
         },
