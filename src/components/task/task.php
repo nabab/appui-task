@@ -68,7 +68,7 @@
                         code="appui-task"
                         ref="dashboard"
                         class="bbn-w-100">
-            <bbns-widget v-if="(isAdmin || isDecider) && ((isClosed && source.price) || !isClosed)"
+            <bbns-widget v-if="(isAdmin || isDecider || isGlobal || isProjectManager) && ((isClosed && source.price) || !isClosed)"
                         :hidden="!currentWidgets.budget"
                         :title="dashboard.widgets.budget.text"
                         :icon="dashboard.widgets.budget.icon"

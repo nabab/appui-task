@@ -164,7 +164,7 @@
       widgetsAvailable(){
         return bbn.fn.order(bbn.fn.filter(Object.values(this.dashboard.widgets), w => {
           if (w.code === 'budget') {
-            return (this.isAdmin || this.isDecider)
+            return (this.isAdmin || this.isDecider || this.isGlobal || this.isProjectManager)
               && ((this.isClosed && this.source.price) || !this.isClosed)
               && !this.currentWidgets[w.code]
           }
@@ -194,6 +194,9 @@
       },
       isGlobal(){
         return !!this.privileges.global;
+      },
+      isProjectManager(){
+        return !!this.privileges.project_manager;
       },
       isMaster() {
         return this.userId === this.source.id_user;
@@ -274,7 +277,9 @@
         return this.isDecider && !this.isClosed;
       },
       canChangeDecider() {
-        return (this.isDecider || this.isAdmin || this.isGlobal) && (this.source.roles.deciders !== undefined) && !this.isClosed;
+        return (this.isDecider || this.isAdmin || this.isGlobal || this.isProjectManager)
+          && (this.source.roles.deciders !== undefined)
+          && !this.isClosed;
       },
       hasComments() {
         return !!this.source.notes.length;
@@ -314,7 +319,7 @@
           && (!this.isManager || (this.source.roles.managers.length > 1));
       },
       canBecomeDecider(){
-        return !!this.privileges.decider
+        return (!!this.privileges.decider || this.isGlobal)
           && !this.isDecider
           && (!this.isManager
             || (this.source.roles.managers.length > 1));

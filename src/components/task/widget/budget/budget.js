@@ -98,11 +98,11 @@
       removeDecider(decider){
         if ( this.task.canChangeDecider ){
           this.confirm(bbn._('Are you sure you want to remove this decider?'), () => {
-            const idx = this.source.roles.deciders.indexOf(user);
+            const idx = this.source.roles.deciders.indexOf(decider);
             if (idx > -1) {
               this.post(this.root + 'actions/role/delete', {
                 id_task: this.source.id,
-                id_user: user
+                id_user: decider
               }, d => {
                 if (d.success) {
                   this.source.roles.deciders.splice(idx, 1);
