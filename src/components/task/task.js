@@ -163,7 +163,7 @@
       widgetsAvailable(){
         return bbn.fn.order(bbn.fn.filter(Object.values(this.dashboard.widgets), w => {
           if (w.code === 'budget') {
-            return (this.isAdmin || this.isDecider)
+            return (this.isAdmin || this.isDecider || this.isGlobal || this.isProjectManager)
               && ((this.isClosed && this.source.price) || !this.isClosed)
               && !this.currentWidgets[w.code]
           }

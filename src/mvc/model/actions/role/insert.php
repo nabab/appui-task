@@ -1,11 +1,4 @@
 <?php
-/*
- * Describe what it does or you're a pussy
- *
- **/
-
-/** @var $model \bbn\Mvc\Model*/
-
 $res = false;
 if ($model->hasData(['id_task', 'role', 'id_user'], true)) {
 	$task = new \bbn\Appui\Task($model->db);

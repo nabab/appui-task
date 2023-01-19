@@ -5,24 +5,38 @@
         type: Object,
         required: true
       },
-      idTask: {
-        type: String,
-        required: true
-      },
       role: {
         type: String,
         required: true
+      },
+      manage: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
       let groupsUsers = [];
       let activeUsers = appui.app.getActiveUsers();
+      if (this.source.roles[this.role] === undefined) {
+        this.$set(this.source.roles, this.role, []);
+      }
       if (appui.app.groups && activeUsers) {
         appui.app.groups.forEach(group => {
           let users = activeUsers.filter(u => {
-              return (u.id_group === group.id)
-                && (u.value !== appui.app.user.id)
-                && !this.source[this.role].includes(u.value);
+            if ((u.id_group === group.id)
+              && (u.value !== appui.app.user.id)
+              && (u.value !== this.source.id_user)
+            ) {
+              let hasRole = false;
+              bbn.fn.iterate(this.source.roles, r => {
+                if (r.includes(u.value)) {
+                  hasRole = true;
+                  return false;
+                }
+              });
+              return !hasRole;
+            }
+            return false;
           });
           users = users.map(u => {
             let user = bbn.fn.extend(true, {
@@ -43,25 +57,43 @@
       }
       return {
         users: bbn.fn.order(groupsUsers, 'text'),
-        root: appui.plugins['appui-task'] + '/'
+        root: appui.plugins['appui-task'] + '/',
+        originalValue: bbn.fn.extend(true, [], this.source.roles[this.role])
+      }
+    },
+    computed: {
+      currentRoleList(){
+        return this.source.roles[this.role];
       }
     },
     methods: {
       onSubmit(ev){
-        if (this.source[this.role].length && !!this.idTask) {
-          this.post(this.root + 'actions/role/insert', {
-            id_task: this.idTask,
-            role: this.role,
-            id_user: this.source[this.role]
-          }, d => {
-            if (d.success) {
-              this.getRef('form').closePopup(true);
-              appui.success();
-            }
-            else {
-              appui.error();
-            }
-          });
+        if (!!this.source.id) {
+          let obj = {
+                id_task: this.source.id,
+                role: this.role,
+              },
+              canPost = false;
+          if (this.manage) {
+            obj.toAdd = bbn.fn.filter(this.currentRoleList, u => !this.originalValue.includes(u));
+            obj.toRemove = bbn.fn.filter(this.originalValue, u => !this.currentRoleList.includes(u));
+            canPost = !!obj.toAdd.length || !!obj.toRemove.length;
+          }
+          else if (this.currentRoleList.length) {
+            obj.id_user = this.currentRoleList;
+            canPost = true;
+          }
+          if (canPost) {
+            this.post(this.root + 'actions/role/' + (this.manage ? 'update' : 'insert'), obj, d => {
+              if (d.success) {
+                this.getRef('form').closePopup(true);
+                appui.success();
+              }
+              else {
+                appui.error();
+              }
+            });
+          }
         }
       }
     }

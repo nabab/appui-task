@@ -149,6 +149,29 @@
         }
         if (this.canChange) {
           menu.push({
+            text: bbn._('Edit title'),
+            icon: 'nf nf-mdi-format_title',
+            action: this.editTitle
+          })
+        }
+        if ((this.isAdmin || this.isProjectManager)
+          && ((this.isClosed && this.source.price) || !this.isClosed)
+        ) {
+          menu.push({
+            text: !!this.source.price ? bbn._('Edit budget') : bbn._('Add budget'),
+            icon: 'nf nf-fa-money',
+            action: this.editBudget
+          });
+          if (!!this.source.price) {
+            menu.push({
+              text: bbn._('Remove budget'),
+              icon: 'nf nf-mdi-delete_empty',
+              action: this.removeBudget
+            });
+          }
+        }
+        if (this.canChange) {
+          menu.push({
             group: bbn._('Roles')
           }, {
             text: bbn._('Add or remove managers'),
@@ -241,7 +264,19 @@
         return menu;
       },
       manageRole(role){
-
+        if (this.canChange && !!role) {
+          this.getPopup({
+            component: 'appui-task-form-role',
+            componentOptions: {
+              source: this.source,
+              role: role,
+              manage: true
+            },
+            title: bbn._('Select user(s)'),
+            width: 400,
+            height: 600
+          });
+        }
       },
       seeTask(){
         bbn.fn.link(this.mainPage.root + 'page/task/' + this.source.id);
@@ -250,6 +285,16 @@
         if (!!this.source.parent && !!this.source.parent.id) {
           bbn.fn.link(this.mainPage.root + 'page/task/' + this.source.parent.id);
         }
+      },
+      editTitle(){
+        this.getPopup({
+          title: false,
+          closable: false,
+          width: bbn.fn.isMobile() ? '95%' : '90%',
+          height: bbn.fn.isMobile() ? '95%' : '90%',
+          component: 'appui-task-item-title',
+          source: this.source
+        });
       },
       openDescription(){
         this.getPopup({
@@ -272,6 +317,12 @@
             source: this.source
           });
         }
+      },
+      editBudget(){
+        
+      },
+      removeBudget(){
+
       },
       toggleSubtasks(){
         this.showSubtasks = !!this.source.num_children && !this.showSubtasks;
