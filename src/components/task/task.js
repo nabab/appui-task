@@ -454,7 +454,7 @@
           text: bbn._('Search and add'),
           icon: 'nf nf-fa-search_plus',
           action: this.searchTask
-        } */, {
+        }, */ {
           text: bbn._('Add task'),
           icon: 'nf nf-fa-plus',
           action: this.addTask
