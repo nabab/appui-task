@@ -16,18 +16,20 @@ if (
     $taskCls = new \bbn\Appui\Task($model->db);
     $taskCls->addLog($model->data['id_task'], 'comment_delete');
 
-    $vcs = new \bbn\Appui\Vcs($model->db);
-    if (($vcsNote = $vcs->getAppuiTaskNoteByNote($model->data['id']))
-      && ($vcsTask = $vcs->getAppuiTaskById($vcsNote['id_parent']))
-    ) {
-      $vcs->addToTasksQueue($vcsTask['id_project'], 'export', [
-        'type' => 'comment',
-        'action' => 'delete',
-        'idUser' => $model->inc->user->getId(),
-        'idIssue' => $vcsTask['id_issue'],
-        'idNote' => $model->data['id'],
-        'idComment' => $vcsNote['id_comment']
-      ], $vcsTask['id_server']);
+    if ($model->hasPlugin('appui-vcs')) {
+      $vcs = new \bbn\Appui\Vcs($model->db);
+      if (($vcsNote = $vcs->getAppuiTaskNoteByNote($model->data['id']))
+        && ($vcsTask = $vcs->getAppuiTaskById($vcsNote['id_parent']))
+      ) {
+        $vcs->addToTasksQueue($vcsTask['id_project'], 'export', [
+          'type' => 'comment',
+          'action' => 'delete',
+          'idUser' => $model->inc->user->getId(),
+          'idIssue' => $vcsTask['id_issue'],
+          'idNote' => $model->data['id'],
+          'idComment' => $vcsNote['id_comment']
+        ], $vcsTask['id_server']);
+      }
     }
 
     /** @todo To remove this and add an apposite function in grid */

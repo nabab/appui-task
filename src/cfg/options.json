@@ -283,6 +283,10 @@
           "code": "manager"
         },
         {
+          "text": "Project Manager",
+          "code": "project_manager"
+        },
+        {
           "text": "Viewer",
           "code": "viewer"
         },
@@ -345,7 +349,8 @@
                   "text": "Sub-Tasks",
                   "code": "subtasks",
                   "closable": true,
-                  "itemComponent": "appui-task-task-widget-subtasks",
+                  "itemComponent": "appui-task-item",
+                  "options": "{\"inverted\":1}",
                   "limit": 10,
                   "icon": "nf nf-oct-tasklist"
                 },
