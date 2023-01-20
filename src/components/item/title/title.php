@@ -7,7 +7,7 @@
             'bbn-left-sspace bbn-right-space': !mainPage.isMobile(),
             'bbn-top-space bbn-bottom-space': !!mainPage.isMobile(),
           }]"
-          v-text="source.title"/>
+          v-text="_('Edit title')"/>
     <div>
       <bbn-button class="bbn-no-border"
                   icon="nf nf-fa-close bbn-lg"
@@ -16,10 +16,19 @@
   </div>
   <div class="bbn-flex-fill bbn-top-xsspace bbn-xspadded">
     <div class="bbn-100 bbn-radius bbn-alt-background">
-      <bbn-scroll axis="y">
-        <div v-html="source.content"
-             class="bbn-padded bbn-radius"/>
-      </bbn-scroll>
+      <bbn-form class="bbn-100"
+                :source="formSource"
+                @submit.prevent="onSubmit">
+        <div class="bbn-overlay">
+          <div class="bbn-100 bbn-spadded">
+            <div class="bbn-100">
+              <bbn-textarea class="bbn-overlay bbn-no-border"
+                            v-model="formSource.title"
+                            :resizable="false"/>
+            </div>
+          </div>
+        </div>
+      </bbn-form>
     </div>
   </div>
 </div>

@@ -203,7 +203,12 @@
           }
         },
         update(prop, val) {
-          this.post(this.root + 'actions/task/update', {
+          if ((this.source[prop] !== undefined)
+            && (this.source[prop] === val)
+          ) {
+            return false;
+          }
+          return this.post(this.root + 'actions/task/update', {
             id_task: this.source.id,
             prop: prop,
             val: val
@@ -229,6 +234,7 @@
             if ((prop === 'price') && (d.lastChangePrice !== undefined)) {
               this.source.lastChangePrice = d.lastChangePrice;
             }
+            this.$set(this.source, 'last_action', dayjs().format('YYYY-MM-DD HH:mm:ss'));
           });
         },
       }

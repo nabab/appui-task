@@ -134,46 +134,27 @@
           icon: this.isCollapsed ? 'nf nf-mdi-arrow_expand' : 'nf nf-mdi-arrow_collapse',
           action: this.toggleCollapsed
         }];
-        if (this.source.num_notes) {
-          menu.push({
-            text: bbn._('Open notes in new window'),
-            icon: 'nf nf-mdi-comment_multiple_outline',
-            action: this.openNotes
-          });
-        }
-        let status = this.getStatusSource();
-        if (status.length) {
-          menu.push({
-            group: bbn._('Status')
-          }, ...status);
-        }
         if (this.canChange) {
           menu.push({
             text: bbn._('Edit title'),
             icon: 'nf nf-mdi-format_title',
             action: this.editTitle
-          })
-        }
-        if ((this.isAdmin || this.isProjectManager)
-          && ((this.isClosed && this.source.price) || !this.isClosed)
-        ) {
-          menu.push({
-            text: !!this.source.price ? bbn._('Edit budget') : bbn._('Add budget'),
-            icon: 'nf nf-fa-money',
-            action: this.editBudget
+          }, {
+            text: bbn._('Priority'),
+            icon: 'nf nf-mdi-numeric',
+            items: this.getPriorityMenuSource()
           });
-          if (!!this.source.price) {
-            menu.push({
-              text: bbn._('Remove budget'),
-              icon: 'nf nf-mdi-delete_empty',
-              action: this.removeBudget
-            });
-          }
+        }
+        let status = this.getStatusMenuSource();
+        if (status.length) {
+          menu.push({
+            text: bbn._('Status'),
+            icon: 'nf nf-mdi-play_pause',
+            items: status
+          });
         }
         if (this.canChange) {
-          menu.push({
-            group: bbn._('Roles')
-          }, {
+          let rolesItems = [{
             text: bbn._('Add or remove managers'),
             icon: 'nf nf-mdi-account_star',
             action: () => {
@@ -197,9 +178,9 @@
             },
             backgroundColor: this.mainPage.getRoleBgColor('viewers'),
             color: this.mainPage.getRoleColor('viewers')
-          });
+          }];
           if (this.canChangeDecider) {
-            menu.push({
+            rolesItems.push({
               text: bbn._('Add or remove deciders'),
               icon: 'nf nf-fa-gavel',
               action: () => {
@@ -209,10 +190,71 @@
               color: this.mainPage.getRoleColor('deciders')
             });
           }
+          menu.push({
+            text: bbn._('Roles'),
+            icon: 'nf nf-fa-users',
+            items: rolesItems
+          });
+        }
+        if ((this.isAdmin || this.isProjectManager)
+          && ((this.isClosed && this.source.price) || !this.isClosed)
+        ) {
+          if (!!this.source.price) {
+            menu.push({
+              text: bbn._('Budget'),
+              icon: 'nf nf-fa-money',
+              items: [{
+                text: bbn._('Edit budget'),
+                icon: 'nf nf-fa-edit',
+                action: this.editBudget
+              }, {
+                text: bbn._('Remove budget'),
+                icon: 'nf nf-mdi-delete_empty',
+                action: this.removeBudget
+              }]
+            });
+          }
+          else {
+            menu.push({
+              text: bbn._('Add budget'),
+              icon: 'nf nf-fa-money',
+              action: this.editBudget
+            });
+          }
+        }
+        if (this.source.num_notes) {
+          menu.push({
+            text: bbn._('Open notes'),
+            icon: 'nf nf-mdi-comment_multiple_outline',
+            action: this.openNotes
+          });
         }
         return menu;
       },
-      getStatusSource(){
+      getPriorityMenuSource(){
+        let menu = [];
+        if (this.canChange) {
+          bbn.fn.each(this.mainPage.priorities, p => {
+            if (p.value !== this.source.priority) {
+              menu.push({
+                text: p.text,
+                action: () => {
+                  this.update('priority', p.value).then(d => {
+                    if (d.data && d.data.success) {
+                      this.source.priority = p.value;
+                    }
+                  });
+                },
+                backgroundColor: p.backgroundColor,
+                color: p.color,
+                cls: 'bbn-c'
+              });
+            }
+          });
+        }
+        return menu;
+      },
+      getStatusMenuSource(){
         let menu = [];
         if (this.canChangeStatus) {
           if (this.isActive && !this.isUnapproved && this.canStart) {
@@ -319,10 +361,43 @@
         }
       },
       editBudget(){
-        
+        this.getPopup({
+          title: bbn._('Set the price'),
+          width: 200,
+          component: 'appui-task-item-budget',
+          source: this.source
+        });
       },
       removeBudget(){
-
+        if ((this.isAdmin || this.isProjectManager)
+          && !this.isClosed
+          && !bbn.fn.isNull(this.source.price)
+        ){
+          this.confirm(bbn._('Are you sure you want to remove the price?'), () => {
+            this.update('price', null).then(d => {
+              if (d.data && d.data.success) {
+                this.source.price = null;
+                if ((this.source.roles.deciders !== undefined)
+                  && this.source.roles.deciders.length
+                ){
+                  this.source.roles.deciders.splice(0);
+                }
+                this.update('state', this.mainPage.states.opened).then(r => {
+                  if (r.data && r.data.success) {
+                    this.source.state = this.mainPage.states.opened;
+                    appui.success();
+                  }
+                  else {
+                    appui.error();
+                  }
+                });
+              }
+              else {
+                appui.error();
+              }
+            });
+          });
+        }
       },
       toggleSubtasks(){
         this.showSubtasks = !!this.source.num_children && !this.showSubtasks;

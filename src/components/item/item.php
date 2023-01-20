@@ -32,14 +32,25 @@
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"/>
-    <div v-if="!columnsComp || !columnsComp.isOrderedByPriority"
-         v-text="source.priority"
-         :class="['bbn-xspadded', 'bbn-radius', 'bbn-s', 'bbn-left-sspace', 'bbn-vmiddle', 'appui-task-pr' + source.priority]"
-         :title="_('Priority')"/>
-    <bbn-context :source="getStatusSource"
+    <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByPriority"
+                 :source="getPriorityMenuSource"
                  item-component="appui-task-item-menu">
-      <bbn-button v-if="!columnsComp || !columnsComp.isOrderedByStatus"
-                  v-text="statusText"
+      <bbn-button v-text="source.priority"
+                  :style="{
+                    color: 'white',
+                    backgroundColor: 'var(--appui-task-pr' + source.priority + ')',
+                    padding: 'var(--xsspace)',
+                    'line-height': 'inherit',
+                    'min-height': 'unset',
+                    'cursor': !canChange ? 'default !important' : ''
+                  }"
+                  class="bbn-upper bbn-s bbn-left-sspace bbn-no-border"
+                  :title="_('Priority')"/>
+    </bbn-context>
+    <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByStatus"
+                 :source="getStatusMenuSource"
+                 item-component="appui-task-item-menu">
+      <bbn-button v-text="statusText"
                   :style="{
                     color: statusColor,
                     backgroundColor: statusBgColor,
