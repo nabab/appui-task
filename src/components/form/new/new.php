@@ -23,5 +23,10 @@
     <bbn-checkbox v-model="source.private"
                   :value="1"
                   :novalue="0"/>
+    <label class="bbn-label"
+           v-text="_('Open after creation')"/>
+    <bbn-checkbox v-model="openAfterCreation"
+                  :value="true"
+                  :novalue="false"/>
   </div>
 </bbn-form>

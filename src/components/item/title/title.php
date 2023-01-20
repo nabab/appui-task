@@ -24,7 +24,8 @@
             <div class="bbn-100">
               <bbn-textarea class="bbn-overlay bbn-no-border"
                             v-model="formSource.title"
-                            :resizable="false"/>
+                            :resizable="false"
+                            maxlength="255"/>
             </div>
           </div>
         </div>

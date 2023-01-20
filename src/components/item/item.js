@@ -332,8 +332,8 @@
         this.getPopup({
           title: false,
           closable: false,
-          width: bbn.fn.isMobile() ? '95%' : '90%',
-          height: bbn.fn.isMobile() ? '95%' : '90%',
+          width: bbn.fn.isMobile() ? '95%' : 600,
+          height: bbn.fn.isMobile() ? '95%' : 200,
           component: 'appui-task-item-title',
           source: this.source
         });

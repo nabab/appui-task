@@ -90,10 +90,12 @@
           }
         });
       },
-      onTaskCreated(d){
+      onTaskCreated(d, openAfterCreation){
         if (d.success && !!d.id) {
           this.currentSearch = '';
-          bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
+          if (openAfterCreation) {
+            bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
+          }
         }
       },
       setCfgToStorage(){

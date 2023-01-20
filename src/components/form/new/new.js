@@ -7,7 +7,8 @@
     },
     data(){
       return {
-        root: appui.plugins['appui-task'] + '/'
+        root: appui.plugins['appui-task'] + '/',
+        openAfterCreation: true
       }
     },
     computed: {
@@ -32,7 +33,7 @@
         if (d.success) {
           appui.success();
           if (bbn.fn.isVue(this.opener)) {
-            this.opener.$emit('taskcreated', d);
+            this.opener.$emit('taskcreated', d, this.openAfterCreation);
             /*
             if (this.opener.taskTitle !== undefined) {
               this.opener.taskTitle = '';

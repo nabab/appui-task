@@ -37,9 +37,11 @@
           });
         }
       },
-      onTaskCreated(d){
+      onTaskCreated(d, openAfterCreation){
         if (d.success && !!d.id) {
-          bbn.fn.link(this.root + 'page/task/' + d.id);
+          if (openAfterCreation) {
+            bbn.fn.link(this.root + 'page/task/' + d.id);
+          }
           this.closest('column').updateData();
         }
       }

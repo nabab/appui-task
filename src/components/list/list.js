@@ -50,21 +50,6 @@
       }
     },
     methods: {
-      createTask(){
-        if ( this.taskTitle.length ){
-          this.getPopup().open({
-            title: bbn._('New task'),
-            width: 500,
-            component: 'appui-task-form-new',
-            source: {
-              title: this.taskTitle,
-              type: '',
-              private: 0
-            },
-            opener: this
-          });
-        }
-      },
       openTask(row){
         bbn.fn.link(this.mainPage.root + 'page/task/' + (typeof row === 'object' ? row.id : row));
       },

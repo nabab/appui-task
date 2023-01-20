@@ -450,7 +450,11 @@
         }];
       },
       tasksButtons(){
-        return this.canChange ? [{
+        return this.canChange ? [/* {
+          text: bbn._('Search and add'),
+          icon: 'nf nf-fa-search_plus',
+          action: this.searchTask
+        } */, {
           text: bbn._('Add task'),
           icon: 'nf nf-fa-plus',
           action: this.addTask
@@ -476,6 +480,18 @@
               private: !!this.source.private ? 1 : 0
             },
             opener: this
+          });
+        }
+      },
+      searchTask(){
+        if (this.canChange && !!this.source.id) {
+          this.getPopup({
+            title: bbn._('Search and add'),
+            width: 500,
+            component: 'appui-task-search',
+            componentOptions: {
+              idParent: this.source.id
+            }
           });
         }
       },
@@ -578,9 +594,11 @@
           widgetPanel.toggle();
         }
       },
-      onTaskCreated(d){
+      onTaskCreated(d, openAfterCreation){
         if (d.success && !!d.id) {
-          this.openTask(d.id);
+          if (openAfterCreation) {
+            this.openTask(d.id);
+          }
           if ((d.children !== undefined)
             && bbn.fn.isArray(this.source.children)
           ) {
