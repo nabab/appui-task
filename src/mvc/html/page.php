@@ -2,7 +2,9 @@
   <bbn-router class="appui-task-nav"
               :scrollable="true"
               :autoload="true"
-              :nav="true">
+              :nav="true"
+              :storage="true"
+              storage-full-name="appui-task-ui">
     <bbns-container url="home"
                     :static="true"
                     :load="false"

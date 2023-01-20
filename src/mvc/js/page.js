@@ -1,5 +1,246 @@
 // Javascript Document
 (() => {
+  if (!window.appuiTaskMixin) {
+    window.appuiTaskMixin = {
+      data(){
+        return {
+          userId: appui.app.user.id,
+          isAdmin: appui.app.user.isAdmin
+        }
+      },
+      computed: {
+        statusText(){
+          return !!this.mainPage ? bbn.fn.getField(this.mainPage.optionsStates, 'text', 'value', this.source.state) : '';
+        },
+        isGlobal(){
+          return !!this.privileges.global;
+        },
+        isProjectManager(){
+          return !!this.privileges.project_manager;
+        },
+        isMaster() {
+          return this.userId === this.source.id_user;
+        },
+        isManager() {
+          return this.isMaster
+            || (!!this.source.roles.managers && this.source.roles.managers.includes(this.userId));
+        },
+        isWorker() {
+          return !!this.source.roles.workers && this.source.roles.workers.includes(this.userId);
+        },
+        isViewer() {
+          return !!this.source.roles.viewers && this.source.roles.viewers.includes(this.userId);
+        },
+        isDecider() {
+          return !!this.source.roles.deciders && this.source.roles.deciders.includes(this.userId);
+        },
+        isAdded() {
+          return this.isManager || this.isWorker || this.isViewer;
+        },
+        isClosed() {
+          return this.source.state === this.mainPage.source.states.closed;
+        },
+        isOpened() {
+          return this.source.state === this.mainPage.source.states.opened;
+        },
+        isOngoing() {
+          return this.source.state === this.mainPage.source.states.ongoing;
+        },
+        isHolding() {
+          return this.source.state === this.mainPage.source.states.holding;
+        },
+        isOpenedOrOngoing() {
+          return this.isOngoing || this.isOpened;
+        },
+        isHoldingOrOpened() {
+          return this.isHolding || this.isOpened;
+        },
+        isActive() {
+          return !this.isClosed && !this.isHolding;
+        },
+        isApproved() {
+          return this.source.price
+            && !!this.source.approved
+            && !!this.source.lastChangePrice
+            && (this.source.approved.chrono !== undefined)
+            && (this.source.lastChangePrice.chrono !== undefined)
+            && (this.source.approved.chrono > this.source.lastChangePrice.chrono);
+        },
+        isUnapproved() {
+          return this.source.price
+            && (!this.source.approved
+              || !this.source.lastChangePrice
+              || (!this.source.approved.chrono
+                || (this.source.approved.chrono < this.source.lastChangePrice.chrono)));
+        },
+        canChange() {
+          return !this.isClosed && (this.isMaster || this.isGlobal || (!this.source.private && this.isManager));
+        },
+        canStart() {
+          return this.isOpened && (this.isManager || this.isWorker || this.isGlobal);
+        },
+        canClose() {
+          return (this.isManager || this.isGlobal) && !this.isClosed;
+        },
+        canHold() {
+          return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
+        },
+        canResume() {
+          return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
+        },
+        canReopen() {
+          return (this.isManager || this.isGlobal) && this.isClosed;
+        },
+        canPing() {
+          return (this.isManager || this.isGlobal) && !this.isClosed;
+        },
+        canApprove() {
+          return this.isDecider && !this.isClosed;
+        },
+        canChangeDecider() {
+          return (this.isDecider || this.isAdmin || this.isGlobal || this.isProjectManager)
+          && (this.source.roles.deciders !== undefined)
+          && !this.isClosed;
+        },
+        canBecomeManager(){
+          return (!!this.privileges.manager || this.isGlobal) && !this.isManager;
+        },
+        canBecomeWorker(){
+          return (!!this.privileges.worker || this.isGlobal)
+            && !this.isWorker
+            && (!this.isManager || (this.source.roles.managers.length > 1));
+        },
+        canBecomeViewer(){
+          return (!!this.privileges.viewer || this.isGlobal)
+            && !this.isViewer
+            && (!this.isManager || (this.source.roles.managers.length > 1));
+        },
+        canBecomeDecider(){
+          return (!!this.privileges.decider || this.isGlobal)
+            && !this.isDecider
+            && (!this.isManager
+              || (this.source.roles.managers.length > 1));
+        },
+        canRevemoHimselfManager(){
+          return (!!this.privileges.manager || this.isGlobal)
+            && !!this.isManager
+            && !this.isMaster
+            && (this.source.roles.managers.length > 1);
+        },
+        canRevemoHimselfWorker(){
+          return (!!this.privileges.worker || this.isGlobal)
+            && !!this.isWorker;
+        },
+        canRevemoHimselfViewer(){
+          return (!!this.privileges.viewer || this.isGlobal)
+            && !!this.isViewer;
+        },
+        canRevemoHimselfDecider(){
+          return (!!this.privileges.decider || this.isGlobal)
+            && !!this.isDecider;
+        },
+        canUnmakeMe() {
+          return this.canRevemoHimselfManager
+            || this.canRevemoHimselfWorker
+            || this.canRevemoHimselfViewer
+            || this.canRevemoHimselfDecider
+        },
+        canBill() {
+          return (this.source.state === this.mainPage.source.states.closed)
+            && this.isApproved
+            && this.isAdmin
+            && (appui.plugins['appui-billing'] !== undefined);
+        }
+      },
+      methods: {
+        start() {
+          if (this.canStart) {
+            this.confirm(bbn._('Are you sure you want to put this task on ongoing?'), () => {
+              this.update('state', this.mainPage.source.states.ongoing);
+            });
+          }
+        },
+        hold() {
+          if (this.canHold) {
+            this.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
+              this.update('state', this.mainPage.source.states.holding);
+            });
+          }
+        },
+        close() {
+          if (this.canClose) {
+            this.confirm(bbn._("Are you sure you want to close this task?"), () => {
+              this.update('state', this.mainPage.source.states.closed);
+            });
+          }
+        },
+        resume() {
+          if (this.canResume) {
+            this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
+              this.update('state', this.mainPage.source.states.ongoing);
+            });
+          }
+        },
+        ping(){
+          if (this.canPing) {
+            this.confirm(bbn._('Are you sure you want to ping the task?'), () => {
+              this.post(this.root + 'actions/task/ping', { id_task: this.source.id }, (d) => {
+                if ( d.success ){
+                  appui.success(bbn._('Pinged'));
+                }
+                else{
+                  appui.error(bbn._('Error'));
+                }
+              });
+            });
+          }
+        },
+        reopen() {
+          if (this.canReopen) {
+            this.confirm(bbn._("Are you sure you want to reopen this task?"), () => {
+              this.update('state', this.mainPage.source.states.opened);
+            });
+          }
+        },
+        update(prop, val) {
+          if ((this.source[prop] !== undefined)
+            && (this.source[prop] === val)
+          ) {
+            return false;
+          }
+          return this.post(this.root + 'actions/task/update', {
+            id_task: this.source.id,
+            prop: prop,
+            val: val
+          }, d => {
+            if (!d.success) {
+              this.alert(bbn._('Error'));
+              return false;
+            }
+            if (prop === 'state') {
+              this.source.state = val;
+              this.source.tracker = d.tracker;
+              if (!d.trakcer) {
+                let tracker = appui.getRegistered('appui-task-tracker');
+                if (bbn.fn.isVue(tracker)
+                  && !!tracker.active
+                  && (tracker.active.id === this.source.id)
+                ) {
+                  tracker.clear();
+                }
+              }
+              this.source.trackers = d.trackers;
+            }
+            if ((prop === 'price') && (d.lastChangePrice !== undefined)) {
+              this.source.lastChangePrice = d.lastChangePrice;
+            }
+            this.$set(this.source, 'last_action', dayjs().format('YYYY-MM-DD HH:mm:ss'));
+          });
+        },
+      }
+    }
+  }
+
   return {
     name: 'appui-task',
     data(){

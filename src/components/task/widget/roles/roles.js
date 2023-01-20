@@ -50,8 +50,7 @@
           this.getPopup({
             component: 'appui-task-form-role',
             componentOptions: {
-              source: this.source.roles,
-              idTask: this.source.id,
+              source: this.source,
               role: role
             },
             title: bbn._('Select user(s)'),

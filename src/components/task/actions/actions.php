@@ -14,14 +14,14 @@
         <span class="bbn-left-sspace"
               v-text="_('Approve')"/>
       </div>
-      <div v-if="task.isAdmin && !task.isClosed && !!source.lastChangePrice"
+      <div v-if="(task.isAdmin || task.isProjectManager) && !task.isClosed && !!source.lastChangePrice"
            class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
            @click="task.editPrice">
         <i class="bbn-m nf nf-fa-edit"/>
         <span class="bbn-left-sspace"
               v-text="_('Edit price')"/>
       </div>
-      <div v-if="task.isAdmin && !task.isClosed && !!source.lastChangePrice"
+      <div v-if="(task.isAdmin || task.isProjectManager) && !task.isClosed && !!source.lastChangePrice"
            class="bbn-vmiddle bbn-red bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
            @click="task.removePrice">
         <i class="bbn-m nf nf-fa-trash"/>

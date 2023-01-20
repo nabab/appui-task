@@ -71,12 +71,22 @@
       removePrice(){
         if ( this.task.isAdmin && !this.task.isClosed ){
           this.confirm(bbn._('Are you sure you want to remove the price?'), () => {
-            this.task.update('price', null);
-            this.task.update('state', this.states.opened);
-            this.source.price = null;
-            this.source.roles.deciders = [];
-            this.showPriceForm = false;
-            this.$parent.updateButtons();
+            this.task.update('price', null).then(d => {
+              if (d.data && d.data.success) {
+                this.source.price = null;
+                if ((this.source.roles.deciders !== undefined)
+                  && this.source.roles.deciders.length
+                ){
+                  this.source.roles.deciders.splice(0);
+                }
+                this.showPriceForm = false;
+                this.$parent.updateButtons();
+                this.update('state', this.states.opened);
+              }
+              else {
+                appui.error();
+              }
+            });
           });
         }
       },
@@ -85,8 +95,7 @@
           this.getPopup().open({
             component: 'appui-task-form-role',
             componentOptions: {
-              source: this.source.roles,
-              idTask: this.source.id,
+              source: this.source,
               role: 'deciders'
             },
             title: bbn._('Select decider(s)'),
