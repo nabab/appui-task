@@ -3,11 +3,12 @@
           :source="source.roles"
           @submit.prevent="onSubmit"
           ref="form">
-  <div class="bbn-overlay bbn-hpadded bbn-vspadded">
+  <div class="bbn-overlay bbn-spadded">
     <appui-usergroup-picker :multi="true"
-                            class="bbn-h-100"
                             v-model="source.roles[role]"
                             :as-array="true"
-                            :source="users"/>
+                            :source="users"
+                            :filterable="true"
+                            :selected-panel="true"/>
   </div>
 </bbn-form>

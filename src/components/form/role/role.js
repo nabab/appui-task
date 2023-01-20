@@ -46,13 +46,15 @@
             delete user.value;
             return user;
           });
-          groupsUsers.push({
-            id: group.id,
-            text: group.nom || group.group,
-            items: bbn.fn.order(users, 'text'),
-            num: users.length,
-            icon: 'nf nf-fa-users'
-          });
+          if (users.length) {
+            groupsUsers.push({
+              id: group.id,
+              text: group.nom || group.group,
+              items: bbn.fn.order(users, 'text'),
+              num: users.length,
+              icon: 'nf nf-fa-users'
+            });
+          }
         });
       }
       return {
