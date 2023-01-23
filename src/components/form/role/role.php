@@ -9,6 +9,7 @@
                             :as-array="true"
                             :source="users"
                             :filterable="true"
-                            :selected-panel="true"/>
+                            :selected-panel="true"
+                            :show-only-new="!manage"/>
   </div>
 </bbn-form>

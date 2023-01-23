@@ -23,6 +23,13 @@
     <bbn-checkbox v-model="source.private"
                   :value="1"
                   :novalue="0"/>
+    <template v-if="roles">
+      <label class="bbn-label"
+             v-text="_('Copy roles from parent task')"/>
+      <bbn-checkbox v-model="copyRoles"
+                    :value="true"
+                    :novalue="false"/>
+    </template>
     <label class="bbn-label"
            v-text="_('Open after creation')"/>
     <bbn-checkbox v-model="openAfterCreation"

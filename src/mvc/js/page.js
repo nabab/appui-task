@@ -232,6 +232,22 @@
             this.$set(this.source, 'last_action', dayjs().format('YYYY-MM-DD HH:mm:ss'));
           });
         },
+        askSetSubtasksRoles(){
+          if (!!this.source.children && this.source.children.length) {
+            this.confirm(bbn._('Do you want to apply the same role configuration of this task in its related subtasks?'), () => {
+              this.post(this.mainPage.root + 'actions/role/subtasks', {
+                id: this.source.id
+              }, d => {
+                if (d.success) {
+                  appui.success();
+                }
+                else {
+                  appui.error();
+                }
+              });
+            });
+          }
+        }
       }
     }
   }

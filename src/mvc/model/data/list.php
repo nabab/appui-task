@@ -224,6 +224,29 @@ if ($grid->check()) {
       $data['data'][$i]['children'] = $taskCls->getChildren($d['id']);
       $data['data'][$i]['num_children'] = count($data['data'][$i]['children']);
       $data['data'][$i]['parent'] = !empty($d['id_parent']) ? $taskCls->info($d['id_parent'], false, false) : null;
+
+      $lastChangePrice = $taskCls->getPriceLog($d['id']) ?: null;
+      if (!empty($lastChangePrice) && \bbn\Str::isJson($lastChangePrice['value'])) {
+        $lastChangePrice['value'] = json_decode($lastChangePrice['value'], true);
+        if (is_array($lastChangePrice['value'])) {
+          $lastChangePrice['value'] = $lastChangePrice['value'][0];
+        }
+      }
+      $approved = $taskCls->getApprovedLog($d['id']) ?: null;
+      if (!empty($approved) && \bbn\Str::isJson($approved['value'])) {
+        $approved['value'] = json_decode($approved['value'], true);
+        if (is_array($approved['value'])) {
+          $approved['value'] = $approved['value'][0];
+        }
+      }
+      if (!empty($lastChangePrice)
+        && !empty($approved)
+        && ($lastChangePrice['chrono'] > $approved['chrono'])
+      ){
+        $approved = null;
+      }
+      $data['data'][$i]['approved'] = $approved;
+      $data['data'][$i]['lastChangePrice'] = $lastChangePrice;
     }
   }
   return $data;

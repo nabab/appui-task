@@ -24,8 +24,8 @@
            class="bbn-top-sspace"
            :readonly="!task.canChange"
            :placeholder="_('Description')"
-           style="width: 100%"
-           height="20rem"/>
+           style="width: 100%; min-height: 20rem"
+           height="auto"/>
   <div class="bbn-grid-fields bbn-top-space bbn-l"
        :style="{
          display: 'grid !important',
