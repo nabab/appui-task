@@ -213,6 +213,7 @@
       <appui-task-item v-for="(child, cidx) in source.children"
                        :source="child"
                        :inverted="inverted"
+                       :remove-parent="removeParent"
                        :key="cidx"
                        :class="['bbn-alt-background', 'bbn-radius', 'bbn-spadded', 'bbn-radius', {
                          'bbn-bottom-space': !!source.children[cidx + 1]

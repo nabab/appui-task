@@ -486,7 +486,7 @@
       searchTask(){
         if (this.canChange && !!this.source.id) {
           this.getPopup({
-            title: bbn._('Search and add'),
+            title: bbn._('Search and add subtasks'),
             width: 500,
             height: 400,
             scrollable: false,

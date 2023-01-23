@@ -48,6 +48,10 @@
       editable: {
         type: Boolean,
         default: true
+      },
+      removeParent: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
@@ -234,6 +238,13 @@
             text: bbn._('Open notes'),
             icon: 'nf nf-mdi-comment_multiple_outline',
             action: this.openNotes
+          });
+        }
+        if (this.canChange && this.removeParent) {
+          menu.push({
+            text: bbn._('Remove as subtask'),
+            icon: 'nf nf-mdi-playlist_remove',
+            action: this.removeAsSubtask
           });
         }
         return menu;
@@ -426,6 +437,40 @@
         }
         else {
           this.collapsed = !this.collapsed;
+        }
+      },
+      removeAsSubtask(){
+        if (this.canChange && this.removeParent && !!this.source.id_parent) {
+          this.post(this.mainPage.root + 'actions/task/subtask/remove', {
+            id: this.source.id
+          }, d => {
+            if (d.success) {
+              if (d.children !== undefined) {
+                let task = appui.getRegistered('appui-task-' + this.source.id_parent, true);
+                let item = this.closest('appui-task-item');
+                if (task) {
+                  if (task.source.children !== undefined) {
+                    task.source.children.splice(0, task.source.children.length, ...d.children);
+                    task.source.num_children = d.children.length;
+                    let widget = task.findByKey('subtasks', 'bbn-widget');
+                    if (widget) {
+                      this.$nextTick(() => {
+                        widget.reload();
+                      })
+                    }
+                  }
+                }
+                else if (!!item
+                  && (item.source.id === this.source.id_parent)
+                  && (item.source.children !== undefined)
+                ) {
+                  item.source.children.splice(0, item.source.children.length, ...d.children);
+                  item.source.num_children = d.children.length;
+                }
+              }
+              appui.success();
+            }
+          })
         }
       }
     },

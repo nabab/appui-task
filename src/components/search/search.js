@@ -55,8 +55,14 @@
             <appui-task-item :source="source"
                              :editable="false"
                              class="bbn-flex-fill bbn-right-space"/>
-            <bbn-button :icon="isAdded ? 'nf nf-fa-check bbn-green bbn-lg' : 'nf nf-fa-plus bbn-lg'"
-                        @click="add"/>
+            <bbn-button v-if="isAdded"
+                        icon="nf nf-fa-minus bbn-lg"
+                        @click="remove"
+                        class="bbn-no-border bbn-alt-background bbn-red"/>
+            <bbn-button v-else
+                        icon="nf nf-fa-plus bbn-lg"
+                        @click="add"
+                        class="bbn-no-border bbn-alt-background bbn-green"/>
 
           </div>
         `,
@@ -85,31 +91,53 @@
               && !!this.source.id
               && !this.source.id_parent
             ) {
-              this.post(appui.plugins['appui-task'] + '/actions/task/subtask', {
+              this.post(appui.plugins['appui-task'] + '/actions/task/subtask/insert', {
                 id: this.source.id,
                 idParent: this.idParent
               }, d => {
                 if (d.success) {
-                  if (!!this.parent
-                    && (this.parent.children !== undefined)
-                    && (d.children !== undefined)
-                  ) {
-                    this.parent.children.splice(0, this.parent.children.length, ...d.children);
-                    this.source.num_children = d.children.length;
-                    let task = appui.getRegistered('appui-task-' + this.idParent);
-                    if (task) {
-                      let widget = task.getRef('subtasksWidget');
-                      if (widget) {
-                        this.$nextTick(() => {
-                          widget.reload();
-                        })
-                      }
-                    }
-                  }
+                  this.updateParent(d.children);
+                  this.source.id_parent = this.idParent;
                   this.isAdded = true;
                   appui.success();
                 }
               });
+            }
+          },
+          remove(){
+            if (this.isAdded
+              && !!this.idParent
+              && !!this.source.id
+              && !!this.source.id_parent
+            ) {
+              this.post(appui.plugins['appui-task'] + '/actions/task/subtask/remove', {
+                id: this.source.id
+              }, d => {
+                if (d.success) {
+                  this.updateParent(d.children);
+                  this.source.id_parent = null;
+                  this.isAdded = false;
+                  appui.success();
+                }
+              });
+            }
+          },
+          updateParent(children){
+            if (!!this.parent
+              && (this.parent.children !== undefined)
+              && (children !== undefined)
+            ) {
+              this.parent.children.splice(0, this.parent.children.length, ...children);
+              this.source.num_children = children.length;
+              let task = appui.getRegistered('appui-task-' + this.idParent, true);
+              if (task) {
+                let widget = task.findByKey('subtasks', 'bbn-widget');
+                if (widget) {
+                  this.$nextTick(() => {
+                    widget.reload();
+                  })
+                }
+              }
             }
           }
         }
