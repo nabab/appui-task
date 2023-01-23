@@ -203,11 +203,6 @@
           }
         },
         update(prop, val) {
-          if ((this.source[prop] !== undefined)
-            && (this.source[prop] === val)
-          ) {
-            return false;
-          }
           return this.post(this.root + 'actions/task/update', {
             id_task: this.source.id,
             prop: prop,
