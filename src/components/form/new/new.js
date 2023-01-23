@@ -13,7 +13,7 @@
       return {
         root: appui.plugins['appui-task'] + '/',
         openAfterCreation: true,
-        copyRoles: !!this.roles && bbn.fn.numProperties(this.roles)
+        copyRoles: !!this.roles && !!bbn.fn.numProperties(this.roles)
       }
     },
     computed: {
