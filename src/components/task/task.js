@@ -469,15 +469,30 @@
       },
       addTask(){
         if (this.canChange && !!this.source.id) {
+          let roles = bbn.fn.extend(true, {}, this.source.roles);
+          if (roles.deciders) {
+            delete roles.deciders;
+          }
+          bbn.fn.iterate(roles, (us, ro) => {
+            if (us.includes(appui.app.user.id)) {
+              us.splice(us.indexOf(appui.app.user.id), 1);
+            }
+            if (!us.length) {
+              delete roles[ro];
+            }
+          });
           this.getPopup().open({
             title: bbn._('New task'),
             width: 500,
             component: 'appui-task-form-new',
-            source: {
-              title: '',
-              type: '',
-              id_parent: this.source.id,
-              private: !!this.source.private ? 1 : 0
+            componentOptions: {
+              source: {
+                title: '',
+                type: '',
+                id_parent: this.source.id,
+                private: !!this.source.private ? 1 : 0
+              },
+              roles: bbn.fn.numProperties(roles) ? roles : false
             },
             opener: this
           });

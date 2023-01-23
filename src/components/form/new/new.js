@@ -3,12 +3,17 @@
     props: {
       source: {
         type: Object
+      },
+      roles: {
+        type: [Boolean, Object],
+        default: false
       }
     },
     data(){
       return {
         root: appui.plugins['appui-task'] + '/',
-        openAfterCreation: true
+        openAfterCreation: true,
+        copyRoles: !!this.roles && bbn.fn.numProperties(this.roles)
       }
     },
     computed: {
@@ -57,6 +62,26 @@
         }
         else {
           appui.error();
+        }
+      },
+      setRoles(){
+        if (bbn.fn.isObject(this.roles)
+          && bbn.fn.numProperties(this.roles)
+        ) {
+          this.$set(this.source, 'roles', this.roles);
+        }
+      }
+    },
+    created(){
+      this.setRoles();
+    },
+    watch: {
+      copyRoles(newVal){
+        if (newVal) {
+          this.setRoles();
+        }
+        else {
+          this.$delete(this.source, 'roles');
         }
       }
     }

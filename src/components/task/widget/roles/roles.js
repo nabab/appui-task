@@ -70,6 +70,7 @@
               }, d => {
                 if (d.success) {
                   this.source.roles[role].splice(idx, 1);
+                  this.task.askSetSubtasksRoles();
                   appui.success();
                 }
                 else {

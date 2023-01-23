@@ -89,6 +89,20 @@
             this.post(this.root + 'actions/role/' + (this.manage ? 'update' : 'insert'), obj, d => {
               if (d.success) {
                 this.getRef('form').closePopup(true);
+                if (!!this.source.children && this.source.children.length) {
+                  this.confirm(bbn._('Do you want to apply the same role configuration of this task in its related subtasks?'), () => {
+                    this.post(this.root + 'actions/role/subtasks', {
+                      id: this.source.id
+                    }, d => {
+                      if (d.success) {
+                        appui.success();
+                      }
+                      else {
+                        appui.error();
+                      }
+                    });
+                  });
+                }
                 appui.success();
               }
               else {

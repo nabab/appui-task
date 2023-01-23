@@ -13,6 +13,13 @@ if ($model->hasData(['title', 'type'], true)
     'private' => empty($model->data['private']) ? 0 : 1
    ]))
 ) {
+  if (!empty($model->data['roles'])) {
+    foreach ($model->data['roles'] as $role => $users) {
+      foreach ($users as $u) {
+        $taskCls->addRole($newId, $role, $u);
+      }
+    }
+  }
   $ret = [
     'success' => true,
     'id' => $newId
