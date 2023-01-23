@@ -44,13 +44,17 @@
       showParent: {
         type: Boolean,
         default: false
+      },
+      editable: {
+        type: Boolean,
+        default: true
       }
     },
     data(){
       return {
         showOpenContent: false,
         showSubtasks: false,
-        collapsed: false
+        collapsed: !this.editable
       }
     },
     computed: {
@@ -125,6 +129,9 @@
     },
     methods: {
       getMenuSource(){
+        if (!this.editable) {
+          return [];
+        }
         let menu = [{
           text: bbn._('Open in new window'),
           icon: 'nf nf-mdi-open_in_new',
@@ -232,6 +239,9 @@
         return menu;
       },
       getPriorityMenuSource(){
+        if (!this.editable) {
+          return [];
+        }
         let menu = [];
         if (this.canChange) {
           bbn.fn.each(this.mainPage.priorities, p => {
@@ -255,6 +265,9 @@
         return menu;
       },
       getStatusMenuSource(){
+        if (!this.editable) {
+          return [];
+        }
         let menu = [];
         if (this.canChangeStatus) {
           if (this.isActive && !this.isUnapproved && this.canStart) {
@@ -400,6 +413,10 @@
         }
       },
       toggleSubtasks(){
+        if (!this.editable) {
+          this.showSubtasks = false;
+          return;
+        }
         this.showSubtasks = !!this.source.num_children && !this.showSubtasks;
       },
       toggleCollapsed(){

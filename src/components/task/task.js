@@ -450,11 +450,11 @@
         }];
       },
       tasksButtons(){
-        return this.canChange ? [/* {
+        return this.canChange ? [{
           text: bbn._('Search and add'),
           icon: 'nf nf-fa-search_plus',
           action: this.searchTask
-        } */, {
+        }, {
           text: bbn._('Add task'),
           icon: 'nf nf-fa-plus',
           action: this.addTask
@@ -488,8 +488,11 @@
           this.getPopup({
             title: bbn._('Search and add'),
             width: 500,
+            height: 400,
+            scrollable: false,
             component: 'appui-task-search',
             componentOptions: {
+              source: this.source,
               idParent: this.source.id
             }
           });

@@ -112,7 +112,8 @@
                         :buttonsRight="tasksButtons"
                         :buttonsLeft="closeButton"
                         :showable="false"
-                        :options="dashboard.widgets.subtasks.options"/>
+                        :options="dashboard.widgets.subtasks.options"
+                        ref="subtasksWidget"/>
             <bbns-widget :hidden="!currentWidgets.logs"
                         :title="dashboard.widgets.logs.text"
                         :icon="dashboard.widgets.logs.icon"
