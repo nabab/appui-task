@@ -9,9 +9,14 @@
   }
   .appui-task-item-content {
     word-break: break-word;
-    white-space: pre-line;
+    white-space: pre-line !important;
     max-height: 600px;
     overflow: hidden;
     margin-bottom: 0;
+  }
+  .appui-task-item-reference {
+    > * {
+      background-color: transparent !important;
+    }
   }
 }

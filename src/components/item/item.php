@@ -78,11 +78,13 @@
          v-if="!!source.private"/>
       <div class="bbn-b bbn-secondary-text-alt bbn-upper bbn-p"
            v-html="source.title"
-           @click="seeTask"/>
+           @click="seeTask"
+           style="white-space: normal !important"/>
     </div>
     <bbn-context :source="getMenuSource"
                  class="bbn-left-sspace"
-                 item-component="appui-task-item-menu">
+                 item-component="appui-task-item-menu"
+                 v-if="editable">
       <bbn-button icon="nf nf-mdi-dots_vertical"
                   :title="_('Menu')"
                   :notext="true"
@@ -113,7 +115,7 @@
       </div>
     </div>
     <div v-if="source.reference"
-         :class="['bbn-vsmargin', 'bbn-w-100', 'bbn-spadded', 'bbn-radius',{
+         :class="['appui-task-item-reference', 'bbn-vsmargin', 'bbn-w-100', 'bbn-spadded', 'bbn-radius',{
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"
