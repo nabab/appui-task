@@ -222,6 +222,16 @@
           }, d => {
             if (d.success) {
               this.source.roles[role].push(appui.app.user.id);
+              if (d.roles !== undefined) {
+                let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
+                if (comps.length) {
+                  bbn.fn.each(comps, c => c.$set(c.source, 'roles', d.roles));
+                  }
+                let t = appui.getRegistered('appui-task-' + this.source.id, true);
+                if (t) {
+                  this.$set(t.source, 'roles', d.roles);
+                }
+              }
               appui.success();
             }
             else {
@@ -280,6 +290,16 @@
                 const idx = this.source.roles[prop].indexOf(appui.app.user.id);
                 if (idx > -1) {
                   this.source.roles[prop].splice(idx, 1);
+                }
+                if (d.roles !== undefined) {
+                  let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
+                  if (comps.length) {
+                    bbn.fn.each(comps, c => c.$set(c.source, 'roles', d.roles));
+                    }
+                  let t = appui.getRegistered('appui-task-' + this.source.id, true);
+                  if (t) {
+                    this.$set(t.source, 'roles', d.roles);
+                  }
                 }
               }
             });

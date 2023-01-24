@@ -18,7 +18,8 @@ if ($model->hasData(['id_task', 'role'], true)
   return [
     'success' => !empty($added) || !empty($removed),
     'removed' => $removed,
-    'added' => $added
+    'added' => $added,
+    'roles' => $taskCls->infoRoles($model->data['id_task'])
   ];
 }
 return [

@@ -6,9 +6,14 @@
 
 /** @var $model \bbn\Mvc\Model*/
 
-$res = false;
+$res = ['success' => false];
 if ($model->hasData(['id_task' ,'id_user'], true)) {
 	$task = new \bbn\Appui\Task($model->db);
-  $res = $task->removeRole($model->data['id_task'], $model->data['id_user']);
+  if ($task->removeRole($model->data['id_task'], $model->data['id_user'])) {
+    $res = [
+      'success' => true,
+      'roles' => $task->infoRoles($model->data['id_task'])
+    ];
+  }
 }
-return ['success' => $res];
+return $res;

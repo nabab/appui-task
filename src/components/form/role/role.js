@@ -89,12 +89,38 @@
             this.post(this.root + 'actions/role/' + (this.manage ? 'update' : 'insert'), obj, d => {
               if (d.success) {
                 this.getRef('form').closePopup(true);
+                if (d.roles !== undefined) {
+                  let comps = this.closest('appui-task').findAllByKey(this.source.id, 'appui-task-item');
+                  if (comps.length) {
+                    bbn.fn.each(comps, c => c.$set(c.source, 'roles', d.roles));
+                  }
+                  let t = appui.getRegistered('appui-task-' + this.source.id, true);
+                  if (t) {
+                    this.$set(t.source, 'roles', d.roles);
+                  }
+                }
                 if (!!this.source.children && this.source.children.length) {
                   this.confirm(bbn._('Do you want to apply the same role configuration of this task in its related subtasks?'), () => {
                     this.post(this.root + 'actions/role/subtasks', {
                       id: this.source.id
                     }, d => {
                       if (d.success) {
+                        if (d.roles && bbn.fn.numProperties(d.roles)) {
+                          bbn.fn.iterate(d.roles, (roles, id) => {
+                            let child = bbn.fn.getRow(this.source.children, 'id', id);
+                            if (child) {
+                              this.$set(child, 'roles', roles);
+                            }
+                            let comps = this.closest('appui-task').findAllByKey(id, 'appui-task-item');
+                            if (comps.length) {
+                              bbn.fn.each(comps, c => c.$set(c.source, 'roles', roles));
+                            }
+                            let t = appui.getRegistered('appui-task-' + id, true);
+                            if (t) {
+                              this.$set(t.source, 'roles', roles);
+                            }
+                          });
+                        }
                         appui.success();
                       }
                       else {

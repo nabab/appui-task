@@ -7,7 +7,7 @@
     <span v-if="active && progress"
           v-text="progress"
     ></span>
-    <i :class="['bbn-lg', 'bbn-b','nf', 'nf-mdi-timer', {'bbn-green': active && progress}]"></i>
+    <i :class="['bbn-b','nf', 'nf-mdi-timer', {'bbn-green': active && progress}]"></i>
   </div>
   <bbn-floater v-if="isVisible"
                :width="300"

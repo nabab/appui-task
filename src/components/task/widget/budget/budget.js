@@ -36,6 +36,9 @@
         return '';
       },
       deciders(){
+        if (this.source.roles.deciders === undefined) {
+          return [];
+        }
         return bbn.fn.order(bbn.fn.map(this.source.roles.deciders.slice(), u => {
           return {
             idUser: u,
@@ -115,6 +118,16 @@
               }, d => {
                 if (d.success) {
                   this.source.roles.deciders.splice(idx, 1);
+                  if (d.roles !== undefined) {
+                    let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
+                    if (comps.length) {
+                      bbn.fn.each(comps, c => c.$set(c.source, 'roles', d.roles));
+                      }
+                    let t = appui.getRegistered('appui-task-' + this.source.id, true);
+                    if (t) {
+                      this.$set(t.source, 'roles', d.roles);
+                    }
+                  }
                   appui.success();
                 }
                 else {

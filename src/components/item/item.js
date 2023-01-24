@@ -132,6 +132,7 @@
       }
     },
     methods: {
+      money: bbn.fn.money,
       getMenuSource(){
         if (!this.editable) {
           return [];
@@ -207,32 +208,15 @@
             items: rolesItems
           });
         }
-        if ((this.isAdmin || this.isProjectManager)
-          && ((this.isClosed && this.source.price) || !this.isClosed)
-        ) {
-          if (!!this.source.price) {
-            menu.push({
-              text: bbn._('Budget'),
-              icon: 'nf nf-fa-money',
-              items: [{
-                text: bbn._('Edit budget'),
-                icon: 'nf nf-fa-edit',
-                action: this.editBudget
-              }, {
-                text: bbn._('Remove budget'),
-                icon: 'nf nf-mdi-delete_empty',
-                action: this.removeBudget
-              }]
-            });
-          }
-          else {
-            menu.push({
-              text: bbn._('Add budget'),
-              icon: 'nf nf-fa-money',
-              action: this.editBudget
-            });
-          }
+        let budget = this.getBudgetMenuSource();
+        if (budget.length > 1) {
+          budget = [{
+            text: bbn._('Budget'),
+            icon: 'nf nf-fa-money',
+            items: budget
+          }];
         }
+        menu.push(...budget);
         if (this.source.num_notes) {
           menu.push({
             text: bbn._('Open notes'),
@@ -246,6 +230,32 @@
             icon: 'nf nf-mdi-playlist_remove',
             action: this.removeAsSubtask
           });
+        }
+        return menu;
+      },
+      getBudgetMenuSource(){
+        let menu = [];
+        if ((this.isAdmin || this.isProjectManager)
+          && ((this.isClosed && this.source.price) || !this.isClosed)
+        ) {
+          if (!!this.source.price) {
+            menu.push({
+              text: bbn._('Edit budget'),
+              icon: 'nf nf-fa-edit',
+              action: this.editBudget
+            }, {
+              text: bbn._('Remove budget'),
+              icon: 'nf nf-mdi-delete_empty',
+              action: this.removeBudget
+            });
+          }
+          else {
+            menu.push({
+              text: bbn._('Add budget'),
+              icon: 'nf nf-fa-money',
+              action: this.editBudget
+            });
+          }
         }
         return menu;
       },

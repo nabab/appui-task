@@ -4,7 +4,7 @@
                            :data="currentData"
                            ref="sections"
                            component="appui-task-item"
-                           :component-options="{showParent: true}"
+                           :component-options="{showParent: true, uid: 'id'}"
                            toolbar="appui-task-columns-toolbar"
                            :pageable="true"
                            :children-filterable="true"

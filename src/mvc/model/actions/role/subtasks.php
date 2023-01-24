@@ -5,6 +5,7 @@ if ($model->hasData('id', true)) {
     && ($roles = $taskCls->infoRoles($model->data['id']))
   ) {
     $success = true;
+    $newRoles = [];
     foreach ($children as $child) {
       foreach ($child['roles'] as $role => $users) {
         foreach ($users as $user) {
@@ -23,11 +24,15 @@ if ($model->hasData('id', true)) {
           }
         }
       }
-      if ($roles !== $taskCls->infoRoles($child['id'])) {
+      if ($roles !== ($childRoles = $taskCls->infoRoles($child['id']))) {
         $success = false;
       }
+      $newRoles[$child['id']] = $childRoles;
     }
-    return ['success' => $success];
+    return [
+      'success' => $success,
+      'roles' => $newRoles
+    ];
   }
 }
 return ['success' => false];

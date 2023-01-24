@@ -239,6 +239,22 @@
                 id: this.source.id
               }, d => {
                 if (d.success) {
+                  if (d.roles && bbn.fn.numProperties(d.roles)) {
+                    bbn.fn.iterate(d.roles, (roles, id) => {
+                      let child = bbn.fn.getRow(this.source.children, 'id', id);
+                      if (child) {
+                        this.$set(child, 'roles', roles);
+                      }
+                      let comps = this.mainPage.findAllByKey(id, 'appui-task-item');
+                      if (comps.length) {
+                        bbn.fn.each(comps, c => c.$set(c.source, 'roles', roles));
+                      }
+                      let t = appui.getRegistered('appui-task-' + id, true);
+                      if (t) {
+                        this.$set(t.source, 'roles', roles);
+                      }
+                    });
+                  }
                   appui.success();
                 }
                 else {

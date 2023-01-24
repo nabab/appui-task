@@ -18,6 +18,24 @@
               :title="author"/>
       </span>
     </div>
+    <bbn-context v-if="!!source.price && (isAdmin || isGlobal || IsProjectManager || isDecider)"
+                 :source="getBudgetMenuSource"
+                 item-component="appui-task-item-menu"
+                 class="bbn-right-sspace">
+      <bbn-button v-text="money(source.price)"
+                  :style="{
+                    color: 'white',
+                    padding: 'var(--xsspace)',
+                    'line-height': 'inherit',
+                    'min-height': 'unset',
+                    cursor: isClosed ? 'default !important' : ''
+                  }"
+                  :class="['bbn-upper', 'bbn-s', 'bbn-left-sspace', 'bbn-no-border', {
+                    'bbn-bg-green': isApproved,
+                    'bbn-bg-orange': !isApproved
+                  }]"
+                  :title="_('Budget')"/>
+    </bbn-context>
     <div v-if="source.creation_date === source.last_action"
          v-text="mainPage.formatDate(source.creation_date)"
          :title="_('Created at')"
@@ -34,7 +52,8 @@
          }]"/>
     <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByPriority"
                  :source="getPriorityMenuSource"
-                 item-component="appui-task-item-menu">
+                 item-component="appui-task-item-menu"
+                 class="bbn-left-sspace">
       <bbn-button v-text="source.priority"
                   :style="{
                     color: 'white',
@@ -44,12 +63,13 @@
                     'min-height': 'unset',
                     'cursor': !canChange ? 'default !important' : ''
                   }"
-                  class="bbn-upper bbn-s bbn-left-sspace bbn-no-border"
+                  class="bbn-upper bbn-s bbn-no-border"
                   :title="_('Priority')"/>
     </bbn-context>
     <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByStatus"
                  :source="getStatusMenuSource"
-                 item-component="appui-task-item-menu">
+                 item-component="appui-task-item-menu"
+                 class="bbn-left-sspace">
       <bbn-button v-text="statusText"
                   :style="{
                     color: statusColor,
@@ -59,7 +79,7 @@
                     'min-height': 'unset',
                     'cursor': !canChangeStatus ? 'default !important' : ''
                   }"
-                  class="bbn-upper bbn-s bbn-left-sspace bbn-no-border"
+                  class="bbn-upper bbn-s bbn-no-border"
                   :title="_('Status')"/>
     </bbn-context>
   </div>
@@ -133,7 +153,9 @@
              }"/>
         <div :style="{
                color: mainPage.getRoleBgColor('managers'),
-               cursor: !canChange ? 'default !important' : ''
+               cursor: !canChange ? 'default !important' : '',
+               'padding-left': '0.5rem',
+               'padding-right': '0.5rem'
              }"
              :title="managersTitle"
              :class="['bbn-no-border', 'bbn-button', {
@@ -146,7 +168,9 @@
         </div>
         <div :style="{
                color: mainPage.getRoleBgColor('workers'),
-               cursor: !canChange ? 'default !important' : ''
+               cursor: !canChange ? 'default !important' : '',
+               'padding-left': '0.5rem',
+               'padding-right': '0.5rem'
              }"
              :title="workersTitle"
              :class="['bbn-left-space', 'bbn-no-border', 'bbn-button', {
@@ -214,7 +238,7 @@
                        :source="child"
                        :inverted="inverted"
                        :remove-parent="true"
-                       :key="cidx"
+                       :key="child.id"
                        :class="['bbn-alt-background', 'bbn-radius', 'bbn-spadded', 'bbn-radius', {
                          'bbn-bottom-space': !!source.children[cidx + 1]
                        }]"/>
