@@ -1,5 +1,7 @@
 <bbn-table :source="mainPage.root + 'page/logs'"
-           :filterable="true">
+           :filterable="true"
+           :pageable="true"
+           :sortable="true">
   <bbns-column :title="_('Date')"
                field="chrono"
                type="datetime"
@@ -14,5 +16,6 @@
                :width="120"/>
   <bbns-column :title="_('Log')"
                field="log"
-               :filterable="false"/>
+               :filterable="false"
+               :sortable="false"/>
 </bbn-table>
