@@ -113,7 +113,8 @@
                         :buttonsLeft="closeButton"
                         :showable="false"
                         :options="dashboard.widgets.subtasks.options"/>
-            <bbns-widget :hidden="!currentWidgets.logs"
+            <bbns-widget v-if="isAdmin || isManager || isGlobal"
+                        :hidden="!currentWidgets.logs"
                         :title="dashboard.widgets.logs.text"
                         :icon="dashboard.widgets.logs.icon"
                         :component="dashboard.widgets.logs.component"
