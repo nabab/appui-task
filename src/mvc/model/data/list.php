@@ -32,7 +32,7 @@ $fields = [
   'bbn_tasks.private',
   'bbn_tasks.active',
   'role' => 'my_role.role',
-  'last_action' => 'FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono))',
+  'last' => 'MAX(bbn_tasks_logs.chrono)',
   'num_children' => 'COUNT(children.id)',
   'num_notes' => 'COUNT(DISTINCT bbn_tasks_notes.id_note)',
   'duration' => "IF(bbn_tasks.`state` = UNHEX('$state_closed'), MAX(bbn_tasks_logs.chrono), UNIX_TIMESTAMP()) - MIN(bbn_tasks_logs.chrono)"
@@ -214,6 +214,7 @@ if ($grid->check()) {
   $data = $grid->getDatatable();
   if (!empty($data['data'])) {
     foreach ($data['data'] as $i => $d) {
+      $data['data'][$i]['last_action'] = date('Y-m-d H:i:s', $d['last']);
       if (!empty($d['reference'])
         && !empty($plugin_model['template'])
         && is_callable($plugin_model['template'])

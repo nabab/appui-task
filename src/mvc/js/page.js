@@ -365,7 +365,7 @@
         return id === appui.app.user.id;
       },
       formatDate(d){
-        return dayjs(d).format('DD/MM/YYYY HH:mm');
+        return dayjs(bbn.fn.date(d)).format('DD/MM/YYYY HH:mm');
       },
       getRoleColor(code){
         if (this.optionsRoles) {
