@@ -2,7 +2,6 @@
   "cfg": {
     "show_code": 1,
     "allow_children": 1,
-    "inheritance": "cascade",
     "show_icon": 1,
     "i18n": "en"
   },
@@ -15,6 +14,10 @@
   "tekname": "tasks",
   "items": [
     {
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1
+      },
       "text": "Actions",
       "code": "actions",
       "items": [
@@ -157,6 +160,10 @@
       ]
     },
     {
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1
+      },
       "text": "Roles",
       "code": "roles",
       "items": [
@@ -187,6 +194,12 @@
       ]
     },
     {
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1,
+        "show_icon": 1,
+        "sortable": 1
+      },
       "text": "States",
       "code": "states",
       "items": [
@@ -235,6 +248,11 @@
       ]
     },
     {
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1,
+        "inheritance": "cascade"
+      },
       "text": "Task categories",
       "code": "cats",
       "items": [
@@ -263,6 +281,10 @@
       ]
     },
     {
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1
+      },
       "text": "Privileges",
       "code": "privileges",
       "items": [
@@ -297,6 +319,12 @@
       ]
     },
     {
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1,
+        "inheritance": "cascade",
+        "show_icon": 1
+      },
       "text": "Plugins",
       "code": "plugins",
       "items": [
