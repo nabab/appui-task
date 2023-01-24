@@ -50,7 +50,7 @@
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"/>
-    <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByPriority"
+    <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByPriority || isSub"
                  :source="getPriorityMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-left-sspace">
@@ -66,7 +66,7 @@
                   class="bbn-upper bbn-s bbn-no-border"
                   :title="_('Priority')"/>
     </bbn-context>
-    <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByStatus"
+    <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByStatus || isSub"
                  :source="getStatusMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-left-sspace">
@@ -241,7 +241,8 @@
                        :key="child.id"
                        :class="['bbn-alt-background', 'bbn-radius', 'bbn-spadded', 'bbn-radius', {
                          'bbn-bottom-space': !!source.children[cidx + 1]
-                       }]"/>
+                       }]"
+                       :is-sub="true"/>
     </div>
   </template>
 </div>

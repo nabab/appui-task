@@ -52,6 +52,10 @@
       removeParent: {
         type: Boolean,
         default: false
+      },
+      isSub: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
