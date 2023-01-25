@@ -76,7 +76,7 @@
         return !!this.mainPage ? this.mainPage.userName(this.source.id_user) : '';
       },
       colObj(){
-        return !!this.columnsComp ? bbn.fn.getRow(this.closest('column').filteredData, 'index', this.index) : {};
+        return !!this.columnsComp ? bbn.fn.getRow(this.closest('bbn-column-list').filteredData, 'index', this.index) : {};
       },
       statusBgColor(){
         return !!this.mainPage ? this.mainPage.getStatusBgColor(this.mainPage.getStatusCode(this.source.state)) : '';

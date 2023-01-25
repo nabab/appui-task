@@ -22,7 +22,7 @@
         });
       },
       collapseAll(){
-        const col = this.closest('column');
+        const col = this.closest('bbn-column-list');
         if (!!col && col.currentData.length) {
           bbn.fn.each(col.currentData, item => {
             col.$set(item, 'collapsed', true)
@@ -30,7 +30,7 @@
         }
       },
       expandAll(){
-        const col = this.closest('column');
+        const col = this.closest('bbn-column-list');
         if (!!col && col.currentData.length) {
           bbn.fn.each(col.currentData, item => {
             col.$set(item, 'collapsed', false)
@@ -42,7 +42,7 @@
           if (openAfterCreation) {
             bbn.fn.link(this.root + 'page/task/' + d.id);
           }
-          this.closest('column').updateData();
+          this.closest('bbn-column-list').updateData();
         }
       }
     },
