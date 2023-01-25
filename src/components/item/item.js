@@ -38,23 +38,23 @@
         type: Number
       },
       inverted: {
-        type: Boolean,
+        type: [Boolean, Number],
         default: false
       },
       showParent: {
-        type: Boolean,
+        type: [Boolean, Number],
         default: false
       },
       editable: {
-        type: Boolean,
+        type: [Boolean, Number],
         default: true
       },
       removeParent: {
-        type: Boolean,
+        type: [Boolean, Number],
         default: false
       },
       isSub: {
-        type: Boolean,
+        type: [Boolean, Number],
         default: false
       }
     },
