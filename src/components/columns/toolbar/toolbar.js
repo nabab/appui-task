@@ -8,6 +8,11 @@
         type: Number
       }
     },
+    data(){
+      return {
+        columnList: null
+      }
+    },
     methods: {
       addTask(){
         this.getPopup({
@@ -16,7 +21,7 @@
           component: 'appui-task-form-new',
           source: {
             title: '',
-            type: this.columnsComp.isOrderedByTypes ? this.source.data.id : '',
+            type: this.columnsComp.isOrderedByTypes ? this.source.id : '',
             private: 0
           }
         });
@@ -45,6 +50,9 @@
           this.closest('bbn-column-list').updateData();
         }
       }
+    },
+    created(){
+      this.$set(this, 'columnList', this.closest('bbn-column-list'));
     },
     mounted(){
       this.$on('taskcreated', this.onTaskCreated);
