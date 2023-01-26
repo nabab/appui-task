@@ -32,7 +32,7 @@ $fields = [
   'bbn_tasks.private',
   'bbn_tasks.active',
   'role' => 'my_role.role',
-  'last_action' => 'SUBSTR(FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono)), 1 19)',
+  'last_action' => "FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono), '%Y-%m-%d %h:%i:%s')",
   'num_children' => 'COUNT(children.id)',
   'num_notes' => 'COUNT(DISTINCT bbn_tasks_notes.id_note)',
   'duration' => "IF(bbn_tasks.`state` = UNHEX('$state_closed'), MAX(bbn_tasks_logs.chrono), UNIX_TIMESTAMP()) - MIN(bbn_tasks_logs.chrono)"
