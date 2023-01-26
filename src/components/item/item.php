@@ -266,6 +266,28 @@
         </bbn-button>
       </div>
     </div>
+    <bbn-column-list v-if="showSubtasks && !!source.num_children"
+                     :class="['bbn-top-space', {
+                       'bbn-alt-background': inverted,
+                       'bbn-background': !inverted
+                     }]"
+                     :title="_('Sub-Tasks')"
+                     :source="mainPage.root + 'data/list'"
+                     :filters="currentFilters"
+                     :filterable="true"
+                     :pageable="true"
+                     :sortable="true"
+                     component="appui-task-item"
+                     :component-options="{
+                       inverted: inverted,
+                       removeParent: true,
+                       isSub: true,
+                       collapseFooter: collapseFooter,
+                       forceCollapsed: forceCollapsed
+                     }"
+                     uid="uid"
+                     :scrollable="false"/>
+    <!--
     <div v-if="showSubtasks && !!source.num_children"
          :class="['bbn-spadded', 'bbn-top-space', 'bbn-radius', {
            'bbn-alt-background': inverted,
@@ -285,5 +307,6 @@
                        :collapse-footer="collapseFooter"
                        :force-collapsed="forceCollapsed"/>
     </div>
+    -->
   </template>
 </div>

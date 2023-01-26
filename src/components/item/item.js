@@ -70,7 +70,14 @@
       return {
         showOpenContent: false,
         showSubtasks: false,
-        collapsed: !this.editable || !!this.forceCollapsed
+        collapsed: !this.editable || !!this.forceCollapsed,
+        currentFilters: {
+          logic: 'AND',
+          conditions: [{
+            field: 'id_parent',
+            value: this.source.id
+          }]
+        }
       }
     },
     computed: {
