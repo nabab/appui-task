@@ -56,13 +56,21 @@
       isSub: {
         type: [Boolean, Number],
         default: false
+      },
+      collapseFooter: {
+        type: Boolean,
+        default: true
+      },
+      forceCollapsed: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
       return {
         showOpenContent: false,
         showSubtasks: false,
-        collapsed: !this.editable
+        collapsed: !this.editable || !!this.forceCollapsed
       }
     },
     computed: {
@@ -113,6 +121,32 @@
         }
         return '';
       },
+      viewersTitle(){
+        if (this.mainPage) {
+          let s = bbn.fn.getField(this.mainPage.optionsRoles, 'text', 'code', 'viewers');
+          if (!!this.source.roles.viewers) {
+            s += "\n";
+            bbn.fn.each(this.source.roles.viewers, u => {
+              s += "\n" + appui.app.getUserName(u);
+            });
+          }
+          return s;
+        }
+        return '';
+      },
+      decidersTitle(){
+        if (this.mainPage) {
+          let s = bbn.fn.getField(this.mainPage.optionsRoles, 'text', 'code', 'deciders');
+          if (!!this.source.roles.deciders) {
+            s += "\n";
+            bbn.fn.each(this.source.roles.deciders, u => {
+              s += "\n" + appui.app.getUserName(u);
+            });
+          }
+          return s;
+        }
+        return '';
+      },
       role(){
         if (this.mainPage && !!this.source.role) {
           return bbn.fn.getRow(this.mainPage.optionsRoles, 'value', this.source.role);
@@ -120,9 +154,6 @@
         return false;
       },
       isCollapsed(){
-        if (this.colObj && bbn.fn.numProperties(this.colObj)) {
-          return !!this.colObj.collapsed;
-        }
         return this.collapsed;
       },
       canChangeStatus(){
@@ -445,13 +476,7 @@
         this.showSubtasks = !!this.source.num_children && !this.showSubtasks;
       },
       toggleCollapsed(){
-        if (this.colObj && bbn.fn.numProperties(this.colObj)) {
-          this.$set(this.colObj, 'collapsed', !!this.colObj.collapsed ? false : true);
-          this.collapsed = this.colObj.collapsed;
-        }
-        else {
-          this.collapsed = !this.collapsed;
-        }
+        this.collapsed = !this.collapsed;
       },
       removeAsSubtask(){
         if (this.canChange && this.removeParent && !!this.source.id_parent) {

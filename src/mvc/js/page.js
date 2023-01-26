@@ -99,7 +99,7 @@
         },
         canChangeDecider() {
           return (this.isDecider || this.isAdmin || this.isGlobal || this.isProjectManager)
-          && (this.source.roles.deciders !== undefined)
+          && !!this.source.price
           && !this.isClosed;
         },
         canBecomeManager(){

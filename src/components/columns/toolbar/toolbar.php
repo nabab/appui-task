@@ -1,6 +1,7 @@
 <div class="appui-task-columns-toolbar">
   <template v-if="!columnList.collapsed">
-    <bbn-button v-if="!!source.canAdd
+    <bbn-button v-if="!!source
+                  && !!source.canAdd
                   && !!columnsComp
                   && columnsComp.isOrderedByTypes"
                 icon="nf nf-fa-plus"

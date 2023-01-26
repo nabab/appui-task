@@ -27,18 +27,24 @@
         });
       },
       collapseAll(){
-        const col = this.closest('bbn-column-list');
-        if (!!col && col.currentData.length) {
-          bbn.fn.each(col.currentData, item => {
-            col.$set(item, 'collapsed', true)
+        if (!!this.columnList
+          && !!this.columnList.component
+          && this.columnList.currentData.length
+        ) {
+          let items = this.columnList.findAll(this.columnList.component);
+          bbn.fn.each(items, item => {
+            item.$set(item, 'collapsed', true);
           });
         }
       },
       expandAll(){
-        const col = this.closest('bbn-column-list');
-        if (!!col && col.currentData.length) {
-          bbn.fn.each(col.currentData, item => {
-            col.$set(item, 'collapsed', false)
+        if (!!this.columnList
+          && !!this.columnList.component
+          && this.columnList.currentData.length
+        ) {
+          let items = this.columnList.findAll(this.columnList.component);
+          bbn.fn.each(items, item => {
+            item.$set(item, 'collapsed', false);
           });
         }
       },
@@ -47,7 +53,7 @@
           if (openAfterCreation) {
             bbn.fn.link(this.root + 'page/task/' + d.id);
           }
-          this.closest('bbn-column-list').updateData();
+          this.columnList.updateData();
         }
       }
     },

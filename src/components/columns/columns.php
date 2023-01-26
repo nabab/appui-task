@@ -11,7 +11,8 @@
                            :children-filters="getFilters"
                            :children-sortable="true"
                            :children-order="[{field: 'last_action', dir: 'DESC'}]"
-                           :collapse-empty="true"/>
+                           :collapse-empty="true"
+                           uid="id"/>
   <div v-else
         class="bbn-100 bbn-alt-background bbn-padded">
     <div class="bbn-100">
