@@ -67,27 +67,34 @@
             color;
         switch (row.state) {
           case this.mainPage.source.states.opened:
-            icon = 'clock';
+            icon = 'md-book_open_page_variant';
             color = 'orange';
             break;
           case this.mainPage.source.states.pending:
-            icon = 'clock';
+            icon = 'fa-clock';
             color = 'red';
             break;
           case this.mainPage.source.states.ongoing:
-            icon = 'play';
+            icon = 'fa-play';
             color = 'blue';
             break;
           case this.mainPage.source.states.closed:
-            icon = 'check';
+            icon = 'fa-check';
             color = 'green';
             break;
           case this.mainPage.source.states.holding:
-            icon = 'pause';
+            icon = 'fa-pause';
             color = 'grey';
             break;
+          case this.mainPage.source.states.unapproved:
+            icon = 'md-police_badge';
+            color = 'red';
+            break;
         }
-        return `<i class="bbn-lg nf nf-fa-${icon}" style="color: ${color}" title="${bbn.fn.getField(this.mainPage.source.options.states, "text", "value", row.state)}"/>`;
+        return `<i class="bbn-m nf nf-${icon}" style="color: ${color}" title="${bbn.fn.getField(this.mainPage.source.options.states, "text", "value", row.state)}"/>`;
+      },
+      renderPriority(row) {
+        return '<span class="bbn-iblock bbn-ratio bbn-xxspadding bbn-m bbn-badge bbn-c appui-task-pr' + row.priority + '">' + row.priority + '</span>';
       },
       renderLast(row){
         return dayjs(row.last_action).calendar();
@@ -180,6 +187,18 @@
             return appui.app.getUserName(this.source.id_user);
           }
         }
+      },
+      prioavatar: {
+        template: `
+<bbn-initial v-if="source.priority"
+             :letters="source.priority.toString()"
+             :class="'bbn-white appui-task-pr' + source.priority"
+             :title="_('Priority') + ' ' + source.priority"
+             :height="25"
+             :width="25"
+             :font-size="15"/>
+        `,
+        props: ['source']
       }
     }
   }
