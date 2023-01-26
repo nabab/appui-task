@@ -34,6 +34,9 @@
                  field="last_action"
                  :width="120"
                  type="datetime"/>
+    <bbns-column title="<?=_("Title")?>"
+                 :min-width="300"
+                 field="title"/>
     <bbns-column title="<?=_("Role")?>"
                  field="role"
                  :render="renderRole"
@@ -50,9 +53,12 @@
                  :render="renderDuration"
                  :width="70"
                  :filterable="false"/>
-    <bbns-column title="<?=_("Title")?>"
-                 :min-width="200"
-                 field="title"/>
+    <bbns-column title="<?=_("Budget")?>"
+                 field="price"
+                 type="money"
+                 :render="renderBudget"
+                 cls="bbn-r"
+                 :width="100"/>
     <bbns-column title="<?=_("Reference")?>"
                  :min-width="150"
                  :max-width="300"

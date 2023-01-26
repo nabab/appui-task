@@ -56,6 +56,18 @@
       refreshTable(){
         this.getRef('tasksTable').updateData();
       },
+      renderBudget(row){
+        if (!!row.price
+          && (!!appui.app.user.isAdmin
+            || !!this.mainPage.privileges.global
+            || !!this.mainPage.privileges.project_manager
+            || (!!row.roles.deciders
+              && row.roles.deciders.includes(appui.app.user.id)))
+        ) {
+          return `<span>${bbn.fn.money(row.price)}</span>`
+        }
+        return '';
+      },
       renderPriority(row){
         return `<div class="bbn-overlay bbn-middle">${row.priority}</div>`;
       },
