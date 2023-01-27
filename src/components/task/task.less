@@ -12,8 +12,16 @@
     > .bbn-scroll {
       position: relative !important;
     }
-    .bbn-basic-component.bbn-widget.full {
-      margin-top: 1rem;
+    .bbn-basic-component.bbn-widget {
+      &.full {
+        margin-top: 1rem;
+      }
+      > div.bbn-content {
+        &.bbn-padded {
+          padding-bottom: var(--space);
+        }
+        padding-bottom: 0;
+      }
     }
     .appui-note-forum {
       border: 0;

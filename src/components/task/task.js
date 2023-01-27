@@ -469,69 +469,12 @@
           action: this.openAllLogs
         }];
       },
-      tasksButtons(){
-        return this.canChange ? [{
-          text: bbn._('Search and add'),
-          icon: 'nf nf-fa-search_plus',
-          action: this.searchTask
-        }, {
-          text: bbn._('Add task'),
-          icon: 'nf nf-fa-plus',
-          action: this.addTask
-        }] : [];
-      },
       closeButton(){
         return [{
           text: bbn._('Close'),
           icon: 'nf nf-fa-close',
           action: this.removeWidgetFromTask
         }];
-      },
-      addTask(){
-        if (this.canChange && !!this.source.id) {
-          let roles = bbn.fn.extend(true, {}, this.source.roles);
-          if (roles.deciders) {
-            delete roles.deciders;
-          }
-          bbn.fn.iterate(roles, (us, ro) => {
-            if (us.includes(appui.app.user.id)) {
-              us.splice(us.indexOf(appui.app.user.id), 1);
-            }
-            if (!us.length) {
-              delete roles[ro];
-            }
-          });
-          this.getPopup().open({
-            title: bbn._('New task'),
-            width: 500,
-            component: 'appui-task-form-new',
-            componentOptions: {
-              source: {
-                title: '',
-                type: '',
-                id_parent: this.source.id,
-                private: !!this.source.private ? 1 : 0
-              },
-              roles: bbn.fn.numProperties(roles) ? roles : false
-            },
-            opener: this
-          });
-        }
-      },
-      searchTask(){
-        if (this.canChange && !!this.source.id) {
-          this.getPopup({
-            title: bbn._('Search and add subtasks'),
-            width: 500,
-            height: 400,
-            scrollable: false,
-            component: 'appui-task-search',
-            componentOptions: {
-              source: this.source,
-              idParent: this.source.id
-            }
-          });
-        }
       },
       openTask(task){
         if (!!task) {
@@ -631,26 +574,6 @@
         if (widgetPanel) {
           widgetPanel.toggle();
         }
-      },
-      onTaskCreated(d, openAfterCreation){
-        if (d.success && !!d.id) {
-          if (openAfterCreation) {
-            this.openTask(d.id);
-          }
-          if ((d.children !== undefined)
-            && bbn.fn.isArray(this.source.children)
-          ) {
-            this.source.children.splice(0, this.source.children.length, ...d.children);
-            this.source.num_children = d.children.length;
-            this.source.has_children = !!d.children.length;
-            if (!!this.dashboard.widgets && !!this.dashboard.widgets.subtasks) {
-              let widget = this.findByKey(this.dashboard.widgets.subtasks.code, 'bbn-widget');
-              if (bbn.fn.isVue(widget)) {
-                widget.reload();
-              }
-            }
-          }
-        }
       }
     },
     created(){
@@ -662,7 +585,6 @@
         });
       }
       appui.register('appui-task-' + this.source.id, this);
-      this.$on('taskcreated', this.onTaskCreated);
     },
     beforeMount(){
       if (this.hasStorage) {
@@ -674,7 +596,6 @@
     },
     beforeDestroy(){
       appui.unregister('appui-task-' + this.source.id);
-      this.$off('taskcreated', this.onTaskCreated);
     },
     watch: {
       'source.title'(val){
@@ -683,7 +604,11 @@
          }
          if ( val.length ){
            this.titleTimeout = setTimeout(() => {
-             this.update('title', val);
+             this.update('title', val).then(d => {
+              if (!!d.data && !!d.data.success) {
+                this.closest('bbn-container').setTitle(val);
+              }
+             });
            }, 1000);
          }
       },

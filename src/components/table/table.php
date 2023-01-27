@@ -9,7 +9,13 @@
              :order="[{field: 'last_action', dir: 'DESC'}]"
              class="appui-task-list-table bbn-no-border"
              :filterable="true"
-             :filters="filters">
+             :filters="filters"
+             :showable="true">
+    <bbns-column title="<?=_('ID')?>"
+                 field="id"
+                 :width="270"
+                 :hidden="true"
+                 :showable="true"/>
     <bbns-column title="<i class='nf nf-fa-user'></i>"
                  ftitle="<?=_('User')?>"
                  field="id_user"

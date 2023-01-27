@@ -277,6 +277,7 @@
                      :filterable="true"
                      :pageable="true"
                      :sortable="true"
+                     :order="currentOrder"
                      component="appui-task-item"
                      :component-options="{
                        inverted: inverted,
@@ -285,8 +286,11 @@
                        collapseFooter: collapseFooter,
                        forceCollapsed: forceCollapsed
                      }"
-                     uid="uid"
-                     :scrollable="false"/>
+                     uid="id"
+                     :scrollable="false"
+                     toolbar="appui-task-item-toolbar"
+                     :toolbar-source="source"
+                     :limit="5"/>
     <!--
     <div v-if="showSubtasks && !!source.num_children"
          :class="['bbn-spadded', 'bbn-top-space', 'bbn-radius', {

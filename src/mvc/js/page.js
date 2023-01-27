@@ -13,7 +13,7 @@
           return !!this.mainPage ? bbn.fn.getField(this.mainPage.optionsStates, 'text', 'value', this.source.state) : '';
         },
         isGlobal(){
-          return !!this.privileges.global;
+          return !!this.mainPage.privileges.global;
         },
         isProjectManager(){
           return !!this.privileges.project_manager;
@@ -212,6 +212,9 @@
               this.alert(bbn._('Error'));
               return false;
             }
+            let props = {
+              [prop]: val
+            }
             if (prop === 'state') {
               this.source.state = val;
               this.source.tracker = d.tracker;
@@ -225,11 +228,34 @@
                 }
               }
               this.source.trackers = d.trackers;
+              props.tracker = d.tracker;
+              props.trackers = d.trackers;
             }
             if ((prop === 'price') && (d.lastChangePrice !== undefined)) {
               this.source.lastChangePrice = d.lastChangePrice;
+              props.lastChangePrice = d.lastChangePrice;
             }
-            this.$set(this.source, 'last_action', dayjs().format('YYYY-MM-DD HH:mm:ss'));
+            let lastAction = dayjs().format('YYYY-MM-DD HH:mm:ss');
+            this.$set(this.source, 'last_action', lastAction);
+            props.last_action = lastAction;
+            let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
+            if (comps.length) {
+              bbn.fn.each(comps, c => {
+                bbn.fn.iterate(props, (v, i) => {
+                  if (!bbn.fn.isSame(v, c.source[i])) {
+                    c.$set(c.source, i, v)
+                  }
+                });
+              });
+            }
+            let t = appui.getRegistered('appui-task-' + this.source.id, true);
+            if (t) {
+              bbn.fn.iterate(props, (v, i) => {
+                if (!bbn.fn.isSame(v, t.source[i])) {
+                  t.$set(t.source, i, v)
+                }
+              });
+            }
           });
         },
         askSetSubtasksRoles(){
@@ -261,6 +287,51 @@
                   appui.error();
                 }
               });
+            });
+          }
+        },
+        addTask(){
+          if (this.canChange && !!this.source.id) {
+            let roles = bbn.fn.extend(true, {}, this.source.roles);
+            if (roles.deciders) {
+              delete roles.deciders;
+            }
+            bbn.fn.iterate(roles, (us, ro) => {
+              if (us.includes(appui.app.user.id)) {
+                us.splice(us.indexOf(appui.app.user.id), 1);
+              }
+              if (!us.length) {
+                delete roles[ro];
+              }
+            });
+            this.getPopup({
+              title: bbn._('New task'),
+              width: 500,
+              component: 'appui-task-form-new',
+              componentOptions: {
+                source: {
+                  title: '',
+                  type: '',
+                  id_parent: this.source.id,
+                  private: !!this.source.private ? 1 : 0
+                },
+                roles: bbn.fn.numProperties(roles) ? roles : false
+              }
+            });
+          }
+        },
+        searchTask(){
+          if (this.canChange && !!this.source.id) {
+            this.getPopup({
+              title: bbn._('Search and add subtasks'),
+              width: 500,
+              height: 400,
+              scrollable: false,
+              component: 'appui-task-search',
+              componentOptions: {
+                source: this.source,
+                idParent: this.source.id
+              }
             });
           }
         }

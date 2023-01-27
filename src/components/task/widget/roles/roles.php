@@ -21,13 +21,21 @@
                     :style="{
                       color: getRoleBgColor('managers')
                     }"/>
-        <span class="bbn-flex-fill bbn-c bbn-upper">
+        <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
+              @click="isManagerOpen = !isManagerOpen">
           <i class="nf nf-mdi-account_star bbn-lg bbn-hsmargin"/>
           <?=_('Supervisors')?>
+          <span v-if="managers.length"
+                class="bbn-badge bbn-s bbn-left-sspace"
+                v-text="managers.length"
+                :style="{
+                  'background-color': getRoleBgColor('managers'),
+                  color: getRoleColor('managers')
+                }"/>
         </span>
         <bbn-button class="bbn-left-sspace bbn-no-border"
                     icon="nf nf-fa-plus"
-                    @click="addRole('managers')"
+                    @click="() => {isManagerOpen = true; addRole('managers')}"
                     v-if="task.canChange"
                     :notext="true"
                     :style="{
@@ -73,13 +81,21 @@
                     :style="{
                       color: getRoleBgColor('workers')
                     }"/>
-        <span class="bbn-flex-fill bbn-c bbn-upper">
+        <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
+              @click="isWorkerOpen = !isWorkerOpen">
           <i class="nf nf-mdi-worker bbn-hsmargin"/>
           <?=_('Workers')?>
+          <span v-if="workers.length"
+                class="bbn-badge bbn-s bbn-left-sspace"
+                v-text="workers.length"
+                :style="{
+                  'background-color': getRoleBgColor('workers'),
+                  color: getRoleColor('workers')
+                }"/>
         </span>
         <bbn-button class="bbn-left-sspace bbn-no-border"
                     icon="nf nf-fa-plus"
-                    @click="addRole('workers')"
+                    @click="() => {isWorkerOpen = true; addRole('workers')}"
                     v-if="task.canChange"
                     :notext="true"
                     :style="{
@@ -134,10 +150,20 @@
                     :style="{
                       color: getRoleBgColor('viewers')
                     }"/>
-        <span class="bbn-flex-fill bbn-c bbn-upper"><i class="nf nf-fa-user_secret bbn-hsmargin"/><?=_('Spectators')?></span>
+        <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
+              @click="isViewerOpen = !isViewerOpen">
+          <i class="nf nf-fa-user_secret bbn-hsmargin"/><?=_('Spectators')?>
+          <span v-if="viewers.length"
+                class="bbn-badge bbn-s bbn-left-sspace"
+                v-text="viewers.length"
+                :style="{
+                  'background-color': getRoleBgColor('viewers'),
+                  color: getRoleColor('viewers')
+                }"/>
+        </span>
         <bbn-button class="bbn-left-sspace bbn-no-border"
                     icon="nf nf-fa-plus"
-                    @click="addRole('viewers')"
+                    @click="() => {isViewerOpen = true; addRole('viewers')}"
                     v-if="task.canChange"
                     :notext="true"
                     :style="{
