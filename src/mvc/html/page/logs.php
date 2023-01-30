@@ -1,11 +1,12 @@
 <bbn-table :source="mainPage.root + 'page/logs'"
            :filterable="true"
            :pageable="true"
-           :sortable="true">
+           :sortable="true"
+           :order="[{field: 'chrono', dir: 'desc'}]">
   <bbns-column :title="_('Date')"
                field="chrono"
                type="datetime"
-               :width="120"/>
+               :width="140"/>
   <bbns-column :title="_('Task')"
                field="title"
                :render="renderTitle"/>
@@ -14,6 +15,10 @@
                :source="mainPage.optionsStates"
                :render="renderState"
                :width="120"/>
+  <bbns-column :title="_('User')"
+               field="id_user"
+               :source="users"
+               :width="180"/>
   <bbns-column :title="_('Log')"
                field="log"
                :filterable="false"

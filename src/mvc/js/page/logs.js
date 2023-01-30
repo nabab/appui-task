@@ -2,7 +2,8 @@
   return {
     data(){
       return {
-        mainPage: null
+        mainPage: null,
+        users: appui.app.users
       }
     },
     methods: {
