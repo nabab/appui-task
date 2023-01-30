@@ -56,13 +56,32 @@
       isSub: {
         type: [Boolean, Number],
         default: false
+      },
+      collapseFooter: {
+        type: Boolean,
+        default: true
+      },
+      forceCollapsed: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
       return {
         showOpenContent: false,
         showSubtasks: false,
-        collapsed: !this.editable
+        collapsed: !this.editable || !!this.forceCollapsed,
+        currentFilters: {
+          logic: 'AND',
+          conditions: [{
+            field: 'id_parent',
+            value: this.source.id
+          }]
+        },
+        currentOrder: [{
+          field: 'last_action',
+          dir: 'DESC'
+        }]
       }
     },
     computed: {
@@ -76,13 +95,7 @@
         return !!this.mainPage ? this.mainPage.userName(this.source.id_user) : '';
       },
       colObj(){
-        return !!this.columnsComp ? bbn.fn.getRow(this.closest('column').filteredData, 'index', this.index) : {};
-      },
-      statusBgColor(){
-        return !!this.mainPage ? this.mainPage.getStatusBgColor(this.mainPage.getStatusCode(this.source.state)) : '';
-      },
-      statusColor(){
-        return !!this.mainPage ? this.mainPage.getStatusColor(this.mainPage.getStatusCode(this.source.state)) : '';
+        return !!this.columnsComp ? bbn.fn.getRow(this.closest('bbn-column-list').filteredData, 'index', this.index) : {};
       },
       closedChildren(){
         return !!this.mainPage ? bbn.fn.filter(this.source.children, c => c.state === this.mainPage.states.closed) : [];
@@ -113,6 +126,32 @@
         }
         return '';
       },
+      viewersTitle(){
+        if (this.mainPage) {
+          let s = bbn.fn.getField(this.mainPage.optionsRoles, 'text', 'code', 'viewers');
+          if (!!this.source.roles.viewers) {
+            s += "\n";
+            bbn.fn.each(this.source.roles.viewers, u => {
+              s += "\n" + appui.app.getUserName(u);
+            });
+          }
+          return s;
+        }
+        return '';
+      },
+      decidersTitle(){
+        if (this.mainPage) {
+          let s = bbn.fn.getField(this.mainPage.optionsRoles, 'text', 'code', 'deciders');
+          if (!!this.source.roles.deciders) {
+            s += "\n";
+            bbn.fn.each(this.source.roles.deciders, u => {
+              s += "\n" + appui.app.getUserName(u);
+            });
+          }
+          return s;
+        }
+        return '';
+      },
       role(){
         if (this.mainPage && !!this.source.role) {
           return bbn.fn.getRow(this.mainPage.optionsRoles, 'value', this.source.role);
@@ -120,9 +159,6 @@
         return false;
       },
       isCollapsed(){
-        if (this.colObj && bbn.fn.numProperties(this.colObj)) {
-          return !!this.colObj.collapsed;
-        }
         return this.collapsed;
       },
       canChangeStatus(){
@@ -237,58 +273,6 @@
         }
         return menu;
       },
-      getBudgetMenuSource(){
-        let menu = [];
-        if ((this.isAdmin || this.isProjectManager)
-          && ((this.isClosed && this.source.price) || !this.isClosed)
-        ) {
-          if (!!this.source.price) {
-            menu.push({
-              text: bbn._('Edit budget'),
-              icon: 'nf nf-fa-edit',
-              action: this.editBudget
-            }, {
-              text: bbn._('Remove budget'),
-              icon: 'nf nf-mdi-delete_empty',
-              action: this.removeBudget
-            });
-          }
-          else {
-            menu.push({
-              text: bbn._('Add budget'),
-              icon: 'nf nf-fa-money',
-              action: this.editBudget
-            });
-          }
-        }
-        return menu;
-      },
-      getPriorityMenuSource(){
-        if (!this.editable) {
-          return [];
-        }
-        let menu = [];
-        if (this.canChange) {
-          bbn.fn.each(this.mainPage.priorities, p => {
-            if (p.value !== this.source.priority) {
-              menu.push({
-                text: p.text,
-                action: () => {
-                  this.update('priority', p.value).then(d => {
-                    if (d.data && d.data.success) {
-                      this.source.priority = p.value;
-                    }
-                  });
-                },
-                backgroundColor: p.backgroundColor,
-                color: p.color,
-                cls: 'bbn-c'
-              });
-            }
-          });
-        }
-        return menu;
-      },
       getStatusMenuSource(){
         if (!this.editable) {
           return [];
@@ -340,6 +324,58 @@
               color: this.mainPage.getStatusColor('opend')
             });
           }
+        }
+        return menu;
+      },
+      getBudgetMenuSource(){
+        let menu = [];
+        if ((this.isAdmin || this.isProjectManager)
+          && ((this.isClosed && this.source.price) || !this.isClosed)
+        ) {
+          if (!!this.source.price) {
+            menu.push({
+              text: bbn._('Edit budget'),
+              icon: 'nf nf-fa-edit',
+              action: this.editBudget
+            }, {
+              text: bbn._('Remove budget'),
+              icon: 'nf nf-mdi-delete_empty',
+              action: this.removeBudget
+            });
+          }
+          else {
+            menu.push({
+              text: bbn._('Add budget'),
+              icon: 'nf nf-fa-money',
+              action: this.editBudget
+            });
+          }
+        }
+        return menu;
+      },
+      getPriorityMenuSource(){
+        if (!this.editable) {
+          return [];
+        }
+        let menu = [];
+        if (this.canChange) {
+          bbn.fn.each(this.mainPage.priorities, p => {
+            if (p.value !== this.source.priority) {
+              menu.push({
+                text: p.text,
+                action: () => {
+                  this.update('priority', p.value).then(d => {
+                    if (d.data && d.data.success) {
+                      this.source.priority = p.value;
+                    }
+                  });
+                },
+                backgroundColor: p.backgroundColor,
+                color: p.color,
+                cls: 'bbn-c'
+              });
+            }
+          });
         }
         return menu;
       },
@@ -445,13 +481,7 @@
         this.showSubtasks = !!this.source.num_children && !this.showSubtasks;
       },
       toggleCollapsed(){
-        if (this.colObj && bbn.fn.numProperties(this.colObj)) {
-          this.$set(this.colObj, 'collapsed', !!this.colObj.collapsed ? false : true);
-          this.collapsed = this.colObj.collapsed;
-        }
-        else {
-          this.collapsed = !this.collapsed;
-        }
+        this.collapsed = !this.collapsed;
       },
       removeAsSubtask(){
         if (this.canChange && this.removeParent && !!this.source.id_parent) {

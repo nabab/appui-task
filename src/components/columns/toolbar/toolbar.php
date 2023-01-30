@@ -1,31 +1,36 @@
-<div class="appui-task-columns-toolbar bbn-vmiddle"
-     :style="{'flex-direction': !source.opened ? 'column': ''}">
-  <template v-if="!!source.opened">
-    <bbn-button v-if="!!source.data.canAdd
+<div class="appui-task-columns-toolbar">
+  <template v-if="!columnList.collapsed">
+    <bbn-button v-if="!!source
+                  && !!source.canAdd
                   && !!columnsComp
                   && columnsComp.isOrderedByTypes"
                 icon="nf nf-fa-plus"
                 :title="_('Create task')"
                 class="bbn-no-border bbn-right-sspace"
-                @click="addTask"/>
+                @click="addTask"
+                :notext="true"/>
     <bbn-button icon="nf nf-fa-compress"
                 :title="_('Collapse all')"
                 class="bbn-no-border bbn-right-sspace"
-                @click="collapseAll"/>
+                @click="collapseAll"
+                v-if="total"
+                :notext="true"/>
     <bbn-button icon="nf nf-fa-expand"
                 :title="_('Expand all')"
                 class="bbn-no-border bbn-right-sspace"
-                @click="expandAll"/>
+                @click="expandAll"
+                v-if="total"
+                :notext="true"/>
   </template>
   <div :class="['bbn-radius', 'bbn-background', 'bbn-hspadded', {
-          'bbn-vspadded': !source.opened,
-          'bbn-vmiddle': !!source.opened,
-          'bbn-flex': !source.opened,
-          'verticaltext': !source.opened
+          'bbn-vspadded': columnList.collapsed,
+          'bbn-vmiddle': !columnList.collapsed,
+          'bbn-flex': columnList.collapsed,
+          'verticaltext': columnList.collapsed
         }]"
-        style="min-height: 1.9rem; min-width: 1.9rem; align-items: center">
+        style="height: auto; min-width: 2rem; align-items: center">
     <i class="nf nf-oct-issue_opened bbn-m bbn-middle"/>
-    <div :class="{'bbn-left-xsspace': !!source.opened}"
+    <div :class="{'bbn-left-xsspace': !columnList.collapsed}"
           v-text="total"/>
   </div>
 </div>

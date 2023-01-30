@@ -8,6 +8,12 @@
         type: Number
       }
     },
+    data(){
+      return {
+        columnList: null,
+        columnsComp: null
+      }
+    },
     methods: {
       addTask(){
         this.getPopup({
@@ -16,24 +22,30 @@
           component: 'appui-task-form-new',
           source: {
             title: '',
-            type: this.columnsComp.isOrderedByTypes ? this.source.data.id : '',
+            type: !!this.columnsComp && this.columnsComp.isOrderedByTypes ? this.source.id : '',
             private: 0
           }
         });
       },
       collapseAll(){
-        const col = this.closest('column');
-        if (!!col && col.currentData.length) {
-          bbn.fn.each(col.currentData, item => {
-            col.$set(item, 'collapsed', true)
+        if (!!this.columnList
+          && !!this.columnList.component
+          && this.columnList.currentData.length
+        ) {
+          let items = this.columnList.findAll(this.columnList.component);
+          bbn.fn.each(items, item => {
+            item.$set(item, 'collapsed', true);
           });
         }
       },
       expandAll(){
-        const col = this.closest('column');
-        if (!!col && col.currentData.length) {
-          bbn.fn.each(col.currentData, item => {
-            col.$set(item, 'collapsed', false)
+        if (!!this.columnList
+          && !!this.columnList.component
+          && this.columnList.currentData.length
+        ) {
+          let items = this.columnList.findAll(this.columnList.component);
+          bbn.fn.each(items, item => {
+            item.$set(item, 'collapsed', false);
           });
         }
       },
@@ -42,9 +54,12 @@
           if (openAfterCreation) {
             bbn.fn.link(this.root + 'page/task/' + d.id);
           }
-          this.closest('column').updateData();
+          this.columnList.updateData();
         }
       }
+    },
+    created(){
+      this.$set(this, 'columnList', this.closest('bbn-column-list'));
     },
     mounted(){
       this.$on('taskcreated', this.onTaskCreated);

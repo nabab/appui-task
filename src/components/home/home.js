@@ -34,6 +34,9 @@
           text: bbn._('Columns'),
           value: 'columns'
         }, {
+          text: bbn._('Table'),
+          value: 'table'
+        }, {
           text: bbn._('List'),
           value: 'list'
         }],
@@ -53,12 +56,19 @@
           value: 'priority'
         }],
         currentSearch: '',
-        currentHierarchy: true
+        currentHierarchy: true,
+        currentComponent: null
       }
     },
     computed: {
       isColumnsView(){
         return this.currentViewMode === 'columns';
+      },
+      isListView(){
+        return this.currentViewMode === 'list';
+      },
+      isTableView(){
+        return this.currentViewMode === 'table';
       },
       roles(){
         let ret = [];

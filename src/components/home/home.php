@@ -64,21 +64,21 @@
                               v-model="currentRole"/>
           </div>
         </div>
-        <div v-if="isColumnsView"
+        <div v-if="(isColumnsView || isListView) && !!currentComponent"
              :class="[{
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
                'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
-               v-text="_('Columns')"/>
+               v-text="isColumnsView ? _('Columns') : _('Rows')"/>
           <div class="bbn-vmiddle">
             <bbn-button icon="nf nf-mdi-arrow_collapse"
                         :text="_('Collapse all')"
-                        @click="getRef('columnsComponent').collapseAll()"
+                        @click="currentComponent.collapseAll()"
                         class="bbn-right-sspace"/>
             <bbn-button icon="nf nf-mdi-arrow_expand"
                         :text="_('Expand all')"
-                        @click="getRef('columnsComponent').expandAll()"/>
+                        @click="currentComponent.expandAll()"/>
           </div>
         </div>
         <div :class="[{
@@ -111,12 +111,21 @@
                         :filter="currentFilter"
                         :search="currentSearch"
                         :role="currentRole"
-                        :hierarchy="currentHierarchy"/>
-    <appui-task-list v-else
+                        :hierarchy="currentHierarchy"
+                        @hook:mounted="currentComponent = getRef('columnsComponent')"/>
+    <appui-task-list v-else-if="isListView"
                      :source="source"
                      :filter="currentFilter"
                      :search="currentSearch"
                      ref="listComponent"
-                     :hierarchy="currentHierarchy"/>
+                     :hierarchy="currentHierarchy"
+                     @hook:mounted="currentComponent = getRef('listComponent')"/>
+    <appui-task-table v-else-if="isTableView"
+                     :source="source"
+                     :filter="currentFilter"
+                     :search="currentSearch"
+                     ref="tableComponent"
+                     :hierarchy="currentHierarchy"
+                     @hook:mounted="currentComponent = getRef('tableComponent')"/>
   </div>
 </div>

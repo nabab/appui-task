@@ -122,18 +122,19 @@
           v-html="source.parent.title"
           @click="seeParentTask"/>
   </div>
-  <template v-if="!isCollapsed">
-    <div class="bbn-vsmargin bbn-w-100"
-         ref="description">
-      <div v-html="source.content"
-           class="appui-task-item-content bbn-w-100"/>
-      <div class="bbn-c bbn-top-space bbn-w-100"
-            v-if="showOpenContent">
-        <bbn-button class="bbn-no-border bbn-upper bbn-xs"
-                    :text="_('Show more content')"
-                    @click="openDescription"/>
-      </div>
+  <div v-if="!isCollapsed"
+       class="bbn-vsmargin bbn-w-100"
+       ref="description">
+    <div v-html="source.content"
+          class="appui-task-item-content bbn-w-100"/>
+    <div class="bbn-c bbn-top-space bbn-w-100"
+          v-if="showOpenContent">
+      <bbn-button class="bbn-no-border bbn-upper bbn-xs"
+                  :text="_('Show more content')"
+                  @click="openDescription"/>
     </div>
+  </div>
+  <template v-if="!isCollapsed || !collapseFooter">
     <div v-if="source.reference"
          :class="['appui-task-item-reference', 'bbn-vsmargin', 'bbn-w-100', 'bbn-spadded', 'bbn-radius',{
            'bbn-alt-background': inverted,
@@ -144,60 +145,98 @@
          style="width: 100%; justify-content: space-between">
       <div class="bbn-vmiddle">
         <div v-if="role"
-             class="bbn-radius bbn-right-space bbn-spadded bbn-upper bbn-s"
+             class="bbn-radius bbn-right-sspace bbn-spadded bbn-upper bbn-s"
              v-text="role.text"
              :style="{
                backgroundColor: role.backgroundColor + ' !important',
                color: role.color + ' !important',
                cursor: 'default !important'
              }"/>
-        <div :style="{
-               color: mainPage.getRoleBgColor('managers'),
-               cursor: !canChange ? 'default !important' : '',
-               'padding-left': '0.5rem',
-               'padding-right': '0.5rem'
-             }"
-             :title="managersTitle"
-             :class="['bbn-no-border', 'bbn-button', {
-               'bbn-alt-background': inverted,
-               'bbn-background': !inverted
-             }]"
-             @click="manageRole('managers')">
-          <i class="nf nf-mdi-account_star bbn-xl"/>
-          <span v-text="!!source.roles.managers ? source.roles.managers.length : 0"/>
-        </div>
-        <div :style="{
-               color: mainPage.getRoleBgColor('workers'),
-               cursor: !canChange ? 'default !important' : '',
-               'padding-left': '0.5rem',
-               'padding-right': '0.5rem'
-             }"
-             :title="workersTitle"
-             :class="['bbn-left-space', 'bbn-no-border', 'bbn-button', {
-               'bbn-alt-background': inverted,
-               'bbn-background': !inverted
-             }]"
-             @click="manageRole('workers')">
-          <i class="nf nf-mdi-worker"/>
-          <span v-text="!!source.roles.workers ? source.roles.workers.length : 0"/>
-        </div>
+        <bbn-button :title="managersTitle"
+                    :class="['bbn-no-border', {
+                      'bbn-alt-background': inverted,
+                      'bbn-background': !inverted,
+                    }]"
+                    :style="{
+                      'padding-left': '0.5rem',
+                      'padding-right': '0.5rem',
+                      color: mainPage.getRoleBgColor('managers'),
+                      cursor: !canChange ? 'default !important' : ''
+                    }"
+                    @click="manageRole('managers')">
+          <div class="bbn-vmiddle">
+            <i class="nf nf-md-account_tie bbn-lg"/>
+            <sub v-text="!!source.roles.managers ? source.roles.managers.length : 0"/>
+          </div>
+        </bbn-button>
+        <bbn-button :title="workersTitle"
+                    :class="['bbn-no-border', 'bbn-left-sspace', {
+                      'bbn-alt-background': inverted,
+                      'bbn-background': !inverted,
+                    }]"
+                    :style="{
+                      'padding-left': '0.5rem',
+                      'padding-right': '0.5rem',
+                      color: mainPage.getRoleBgColor('workers'),
+                      cursor: !canChange ? 'default !important' : ''
+                    }"
+                    @click="manageRole('workers')">
+          <div class="bbn-vmiddle">
+            <i class="nf nf-md-account_hard_hat bbn-lg"/>
+            <sub v-text="!!source.roles.workers ? source.roles.workers.length : 0"/>
+          </div>
+        </bbn-button>
+        <bbn-button :title="viewersTitle"
+                    :class="['bbn-no-border', 'bbn-left-sspace', {
+                      'bbn-alt-background': inverted,
+                      'bbn-background': !inverted,
+                    }]"
+                    :style="{
+                      'padding-left': '0.5rem',
+                      'padding-right': '0.5rem',
+                      color: mainPage.getRoleBgColor('viewers'),
+                      cursor: !canChange ? 'default !important' : ''
+                    }"
+                    @click="manageRole('viewers')">
+          <div class="bbn-vmiddle">
+            <i class="nf nf-md-account_eye bbn-lg"/>
+            <sub v-text="!!source.roles.viewers ? source.roles.viewers.length : 0"/>
+          </div>
+        </bbn-button>
+        <bbn-button :title="decidersTitle"
+                    :class="['bbn-no-border', 'bbn-left-sspace', {
+                      'bbn-alt-background': inverted,
+                      'bbn-background': !inverted,
+                    }]"
+                    :style="{
+                      'padding-left': '0.5rem',
+                      'padding-right': '0.5rem',
+                      color: mainPage.getRoleBgColor('deciders'),
+                      cursor: !canChange ? 'default !important' : ''
+                    }"
+                    @click="manageRole('deciders')"
+                    v-if="canChangeDecider">
+          <div class="bbn-vmiddle">
+            <i class="nf nf-md-account_cash bbn-lg"/>
+            <sub v-text="!!source.roles.deciders ? source.roles.deciders.length : 0"
+                  class="bbn-left-xxsspace"/>
+          </div>
+        </bbn-button>
       </div>
       <div>
         <bbn-button :title="_('Notes')"
-                    :class="['bbn-no-border', {
+                    :class="['bbn-no-border', 'bbn-right-sspace', {
                       'bbn-alt-background': inverted,
                       'bbn-background': !inverted
                     }]"
                     style="padding-left: 0.5rem; padding-right: 0.5rem"
                     @click="openNotes">
           <div class="bbn-vmiddle">
-            <i class="nf nf-mdi-comment_multiple_outline bbn-lg"/>
-            <span v-text="source.num_notes"
-                  class="bbn-left-sspace"/>
+            <i class="nf nf-md-comment_text_multiple_outline bbn-lg"/>
+            <sub v-text="source.num_notes"
+                 class="bbn-left-xxsspace"/>
           </div>
         </bbn-button>
-      </div>
-      <div>
         <bbn-button :class="['bbn-no-border', {
                       'bbn-alt-background': inverted,
                       'bbn-background': !inverted
@@ -211,22 +250,48 @@
                     @click="toggleSubtasks">
           <div class="bbn-vmiddle">
             <template v-if="source.num_children">
-              <i class="nf nf-mdi-playlist_check bbn-xl bbn-green"/>
-              <span v-text="closedChildren.length"
-                    class="bbn-left-sspace bbn-right-space bbn-green"/>
-              <i class="nf nf-mdi-playlist_remove bbn-lg bbn-red"/>
-              <span v-text="source.num_children - closedChildren.length"
-                    class="bbn-left-sspace bbn-red"/>
+              <i class="nf nf-md-playlist_check bbn-xl bbn-green"/>
+              <sub v-text="closedChildren.length"
+                    class="bbn-left-xxsspace bbn-right-sspace bbn-green"/>
+              <i class="nf nf-md-playlist_remove bbn-lg bbn-red"/>
+              <sub v-text="source.num_children - closedChildren.length"
+                    class="bbn-left-xxsspace bbn-red"/>
             </template>
             <template v-else>
-              <i class="bbn-right-sspace nf nf-mdi-format_list_checks bbn-lg"/>
-              <span v-text="_('No sub-tasks')"
-                    class="bbn-upper bbn-xs"/>
+              <i class="nf nf-md-list_status bbn-lg"/>
+              <sub v-text="0"
+                   class="bbn-left-xxsspace"/>
             </template>
           </div>
         </bbn-button>
       </div>
     </div>
+    <bbn-column-list v-if="showSubtasks && !!source.num_children"
+                     :class="['bbn-top-space', {
+                       'bbn-alt-background': inverted,
+                       'bbn-background': !inverted
+                     }]"
+                     :title="_('Sub-Tasks')"
+                     :source="mainPage.root + 'data/list'"
+                     :filters="currentFilters"
+                     :filterable="true"
+                     :pageable="true"
+                     :sortable="true"
+                     :order="currentOrder"
+                     component="appui-task-item"
+                     :component-options="{
+                       inverted: inverted,
+                       removeParent: true,
+                       isSub: true,
+                       collapseFooter: collapseFooter,
+                       forceCollapsed: forceCollapsed
+                     }"
+                     uid="id"
+                     :scrollable="false"
+                     toolbar="appui-task-item-toolbar"
+                     :toolbar-source="source"
+                     :limit="5"/>
+    <!--
     <div v-if="showSubtasks && !!source.num_children"
          :class="['bbn-spadded', 'bbn-top-space', 'bbn-radius', {
            'bbn-alt-background': inverted,
@@ -242,7 +307,10 @@
                        :class="['bbn-alt-background', 'bbn-radius', 'bbn-spadded', 'bbn-radius', {
                          'bbn-bottom-space': !!source.children[cidx + 1]
                        }]"
-                       :is-sub="true"/>
+                       :is-sub="true"
+                       :collapse-footer="collapseFooter"
+                       :force-collapsed="forceCollapsed"/>
     </div>
+    -->
   </template>
 </div>
