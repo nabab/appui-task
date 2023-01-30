@@ -97,12 +97,6 @@
       colObj(){
         return !!this.columnsComp ? bbn.fn.getRow(this.closest('bbn-column-list').filteredData, 'index', this.index) : {};
       },
-      statusBgColor(){
-        return !!this.mainPage ? this.mainPage.getStatusBgColor(this.mainPage.getStatusCode(this.source.state)) : '';
-      },
-      statusColor(){
-        return !!this.mainPage ? this.mainPage.getStatusColor(this.mainPage.getStatusCode(this.source.state)) : '';
-      },
       closedChildren(){
         return !!this.mainPage ? bbn.fn.filter(this.source.children, c => c.state === this.mainPage.states.closed) : [];
       },
@@ -279,58 +273,6 @@
         }
         return menu;
       },
-      getBudgetMenuSource(){
-        let menu = [];
-        if ((this.isAdmin || this.isProjectManager)
-          && ((this.isClosed && this.source.price) || !this.isClosed)
-        ) {
-          if (!!this.source.price) {
-            menu.push({
-              text: bbn._('Edit budget'),
-              icon: 'nf nf-fa-edit',
-              action: this.editBudget
-            }, {
-              text: bbn._('Remove budget'),
-              icon: 'nf nf-mdi-delete_empty',
-              action: this.removeBudget
-            });
-          }
-          else {
-            menu.push({
-              text: bbn._('Add budget'),
-              icon: 'nf nf-fa-money',
-              action: this.editBudget
-            });
-          }
-        }
-        return menu;
-      },
-      getPriorityMenuSource(){
-        if (!this.editable) {
-          return [];
-        }
-        let menu = [];
-        if (this.canChange) {
-          bbn.fn.each(this.mainPage.priorities, p => {
-            if (p.value !== this.source.priority) {
-              menu.push({
-                text: p.text,
-                action: () => {
-                  this.update('priority', p.value).then(d => {
-                    if (d.data && d.data.success) {
-                      this.source.priority = p.value;
-                    }
-                  });
-                },
-                backgroundColor: p.backgroundColor,
-                color: p.color,
-                cls: 'bbn-c'
-              });
-            }
-          });
-        }
-        return menu;
-      },
       getStatusMenuSource(){
         if (!this.editable) {
           return [];
@@ -382,6 +324,58 @@
               color: this.mainPage.getStatusColor('opend')
             });
           }
+        }
+        return menu;
+      },
+      getBudgetMenuSource(){
+        let menu = [];
+        if ((this.isAdmin || this.isProjectManager)
+          && ((this.isClosed && this.source.price) || !this.isClosed)
+        ) {
+          if (!!this.source.price) {
+            menu.push({
+              text: bbn._('Edit budget'),
+              icon: 'nf nf-fa-edit',
+              action: this.editBudget
+            }, {
+              text: bbn._('Remove budget'),
+              icon: 'nf nf-mdi-delete_empty',
+              action: this.removeBudget
+            });
+          }
+          else {
+            menu.push({
+              text: bbn._('Add budget'),
+              icon: 'nf nf-fa-money',
+              action: this.editBudget
+            });
+          }
+        }
+        return menu;
+      },
+      getPriorityMenuSource(){
+        if (!this.editable) {
+          return [];
+        }
+        let menu = [];
+        if (this.canChange) {
+          bbn.fn.each(this.mainPage.priorities, p => {
+            if (p.value !== this.source.priority) {
+              menu.push({
+                text: p.text,
+                action: () => {
+                  this.update('priority', p.value).then(d => {
+                    if (d.data && d.data.success) {
+                      this.source.priority = p.value;
+                    }
+                  });
+                },
+                backgroundColor: p.backgroundColor,
+                color: p.color,
+                cls: 'bbn-c'
+              });
+            }
+          });
         }
         return menu;
       },

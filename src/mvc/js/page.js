@@ -12,11 +12,17 @@
         statusText(){
           return !!this.mainPage ? bbn.fn.getField(this.mainPage.optionsStates, 'text', 'value', this.source.state) : '';
         },
+        statusBgColor(){
+          return !!this.mainPage ? this.mainPage.getStatusBgColor(this.mainPage.getStatusCode(this.source.state)) : '';
+        },
+        statusColor(){
+          return !!this.mainPage ? this.mainPage.getStatusColor(this.mainPage.getStatusCode(this.source.state)) : '';
+        },
         isGlobal(){
           return !!this.mainPage.privileges.global;
         },
         isProjectManager(){
-          return !!this.privileges.project_manager;
+          return !!this.mainPage.privileges.project_manager;
         },
         isMaster() {
           return this.userId === this.source.id_user;
@@ -103,40 +109,40 @@
           && !this.isClosed;
         },
         canBecomeManager(){
-          return (!!this.privileges.manager || this.isGlobal) && !this.isManager;
+          return (!!this.mainPage.privileges.manager || this.isGlobal) && !this.isManager;
         },
         canBecomeWorker(){
-          return (!!this.privileges.worker || this.isGlobal)
+          return (!!this.mainPage.privileges.worker || this.isGlobal)
             && !this.isWorker
             && (!this.isManager || (this.source.roles.managers.length > 1));
         },
         canBecomeViewer(){
-          return (!!this.privileges.viewer || this.isGlobal)
+          return (!!this.mainPage.privileges.viewer || this.isGlobal)
             && !this.isViewer
             && (!this.isManager || (this.source.roles.managers.length > 1));
         },
         canBecomeDecider(){
-          return (!!this.privileges.decider || this.isGlobal)
+          return (!!this.mainPage.privileges.decider || this.isGlobal)
             && !this.isDecider
             && (!this.isManager
               || (this.source.roles.managers.length > 1));
         },
         canRevemoHimselfManager(){
-          return (!!this.privileges.manager || this.isGlobal)
+          return (!!this.mainPage.privileges.manager || this.isGlobal)
             && !!this.isManager
             && !this.isMaster
             && (this.source.roles.managers.length > 1);
         },
         canRevemoHimselfWorker(){
-          return (!!this.privileges.worker || this.isGlobal)
+          return (!!this.mainPage.privileges.worker || this.isGlobal)
             && !!this.isWorker;
         },
         canRevemoHimselfViewer(){
-          return (!!this.privileges.viewer || this.isGlobal)
+          return (!!this.mainPage.privileges.viewer || this.isGlobal)
             && !!this.isViewer;
         },
         canRevemoHimselfDecider(){
-          return (!!this.privileges.decider || this.isGlobal)
+          return (!!this.mainPage.privileges.decider || this.isGlobal)
             && !!this.isDecider;
         },
         canUnmakeMe() {

@@ -20,28 +20,37 @@
     },
     computed: {
       managers(){
-        return bbn.fn.order(bbn.fn.map(this.source.roles.managers.slice(), u => {
-          return {
-            idUser: u,
-            userName: this.userName(u)
-          }
-        }), 'userName');
+        if (!!this.source.roles && !!this.source.roles.managers) {
+          return bbn.fn.order(bbn.fn.map(this.source.roles.managers.slice(), u => {
+            return {
+              idUser: u,
+              userName: this.userName(u)
+            }
+          }), 'userName');
+        }
+        return [];
       },
       workers(){
-        return bbn.fn.order(bbn.fn.map(this.source.roles.workers.slice(), u => {
-          return {
-            idUser: u,
-            userName: this.userName(u)
-          }
-        }), 'userName');
+        if (!!this.source.roles && !!this.source.roles.workers) {
+          return bbn.fn.order(bbn.fn.map(this.source.roles.workers.slice(), u => {
+            return {
+              idUser: u,
+              userName: this.userName(u)
+            }
+          }), 'userName');
+        }
+        return [];
       },
       viewers(){
-        return bbn.fn.order(bbn.fn.map(this.source.roles.viewers.slice(), u => {
-          return {
-            idUser: u,
-            userName: this.userName(u)
-          }
-        }), 'userName');
+        if (!!this.source.roles && !!this.source.roles.viewers) {
+          return bbn.fn.order(bbn.fn.map(this.source.roles.viewers.slice(), u => {
+            return {
+              idUser: u,
+              userName: this.userName(u)
+            }
+          }), 'userName');
+        }
+        return [];
       }
     },
     methods: {

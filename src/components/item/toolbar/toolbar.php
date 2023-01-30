@@ -24,16 +24,16 @@
                 :disabled="!source.num_children"/>
     <bbn-button icon="nf nf-mdi-sort_alphabetical"
                 :title="_('Order')"
-                class="bbn-no-border bbn-right-sspace"
+                :class="['bbn-no-border', 'bbn-right-sspace', {'bbn-state-active': !!currentOrder}]"
                 :notext="true"
                 @click="setMode('order')"
-                :disabled="true"/>
+                :disabled="!source.num_children"/>
     <bbn-button icon="nf nf-md-filter"
                 :title="_('Filter')"
-                class="bbn-no-border bbn-right-sspace"
+                :class="['bbn-no-border', 'bbn-right-sspace', {'bbn-state-active': hasFilters}]"
                 :notext="true"
                 @click="setMode('filter')"
-                :disabled="true"/>
+                :disabled="!source.num_children"/>
     <bbn-button icon="nf nf-fa-compress"
                 :title="_('Collapse all')"
                 class="bbn-no-border bbn-right-sspace"
@@ -63,8 +63,76 @@
                     :placeholder="_('Search')"
                     class="bbn-flex-fill bbn-no-border"/>
       </template>
-      <template v-else-if="mode === 'order'"></template>
-      <template v-else-if="mode === 'filter'"></template>
+      <template v-else-if="mode === 'order'">
+        <bbn-dropdown class="bbn-no-border bbn-flex-fill"
+                      :source="orderSource"
+                      v-model="currentOrder"/>
+        <bbn-button v-if="currentOrderIcon"
+                    :icon="currentOrderIcon"
+                    :text="currentSort === 'asc' ? _('Ascending order') : _('Descending order')"
+                    :notext="true"
+                    @click="currentSort = currentSort === 'asc' ? 'desc' : 'asc'"
+                    class="bbn-left-sspace bbn-no-border"
+                    style="height: auto"/>
+        <bbn-button icon="nf nf-fa-close"
+                  :text="_('Remove')"
+                  :notext="true"
+                  @click="currentOrder = null"
+                  class="bbn-left-sspace bbn-no-border"
+                  style="height: auto"/>
+      </template>
+      <template v-else-if="mode === 'filter'">
+        <div class="bbn-flex-fill">
+          <bbn-context :source="getStatusMenuSource"
+                       item-component="appui-task-item-menu"
+                       class="bbn-left-sspace">
+            <bbn-button v-text="currentFilters.status ? getField(mainPage.optionsStates, 'text', 'value', currentFilters.status) : _('Status')"
+                        :style="{
+                          color: currentFilters.status ? getField(mainPage.optionsStates, 'color', 'value', currentFilters.status) : '',
+                          backgroundColor: currentFilters.status ? getField(mainPage.optionsStates, 'backgroundColor', 'value', currentFilters.status) : '',
+                          padding: 'var(--xsspace)',
+                          'line-height': 'inherit',
+                          'min-height': 'unset'
+                        }"
+                        class="bbn-upper bbn-s bbn-no-border"
+                        :title="_('Status')"/>
+          </bbn-context>
+          <bbn-context :source="getPriorityMenuSource"
+                       item-component="appui-task-item-menu"
+                       class="bbn-left-sspace">
+            <bbn-button v-text="currentFilters.priority ? getField(mainPage.priorities, 'text', 'value', currentFilters.priority) : _('Priority')"
+                        :style="{
+                          color: currentFilters.priority ? getField(mainPage.priorities, 'color', 'value', currentFilters.priority) : '',
+                          backgroundColor: currentFilters.priority ? getField(mainPage.priorities, 'backgroundColor', 'value', currentFilters.priority) : '',
+                          padding: 'var(--xsspace)',
+                          'line-height': 'inherit',
+                          'min-height': 'unset'
+                        }"
+                        class="bbn-upper bbn-s bbn-no-border"
+                        :title="_('Priority')"/>
+          </bbn-context>
+          <bbn-context :source="getMyRoleMenuSource"
+                       item-component="appui-task-item-menu"
+                       class="bbn-left-sspace">
+            <bbn-button v-text="currentFilters.role ? getField(mainPage.optionsRoles, 'text', 'value', currentFilters.role) : _('Role')"
+                        :style="{
+                          color: currentFilters.role ? getField(mainPage.optionsRoles, 'color', 'value', currentFilters.role) : '',
+                          backgroundColor: currentFilters.role ? getField(mainPage.optionsRoles, 'backgroundColor', 'value', currentFilters.role) : '',
+                          padding: 'var(--xsspace)',
+                          'line-height': 'inherit',
+                          'min-height': 'unset'
+                        }"
+                        class="bbn-upper bbn-s bbn-no-border"
+                        :title="_('Role')"/>
+          </bbn-context>
+        </div>
+        <bbn-button icon="nf nf-fa-close"
+                  :text="_('Remove')"
+                  :notext="true"
+                  @click="removeFilters"
+                  class="bbn-left-sspace bbn-no-border"
+                  style="height: auto"/>
+      </template>
     </div>
   </template>
 </div>

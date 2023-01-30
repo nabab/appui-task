@@ -34,7 +34,7 @@
                   return false;
                 }
               });
-              return !hasRole;
+              return !hasRole || this.manage;
             }
             return false;
           });
