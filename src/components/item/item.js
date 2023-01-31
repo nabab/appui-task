@@ -330,7 +330,8 @@
       getBudgetMenuSource(){
         let menu = [];
         if ((this.isAdmin || this.isProjectManager)
-          && ((this.isClosed && this.source.price) || !this.isClosed)
+          && (!this.isClosed || !!this.source.price)
+          && !this.source.children_price
         ) {
           if (!!this.source.price) {
             menu.push({

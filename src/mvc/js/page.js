@@ -266,7 +266,7 @@
         },
         askSetSubtasksRoles(){
           if (!!this.source.children && this.source.children.length) {
-            this.confirm(bbn._('Do you want to apply the same role configuration of this task in its related subtasks?'), () => {
+            this.confirm(bbn._('Do you want to apply the same roles configurations of this task in its related subtasks?'), () => {
               this.post(this.mainPage.root + 'actions/role/subtasks', {
                 id: this.source.id
               }, d => {

@@ -18,7 +18,7 @@
               :title="author"/>
       </span>
     </div>
-    <bbn-context v-if="!!source.price && (isAdmin || isGlobal || IsProjectManager || isDecider)"
+    <bbn-context v-if="!!source.price && (isAdmin || isGlobal || isProjectManager || isDecider)"
                  :source="getBudgetMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-right-sspace">
