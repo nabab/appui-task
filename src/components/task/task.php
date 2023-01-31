@@ -104,7 +104,7 @@
             <bbns-widget :hidden="!currentWidgets.subtasks"
                         :title="dashboard.widgets.subtasks.text"
                         :icon="dashboard.widgets.subtasks.icon"
-                        component="dashboard.widgets.subtasks.component"
+                        :component="dashboard.widgets.subtasks.component"
                         uid="dashboard.widgets.subtasks.code"
                         :closable="dashboard.widgets.subtasks.closable"
                         :source="source"
