@@ -28,7 +28,7 @@
                     padding: 'var(--xsspace)',
                     'line-height': 'inherit',
                     'min-height': 'unset',
-                    cursor: isClosed ? 'default !important' : ''
+                    cursor: !getBudgetMenuSource().length ? 'default !important' : ''
                   }"
                   :class="['bbn-upper', 'bbn-s', 'bbn-left-sspace', 'bbn-no-border', {
                     'bbn-bg-green': isApproved,

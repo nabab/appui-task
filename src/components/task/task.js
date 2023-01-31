@@ -517,10 +517,21 @@
             this.post(`${this.root}actions/task/approve`, {
               id_task: this.source.id
             }, d => {
-              if (d.success && d.data.approved) {
-                this.source.approved = d.data.approved;
-                this.update('state', this.states.opened);
+              if (d.success && d.approved) {
+                this.source.approved = d.approved;
+                this.source.state = this.states.opened;
+                if (!!this.dashboard.widgets.subtasks
+                  && !!this.dashboard.widgets.subtasks.component
+                ) {
+                  let subtasks = this.find(this.dashboard.widgets.subtasks.component);
+                  if (subtasks) {
+                    subtasks.refresh();
+                  }
+                }
                 appui.success(bbn._('Price approved'));
+              }
+              else {
+                appui.error();
               }
             });
           });

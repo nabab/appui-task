@@ -17,5 +17,6 @@
                   :scrollable="false"
                   toolbar="appui-task-item-toolbar"
                   :toolbar-source="source"
-                  :limit="5"/>
+                  :limit="5"
+                  ref="list"/>
 </div>

@@ -20,6 +20,11 @@
           dir: 'DESC'
         }]
       }
+    },
+    methods: {
+      refresh(){
+        this.getRef('list').updateData();
+      }
     }
   }
 })();
