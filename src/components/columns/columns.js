@@ -94,7 +94,7 @@
           bbn.fn.each(vals, v => {
             sec.push({
               id: v.value,
-              title: v.text,
+              title: v.text.toString(),
               items: this.mainPage.root + 'data/list',
               backgroundColor: v.backgroundColor || '',
               fontColor: v.color || v.fontColor || '',
