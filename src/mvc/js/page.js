@@ -65,7 +65,7 @@
           return !this.isClosed && !this.isHolding;
         },
         isApproved() {
-          return this.source.price
+          return (this.source.price || this.source.children_price)
             && !!this.source.approved
             && !!this.source.lastChangePrice
             && (this.source.approved.chrono !== undefined)
@@ -73,7 +73,7 @@
             && (this.source.approved.chrono > this.source.lastChangePrice.chrono);
         },
         isUnapproved() {
-          return this.source.price
+          return (this.source.price || this.source.children_price)
             && (!this.source.approved
               || !this.source.lastChangePrice
               || (!this.source.approved.chrono
@@ -101,11 +101,15 @@
           return (this.isManager || this.isGlobal) && !this.isClosed;
         },
         canApprove() {
-          return this.isDecider && !this.isClosed;
+          return this.isDecider
+            && !this.isClosed
+            && (!!this.source.price || !!this.source.children_price)
+            && !this.source.parent_has_price
+            && !this.isApproved;
         },
         canChangeDecider() {
           return (this.isDecider || this.isAdmin || this.isGlobal || this.isProjectManager)
-          && !!this.source.price
+          && (!!this.source.price || !!this.source.children_price)
           && !this.isClosed;
         },
         canBecomeManager(){
@@ -237,9 +241,24 @@
               props.tracker = d.tracker;
               props.trackers = d.trackers;
             }
-            if ((prop === 'price') && (d.lastChangePrice !== undefined)) {
-              this.source.lastChangePrice = d.lastChangePrice;
-              props.lastChangePrice = d.lastChangePrice;
+            if (prop === 'price') {
+              if (d.lastChangePrice !== undefined) {
+                this.source.lastChangePrice = d.lastChangePrice;
+                props.lastChangePrice = d.lastChangePrice;
+              }
+              if (!val) {
+                this.source.price = null;
+                this.source.state = this.states.opened;
+                props.state = this.states.opened;
+                this.$set(this.source, 'approved', null);
+                this.$set(this.source, 'lastChangePrice', null);
+                props.approved = null;
+                props.lastChangePrice = null;
+              }
+              else {
+                this.source.state = this.states.unapproved;
+                props.state = this.states.unapproved;
+              }
             }
             let lastAction = dayjs().format('YYYY-MM-DD HH:mm:ss');
             this.$set(this.source, 'last_action', lastAction);

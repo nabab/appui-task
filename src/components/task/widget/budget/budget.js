@@ -18,8 +18,11 @@
         return this.task.isApproved ? bbn._('Approved') : bbn._('Unapproved');
       },
       price(){
-        if ( this.source.price ){
+        if (this.source.price) {
           return bbn.fn.money(this.source.price);
+        }
+        if (this.source.children_price) {
+          return bbn.fn.money(this.source.children_price);
         }
         return '';
       },
@@ -60,34 +63,19 @@
         this.showPriceForm = false;
       },
       saveForm(){
-        if ( this.source.price && this.task.isAdmin && !this.task.isClosed ){
+        if (!!this.source.price
+          && (this.task.isAdmin || this.task.isGlobal || this.task.isPojectManager)
+          && !this.task.isClosed
+        ){
           this.confirm(bbn._('Are you sure you want to save this price?'), () => {
-            this.task.update('price', this.source.price);
-            if ( this.source.state !== this.states.unapproved ){
-              this.task.update('state', this.states.unapproved);
-            }
-            this.showPriceForm = false;
-            this.$parent.updateButtons();
-          });
-        }
-      },
-      removePrice(){
-        if ( this.task.isAdmin && !this.task.isClosed ){
-          this.confirm(bbn._('Are you sure you want to remove the price?'), () => {
-            this.task.update('price', null).then(d => {
+            this.task.update('price', this.source.price).then(d => {
               if (d.data && d.data.success) {
-                this.source.price = null;
-                if ((this.source.roles.deciders !== undefined)
-                  && this.source.roles.deciders.length
-                ){
-                  this.source.roles.deciders.splice(0);
-                }
                 this.showPriceForm = false;
                 this.$parent.updateButtons();
-                this.update('state', this.states.opened);
-              }
-              else {
-                appui.error();
+                let w = this.task.find('appui-task-task-widget-subtasks');
+                if (w) {
+                  w.refresh();
+                }
               }
             });
           });
