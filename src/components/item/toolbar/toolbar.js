@@ -120,7 +120,7 @@
       onTaskCreated(d, openAfterCreation){
         if (d.success && !!d.id) {
           if (openAfterCreation) {
-            bbn.fn.link(this.root + 'page/task/' + d.id);
+            bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
           }
           if ((d.children !== undefined)
             && bbn.fn.isArray(this.source.children)
