@@ -451,24 +451,14 @@
         return false;
       },
       addBudget() {
-        if (this.isAdmin || this.isGlobal || this.isProjectManager) {
+        if ((this.isAdmin || this.isProjectManager || this.isGlobal)
+          && !this.isClosed
+          && !this.source.price
+          && !this.source.parent_has_price
+          && !this.source.children_price
+        ) {
           this.find('appui-task-task-widget-budget').showPriceForm = true;
         }
-      },
-      budgetButtons(){
-        let btn = [];
-        if (!this.source.price
-          && !this.source.children_price
-          && (this.isAdmin || this.isGlobal || this.isProjectManager)
-          && !this.isClosed
-        ) {
-          btn.push({
-            text: bbn._('Add budget'),
-            icon: 'nf nf-fa-plus',
-            action: this.addBudget
-          });
-        }
-        return btn;
       },
       trackerButtons(){
         return [{
@@ -533,15 +523,8 @@
               id_task: this.source.id
             }, d => {
               if (d.success && d.approved) {
-                this.source.approved = d.approved;
-                this.source.state = this.states.opened;
-                if (!!this.dashboard.widgets.subtasks
-                  && !!this.dashboard.widgets.subtasks.component
-                ) {
-                  let subtasks = this.find(this.dashboard.widgets.subtasks.component);
-                  if (subtasks) {
-                    subtasks.refresh();
-                  }
+                if (!!d.toUpdate && d.toUpdate.length) {
+                  this.updateItems(d.toUpdate);
                 }
                 appui.success(bbn._('Price approved'));
               }

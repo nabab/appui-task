@@ -77,7 +77,6 @@
                         :closable="dashboard.widgets.budget.closable"
                         :source="source"
                         :showable="false"
-                        :buttonsRight="budgetButtons"
                         :buttonsLeft="closeButton"
                         :padding="true"/>
             <bbns-widget :hidden="!currentWidgets.roles"

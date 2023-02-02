@@ -95,7 +95,7 @@
            :title="_('Remove decider')"/>
       </div>
     </div>
-    <div v-if="!source.roles.deciders.length"
+    <div v-if="!source.roles.deciders || !source.roles.deciders.length"
           class="bbn-c bbn-spadded bbn-radius-bottom"
           :style="{
             color: getRoleColor('deciders'),

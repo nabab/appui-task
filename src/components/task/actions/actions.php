@@ -14,17 +14,24 @@
         <span class="bbn-left-sspace"
               v-text="_('Approve')"/>
       </div>
-      <div v-if="(task.isAdmin || task.isProjectManager) && !task.isClosed && !!source.lastChangePrice"
+      <div v-if="(task.isAdmin || task.isProjectManager || task.isGlobal) && !task.isClosed && !source.price && !source.parent_has_price && !source.children_price"
+           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           @click="task.addPrice">
+        <i class="bbn-m nf nf-md-cash_plus"/>
+        <span class="bbn-left-sspace"
+              v-text="_('Add price')"/>
+      </div>
+      <div v-if="(task.isAdmin || task.isProjectManager || task.isGlobal) && !task.isClosed && !!source.lastChangePrice && !!source.price"
            class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
            @click="task.editPrice">
-        <i class="bbn-m nf nf-fa-edit"/>
+        <i class="bbn-m nf nf-md-credit_card_edit"/>
         <span class="bbn-left-sspace"
               v-text="_('Edit price')"/>
       </div>
-      <div v-if="(task.isAdmin || task.isProjectManager) && !task.isClosed && !!source.lastChangePrice"
+      <div v-if="(task.isAdmin || task.isProjectManager || task.isGlobal) && !task.isClosed && !!source.lastChangePrice && !!source.price"
            class="bbn-vmiddle bbn-red bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
            @click="task.removePrice">
-        <i class="bbn-m nf nf-fa-trash"/>
+        <i class="bbn-m nf nf-md-trash_can"/>
         <span class="bbn-left-sspace"
               v-text="_('Remove price')"/>
       </div>
@@ -213,14 +220,20 @@
                         backgroundColor: getStatusBgColor('approved'),
                         color: getStatusColor('approved')
                       }"/>
-          <bbn-button v-if="task.isAdmin && !task.isClosed && !!source.lastChangePrice"
-                      icon="nf nf-fa-edit"
+          <bbn-button v-if="(task.isAdmin || task.isProjectManager || task.isGlobal) && !task.isClosed && !source.price && !source.parent_has_price && !source.children_price"
+                      icon="nf nf-md-cash_plus"
+                      title="<?=_('Add price')?>"
+                      @click="task.editPrice"
+                      class="bbn-hsmargin"
+                      :notext="true"/>
+          <bbn-button v-if="(task.isAdmin || task.isProjectManager || task.isGlobal) && !task.isClosed && !!source.lastChangePrice && !!source.price"
+                      icon="nf nf-md-credit_card_edit"
                       title="<?=_('Edit price')?>"
                       @click="task.editPrice"
                       class="bbn-hsmargin"
                       :notext="true"/>
-          <bbn-button v-if="task.isAdmin && !task.isClosed && !!source.lastChangePrice"
-                      icon="nf nf-fa-trash"
+          <bbn-button v-if="(task.isAdmin || task.isProjectManager || task.isGlobal) && !task.isClosed && !!source.lastChangePrice && !!source.price"
+                      icon="nf nf-md-trash_can"
                       title="<?=_('Remove price')?>"
                       @click="task.removePrice"
                       :notext="true"

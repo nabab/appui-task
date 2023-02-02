@@ -24,8 +24,7 @@
       },
       showBudget(){
         return this.canApprove
-          || (!!this.source.price
-            && (this.isAdmin || this.isGlobal || this.isProjectManager)
+          || ((this.isAdmin || this.isGlobal || this.isProjectManager)
             && !this.isClosed
             && !!this.source.lastChangePrice
             && !this.source.children_price
