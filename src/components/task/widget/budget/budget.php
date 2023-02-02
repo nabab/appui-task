@@ -2,8 +2,8 @@
   <div v-if="!showPriceForm && (!!source.price || !!source.children_price)"
         :class="['bbn-radius', 'bbn-flex-width', 'bbn-bordered', {
           'bbn-bg-green': task.isApproved,
-          'bbn-bg-orange': !task.isApproved && (!!source.price || (!!source.children_price && !source.num_children_noprice)),
-          'bbn-bg-red': !task.isApproved && !!source.children_price && !!source.num_children_noprice
+          'bbn-bg-orange': !!task.isUnapproved && !task.isApproved && (!!source.price || (!!source.children_price && !source.num_children_noprice)),
+          'bbn-bg-red': !!task.isUnapproved && !task.isApproved && !!source.children_price && !!source.num_children_noprice
         }]"
         :style="{borderColor: 'var(' + (task.isApproved ? '--green' : (!!source.children_price && !!source.num_children_noprice ? '--red' : '--orange')) + ') !important'}">
     <div class="bbn-spadded bbn-secondary-text-alt bbn-b bbn-background bbn-radius bbn-flex-fill bbn-c"

@@ -66,12 +66,14 @@
         },
         isApproved() {
           return !this.isUnapproved
-            && (this.source.price || this.source.children_price)
             && !!this.source.approved
-            && !!this.source.lastChangePrice
-            && (this.source.approved.chrono !== undefined)
-            && (this.source.lastChangePrice.chrono !== undefined)
-            && (this.source.approved.chrono > this.source.lastChangePrice.chrono);
+            && ((this.source.price
+                && !!this.source.lastChangePrice
+                && (this.source.approved.chrono !== undefined)
+                && (this.source.lastChangePrice.chrono !== undefined)
+                && (this.source.approved.chrono > this.source.lastChangePrice.chrono))
+              || this.source.children_price)
+            ;
         },
         isUnapproved() {
           return this.source.state === this.mainPage.source.states.unapproved;
