@@ -66,6 +66,18 @@
         }
         return '';
       },
+      renderBudgetSubtasks(row){
+        if (!!row.children_price
+          && (!!appui.app.user.isAdmin
+            || !!this.mainPage.privileges.global
+            || !!this.mainPage.privileges.project_manager
+            || (!!row.roles.deciders
+              && row.roles.deciders.includes(appui.app.user.id)))
+        ) {
+          return `<span>${bbn.fn.money(row.children_price)}</span>`
+        }
+        return '';
+      },
       renderState(row){
         let icon,
             color;

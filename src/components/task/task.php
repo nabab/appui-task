@@ -68,7 +68,7 @@
                         code="appui-task"
                         ref="dashboard"
                         class="bbn-w-100">
-            <bbns-widget v-if="(isAdmin || isDecider || isGlobal || isProjectManager) && ((isClosed && source.price) || !isClosed)"
+            <bbns-widget v-if="budgetIsVisible"
                         :hidden="!currentWidgets.budget"
                         :title="dashboard.widgets.budget.text"
                         :icon="dashboard.widgets.budget.icon"
@@ -77,7 +77,6 @@
                         :closable="dashboard.widgets.budget.closable"
                         :source="source"
                         :showable="false"
-                        :buttonsRight="budgetButtons"
                         :buttonsLeft="closeButton"
                         :padding="true"/>
             <bbns-widget :hidden="!currentWidgets.roles"
@@ -105,7 +104,7 @@
                         :title="dashboard.widgets.subtasks.text"
                         :icon="dashboard.widgets.subtasks.icon"
                         :component="dashboard.widgets.subtasks.component"
-                        uid="dashboard.widgets.subtasks.code"
+                        :uid="dashboard.widgets.subtasks.code"
                         :closable="dashboard.widgets.subtasks.closable"
                         :source="source"
                         :padding="false"

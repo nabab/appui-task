@@ -1,31 +1,38 @@
 (() => {
   return {
+    mixins: [
+      appuiTaskMixin
+    ],
     computed: {
       showStatus(){
-        return this.task.canReopen
-          || (this.task.canChange
-            && ((this.task.isUnapproved && this.canClose)
-              || (this.task.isActive
-                && (this.task.canStart || this.task.canHold || this.task.canResume || this.task.canClose)
-                  || (this.task.isHolding && this.task.canResume)
-                  || (this.task.isClosed && this.task.canReopen))))
+        return this.canReopen
+          || (this.canChange
+            && ((this.isUnapproved && this.canClose)
+              || (this.isActive
+                && (this.canStart || this.canHold || this.canResume || this.canClose)
+                  || (this.isHolding && this.canResume)
+                  || (this.isClosed && this.canReopen))))
       },
       showRoles(){
-        return this.task.canBecomeManager
-          || this.task.canBecomeWorker
-          || this.task.canBecomeViewer
-          || this.task.canBecomeDecider;
+        return this.canBecomeManager
+          || this.canBecomeWorker
+          || this.canBecomeViewer
+          || this.canBecomeDecider;
       },
       showOther(){
-        return this.task.canPing;
+        return this.canPing;
       },
       showBudget(){
-        return (this.task.canApprove && !this.task.isApproved)
-          || (!!this.source.price && this.task.isAdmin && !this.task.isClosed && !!this.source.lastChangePrice);
+        return this.canApprove
+          || ((this.isAdmin || this.isGlobal || this.isProjectManager)
+            && !this.isClosed
+            && !!this.source.lastChangePrice
+            && !this.source.children_price
+            && !this.source.parent_has_price);
       },
       showTracker(){
-        return this.task.isOngoing
-          && (this.task.isWorker || this.task.isManager)
+        return this.isOngoing
+          && (this.isWorker || this.isManager)
       }
     }
   }

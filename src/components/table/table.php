@@ -65,6 +65,14 @@
                  :render="renderBudget"
                  cls="bbn-r"
                  :width="100"/>
+    <bbns-column title="<?=_("Budget Sub-Tasks")?>"
+                 field="children_price"
+                 type="money"
+                 :render="renderBudgetSubtasks"
+                 cls="bbn-r"
+                 :width="100"
+                 :filterable="false"
+                 :sortable="false"/>
     <bbns-column title="<?=_("Reference")?>"
                  :min-width="150"
                  :max-width="300"

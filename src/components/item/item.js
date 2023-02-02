@@ -330,7 +330,9 @@
       getBudgetMenuSource(){
         let menu = [];
         if ((this.isAdmin || this.isProjectManager)
-          && ((this.isClosed && this.source.price) || !this.isClosed)
+          && (!this.isClosed || !!this.source.price)
+          && !this.source.children_price
+          && !this.source.parent_has_price
         ) {
           if (!!this.source.price) {
             menu.push({
@@ -364,11 +366,7 @@
               menu.push({
                 text: p.text,
                 action: () => {
-                  this.update('priority', p.value).then(d => {
-                    if (d.data && d.data.success) {
-                      this.source.priority = p.value;
-                    }
-                  });
+                  this.update('priority', p.value);
                 },
                 backgroundColor: p.backgroundColor,
                 color: p.color,
@@ -423,16 +421,14 @@
         });
       },
       openNotes(){
-        if (this.source.num_notes) {
-          this.getPopup({
-            title: false,
-            closable: false,
-            width: bbn.fn.isMobile() ? '95%' : '90%',
-            height: bbn.fn.isMobile() ? '95%' : '90%',
-            component: 'appui-task-item-notes',
-            source: this.source
-          });
-        }
+        this.getPopup({
+          title: false,
+          closable: false,
+          width: bbn.fn.isMobile() ? '95%' : '90%',
+          height: bbn.fn.isMobile() ? '95%' : '90%',
+          component: 'appui-task-item-notes',
+          source: this.source
+        });
       },
       editBudget(){
         this.getPopup({
@@ -448,28 +444,7 @@
           && !bbn.fn.isNull(this.source.price)
         ){
           this.confirm(bbn._('Are you sure you want to remove the price?'), () => {
-            this.update('price', null).then(d => {
-              if (d.data && d.data.success) {
-                this.source.price = null;
-                if ((this.source.roles.deciders !== undefined)
-                  && this.source.roles.deciders.length
-                ){
-                  this.source.roles.deciders.splice(0);
-                }
-                this.update('state', this.mainPage.states.opened).then(r => {
-                  if (r.data && r.data.success) {
-                    this.source.state = this.mainPage.states.opened;
-                    appui.success();
-                  }
-                  else {
-                    appui.error();
-                  }
-                });
-              }
-              else {
-                appui.error();
-              }
-            });
+            this.update('price', null);
           });
         }
       },

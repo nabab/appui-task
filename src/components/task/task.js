@@ -160,15 +160,22 @@
         }
         return false;
       },
+      budgetIsVisible(){
+        return (this.isAdmin || this.isDecider || this.isGlobal || this.isProjectManager)
+          && (!this.isClosed || (!!this.source.price || !!this.source.children_price))
+          && !this.source.parent_has_price;
+      },
       widgetsAvailable(){
         return bbn.fn.order(bbn.fn.filter(Object.values(this.dashboard.widgets), w => {
           if (w.code === 'budget') {
-            return (this.isAdmin || this.isDecider || this.isGlobal || this.isProjectManager)
-              && ((this.isClosed && this.source.price) || !this.isClosed)
-              && !this.currentWidgets[w.code]
+            return this.budgetIsVisible && !this.currentWidgets[w.code];
           }
           if ((w.code === 'info') || (w.code === 'actions')) {
             return false;
+          }
+          if (w.code === 'logs') {
+            return (this.isAdmin || this.isManager || this.isGlobal)
+              && !this.currentWidgets[w.code];
           }
           return !this.currentWidgets[w.code];
         }), 'text');
@@ -444,16 +451,14 @@
         return false;
       },
       addBudget() {
-        if (this.isAdmin) {
+        if ((this.isAdmin || this.isProjectManager || this.isGlobal)
+          && !this.isClosed
+          && !this.source.price
+          && !this.source.parent_has_price
+          && !this.source.children_price
+        ) {
           this.find('appui-task-task-widget-budget').showPriceForm = true;
         }
-      },
-      budgetButtons(){
-        return !this.source.price && this.isAdmin && !this.isClosed ? [{
-          text: bbn._('Add budget'),
-          icon: 'nf nf-fa-plus',
-          action: this.addBudget
-        }] : [];
       },
       trackerButtons(){
         return [{
@@ -517,10 +522,14 @@
             this.post(`${this.root}actions/task/approve`, {
               id_task: this.source.id
             }, d => {
-              if (d.success && d.data.approved) {
-                this.source.approved = d.data.approved;
-                this.update('state', this.states.opened);
+              if (d.success && d.approved) {
+                if (!!d.toUpdate && d.toUpdate.length) {
+                  this.updateItems(d.toUpdate);
+                }
                 appui.success(bbn._('Price approved'));
+              }
+              else {
+                appui.error();
               }
             });
           });
@@ -550,22 +559,31 @@
         }
       },
       removePrice(){
-        if (this.isAdmin && !this.isClosed) {
+        if (this.isAdmin
+          && !this.isClosed
+          && !bbn.fn.isNull(this.source.price)
+        ) {
           this.confirm(bbn._('Are you sure you want to remove the price?'), () => {
-            if (!bbn.fn.isNull(this.source.price)) {
-              this.update('price', null);
-              this.source.price = null;
-            }
-            if (this.source.state !== this.states.opened) {
-              this.update('state', this.states.opened);
-            }
-            this.$set(this.source, 'approved', null);
-            this.$set(this.source, 'lastChangePrice', null);
-            let cp = this.find('appui-task-task-widget-budget');
-            if (bbn.fn.isVue(cp)) {
-              cp.showPriceForm = false;
-              cp.closest('bbn-widget').updateButtons();
-            }
+            this.update('price', null).then(d => {
+              if (d.data && d.data.success) {
+                /*
+                if (this.source.state !== this.states.opened) {
+                  this.update('state', this.states.opened);
+                }
+                this.$set(this.source, 'approved', null);
+                this.$set(this.source, 'lastChangePrice', null);
+                */
+                let cp = this.find('appui-task-task-widget-budget');
+                if (bbn.fn.isVue(cp)) {
+                  cp.showPriceForm = false;
+                  cp.closest('bbn-widget').updateButtons();
+                }
+                let cpSubTasks = this.find('appui-task-task-widget-subtasks');
+                if (bbn.fn.isVue(cpSubTasks)) {
+                  cpSubTasks.refresh();
+                }
+              }
+            });
           });
         }
       },

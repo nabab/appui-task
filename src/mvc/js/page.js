@@ -65,7 +65,8 @@
           return !this.isClosed && !this.isHolding;
         },
         isApproved() {
-          return this.source.price
+          return !this.isUnapproved
+            && (this.source.price || this.source.children_price)
             && !!this.source.approved
             && !!this.source.lastChangePrice
             && (this.source.approved.chrono !== undefined)
@@ -73,11 +74,7 @@
             && (this.source.approved.chrono > this.source.lastChangePrice.chrono);
         },
         isUnapproved() {
-          return this.source.price
-            && (!this.source.approved
-              || !this.source.lastChangePrice
-              || (!this.source.approved.chrono
-                || (this.source.approved.chrono < this.source.lastChangePrice.chrono)));
+          return this.source.state === this.mainPage.source.states.unapproved;
         },
         canChange() {
           return !this.isClosed && (this.isMaster || this.isGlobal || (!this.source.private && this.isManager));
@@ -101,11 +98,16 @@
           return (this.isManager || this.isGlobal) && !this.isClosed;
         },
         canApprove() {
-          return this.isDecider && !this.isClosed;
+          return this.isDecider
+            && !this.isClosed
+            && !!this.isUnapproved
+            && !this.source.parent_has_price
+            && ((!!this.source.price && !this.isApproved)
+              || !!this.source.children_price);
         },
         canChangeDecider() {
           return (this.isDecider || this.isAdmin || this.isGlobal || this.isProjectManager)
-          && !!this.source.price
+          && (!!this.source.price || !!this.source.children_price)
           && !this.isClosed;
         },
         canBecomeManager(){
@@ -237,14 +239,33 @@
               props.tracker = d.tracker;
               props.trackers = d.trackers;
             }
-            if ((prop === 'price') && (d.lastChangePrice !== undefined)) {
-              this.source.lastChangePrice = d.lastChangePrice;
-              props.lastChangePrice = d.lastChangePrice;
+            if (prop === 'price') {
+              if (d.lastChangePrice !== undefined) {
+                this.source.lastChangePrice = d.lastChangePrice;
+                props.lastChangePrice = d.lastChangePrice;
+              }
+              if (!val) {
+                this.source.price = null;
+                this.source.state = this.mainPage.states.opened;
+                props.state = this.mainPage.states.opened;
+                this.$set(this.source, 'approved', null);
+                this.$set(this.source, 'lastChangePrice', null);
+                props.approved = null;
+                props.lastChangePrice = null;
+              }
+              else {
+                this.source.state = this.mainPage.states.unapproved;
+                props.state = this.mainPage.states.unapproved;
+              }
             }
             let lastAction = dayjs().format('YYYY-MM-DD HH:mm:ss');
             this.$set(this.source, 'last_action', lastAction);
             props.last_action = lastAction;
             let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
+            let t = appui.getRegistered('appui-task-' + this.source.id, true);
+            if (t) {
+              comps.push(t);
+            }
             if (comps.length) {
               bbn.fn.each(comps, c => {
                 bbn.fn.iterate(props, (v, i) => {
@@ -254,19 +275,41 @@
                 });
               });
             }
-            let t = appui.getRegistered('appui-task-' + this.source.id, true);
-            if (t) {
-              bbn.fn.iterate(props, (v, i) => {
-                if (!bbn.fn.isSame(v, t.source[i])) {
-                  t.$set(t.source, i, v)
-                }
-              });
+            if (!!d.toUpdate && d.toUpdate.length) {
+              this.updateItems(d.toUpdate);
             }
           });
         },
+        updateItems(items){
+          if (!!items) {
+            if (!bbn.fn.isArray(items)) {
+              items = [items];
+            }
+            bbn.fn.each(items, item => {
+              if (bbn.fn.isObject(item)) {
+                let comps = bbn.fn.unique(this.mainPage.findAllByKey(item.id, 'appui-task-item'));
+                let t = appui.getRegistered('appui-task-' + item.id, true);
+                if (t) {
+                  comps.push(t);
+                }
+                if (comps.length) {
+                  bbn.fn.each(comps, c => {
+                    bbn.fn.iterate(item, (v, i) => {
+                      if ((c.source[i] !== undefined)
+                        && !bbn.fn.isSame(v, c.source[i])
+                      ) {
+                        c.$set(c.source, i, v)
+                      }
+                    });
+                  });
+                }
+              }
+            })
+          }
+        },
         askSetSubtasksRoles(){
           if (!!this.source.children && this.source.children.length) {
-            this.confirm(bbn._('Do you want to apply the same role configuration of this task in its related subtasks?'), () => {
+            this.confirm(bbn._('Do you want to apply the same roles configurations of this task in its related subtasks?'), () => {
               this.post(this.mainPage.root + 'actions/role/subtasks', {
                 id: this.source.id
               }, d => {

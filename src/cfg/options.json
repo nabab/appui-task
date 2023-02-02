@@ -377,9 +377,8 @@
                   "text": "Sub-Tasks",
                   "code": "subtasks",
                   "closable": true,
-                  "itemComponent": "appui-task-item",
-                  "options": "{\"inverted\":1,\"removeParent\":1}",
-                  "limit": 10,
+                  "component": "appui-task-task-widget-subtasks",
+                  "limit": 0,
                   "icon": "nf nf-oct-tasklist"
                 },
                 {

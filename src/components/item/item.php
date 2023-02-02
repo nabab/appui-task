@@ -18,23 +18,28 @@
               :title="author"/>
       </span>
     </div>
-    <bbn-context v-if="!!source.price && (isAdmin || isGlobal || isProjectManager || isDecider)"
+    <bbn-context v-if="(!!source.price || !!source.children_price) && (isAdmin || isGlobal || isProjectManager || isDecider)"
                  :source="getBudgetMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-right-sspace">
-      <bbn-button v-text="money(source.price)"
-                  :style="{
+      <bbn-button :style="{
                     color: 'white',
                     padding: 'var(--xsspace)',
                     'line-height': 'inherit',
                     'min-height': 'unset',
-                    cursor: isClosed ? 'default !important' : ''
+                    cursor: !getBudgetMenuSource().length ? 'default !important' : ''
                   }"
-                  :class="['bbn-upper', 'bbn-s', 'bbn-left-sspace', 'bbn-no-border', {
+                  :class="['bbn-upper', 'bbn-s', 'bbn-left-sspace', 'bbn-no-border', 'appui-task-item-btn-budget', {
                     'bbn-bg-green': isApproved,
-                    'bbn-bg-orange': !isApproved
+                    'bbn-bg-orange': !isApproved && (!!source.price || (!!source.children_price && !source.num_children_noprice)),
+                    'bbn-bg-red': !isApproved && !!source.children_price && !!source.num_children_noprice
                   }]"
-                  :title="_('Budget')"/>
+                  :title="_('Budget')">
+          <span v-text="money(source.price || source.children_price)"/>
+          <i v-if="!isApproved && !!source.children_price && !!source.num_children_noprice"
+             class="nf nf-fa-info_circle bbn-left-sspace"
+             :title="_('%d sub-tasks need their price to be set', source.num_children_noprice)"/>
+      </bbn-button>
     </bbn-context>
     <div v-if="source.creation_date === source.last_action"
          v-text="mainPage.formatDate(source.creation_date)"
@@ -252,10 +257,10 @@
             <template v-if="source.num_children">
               <i class="nf nf-md-playlist_check bbn-xl bbn-green"/>
               <sub v-text="closedChildren.length"
-                    class="bbn-left-xxsspace bbn-right-sspace bbn-green"/>
+                   class="bbn-left-xxsspace bbn-right-sspace bbn-green"/>
               <i class="nf nf-md-playlist_remove bbn-lg bbn-red"/>
               <sub v-text="source.num_children - closedChildren.length"
-                    class="bbn-left-xxsspace bbn-red"/>
+                   class="bbn-left-xxsspace bbn-red"/>
             </template>
             <template v-else>
               <i class="nf nf-md-list_status bbn-lg"/>
@@ -291,26 +296,5 @@
                      toolbar="appui-task-item-toolbar"
                      :toolbar-source="source"
                      :limit="5"/>
-    <!--
-    <div v-if="showSubtasks && !!source.num_children"
-         :class="['bbn-spadded', 'bbn-top-space', 'bbn-radius', {
-           'bbn-alt-background': inverted,
-           'bbn-background': !inverted
-         }]">
-      <div class="bbn-radius bbn-c bbn-upper bbn-xspadded bbn-xsspace bbn-tertiary-text-alt bbn-b"
-           v-text="_('Sub-Tasks')"/>
-      <appui-task-item v-for="(child, cidx) in source.children"
-                       :source="child"
-                       :inverted="inverted"
-                       :remove-parent="true"
-                       :key="child.id"
-                       :class="['bbn-alt-background', 'bbn-radius', 'bbn-spadded', 'bbn-radius', {
-                         'bbn-bottom-space': !!source.children[cidx + 1]
-                       }]"
-                       :is-sub="true"
-                       :collapse-footer="collapseFooter"
-                       :force-collapsed="forceCollapsed"/>
-    </div>
-    -->
   </template>
 </div>
