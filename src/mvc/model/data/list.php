@@ -11,6 +11,25 @@ $id_user = $model->inc->user->getId();
 $id_group = $model->inc->user->getGroup();
 $state_closed = $taskCls->idState('closed');
 
+//Privileges
+$privileges = $model->inc->options->codeIds('privileges', 'task', 'appui');
+$isAccountManager = !empty($privileges['account_manager'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['account_manager'], true));
+$isAccountViewer = !empty($privileges['account_viewer'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['account_viewer'], true));
+$isProjectManager = !empty($privileges['project_manager'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['project_manager'], true));
+$isProjectViewer = !empty($privileges['project_viewer'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['project_viewer'], true));
+$isAssigner = !empty($privileges['assigner'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['assigner'], true));
+$isFinancialManager = !empty($privileges['financial_manager'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['financial_manager'], true));
+$isFinancialViewer = !empty($privileges['financial_viewer'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['financial_viewer'], true));
+$isProjectSupervisor = !empty($privileges['project_supervisor'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['project_supervisor'], true));
+
 if ( !empty($model->data['data']) ){
   $ext_filters = $model->data['data'];
   unset($model->data['data']);

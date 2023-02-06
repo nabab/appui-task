@@ -21,8 +21,29 @@
         isGlobal(){
           return !!this.mainPage.privileges.global;
         },
+        isAccountManager(){
+          return !!this.mainPage.privileges.account_manager;
+        },
+        isAccountViewer(){
+          return !!this.mainPage.privileges.account_viewer;
+        },
         isProjectManager(){
           return !!this.mainPage.privileges.project_manager;
+        },
+        isProjectViewer(){
+          return !!this.mainPage.privileges.project_viewer;
+        },
+        isAssigner(){
+          return !!this.mainPage.privileges.assigner;
+        },
+        isFinancialManager(){
+          return !!this.mainPage.privileges.financial_manager;
+        },
+        isFinancialViewer(){
+          return !!this.mainPage.privileges.financial_viewer;
+        },
+        isProjectSupervisor(){
+          return !!this.mainPage.privileges.project_supervisor;
         },
         isMaster() {
           return this.userId === this.source.id_user;
