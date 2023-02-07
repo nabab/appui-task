@@ -18,7 +18,7 @@
               :title="author"/>
       </span>
     </div>
-    <bbn-context v-if="(!!source.price || !!source.children_price) && (isAdmin || isGlobal || isProjectManager || isDecider)"
+    <bbn-context v-if="(!!source.price || !!source.children_price) && canSeeBudget"
                  :source="getBudgetMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-right-sspace">
@@ -202,7 +202,8 @@
                       color: mainPage.getRoleBgColor('viewers'),
                       cursor: !canChange ? 'default !important' : ''
                     }"
-                    @click="manageRole('viewers')">
+                    @click="manageRole('viewers')"
+                    v-if="canSeeViewers">
           <div class="bbn-vmiddle">
             <i class="nf nf-md-account_eye bbn-lg"/>
             <sub v-text="!!source.roles.viewers ? source.roles.viewers.length : 0"/>

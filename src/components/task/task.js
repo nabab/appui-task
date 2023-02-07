@@ -161,7 +161,7 @@
         return false;
       },
       budgetIsVisible(){
-        return (this.isAdmin || this.isDecider || this.isGlobal || this.isProjectManager)
+        return this.canSeeBudget
           && (!this.isClosed || (!!this.source.price || !!this.source.children_price))
           && !this.source.parent_has_price;
       },
@@ -174,7 +174,7 @@
             return false;
           }
           if (w.code === 'logs') {
-            return (this.isAdmin || this.isManager || this.isGlobal)
+            return (this.isAdmin || this.isAccountManager || this.isGlobal)
               && !this.currentWidgets[w.code];
           }
           return !this.currentWidgets[w.code];
@@ -451,7 +451,7 @@
         return false;
       },
       addBudget() {
-        if ((this.isAdmin || this.isProjectManager || this.isGlobal)
+        if ((this.isAdmin || this.isAccountManager || this.isGlobal)
           && !this.isClosed
           && !this.source.price
           && !this.source.parent_has_price
@@ -559,7 +559,7 @@
         }
       },
       removePrice(){
-        if (this.isAdmin
+        if ((this.isAdmin || this.isGlobal || this.isAccountManager)
           && !this.isClosed
           && !bbn.fn.isNull(this.source.price)
         ) {

@@ -132,7 +132,7 @@
        :style="{
          borderColor: getRoleBgColor('viewers') + '!important'
        }"
-       v-if="task.isManager || task.isGlobal">
+       v-if="task.canSeeViewers">
     <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadded', {
            'bbn-radius-top': isViewerOpen,
            'bbn-radius': !isViewerOpen

@@ -100,28 +100,34 @@
           return this.source.state === this.mainPage.source.states.unapproved;
         },
         canChange() {
-          return !this.isClosed && (this.isMaster || this.isGlobal || (!this.source.private && this.isManager));
+          return !this.isClosed && (this.isMaster || this.isGlobal || this.isAccountManager || this.isProjectManager || this.isProjectSupervisor || (!this.source.private && this.isManager));
+        },
+        canChangeBudget(){
+          return !this.isClosed && (this.isAdmin || this.isGlobal || this.isAccountManager);
+        },
+        canSeeBudget(){
+          return this.isAdmin || this.isGlobal || this.isDecider || this.isAccountManager || this.isAccountViewer || this.isFinancialManager || this.isFinancialViewer;
         },
         canStart() {
-          return this.isOpened && (this.isManager || this.isWorker || this.isGlobal);
+          return this.isOpened && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
         },
         canClose() {
-          return (this.isManager || this.isGlobal) && !this.isClosed;
+          return (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed;
         },
         canHold() {
-          return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
+          return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
         },
         canResume() {
-          return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker || this.isGlobal);
+          return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
         },
         canReopen() {
-          return (this.isManager || this.isGlobal) && this.isClosed;
+          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && this.isClosed;
         },
         canPing() {
-          return (this.isManager || this.isGlobal) && !this.isClosed;
+          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed;
         },
         canApprove() {
-          return this.isDecider
+          return (this.isDecider || this.isFinancialManager)
             && !this.isClosed
             && !!this.isUnapproved
             && !this.source.parent_has_price
@@ -129,7 +135,7 @@
               || !!this.source.children_price);
         },
         canChangeDecider() {
-          return (this.isDecider || this.isAdmin || this.isGlobal || this.isProjectManager)
+          return (this.isDecider || this.isAdmin || this.isGlobal || this.isAccountManager)
           && (!!this.source.price || !!this.source.children_price)
           && !this.isClosed;
         },
@@ -179,8 +185,11 @@
         canBill() {
           return (this.source.state === this.mainPage.source.states.closed)
             && this.isApproved
-            && this.isAdmin
+            && (this.isAdmin || this.isGlobal || this.isAccountManager)
             && (appui.plugins['appui-billing'] !== undefined);
+        },
+        canSeeViewers(){
+          return this.isManager || this.isGlobal || this.isAccountManager || this.isAccountViewer || this.isProjectSupervisor || this.isProjectManager;
         }
       },
       methods: {

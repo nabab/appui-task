@@ -329,7 +329,7 @@
       },
       getBudgetMenuSource(){
         let menu = [];
-        if ((this.isAdmin || this.isProjectManager)
+        if ((this.isAdmin || this.isAccountManager)
           && (!this.isClosed || !!this.source.price)
           && !this.source.children_price
           && !this.source.parent_has_price
@@ -439,7 +439,7 @@
         });
       },
       removeBudget(){
-        if ((this.isAdmin || this.isProjectManager)
+        if ((this.isAdmin || this.isAccountManager)
           && !this.isClosed
           && !bbn.fn.isNull(this.source.price)
         ){

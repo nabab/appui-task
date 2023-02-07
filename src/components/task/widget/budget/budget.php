@@ -16,7 +16,7 @@
          :title="_('%d sub-tasks need their price to be set', source.num_children_noprice)"/>
     </div>
   </div>
-  <div v-else-if="showPriceForm && (task.isAdmin || task.isGlobal || task.isProjectManager)"
+  <div v-else-if="showPriceForm && task.canChangeBudget"
         class="bbn-flex-width bbn-vmiddle">
     <bbn-numeric class="bbn-flex-fill"
                   :decimals="2"

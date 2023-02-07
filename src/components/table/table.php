@@ -10,7 +10,8 @@
              class="appui-task-list-table bbn-no-border"
              :filterable="true"
              :filters="filters"
-             :showable="true">
+             :showable="true"
+             :resizable="true">
     <bbns-column title="<?=_('ID')?>"
                  field="id"
                  :width="270"
