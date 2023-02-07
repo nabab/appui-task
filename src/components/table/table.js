@@ -58,7 +58,10 @@
         if (!!row.price
           && (!!appui.app.user.isAdmin
             || !!this.mainPage.privileges.global
-            || !!this.mainPage.privileges.project_manager
+            || !!this.mainPage.privileges.account_manager
+            || !!this.mainPage.privileges.account_viewer
+            || !!this.mainPage.privileges.financial_manager
+            || !!this.mainPage.privileges.financial_viewer
             || (!!row.roles.deciders
               && row.roles.deciders.includes(appui.app.user.id)))
         ) {
@@ -70,7 +73,10 @@
         if (!!row.children_price
           && (!!appui.app.user.isAdmin
             || !!this.mainPage.privileges.global
-            || !!this.mainPage.privileges.project_manager
+            || !!this.mainPage.privileges.account_manager
+            || !!this.mainPage.privileges.account_viewer
+            || !!this.mainPage.privileges.financial_manager
+            || !!this.mainPage.privileges.financial_viewer
             || (!!row.roles.deciders
               && row.roles.deciders.includes(appui.app.user.id)))
         ) {

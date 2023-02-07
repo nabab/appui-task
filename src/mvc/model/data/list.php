@@ -11,6 +11,38 @@ $id_user = $model->inc->user->getId();
 $id_group = $model->inc->user->getGroup();
 $state_closed = $taskCls->idState('closed');
 
+//Privileges
+$privileges = $model->inc->options->codeIds('privileges', 'task', 'appui');
+$isAdmin = $model->inc->user->isAdmin();
+$isDev = $model->inc->user->isDev();
+$isGlobal = !empty($privileges['global'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['global'], true));
+$allPrivileges = !!$isAdmin || !!$isDev || !!$isGlobal;
+$isAccountManager = !$allPrivileges
+  && !empty($privileges['account_manager'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['account_manager'], true));
+$isAccountViewer = !$allPrivileges
+  && !empty($privileges['account_viewer'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['account_viewer'], true));
+$isProjectManager = !$allPrivileges
+  && !empty($privileges['project_manager'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['project_manager'], true));
+$isProjectViewer = !$allPrivileges
+  && !empty($privileges['project_viewer'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['project_viewer'], true));
+$isAssigner = !$allPrivileges
+  && !empty($privileges['assigner'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['assigner'], true));
+$isFinancialManager = !$allPrivileges
+  && !empty($privileges['financial_manager'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['financial_manager'], true));
+$isFinancialViewer = !$allPrivileges
+  && !empty($privileges['financial_viewer'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['financial_viewer'], true));
+$isProjectSupervisor = !$allPrivileges
+  && !empty($privileges['project_supervisor'])
+  && $model->inc->perm->has($model->inc->perm->optionToPermission($privileges['project_supervisor'], true));
+
 if ( !empty($model->data['data']) ){
   $ext_filters = $model->data['data'];
   unset($model->data['data']);
@@ -99,6 +131,16 @@ $join = [[
       'exp' => 'children.id_parent'
     ]]
   ]
+], [
+  'table' => 'bbn_tasks',
+  'alias' => 'parent',
+  'type' => 'left',
+  'on' => [
+    'conditions' => [[
+      'field' => 'bbn_tasks.id_parent',
+      'exp' => 'parent.id'
+    ]]
+  ]
 ]];
 
 $filters = [
@@ -121,6 +163,44 @@ $filters = [
     ]]
   ]]
 ];
+
+if ($isProjectViewer) {
+  $filters['conditions'][] = [
+    'logic' => 'OR',
+    'conditions' => [[
+      'conditions' => [[
+        'field' => 'bbn_tasks.price',
+        'operator' => 'isnull'
+      ], [
+        'field' => 'parent.price',
+        'operator' => 'isnull'
+      ]]
+    ], [
+      'field' => 'my_role.role',
+      'operator' => 'isnotnull'
+    ]]
+  ];
+}
+
+if ($isAssigner) {
+
+}
+
+if ($isFinancialManager || $isFinancialViewer) {
+  $filters['conditions'][] = [
+    'logic' => 'OR',
+    'conditions' => [[
+      'field' => 'bbn_tasks.price',
+      'operator' => 'isnotnull'
+    ], [
+      'field' => 'parent.price',
+      'operator' => 'isnotnull'
+    ], [
+      'field' => 'my_role.role',
+      'operator' => 'isnotnull'
+    ]]
+  ];
+}
 
 if ( isset($ext_filters['selection']) ){
   if ( $ext_filters['selection'] === 'user' ){
@@ -202,6 +282,7 @@ if ( $plugin_model = $model->getPluginModel('reference') ){
   }
 }
 
+//die(\bbn\X::dump($filters));
 
 $grid = new \bbn\Appui\Grid($model->db, $model->data, [
   'table' => 'bbn_tasks',

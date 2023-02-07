@@ -64,9 +64,9 @@
       },
       saveForm(){
         if (!!this.source.price
-          && (this.task.isAdmin || this.task.isGlobal || this.task.isPojectManager)
+          && this.task.canChangeBudget
           && !this.task.isClosed
-        ){
+        ) {
           this.confirm(bbn._('Are you sure you want to save this price?'), () => {
             this.task.update('price', this.source.price).then(d => {
               if (d.data && d.data.success) {

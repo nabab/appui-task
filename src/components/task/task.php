@@ -110,7 +110,7 @@
                         :padding="false"
                         :buttonsLeft="closeButton"
                         :showable="false"/>
-            <bbns-widget v-if="isAdmin || isManager || isGlobal"
+            <bbns-widget v-if="isAdmin || isAccountManager || isGlobal"
                         :hidden="!currentWidgets.logs"
                         :title="dashboard.widgets.logs.text"
                         :icon="dashboard.widgets.logs.icon"

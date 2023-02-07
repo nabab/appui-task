@@ -16,13 +16,31 @@
               text: bbn._('Mine'),
               value: 'user'
             }];
-      if (!!mainPage.source.privileges && !!mainPage.source.privileges.group) {
+      if (!!mainPage.source.privileges
+        && (!!mainPage.source.privileges.group
+          || !!mainPage.source.privileges.global
+          || !!mainPage.source.privileges.account_manager
+          || !!mainPage.source.privileges.account_viewer
+          || !!mainPage.source.privileges.project_manager
+          || !!mainPage.source.privileges.financial_manager
+          || !!mainPage.source.privileges.financial_viewer
+          || !!mainPage.source.privileges.project_supervisor)
+      ) {
         filterTypes.push({
-          text: bbn._('My groups'),
+          text: bbn._('My group'),
           value: 'group'
         });
       }
-      if (!!mainPage.source.privileges && !!mainPage.source.privileges.global) {
+      if (!!mainPage.source.privileges
+        && (!!mainPage.source.privileges.group
+          || !!mainPage.source.privileges.global
+          || !!mainPage.source.privileges.account_manager
+          || !!mainPage.source.privileges.account_viewer
+          || !!mainPage.source.privileges.project_manager
+          || !!mainPage.source.privileges.financial_manager
+          || !!mainPage.source.privileges.financial_viewer
+          || !!mainPage.source.privileges.project_supervisor)
+      ) {
         filterTypes.push({
           text: bbn._('All'),
           value: 'all'

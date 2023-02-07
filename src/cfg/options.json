@@ -305,8 +305,36 @@
           "code": "manager"
         },
         {
+          "text": "Account Manager",
+          "code": "account_manager"
+        },
+        {
+          "text": "Account Viewer",
+          "code": "account_viewer"
+        },
+        {
           "text": "Project Manager",
           "code": "project_manager"
+        },
+        {
+          "text": "Project Viewer",
+          "code": "project_viewer"
+        },
+        {
+          "text": "Assigner",
+          "code": "assigner"
+        },
+        {
+          "text": "Financial Manager",
+          "code": "financial_manager"
+        },
+        {
+          "text": "Financial Viewer",
+          "code": "financial_viewer"
+        },
+        {
+          "text": "Project Supervisor",
+          "code": "project_supervisor"
         },
         {
           "text": "Viewer",
