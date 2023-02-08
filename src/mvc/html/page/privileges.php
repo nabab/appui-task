@@ -56,7 +56,8 @@
                             :pageable="true"
                             :children-filterable="true"
                             :children-filters="getFilters"
-                            uid="id"/>
+                            uid="id"
+                            columnWidth="30rem"/>
     <div v-else
           class="bbn-100 bbn-alt-background bbn-padded">
       <div class="bbn-100">
