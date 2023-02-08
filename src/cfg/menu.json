@@ -8,6 +8,12 @@
       "num": 1,
       "icon": "nf nf-fa-columns",
       "link": "page"
+    },
+    {
+      "text": "Users privileges",
+      "num": 2,
+      "icon": "nf nf-md-account_lock_outline",
+      "link": "page\/privileges"
     }
   ]
 }
