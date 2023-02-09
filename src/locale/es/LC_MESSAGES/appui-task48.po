@@ -7,43 +7,69 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-29 11:20+0100\n"
-"POT-Revision-Date: 2022-11-29 11:20+0100\n"
+"POT-Creation-Date: 2023-02-09 14:12+0100\n"
+"POT-Revision-Date: 2023-02-09 14:12+0100\n"
 "Language: es\n"
-"X-Domain: appui-task46\n"
+"X-Domain: appui-task48\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/columns/task/task.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.php
-msgid "Supervisors"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/columns/task/task.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.php
-msgid "Workers"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/columns/task/task.js
-msgid "Open in new window"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/columns/task/task.js
-msgid "Expand"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/columns/task/task.js
-msgid "Collapse"
-msgstr ""
-
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/columns/toolbar/toolbar.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
 msgid "New task"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/form/new/new.php
 msgid "Select a type..."
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/form/role/role.js
+msgid ""
+"Do you want to apply the same role configuration of this task in its related "
+"subtasks?"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+msgid "Mine"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+msgid "My group"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+msgid "All"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+msgid "Columns"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+msgid "Table"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+msgid "List"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+msgid "Types"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/toolbar/toolbar.js
+msgid "Status"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/home/home.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/toolbar/toolbar.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/info/info.php
+msgid "Priority"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/invoice/invoice.js
@@ -52,8 +78,8 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/invoice/invoice.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/notes/notes.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/tracker/detail/detail.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
 msgid "Error"
 msgstr ""
 
@@ -86,69 +112,124 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/logs/detail/detail.php
-msgid "User"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Open in new window"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/info/info.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "Priority"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Expand"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-msgid "#Notes"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Collapse"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-msgid "States"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Edit title"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "Last"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Add or remove managers"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "Role"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Add or remove workers"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "Type"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Add or remove viewers"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/tracker/detail/detail.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "Duration"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Add or remove deciders"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Roles"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "Budget"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Open notes"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Remove as subtask"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
+msgid "Put on ongoing"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
+msgid "Put on hold"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
+msgid "Resume"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
+msgid "Close"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
+msgid "Reopen"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Edit budget"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Remove budget"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Add budget"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/privileges.js
+msgid "Select user(s)"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+msgid "Set the price"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/item.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
+msgid "Are you sure you want to remove the price?"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/toolbar/toolbar.js
+msgid "Last edit"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/toolbar/toolbar.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
 msgid "Title"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-msgid "Reference"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-msgid "Creation Date"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/info/info.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "Deadline"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/list/list.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "See task"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/item/toolbar/toolbar.js
+msgid "Remove filter"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/notes/notes.js
@@ -186,6 +267,61 @@ msgstr ""
 msgid "Add a note"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "ID"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/logs/detail/detail.php
+msgid "User"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "States"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "Last"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "Role"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "Type"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/tracker/detail/detail.php
+msgid "Duration"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "Budget Sub-Tasks"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "Reference"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "Creation Date"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/info/info.php
+msgid "Deadline"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "#Notes"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/table/table.php
+msgid "See task"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
 msgid "Simple text"
 msgstr ""
@@ -211,34 +347,6 @@ msgid "CSS code"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Are you sure you want to put this task on ongoing?"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Are you sure you want to put this task on hold?"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Are you sure you want to close this task?"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Are you sure you want to resume this task?"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Are you sure you want to ping the task?"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Pinged"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Are you sure you want to reopen this task?"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
 msgid "Are you sure?"
 msgstr ""
 
@@ -255,10 +363,6 @@ msgid "Are you sure you want to remove this link?"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Add budget"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
 msgid "See tracker detail"
 msgstr ""
 
@@ -267,20 +371,11 @@ msgid "See all logs"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-msgid "Add task"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
-msgid "Close"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
 msgid "Tracker detail"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/public/page/logs.php
 msgid "Logs"
 msgstr ""
 
@@ -292,37 +387,16 @@ msgstr ""
 msgid "Price approved"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/budget/budget.js
-msgid "Are you sure you want to remove the price?"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
-msgid "Put on ongoing"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
-msgid "Put on hold"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
-msgid "Resume"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
-msgid "Reopen"
-msgstr ""
-
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/task.php
 msgid "Menu"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
 msgid "Approve"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
+msgid "Add price"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/actions/actions.php
@@ -420,10 +494,6 @@ msgid "Cancel"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/budget/budget.php
-msgid "No price set"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/budget/budget.php
 msgid "Deciders"
 msgstr ""
 
@@ -445,16 +515,21 @@ msgid "Action"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.js
-msgid "Select user(s)"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/privileges.js
+msgid "Are you sure you want to remove this user?"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.js
-msgid "Are you sure you want to remove this user?"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.php
+msgid "Supervisors"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/tracker/detail/detail.js
 msgid "Remove"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.php
+msgid "Workers"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/roles/roles.php
@@ -472,7 +547,6 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/tracker/detail/detail.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/components/task/widget/tracker/detail/detail.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
 msgid "Start"
 msgstr ""
 
@@ -530,51 +604,82 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/html/budgets.php
+msgid "Nom"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/html/budgets.php
+msgid "Price"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/html/budgets.php
+msgid "Statut"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/html/budgets.php
+msgid "Last chamge"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/html/page.php
 msgid "Home"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "Mine"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/budgets.js
+msgid "%s accepted on %s"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "My groups"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid "Are you sure you want to put this task on ongoing?"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "All"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid "Are you sure you want to put this task on hold?"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
-msgid "Columns"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid "Are you sure you want to close this task?"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
-msgid "List"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid "Are you sure you want to resume this task?"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
-msgid "Types"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid "Are you sure you want to ping the task?"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/home.js
-msgid "Status"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid "Pinged"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "State"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid "Are you sure you want to reopen this task?"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/model/lng/search.php
-msgid "Unknown"
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid ""
+"Do you want to apply the same roles configurations of this task in its related "
+"subtasks?"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page.js
+msgid "Search and add subtasks"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/js/page/privileges.js
+msgid "Add user"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/public/budgets.php
+msgid "Budgets"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/public/page.php
 msgid "Tasks"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/mvc/public/page/privileges.php
+msgid "Privileges"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-task/src/plugins/appui-dashboard/model/all_tasks.php
