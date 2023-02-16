@@ -6,6 +6,7 @@
              :pageable="true">
   	<bbns-column field="title"
                  title="<?= _("Nom") ?>"
+                 :render="renderTitle"
                  :min-width="250"/>
   	<bbns-column field="price"
                  :render="renderPrice"

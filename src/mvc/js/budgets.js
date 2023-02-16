@@ -8,6 +8,9 @@
       }
     },
     methods: {
+      renderTitle(row) {
+        return '<a href="' + this.root + 'page/task/' + row.id + '">' + row.title + '</a>';
+      },
       renderPrice(row) {
         let st = '<span class="bbn-b ';
         if (row.accepter) {
