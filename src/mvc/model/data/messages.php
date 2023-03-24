@@ -306,13 +306,14 @@ if ( $grid->check() ){
   $notes = new \bbn\Appui\Note($model->db);
   if ( is_array($d['data']) && !empty($d['data']) ){
     $ftype = \bbn\Appui\Note::getOptionId('file', 'media');
+    $itype = \bbn\Appui\Note::getOptionId('image', 'media');
     $ltype = \bbn\Appui\Note::getOptionId('link', 'media');
     foreach ($d['data'] as $i => $n ){
       $d['data'][$i]['files'] = [];
       $d['data'][$i]['links'] = [];
       $medias = $notes->getMedias($n['id']);
       foreach ( $medias as $m ){
-        if ( $m['type'] === $ftype ){
+        if (($m['type'] === $ftype) || ($m['type'] === $itype)) {
           $d['data'][$i]['files'][] = [
             'id' => $m['id'],
             'name' => $m['name'],
