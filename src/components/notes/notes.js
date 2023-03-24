@@ -80,8 +80,8 @@
                 formAction: this.root + 'actions/messages/edit',
                 formSuccess: (d) => {
                   if ( d.success ){
-                    if ( v.topic ){
-                      v.topic.getRef('pager').updateData();
+                    if (!v.isTopic) {
+                      v.topic.updateData();
                     }
                     else {
                       this.getRef('forum').updateData();
@@ -98,7 +98,7 @@
                 id_task: this.source.id
               },
               row: {
-                title: v.topic ? undefined : n.title,
+                title: !v.isTopic ? undefined : n.title,
                 text: n.content,
                 files: n.files,
                 links: n.links,
@@ -120,16 +120,12 @@
                 formAction: this.root + 'actions/messages/reply',
                 formSuccess: (d) => {
                   if ( d.success ){
-                    if ( v.topic ){
-                      v.topic.getRef('pager').updateData();
+                    if (!v.isTopic) {
+                      v.topic.updateData();
                     }
                     else {
-                      if ( v.getRef('pager') ){
-                        v.getRef('pager').updateData();
-                      }
-                      else {
-                        n.num_replies++;
-                      }
+                      n.num_replies++;
+                      v.topic.updateData();
                     }
                     appui.success(bbn._('Inserted'));
                   }
@@ -161,8 +157,8 @@
               id_task: this.source.id
             }, (d) => {
               if ( d.success ){
-                if ( v.topic ){
-                  v.topic.getRef('pager').updateData();
+                if (!v.isTopic) {
+                  v.topic.updateData();
                 }
                 else {
                   this.getRef('forum').updateData();
