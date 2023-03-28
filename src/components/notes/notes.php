@@ -14,5 +14,5 @@
                   @edit="edit"
                   @reply="reply"
                   @remove="remove"
-                  :image-dom="root + 'image/'"
+                  :image-dom="imageDom"
                   :download-url="root + 'download/media/'"/>
