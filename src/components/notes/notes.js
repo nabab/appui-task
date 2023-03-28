@@ -21,12 +21,10 @@
     computed: {
       form(){
         return {
-          props: {
-            imageDom: this.root + 'image/tmp/',
-            fileSave: this.root + 'actions/file/upload/',
-            fileRemove: this.root + 'actions/file/unupload/',
-            linkPreview: this.root + 'link_preview'
-          },
+          imageDom: this.root + 'image/tmp/',
+          fileSave: this.root + 'actions/file/upload/',
+          fileRemove: this.root + 'actions/file/unupload/',
+          linkPreview: this.root + 'link_preview',
           data: {
             id_task: this.source.id
           }
@@ -45,20 +43,18 @@
             width: 800,
             height: 750,
             component: 'appui-note-forum-form',
-            source: bbn.fn.extend(true, {
-              props: {
-                formAction: this.root + 'actions/messages/insert',
-                formSuccess: (d) => {
-                  if ( d.success ){
-                    this.getRef('forum').updateData();
-                    appui.success(bbn._('Inserted'));
-                  }
-                  else {
-                    appui.error(bbn._('Error'));
-                  }
+            componentOptions: bbn.fn.extend(true, {
+              formAction: this.root + 'actions/messages/insert',
+              formSuccess: d => {
+                if (d.success) {
+                  this.getRef('forum').updateData();
+                  appui.success(bbn._('Inserted'));
+                }
+                else {
+                  appui.error(bbn._('Error'));
                 }
               },
-              row: {
+              source: {
                 title: '',
                 text: '',
                 files: [],
@@ -76,29 +72,27 @@
             width: 800,
             height: 600,
             component: 'appui-note-forum-form',
-            source: bbn.fn.extend(true, {
-              props: {
-                formAction: this.root + 'actions/messages/edit',
-                formSuccess: (d) => {
-                  if ( d.success ){
-                    if (!v.isTopic) {
-                      v.topic.updateData();
-                    }
-                    else {
-                      this.getRef('forum').updateData();
-                    }
-                    appui.success(bbn._('Edited'));
+            componentOptions: bbn.fn.extend(true, {
+              formAction: this.root + 'actions/messages/edit',
+              formSuccess: d => {
+                if (d.success) {
+                  if (!v.isTopic) {
+                    v.topic.updateData();
                   }
                   else {
-                    appui.error(bbn._('Error'));
+                    this.getRef('forum').updateData();
                   }
+                  appui.success(bbn._('Edited'));
+                }
+                else {
+                  appui.error(bbn._('Error'));
                 }
               },
               data: {
                 id: n.id,
                 id_task: this.source.id
               },
-              row: {
+              source: {
                 title: !v.isTopic ? undefined : n.title,
                 text: n.content,
                 files: n.files,
@@ -117,22 +111,20 @@
             height: 600,
             component: 'appui-note-forum-form',
             source: bbn.fn.extend(true, {
-              props: {
-                formAction: this.root + 'actions/messages/reply',
-                formSuccess: (d) => {
-                  if ( d.success ){
-                    if (!v.isTopic) {
-                      v.topic.updateData();
-                    }
-                    else {
-                      n.num_replies++;
-                      v.topic.updateData();
-                    }
-                    appui.success(bbn._('Inserted'));
+              formAction: this.root + 'actions/messages/reply',
+              formSuccess: d => {
+                if (d.success) {
+                  if (!v.isTopic) {
+                    v.topic.updateData();
                   }
                   else {
-                    appui.error(bbn._('Error'));
+                    n.num_replies++;
+                    v.topic.updateData();
                   }
+                  appui.success(bbn._('Inserted'));
+                }
+                else {
+                  appui.error(bbn._('Error'));
                 }
               },
               data: {
@@ -140,7 +132,7 @@
                 id_alias: n.id_alias || n.id,
                 id_task: this.source.id
               },
-              row: {
+              source: {
                 text: '',
                 files: [],
                 links: [],
@@ -156,8 +148,8 @@
             this.post(this.root + 'actions/messages/delete', {
               id: n.id,
               id_task: this.source.id
-            }, (d) => {
-              if ( d.success ){
+            }, d => {
+              if (d.success) {
                 if (!v.isTopic) {
                   v.topic.updateData();
                 }
