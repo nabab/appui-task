@@ -300,11 +300,13 @@
             }
             if (comps.length) {
               bbn.fn.each(comps, c => {
-                bbn.fn.iterate(props, (v, i) => {
-                  if (!bbn.fn.isSame(v, c.source[i])) {
-                    c.$set(c.source, i, v)
-                  }
-                });
+                if (c.bbnUid !== this.bbnUid) {
+                  bbn.fn.iterate(props, (v, i) => {
+                    if (!bbn.fn.isSame(v, c.source[i])) {
+                      c.$set(c.source, i, v)
+                    }
+                  });
+                }
               });
             }
             if (!!d.toUpdate && d.toUpdate.length) {
@@ -326,13 +328,15 @@
                 }
                 if (comps.length) {
                   bbn.fn.each(comps, c => {
-                    bbn.fn.iterate(item, (v, i) => {
-                      if ((c.source[i] !== undefined)
-                        && !bbn.fn.isSame(v, c.source[i])
-                      ) {
-                        c.$set(c.source, i, v)
-                      }
-                    });
+                    if (c.bbnUid !== this.bbnUid) {
+                      bbn.fn.iterate(item, (v, i) => {
+                        if ((c.source[i] !== undefined)
+                          && !bbn.fn.isSame(v, c.source[i])
+                        ) {
+                          c.$set(c.source, i, v)
+                        }
+                      });
+                    }
                   });
                 }
               }
