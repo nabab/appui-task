@@ -15,4 +15,6 @@
                   @reply="reply"
                   @remove="remove"
                   :image-dom="imageDom"
-                  :download-url="root + 'download/media/'"/>
+                  :download-url="root + 'download/media/'"
+                  :filterable="true"
+                  :search="true"/>
