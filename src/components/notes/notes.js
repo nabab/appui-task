@@ -38,7 +38,7 @@
     methods: {
       insert(){
         if (!this.isClosed) {
-          this.getPopup().open({
+          this.getPopup({
             title: bbn._('New message'),
             width: 800,
             height: 750,
@@ -67,7 +67,7 @@
       },
       edit(n, v){
         if (!this.isClosed) {
-          this.getPopup().open({
+          this.getPopup({
             title: bbn._('Edit'),
             width: 800,
             height: 600,
@@ -105,12 +105,12 @@
       },
       reply(n, v){
         if (!this.isClosed) {
-          this.getPopup().open({
+          this.getPopup({
             title: bbn._('Reply to') + ' ' + appui.app.getUserName(n.creator),
             width: 800,
             height: 600,
             component: 'appui-note-forum-form',
-            source: bbn.fn.extend(true, {
+            componentOptions: bbn.fn.extend(true, {
               formAction: this.root + 'actions/messages/reply',
               formSuccess: d => {
                 if (d.success) {
