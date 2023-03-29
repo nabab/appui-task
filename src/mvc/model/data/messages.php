@@ -318,7 +318,8 @@ if ( $grid->check() ){
             'id' => $m['id'],
             'name' => $m['name'],
             'title' => $m['title'],
-            'extension' => '.'.\bbn\Str::fileExt($m['name'])
+            'extension' => '.'.\bbn\Str::fileExt($m['name']),
+            'isImage' => $m['type'] === $itype
           ];
         }
         if ( $m['type'] === $ltype ){

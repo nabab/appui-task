@@ -8,8 +8,13 @@
                     icon: 'nf nf-fa-pencil',
                     disabled: isClosed
                   }]"
-                  :edit="!isClosed ? edit : false"
-                  :reply="!isClosed ? reply : false"
-                  :remove="!isClosed ? remove : false"
-                  :image-dom="root + 'image/'"
-                  :download-url="root + 'download/media/'"/>
+                  :edit-enabled="!isClosed"
+                  :reply-enabled="!isClosed"
+                  :remove-enabled="!isClosed"
+                  @edit="edit"
+                  @reply="reply"
+                  @remove="remove"
+                  :image-dom="imageDom"
+                  :download-url="root + 'download/media/'"
+                  :filterable="true"
+                  :search="true"/>
