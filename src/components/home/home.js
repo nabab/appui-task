@@ -11,7 +11,7 @@
       }
     },
     data(){
-      const mainPage = this.closest('appui-task'),
+      const mainPage = this.closest('appui-task-page'),
             filterTypes = [{
               text: bbn._('Mine'),
               value: 'user'
@@ -122,7 +122,7 @@
         if (d.success && !!d.id) {
           this.currentSearch = '';
           if (openAfterCreation) {
-            bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
+            bbn.fn.link(this.mainPage.taskRoot + d.id);
           }
         }
       },

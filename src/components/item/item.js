@@ -10,10 +10,13 @@
     computed:{
       root(){
         return !!this.mainPage ? this.mainPage.root : '';
+      },
+      taskRoot() {
+        return !!this.mainPage ? this.mainPage.taskRoot : '';
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', this.closest('appui-task-page'));
       this.$set(this, 'homePage', this.closest('appui-task-home'));
       this.$set(this, 'columnsComp', this.closest('appui-task-columns'));
     }
@@ -85,9 +88,6 @@
       }
     },
     computed: {
-      root(){
-        return !!this.mainPage ? this.mainPage.root : '';
-      },
       privileges(){
         return!!this.mainPage ? this.mainPage.privileges : {};
       },
@@ -393,11 +393,11 @@
         }
       },
       seeTask(){
-        bbn.fn.link(this.mainPage.root + 'page/task/' + this.source.id);
+        bbn.fn.link(this.taskRoot + this.source.id);
       },
       seeParentTask(){
         if (!!this.source.parent && !!this.source.parent.id) {
-          bbn.fn.link(this.mainPage.root + 'page/task/' + this.source.parent.id);
+          bbn.fn.link(this.taskRoot + this.source.parent.id);
         }
       },
       editTitle(){

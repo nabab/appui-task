@@ -14,7 +14,7 @@
     data(){
       return {
         root: appui.plugins['appui-task'] + '/',
-        mainPage: this.closest('appui-task'),
+        mainPage: this.closest('appui-task-page'),
         imageDom: appui.plugins['appui-note'] + '/media/image/'
       }
     },

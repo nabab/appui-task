@@ -10,10 +10,13 @@
     computed:{
       root(){
         return !!this.mainPage ? this.mainPage.root : '';
+      },
+      taskRoot(){
+        return !!this.mainPage ? this.mainPage.taskRoot : '';
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', this.closest('appui-task-page'));
       this.$set(this, 'homePage', this.closest('appui-task-home'));
       this.$set(this, 'columnsComp', this.closest('appui-task-columns'));
     }
@@ -58,7 +61,6 @@
     data(){
       return {
         ready: false,
-        mainPage: this.closest('appui-task'),
         currentData: {
           selection: this.filter,
           title: this.search,
@@ -114,6 +116,13 @@
       },
       getFilters(src, data, idx){
         let conditions = [];
+        let typeConditions = bbn.fn.map(this.source.options.cats, c => {
+          return {
+            field: 'bbn_tasks.type',
+            operator: '=',
+            value: c.value
+          }
+        });
         switch (this.order) {
           case 'types':
             conditions.push({
@@ -131,6 +140,9 @@
               field: 'bbn_tasks.state',
               operator: '=',
               value: src.id
+            }, {
+              logic: 'OR',
+              conditions: typeConditions
             });
             break;
           case 'priority':
@@ -142,6 +154,9 @@
               field: 'bbn_tasks.state',
               operator: 'neq',
               value: this.mainPage.source.states.closed
+            }, {
+              logic: 'OR',
+              conditions: typeConditions
             });
             break;
         }

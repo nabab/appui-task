@@ -46,7 +46,7 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', this.closest('appui-task-page'));
     },
     components: {
       item: {
@@ -129,13 +129,25 @@
             ) {
               this.parent.children.splice(0, this.parent.children.length, ...children);
               this.source.num_children = children.length;
+              let comps = bbn.fn.unique(this.closest('appui-task-search').mainPage.findAllByKey(this.idParent, 'appui-task-item'));
+              if (comps.length) {
+                bbn.fn.each(comps, c => {
+                  let list = c.find('bbn-column-list');
+                  if (list) {
+                    list.updateData();
+                  }
+                });
+              }
               let task = appui.getRegistered('appui-task-' + this.idParent, true);
               if (task) {
                 let widget = task.findByKey('subtasks', 'bbn-widget');
                 if (widget) {
-                  this.$nextTick(() => {
-                    widget.reload();
-                  })
+                  let comp = widget.find('appui-task-task-widget-subtasks');
+                  if (comp) {
+                    this.$nextTick(() => {
+                      comp.refresh();
+                    })
+                  }
                 }
               }
             }

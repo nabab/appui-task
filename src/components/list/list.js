@@ -18,7 +18,7 @@
       }
     },
     data(){
-      const mainPage = this.closest('appui-task');
+      const mainPage = this.closest('appui-task-page');
       let filters = {
         conditions: [{
           field: 'state',
@@ -55,7 +55,7 @@
         this.getRef('tasksList').collapseAll();
       },
       openTask(row){
-        bbn.fn.link(this.mainPage.root + 'page/task/' + (typeof row === 'object' ? row.id : row));
+        bbn.fn.link(this.mainPage.taskRoot + (typeof row === 'object' ? row.id : row));
       },
       refreshList(){
         this.getRef('tasksList').updateData();

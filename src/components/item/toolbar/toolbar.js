@@ -120,7 +120,7 @@
       onTaskCreated(d, openAfterCreation){
         if (d.success && !!d.id) {
           if (openAfterCreation) {
-            bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
+            bbn.fn.link(this.mainPage.taskRoot + d.id);
           }
           if ((d.children !== undefined)
             && bbn.fn.isArray(this.source.children)
@@ -202,7 +202,7 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', this.closest('appui-task-page'));
       this.$set(this, 'columnList', this.closest('bbn-column-list'));
     },
     mounted(){

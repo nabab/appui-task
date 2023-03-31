@@ -35,7 +35,7 @@
     <template v-if="!!source.id_parent && !!source.parent">
       <label><?=_('Parent task')?></label>
       <a v-text="source.parent.title"
-          :href="root + 'page/task/' + source.id_parent"/>
+          :href="taskRoot + source.id_parent"/>
     </template>
     <label v-if="source.reference"><?=_('External reference')?></label>
     <div v-if="source.reference"

@@ -52,7 +52,7 @@
       onTaskCreated(d, openAfterCreation){
         if (d.success && !!d.id) {
           if (openAfterCreation) {
-            bbn.fn.link(this.root + 'page/task/' + d.id);
+            bbn.fn.link(this.taskRoot + d.id);
           }
           this.columnList.updateData();
         }

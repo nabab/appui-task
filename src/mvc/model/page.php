@@ -12,10 +12,24 @@ use \bbn\Appui\Dashboard;
 use \bbn\X;
 
 $s =& $model->inc->session;
-$pm = new Task($model->db);
+$taskCls = new Task($model->db);
 $mgr = $model->inc->user->getManager();
 $arch = $model->inc->user->getClassCfg()['arch']['groups'];
 $groups = $mgr->groups();
+$cats = [];
+$model->inc->options->map(function ($a) use (&$cats){
+  if (!empty($a['default'])) {
+    $cats[] = [
+      'value' => $a['id'],
+      'text' => $a['text']
+    ];
+  }
+  $a['is_parent'] = !empty($a['items']);
+  if ( $a['is_parent'] ){
+    $a['expanded'] = true;
+  }
+  return $a;
+}, Task::getOptionsTree('cats'), 1);
 $d = [
   'root' => APPUI_TASKS_ROOT,
   'root_notes' => $model->pluginUrl('appui-note').'/',
@@ -28,7 +42,7 @@ $d = [
     'roles' => array_map(function($r){
       return X::mergeArrays($r, Task::getOptionsObject()->getValue($r['value']) ?: []);
     }, Task::getAppuiOptionsTextValue('roles')),
-    'cats' => Task::catCorrespondances()
+    'cats' => X::sortBy($cats, 'text', 'ASC')
   ],
   'usergroup' => $model->inc->user->getGroup(),
   'groups' => array_map(function($g) use($arch){
@@ -36,13 +50,13 @@ $d = [
     unset($g[$arch['group']]);
     return $g;
   }, $groups),
-  'categories' => $model->inc->options->map(function($a){
+  'categories' => X::sortBy(array_values(array_filter($model->inc->options->map(function($a){
     $a['is_parent'] = !empty($a['items']);
-    if ( $a['is_parent'] ){
+    if ($a['is_parent']) {
       $a['expanded'] = true;
     }
     return $a;
-  }, $pm->categories(), 1),
+  }, $taskCls->categories(), 1), fn($a) => !empty($a['default']))), 'text', 'ASC'),
   'media_types' => $model->inc->options->codeOptions(Note::getAppuiOptionId('media')),
   'dashboard' => [
     'widgets' => [],

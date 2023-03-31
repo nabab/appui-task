@@ -16,6 +16,9 @@
       root(){
         return !!this.mainPage ? this.mainPage.root : '';
       },
+      taskRoot(){
+        return !!this.mainPage ? this.mainPage.taskRoot : '';
+      },
       categories(){
         return !!this.mainPage ? this.mainPage.fullCategories : [];
       },
@@ -87,7 +90,7 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', this.closest('appui-task-page'));
       this.$set(this, 'task', this.closest('appui-task-task'));
     }
   }];
@@ -483,7 +486,7 @@
       },
       openTask(task){
         if (!!task) {
-          bbn.fn.link(this.root + 'page/task/' + task);
+          bbn.fn.link(this.taskRoot + task);
         }
       },
       addWidgetToTask(code){
