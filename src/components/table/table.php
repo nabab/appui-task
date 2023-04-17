@@ -37,9 +37,14 @@
                  :width="50"
                  cls="bbn-h-100 bbn-c"
                  :source="mainPage.source.options.states"/>
+    <bbns-column title="<?=_("Ref.")?>"
+                 ftitle="<?=_("Reference number")?>"
+                 field="ref"
+                 :width="100"
+                 cls="bbn-c"/>
     <bbns-column title="<?=_("Last")?>"
                  field="last_action"
-                 :width="120"
+                 :width="130"
                  type="datetime"/>
     <bbns-column title="<?=_("Title")?>"
                  :min-width="300"

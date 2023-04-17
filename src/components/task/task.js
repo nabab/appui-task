@@ -115,7 +115,7 @@
     },
     data(){
       return {
-        creation: bbn.fn.fdate(this.source.creation_date),
+        creation: dayjs(this.source.creation_date).format('DD/MM/YYYY HH:mm'),
         ref: dayjs().unix(),
         commentTypes: [{
           text: bbn._('Simple text'),

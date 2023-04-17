@@ -12,7 +12,8 @@
                            :children-sortable="true"
                            :children-order="[{field: 'last_action', dir: 'DESC'}]"
                            :collapse-empty="true"
-                           uid="id"/>
+                           uid="id"
+                           column-width="45rem"/>
   <div v-else
         class="bbn-100 bbn-alt-background bbn-padded">
     <div class="bbn-100">

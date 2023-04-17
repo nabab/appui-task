@@ -67,7 +67,8 @@
                         :order="dashboard.order"
                         code="appui-task"
                         ref="dashboard"
-                        class="bbn-w-100">
+                        class="bbn-w-100"
+                        :max="3">
             <bbns-widget v-if="budgetIsVisible"
                         :hidden="!currentWidgets.budget"
                         :title="dashboard.widgets.budget.text"

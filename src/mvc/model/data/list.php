@@ -50,6 +50,7 @@ if ( !empty($model->data['data']) ){
 
 $fields = [
   'bbn_tasks.id',
+  'bbn_tasks.ref',
   'bbn_tasks.type',
   'bbn_tasks.id_parent',
   'bbn_tasks.id_user',
@@ -248,9 +249,16 @@ if ( isset($ext_filters['selection']) ){
 
 if ( !empty($ext_filters['title']) ){
   $filters['conditions'][] = [
-    'field' => 'bbn_notes_versions.title',
-    'operator' => 'contains',
-    'value' => $ext_filters['title']
+    'logic' => 'OR',
+    'conditions' => [[
+      'field' => 'bbn_notes_versions.title',
+      'operator' => 'contains',
+      'value' => $ext_filters['title']
+    ], [
+      'field' => 'bbn_tasks.ref',
+      'operator' => 'contains',
+      'value' => $ext_filters['title']
+    ]]
   ];
 }
 

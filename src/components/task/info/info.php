@@ -1,17 +1,23 @@
 <div class="appui-task-task-info">
-  <div class="bbn-flex-width bbn-bottom-space">
+  <div class="bbn-flex-width bbn-bottom-sspace">
     <div class="bbn-vmiddle bbn-flex-fill">
-      <bbn-initial :user-name="userName(source.id_user)"
-                   width="1.2rem"
-                   height="1.2rem"
-                   font-size="0.7rem"/>
-      <span class="bbn-left-xsspace bbn-s bbn-unselectable"
-            v-text="isYou(source.id_user) ? _('You') : userName(source.id_user)"
-            :title="_('Created by') + ' ' + userName(source.id_user)"/>
+      <span class="bbn-right-sspace bbn-radius bbn-xspadded bbn-s bbn-background bbn-text"
+            v-text="source.ref"
+            :title="_('Reference number')"/>
+      <span class="bbn-vmiddle bbn-right-spadded bbn-radius bbn-background bbn-text">
+        <bbn-initial :user-name="userName(source.id_user)"
+                    width="1.2rem"
+                    height="1.2rem"
+                    font-size="0.7rem"
+                    style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important"/>
+        <span class="bbn-left-xsspace bbn-s bbn-unselectable"
+              v-text="isYou(source.id_user) ? _('You') : userName(source.id_user)"
+              :title="_('Created by') + ' ' + userName(source.id_user)"/>
+      </span>
     </div>
     <div v-text="task.creation"
          :title="_('Created at')"
-         class="bbn-s"/>
+         class="bbn-s bbn-background bbn-text bbn-xspadded bbn-radius"/>
   </div>
   <bbn-textarea v-model="source.title"
                 class="bbn-lg"

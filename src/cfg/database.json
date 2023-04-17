@@ -167,6 +167,32 @@
                 "null": 0,
                 "generation": ""
             },
+            "easy_id": {
+              "position": 10,
+              "type": "int",
+              "null": 1,
+              "key": null,
+              "extra": "",
+              "signed": 0,
+              "virtual": false,
+              "generation": null,
+              "default": "NULL",
+              "defaultExpression": false,
+              "maxlength": 10
+            },
+            "ref": {
+              "position": 11,
+              "type": "varchar",
+              "null": 1,
+              "key": null,
+              "extra": "VIRTUAL GENERATED",
+              "signed": 1,
+              "virtual": 1,
+              "generation": "concat(easy_id,'/',year(creation_date))",
+              "default": "NULL",
+              "defaultExpression": false,
+              "maxlength": 15
+            },
             "deadline": {
                 "type": "datetime",
                 "null": 1,

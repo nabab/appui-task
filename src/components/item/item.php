@@ -4,6 +4,12 @@
      }]">
   <div class="bbn-flex-width">
     <div class="bbn-vmiddle bbn-flex-fill">
+      <span :class="['bbn-right-sspace', 'bbn-radius', 'bbn-xspadded', 'bbn-s', {
+              'bbn-alt-background': inverted,
+              'bbn-background': !inverted
+            }]"
+            v-text="source.ref"
+            :title="_('Reference number')"/>
       <span :class="['bbn-vmiddle', 'bbn-right-spadded', 'bbn-radius', {
               'bbn-alt-background': inverted,
               'bbn-background': !inverted
