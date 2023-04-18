@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: BBN
- * Date: 04/06/2017
- * Time: 17:33
- */
+$userCfg = $model->inc->user->getClassCfg();
+$userNameField = $model->db->cfn($userCfg['arch']['users']['username'], $userCfg['table']);
 if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_alias']) ){
   $cfg = [
 		'table' => 'bbn_notes',
@@ -24,7 +20,8 @@ if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_
 			'last_edit' => 'last_version.creation',
 			'num_replies' => 'COUNT(DISTINCT replies.id)',
 			'last_reply' => 'IFNULL(MAX(replies_versions.creation), last_version.creation)',
-			'users' => 'GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ",")'
+			'users' => 'GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ",")',
+      'username' => $userNameField
 		],
 		'join' => [[
 			'table' => 'bbn_notes_versions',
@@ -130,7 +127,16 @@ if ( !empty($model->data['data']['id_task']) && !isset($model->data['data']['id_
 					'value' => 1
 				]]
 			]
-		]],
+    ], [
+      'table' => $userCfg['table'],
+      'type' => 'left',
+      'on' => [
+        'conditions' => [[
+          'field' => $model->db->cfn('id', $userCfg['table']),
+          'exp' => 'versions.id_user'
+        ]]
+      ]
+    ]],
     'filters' => [[
       'field' => 'bbn_tasks.id',
       'operator' => 'eq',
@@ -182,7 +188,8 @@ else if ( !empty($model->data['data']['id_alias']) ){
       'users' => 'GROUP_CONCAT(DISTINCT LOWER(HEX(versions.id_user)) SEPARATOR ",")',
       'parent_creation' => 'parent_version.creation',
       'parent_creator' => 'parent_version.id_user',
-      'parent_active' => 'parent.active'
+      'parent_active' => 'parent.active',
+      'username' => $userNameField
     ],
     'join' => [[
       'table' => 'bbn_notes_versions',
@@ -275,6 +282,15 @@ else if ( !empty($model->data['data']['id_alias']) ){
           'field' => 'parent_version.version',
           'operatort' => '=',
           'value' => 1
+        ]]
+      ]
+    ], [
+      'table' => $userCfg['table'],
+      'type' => 'left',
+      'on' => [
+        'conditions' => [[
+          'field' => $model->db->cfn('id', $userCfg['table']),
+          'exp' => 'versions.id_user'
         ]]
       ]
     ]],
