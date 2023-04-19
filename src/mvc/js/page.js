@@ -82,8 +82,11 @@
         isHoldingOrOpened() {
           return this.isHolding || this.isOpened;
         },
+        isCanceled(){
+          return this.source.state === this.mainPage.source.states.canceled;
+        },
         isActive() {
-          return !this.isClosed && !this.isHolding;
+          return !this.isClosed && !this.isHolding && !this.isCanceled;
         },
         isApproved() {
           return !this.isUnapproved
@@ -100,10 +103,10 @@
           return this.source.state === this.mainPage.source.states.unapproved;
         },
         canChange() {
-          return !this.isClosed && (this.isMaster || this.isGlobal || this.isAccountManager || this.isProjectManager || this.isProjectSupervisor || (!this.source.private && this.isManager));
+          return !this.isClosed && !this.isCanceled && (this.isMaster || this.isGlobal || this.isAccountManager || this.isProjectManager || this.isProjectSupervisor || (!this.source.private && this.isManager));
         },
         canChangeBudget(){
-          return !this.isClosed && (this.isAdmin || this.isGlobal || this.isAccountManager);
+          return !this.isClosed && !this.isCanceled && (this.isAdmin || this.isGlobal || this.isAccountManager);
         },
         canSeeBudget(){
           return this.isAdmin || this.isGlobal || this.isDecider || this.isAccountManager || this.isAccountViewer || this.isFinancialManager || this.isFinancialViewer;
@@ -112,7 +115,7 @@
           return this.isOpened && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
         },
         canClose() {
-          return (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed;
+          return (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed && !this.isCanceled;
         },
         canHold() {
           return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
@@ -121,14 +124,21 @@
           return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
         },
         canReopen() {
-          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && this.isClosed;
+          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && this.isClosed && !this.isCanceled;
+        },
+        canCancel(){
+          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed && !this.isCanceled;
+        },
+        canRemoveTask(){
+          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed;
         },
         canPing() {
-          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed;
+          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed && !this.isCanceled;
         },
         canApprove() {
           return (this.isDecider || this.isFinancialManager)
             && !this.isClosed
+            && !this.isCanceled
             && !!this.isUnapproved
             && !this.source.parent_has_price
             && ((!!this.source.price && !this.isApproved)
@@ -137,50 +147,58 @@
         canChangeDecider() {
           return (this.isDecider || this.isAdmin || this.isGlobal || this.isAccountManager)
           && (!!this.source.price || !!this.source.children_price)
-          && !this.isClosed;
+          && !this.isClosed
+          && !this.isCanceled;
         },
         canBecomeManager(){
-          return (!!this.mainPage.privileges.manager || this.isGlobal) && !this.isManager;
+          return (!!this.mainPage.privileges.manager || this.isGlobal) && !this.isManager && !this.isCanceled;
         },
         canBecomeWorker(){
           return (!!this.mainPage.privileges.worker || this.isGlobal)
             && !this.isWorker
-            && (!this.isManager || (this.source.roles.managers.length > 1));
+            && (!this.isManager || (this.source.roles.managers.length > 1))
+            && !this.isCanceled;
         },
         canBecomeViewer(){
           return (!!this.mainPage.privileges.viewer || this.isGlobal)
             && !this.isViewer
-            && (!this.isManager || (this.source.roles.managers.length > 1));
+            && (!this.isManager || (this.source.roles.managers.length > 1))
+            && !this.isCanceled;
         },
         canBecomeDecider(){
           return (!!this.mainPage.privileges.decider || this.isGlobal)
             && !this.isDecider
             && (!this.isManager
-              || (this.source.roles.managers.length > 1));
+              || (this.source.roles.managers.length > 1))
+            && !this.isCanceled;
         },
-        canRevemoHimselfManager(){
+        canRemoveHimselfManager(){
           return (!!this.mainPage.privileges.manager || this.isGlobal)
             && !!this.isManager
             && !this.isMaster
-            && (this.source.roles.managers.length > 1);
+            && (this.source.roles.managers.length > 1)
+            && !this.isCanceled;
         },
-        canRevemoHimselfWorker(){
+        canRemoveHimselfWorker(){
           return (!!this.mainPage.privileges.worker || this.isGlobal)
-            && !!this.isWorker;
+            && !!this.isWorker
+            && !this.isCanceled;
         },
-        canRevemoHimselfViewer(){
+        canRemoveHimselfViewer(){
           return (!!this.mainPage.privileges.viewer || this.isGlobal)
-            && !!this.isViewer;
+            && !!this.isViewer
+            && !this.isCanceled;
         },
-        canRevemoHimselfDecider(){
+        canRemoveHimselfDecider(){
           return (!!this.mainPage.privileges.decider || this.isGlobal)
-            && !!this.isDecider;
+            && !!this.isDecider
+            && !this.isCanceled;
         },
         canUnmakeMe() {
-          return this.canRevemoHimselfManager
-            || this.canRevemoHimselfWorker
-            || this.canRevemoHimselfViewer
-            || this.canRevemoHimselfDecider
+          return this.canRemoveHimselfManager
+            || this.canRemoveHimselfWorker
+            || this.canRemoveHimselfViewer
+            || this.canRemoveHimselfDecider
         },
         canBill() {
           return (this.source.state === this.mainPage.source.states.closed)
@@ -218,6 +236,20 @@
           if (this.canResume) {
             this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
               this.update('state', this.mainPage.source.states.ongoing);
+            });
+          }
+        },
+        cancel(){
+          if (this.canCancel) {
+            this.confirm(bbn._('Are you sure you want to cancel this task?'), () => {
+              this.update('state', this.mainPage.source.states.canceled);
+            });
+          }
+        },
+        removeTask(){
+          if (this.canRemoveTask) {
+            this.confirm(bbn._('Are you sure you want to remove this task?'), () => {
+              
             });
           }
         },

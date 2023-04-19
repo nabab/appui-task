@@ -26,6 +26,7 @@
         return this.canApprove
           || ((this.isAdmin || this.isGlobal || this.isAccountManager)
             && !this.isClosed
+            && !this.isCanceled
             && !this.source.children_price
             && !this.source.parent_has_price);
       },
