@@ -241,7 +241,11 @@
                       'bbn-alt-background': inverted,
                       'bbn-background': !inverted
                     }]"
-                    style="padding-left: 0.5rem; padding-right: 0.5rem"
+                    :style="{
+                      'padding-left': '0.5rem',
+                      'padding-right': '0.5rem',
+                      'cursor': isDeleted ? 'default !important' : ''
+                    }"
                     @click="openNotes">
           <div class="bbn-vmiddle">
             <i class="nf nf-md-comment_text_multiple_outline bbn-lg"/>

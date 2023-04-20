@@ -85,8 +85,11 @@
         isCanceled(){
           return this.source.state === this.mainPage.source.states.canceled;
         },
+        isDeleted(){
+          return this.source.state === this.mainPage.source.states.deleted;
+        },
         isActive() {
-          return !this.isClosed && !this.isHolding && !this.isCanceled;
+          return !this.isClosed && !this.isHolding && !this.isCanceled && !this.isDeleted;
         },
         isApproved() {
           return !this.isUnapproved
@@ -103,42 +106,103 @@
           return this.source.state === this.mainPage.source.states.unapproved;
         },
         canChange() {
-          return !this.isClosed && !this.isCanceled && (this.isMaster || this.isGlobal || this.isAccountManager || this.isProjectManager || this.isProjectSupervisor || (!this.source.private && this.isManager));
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isMaster
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectManager
+              || this.isProjectSupervisor
+              || (!this.source.private && this.isManager));
         },
         canChangeBudget(){
-          return !this.isClosed && !this.isCanceled && (this.isAdmin || this.isGlobal || this.isAccountManager);
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isAdmin || this.isGlobal || this.isAccountManager);
         },
         canSeeBudget(){
-          return this.isAdmin || this.isGlobal || this.isDecider || this.isAccountManager || this.isAccountViewer || this.isFinancialManager || this.isFinancialViewer;
+          return this.isAdmin
+            || this.isGlobal
+            || this.isDecider
+            || this.isAccountManager
+            || this.isAccountViewer
+            || this.isFinancialManager
+            || this.isFinancialViewer;
         },
         canStart() {
-          return this.isOpened && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
+          return this.isOpened
+            && (this.isManager
+              || this.isWorker
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canClose() {
-          return (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed && !this.isCanceled;
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isManager
+              || this.isWorker
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canHold() {
-          return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
+          return (this.isOngoing || this.isOpened)
+            && (this.isManager
+              || this.isWorker
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canResume() {
-          return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
+          return (this.isHolding && !this.isOpened)
+            && (this.isManager
+              || this.isWorker
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canReopen() {
-          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && this.isClosed && !this.isCanceled;
+          return this.isClosed
+            && (this.isManager
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canCancel(){
-          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed && !this.isCanceled;
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isManager
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canRemoveTask(){
-          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed;
+          return !this.isClosed
+            && !this.isDeleted
+            && (this.isManager
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canPing() {
-          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed && !this.isCanceled;
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isManager
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canApprove() {
           return (this.isDecider || this.isFinancialManager)
             && !this.isClosed
             && !this.isCanceled
+            && !this.isDeleted
             && !!this.isUnapproved
             && !this.source.parent_has_price
             && ((!!this.source.price && !this.isApproved)
@@ -146,53 +210,64 @@
         },
         canChangeDecider() {
           return (this.isDecider || this.isAdmin || this.isGlobal || this.isAccountManager)
-          && (!!this.source.price || !!this.source.children_price)
-          && !this.isClosed
-          && !this.isCanceled;
+            && (!!this.source.price || !!this.source.children_price)
+            && !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canBecomeManager(){
-          return (!!this.mainPage.privileges.manager || this.isGlobal) && !this.isManager && !this.isCanceled;
+          return !this.isManager
+            && !this.isCanceled
+            && !this.isDeleted
+            && (!!this.mainPage.privileges.manager || this.isGlobal);
         },
         canBecomeWorker(){
           return (!!this.mainPage.privileges.worker || this.isGlobal)
             && !this.isWorker
             && (!this.isManager || (this.source.roles.managers.length > 1))
-            && !this.isCanceled;
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canBecomeViewer(){
           return (!!this.mainPage.privileges.viewer || this.isGlobal)
             && !this.isViewer
             && (!this.isManager || (this.source.roles.managers.length > 1))
-            && !this.isCanceled;
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canBecomeDecider(){
           return (!!this.mainPage.privileges.decider || this.isGlobal)
             && !this.isDecider
             && (!this.isManager
               || (this.source.roles.managers.length > 1))
-            && !this.isCanceled;
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canRemoveHimselfManager(){
           return (!!this.mainPage.privileges.manager || this.isGlobal)
             && !!this.isManager
             && !this.isMaster
             && (this.source.roles.managers.length > 1)
-            && !this.isCanceled;
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canRemoveHimselfWorker(){
           return (!!this.mainPage.privileges.worker || this.isGlobal)
             && !!this.isWorker
-            && !this.isCanceled;
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canRemoveHimselfViewer(){
           return (!!this.mainPage.privileges.viewer || this.isGlobal)
             && !!this.isViewer
-            && !this.isCanceled;
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canRemoveHimselfDecider(){
           return (!!this.mainPage.privileges.decider || this.isGlobal)
             && !!this.isDecider
-            && !this.isCanceled;
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canUnmakeMe() {
           return this.canRemoveHimselfManager
@@ -201,13 +276,18 @@
             || this.canRemoveHimselfDecider
         },
         canBill() {
-          return (this.source.state === this.mainPage.source.states.closed)
+          return this.isClosed
             && this.isApproved
             && (this.isAdmin || this.isGlobal || this.isAccountManager)
             && (appui.plugins['appui-billing'] !== undefined);
         },
         canSeeViewers(){
-          return this.isManager || this.isGlobal || this.isAccountManager || this.isAccountViewer || this.isProjectSupervisor || this.isProjectManager;
+          return this.isManager
+            || this.isGlobal
+            || this.isAccountManager
+            || this.isAccountViewer
+            || this.isProjectSupervisor
+            || this.isProjectManager;
         }
       },
       methods: {
@@ -249,7 +329,7 @@
         removeTask(){
           if (this.canRemoveTask) {
             this.confirm(bbn._('Are you sure you want to remove this task?'), () => {
-              
+              this.update('state', this.mainPage.source.states.deleted);
             });
           }
         },

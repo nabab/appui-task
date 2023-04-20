@@ -112,6 +112,10 @@
             icon = 'md-police_badge';
             color = 'red';
             break;
+          case this.mainPage.source.states.canceled:
+            icon = 'fa-remove';
+            color = 'slateblue';
+            break;
         }
         return `<i class="bbn-m nf nf-${icon}" style="color: ${color}" title="${bbn.fn.getField(this.mainPage.source.options.states, "text", "value", row.state)}"/>`;
       },

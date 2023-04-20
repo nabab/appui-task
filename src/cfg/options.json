@@ -142,9 +142,6 @@
           "code": "content_delete"
         },
         {
-          "text": "Removed the task",
-          "code": "task_remove"
-        },{
           "text": "Reopened the task",
           "code": "task_reopen"
         },
@@ -221,10 +218,17 @@
           "code": "canceled",
           "backgroundColor": "slateblue",
           "color": "white"
-        },{
+        },
+        {
           "text": "Closed",
           "code": "closed",
           "backgroundColor": "green",
+          "color": "white"
+        },
+        {
+          "text": "Deleted",
+          "code": "deleted",
+          "backgroundColor": "crimson",
           "color": "white"
         },
         {

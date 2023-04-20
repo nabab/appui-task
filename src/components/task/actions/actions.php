@@ -89,6 +89,26 @@
         <span class="bbn-left-sspace"
               v-text="_('Reopen')"/>
       </div>
+      <div v-if="task.isActive && task.canCancel"
+           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           @click="task.cancel"
+           :style="{
+             color: getStatusBgColor('canceled')
+           }">
+        <i class="bbn-m nf nf nf-fa-remove"/>
+        <span class="bbn-left-sspace"
+              v-text="_('Cancel')"/>
+      </div>
+      <div v-if="task.canRemoveTask"
+           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           @click="task.removeTask"
+           :style="{
+             color: getStatusBgColor('deleted')
+           }">
+        <i class="bbn-m nf nf-fa-trash"/>
+        <span class="bbn-left-sspace"
+              v-text="_('Delete')"/>
+      </div>
     </template>
     <template v-if="showRoles">
       <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padded bbn-alt-background bbn-radius"
@@ -305,7 +325,7 @@
                         }"/>
             <bbn-button v-if="task.canRemoveTask"
                         @click="task.removeTask"
-                        title="<?=_('Remove') ?>"
+                        title="<?=_('Delete') ?>"
                         icon="nf nf-fa-trash"
                         :notext="true"
                         class="bbn-bg-red bbn-white"/>
