@@ -2,7 +2,9 @@
 /** @var $model \bbn\Mvc\Model */
 if ($model->hasData('id', true)) {
   $task = new \bbn\Appui\Task($model->db);
-  if ($task->exists($model->data['id'])) {
+  if ($task->exists($model->data['id'])
+    && !$task->isDeleted($model->data['id'])
+  ) {
     $info = $task->info($model->data['id']);
     $logs = $task->getLog($model->data['id']);
     $lastChangePrice = $task->getPriceLog($model->data['id']) ?: null;

@@ -18,7 +18,7 @@ if ($model->hasData(['id_task', 'prop'], true)) {
     if (($model->data['val'] === $cancelState)
       || ($model->data['val'] === $deletedState)
     ) {
-      //$includeDeleted = true;
+      $includeDeleted = true;
     }
   }
   $res = [
