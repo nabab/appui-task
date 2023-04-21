@@ -36,7 +36,7 @@
                  :render="renderState"
                  :width="50"
                  cls="bbn-h-100 bbn-c"
-                 :source="mainPage.source.options.states"/>
+                 :source="states"/>
     <bbns-column title="<?=_("Ref.")?>"
                  ftitle="<?=_("Reference number")?>"
                  field="ref"

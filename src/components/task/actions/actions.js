@@ -6,6 +6,7 @@
     computed: {
       showStatus(){
         return this.canReopen
+          || this.canRemoveTask
           || (this.canChange
             && ((this.isUnapproved && this.canClose)
               || (this.isActive

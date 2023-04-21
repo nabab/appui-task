@@ -174,7 +174,7 @@
     methods: {
       money: bbn.fn.money,
       getMenuSource(){
-        if (!this.editable || this.isDelete) {
+        if (!this.editable || this.isDeleted) {
           return [];
         }
         let menu = [{

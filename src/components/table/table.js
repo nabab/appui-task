@@ -36,7 +36,8 @@
         taskTitle: '',
         mainPage: mainPage,
         users: bbn.fn.order(appui.app.users, 'text', 'ASC'),
-        filters: filters
+        filters: filters,
+        states: bbn.fn.order(bbn.fn.filter(mainPage.source.options.states, s => s.code !== 'deleted'), 'text', 'asc')
       };
     },
     computed: {

@@ -119,7 +119,8 @@
       <bbn-button icon="nf nf-mdi-dots_vertical"
                   :title="_('Menu')"
                   :notext="true"
-                  class="bbn-no-border"/>
+                  class="bbn-no-border"
+                  :style="{'cursor': isDeleted ? 'default !important' : ''}"/>
     </bbn-context>
   </div>
   <div v-if="!!showParent && source.parent"

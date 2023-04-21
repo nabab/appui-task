@@ -405,14 +405,14 @@
             let lastAction = dayjs().format('YYYY-MM-DD HH:mm:ss');
             this.$set(this.source, 'last_action', lastAction);
             props.last_action = lastAction;
-            let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
+            let comps = bbn.fn.unique(this.mainPage.findAllByKey(this.source.id, 'appui-task-item'));
             let t = appui.getRegistered('appui-task-' + this.source.id, true);
             if (t) {
               comps.push(t);
             }
             if (comps.length) {
               bbn.fn.each(comps, c => {
-                if (c.bbnUid !== this.bbnUid) {
+                if (c._uid !== this._uid) {
                   bbn.fn.iterate(props, (v, i) => {
                     if (!bbn.fn.isSame(v, c.source[i])) {
                       c.$set(c.source, i, v)
@@ -423,6 +423,17 @@
             }
             if (!!d.toUpdate && d.toUpdate.length) {
               this.updateItems(d.toUpdate);
+            }
+            if ((prop === 'state')
+              && (val === this.mainPage.states.deleted)
+            ) {
+              let t = appui.getRegistered('appui-task-' + this.source.id, true);
+              if (t) {
+                let cont = t.closest('bbn-container');
+                if (cont) {
+                  cont.router.close(cont.idx, true);
+                }
+              }
             }
           });
         },
@@ -440,14 +451,22 @@
                 }
                 if (comps.length) {
                   bbn.fn.each(comps, c => {
-                    if (c.bbnUid !== this.bbnUid) {
+                    if (c._uid !== this._uid) {
                       bbn.fn.iterate(item, (v, i) => {
                         if ((c.source[i] !== undefined)
                           && !bbn.fn.isSame(v, c.source[i])
                         ) {
-                          c.$set(c.source, i, v)
+                          c.$set(c.source, i, v);
                         }
                       });
+                      if ((c.$options._componentTag === 'appui-task-task')
+                        && (c.source.state === this.mainPage.states.deleted)
+                      ) {
+                        let cont = c.closest('bbn-container');
+                        if (cont) {
+                          cont.router.close(cont.idx, true);
+                        }
+                      }
                     }
                   });
                 }
