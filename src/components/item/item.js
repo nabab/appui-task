@@ -174,7 +174,7 @@
     methods: {
       money: bbn.fn.money,
       getMenuSource(){
-        if (!this.editable) {
+        if (!this.editable || this.isDeleted) {
           return [];
         }
         let menu = [{
@@ -324,12 +324,31 @@
               color: this.mainPage.getStatusColor('opend')
             });
           }
+          if (this.canCancel) {
+            menu.push({
+              text: bbn._('Cancel'),
+              icon: 'nf nf-fa-remove',
+              action: this.cancel,
+              backgroundColor: this.mainPage.getStatusBgColor('canceled'),
+              color: this.mainPage.getStatusColor('canceled')
+            });
+          }
+        }
+        if (this.canRemoveTask) {
+          menu.push({
+            text: bbn._('Delete'),
+            icon: 'nf nf-fa-trash',
+            action: this.removeTask,
+            backgroundColor: this.mainPage.getStatusBgColor('deleted'),
+            color: this.mainPage.getStatusColor('deleted')
+          });
         }
         return menu;
       },
       getBudgetMenuSource(){
         let menu = [];
         if ((this.isAdmin || this.isAccountManager)
+          && !this.isCanceled
           && (!this.isClosed || !!this.source.price)
           && !this.source.children_price
           && !this.source.parent_has_price
@@ -421,14 +440,16 @@
         });
       },
       openNotes(){
-        this.getPopup({
-          title: false,
-          closable: false,
-          width: bbn.fn.isMobile() ? '95%' : '90%',
-          height: bbn.fn.isMobile() ? '95%' : '90%',
-          component: 'appui-task-item-notes',
-          source: this.source
-        });
+        if (!this.isDeleted) {
+          this.getPopup({
+            title: false,
+            closable: false,
+            width: bbn.fn.isMobile() ? '95%' : '90%',
+            height: bbn.fn.isMobile() ? '95%' : '90%',
+            component: 'appui-task-item-notes',
+            source: this.source
+          });
+        }
       },
       editBudget(){
         this.getPopup({

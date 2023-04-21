@@ -62,6 +62,10 @@
           "code": "role_sdelete"
         },
         {
+          "text": "Canceled the task",
+          "code": "task_cancel"
+        },
+        {
           "text": "Changed the deadline from %s to %s",
           "code": "deadline_update"
         },
@@ -210,9 +214,21 @@
           "color": "white"
         },
         {
+          "text": "Canceled",
+          "code": "canceled",
+          "backgroundColor": "slateblue",
+          "color": "white"
+        },
+        {
           "text": "Closed",
           "code": "closed",
           "backgroundColor": "green",
+          "color": "white"
+        },
+        {
+          "text": "Deleted",
+          "code": "deleted",
+          "backgroundColor": "crimson",
           "color": "white"
         },
         {

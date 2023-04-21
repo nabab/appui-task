@@ -89,6 +89,26 @@
         <span class="bbn-left-sspace"
               v-text="_('Reopen')"/>
       </div>
+      <div v-if="task.isActive && task.canCancel"
+           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           @click="task.cancel"
+           :style="{
+             color: getStatusBgColor('canceled')
+           }">
+        <i class="bbn-m nf nf nf-fa-remove"/>
+        <span class="bbn-left-sspace"
+              v-text="_('Cancel')"/>
+      </div>
+      <div v-if="task.canRemoveTask"
+           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           @click="task.removeTask"
+           :style="{
+             color: getStatusBgColor('deleted')
+           }">
+        <i class="bbn-m nf nf-fa-trash"/>
+        <span class="bbn-left-sspace"
+              v-text="_('Delete')"/>
+      </div>
     </template>
     <template v-if="showRoles">
       <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padded bbn-alt-background bbn-radius"
@@ -103,7 +123,7 @@
         <span class="bbn-left-sspace"
               v-text="_('Make me a supervisor')"/>
       </div>
-      <div v-if="task.canRevemoHimselfManager"
+      <div v-if="task.canRemoveHimselfManager"
            class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
            @click="task.unmakeMe('managers')"
            :style="{
@@ -123,7 +143,7 @@
         <span class="bbn-left-sspace"
               v-text="_('Make me a worker')"/>
       </div>
-      <div v-if="task.canRevemoHimselfWorker"
+      <div v-if="task.canRemoveHimselfWorker"
            class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
            @click="task.unmakeMe('workers')"
            :style="{
@@ -143,7 +163,7 @@
         <span class="bbn-left-sspace"
               v-text="_('Make me a spectator')"/>
       </div>
-      <div v-if="task.canRevemoHimselfViewer"
+      <div v-if="task.canRemoveHimselfViewer"
            class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
            @click="task.unmakeMe('viewers')"
            :style="{
@@ -163,7 +183,7 @@
         <span class="bbn-left-sspace"
               v-text="_('Make me a decider')"/>
       </div>
-      <div v-if="task.canRevemoHimselfDecider"
+      <div v-if="task.canRemoveHimselfDecider"
            class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
            @click="task.unmakeMe('deciders')"
            :style="{
@@ -292,6 +312,24 @@
                         backgroundColor: getStatusBgColor('opened'),
                         color: getStatusColor('opened')
                       }"/>
+          <span v-if="(task.isActive && task.canCancel) || task.canRemoveTask"
+                class="bbn-left-space">
+            <bbn-button v-if="task.isActive && task.canCancel"
+                        @click="task.cancel"
+                        title="<?=_('Cancel') ?>"
+                        icon="nf nf-fa-remove"
+                        :notext="true"
+                        :style="{
+                          backgroundColor: getStatusBgColor('canceled'),
+                          color: getStatusColor('canceled')
+                        }"/>
+            <bbn-button v-if="task.canRemoveTask"
+                        @click="task.removeTask"
+                        title="<?=_('Delete') ?>"
+                        icon="nf nf-fa-trash"
+                        :notext="true"
+                        class="bbn-bg-red bbn-white"/>
+          </span>
         </div>
       </div>
     </div>
@@ -310,7 +348,7 @@
                         backgroundColor: getRoleBgColor('managers'),
                         color: getRoleColor('managers')
                       }"/>
-          <bbn-button v-if="task.canRevemoHimselfManager"
+          <bbn-button v-if="task.canRemoveHimselfManager"
                       @click="task.unmakeMe('managers')"
                       icon="nf nf-mdi-account_minus"
                       title="<?=_('Remove me from supervisors')?>"
@@ -328,7 +366,7 @@
                         backgroundColor: getRoleBgColor('workers'),
                         color: getRoleColor('workers')
                       }"/>
-          <bbn-button v-if="task.canRevemoHimselfWorker"
+          <bbn-button v-if="task.canRemoveHimselfWorker"
                       @click="task.unmakeMe('workers')"
                       icon="nf nf-mdi-account_minus"
                       title="<?=_('Remove me from workers')?>"
@@ -346,7 +384,7 @@
                         backgroundColor: getRoleBgColor('viewers'),
                         color: getRoleColor('viewers')
                       }"/>
-          <bbn-button v-if="task.canRevemoHimselfViewer"
+          <bbn-button v-if="task.canRemoveHimselfViewer"
                       @click="task.unmakeMe('viewers')"
                       icon="nf nf-mdi-account_minus"
                       title="<?=_('Remove me from viewers')?>"
@@ -364,7 +402,7 @@
                         backgroundColor: getRoleBgColor('deciders'),
                         color: getRoleColor('deciders')
                       }"/>
-          <bbn-button v-if="task.canRevemoHimselfDecider"
+          <bbn-button v-if="task.canRemoveHimselfDecider"
                       @click="task.unmakeMe('deciders')"
                       icon="nf nf-mdi-account_minus"
                       title="<?=_('Remove me from deciders')?>"

@@ -82,8 +82,14 @@
         isHoldingOrOpened() {
           return this.isHolding || this.isOpened;
         },
+        isCanceled(){
+          return this.source.state === this.mainPage.source.states.canceled;
+        },
+        isDeleted(){
+          return this.source.state === this.mainPage.source.states.deleted;
+        },
         isActive() {
-          return !this.isClosed && !this.isHolding;
+          return !this.isClosed && !this.isHolding && !this.isCanceled && !this.isDeleted;
         },
         isApproved() {
           return !this.isUnapproved
@@ -100,35 +106,103 @@
           return this.source.state === this.mainPage.source.states.unapproved;
         },
         canChange() {
-          return !this.isClosed && (this.isMaster || this.isGlobal || this.isAccountManager || this.isProjectManager || this.isProjectSupervisor || (!this.source.private && this.isManager));
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isMaster
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectManager
+              || this.isProjectSupervisor
+              || (!this.source.private && this.isManager));
         },
         canChangeBudget(){
-          return !this.isClosed && (this.isAdmin || this.isGlobal || this.isAccountManager);
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isAdmin || this.isGlobal || this.isAccountManager);
         },
         canSeeBudget(){
-          return this.isAdmin || this.isGlobal || this.isDecider || this.isAccountManager || this.isAccountViewer || this.isFinancialManager || this.isFinancialViewer;
+          return this.isAdmin
+            || this.isGlobal
+            || this.isDecider
+            || this.isAccountManager
+            || this.isAccountViewer
+            || this.isFinancialManager
+            || this.isFinancialViewer;
         },
         canStart() {
-          return this.isOpened && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
+          return this.isOpened
+            && (this.isManager
+              || this.isWorker
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canClose() {
-          return (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed;
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isManager
+              || this.isWorker
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canHold() {
-          return (this.isOngoing || this.isOpened) && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
+          return (this.isOngoing || this.isOpened)
+            && (this.isManager
+              || this.isWorker
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canResume() {
-          return (this.isHolding && !this.isOpened) && (this.isManager || this.isWorker || this.isGlobal || this.isAccountManager || this.isProjectSupervisor);
+          return (this.isHolding && !this.isOpened)
+            && (this.isManager
+              || this.isWorker
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canReopen() {
-          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && this.isClosed;
+          return this.isClosed
+            && (this.isManager
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
+        },
+        canCancel(){
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isManager
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
+        },
+        canRemoveTask(){
+          return !this.isClosed
+            && !this.isDeleted
+            && (this.isManager
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canPing() {
-          return (this.isManager || this.isGlobal || this.isAccountManager || this.isProjectSupervisor) && !this.isClosed;
+          return !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
+            && (this.isManager
+              || this.isGlobal
+              || this.isAccountManager
+              || this.isProjectSupervisor);
         },
         canApprove() {
           return (this.isDecider || this.isFinancialManager)
             && !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted
             && !!this.isUnapproved
             && !this.source.parent_has_price
             && ((!!this.source.price && !this.isApproved)
@@ -136,60 +210,84 @@
         },
         canChangeDecider() {
           return (this.isDecider || this.isAdmin || this.isGlobal || this.isAccountManager)
-          && (!!this.source.price || !!this.source.children_price)
-          && !this.isClosed;
+            && (!!this.source.price || !!this.source.children_price)
+            && !this.isClosed
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canBecomeManager(){
-          return (!!this.mainPage.privileges.manager || this.isGlobal) && !this.isManager;
+          return !this.isManager
+            && !this.isCanceled
+            && !this.isDeleted
+            && (!!this.mainPage.privileges.manager || this.isGlobal);
         },
         canBecomeWorker(){
           return (!!this.mainPage.privileges.worker || this.isGlobal)
             && !this.isWorker
-            && (!this.isManager || (this.source.roles.managers.length > 1));
+            && (!this.isManager || (this.source.roles.managers.length > 1))
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canBecomeViewer(){
           return (!!this.mainPage.privileges.viewer || this.isGlobal)
             && !this.isViewer
-            && (!this.isManager || (this.source.roles.managers.length > 1));
+            && (!this.isManager || (this.source.roles.managers.length > 1))
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canBecomeDecider(){
           return (!!this.mainPage.privileges.decider || this.isGlobal)
             && !this.isDecider
             && (!this.isManager
-              || (this.source.roles.managers.length > 1));
+              || (this.source.roles.managers.length > 1))
+            && !this.isCanceled
+            && !this.isDeleted;
         },
-        canRevemoHimselfManager(){
+        canRemoveHimselfManager(){
           return (!!this.mainPage.privileges.manager || this.isGlobal)
             && !!this.isManager
             && !this.isMaster
-            && (this.source.roles.managers.length > 1);
+            && (this.source.roles.managers.length > 1)
+            && !this.isCanceled
+            && !this.isDeleted;
         },
-        canRevemoHimselfWorker(){
+        canRemoveHimselfWorker(){
           return (!!this.mainPage.privileges.worker || this.isGlobal)
-            && !!this.isWorker;
+            && !!this.isWorker
+            && !this.isCanceled
+            && !this.isDeleted;
         },
-        canRevemoHimselfViewer(){
+        canRemoveHimselfViewer(){
           return (!!this.mainPage.privileges.viewer || this.isGlobal)
-            && !!this.isViewer;
+            && !!this.isViewer
+            && !this.isCanceled
+            && !this.isDeleted;
         },
-        canRevemoHimselfDecider(){
+        canRemoveHimselfDecider(){
           return (!!this.mainPage.privileges.decider || this.isGlobal)
-            && !!this.isDecider;
+            && !!this.isDecider
+            && !this.isCanceled
+            && !this.isDeleted;
         },
         canUnmakeMe() {
-          return this.canRevemoHimselfManager
-            || this.canRevemoHimselfWorker
-            || this.canRevemoHimselfViewer
-            || this.canRevemoHimselfDecider
+          return this.canRemoveHimselfManager
+            || this.canRemoveHimselfWorker
+            || this.canRemoveHimselfViewer
+            || this.canRemoveHimselfDecider
         },
         canBill() {
-          return (this.source.state === this.mainPage.source.states.closed)
+          return this.isClosed
             && this.isApproved
             && (this.isAdmin || this.isGlobal || this.isAccountManager)
             && (appui.plugins['appui-billing'] !== undefined);
         },
         canSeeViewers(){
-          return this.isManager || this.isGlobal || this.isAccountManager || this.isAccountViewer || this.isProjectSupervisor || this.isProjectManager;
+          return this.isManager
+            || this.isGlobal
+            || this.isAccountManager
+            || this.isAccountViewer
+            || this.isProjectSupervisor
+            || this.isProjectManager;
         }
       },
       methods: {
@@ -218,6 +316,20 @@
           if (this.canResume) {
             this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
               this.update('state', this.mainPage.source.states.ongoing);
+            });
+          }
+        },
+        cancel(){
+          if (this.canCancel) {
+            this.confirm(bbn._('Are you sure you want to cancel this task?'), () => {
+              this.update('state', this.mainPage.source.states.canceled);
+            });
+          }
+        },
+        removeTask(){
+          if (this.canRemoveTask) {
+            this.confirm(bbn._('Are you sure you want to remove this task?'), () => {
+              this.update('state', this.mainPage.source.states.deleted);
             });
           }
         },
@@ -293,14 +405,14 @@
             let lastAction = dayjs().format('YYYY-MM-DD HH:mm:ss');
             this.$set(this.source, 'last_action', lastAction);
             props.last_action = lastAction;
-            let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
+            let comps = bbn.fn.unique(this.mainPage.findAllByKey(this.source.id, 'appui-task-item'));
             let t = appui.getRegistered('appui-task-' + this.source.id, true);
             if (t) {
               comps.push(t);
             }
             if (comps.length) {
               bbn.fn.each(comps, c => {
-                if (c.bbnUid !== this.bbnUid) {
+                if (c._uid !== this._uid) {
                   bbn.fn.iterate(props, (v, i) => {
                     if (!bbn.fn.isSame(v, c.source[i])) {
                       c.$set(c.source, i, v)
@@ -311,6 +423,17 @@
             }
             if (!!d.toUpdate && d.toUpdate.length) {
               this.updateItems(d.toUpdate);
+            }
+            if ((prop === 'state')
+              && (val === this.mainPage.states.deleted)
+            ) {
+              let t = appui.getRegistered('appui-task-' + this.source.id, true);
+              if (t) {
+                let cont = t.closest('bbn-container');
+                if (cont) {
+                  cont.router.close(cont.idx, true);
+                }
+              }
             }
           });
         },
@@ -328,14 +451,22 @@
                 }
                 if (comps.length) {
                   bbn.fn.each(comps, c => {
-                    if (c.bbnUid !== this.bbnUid) {
+                    if (c._uid !== this._uid) {
                       bbn.fn.iterate(item, (v, i) => {
                         if ((c.source[i] !== undefined)
                           && !bbn.fn.isSame(v, c.source[i])
                         ) {
-                          c.$set(c.source, i, v)
+                          c.$set(c.source, i, v);
                         }
                       });
+                      if ((c.$options._componentTag === 'appui-task-task')
+                        && (c.source.state === this.mainPage.states.deleted)
+                      ) {
+                        let cont = c.closest('bbn-container');
+                        if (cont) {
+                          cont.router.close(cont.idx, true);
+                        }
+                      }
                     }
                   });
                 }

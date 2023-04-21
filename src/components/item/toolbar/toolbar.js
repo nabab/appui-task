@@ -145,12 +145,15 @@
       },
       getStatusMenuSource(){
         let res = [];
-        res = bbn.fn.map(bbn.fn.extend(true, res, this.mainPage.optionsStates), s => {
-          s.action = () => {
-            this.currentFilters.status = s.value;
-          };
-          return s;
-        });
+        res = bbn.fn.map(
+          bbn.fn.extend(true, res, bbn.fn.filter(this.mainPage.optionsStates, s => s.code !== 'deleted')),
+          s => {
+            s.action = () => {
+              this.currentFilters.status = s.value;
+            };
+            return s;
+          }
+        );
         if (this.currentFilters.status) {
           res.push({
             text: bbn._('Remove filter'),

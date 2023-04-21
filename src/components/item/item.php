@@ -119,7 +119,8 @@
       <bbn-button icon="nf nf-mdi-dots_vertical"
                   :title="_('Menu')"
                   :notext="true"
-                  class="bbn-no-border"/>
+                  class="bbn-no-border"
+                  :style="{'cursor': isDeleted ? 'default !important' : ''}"/>
     </bbn-context>
   </div>
   <div v-if="!!showParent && source.parent"
@@ -241,7 +242,11 @@
                       'bbn-alt-background': inverted,
                       'bbn-background': !inverted
                     }]"
-                    style="padding-left: 0.5rem; padding-right: 0.5rem"
+                    :style="{
+                      'padding-left': '0.5rem',
+                      'padding-right': '0.5rem',
+                      'cursor': isDeleted ? 'default !important' : ''
+                    }"
                     @click="openNotes">
           <div class="bbn-vmiddle">
             <i class="nf nf-md-comment_text_multiple_outline bbn-lg"/>

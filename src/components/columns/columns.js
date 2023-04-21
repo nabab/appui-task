@@ -84,7 +84,7 @@
             vals = this.mainPage.source.options.cats;
             break;
           case 'status':
-            vals = this.mainPage.source.options.states;
+            vals = bbn.fn.filter(this.mainPage.source.options.states, s => s.code !== 'deleted');
             break;
           case 'priority':
             vals = this.mainPage.priorities;
