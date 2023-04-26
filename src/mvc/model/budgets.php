@@ -15,7 +15,7 @@ if ($model->hasData('limit')) {
   $cfg = [
     'table' => 'bbn_tasks',
     'fields' => [
-      'id', 'type', 'bbn_tasks.price', 'state',
+      'id', 'type', 'bbn_tasks.price', 'state', 'bbn_tasks.ref',
       'bbn_notes_versions.title',
       'last_date' => 'SUBSTR(FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono)), 1, 19)',
       'accept_date' => 'SUBSTR(FROM_UNIXTIME(MAX(accepted_logs.chrono)), 1, 19)',

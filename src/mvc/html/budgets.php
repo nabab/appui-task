@@ -4,6 +4,10 @@
              :sortable="true"
              :limit="100"
              :pageable="true">
+    <bbns-column field="ref"
+                 title="<?= _("Ref.") ?>"
+                 :width="120"
+                 cls="bbn-c"/>
   	<bbns-column field="title"
                  title="<?= _("Nom") ?>"
                  :render="renderTitle"
