@@ -134,7 +134,7 @@
                 "virtual": false,
                 "generation": null,
                 "default": "NULL",
-                "defaultExpression": false,
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "title": {
@@ -177,7 +177,7 @@
               "virtual": false,
               "generation": null,
               "default": "NULL",
-              "defaultExpression": false,
+              "defaultExpression": 1,
               "maxlength": 10
             },
             "ref": {
@@ -190,7 +190,7 @@
               "virtual": 1,
               "generation": "concat(easy_id,'/',year(creation_date))",
               "default": "NULL",
-              "defaultExpression": false,
+              "defaultExpression": 1,
               "maxlength": 15
             },
             "deadline": {
