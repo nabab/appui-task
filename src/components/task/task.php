@@ -60,7 +60,7 @@
         <div class="bbn-flex-fill">
           <div class="bbn-w-100 bbn-hpadded">
             <appui-task-task-info :source="source"
-                                  class="bbn-padded bbn-alt-background bbn-radius bbn-bordered"/>
+                                  class="bbn-w-100 bbn-padded bbn-alt-background bbn-radius bbn-bordered"/>
           </div>
           <bbn-dashboard :sortable="true"
                         :scrollable="false"
