@@ -13,7 +13,7 @@
     },
     data(){
       return {
-        isManagerOpen: false,
+        isManagerOpen: !!this.source.roles || !!this.source.roles.managers,
         isWorkerOpen: true,
         isViewerOpen: true
       }

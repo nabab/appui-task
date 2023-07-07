@@ -1,6 +1,5 @@
 <div class="appui-task-task-widget-roles">
-  <div v-if="managers.length"
-       class="bbn-w-100 bbn-radius bbn-bordered bbn-bottom-space bbn-background"
+  <div class="bbn-w-100 bbn-radius bbn-bordered bbn-bottom-space bbn-background"
        :style="{
          borderColor: getRoleBgColor('managers') + '!important'
        }">
@@ -58,6 +57,14 @@
            @click="removeRole(r.idUser, 'managers')"
            title="<?=_('Remove')?>"/>
       </div>
+    </div>
+    <div v-if="!managers.length && isManagerOpen"
+         class="bbn-spadded bbn-c"
+         :style="{
+           color: getRoleColor('managers'),
+           backgroundColor: getRoleBgColor('managers')
+         }">
+      <?=_('Not set')?>
     </div>
   </div>
   <div class="bbn-w-100 bbn-radius bbn-bordered bbn-bottom-space bbn-background"
