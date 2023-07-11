@@ -200,7 +200,7 @@
         template: `
 <bbn-initial v-if="source.id_user"
              :user-id="source.id_user"
-             :title="userName"
+             :user-name="userName"
              :height="25"
              :width="25"
              :font-size="15"/>

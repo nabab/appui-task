@@ -41,7 +41,7 @@
       <bbn-initial :user-id="source.approved.id_user"
                     :height="25"
                     :width="25"
-                    title="approvedBy"
+                    user-name="approvedBy"
                     font-size="1em"/>
       <span class="bbn-left-sspace"
             v-text="approvedBy"/>

@@ -177,7 +177,7 @@
         `,
         data(){
           return {
-            tracker: bbn.vue.find(appui, 'appui-task-tracker')
+            tracker: appui.find('appui-task-tracker')
           }
         },
         methods: {

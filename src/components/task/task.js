@@ -91,20 +91,12 @@
       this.$set(this, 'task', this.closest('appui-task-task'));
     }
   }];
-  bbn.vue.addPrefix('appui-task-task-', (tag, resolve, reject) => {
-    return bbn.vue.queueComponent(
-      tag,
-      appui.plugins['appui-task'] + '/components/task/' + bbn.fn.replaceAll('-', '/', tag).substr('appui-task-task-'.length),
-      mixins,
-      resolve,
-      reject
-    );
-  });
+  bbn.cp.addPrefix('appui-task-task-', null, mixins);
 
   return  {
     mixins: [
-      bbn.vue.basicComponent,
-      bbn.vue.localStorageComponent,
+      bbn.cp.mixins.basic,
+      bbn.cp.mixins.localStorage,
       ...mixins,
       appuiTaskMixin
     ],

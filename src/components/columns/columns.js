@@ -18,15 +18,7 @@
       this.$set(this, 'columnsComp', this.closest('appui-task-columns'));
     }
   }];
-  bbn.vue.addPrefix('appui-task-columns-', (tag, resolve, reject) => {
-    return bbn.vue.queueComponent(
-      tag,
-      appui.plugins['appui-task'] + '/components/columns/' + bbn.fn.replaceAll('-', '/', tag).substr('appui-task-columns-'.length),
-      mixins,
-      resolve,
-      reject
-    );
-  });
+  bbn.cp.addPrefix('appui-task-columns-', null, mixins);
 
   return {
     mixins: mixins,
