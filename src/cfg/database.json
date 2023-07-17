@@ -137,11 +137,6 @@
                 "defaultExpression": 1,
                 "maxlength": 16
             },
-            "title": {
-                "type": "varchar",
-                "null": 0,
-                "maxlength": 100
-            },
             "state": {
                 "type": "binary",
                 "null": 0,
