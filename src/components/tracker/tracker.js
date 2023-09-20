@@ -1,5 +1,6 @@
 (() => {
   return {
+    mixins: [bbn.cp.mixins.basic],
     data(){
       return {
         list: [],
