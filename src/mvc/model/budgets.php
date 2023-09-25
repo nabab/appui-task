@@ -59,10 +59,10 @@ if ($model->hasData('limit')) {
       'bbn_tasks.active' => 1,
       ['price', '>', 0]
     ],
-    'group_by' => ['bbn_tasks.id'],
+    'group_by' => ['bbn_tasks.id']/*,
     'having' => [
       ['last_date', '>', date('Y-m-d H:i:s', strtotime('6 month ago'))]
-    ]
+    ]*/
   ];
   $grid = new bbn\Appui\Grid($model->db, $model->data, $cfg);
   if ($grid->check()) {
