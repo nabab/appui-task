@@ -197,6 +197,9 @@ if ($isFinancialManager || $isFinancialViewer) {
       'field' => 'parent.price',
       'operator' => 'isnotnull'
     ], [
+      'field' => 'children.price',
+      'operator' => 'isnotnull'
+    ], [
       'field' => 'my_role.role',
       'operator' => 'isnotnull'
     ]]
