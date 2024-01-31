@@ -121,9 +121,12 @@
               task.$set(task.source, 'tracker', false);
               task.$set(task.source, 'trackers', d.trackers);
               if (!!obj.message) {
-                let notes = task.find(task.dashboard.widgets.notes.component);
-                if (bbn.fn.isVue(notes)) {
-                  notes.getRef('forum').updateData();
+                let notesWidget = task.find(task.dashboard.widgets.notes.component);
+                if (bbn.fn.isVue(notesWidget)) {
+                  let notes = notesWidget.find('appui-task-notes');
+                  if (bbn.fn.isVue(notes)) {
+                    notes.getRef('forum').updateData();
+                  }
                 }
               }
             }
@@ -165,25 +168,19 @@
       trackerMessage: {
         props: ['source'],
         template: `
-<bbn-form
-          :source="source"
-          @submit="save"
->
+<bbn-form :source="source"
+          @submit="save">
   <bbn-textarea v-model="source.message"
                 class="bbn-overlay"
                 style="width: 100%; padding: 10px"
-  ></bbn-textarea>
+                :focused="true"
+                :resizable="false"/>
 </bbn-form>
         `,
-        data(){
-          return {
-            tracker: bbn.vue.find(appui, 'appui-task-tracker')
-          }
-        },
         methods: {
           save(){
             if ( this.source.message.length ){
-              this.tracker.stopPost({message: this.source.message});
+              appui.getRegistered('appui-task-tracker').stopPost({message: this.source.message});
             }
           }
         }

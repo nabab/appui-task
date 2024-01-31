@@ -31,7 +31,7 @@
       edit(row, col, idx){
         return this.$refs.table.edit(row, {
           title: bbn._("Edit"),
-          height: 500
+          width: 500
         }, idx);
       },
       remove(row){
@@ -84,24 +84,22 @@
           :action="tracker.root + 'actions/tracker/edit'"
           :scrollable="false"
           :validation="validation"
-          @success="success"
->
+          @success="success">
   <div class="bbn-grid-fields bbn-padded">
     <label>` + bbn._('Start') + `</label>
     <bbn-datetimepicker v-model="source.row.start"
                         :max="maxStart"
-    ></bbn-datetimepicker>
+                        :show-second="true"/>
     <label>` + bbn._('End') + `</label>
     <bbn-datetimepicker v-model="source.row.end"
                         :min="source.row.start"
                         :max="maxEnd"
-    ></bbn-datetimepicker>
+                        :show-second="true"/>
     <label>`+ bbn._('Message') + `</label>
     <div style="height: 300px">
       <bbn-textarea v-model="source.row.message"
                     class="bbn-h-100"
-                    style="width: 100%"
-      ></bbn-textarea>
+                    style="width: 100%"/>
     </div>
   </div>
 </bbn-form>
@@ -131,6 +129,13 @@
             if ( d.success ){
               this.tracker.getRef('table').updateData();
               appui.success(bbn._('Edited'));
+              let notesWidget = this.closest('bbn-container').find('appui-task-task-widgets-notes');
+              if (notesWidget) {
+                let taskNotes = notesWidget.find('appui-task-notes');
+                if (taskNotes && !!taskNotes.getRef('forum')) {
+                  taskNotes.getRef('forum').updateData();
+                }
+              }
             }
             else {
               appui.error(bbn._('Error'));
