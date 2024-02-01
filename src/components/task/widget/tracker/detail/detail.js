@@ -107,14 +107,18 @@
         data(){
           return {
             tracker: this.closest('bbn-container').find('appui-task-task-widget-tracker-detail'),
-            maxEnd: dayjs().format('YYYY-MM-DD')
+            maxEnd: dayjs().format('YYYY-MM-DD HH:mm:ss')
           }
         },
         computed: {
           maxStart(){
+            if (!this.source.row.end) {
+              return dayjs().format('YYYY-MM-DD HH:mm:ss');
+            }
+
             let end = dayjs(this.source.row.end).unix(),
                 now = dayjs().unix();
-            return end > now ? dayjs().format('YYYY-MM-DD HH:mm:ss') : this.source.row.end;
+            return end < now ? this.source.row.end : dayjs().format('YYYY-MM-DD HH:mm:ss');
           }
         },
         methods: {

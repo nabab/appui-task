@@ -41,12 +41,11 @@ if (!empty($model->data['id'])
 
   if ($ok
     && (($oldTrack->start !== $model->data['start'])
-      || ($oldTrack->end !== $model->data['end'])
+      || ($oldTrack->length !== $model->data['length'])
       || ($oldTrack->id_note !== $model->data['id_note']))
     && !$model->db->update('bbn_tasks_sessions', [
       'id_note' => !empty($model->data['id_note']) ? $model->data['id_note'] : null,
       'start' => $model->data['start'],
-      'end' => $model->data['end'],
       'length' => $model->data['length']
     ], [
       'id' => $model->data['id']
