@@ -34,6 +34,18 @@
           width: 500
         }, idx);
       },
+      canDelete(row) {
+        if (appui.app.user.isAdmin
+          || (
+            (appui.app.user.id === row.id_user)
+            && (dayjs().diff(dayjs(row.end), 'hours') < 48)
+          )
+        ) {
+          return true;
+        }
+
+        return false;
+      },
       remove(row){
         if ( appui.app.user.isAdmin ){
           this.confirm(bbn._('Are you sure you want to delete this track?'), () => {
@@ -51,13 +63,7 @@
       },
       gridButtons(row){
         let ret = [];
-        if (
-          appui.app.user.isAdmin ||
-          (
-            (row.id_user === appui.app.user.id) &&
-            (dayjs().diff(dayjs(row.end), 'hours') < 48)
-          )
-        ){
+        if (this.canDelete(row)) {
           ret.push({
             title: bbn._('Edit'),
             icon: 'nf nf-fa-edit',
@@ -65,7 +71,8 @@
             action: this.edit
           });
         }
-        if ( appui.app.user.isAdmin ){
+        
+        if (this.canDelete(row)) {
           ret.push({
             title: bbn._('Remove'),
             icon: 'nf nf-fa-trash',
