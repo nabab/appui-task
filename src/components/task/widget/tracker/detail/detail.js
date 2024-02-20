@@ -34,8 +34,20 @@
           height: 500
         }, idx);
       },
+      canDelete(row) {
+        if (appui.app.user.isAdmin
+          || (
+            (appui.app.user.id === row.id_user)
+            && (dayjs().diff(dayjs(row.end), 'hours') < 48)
+          )
+        ) {
+          return true;
+        }
+
+        return false;
+      },
       remove(row){
-        if ( appui.app.user.isAdmin ){
+        if (this.canDelete(row)){
           this.confirm(bbn._('Are you sure you want to delete this track?'), () => {
             this.post(this.root + 'actions/tracker/remove', {id: row.id}, d => {
               if ( d.success ){
@@ -51,13 +63,7 @@
       },
       gridButtons(row){
         let ret = [];
-        if (
-          appui.app.user.isAdmin ||
-          (
-            (row.id_user === appui.app.user.id) &&
-            (dayjs().diff(dayjs(row.end), 'hours') < 48)
-          )
-        ){
+        if (this.canDelete(row)) {
           ret.push({
             title: bbn._('Edit'),
             icon: 'nf nf-fa-edit',
@@ -65,7 +71,8 @@
             action: this.edit
           });
         }
-        if ( appui.app.user.isAdmin ){
+
+        if (appui.app.user.isAdmin) {
           ret.push({
             title: bbn._('Remove'),
             icon: 'nf nf-fa-trash',
@@ -84,24 +91,20 @@
           :action="tracker.root + 'actions/tracker/edit'"
           :scrollable="false"
           :validation="validation"
-          @success="success"
->
+          @success="success">
   <div class="bbn-grid-fields bbn-padded">
     <label>` + bbn._('Start') + `</label>
     <bbn-datetimepicker v-model="source.row.start"
-                        :max="maxStart"
-    ></bbn-datetimepicker>
+                        :max="maxStart"/>
     <label>` + bbn._('End') + `</label>
     <bbn-datetimepicker v-model="source.row.end"
                         :min="source.row.start"
-                        :max="maxEnd"
-    ></bbn-datetimepicker>
+                        :max="maxEnd"/>
     <label>`+ bbn._('Message') + `</label>
     <div style="height: 300px">
       <bbn-textarea v-model="source.row.message"
                     class="bbn-h-100"
-                    style="width: 100%"
-      ></bbn-textarea>
+                    style="width: 100%"/>
     </div>
   </div>
 </bbn-form>

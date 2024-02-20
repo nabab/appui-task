@@ -1,13 +1,10 @@
 <div class="appui-task-tracker"
-     title="<?=_('Tracker')?>"
->
+     title="<?=_('Tracker')?>">
   <div class="bbn-block bbn-p bbn-no-wrap"
-       @click="openWindow"
-  >
+       @click="openWindow">
     <span v-if="active && progress"
-          v-text="progress"
-    ></span>
-    <i :class="['bbn-b','nf', 'nf-mdi-timer', {'bbn-green': active && progress}]"></i>
+          v-text="progress"/>
+    <i :class="['bbn-b','nf', 'nf-mdi-timer', {'bbn-green': active && progress}]"/>
   </div>
   <bbn-floater v-if="isVisible"
                :width="300"
@@ -16,8 +13,7 @@
                :scrollable="false"
                :auto-hide="200"
                @close="isVisible = false"
-               :container="$root.$el"
-  >
+               :container="$root.$el">
     <div class="bbn-overlay">
       <div class="appui-task-tracker-list bbn-w-100 bbn-flex-height">
         <div class="bbn-header bbn-spadded bbn-no-border-top bbn-no-hborder bbn-flex-width">
@@ -26,25 +22,21 @@
           </div>
           <div>
             <i class="nf nf-mdi-refresh bbn-p"
-               @click="refreshList(false)"
-            ></i>
+               @click="refreshList(false)"/>
             &nbsp;
             <i class="bbn-p nf nf-mdi-window_close"
-               @click="openWindow"
-            ></i>
+               @click="openWindow"/>
           </div>
         </div>
         <div class="bbn-flex-fill bbn-flex-height">
           <div v-if="active"
-               class="bbn-block"
-          >
+               class="bbn-block">
             <div class="bbn-header bbn-no-border-top bbn-no-border-left bbn-no-border-right bbn-xspadded">
               <div class="bbn-flex-width">
                 <div class="bbn-flex-fill bbn-b bbn-hspadded"><?=_('In progress')?></div>
                 <div v-if="progress"
                      class="bbn-b bbn-hspadded"
-                     v-text="progress"
-                ></div>
+                     v-text="progress"/>
               </div>
             </div>
             <div class="bbn-primary">
@@ -52,15 +44,13 @@
                 <div v-text="shorten(getField(list, 'title', 'id', active.id_task))"
                      class="bbn-flex-fill bbn-p bbn-b bbn-hspadded"
                      @click="openTask(active.id_task)"
-                     title="<?=_('Open task')?>"
-                ></div>
+                     title="<?=_('Open task')?>"/>
                 <div class="bbn-hspadded">
                   <bbn-button @click="stop"
                               icon="nf nf-fa-stop"
                               title="<?=_('Stop tracker')?>"
                               :notext="true"
-                              class="bbn-no-margin bbn-red"
-                  ></bbn-button>
+                              class="bbn-no-margin bbn-red"/>
                 </div>
               </div>
             </div>
@@ -73,14 +63,12 @@
                   <div class="bbn-flex-fill bbn-p"
                        v-text="shorten(l.title)"
                        @click="openTask(l.id)"
-                       title="<?=_('Open task')?>"
-                  ></div>
+                       title="<?=_('Open task')?>"/>
                   <bbn-button @click="start(l.id)"
                               icon="nf nf-fa-play"
                               title="<?=_('Play tracker')?>"
                               style="color: green"
-                              :notext="true"
-                  ></bbn-button>
+                              :notext="true"/>
                 </div>
               </div>
             </bbn-scroll>
