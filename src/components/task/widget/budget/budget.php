@@ -1,4 +1,4 @@
-<div class="appui-task-task-widget-budget">
+<div class="appui-task-task-widget-budget bbn-bottom-padded">
   <div v-if="!showPriceForm && (!!source.price || !!source.children_price)"
         :class="['bbn-radius', 'bbn-flex-width', 'bbn-bordered', {
           'bbn-bg-green': task.isApproved,

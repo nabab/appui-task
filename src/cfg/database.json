@@ -602,6 +602,15 @@
                 "generation": "addtime(`start`,sec_to_time(`length`))",
                 "default": "NULL",
                 "defaultExpression": 1
+            },
+            "tokens": {
+                "type": "decimal",
+                "null": 1,
+                "default": "NULL",
+                "defaultExpression": 1,
+                "maxlength": 4,
+                "decimans": 4
+                "signed": 0
             }
         }
     },

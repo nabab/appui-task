@@ -264,10 +264,69 @@
       ]
     },
     {
+      "text": "Tokens",
+      "code": "tokens",
+      "items": [
+        {
+          "text": "Configuration",
+          "code": "config",
+          "billing": {
+            "day": "01",
+            "month": "01",
+            "months": 1
+          },
+          "step": 900
+        },
+        {
+          "text": "Categories",
+          "code": "cats",
+          "items": [
+            {
+              "text": "Developments",
+              "code": "developments",
+              "tokensYear": 0
+            },
+            {
+              "text": "Maintenance proactive",
+              "code": "proactive",
+              "tokensYear": 0
+            },
+            {
+              "text": "Support and maintenance",
+              "code": "support",
+              "tokensYear": 0
+            }
+          ],
+          "cfg": {
+            "show_code": 1,
+            "schema": [
+              {
+                "field": "tokensYear",
+                "ftitle": "Tokens per year",
+                "title": "Tokens",
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ],
+      "cfg": {
+          "show_code": 1,
+          "allow_children": 1
+      }
+    },
+    {
       "cfg": {
         "show_code": 1,
+        "show_alias": 1,
         "allow_children": 1,
-        "inheritance": "cascade"
+        "inheritance": "cascade",
+        "id_root_alias": [
+          "cats",
+          "tokens",
+          "task",
+          "appui"
+        ]
       },
       "text": "Task categories",
       "code": "cats",
@@ -282,15 +341,36 @@
           "items": [
             {
               "text": "New feature",
-              "code": "new"
+              "code": "new",
+              "id_alias": [
+                "developments",
+                "cats",
+                "tokens",
+                "task",
+                "appui"
+              ]
             },
             {
               "text": "Improvement of an existing feature",
-              "code": "enhancement"
+              "code": "enhancement",
+              "id_alias": [
+                "proactive",
+                "cats",
+                "tokens",
+                "task",
+                "appui"
+              ]
             },
             {
               "text": "Report a bug",
-              "code": "bug"
+              "code": "bug",
+              "id_alias": [
+                "support",
+                "cats",
+                "tokens",
+                "task",
+                "appui"
+              ]
             }
           ]
         }

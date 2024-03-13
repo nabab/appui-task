@@ -1,4 +1,4 @@
-<div class="appui-task-task-widget-logs">
+<div class="appui-task-task-widget-logs bbn-bottom-padded">
   <div v-html="_('There are %s logs', '<b>' + source.totLogs + '</b>')"
        class="bbn-spadded bbn-background bbn-bottom-space bbn-c bbn-radius"/>
   <div v-for="(log, i) in source.lastLogs"

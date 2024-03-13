@@ -19,7 +19,6 @@
     },
     computed: {
       summary(){
-        let roles = this.source.roles.managers.concat(this.source.roles.workers);
         let res = bbn.fn.map(
           bbn.fn.extend(true, [], bbn.fn.isArray(this.source.trackers) ? this.source.trackers : []),
           t => {
@@ -35,20 +34,6 @@
             }
           }
         );
-        /* bbn.fn.each(roles, r => {
-          if (!bbn.fn.getRow(res, 'idUser', r)) {
-            let time = 0;
-            if (!!this.progress && (r === appui.app.user.id)) {
-              time += this.getProgress();
-            }
-            res.push({
-              idUser: r,
-              userName: this.userName(r),
-              total: this.secToTime(time, true),
-              notes: 0
-            });
-          }
-        }); */
         return bbn.fn.order(res, 'userName');
       }
     },

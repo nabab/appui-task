@@ -28,7 +28,7 @@
         if (bbn.fn.isVue(this.mainPage)
           && (this.mainPage.fullCategories !== undefined)
         ) {
-          return this.mainPage.fullCategories;
+          return bbn.fn.filter(this.mainPage.fullCategories, c => !c.num_children);
         }
         return [];
       }
