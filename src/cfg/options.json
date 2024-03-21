@@ -268,33 +268,23 @@
       "code": "tokens",
       "items": [
         {
-          "text": "Configuration",
-          "code": "config",
-          "billing": {
-            "day": "01",
-            "month": "01",
-            "months": 1
-          },
-          "step": 900
-        },
-        {
           "text": "Categories",
           "code": "cats",
           "items": [
             {
               "text": "Developments",
               "code": "developments",
-              "tokensYear": 0
+              "tokensYear": 960
             },
             {
               "text": "Maintenance proactive",
               "code": "proactive",
-              "tokensYear": 0
+              "tokensYear": 480
             },
             {
               "text": "Support and maintenance",
               "code": "support",
-              "tokensYear": 0
+              "tokensYear": 1760
             }
           ],
           "cfg": {
@@ -308,11 +298,21 @@
               }
             ]
           }
+        },
+        {
+          "text": "Configuration",
+          "code": "config",
+          "billing": {
+            "day": "01",
+            "month": "01",
+            "months": 1
+          },
+          "step": 900
         }
       ],
       "cfg": {
-          "show_code": 1,
-          "allow_children": 1
+        "show_code": 1,
+        "allow_children": 1
       }
     },
     {

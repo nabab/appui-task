@@ -30,9 +30,7 @@
         this.isVisible = !this.isVisible;
       },
       refreshList(startAfter){
-        this.post(this.root + 'data/tasks', {
-          id_user: appui.app.user.id
-        }, d => {
+        this.post(this.root + 'data/tasks', d => {
           if ( d.success && (d.data.list !== undefined) && (d.data.active !== undefined) ){
             this.list = d.data.list;
             this.active = d.data.active || false

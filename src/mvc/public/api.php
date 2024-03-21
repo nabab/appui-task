@@ -40,9 +40,29 @@ if (!empty($ctrl->post['action'])
         $success = $tasks->stopTrack($ctrl->post['id'], $ctrl->post['message'] ?? false);
       }
       break;
+
+    case 'switchTracker':
+      if (!empty($ctrl->post['current'])
+        && !empty($ctrl->post['new'])
+      ) {
+        $success = $tasks->switchTracker($ctrl->post['current'], $ctrl->post['new'], $ctrl->post['message'] ?? false);
+      }
+      break;
   }
   $ctrl->obj->success = $success;
-  $d['active'] = $tasks->getActiveTrack();
+  if ($d['active'] = $tasks->getActiveTrack()) {
+    if (($tokensType = $tasks->getTokensType($d['active']['id_task']))
+      && ($tokensCfg = $tasks->getTokensCfg())
+    ) {
+      $currentToken = (time() - strtotime($d['active']['start'])) / $tokensCfg['step'];
+      $d['active']['tokens'] = ceil($currentToken + $tasks->calcTokens($d['active']['id_task']));
+      $d['active']['taskTokens'] = ceil($tasks->getTokens($d['active']['id_task']) + $d['active']['tokens']);
+      $tokens = $tasks->getTokensCurrent($tokensType);
+      $d['active']['availableTokens'] = !empty($tokens['available']) ? ($tokens['available'] - $d['active']['tokens']) : 0;
+      $d['active']['totalTokens'] = $tokens['total'];
+    }
+  }
+
   $ctrl->obj->data = $d;
 }
 else {

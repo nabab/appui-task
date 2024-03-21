@@ -34,12 +34,9 @@
           width: 500
         }, idx);
       },
-      canDelete(row) {
-        if (appui.app.user.isAdmin
-          || (
-            (appui.app.user.id === row.id_user)
-            && (dayjs().diff(dayjs(row.end), 'hours') < 48)
-          )
+      canEditOrDelete(row) {
+        if ((appui.app.user.id === row.id_user)
+          && (dayjs().diff(dayjs(row.end), 'hours') < 48)
         ) {
           return true;
         }
@@ -47,7 +44,7 @@
         return false;
       },
       remove(row){
-        if ( appui.app.user.isAdmin ){
+        if (this.canEditOrDelete(row)) {
           this.confirm(bbn._('Are you sure you want to delete this track?'), () => {
             this.post(this.root + 'actions/tracker/remove', {id: row.id}, d => {
               if ( d.success ){
@@ -63,7 +60,7 @@
       },
       gridButtons(row){
         let ret = [];
-        if (this.canDelete(row)) {
+        if (this.canEditOrDelete(row)) {
           ret.push({
             title: bbn._('Edit'),
             icon: 'nf nf-fa-edit',
@@ -71,8 +68,8 @@
             action: this.edit
           });
         }
-        
-        if (this.canDelete(row)) {
+
+        if (this.canEditOrDelete(row)) {
           ret.push({
             title: bbn._('Remove'),
             icon: 'nf nf-fa-trash',

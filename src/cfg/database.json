@@ -592,7 +592,8 @@
                 "null": 1,
                 "default": "NULL",
                 "defaultExpression": 1,
-                "maxlength": 10
+                "maxlength": 10,
+                "signed": 0
             },
             "end": {
                 "type": "datetime",
@@ -604,12 +605,11 @@
                 "defaultExpression": 1
             },
             "tokens": {
-                "type": "decimal",
+                "type": "int",
                 "null": 1,
                 "default": "NULL",
                 "defaultExpression": 1,
-                "maxlength": 4,
-                "decimans": 4
+                "maxlength": 10,
                 "signed": 0
             }
         }
