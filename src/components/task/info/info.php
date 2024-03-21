@@ -39,28 +39,28 @@
          'grid-template-columns': !!mainPage.isMobile() ? 'auto' : 'minmax(auto, max-content) auto minmax(auto, max-content) auto'
        }">
     <template v-if="!!source.id_parent && !!source.parent">
-      <label><?=_('Parent task')?></label>
+      <label><?= _('Parent task') ?></label>
       <a v-text="source.parent.title"
           :href="root + 'page/task/' + source.id_parent"/>
     </template>
-    <label v-if="source.reference"><?=_('External reference')?></label>
+    <label v-if="source.reference"><?= _('External reference') ?></label>
     <div v-if="source.reference"
           v-html="source.reference"/>
-    <label><?=_('Category')?></label>
+    <label><?= _('Category') ?></label>
     <bbn-dropdown :source="categories"
                   v-model="source.type"
                   :value="source.type"
                   :disabled="!task.canChange"
                   group="group"
                   :groupable="true"/>
-    <label><?=_('Priority')?></label>
+    <label><?= _('Priority') ?></label>
     <bbn-dropdown v-model="source.priority"
                   style="width: 80px"
                   :source="mainPage.priorities"
                   source-cls="class"
                   :component="$options.components.priority"
                   :disabled="!task.canChange"/>
-    <label><?=_('Deadline')?></label>
+    <label><?= _('Deadline') ?></label>
     <div>
       <bbn-datetimepicker v-model="source.deadline"
                           @keydown="task.preventAll($event)"
@@ -72,7 +72,7 @@
                   :notext="true"/>
     </div>
     <template v-if="!!source.documents && source.documents.length">
-      <label><?=_('Documents')?></label>
+      <label><?= _('Documents') ?></label>
       <div class="bbn-vmiddle"
             style="flex-wrap: wrap">
         <div v-for="(doc, i) in source.documents"

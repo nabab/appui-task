@@ -233,7 +233,7 @@
         <div>
           <bbn-button v-if="task.canApprove"
                       @click="task.approve"
-                      title="<?=_('Approve')?>"
+                      title="<?= _('Approve') ?>"
                       icon="nf nf-fa-thumbs_up"
                       :notext="true"
                       :style="{
@@ -242,19 +242,19 @@
                       }"/>
           <bbn-button v-if="task.canChangeBudget && !source.price && !source.parent_has_price && !source.children_price"
                       icon="nf nf-md-cash_plus"
-                      title="<?=_('Add price')?>"
+                      title="<?= _('Add price') ?>"
                       @click="task.editPrice"
                       class="bbn-hsmargin"
                       :notext="true"/>
           <bbn-button v-if="task.canChangeBudget && !!source.lastChangePrice && !!source.price"
                       icon="nf nf-md-credit_card_edit"
-                      title="<?=_('Edit price')?>"
+                      title="<?= _('Edit price') ?>"
                       @click="task.editPrice"
                       class="bbn-hsmargin"
                       :notext="true"/>
           <bbn-button v-if="task.canChangeBudget && !task.isClosed && !!source.lastChangePrice && !!source.price"
                       icon="nf nf-md-trash_can"
-                      title="<?=_('Remove price')?>"
+                      title="<?= _('Remove price') ?>"
                       @click="task.removePrice"
                       :notext="true"
                       class="bbn-white bbn-bg-red"/>
@@ -269,7 +269,7 @@
         <div>
           <bbn-button v-if="task.isActive && !task.isUnapproved && task.canStart"
                       @click="task.start"
-                      title="<?=_('Put on ongoing')?>"
+                      title="<?= _('Put on ongoing') ?>"
                       icon="nf nf-fa-play"
                       :notext="true"
                       :style="{
@@ -278,7 +278,7 @@
                       }"/>
           <bbn-button v-if="task.isActive && !task.isUnapproved && task.canHold"
                       @click="task.hold"
-                      title="<?=_('Put on hold')?>"
+                      title="<?= _('Put on hold') ?>"
                       icon="nf nf-fa-pause"
                       :notext="true"
                       :style="{
@@ -287,7 +287,7 @@
                       }"/>
           <bbn-button v-if="(task.isActive || task.isHolding) && !task.isUnapproved && task.canResume"
                       @click="task.resume"
-                      title="<?=_('Resume')?>"
+                      title="<?= _('Resume') ?>"
                       icon="nf nf-fa-play"
                       :notext="true"
                       :style="{
@@ -296,7 +296,7 @@
                       }"/>
           <bbn-button v-if="(task.isActive || task.isUnapproved) && task.canClose"
                       @click="task.close"
-                      title="<?=_('Close') ?>"
+                      title="<?= _('Close')  ?>"
                       icon="nf nf-fa-check"
                       :notext="true"
                       :style="{
@@ -305,7 +305,7 @@
                       }"/>
           <bbn-button v-if="task.isClosed && task.canReopen"
                       @click="task.reopen"
-                      title="<?=_('Reopen')?>"
+                      title="<?= _('Reopen') ?>"
                       icon="nf nf-oct-issue_reopened"
                       :notext="true"
                       :style="{
@@ -316,7 +316,7 @@
                 class="bbn-left-space">
             <bbn-button v-if="task.isActive && task.canCancel"
                         @click="task.cancel"
-                        title="<?=_('Cancel') ?>"
+                        title="<?= _('Cancel')  ?>"
                         icon="nf nf-fa-remove"
                         :notext="true"
                         :style="{
@@ -325,7 +325,7 @@
                         }"/>
             <bbn-button v-if="task.canRemoveTask"
                         @click="task.removeTask"
-                        title="<?=_('Delete') ?>"
+                        title="<?= _('Delete')  ?>"
                         icon="nf nf-fa-trash"
                         :notext="true"
                         class="bbn-bg-red bbn-white"/>
@@ -342,7 +342,7 @@
           <bbn-button v-if="task.canBecomeManager"
                       @click="task.makeMe('managers')"
                       icon="nf nf-mdi-account_plus"
-                      title="<?=_('Make me a supervisor')?>"
+                      title="<?= _('Make me a supervisor') ?>"
                       :notext="true"
                       :style="{
                         backgroundColor: getRoleBgColor('managers'),
@@ -351,7 +351,7 @@
           <bbn-button v-if="task.canRemoveHimselfManager"
                       @click="task.unmakeMe('managers')"
                       icon="nf nf-mdi-account_minus"
-                      title="<?=_('Remove me from supervisors')?>"
+                      title="<?= _('Remove me from supervisors') ?>"
                       :notext="true"
                       :style="{
                         backgroundColor: getRoleBgColor('managers'),
@@ -360,7 +360,7 @@
           <bbn-button v-if="task.canBecomeWorker"
                       @click="task.makeMe('workers')"
                       icon="nf nf-mdi-account_plus"
-                      title="<?=_('Make me a worker')?>"
+                      title="<?= _('Make me a worker') ?>"
                       :notext="true"
                       :style="{
                         backgroundColor: getRoleBgColor('workers'),
@@ -369,7 +369,7 @@
           <bbn-button v-if="task.canRemoveHimselfWorker"
                       @click="task.unmakeMe('workers')"
                       icon="nf nf-mdi-account_minus"
-                      title="<?=_('Remove me from workers')?>"
+                      title="<?= _('Remove me from workers') ?>"
                       :notext="true"
                       :style="{
                         backgroundColor: getRoleBgColor('workers'),
@@ -378,7 +378,7 @@
           <bbn-button v-if="task.canBecomeViewer"
                       @click="task.makeMe('viewers')"
                       icon="nf nf-mdi-account_plus"
-                      title="<?=_('Make me a spectator')?>"
+                      title="<?= _('Make me a spectator') ?>"
                       :notext="true"
                       :style="{
                         backgroundColor: getRoleBgColor('viewers'),
@@ -387,7 +387,7 @@
           <bbn-button v-if="task.canRemoveHimselfViewer"
                       @click="task.unmakeMe('viewers')"
                       icon="nf nf-mdi-account_minus"
-                      title="<?=_('Remove me from viewers')?>"
+                      title="<?= _('Remove me from viewers') ?>"
                       :notext="true"
                       :style="{
                         backgroundColor: getRoleBgColor('viewers'),
@@ -396,7 +396,7 @@
           <bbn-button v-if="task.canBecomeDecider"
                       @click="task.makeMe('deciders')"
                       icon="nf nf-mdi-account_plus"
-                      title="<?=_('Make me a decider')?>"
+                      title="<?= _('Make me a decider') ?>"
                       :notext="true"
                       :style="{
                         backgroundColor: getRoleBgColor('deciders'),
@@ -405,7 +405,7 @@
           <bbn-button v-if="task.canRemoveHimselfDecider"
                       @click="task.unmakeMe('deciders')"
                       icon="nf nf-mdi-account_minus"
-                      title="<?=_('Remove me from deciders')?>"
+                      title="<?= _('Remove me from deciders') ?>"
                       :notext="true"
                       :style="{
                         backgroundColor: getRoleBgColor('deciders'),
@@ -443,7 +443,7 @@
         <div>
           <bbn-button v-if="task.canPing"
                       @click="task.ping"
-                      title="<?=_('Ping workers')?>"
+                      title="<?= _('Ping workers') ?>"
                       icon="nf nf-fa-hand_pointer_o"
                       :notext="true"/>
         </div>

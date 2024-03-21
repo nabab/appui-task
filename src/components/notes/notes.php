@@ -3,7 +3,7 @@
                   :data="{id_task: source.id}"
                   :pageable="true"
                   :toolbar="[{
-                    text: '<?=_('Add a note')?>',
+                    text: '<?= _('Add a note') ?>',
                     action: insert,
                     icon: 'nf nf-fa-pencil',
                     disabled: isClosed

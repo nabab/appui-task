@@ -15,7 +15,7 @@
                   group="group"
                   source-value="id"
                   required="required"
-                  placeholder="<?=_('Select a type...')?>"
+                  placeholder="<?= _('Select a type...') ?>"
                   class="bbn-w-100"
                   :groupable="true"/>
     <label class="bbn-label"

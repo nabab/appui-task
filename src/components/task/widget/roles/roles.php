@@ -23,7 +23,7 @@
         <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
               @click="isManagerOpen = !isManagerOpen">
           <i class="nf nf-mdi-account_star bbn-lg bbn-hsmargin"/>
-          <?=_('Supervisors')?>
+          <?= _('Supervisors') ?>
           <span v-if="managers.length"
                 class="bbn-badge bbn-s bbn-left-sspace"
                 v-text="managers.length"
@@ -55,7 +55,7 @@
         <i class="nf nf-fa-trash bbn-p bbn-red bbn-right-sspace"
            v-if="task.canChange && (managers.length > 1) && (r.idUser !== source.id_user) && (task.isAdmin || task.isGlobal)"
            @click="removeRole(r.idUser, 'managers')"
-           title="<?=_('Remove')?>"/>
+           title="<?= _('Remove') ?>"/>
       </div>
     </div>
     <div v-if="!managers.length && isManagerOpen"
@@ -64,7 +64,7 @@
            color: getRoleColor('managers'),
            backgroundColor: getRoleBgColor('managers')
          }">
-      <?=_('Not set')?>
+      <?= _('Not set') ?>
     </div>
   </div>
   <div class="bbn-w-100 bbn-radius bbn-bordered bbn-bottom-space bbn-background"
@@ -91,7 +91,7 @@
         <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
               @click="isWorkerOpen = !isWorkerOpen">
           <i class="nf nf-mdi-worker bbn-hsmargin"/>
-          <?=_('Workers')?>
+          <?= _('Workers') ?>
           <span v-if="workers.length"
                 class="bbn-badge bbn-s bbn-left-sspace"
                 v-text="workers.length"
@@ -123,7 +123,7 @@
         <i class="nf nf-fa-trash bbn-p bbn-red bbn-right-sspace"
            v-if="task.canChange"
            @click="removeRole(r.idUser, 'workers')"
-           title="<?=_('Remove')?>"/>
+           title="<?= _('Remove') ?>"/>
       </div>
     </div>
     <div v-if="!workers.length && isWorkerOpen"
@@ -132,7 +132,7 @@
            color: getRoleColor('workers'),
            backgroundColor: getRoleBgColor('workers')
          }">
-      <?=_('Not set')?>
+      <?= _('Not set') ?>
     </div>
   </div>
   <div class="bbn-w-100 bbn-radius bbn-bordered bbn-background"
@@ -159,7 +159,7 @@
                     }"/>
         <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
               @click="isViewerOpen = !isViewerOpen">
-          <i class="nf nf-fa-user_secret bbn-hsmargin"/><?=_('Spectators')?>
+          <i class="nf nf-fa-user_secret bbn-hsmargin"/><?= _('Spectators') ?>
           <span v-if="viewers.length"
                 class="bbn-badge bbn-s bbn-left-sspace"
                 v-text="viewers.length"
@@ -191,7 +191,7 @@
         <i class="nf nf-fa-trash bbn-p bbn-red bbn-right-sspace"
             v-if="task.canChange"
             @click="removeRole(r.idUser, 'viewers')"
-            title="<?=_('Remove')?>"/>
+            title="<?= _('Remove') ?>"/>
       </div>
     </div>
     <div v-if="!viewers.length && isViewerOpen"
@@ -200,7 +200,7 @@
            color: getRoleColor('viewers'),
            backgroundColor: getRoleBgColor('viewers')
          }">
-      <?=_('Not set')?>
+      <?= _('Not set') ?>
     </div>
   </div>
 </div>

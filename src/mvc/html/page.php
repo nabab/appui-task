@@ -10,7 +10,7 @@
                     :load="false"
                     component="appui-task-home"
                     icon="nf nf-fa-home"
-                    title="<?=_('Home')?>"
+                    title="<?= _('Home') ?>"
                     :notext="true"
                     :source="source"/>
   </bbn-router>

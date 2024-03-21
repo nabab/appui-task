@@ -9,8 +9,8 @@
     <div class="bbn-spadded bbn-secondary-text-alt bbn-b bbn-background bbn-radius bbn-flex-fill bbn-c"
           v-text="price"/>
     <div class="bbn-vspadded bbn-hxlpadded bbn-c bbn-b bbn-white">
-      <span v-if="task.isApproved"><?=_('Approved')?></span>
-      <span v-else><?=_('Unapproved')?></span>
+      <span v-if="task.isApproved"><?= _('Approved') ?></span>
+      <span v-else><?= _('Unapproved') ?></span>
       <i v-if="!task.isApproved && !!source.children_price && !!source.num_children_noprice"
          class="nf nf-fa-info_circle bbn-left-sspace"
          :title="_('%d sub-tasks need their price to be set', source.num_children_noprice)"/>
@@ -26,12 +26,12 @@
     <bbn-button icon="nf nf-fa-check"
                 :disabled="!source.price || (source.price == oldPrice)"
                 @click="saveForm"
-                title="<?=_('Save')?>"
+                title="<?= _('Save') ?>"
                 class="bbn-white bbn-bg-green bbn-left-sspace bbn-right-xsspace"
                 :notext="true"/>
     <bbn-button icon="nf nf-fa-times"
                 @click="cancelForm"
-                title="<?=_('Cancel')?>"
+                title="<?= _('Cancel') ?>"
                 :notext="true"
                 class="bbn-bg-red bbn-white"/>
   </div>
@@ -70,7 +70,7 @@
       <div class="bbn-vmiddle bbn-flex-width">
         <span class="bbn-flex-fill bbn-c bbn-upper">
           <i class="nf nf-fa-gavel bbn-hsmargin"/>
-          <?=_('Deciders')?>
+          <?= _('Deciders') ?>
         </span>
         <bbn-button class="bbn-left-sspace bbn-no-border"
                     icon="nf nf-fa-plus"
@@ -101,7 +101,7 @@
             color: getRoleColor('deciders'),
             backgroundColor: getRoleBgColor('deciders')
           }">
-      <?=_('Not set')?>
+      <?= _('Not set') ?>
     </div>
   </div>
   <div v-if="task.canBill"
@@ -109,7 +109,7 @@
        style="margin-top: 10px">
     <div class="bbn-header bbn-no-border-top bbn-no-hborder bbn-radius-top bbn-xspadded">
       <div class="bbn-vmiddle bbn-flex-width">
-        <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-file_invoice bbn-hsmargin"></i><?=_('Invoice')?></span>
+        <span class="bbn-b bbn-flex-fill"><i class="nf nf-fa-file_invoice bbn-hsmargin"></i><?= _('Invoice') ?></span>
         <i class="nf nf-fa-plus bbn-p bbn-hsmargin"
            @click="makeInvoice"
            v-if="!task.hasInvoice"/>
@@ -120,15 +120,15 @@
     </div>
     <div v-if="task.hasInvoice"
          class="bbn-spadded bbn-grid-fields">
-      <label><?=_('Ref')?></label>
+      <label><?= _('Ref') ?></label>
       <div v-text="getInvoiceRef()"/>
-      <label><?=_('Date')?></label>
+      <label><?= _('Date') ?></label>
       <div v-text="getInvoiceDate()"/>
-      <label><?=_('Taxable')?></label>
+      <label><?= _('Taxable') ?></label>
       <div v-text="money(source.invoice.taxable)"/>
-      <label><?=_('Tax')?></label>
+      <label><?= _('Tax') ?></label>
       <div v-text="getInvoiceTax()"/>
-      <label><?=_('Amount')?></label>
+      <label><?= _('Amount') ?></label>
       <div v-text="money(source.invoice.amount)"/>
     </div>
   </div>

@@ -19,30 +19,30 @@
                    v-text="statusText"/>
               <i v-if="isActive && !isUnapproved && canStart"
                  @click="start"
-                 title="<?=_("Put on ongoing")?>"
+                 title="<?= _("Put on ongoing") ?>"
                  class="nf nf-fa-play bbn-p bbn-xxxl"
                  :style="{color: getStatusBgColor('ongoing')}"/>
               <i v-if="isActive && !isUnapproved && canHold"
                  @click="hold"
-                 title="<?=_("Put on hold")?>"
+                 title="<?= _("Put on hold") ?>"
                  class="nf nf-fa-pause bbn-p bbn-left-space bbn-xxxl"
                  :style="{color: getStatusBgColor('holding')}"/>
               <i v-if="(isActive || isHolding) && !isUnapproved && canResume"
                  @click="resume"
-                 title="<?=_("Resume")?>"
+                 title="<?= _("Resume") ?>"
                  class="nf nf-fa-play bbn-p bbn-left-space bbn-xxxl"
                  :style="{color: getStatusBgColor('ongoing')}"/>
               <i v-if="(isActive || isUnapproved) && canClose"
                  @click="close"
-                 title="<?=_("Close") ?>"
+                 title="<?= _("Close")  ?>"
                  class="nf nf-fa-check bbn-p bbn-left-space bbn-xxxl"
                  :style="{color: getStatusBgColor('closed')}"/>
               <i v-if="isClosed && canReopen"
                  @click="reopen"
-                 title="<?=_("Reopen")?>"
+                 title="<?= _("Reopen") ?>"
                  class="nf nf-fa-hand_pointer_o bbn-p bbn-left-space bbn-xxxl"/>
               <i @click="toggleMobileMenu"
-                 title="<?=_("Menu")?>"
+                 title="<?= _("Menu") ?>"
                  class="nf nf-mdi-menu bbn-p bbn-left-space bbn-xxxl"/>
             </div>
             <div v-else

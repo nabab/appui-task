@@ -11,7 +11,7 @@
         :class="[source.bugclass, 'bbn-flex-fill']"
         :title="source.status"
   >
-    <?=_('Untitled')?>
+    <?= _('Untitled') ?>
   </span>
   <span v-text="date"></span>
 </div>
