@@ -31,7 +31,7 @@ if ($model->hasData(['id_task', 'prop'], true)) {
   $res['data'] = \bbn\X::mergeArrays(
     $taskCls->info($idTask),
     [
-      'tracker' => $taskCls->getTrack($idTask),
+      'tracker' => $taskCls->getActiveTrack(false, $idTask),
       'trackers' => $taskCls->getTracks($idTask)
     ]
   );

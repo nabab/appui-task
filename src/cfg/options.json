@@ -307,7 +307,9 @@
             "month": "01",
             "months": 1
           },
-          "step": 900
+          "step": 900,
+          "checkType": 0,
+          "amount": 25
         }
       ],
       "cfg": {

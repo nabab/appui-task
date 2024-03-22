@@ -73,7 +73,7 @@ if ($model->hasData('id', true)) {
         //'notes' => $model->getModel(APPUI_TASKS_ROOT . 'data/last_messages', ['id_task' => $model->data['id']]),
         'approved' => $task->getApprovalInfo($model->data['id']),
         'lastChangePrice' => $lastChangePrice,
-        'tracker' => $task->getTrack($model->data['id']),
+        'tracker' => $task->getActiveTrack(false, $model->data['id']),
         'trackers' => $task->getTracks($model->data['id']),
         'invoice' => $task->getInvoice($model->data['id']),
         'lastLogs' => !empty($logs) ? array_slice($logs, 0, 5) : [],
