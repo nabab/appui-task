@@ -106,7 +106,7 @@
       reply(n, v){
         if (!this.isClosed) {
           this.getPopup({
-            title: bbn._('Reply to') + ' ' + appui.app.getUserName(n.creator),
+            title: bbn._('Reply to') + ' ' + appui.getUserName(n.creator),
             width: 800,
             height: 600,
             component: 'appui-note-forum-form',

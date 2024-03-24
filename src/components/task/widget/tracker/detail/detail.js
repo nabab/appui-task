@@ -14,7 +14,7 @@
     },
     methods: {
       renderUser(row){
-        return bbn.fn.getField(appui.app.users, 'text', 'value', row.id_user);
+        return bbn.fn.getField(appui.users, 'text', 'value', row.id_user);
       },
       renderLength(row){
         return this.secToTime(row.length);
@@ -35,9 +35,9 @@
         }, idx);
       },
       canDelete(row) {
-        if (appui.app.user.isAdmin
+        if (appui.user.isAdmin
           || (
-            (appui.app.user.id === row.id_user)
+            (appui.user.id === row.id_user)
             && (dayjs().diff(dayjs(row.end), 'hours') < 48)
           )
         ) {
@@ -72,7 +72,7 @@
           });
         }
 
-        if (appui.app.user.isAdmin) {
+        if (appui.user.isAdmin) {
           ret.push({
             title: bbn._('Remove'),
             icon: 'nf nf-fa-trash',

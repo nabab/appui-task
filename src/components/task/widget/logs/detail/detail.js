@@ -36,7 +36,7 @@
         },
         computed: {
           userName(){
-            return appui.app.getUserName(this.source.id_user);
+            return appui.getUserName(this.source.id_user);
           }
         }
       }

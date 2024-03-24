@@ -4,8 +4,8 @@
     window.appuiTaskMixin = {
       data(){
         return {
-          userId: appui.app.user.id,
-          isAdmin: appui.app.user.isAdmin
+          userId: appui.user.id,
+          isAdmin: appui.user.isAdmin
         }
       },
       computed: {
@@ -513,8 +513,8 @@
               delete roles.deciders;
             }
             bbn.fn.iterate(roles, (us, ro) => {
-              if (us.includes(appui.app.user.id)) {
-                us.splice(us.indexOf(appui.app.user.id), 1);
+              if (us.includes(appui.user.id)) {
+                us.splice(us.indexOf(appui.user.id), 1);
               }
               if (!us.length) {
                 delete roles[ro];
@@ -594,7 +594,7 @@
         return res;
       },
       groups(){
-        let users = bbn.fn.extend(true, [], appui.app.users);
+        let users = bbn.fn.extend(true, [], appui.users);
         return bbn.fn.map(bbn.fn.extend(true, [], this.source.groups), v => {
           v.text = v.nom || v.text
           v.expanded = false;
@@ -630,13 +630,13 @@
     methods: {
       isMobile: bbn.fn.isMobile,
       userName(id){
-        return bbn.fn.getField(appui.app.users, 'text', 'value', id);
+        return bbn.fn.getField(appui.users, 'text', 'value', id);
       },
       userGroup(id){
-        return bbn.fn.getField(appui.app.users, 'id_group', 'value', id);
+        return bbn.fn.getField(appui.users, 'id_group', 'value', id);
       },
       userAvatar(id){
-        const av = bbn.fn.getField(appui.app.users, 'avatar', 'value', id);
+        const av = bbn.fn.getField(appui.users, 'avatar', 'value', id);
         return av ? av : bbn.var.defaultAvatar;
       },
       userAvatarImg(id){
@@ -645,11 +645,11 @@
         return '<span class="appui-avatar"><img src="' + av + '" alt="' + name + '" title="' + name + '"></span>';
       },
       userFull(id){
-        const user = bbn.fn.getRow(appui.app.users, 'value', id);
+        const user = bbn.fn.getRow(appui.users, 'value', id);
         return '<span class="appui-avatar"><img src="' + user.avatar + '" alt="' + user.text + '"> ' + user.text + '</span>';
       },
       isYou(id){
-        return id === appui.app.user.id;
+        return id === appui.user.id;
       },
       formatDate(d){
         return dayjs(bbn.fn.date(d)).format('DD/MM/YYYY HH:mm');

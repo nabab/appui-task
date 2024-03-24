@@ -19,15 +19,15 @@ $groups = $mgr->groups();
 $d = [
   'root' => APPUI_TASKS_ROOT,
   'root_notes' => $model->pluginUrl('appui-note').'/',
-  'roles' => Task::getAppuiOptionsIds('roles'),
-  'states' => Task::getAppuiOptionsIds('states'),
+  'roles' => Task::getOptionsIds('roles'),
+  'states' => Task::getOptionsIds('states'),
   'options' => [
     'states' => array_map(function($s){
       return X::mergeArrays($s, Task::getOptionsObject()->getValue($s['value']) ?: []);
-    }, Task::getAppuiOptionsTextValue('states')),
+    }, Task::getOptionsTextValue('states')),
     'roles' => array_map(function($r){
       return X::mergeArrays($r, Task::getOptionsObject()->getValue($r['value']) ?: []);
-    }, Task::getAppuiOptionsTextValue('roles')),
+    }, Task::getOptionsTextValue('roles')),
     'cats' => Task::catCorrespondances()
   ],
   'usergroup' => $model->inc->user->getGroup(),
@@ -43,7 +43,7 @@ $d = [
     }
     return $a;
   }, $pm->categories(), 1),
-  'media_types' => $model->inc->options->codeOptions(Note::getAppuiOptionId('media')),
+  'media_types' => $model->inc->options->codeOptions(Note::getOptionId('media')),
   'dashboard' => [
     'widgets' => [],
     'order' => []

@@ -18,7 +18,7 @@
         }
       },
       isYou(id){
-        return appui.app.user.id === id;
+        return appui.user.id === id;
       }
     },
     components: {

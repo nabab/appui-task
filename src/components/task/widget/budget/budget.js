@@ -34,7 +34,7 @@
       },
       approvedBy(){
         if ( this.task.isApproved ){
-          return bbn.fn.getField(appui.app.users, 'text', 'value', this.source.approved.id_user);
+          return bbn.fn.getField(appui.users, 'text', 'value', this.source.approved.id_user);
         }
         return '';
       },
@@ -51,7 +51,7 @@
       }
     },
     methods: {
-      getUserName: appui.app.getUserName,
+      getUserName: appui.getUserName,
       money: bbn.fn.money,
       cancelForm(){
         if ( this.source.price !== this.oldPrice ){

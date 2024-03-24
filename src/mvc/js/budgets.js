@@ -33,7 +33,7 @@
         if (row.accepter) {
           return bbn._(
             "%s accepted on %s",
-            appui.app.getUserName(row.accepter),
+            appui.getUserName(row.accepter),
             bbn.fn.fdate(row.accept_date, 's')
           )
         }

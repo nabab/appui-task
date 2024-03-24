@@ -32,7 +32,7 @@
       },
       refreshList(startAfter){
         this.post(this.root + 'data/tasks', {
-          id_user: appui.app.user.id
+          id_user: appui.user.id
         }, d => {
           if ( d.success && (d.data.list !== undefined) && (d.data.active !== undefined) ){
             this.list = d.data.list;

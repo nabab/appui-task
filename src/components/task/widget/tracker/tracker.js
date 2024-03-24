@@ -14,7 +14,7 @@
     data(){
       return {
         progress: false,
-        currentUserID: appui.app.user.id
+        currentUserID: appui.user.id
       }
     },
     computed: {
@@ -24,7 +24,7 @@
           bbn.fn.extend(true, [], bbn.fn.isArray(this.source.trackers) ? this.source.trackers : []),
           t => {
             let time = bbn.fn.isNumber(t.total_time) ? t.total_time : 0;
-            if (!!this.progress && (t.id_user === appui.app.user.id)) {
+            if (!!this.progress && (t.id_user === appui.user.id)) {
               time += this.getProgress();
             }
             return {
@@ -38,7 +38,7 @@
         /* bbn.fn.each(roles, r => {
           if (!bbn.fn.getRow(res, 'idUser', r)) {
             let time = 0;
-            if (!!this.progress && (r === appui.app.user.id)) {
+            if (!!this.progress && (r === appui.user.id)) {
               time += this.getProgress();
             }
             res.push({

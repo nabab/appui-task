@@ -35,7 +35,7 @@
       return {
         taskTitle: '',
         mainPage: mainPage,
-        users: bbn.fn.order(appui.app.users, 'text', 'ASC'),
+        users: bbn.fn.order(appui.users, 'text', 'ASC'),
         filters: filters,
         states: bbn.fn.order(bbn.fn.filter(mainPage.source.options.states, s => s.code !== 'deleted'), 'text', 'asc')
       };
@@ -57,14 +57,14 @@
       },
       renderBudget(row){
         if (!!row.price
-          && (!!appui.app.user.isAdmin
+          && (!!appui.user.isAdmin
             || !!this.mainPage.privileges.global
             || !!this.mainPage.privileges.account_manager
             || !!this.mainPage.privileges.account_viewer
             || !!this.mainPage.privileges.financial_manager
             || !!this.mainPage.privileges.financial_viewer
             || (!!row.roles.deciders
-              && row.roles.deciders.includes(appui.app.user.id)))
+              && row.roles.deciders.includes(appui.user.id)))
         ) {
           return `<span>${bbn.fn.money(row.price)}</span>`
         }
@@ -72,14 +72,14 @@
       },
       renderBudgetSubtasks(row){
         if (!!row.children_price
-          && (!!appui.app.user.isAdmin
+          && (!!appui.user.isAdmin
             || !!this.mainPage.privileges.global
             || !!this.mainPage.privileges.account_manager
             || !!this.mainPage.privileges.account_viewer
             || !!this.mainPage.privileges.financial_manager
             || !!this.mainPage.privileges.financial_viewer
             || (!!row.roles.deciders
-              && row.roles.deciders.includes(appui.app.user.id)))
+              && row.roles.deciders.includes(appui.user.id)))
         ) {
           return `<span>${bbn.fn.money(row.children_price)}</span>`
         }
@@ -208,7 +208,7 @@
         props: ['source'],
         computed: {
           userName(){
-            return appui.app.getUserName(this.source.id_user);
+            return appui.getUserName(this.source.id_user);
           }
         }
       },

@@ -98,7 +98,7 @@
           if (!!this.source.roles.managers) {
             s += "\n";
             bbn.fn.each(this.source.roles.managers, u => {
-              s += "\n" + appui.app.getUserName(u);
+              s += "\n" + appui.getUserName(u);
             });
           }
           return s;
@@ -111,7 +111,7 @@
           if (!!this.source.roles.workers) {
             s += "\n";
             bbn.fn.each(this.source.roles.workers, u => {
-              s += "\n" + appui.app.getUserName(u);
+              s += "\n" + appui.getUserName(u);
             });
           }
           return s;
@@ -124,7 +124,7 @@
           if (!!this.source.roles.viewers) {
             s += "\n";
             bbn.fn.each(this.source.roles.viewers, u => {
-              s += "\n" + appui.app.getUserName(u);
+              s += "\n" + appui.getUserName(u);
             });
           }
           return s;
@@ -137,7 +137,7 @@
           if (!!this.source.roles.deciders) {
             s += "\n";
             bbn.fn.each(this.source.roles.deciders, u => {
-              s += "\n" + appui.app.getUserName(u);
+              s += "\n" + appui.getUserName(u);
             });
           }
           return s;

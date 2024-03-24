@@ -35,7 +35,7 @@
       return {
         taskTitle: '',
         mainPage: mainPage,
-        users: bbn.fn.order(appui.app.users, 'text', 'ASC'),
+        users: bbn.fn.order(appui.users, 'text', 'ASC'),
         filters: filters
       };
     },

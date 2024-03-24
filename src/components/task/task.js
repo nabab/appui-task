@@ -211,16 +211,16 @@
         if (this.source.id
           && !!role
           && this.mainPage.source.roles[role]
-          && !this.source.roles[role].includes(appui.app.user.id)
+          && !this.source.roles[role].includes(appui.user.id)
           && !!this['canBecome' + bbn.fn.substr(bbn.fn.correctCase(role), 0, -1)]
         ) {
           return this.post(this.root + 'actions/role/insert', {
             id_task: this.source.id,
             role: this.mainPage.source.roles[role],
-            id_user: appui.app.user.id
+            id_user: appui.user.id
           }, d => {
             if (d.success) {
-              this.source.roles[role].push(appui.app.user.id);
+              this.source.roles[role].push(appui.user.id);
               if (d.roles !== undefined) {
                 let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
                 if (comps.length) {
@@ -245,7 +245,7 @@
           && !!this['canBecome' + bbn.fn.substr(bbn.fn.correctCase(role), 0, -1)]
         ) {
           this.confirm(bbn._('Are you sure?'), () => {
-            let exists = !!bbn.fn.filter([].concat(...Object.values(this.source.roles)), v => v.includes(appui.app.user.id)).length;
+            let exists = !!bbn.fn.filter([].concat(...Object.values(this.source.roles)), v => v.includes(appui.user.id)).length;
             if (exists && this.canUnmakeMe) {
               this._unmakeMe().then(d => {
                 if (d.data && d.data.success) {
@@ -282,11 +282,11 @@
           if (!!prop && !!this.mainPage.source.roles[prop]) {
             return this.post(this.root + 'actions/role/delete', {
               id_task: this.source.id,
-              id_user: appui.app.user.id,
+              id_user: appui.user.id,
               role: this.mainPage.source.roles[prop]
             }, d => {
               if (d.success) {
-                const idx = this.source.roles[prop].indexOf(appui.app.user.id);
+                const idx = this.source.roles[prop].indexOf(appui.user.id);
                 if (idx > -1) {
                   this.source.roles[prop].splice(idx, 1);
                 }

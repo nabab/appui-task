@@ -20,11 +20,11 @@
       if (this.source.roles[this.role] === undefined) {
         this.$set(this.source.roles, this.role, []);
       }
-      if (appui.app.groups && activeUsers) {
-        appui.app.groups.forEach(group => {
+      if (appui.groups && activeUsers) {
+        appui.groups.forEach(group => {
           let users = activeUsers.filter(u => {
             if ((u.id_group === group.id)
-              && (u.value !== appui.app.user.id)
+              && (u.value !== appui.user.id)
               && (u.value !== this.source.id_user)
             ) {
               let hasRole = false;

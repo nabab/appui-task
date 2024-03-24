@@ -12,7 +12,7 @@
           u.username = u.text
           return u;
         }),
-        groups: appui.app.groups
+        groups: appui.groups
       }
     },
     computed: {
@@ -94,10 +94,10 @@
         },
         computed: {
           user(){
-            return !!this.source.value ? bbn.fn.getRow(appui.app.users, 'value', this.source.value) : null;
+            return !!this.source.value ? bbn.fn.getRow(appui.users, 'value', this.source.value) : null;
           },
           group(){
-            return !!this.user ? bbn.fn.getRow(appui.app.groups, 'id', this.user.id_group) : null;
+            return !!this.user ? bbn.fn.getRow(appui.groups, 'id', this.user.id_group) : null;
           }
         },
         methods: {
@@ -211,8 +211,8 @@
         data(){
           let groupsUsers = [];
           let activeUsers = appui.app.getActiveUsers();
-          if (appui.app.groups && activeUsers) {
-            appui.app.groups.forEach(group => {
+          if (appui.groups && activeUsers) {
+            appui.groups.forEach(group => {
               let users = activeUsers.filter(u => {
                 if (u.id_group === group.id) {
                   return !this.source.users.includes(u.value);

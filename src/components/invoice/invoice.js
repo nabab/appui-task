@@ -13,7 +13,7 @@
           amount: 0,
           id_task: this.source.id,
           approved: this.source.approved ? {
-            user: bbn.fn.getField(appui.app.users, 'text', 'value', this.source.approved.id_user),
+            user: bbn.fn.getField(appui.users, 'text', 'value', this.source.approved.id_user),
             moment: dayjs.unix(this.source.approved.chrono).format('DD/MM/YYYY')
           } : false
         }
