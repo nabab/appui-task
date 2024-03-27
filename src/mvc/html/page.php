@@ -6,7 +6,7 @@
               :storage="true"
               storage-full-name="appui-task-ui">
     <bbns-container url="home"
-                    :static="true"
+                    :fixed="true"
                     :load="false"
                     component="appui-task-home"
                     icon="nf nf-fa-home"
