@@ -34,6 +34,14 @@
           width: 500
         }, idx);
       },
+      openTracksEditor(row){
+        if (!!appui.options.tasks?.tokens?.cfg
+          && !!row.start
+          && !!row.end
+        ) {
+          bbn.fn.link(this.root + 'page/tracks/' + row.id);
+        }
+      },
       canEditOrDelete(row) {
         if ((appui.app.user.id === row.id_user)
           && (dayjs().diff(dayjs(row.end), 'hours') < 48)
@@ -65,7 +73,7 @@
             title: bbn._('Edit'),
             icon: 'nf nf-fa-edit',
             notext: true,
-            action: this.edit
+            action: !!appui.options.tasks?.tokens?.cfg ? this.openTracksEditor : this.edit
           });
         }
 

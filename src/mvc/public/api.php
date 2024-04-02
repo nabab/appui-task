@@ -51,13 +51,13 @@ if (!empty($ctrl->post['action'])
   }
   $ctrl->obj->success = $success;
   if ($d['active'] = $tasks->getActiveTrack()) {
-    if (($tokensType = $tasks->getTokensType($d['active']['id_task']))
+    if (($tokenCat = $tasks->getTokensCategory($d['active']['id_task']))
       && ($tokensCfg = $tasks->getTokensCfg())
     ) {
       $currentToken = (time() - strtotime($d['active']['start'])) / $tokensCfg['step'];
       $d['active']['tokens'] = ceil($currentToken + $tasks->calcTokens($d['active']['id_task']));
       $d['active']['taskTokens'] = ceil($tasks->getTokens($d['active']['id_task']) + $d['active']['tokens']);
-      $tokens = $tasks->getTokensCurrent($tokensType);
+      $tokens = $tasks->getTokensCurrent($tokenCat);
       $d['active']['availableTokens'] = !empty($tokens['available']) ? ($tokens['available'] - $d['active']['tokens']) : 0;
       $d['active']['totalTokens'] = $tokens['total'];
     }
