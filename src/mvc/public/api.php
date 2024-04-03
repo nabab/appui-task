@@ -55,7 +55,7 @@ if (!empty($ctrl->post['action'])
       && ($tokensCfg = $tasks->getTokensCfg())
     ) {
       $currentToken = (time() - strtotime($d['active']['start'])) / $tokensCfg['step'];
-      $d['active']['tokens'] = ceil($currentToken + $tasks->calcTokens($d['active']['id_task']));
+      $d['active']['tokens'] = ceil($currentToken + $tasks->calcLinkedTokens($d['active']['id_task']));
       $d['active']['taskTokens'] = ceil($tasks->getTokens($d['active']['id_task']) + $d['active']['tokens']);
       $tokens = $tasks->getTokensCurrent($tokenCat);
       $d['active']['availableTokens'] = !empty($tokens['available']) ? ($tokens['available'] - $d['active']['tokens']) : 0;
