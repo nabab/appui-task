@@ -4,15 +4,12 @@ if (!empty($model->data['data']['startDatetime'])
   && ($t = new \bbn\Appui\Task($model->db))
 ) {
   $data = array_map(function($track) use($t){
-    $title = $t->getTitle($track['id_task']);
-    $track['message'] = '';
     if (($n = $t->getTrackNote($track['id']))
       && !empty($n['content'])
     ) {
-      $title .= '<div>'.$n['content'].'</div>';
       $track['message'] = $n['content'];
     }
-    $track['title'] = $title;
+    $track['title'] = $t->getTitle($track['id_task']);
     return $track;
   }, $t->getTracksByDates($model->data['data']['startDatetime'], $model->data['data']['endDatetime']) ?: []);
 

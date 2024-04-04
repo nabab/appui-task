@@ -11,4 +11,9 @@ if ($ctrl->hasArguments()
 
 }
 
+$taskCls = new \bbn\Appui\Task($ctrl->db);
+$ctrl->addData([
+  'states' => $taskCls->states()
+]);
+
 $ctrl->combo(_('Tracks editor'), true)->setIcon('nf nf-md-chart_timeline');

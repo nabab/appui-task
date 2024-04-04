@@ -3,9 +3,10 @@
               @dataloaded="goToTrack"
               ref="tracks"
               uid="id"
-              :editable="true"
-              :editor="$options.components.editor"
+              editable="inline"
+              :editor="$options.components.toolbarEditor"
               @edit="onEdit"
               @editSuccess="onEditSuccess"
-              @editFailure="onEditFailure"/>
+              @editFailure="onEditFailure"
+              :map="mapItems"/>
 </div>
