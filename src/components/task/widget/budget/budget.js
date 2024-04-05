@@ -48,7 +48,17 @@
             userName: this.userName(u)
           }
         }), 'userName');
-      }
+      },
+      tokens: {
+        get(){
+          return !!this.source.price && this.isTokensActive ? this.source.price / this.tokensCfg.amount : '';
+        },
+        set(val){
+          if (this.isTokensActive) {
+            this.source.price = val * this.tokensCfg.amount;
+          }
+        }
+      },
     },
     methods: {
       getUserName: appui.app.getUserName,

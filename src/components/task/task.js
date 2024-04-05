@@ -29,7 +29,13 @@
         return !!this.mainPage ? this.mainPage.optionsRoles : [];
       },
       privileges(){
-        return!!this.mainPage ? this.mainPage.privileges : {};
+        return !!this.mainPage ? this.mainPage.privileges : {};
+      },
+      isTokensActive(){
+        return !!this.mainPage ? this.mainPage.isTokensActive : false;
+      },
+      tokensCfg(){
+        return !!this.mainPage ? this.mainPage.tokensCfg : {};
       }
     },
     methods: {

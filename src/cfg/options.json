@@ -302,6 +302,7 @@
         {
           "text": "Configuration",
           "code": "config",
+          "active": 0,
           "billing": {
             "day": "01",
             "month": "01",

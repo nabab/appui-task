@@ -51,8 +51,9 @@ if (!empty($ctrl->post['action'])
   }
   $ctrl->obj->success = $success;
   if ($d['active'] = $tasks->getActiveTrack()) {
-    if (($tokenCat = $tasks->getTokensCategory($d['active']['id_task']))
+    if ($tasks->isTokensActive()
       && ($tokensCfg = $tasks->getTokensCfg())
+      && ($tokenCat = $tasks->getTokensCategory($d['active']['id_task']))
     ) {
       $currentToken = (time() - strtotime($d['active']['start'])) / $tokensCfg['step'];
       $d['active']['tokens'] = ceil($currentToken + $tasks->calcLinkedTokens($d['active']['id_task']));

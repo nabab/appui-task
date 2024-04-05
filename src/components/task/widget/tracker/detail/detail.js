@@ -34,12 +34,12 @@
           width: 500
         }, idx);
       },
-      openTracksEditor(row){
+      openTrackerSessionsEditor(row){
         if (!!appui.options.tasks?.tokens?.cfg
           && !!row.start
           && !!row.end
         ) {
-          bbn.fn.link(this.root + 'page/tracks/' + row.id);
+          bbn.fn.link(this.root + 'page/sessions/' + row.id);
         }
       },
       canEditOrDelete(row) {
@@ -73,7 +73,7 @@
             title: bbn._('Edit'),
             icon: 'nf nf-fa-edit',
             notext: true,
-            action: !!appui.options.tasks?.tokens?.cfg ? this.openTracksEditor : this.edit
+            action: !!appui.options.tasks?.tokens?.cfg ? this.openTrackerSessionsEditor : this.edit
           });
         }
 

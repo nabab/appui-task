@@ -18,6 +18,10 @@
       }
     },
     computed: {
+      totalTime(){
+        let d = dayjs.duration(bbn.fn.sum(this.summary, 'totalTime') * 1000);
+        return '';
+      },
       summary(){
         let res = bbn.fn.map(
           bbn.fn.extend(true, [], bbn.fn.isArray(this.source.trackers) ? this.source.trackers : []),
@@ -30,6 +34,7 @@
               idUser: t.id_user,
               userName: this.userName(t.id_user),
               total: this.secToTime(time, true),
+              totalTime: time,
               notes: t.num_notes
             }
           }

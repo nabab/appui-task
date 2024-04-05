@@ -639,6 +639,17 @@
       },
       privileges(){
         return this.source.privileges;
+      },
+      isTokensActive(){
+        return !!this.source.tokens?.active
+          && !!this.source.tokens?.cfg?.billing?.day
+          && !!this.source.tokens?.cfg?.billing?.month
+          && !!this.source.tokens?.cfg?.billing?.months
+          && !!this.source.tokens?.cfg?.step
+          && !!this.source.tokens?.cfg?.amount;
+      },
+      tokensCfg(){
+        return this.isTokensActive ? this.source.tokens.cfg || {} : {};
       }
     },
     methods: {

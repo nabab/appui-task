@@ -13,5 +13,13 @@
                     title="<?=_('Home')?>"
                     :notext="true"
                     :source="source"/>
+    <bbns-container url="sessions"
+                    :static="true"
+                    :load="false"
+                    component="appui-task-tracker-sessions"
+                    icon="nf nf-md-chart_timeline"
+                    title="<?=_('Tracker sessions editor')?>"
+                    :notext="true"
+                    :source="source"/>
   </bbn-router>
 </div>

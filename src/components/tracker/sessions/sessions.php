@@ -1,5 +1,5 @@
-<div class="bbn-overlay">
-  <bbn-tracks :source="root + 'data/tracks'"
+<div class="appui-task-tracker-sessions bbn-overlay">
+  <bbn-tracks :source="root + 'data/sessions'"
               @dataloaded="goToTrack"
               ref="tracks"
               uid="id"

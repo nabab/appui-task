@@ -10,7 +10,7 @@
         if (!!this.source?.idTrack) {
           let tracks = this.getRef('tracks');
           if (tracks) {
-           // tracks.scrollTo(this.source.idTrack);
+            tracks.scrollTo(this.source.idTrack);
           }
         }
       },
@@ -42,7 +42,7 @@
       },
       mapItems(item){
         if (!!item.message) {
-          item.title += '<div class="bbn-alt-text">' + item.message + '</div>';
+          item.title += '<div class="bbn-alt-text bbn-top-sspace">' + item.message + '</div>';
         }
         else {
           item.message = '';
@@ -51,7 +51,7 @@
       }
     },
     created(){
-      appui.register('appui-task-tracks', this);
+      appui.register('appui-task-sessions-editor', this);
     },
     components: {
       popupEditor: {
@@ -154,8 +154,8 @@
                     :validation="validation">
             <div class="bbn-hspadded bbn-bottom-spadded bbn-vmiddle bbn-flex-width"
                  style="gap: var(--space); align-items: flex-end">
-              <div class="bbn-flex-fill bbn-flex-wrap bbn-vmiddle bbn-flex-width"
-                   style="gap: var(--space); align-items: flex-end">
+              <div class="bbn-flex-fill bbn-vmiddle bbn-flex-width"
+                   style="gap: var(--space); align-items: flex-end; flex-wrap: wrap">
                 <span>
                   <span class="bbn-toplabel">` + bbn._('Start') + `</span>
                   <bbn-datetimepicker v-model="source.start"
@@ -183,7 +183,10 @@
                                   }]
                                 }"
                                 :sortable="true"
-                                :order="[{field: 'bbn_notes_versions.title', dir: 'ASC'}]"
+                                :order="[{
+                                  field: 'bbn_notes_versions.title',
+                                  dir: 'ASC'
+                                }]"
                                 source-value="id"
                                 source-text="title"
                                 required/>
@@ -232,7 +235,7 @@
         },
         data(){
           return {
-            appuiTracks: appui.getRegistered('appui-task-tracks'),
+            appuiTracks: appui.getRegistered('appui-task-sessions-editor'),
             tracks: this.closest('bbn-tracks'),
             form: false,
             maxEnd: dayjs().format('YYYY-MM-DD HH:mm:ss'),
