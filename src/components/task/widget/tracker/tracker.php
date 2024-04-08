@@ -27,6 +27,22 @@
       <span v-text="s.total"
             :class="{'bbn-green': !!progress && (currentUserID === s.idUser)}"/>
     </div>
+    <div v-if="totalTime.length"
+         class="bbn-background bbn-top-space bbn-radius bbn-spadded">
+      <div class="bbn-vmiddle"
+           style="justify-content: space-between">
+        <span class="bbn-b"><?=_("Total")?></span>
+        <div>
+          <span v-html="totalTime"/>
+          <div v-if="hasTokensActive"
+               class="bbn-vmiddle"
+               style="justify-content: flex-end">
+               <strong v-html="totalTokens"/>
+               <span><?=_("tokens")?></span>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="bbn-background bbn-top-space bbn-c bbn-radius"
         @click="task.openTrackerDetail"
         :title="_('See tracker detail')">

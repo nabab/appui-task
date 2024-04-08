@@ -10,7 +10,7 @@
       <div class="bbn-secondary-text-alt"
            v-text="price"
            title="<?=_('Price')?>"/>
-      <div v-if="isTokensActive"
+      <div v-if="hasTokensActive"
            class="bbn-tertiary-text-alt"
            title="<?=_('Tokens')?>">
         <span v-text="tokens"/>
@@ -37,7 +37,7 @@
                      unit="€"
                      v-model="source.price"/>
       </span>
-      <span v-if="isTokensActive"
+      <span v-if="hasTokensActive"
             class="bbn-flex-width">
         <span class="bbn-leftlabel"><?=_('Tokens')?></span>
         <bbn-numeric class="bbn-flex-fill"

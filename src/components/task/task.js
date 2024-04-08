@@ -36,6 +36,9 @@
       },
       tokensCfg(){
         return !!this.mainPage ? this.mainPage.tokensCfg : {};
+      },
+      hasTokensActive(){
+        return !!this.isTokensActive && !!this.source.tokens_category;
       }
     },
     methods: {

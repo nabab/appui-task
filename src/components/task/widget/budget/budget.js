@@ -51,10 +51,19 @@
       },
       tokens: {
         get(){
-          return !!this.source.price && this.isTokensActive ? this.source.price / this.tokensCfg.amount : '';
+          if (this.hasTokensActive) {
+            let price = this.source.price;
+            if (!!this.source.children_price) {
+              price = this.source.children_price;
+            }
+
+            return !!price ? price / this.tokensCfg.amount : '';
+          }
+
+          return '';
         },
         set(val){
-          if (this.isTokensActive) {
+          if (this.hasTokensActive) {
             this.source.price = val * this.tokensCfg.amount;
           }
         }

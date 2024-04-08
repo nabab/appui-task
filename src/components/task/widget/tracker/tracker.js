@@ -19,8 +19,37 @@
     },
     computed: {
       totalTime(){
-        let d = dayjs.duration(bbn.fn.sum(this.summary, 'totalTime') * 1000);
-        return '';
+        let d = dayjs.duration((bbn.fn.sum(this.summary, 'totalTime') || 0) * 1000);
+        let res = '';
+        if (d.years()) {
+          let y = d.years();
+          res += '<strong>' + y + '</strong>' + (y === 1 ? bbn._('year') : bbn._('years'));
+        }
+        if (d.months()) {
+          let m = d.months();
+          res += (!!res.length ? ' ' : '') + '<strong>' + m + '</strong>' + (m === 1 ? bbn._('month') : bbn._('months'));
+        }
+        if (d.days()) {
+          let da = d.days();
+          res += (!!res.length ? ' ' : '') + '<strong>' + da + '</strong>' + (da === 1 ? bbn._('day') : bbn._('days'));
+        }
+        if (d.hours()) {
+          let h = d.hours();
+          res += (!!res.length ? ' ' : '') + '<strong>' + h + '</strong>' + (h === 1 ? bbn._('hour') : bbn._('hours'));
+        }
+        if (d.minutes()) {
+          let m = d.minutes();
+          res += (!!res.length ? ' ' : '') +'<strong>' +  m + '</strong>' + (m === 1 ? bbn._('minute') : bbn._('minutes'));;
+        }
+
+        return res;
+      },
+      totalTokens(){
+        if (!this.source.trackers) {
+          return 0;
+        }
+
+        return bbn.fn.sum(this.source.trackers, 'total_tokens') || 0;
       },
       summary(){
         let res = bbn.fn.map(
