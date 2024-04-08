@@ -592,7 +592,8 @@
                 "null": 1,
                 "default": "NULL",
                 "defaultExpression": 1,
-                "maxlength": 10
+                "maxlength": 10,
+                "signed": 0
             },
             "end": {
                 "type": "datetime",
@@ -602,6 +603,14 @@
                 "generation": "addtime(`start`,sec_to_time(`length`))",
                 "default": "NULL",
                 "defaultExpression": 1
+            },
+            "tokens": {
+                "type": "int",
+                "null": 1,
+                "default": "NULL",
+                "defaultExpression": 1,
+                "maxlength": 10,
+                "signed": 0
             }
         }
     },

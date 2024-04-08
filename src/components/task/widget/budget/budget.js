@@ -48,7 +48,26 @@
             userName: this.userName(u)
           }
         }), 'userName');
-      }
+      },
+      tokens: {
+        get(){
+          if (this.hasTokensActive) {
+            let price = this.source.price;
+            if (!!this.source.children_price) {
+              price = this.source.children_price;
+            }
+
+            return !!price ? price / this.tokensCfg.amount : '';
+          }
+
+          return '';
+        },
+        set(val){
+          if (this.hasTokensActive) {
+            this.source.price = val * this.tokensCfg.amount;
+          }
+        }
+      },
     },
     methods: {
       getUserName: appui.getUserName,

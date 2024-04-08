@@ -12,7 +12,7 @@ use \bbn\Appui\Dashboard;
 use \bbn\X;
 
 $s =& $model->inc->session;
-$pm = new Task($model->db);
+$taskCls = new Task($model->db);
 $mgr = $model->inc->user->getManager();
 $arch = $model->inc->user->getClassCfg()['arch']['groups'];
 $groups = $mgr->groups();
@@ -42,7 +42,7 @@ $d = [
       $a['expanded'] = true;
     }
     return $a;
-  }, $pm->categories(), 1),
+  }, $taskCls->categories(), 1),
   'media_types' => $model->inc->options->codeOptions(Note::getOptionId('media')),
   'dashboard' => [
     'widgets' => [],
@@ -50,7 +50,11 @@ $d = [
   ],
   'privileges' => array_map(function($p) use($model){
     return $model->inc->perm->has($model->inc->perm->optionToPermission($p, true));
-  }, $model->inc->options->codeIds('privileges', 'task', 'appui'))
+  }, $model->inc->options->codeIds('privileges', 'task', 'appui')),
+  'tokens' => [
+    'active' => $taskCls->isTokensActive(),
+    'cfg' => $taskCls->getTokensCfg()
+  ]
 ];
 
 try {

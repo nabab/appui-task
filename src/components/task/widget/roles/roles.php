@@ -1,4 +1,4 @@
-<div class="appui-task-task-widget-roles">
+<div class="appui-task-task-widget-roles bbn-bottom-padded bbn-w-100">
   <div class="bbn-w-100 bbn-radius bbn-bordered bbn-bottom-space bbn-background"
        :style="{
          borderColor: getRoleBgColor('managers') + '!important'

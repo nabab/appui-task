@@ -31,15 +31,20 @@
       edit(row, col, idx){
         return this.$refs.table.edit(row, {
           title: bbn._("Edit"),
-          height: 500
+          width: 500
         }, idx);
       },
-      canDelete(row) {
-        if (appui.user.isAdmin
-          || (
-            (appui.user.id === row.id_user)
-            && (dayjs().diff(dayjs(row.end), 'hours') < 48)
-          )
+      openTrackerSessionsEditor(row){
+        if (!!this.hasTokensActive
+          && !!row.start
+          && !!row.end
+        ) {
+          bbn.fn.link(this.root + 'page/sessions/' + row.id);
+        }
+      },
+      canEditOrDelete(row) {
+        if ((appui.user.id === row.id_user)
+          && (dayjs().diff(dayjs(row.end), 'hours') < 48)
         ) {
           return true;
         }
@@ -47,7 +52,7 @@
         return false;
       },
       remove(row){
-        if (this.canDelete(row)){
+        if (this.canEditOrDelete(row)) {
           this.confirm(bbn._('Are you sure you want to delete this track?'), () => {
             this.post(this.root + 'actions/tracker/remove', {id: row.id}, d => {
               if ( d.success ){
@@ -63,16 +68,16 @@
       },
       gridButtons(row){
         let ret = [];
-        if (this.canDelete(row)) {
+        if (this.canEditOrDelete(row)) {
           ret.push({
             title: bbn._('Edit'),
             icon: 'nf nf-fa-edit',
             notext: true,
-            action: this.edit
+            action: !!this.hasTokensActive ? this.openTrackerSessionsEditor : this.edit
           });
         }
 
-        if (appui.user.isAdmin) {
+        if (this.canEditOrDelete(row)) {
           ret.push({
             title: bbn._('Remove'),
             icon: 'nf nf-fa-trash',
@@ -95,11 +100,13 @@
   <div class="bbn-grid-fields bbn-padded">
     <label>` + bbn._('Start') + `</label>
     <bbn-datetimepicker v-model="source.row.start"
-                        :max="maxStart"/>
+                        :max="maxStart"
+                        :show-second="true"/>
     <label>` + bbn._('End') + `</label>
     <bbn-datetimepicker v-model="source.row.end"
                         :min="source.row.start"
-                        :max="maxEnd"/>
+                        :max="maxEnd"
+                        :show-second="true"/>
     <label>`+ bbn._('Message') + `</label>
     <div style="height: 300px">
       <bbn-textarea v-model="source.row.message"
@@ -112,14 +119,18 @@
         data(){
           return {
             tracker: this.closest('bbn-container').find('appui-task-task-widget-tracker-detail'),
-            maxEnd: dayjs().format('YYYY-MM-DD')
+            maxEnd: dayjs().format('YYYY-MM-DD HH:mm:ss')
           }
         },
         computed: {
           maxStart(){
+            if (!this.source.row.end) {
+              return dayjs().format('YYYY-MM-DD HH:mm:ss');
+            }
+
             let end = dayjs(this.source.row.end).unix(),
                 now = dayjs().unix();
-            return end > now ? dayjs().format('YYYY-MM-DD HH:mm:ss') : this.source.row.end;
+            return end < now ? this.source.row.end : dayjs().format('YYYY-MM-DD HH:mm:ss');
           }
         },
         methods: {
@@ -134,6 +145,13 @@
             if ( d.success ){
               this.tracker.getRef('table').updateData();
               appui.success(bbn._('Edited'));
+              let notesWidget = this.closest('bbn-container').find('appui-task-task-widgets-notes');
+              if (notesWidget) {
+                let taskNotes = notesWidget.find('appui-task-notes');
+                if (taskNotes && !!taskNotes.getRef('forum')) {
+                  taskNotes.getRef('forum').updateData();
+                }
+              }
             }
             else {
               appui.error(bbn._('Error'));

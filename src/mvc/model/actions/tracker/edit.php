@@ -1,46 +1,41 @@
 <?php
-$ok = false;
-if (
-  !empty($model->data['id']) &&
-  !empty($model->data['start']) &&
-  !empty($model->data['end']) &&
-  !empty($model->data['length']) &&
-  (strtotime($model->data['end']) > strtotime($model->data['start']))
+
+if (!empty($model->data['id'])
+  && !empty($model->data['id_task'])
+  && !empty($model->data['start'])
+  && !empty($model->data['end'])
+  && (strtotime($model->data['end']) > strtotime($model->data['start']))
 ){
-  $ok = true;
-
-  // Message
-  if ( !empty($model->data['id_note']) ){
-    $notes = new \bbn\Appui\Note($model->db);
-    if (
-      empty($model->data['message']) &&
-      !$notes->remove($model->data['id_note'], true)
-    ){
-      $ok = false;
-    }
-    if (
-      $ok &&
-      !empty($model->data['message']) &&
-      ($old_message = $notes->get($model->data['id_note'])) &&
-      ($old_message['content'] !== $model->data['message']) &&
-      !$notes->update($model->data['id_note'], $old_message['title'], $model->data['message'])
-    ){
-      $ok = false;
-    }
+  $success = true;
+  $taskCls = new \bbn\Appui\Task($model->db);
+  $currentTrack = $taskCls->getTrack($model->data['id']);
+  $note = $taskCls->getTrackNote($model->data['id']);
+  $message = !empty($note['content']) && !empty($note['content']) ? $note['content'] : '';
+  if (($currentTrack['start'] !== $model->data['start'])
+    || ($currentTrack['end'] !== $model->data['end'])
+    || ($message !== $model->data['message'])
+   ) {
+     $success = $taskCls->editTrack(
+       $model->data['id'],
+       $model->data['start'],
+       $model->data['end'],
+       $model->data['message'] ?? null
+     );
   }
 
-  if ( $ok ){
-    $old_track = $model->db->select('bbn_tasks_sessions', [], ['id' => $model->data['id']]);
-    if (
-      (($old_track->start !== $model->data['start']) ||
-      ($old_track->end !== $model->data['end'])) &&
-      !$model->db->update('bbn_tasks_sessions', [
-        'start' => $model->data['start'],
-        'length' => $model->data['length']
-      ], ['id' => $model->data['id']])
-    ){
-      $ok = false;
-    }
+  if ($currentTrack['id_task'] !== $model->data['id_task']) {
+    $success = $taskCls->moveTrack($model->data['id'], $model->data['id_task']);
   }
+
+  $note = $taskCls->getTrackNote($model->data['id']);
+  $message = !empty($note['content']) && !empty($note['content']) ? $note['content'] : '';
+  return [
+    'success' => $success,
+    'data' => \bbn\X::mergeArrays(
+      $taskCls->getTrack($model->data['id']),
+      ['message' => $message]
+    )
+  ];
 }
-return ['success' => $ok];
+
+return ['success' => false];

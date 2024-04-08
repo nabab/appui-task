@@ -382,6 +382,12 @@
               this.source.trackers = d.trackers;
               props.tracker = d.tracker;
               props.trackers = d.trackers;
+              let columns = this.closest('appui-task-columns');
+              if (bbn.fn.isVue(columns)
+                && (columns.order === 'status')
+              ) {
+                columns.reloadAll();
+              }
             }
             if (prop === 'price') {
               if (d.lastChangePrice !== undefined) {
@@ -400,6 +406,14 @@
               else {
                 this.source.state = this.mainPage.states.unapproved;
                 props.state = this.mainPage.states.unapproved;
+              }
+            }
+            if (prop === 'priority') {
+              let columns = this.closest('appui-task-columns');
+              if (bbn.fn.isVue(columns)
+                && (columns.order === 'priority')
+              ) {
+                columns.reloadAll();
               }
             }
             let lastAction = dayjs().format('YYYY-MM-DD HH:mm:ss');
@@ -625,6 +639,17 @@
       },
       privileges(){
         return this.source.privileges;
+      },
+      isTokensActive(){
+        return !!this.source.tokens?.active
+          && !!this.source.tokens?.cfg?.billing?.day
+          && !!this.source.tokens?.cfg?.billing?.month
+          && !!this.source.tokens?.cfg?.billing?.months
+          && !!this.source.tokens?.cfg?.step
+          && !!this.source.tokens?.cfg?.amount;
+      },
+      tokensCfg(){
+        return this.isTokensActive ? this.source.tokens.cfg || {} : {};
       }
     },
     methods: {

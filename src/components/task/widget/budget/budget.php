@@ -1,13 +1,22 @@
-<div class="appui-task-task-widget-budget">
+<div class="appui-task-task-widget-budget bbn-bottom-oadded">
   <div v-if="!showPriceForm && (!!source.price || !!source.children_price)"
-        :class="['bbn-radius', 'bbn-flex-width', 'bbn-bordered', {
+        :class="['bbn-radius', 'bbn-flex-width', 'bbn-bordered', 'bbn-vmiddle', {
           'bbn-bg-green': task.isApproved,
           'bbn-bg-orange': !!task.isUnapproved && !task.isApproved && (!!source.price || (!!source.children_price && !source.num_children_noprice)),
           'bbn-bg-red': !!task.isUnapproved && !task.isApproved && !!source.children_price && !!source.num_children_noprice
         }]"
         :style="{borderColor: 'var(' + (task.isApproved ? '--green' : (!!source.children_price && !!source.num_children_noprice ? '--red' : '--orange')) + ') !important'}">
-    <div class="bbn-spadded bbn-secondary-text-alt bbn-b bbn-background bbn-radius bbn-flex-fill bbn-c"
-          v-text="price"/>
+    <div class="bbn-spadded bbn-b bbn-background bbn-radius bbn-flex-fill bbn-c">
+      <div class="bbn-secondary-text-alt"
+           v-text="price"
+           title="<?=_('Price')?>"/>
+      <div v-if="hasTokensActive"
+           class="bbn-tertiary-text-alt"
+           title="<?=_('Tokens')?>">
+        <span v-text="tokens"/>
+        <i class="nf nf-mdi-coins bbn-m"/>
+      </div>
+    </div>
     <div class="bbn-vspadded bbn-hxlpadded bbn-c bbn-b bbn-white">
       <span v-if="task.isApproved"><?= _('Approved') ?></span>
       <span v-else><?= _('Unapproved') ?></span>
@@ -18,11 +27,25 @@
   </div>
   <div v-else-if="showPriceForm && task.canChangeBudget"
         class="bbn-flex-width bbn-vmiddle">
-    <bbn-numeric class="bbn-flex-fill"
-                  :decimals="2"
-                  :min="0"
-                  v-model="source.price"
-                  style="margin-right: 5px"/>
+    <div class="bbn-flex-column bbn-flex-fill"
+         style="gap: var(--sspace)">
+      <span class="bbn-flex-width">
+        <span class="bbn-leftlabel"><?=_('Price')?></span>
+        <bbn-numeric class="bbn-flex-fill"
+                     :decimals="2"
+                     :min="0"
+                     unit="€"
+                     v-model="source.price"/>
+      </span>
+      <span v-if="hasTokensActive"
+            class="bbn-flex-width">
+        <span class="bbn-leftlabel"><?=_('Tokens')?></span>
+        <bbn-numeric class="bbn-flex-fill"
+                      :decimals="2"
+                      :min="0"
+                      v-model="tokens"/>
+      </span>
+    </div>
     <bbn-button icon="nf nf-fa-check"
                 :disabled="!source.price || (source.price == oldPrice)"
                 @click="saveForm"
