@@ -11,7 +11,7 @@
       }
     },
     data(){
-      const mainPage = this.closest('appui-task'),
+      const mainPage = appui.getRegistered('appui-task'),
             filterTypes = [{
               text: bbn._('Mine'),
               value: 'user'

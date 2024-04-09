@@ -46,7 +46,7 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', appui.getRegistered('appui-task'));
     },
     components: {
       item: {

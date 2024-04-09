@@ -22,7 +22,7 @@
         return bbn.fn.isVue(floater) ? floater.opener : false;
       },
       mainPage(){
-        return this.closest('appui-task');
+        return appui.getRegistered('appui-task');
       },
       fullCategories(){
         if (bbn.fn.isVue(this.mainPage)

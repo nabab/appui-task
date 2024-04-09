@@ -90,7 +90,7 @@
               if (d.success) {
                 this.getRef('form').closePopup(true);
                 if (d.roles !== undefined) {
-                  let comps = this.closest('appui-task').findAllByKey(this.source.id, 'appui-task-item');
+                  let comps = appui.getRegistered('appui-task').findAllByKey(this.source.id, 'appui-task-item');
                   if (comps.length) {
                     bbn.fn.each(comps, c => c.$set(c.source, 'roles', d.roles));
                   }
@@ -111,7 +111,7 @@
                             if (child) {
                               this.$set(child, 'roles', roles);
                             }
-                            let comps = this.closest('appui-task').findAllByKey(id, 'appui-task-item');
+                            let comps = appui.getRegistered('appui-task').findAllByKey(id, 'appui-task-item');
                             if (comps.length) {
                               bbn.fn.each(comps, c => c.$set(c.source, 'roles', roles));
                             }

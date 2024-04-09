@@ -96,7 +96,7 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', appui.getRegistered('appui-task'));
       this.$set(this, 'task', this.closest('appui-task-task'));
     }
   }];

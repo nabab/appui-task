@@ -18,7 +18,7 @@
       }
     },
     data(){
-      const mainPage = this.closest('appui-task');
+      const mainPage = appui.getRegistered('appui-task');
       let filters = {
         conditions: [{
           field: 'state',

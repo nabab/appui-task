@@ -205,7 +205,7 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', appui.getRegistered('appui-task'));
       this.$set(this, 'columnList', this.closest('bbn-column-list'));
     },
     mounted(){

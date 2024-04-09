@@ -13,7 +13,7 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', this.closest('appui-task'));
+      this.$set(this, 'mainPage', appui.getRegistered('appui-task'));
       this.$set(this, 'homePage', this.closest('appui-task-home'));
       this.$set(this, 'columnsComp', this.closest('appui-task-columns'));
     }
@@ -50,7 +50,6 @@
     data(){
       return {
         ready: false,
-        mainPage: this.closest('appui-task'),
         currentData: {
           selection: this.filter,
           title: this.search,
@@ -160,7 +159,11 @@
         });
       },
       filter(newVal){
-        this.getRef('sections').setAllCheckCollapse();
+        let sections = this.getRef('sections');
+        if (!!sections) {
+          sections.setAllCheckCollapse();
+        }
+
         this.currentData.selection = newVal;
       },
       role(newVal){

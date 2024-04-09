@@ -570,7 +570,6 @@
   }
 
   return {
-    name: 'appui-task',
     data(){
       return {
         root: appui.plugins['appui-task'] + '/',
@@ -709,6 +708,9 @@
         }
         return '';
       }
+    },
+    created(){
+      appui.register('appui-task', this);
     }
   };
 })();
