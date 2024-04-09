@@ -1,5 +1,5 @@
 <div class="appui-task-columns-toolbar">
-  <template v-if="!columnList.collapsed">
+  <template v-if="columnList && columnList.collapsed">
     <bbn-button v-if="!!source
                   && !!source.canAdd
                   && !!columnsComp
@@ -22,15 +22,16 @@
                 v-if="total"
                 :notext="true"/>
   </template>
-  <div :class="['bbn-radius', 'bbn-background', 'bbn-hspadded', {
-          'bbn-vspadded': columnList.collapsed,
-          'bbn-vmiddle': !columnList.collapsed,
-          'bbn-flex': columnList.collapsed,
-          'verticaltext': columnList.collapsed
+  <div v-if="columnList"
+       :class="['bbn-radius', 'bbn-background', 'bbn-hspadded', {
+          'bbn-vspadded': columnList?.collapsed,
+          'bbn-vmiddle': !columnList?.collapsed,
+          'bbn-flex': columnList?.collapsed,
+          'verticaltext': columnList?.collapsed
         }]"
         style="height: auto; min-width: 2rem; align-items: center">
     <i class="nf nf-oct-issue_opened bbn-m bbn-middle"/>
-    <div :class="{'bbn-left-xsspace': !columnList.collapsed}"
+    <div :class="{'bbn-left-xsspace': !columnList?.collapsed}"
           v-text="total"/>
   </div>
 </div>
