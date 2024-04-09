@@ -28,7 +28,8 @@
         });
       },
       collapseAll(){
-        if (this.columnList?.component
+        if (!!this.columnList
+          && this.columnList?.component
           && this.columnList.currentData.length
         ) {
           let items = this.columnList.findAll(this.columnList.component);
@@ -38,7 +39,8 @@
         }
       },
       expandAll(){
-        if (this.columnList?.component
+        if (this.columnList
+          && this.columnList?.component
           && this.columnList.currentData.length
         ) {
           let items = this.columnList.findAll(this.columnList.component);
@@ -52,16 +54,33 @@
           if (openAfterCreation) {
             bbn.fn.link(this.root + 'page/task/' + d.id);
           }
-          this.columnList.updateData();
+
+          if (this.columnList) {
+            this.columnList.updateData();
+          }
         }
+      },
+      onCollapsed(){
+        this.$forceUpdate();
+      },
+      onExpanded(){
+        this.$forceUpdate();
       }
     },
     mounted() {
       this.$on('taskcreated', this.onTaskCreated);
       this.columnList = this.closest('bbn-column-list');
+      if (this.columnList) {
+        this.columnList.$on('collapsed', this.onCollapsed);
+        this.columnList.$on('expanded', this.onExpanded);
+      }
     },
     beforeDestroy(){
       this.$off('taskcreated', this.onTaskCreated);
+      if (this.columnList) {
+        this.columnList.$off('collapsed', this.onCollapsed);
+        this.columnList.$off('expanded', this.onExpanded);
+      }
     }
   }
 })();
