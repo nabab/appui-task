@@ -711,6 +711,9 @@
     },
     created(){
       appui.register('appui-task', this);
+    },
+    beforeDestroy(){
+      appui.unregister('appui-task');
     }
   };
 })();

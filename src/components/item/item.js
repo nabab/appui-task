@@ -508,7 +508,8 @@
     },
     mounted(){
       this.$nextTick(() => {
-        if (this.getRef('description').clientHeight >= 600) {
+        let desc = this.getRef('description');
+        if (desc?.clientHeight >= 600) {
           this.showOpenContent = true;
         }
       });

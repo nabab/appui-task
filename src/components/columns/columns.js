@@ -103,6 +103,9 @@
       collapseAll(){
         this.getRef('sections').collapseAll();
       },
+      reloadAll(){
+        this.getRef('sections').reloadAll();
+      },
       getFilters(src, data, idx){
         let conditions = [];
         switch (this.order) {
@@ -155,7 +158,7 @@
     watch: {
       order(){
         this.$nextTick(() => {
-          this.getRef('sections').updateData();
+          this.reloadAll();
         });
       },
       filter(newVal){
