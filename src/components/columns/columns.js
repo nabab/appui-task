@@ -170,7 +170,11 @@
         this.currentData.selection = newVal;
       },
       role(newVal){
-        this.getRef('sections').setAllCheckCollapse();
+        let sections = this.getRef('sections');
+        if (!!sections) {
+          sections.setAllCheckCollapse();
+        }
+
         this.currentData.role = newVal;
       },
       search(newVal){
@@ -178,7 +182,11 @@
           clearTimeout(this.searchTimeout);
         }
         this.searchTimeout = setTimeout(() => {
-          this.getRef('sections').setAllCheckCollapse();
+          let sections = this.getRef('sections');
+          if (!!sections) {
+            sections.setAllCheckCollapse();
+          }
+
           this.currentData.title = newVal;
         }, 500);
       }

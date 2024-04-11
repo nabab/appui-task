@@ -167,19 +167,34 @@
           && !this.source.parent_has_price;
       },
       widgetsAvailable(){
-        return bbn.fn.order(bbn.fn.filter(Object.values(this.dashboard.widgets), w => {
-          if (w.code === 'budget') {
-            return this.budgetIsVisible && !this.currentWidgets[w.code];
-          }
-          if ((w.code === 'info') || (w.code === 'actions')) {
-            return false;
-          }
-          if (w.code === 'logs') {
-            return (this.isAdmin || this.isAccountManager || this.isGlobal)
-              && !this.currentWidgets[w.code];
-          }
-          return !this.currentWidgets[w.code];
-        }), 'text');
+        if (!this.dashboard || !this.dashboard.widgets) {
+          return [];
+        }
+
+        return bbn.fn.order(
+          bbn.fn.filter(
+            Object.values(this.dashboard.widgets),
+            w => {
+              if (w.code === 'budget') {
+                return this.budgetIsVisible
+                  && !this.currentWidgets[w.code];
+              }
+
+              if ((w.code === 'info')
+                || (w.code === 'actions')
+              ) {
+                return false;
+              }
+
+              if (w.code === 'logs') {
+                return (this.isAdmin || this.isAccountManager || this.isGlobal)
+                  && !this.currentWidgets[w.code];
+              }
+
+              return !this.currentWidgets[w.code];
+            }
+          ),
+        'text');
       },
       mediaFileType(){
         return this.mainPage.source.media_types
@@ -488,9 +503,14 @@
         }
       },
       addWidgetToTask(code){
+        bbn.fn.log('addWidget', code)
         if (!this.currentWidgets[code]) {
-          this.$set(this.currentWidgets, code, 1);
-          this.getRef('dashboard').showWidget(code);
+          this.currentWidgets[code] = 1;
+          bbn.fn.log('currentWidgets', this.currentWidgets)
+          let dash = this.getRef('dashboard');
+          if (dash) {
+            dash.showWidget(code);
+          }
         }
       },
       removeWidgetFromTask(widget){
@@ -596,10 +616,12 @@
       }
     },
     created(){
-      if (this.source.roles && this.mainPage.source.roles) {
+      if (this.source.roles
+        && this.mainPage.source.roles
+      ) {
         bbn.fn.each(this.mainPage.source.roles, (i, n) => {
           if (!this.source.roles[n]) {
-            this.$set(this.source.roles, n, []);
+            this.source.roles[n] = [];
           }
         });
       }
@@ -608,8 +630,10 @@
     beforeMount(){
       if (this.hasStorage) {
         const storage = this.getStorage();
-        if (!!storage && (storage.widgets !== undefined)) {
-          this.$set(this, 'currentWidgets', storage.widgets);
+        if (!!storage
+          && (storage.widgets !== undefined)
+        ) {
+          this.currentWidgets = storage.widgets;
         }
       }
     },
@@ -660,6 +684,7 @@
           if (!storage) {
             storage = {};
           }
+
           storage.widgets = newVal;
           this.setStorage(storage);
         }

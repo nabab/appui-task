@@ -6,38 +6,38 @@
           <div :class="['bbn-alt-background', 'bbn-radius', 'bbn-nowrap', 'bbn-bordered', 'bbn-flex-width', 'bbn-vmiddle', {'bbn-spadded': !mainPage.isMobile()}]">
             <div class="bbn-background bbn-vmiddle bbn-hspadded bbn-radius bbn-flex-fill"
                  style="min-height: 2rem; flex-wrap: wrap"
-                 v-if="!mainPage.isMobile()">
+                 bbn-if="!mainPage.isMobile()">
               <appui-task-task-actions :source="source"/>
             </div>
-            <div v-if="mainPage.isMobile()"
+            <div bbn-if="mainPage.isMobile()"
                  class="bbn-spadded bbn-radius bbn-flex-width bbn-vmiddle"
                  :style="{
                    color: getStatusColor(getStatusCode(source.state)),
                    backgroundColor: getStatusBgColor(getStatusCode(source.state))
                  }">
               <div class="bbn-upper bbn-b bbn-lg bbn-hspadded bbn-flex-fill"
-                   v-text="statusText"/>
-              <i v-if="isActive && !isUnapproved && canStart"
+                   bbn-text="statusText"/>
+              <i bbn-if="isActive && !isUnapproved && canStart"
                  @click="start"
                  title="<?= _("Put on ongoing") ?>"
                  class="nf nf-fa-play bbn-p bbn-xxxl"
                  :style="{color: getStatusBgColor('ongoing')}"/>
-              <i v-if="isActive && !isUnapproved && canHold"
+              <i bbn-if="isActive && !isUnapproved && canHold"
                  @click="hold"
                  title="<?= _("Put on hold") ?>"
                  class="nf nf-fa-pause bbn-p bbn-left-space bbn-xxxl"
                  :style="{color: getStatusBgColor('holding')}"/>
-              <i v-if="(isActive || isHolding) && !isUnapproved && canResume"
+              <i bbn-if="(isActive || isHolding) && !isUnapproved && canResume"
                  @click="resume"
                  title="<?= _("Resume") ?>"
                  class="nf nf-fa-play bbn-p bbn-left-space bbn-xxxl"
                  :style="{color: getStatusBgColor('ongoing')}"/>
-              <i v-if="(isActive || isUnapproved) && canClose"
+              <i bbn-if="(isActive || isUnapproved) && canClose"
                  @click="close"
                  title="<?= _("Close")  ?>"
                  class="nf nf-fa-check bbn-p bbn-left-space bbn-xxxl"
                  :style="{color: getStatusBgColor('closed')}"/>
-              <i v-if="isClosed && canReopen"
+              <i bbn-if="isClosed && canReopen"
                  @click="reopen"
                  title="<?= _("Reopen") ?>"
                  class="nf nf-fa-hand_pointer_o bbn-p bbn-left-space bbn-xxxl"/>
@@ -45,12 +45,12 @@
                  title="<?= _("Menu") ?>"
                  class="nf nf-mdi-menu bbn-p bbn-left-space bbn-xxxl"/>
             </div>
-            <div v-else
+            <div bbn-else
                  :class="['bbn-upper', 'bbn-b', 'bbn-lg', 'bbn-spadded', 'bbn-radius', 'bbn-c', {
                    'bbn-left-lspace bbn-right-space': !mainPage.isMobile(),
                    'bbn-flex-fill': mainPage.isMobile()
                  }]"
-                 v-text="statusText"
+                 bbn-text="statusText"
                  :style="{
                    color: getStatusColor(getStatusCode(source.state)),
                    backgroundColor: getStatusBgColor(getStatusCode(source.state))
@@ -69,7 +69,7 @@
                         ref="dashboard"
                         class="bbn-w-100"
                         :max="3">
-            <bbns-widget v-if="dashboard?.widgets?.budget && budgetIsVisible"
+            <bbns-widget bbn-if="dashboard?.widgets?.budget && budgetIsVisible"
                         :hidden="!currentWidgets.budget"
                         :title="dashboard.widgets.budget.text"
                         :icon="dashboard.widgets.budget.icon"
@@ -80,7 +80,7 @@
                         :showable="false"
                         :buttonsLeft="closeButton"
                         :padding="true"/>
-            <bbns-widget v-if="dashboard?.widgets?.roles"
+            <bbns-widget bbn-if="dashboard?.widgets?.roles"
                         :hidden="!currentWidgets.roles"
                         :title="dashboard.widgets.roles.text"
                         :icon="dashboard.widgets.roles.icon"
@@ -91,7 +91,7 @@
                         :showable="false"
                         :buttonsLeft="closeButton"
                         :padding="true"/>
-            <bbns-widget v-if="dashboard?.widgets?.tracker"
+            <bbns-widget bbn-if="dashboard?.widgets?.tracker"
                         :hidden="!currentWidgets.tracker"
                         :title="dashboard.widgets.tracker.text"
                         :icon="dashboard.widgets.tracker.icon"
@@ -103,7 +103,7 @@
                         :buttonsLeft="closeButton"
                         :buttonsRight="trackerButtons"
                         :padding="true"/>
-            <bbns-widget v-if="dashboard?.widgets?.subtasks"
+            <bbns-widget bbn-if="dashboard?.widgets?.subtasks"
                         :hidden="!currentWidgets.subtasks"
                         :title="dashboard.widgets.subtasks.text"
                         :icon="dashboard.widgets.subtasks.icon"
@@ -114,7 +114,7 @@
                         :padding="false"
                         :buttonsLeft="closeButton"
                         :showable="false"/>
-            <bbns-widget v-if="dashboard?.widgets?.logs && (isAdmin || isAccountManager || isGlobal)"
+            <bbns-widget bbn-if="dashboard?.widgets?.logs && (isAdmin || isAccountManager || isGlobal)"
                         :hidden="!currentWidgets.logs"
                         :title="dashboard.widgets.logs.text"
                         :icon="dashboard.widgets.logs.icon"
@@ -126,7 +126,7 @@
                         :buttonsRight="logsButtons"
                         :buttonsLeft="closeButton"
                         :showable="false"/>
-            <bbns-widget v-if="dashboard?.widgets?.notes"
+            <bbns-widget bbn-if="dashboard?.widgets?.notes"
                         :hidden="!currentWidgets.notes"
                         :title="dashboard.widgets.notes.text"
                         :icon="dashboard.widgets.notes.icon"
@@ -144,24 +144,24 @@
     </div>
     <div class="bbn-rel"
          style="width: 300px; min-width: 300px"
-         v-if="widgetsAvailable.length && !mainPage.isMobile()">
+         bbn-if="widgetsAvailable.length && !mainPage.isMobile()">
       <div class="bbn-overlay bbn-padded bbn-background"
            style="padding-left: 0">
         <div class="bbn-flex-height bbn-radius">
           <div class="bbn-bordered-top bbn-spadded bbn-radius-top bbn-alt-background bbn-bordered-left bbn-bordered-right">
             <div class="bbn-spadded bbn-background bbn-c bbn-b bbn-radius bbn-tertiary-text-alt bbn-upper bbn-bottom-sspace bbn-lg"
-                 v-text="_('Widgets')"/>
+                 bbn-text="_('Widgets')"/>
           </div>
           <div class="bbn-flex-fill">
             <bbn-scroll>
               <div class="bbn-padded bbn-background bbn-bordered-left bbn-bordered-right bbn-bordered-bottom bbn-radius-bottom">
-                <div v-for="(w, i) in widgetsAvailable"
+                <div bbn-for="(w, i) in widgetsAvailable"
                      @click="addWidgetToTask(w.code)"
                      :class="['bbn-spadded', 'bbn-c', 'bbn-alt-background', 'bbn-m', 'bbn-p', 'bbn-radius', {
                        'bbn-bottom-space': !!widgetsAvailable[i+1]
                      }]">
                   <i :class="w.icon"/>
-                  <span v-text="w.text"/>
+                  <span bbn-text="w.text"/>
                 </div>
               </div>
             </bbn-scroll>
@@ -170,7 +170,7 @@
       </div>
     </div>
   </div>
-  <bbn-slider v-if="mainPage.isMobile()"
+  <bbn-slider bbn-if="mainPage.isMobile()"
               orientation="left"
               ref="slider"
               :style="{
