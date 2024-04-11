@@ -3,7 +3,7 @@
     <div :class="['bbn-upper', 'bbn-b', 'bbn-lg', 'bbn-secondary-text-alt', 'bbn-flex-fill', 'bbn-alt-background', 'bbn-spadded', 'bbn-radius', 'bbn-ellipsis', {
             'bbn-left-sspace bbn-right-space': !mainPage.isMobile()
           }]"
-          v-text="source.title"/>
+          bbn-text="source.title"/>
     <div>
       <bbn-button class="bbn-no-border"
                   icon="nf nf-fa-close bbn-lg"

@@ -1,17 +1,17 @@
 <div class="appui-task-widget-task bbn-flex-width">
-  <span v-if="source.title"
+  <span bbn-if="source.title"
         :class="[source.bugclass, 'bbn-flex-fill']"
         :title="source.status"
   >
     <a :href="tasksRoot + 'page/task/' + source.id"
-       v-html="source.title"
+       bbn-html="source.title"
     ></a>
   </span>
-  <span v-else
+  <span bbn-else
         :class="[source.bugclass, 'bbn-flex-fill']"
         :title="source.status"
   >
     <?= _('Untitled') ?>
   </span>
-  <span v-text="date"></span>
+  <span bbn-text="date"></span>
 </div>

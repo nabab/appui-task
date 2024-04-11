@@ -1,6 +1,9 @@
 (() => {
   return {
-    mixins: [appuiTaskMixin],
+    mixins: [
+      appuiTaskMixin,
+      bbn.cp.mixins.basic
+    ],
     props: {
       source: {
         type: Object
@@ -205,8 +208,8 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', appui.getRegistered('appui-task'));
-      this.$set(this, 'columnList', this.closest('bbn-column-list'));
+      this.mainPage = appui.getRegistered('appui-task');
+      this.columnList = this.closest('bbn-column-list');
     },
     mounted(){
       this.$on('taskcreated', this.onTaskCreated);

@@ -14,9 +14,9 @@
                'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
-               v-text="_('Search')"/>
+               bbn-text="_('Search')"/>
           <div class="bbn-vmiddle">
-            <bbn-input v-model="currentSearch"
+            <bbn-input bbn-model="currentSearch"
                        :button-right="currentSearch.length ? 'nf nf-fa-close' : 'nf nf-fa-search'"
                        :action-right="clearSearch"
                        :placeholder="_('Search or Title for the new task')"
@@ -28,49 +28,49 @@
                          :notext="mainPage.isMobile()"/>
           </div>
         </div>
-        <div v-if="filterTypes.length > 1"
+        <div bbn-if="filterTypes.length > 1"
              :class="[{
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
                'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
-               v-text="_('Filter')"/>
+               bbn-text="_('Filter')"/>
           <div class="bbn-vmiddle">
             <bbn-radiobuttons :source="filterTypes"
-                              v-model="currentFilter"/>
+                              bbn-model="currentFilter"/>
           </div>
         </div>
-        <div v-if="isColumnsView"
+        <div bbn-if="isColumnsView"
              :class="[{
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
                'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
-               v-text="_('Order')"/>
+               bbn-text="_('Order')"/>
           <div class="bbn-vmiddle">
             <bbn-radiobuttons :source="orderTypes"
-                              v-model="currentOrder"/>
+                              bbn-model="currentOrder"/>
           </div>
         </div>
-        <div v-if="isColumnsView && !!roles && roles.length"
+        <div bbn-if="isColumnsView && !!roles && roles.length"
              :class="[{
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
                'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
-               v-text="_('Role')"/>
+               bbn-text="_('Role')"/>
           <div class="bbn-vmiddle">
             <bbn-radiobuttons :source="roles"
-                              v-model="currentRole"/>
+                              bbn-model="currentRole"/>
           </div>
         </div>
-        <div v-if="(isColumnsView || isListView) && !!currentComponent"
+        <div bbn-if="(isColumnsView || isListView) && !!currentComponent"
              :class="[{
                'bbn-vmiddle bbn-right-lspace': !mainPage.isMobile(),
                'bbn-right-space': mainPage.isMobile()
              }, 'bbn-vxsmargin']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
-               v-text="isColumnsView ? _('Columns') : _('Rows')"/>
+               bbn-text="isColumnsView ? _('Columns') : _('Rows')"/>
           <div class="bbn-vmiddle">
             <bbn-button icon="nf nf-mdi-arrow_collapse"
                         :text="_('Collapse all')"
@@ -85,10 +85,10 @@
                'bbn-vmiddle': !mainPage.isMobile()
              }, 'bbn-vxsmargin', 'bbn-right-space']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
-               v-text="_('Mode')"/>
+               bbn-text="_('Mode')"/>
           <div class="bbn-vmiddle">
             <bbn-radiobuttons :source="viewModes"
-                              v-model="currentViewMode"/>
+                              bbn-model="currentViewMode"/>
           </div>
         </div>
         <bbn-button :title="_('Hierarchy')"
@@ -100,11 +100,11 @@
              'bbn-left-lspace bbn-right-space': !mainPage.isMobile(),
              'bbn-top-space bbn-bottom-space': !!mainPage.isMobile(),
            }]"
-           v-text="_('Tasks')"/>
+           bbn-text="_('Tasks')"/>
     </div>
   </div>
   <div class="bbn-flex-fill bbn-alt-background">
-    <appui-task-columns v-if="isColumnsView"
+    <appui-task-columns bbn-if="isColumnsView"
                         :source="source"
                         ref="columnsComponent"
                         :order="currentOrder"
@@ -113,14 +113,14 @@
                         :role="currentRole"
                         :hierarchy="currentHierarchy"
                         @hook:mounted="currentComponent = getRef('columnsComponent')"/>
-    <appui-task-list v-else-if="isListView"
+    <appui-task-list bbn-else-if="isListView"
                      :source="source"
                      :filter="currentFilter"
                      :search="currentSearch"
                      ref="listComponent"
                      :hierarchy="currentHierarchy"
                      @hook:mounted="currentComponent = getRef('listComponent')"/>
-    <appui-task-table v-else-if="isTableView"
+    <appui-task-table bbn-else-if="isTableView"
                      :source="source"
                      :filter="currentFilter"
                      :search="currentSearch"

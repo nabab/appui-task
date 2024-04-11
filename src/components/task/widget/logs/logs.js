@@ -1,3 +1,5 @@
 (() => {
-  return {}
+  return {
+    mixins: [bbn.cp.mixins.basic]
+  }
 })();

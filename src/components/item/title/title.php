@@ -7,7 +7,7 @@
             'bbn-left-sspace bbn-right-space': !mainPage.isMobile(),
             'bbn-top-space bbn-bottom-space': !!mainPage.isMobile(),
           }]"
-          v-text="_('Edit title')"/>
+          bbn-text="_('Edit title')"/>
     <div>
       <bbn-button class="bbn-no-border"
                   icon="nf nf-fa-close bbn-lg"
@@ -23,7 +23,7 @@
           <div class="bbn-100 bbn-spadded">
             <div class="bbn-100">
               <bbn-textarea class="bbn-overlay bbn-no-border"
-                            v-model="formSource.title"
+                            bbn-model="formSource.title"
                             :resizable="false"
                             maxlength="255"/>
             </div>

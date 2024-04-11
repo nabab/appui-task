@@ -1,5 +1,5 @@
 <div class="appui-task-columns bbn-overlay">
-  <bbn-collapsable-columns v-if="ready && !!sections && sections.length"
+  <bbn-collapsable-columns bbn-if="ready && !!sections && sections.length"
                            :source="sections"
                            :data="currentData"
                            ref="sections"
@@ -14,7 +14,7 @@
                            :collapse-empty="true"
                            uid="id"
                            column-width="45rem"/>
-  <div v-else
+  <div bbn-else
         class="bbn-100 bbn-alt-background bbn-padded">
     <div class="bbn-100">
       <bbn-loader class="bbn-radius"

@@ -8,7 +8,7 @@
               'bbn-alt-background': inverted,
               'bbn-background': !inverted
             }]"
-            v-text="source.ref"
+            bbn-text="source.ref"
             :title="_('Reference number')"/>
       <span :class="['bbn-vmiddle', 'bbn-right-spadded', 'bbn-radius', {
               'bbn-alt-background': inverted,
@@ -20,11 +20,11 @@
                      font-size="0.7rem"
                      style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important"/>
         <span class="bbn-left-xsspace bbn-s bbn-unselectable"
-              v-text="mainPage.isYou(source.id_user) ? _('You') : author"
+              bbn-text="mainPage.isYou(source.id_user) ? _('You') : author"
               :title="author"/>
       </span>
     </div>
-    <bbn-context v-if="(!!source.price || !!source.children_price) && canSeeBudget"
+    <bbn-context bbn-if="(!!source.price || !!source.children_price) && canSeeBudget"
                  :source="getBudgetMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-right-sspace">
@@ -41,31 +41,31 @@
                     'bbn-bg-red': !isApproved && !!source.children_price && !!source.num_children_noprice
                   }]"
                   :title="_('Budget')">
-          <span v-text="money(source.price || source.children_price)"/>
-          <i v-if="!isApproved && !!source.children_price && !!source.num_children_noprice"
+          <span bbn-text="money(source.price || source.children_price)"/>
+          <i bbn-if="!isApproved && !!source.children_price && !!source.num_children_noprice"
              class="nf nf-fa-info_circle bbn-left-sspace"
              :title="_('%d sub-tasks need their price to be set', source.num_children_noprice)"/>
       </bbn-button>
     </bbn-context>
-    <div v-if="source.creation_date === source.last_action"
-         v-text="mainPage.formatDate(source.creation_date)"
+    <div bbn-if="source.creation_date === source.last_action"
+         bbn-text="mainPage.formatDate(source.creation_date)"
          :title="_('Created at')"
          :class="['bbn-s', 'bbn-vmiddle', 'bbn-radius', 'bbn-hspadded', {
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"/>
-    <div v-else
-         v-text="mainPage.formatDate(source.last_action)"
+    <div bbn-else
+         bbn-text="mainPage.formatDate(source.last_action)"
          :title="_('Updated at')"
          :class="['bbn-s', 'bbn-vmiddle', 'bbn-radius', 'bbn-hspadded', {
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"/>
-    <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByPriority || isSub"
+    <bbn-context bbn-if="!columnsComp || !columnsComp.isOrderedByPriority || isSub"
                  :source="getPriorityMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-left-sspace">
-      <bbn-button v-text="source.priority"
+      <bbn-button bbn-text="source.priority"
                   :style="{
                     color: 'white',
                     backgroundColor: 'var(--appui-task-pr' + source.priority + ')',
@@ -77,11 +77,11 @@
                   class="bbn-upper bbn-s bbn-no-border"
                   :title="_('Priority')"/>
     </bbn-context>
-    <bbn-context v-if="!columnsComp || !columnsComp.isOrderedByStatus || isSub"
+    <bbn-context bbn-if="!columnsComp || !columnsComp.isOrderedByStatus || isSub"
                  :source="getStatusMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-left-sspace">
-      <bbn-button v-text="statusText"
+      <bbn-button bbn-text="statusText"
                   :style="{
                     color: statusColor,
                     backgroundColor: statusBgColor,
@@ -106,16 +106,16 @@
          }]">
       <i class="nf nf-mdi-lock bbn-red bbn-right-sspace"
          :title="_('Private')"
-         v-if="!!source.private"/>
+         bbn-if="!!source.private"/>
       <div class="bbn-b bbn-secondary-text-alt bbn-upper bbn-p"
-           v-html="source.title"
+           bbn-html="source.title"
            @click="seeTask"
            style="white-space: normal !important"/>
     </div>
     <bbn-context :source="getMenuSource"
                  class="bbn-left-sspace"
                  item-component="appui-task-item-menu"
-                 v-if="editable">
+                 bbn-if="editable">
       <bbn-button icon="nf nf-mdi-dots_vertical"
                   :title="_('Menu')"
                   :notext="true"
@@ -123,7 +123,7 @@
                   :style="{'cursor': isDeleted ? 'default !important' : ''}"/>
     </bbn-context>
   </div>
-  <div v-if="!!showParent && source.parent"
+  <div bbn-if="!!showParent && source.parent"
        :class="['bbn-middle', 'bbn-vsmargin', 'bbn-radius', 'bbn-spadded', {
          'bbn-alt-background': inverted,
          'bbn-background': !inverted
@@ -131,34 +131,34 @@
     <i class="nf nf-mdi-subdirectory_arrow_right bbn-right-sspace"
        :title="_('Parent task')"/>
     <div class="bbn-b bbn-tertiary-text-alt bbn-upper bbn-p"
-          v-html="source.parent.title"
+          bbn-html="source.parent.title"
           @click="seeParentTask"/>
   </div>
-  <div v-if="!isCollapsed"
+  <div bbn-if="!isCollapsed"
        class="bbn-vsmargin bbn-w-100"
        ref="description">
-    <div v-html="source.content"
+    <div bbn-html="source.content"
           class="appui-task-item-content bbn-w-100"/>
     <div class="bbn-c bbn-top-space bbn-w-100"
-          v-if="showOpenContent">
+          bbn-if="showOpenContent">
       <bbn-button class="bbn-no-border bbn-upper bbn-xs"
                   :text="_('Show more content')"
                   @click="openDescription"/>
     </div>
   </div>
-  <template v-if="!isCollapsed || !collapseFooter">
-    <div v-if="source.reference"
+  <template bbn-if="!isCollapsed || !collapseFooter">
+    <div bbn-if="source.reference"
          :class="['appui-task-item-reference', 'bbn-vsmargin', 'bbn-w-100', 'bbn-spadded', 'bbn-radius',{
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"
-         v-html="source.reference"/>
+         bbn-html="source.reference"/>
     <div class="bbn-vmiddle"
          style="width: 100%; justify-content: space-between">
       <div class="bbn-vmiddle">
-        <div v-if="role"
+        <div bbn-if="role"
              class="bbn-radius bbn-right-sspace bbn-spadded bbn-upper bbn-s"
-             v-text="role.text"
+             bbn-text="role.text"
              :style="{
                backgroundColor: role.backgroundColor + ' !important',
                color: role.color + ' !important',
@@ -178,7 +178,7 @@
                     @click="manageRole('managers')">
           <div class="bbn-vmiddle">
             <i class="nf nf-md-account_tie bbn-lg"/>
-            <sub v-text="!!source.roles.managers ? source.roles.managers.length : 0"/>
+            <sub bbn-text="!!source.roles.managers ? source.roles.managers.length : 0"/>
           </div>
         </bbn-button>
         <bbn-button :title="workersTitle"
@@ -195,7 +195,7 @@
                     @click="manageRole('workers')">
           <div class="bbn-vmiddle">
             <i class="nf nf-md-account_hard_hat bbn-lg"/>
-            <sub v-text="!!source.roles.workers ? source.roles.workers.length : 0"/>
+            <sub bbn-text="!!source.roles.workers ? source.roles.workers.length : 0"/>
           </div>
         </bbn-button>
         <bbn-button :title="viewersTitle"
@@ -210,10 +210,10 @@
                       cursor: !canChange ? 'default !important' : ''
                     }"
                     @click="manageRole('viewers')"
-                    v-if="canSeeViewers">
+                    bbn-if="canSeeViewers">
           <div class="bbn-vmiddle">
             <i class="nf nf-md-account_eye bbn-lg"/>
-            <sub v-text="!!source.roles.viewers ? source.roles.viewers.length : 0"/>
+            <sub bbn-text="!!source.roles.viewers ? source.roles.viewers.length : 0"/>
           </div>
         </bbn-button>
         <bbn-button :title="decidersTitle"
@@ -228,10 +228,10 @@
                       cursor: !canChange ? 'default !important' : ''
                     }"
                     @click="manageRole('deciders')"
-                    v-if="canChangeDecider">
+                    bbn-if="canChangeDecider">
           <div class="bbn-vmiddle">
             <i class="nf nf-md-account_cash bbn-lg"/>
-            <sub v-text="!!source.roles.deciders ? source.roles.deciders.length : 0"
+            <sub bbn-text="!!source.roles.deciders ? source.roles.deciders.length : 0"
                   class="bbn-left-xxsspace"/>
           </div>
         </bbn-button>
@@ -250,7 +250,7 @@
                     @click="openNotes">
           <div class="bbn-vmiddle">
             <i class="nf nf-md-comment_text_multiple_outline bbn-lg"/>
-            <sub v-text="source.num_notes"
+            <sub bbn-text="source.num_notes"
                  class="bbn-left-xxsspace"/>
           </div>
         </bbn-button>
@@ -266,24 +266,24 @@
                     :title="_('Sub-Tasks')"
                     @click="toggleSubtasks">
           <div class="bbn-vmiddle">
-            <template v-if="source.num_children">
+            <template bbn-if="source.num_children">
               <i class="nf nf-md-playlist_check bbn-xl bbn-green"/>
-              <sub v-text="closedChildren.length"
+              <sub bbn-text="closedChildren.length"
                    class="bbn-left-xxsspace bbn-right-sspace bbn-green"/>
               <i class="nf nf-md-playlist_remove bbn-lg bbn-red"/>
-              <sub v-text="source.num_children - closedChildren.length"
+              <sub bbn-text="source.num_children - closedChildren.length"
                    class="bbn-left-xxsspace bbn-red"/>
             </template>
-            <template v-else>
+            <template bbn-else>
               <i class="nf nf-md-list_status bbn-lg"/>
-              <sub v-text="0"
+              <sub bbn-text="0"
                    class="bbn-left-xxsspace"/>
             </template>
           </div>
         </bbn-button>
       </div>
     </div>
-    <bbn-column-list v-if="showSubtasks && !!source.num_children"
+    <bbn-column-list bbn-if="showSubtasks && !!source.num_children"
                      :class="['bbn-top-space', {
                        'bbn-alt-background': inverted,
                        'bbn-background': !inverted

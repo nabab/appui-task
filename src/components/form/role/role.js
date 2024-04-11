@@ -16,7 +16,7 @@
     },
     data(){
       let groupsUsers = [];
-      let activeUsers = appui.app.getActiveUsers();
+      let activeUsers = appui.getActiveUsers();
       if (this.source.roles[this.role] === undefined) {
         this.$set(this.source.roles, this.role, []);
       }

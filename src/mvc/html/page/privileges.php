@@ -14,9 +14,9 @@
                'bbn-right-space': isMobile()
              }, 'bbn-vxsmargin']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': isMobile()}]"
-               v-text="_('Search')"/>
+               bbn-text="_('Search')"/>
           <div class="bbn-vmiddle">
-            <bbn-input v-model="currentSearch"
+            <bbn-input bbn-model="currentSearch"
                        :button-right="currentSearch.length ? 'nf nf-fa-close' : 'nf nf-fa-search'"
                        :action-right="clearSearch"
                        :placeholder="_('Search user')"
@@ -28,7 +28,7 @@
                'bbn-right-space': isMobile()
              }, 'bbn-vxsmargin']">
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': isMobile()}]"
-               v-text="_('Columns')"/>
+               bbn-text="_('Columns')"/>
           <div class="bbn-vmiddle">
             <bbn-button icon="nf nf-mdi-arrow_collapse"
                         :text="_('Collapse all')"
@@ -44,11 +44,11 @@
              'bbn-left-lspace bbn-right-space': !isMobile(),
              'bbn-top-space bbn-bottom-space': !!isMobile(),
            }]"
-           v-text="_('Privileges')"/>
+           bbn-text="_('Privileges')"/>
     </div>
   </div>
   <div class="bbn-flex-fill bbn-alt-background">
-    <bbn-collapsable-columns v-if="ready && !!sections && sections.length"
+    <bbn-collapsable-columns bbn-if="ready && !!sections && sections.length"
                             :source="sections"
                             ref="sections"
                             :component="$options.components.user"
@@ -58,7 +58,7 @@
                             :children-filters="getFilters"
                             uid="id"
                             columnWidth="30rem"/>
-    <div v-else
+    <div bbn-else
           class="bbn-100 bbn-alt-background bbn-padded">
       <div class="bbn-100">
         <bbn-loader class="bbn-radius"

@@ -3,15 +3,15 @@
           @success="onSuccess">
   <div class="bbn-padded bbn-grid-fields">
     <label class="bbn-label"
-           v-text="_('Title')"/>
+           bbn-text="_('Title')"/>
     <bbn-input maxlength="255"
                required="required"
-               v-model="source.title"
+               bbn-model="source.title"
                class="bbn-w-100"/>
     <label class="bbn-label"
-           v-text="_('Type')"/>
+           bbn-text="_('Type')"/>
     <bbn-dropdown :source="fullCategories"
-                  v-model="source.type"
+                  bbn-model="source.type"
                   group="group"
                   source-value="id"
                   required="required"
@@ -19,20 +19,20 @@
                   class="bbn-w-100"
                   :groupable="true"/>
     <label class="bbn-label"
-           v-text="_('Private')"/>
-    <bbn-checkbox v-model="source.private"
+           bbn-text="_('Private')"/>
+    <bbn-checkbox bbn-model="source.private"
                   :value="1"
                   :novalue="0"/>
-    <template v-if="roles">
+    <template bbn-if="roles">
       <label class="bbn-label"
-             v-text="_('Copy roles from parent task')"/>
-      <bbn-checkbox v-model="copyRoles"
+             bbn-text="_('Copy roles from parent task')"/>
+      <bbn-checkbox bbn-model="copyRoles"
                     :value="true"
                     :novalue="false"/>
     </template>
     <label class="bbn-label"
-           v-text="_('Open after creation')"/>
-    <bbn-checkbox v-model="openAfterCreation"
+           bbn-text="_('Open after creation')"/>
+    <bbn-checkbox bbn-model="openAfterCreation"
                   :value="true"
                   :novalue="false"/>
   </div>

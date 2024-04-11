@@ -96,8 +96,8 @@
       }
     },
     created(){
-      this.$set(this, 'mainPage', appui.getRegistered('appui-task'));
-      this.$set(this, 'task', this.closest('appui-task-task'));
+      this.mainPage = appui.getRegistered('appui-task');
+      this.task = this.closest('appui-task-task');
     }
   }];
   bbn.cp.addPrefix('appui-task-task-', null, mixins);

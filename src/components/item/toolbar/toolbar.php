@@ -1,7 +1,7 @@
 <div class="appui-task-item-toolbar"
      :style="{width: !!mode ? '100%' : 'auto'}">
-  <template v-if="!mode">
-    <bbn-context v-if="canChange"
+  <template bbn-if="!mode">
+    <bbn-context bbn-if="canChange"
                  :source="[{
                    text: _('Create new'),
                    icon: 'nf nf-fa-plus',
@@ -38,16 +38,16 @@
                 :title="_('Collapse all')"
                 class="bbn-no-border bbn-right-sspace"
                 @click="collapseAll"
-                v-if="!!source.num_children"
+                bbn-if="!!source.num_children"
                 :notext="true"/>
     <bbn-button icon="nf nf-fa-expand"
                 :title="_('Expand all')"
                 class="bbn-no-border bbn-right-sspace"
                 @click="expandAll"
-                v-if="!!source.num_children"
+                bbn-if="!!source.num_children"
                 :notext="true"/>
   </template>
-  <template v-else>
+  <template bbn-else>
     <div class="bbn-flex-width"
          style="align-items: stretch">
       <bbn-button icon="nf nf-fa-arrow_left"
@@ -56,18 +56,18 @@
                   @click="setMode(null)"
                   class="bbn-right-sspace bbn-no-border"
                   style="height: auto"/>
-      <template v-if="mode === 'search'">
-        <bbn-input v-model="currentSearch"
+      <template bbn-if="mode === 'search'">
+        <bbn-input bbn-model="currentSearch"
                     :button-right="currentSearch.length ? 'nf nf-fa-close' : 'nf nf-fa-search'"
                     :action-right="clearSearch"
                     :placeholder="_('Search')"
                     class="bbn-flex-fill bbn-no-border"/>
       </template>
-      <template v-else-if="mode === 'order'">
+      <template bbn-else-if="mode === 'order'">
         <bbn-dropdown class="bbn-no-border bbn-flex-fill"
                       :source="orderSource"
-                      v-model="currentOrder"/>
-        <bbn-button v-if="currentOrderIcon"
+                      bbn-model="currentOrder"/>
+        <bbn-button bbn-if="currentOrderIcon"
                     :icon="currentOrderIcon"
                     :text="currentSort === 'asc' ? _('Ascending order') : _('Descending order')"
                     :notext="true"
@@ -81,12 +81,12 @@
                   class="bbn-left-sspace bbn-no-border"
                   style="height: auto"/>
       </template>
-      <template v-else-if="mode === 'filter'">
+      <template bbn-else-if="mode === 'filter'">
         <div class="bbn-flex-fill">
           <bbn-context :source="getStatusMenuSource"
                        item-component="appui-task-item-menu"
                        class="bbn-left-sspace">
-            <bbn-button v-text="currentFilters.status ? getField(mainPage.optionsStates, 'text', 'value', currentFilters.status) : _('Status')"
+            <bbn-button bbn-text="currentFilters.status ? getField(mainPage.optionsStates, 'text', 'value', currentFilters.status) : _('Status')"
                         :style="{
                           color: currentFilters.status ? getField(mainPage.optionsStates, 'color', 'value', currentFilters.status) : '',
                           backgroundColor: currentFilters.status ? getField(mainPage.optionsStates, 'backgroundColor', 'value', currentFilters.status) : '',
@@ -100,7 +100,7 @@
           <bbn-context :source="getPriorityMenuSource"
                        item-component="appui-task-item-menu"
                        class="bbn-left-sspace">
-            <bbn-button v-text="currentFilters.priority ? getField(mainPage.priorities, 'text', 'value', currentFilters.priority) : _('Priority')"
+            <bbn-button bbn-text="currentFilters.priority ? getField(mainPage.priorities, 'text', 'value', currentFilters.priority) : _('Priority')"
                         :style="{
                           color: currentFilters.priority ? getField(mainPage.priorities, 'color', 'value', currentFilters.priority) : '',
                           backgroundColor: currentFilters.priority ? getField(mainPage.priorities, 'backgroundColor', 'value', currentFilters.priority) : '',
@@ -114,7 +114,7 @@
           <bbn-context :source="getMyRoleMenuSource"
                        item-component="appui-task-item-menu"
                        class="bbn-left-sspace">
-            <bbn-button v-text="currentFilters.role ? getField(mainPage.optionsRoles, 'text', 'value', currentFilters.role) : _('Role')"
+            <bbn-button bbn-text="currentFilters.role ? getField(mainPage.optionsRoles, 'text', 'value', currentFilters.role) : _('Role')"
                         :style="{
                           color: currentFilters.role ? getField(mainPage.optionsRoles, 'color', 'value', currentFilters.role) : '',
                           backgroundColor: currentFilters.role ? getField(mainPage.optionsRoles, 'backgroundColor', 'value', currentFilters.role) : '',

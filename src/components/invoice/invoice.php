@@ -5,8 +5,8 @@
   <div class="bbn-grid-fields bbn-padded">
     <label><?= _('Ref.') ?></label>
     <div>
-      <span v-text="currentYear"></span>
-      <bbn-masked v-model="formData.ref"
+      <span bbn-text="currentYear"></span>
+      <bbn-masked bbn-model="formData.ref"
                   mask="00000"
                   @blur="fillRef"
                   maxlength="5"
@@ -16,19 +16,19 @@
     </div>
     <label><?= _('Date') ?></label>
     <div>
-      <bbn-datetimepicker v-model="formData.creation"
+      <bbn-datetimepicker bbn-model="formData.creation"
                           :max="currentYear + '12-31 23:59:59'"
                           :min="currentYear + '01-01 00:00:00'"
                           required
       ></bbn-datetimepicker>
     </div>
     <label><?= _('Description') ?></label>
-    <bbn-rte v-model="formData.description"
+    <bbn-rte bbn-model="formData.description"
              required
     ></bbn-rte>
     <label><?= _('Tax') ?></label>
     <div class="bbn-vmiddle">
-      <bbn-numeric v-model="formData.tax"
+      <bbn-numeric bbn-model="formData.tax"
                    required
                    :min="0"
                    :max="100"
@@ -37,7 +37,7 @@
     </div>
     <label><?= _('Taxable') ?></label>
     <div class="bbn-vmiddle">
-      <bbn-numeric v-model="formData.taxable"
+      <bbn-numeric bbn-model="formData.taxable"
                    required
                    :min="0"
                    :decimals="2"

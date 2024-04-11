@@ -7,7 +7,7 @@
             'bbn-left-sspace bbn-right-space': !mainPage.isMobile(),
             'bbn-top-space bbn-bottom-space': !!mainPage.isMobile(),
           }]"
-          v-text="source.title"/>
+          bbn-text="source.title"/>
     <div>
       <bbn-button class="bbn-no-border"
                   icon="nf nf-fa-close bbn-lg"
@@ -17,7 +17,7 @@
   <div class="bbn-flex-fill bbn-top-xsspace bbn-xspadded">
     <div class="bbn-100 bbn-radius bbn-alt-background">
       <bbn-scroll axis="y">
-        <div v-html="source.content"
+        <div bbn-html="source.content"
              class="bbn-padded bbn-radius"/>
       </bbn-scroll>
     </div>

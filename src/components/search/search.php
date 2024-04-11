@@ -1,6 +1,6 @@
 <div class="appui-task-search bbn-flex-height bbn-overlay">
   <div class="bbn-left-sspace bbn-top-sspace bbn-right-sspace bbn-spadded bbn-radius bbn-alt-background">
-    <bbn-input v-model="currentSearch"
+    <bbn-input bbn-model="currentSearch"
                :button-right="currentSearch.length ? 'nf nf-fa-close' : 'nf nf-fa-search'"
                :action-right="clearSearch"
                :placeholder="_('Search')"

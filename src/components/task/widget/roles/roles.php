@@ -24,9 +24,9 @@
               @click="isManagerOpen = !isManagerOpen">
           <i class="nf nf-mdi-account_star bbn-lg bbn-hsmargin"/>
           <?= _('Supervisors') ?>
-          <span v-if="managers.length"
+          <span bbn-if="managers.length"
                 class="bbn-badge bbn-s bbn-left-sspace"
-                v-text="managers.length"
+                bbn-text="managers.length"
                 :style="{
                   'background-color': getRoleBgColor('managers'),
                   color: getRoleColor('managers')
@@ -35,30 +35,30 @@
         <bbn-button class="bbn-left-sspace bbn-no-border"
                     icon="nf nf-fa-plus"
                     @click="() => {isManagerOpen = true; addRole('managers')}"
-                    v-if="task.canChange"
+                    bbn-if="task.canChange"
                     :notext="true"
                     :style="{
                       color: getRoleBgColor('managers')
                     }"/>
       </div>
     </div>
-    <div v-if="isManagerOpen"
-         v-for="r in managers"
+    <div bbn-if="isManagerOpen"
+         bbn-for="r in managers"
          class=" bbn-smargin">
       <div class="bbn-vmiddle bbn-flex-width bbn-radius bbn-alt-background bbn-alt-text">
         <bbn-initial :user-id="r.idUser"
                      :height="25"
                      :width="25"
                      font-size="1em"/>
-        <span v-text="r.userName"
+        <span bbn-text="r.userName"
               class="bbn-hsmargin bbn-flex-fill"/>
         <i class="nf nf-fa-trash bbn-p bbn-red bbn-right-sspace"
-           v-if="task.canChange && (managers.length > 1) && (r.idUser !== source.id_user) && (task.isAdmin || task.isGlobal)"
+           bbn-if="task.canChange && (managers.length > 1) && (r.idUser !== source.id_user) && (task.isAdmin || task.isGlobal)"
            @click="removeRole(r.idUser, 'managers')"
            title="<?= _('Remove') ?>"/>
       </div>
     </div>
-    <div v-if="!managers.length && isManagerOpen"
+    <div bbn-if="!managers.length && isManagerOpen"
          class="bbn-spadded bbn-c"
          :style="{
            color: getRoleColor('managers'),
@@ -92,9 +92,9 @@
               @click="isWorkerOpen = !isWorkerOpen">
           <i class="nf nf-mdi-worker bbn-hsmargin"/>
           <?= _('Workers') ?>
-          <span v-if="workers.length"
+          <span bbn-if="workers.length"
                 class="bbn-badge bbn-s bbn-left-sspace"
-                v-text="workers.length"
+                bbn-text="workers.length"
                 :style="{
                   'background-color': getRoleBgColor('workers'),
                   color: getRoleColor('workers')
@@ -103,30 +103,30 @@
         <bbn-button class="bbn-left-sspace bbn-no-border"
                     icon="nf nf-fa-plus"
                     @click="() => {isWorkerOpen = true; addRole('workers')}"
-                    v-if="task.canChange"
+                    bbn-if="task.canChange"
                     :notext="true"
                     :style="{
                       color: getRoleBgColor('workers')
                     }"/>
       </div>
     </div>
-    <div v-if="isWorkerOpen"
-         v-for="r in workers"
+    <div bbn-if="isWorkerOpen"
+         bbn-for="r in workers"
          class="bbn-smargin">
       <div class="bbn-vmiddle bbn-flex-width bbn-alt-background bbn-alt-text bbn-radius">
         <bbn-initial :user-id="r.idUser"
                      :height="25"
                      :width="25"
                      font-size="1em"/>
-        <span v-text="r.userName"
+        <span bbn-text="r.userName"
               class="bbn-hsmargin bbn-flex-fill"/>
         <i class="nf nf-fa-trash bbn-p bbn-red bbn-right-sspace"
-           v-if="task.canChange"
+           bbn-if="task.canChange"
            @click="removeRole(r.idUser, 'workers')"
            title="<?= _('Remove') ?>"/>
       </div>
     </div>
-    <div v-if="!workers.length && isWorkerOpen"
+    <div bbn-if="!workers.length && isWorkerOpen"
          class="bbn-spadded bbn-c"
          :style="{
            color: getRoleColor('workers'),
@@ -139,7 +139,7 @@
        :style="{
          borderColor: getRoleBgColor('viewers') + '!important'
        }"
-       v-if="task.canSeeViewers">
+       bbn-if="task.canSeeViewers">
     <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadded', {
            'bbn-radius-top': isViewerOpen,
            'bbn-radius': !isViewerOpen
@@ -160,9 +160,9 @@
         <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
               @click="isViewerOpen = !isViewerOpen">
           <i class="nf nf-fa-user_secret bbn-hsmargin"/><?= _('Spectators') ?>
-          <span v-if="viewers.length"
+          <span bbn-if="viewers.length"
                 class="bbn-badge bbn-s bbn-left-sspace"
-                v-text="viewers.length"
+                bbn-text="viewers.length"
                 :style="{
                   'background-color': getRoleBgColor('viewers'),
                   color: getRoleColor('viewers')
@@ -171,30 +171,30 @@
         <bbn-button class="bbn-left-sspace bbn-no-border"
                     icon="nf nf-fa-plus"
                     @click="() => {isViewerOpen = true; addRole('viewers')}"
-                    v-if="task.canChange"
+                    bbn-if="task.canChange"
                     :notext="true"
                     :style="{
                       color: getRoleBgColor('viewers')
                     }"/>
       </div>
     </div>
-    <div v-if="isViewerOpen"
-         v-for="r in viewers"
+    <div bbn-if="isViewerOpen"
+         bbn-for="r in viewers"
          class="bbn-smargin">
       <div class="bbn-vmiddle bbn-flex-width bbn-alt-background bbn-alt-text bbn-radius">
         <bbn-initial :user-id="r.idUser"
                      :height="25"
                      :width="25"
                      font-size="1em"/>
-        <span v-text="r.userName"
+        <span bbn-text="r.userName"
               class="bbn-hsmargin bbn-flex-fill"/>
         <i class="nf nf-fa-trash bbn-p bbn-red bbn-right-sspace"
-            v-if="task.canChange"
+            bbn-if="task.canChange"
             @click="removeRole(r.idUser, 'viewers')"
             title="<?= _('Remove') ?>"/>
       </div>
     </div>
-    <div v-if="!viewers.length && isViewerOpen"
+    <div bbn-if="!viewers.length && isViewerOpen"
          class="bbn-spadded bbn-c"
          :style="{
            color: getRoleColor('viewers'),

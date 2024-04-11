@@ -7,7 +7,7 @@
         currentSearch: '',
         selected: false,
         currentSection: 0,
-        users: bbn.fn.map(bbn.fn.extend(true, [], appui.app.getActiveUsers()), u => {
+        users: bbn.fn.map(bbn.fn.extend(true, [], appui.getActiveUsers()), u => {
           u.id = u.value;
           u.username = u.text
           return u;
@@ -210,7 +210,7 @@
         },
         data(){
           let groupsUsers = [];
-          let activeUsers = appui.app.getActiveUsers();
+          let activeUsers = appui.getActiveUsers();
           if (appui.groups && activeUsers) {
             appui.groups.forEach(group => {
               let users = activeUsers.filter(u => {

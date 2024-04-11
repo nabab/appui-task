@@ -5,7 +5,7 @@
           ref="form">
   <div class="bbn-overlay bbn-spadded">
     <appui-usergroup-picker :multi="true"
-                            v-model="source.roles[role]"
+                            bbn-model="source.roles[role]"
                             :as-array="true"
                             :source="users"
                             :filterable="true"

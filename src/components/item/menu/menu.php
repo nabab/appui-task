@@ -6,18 +6,18 @@
      @mouseover="onMouseOver"
      @mouseleave="onMouseLeave"
      :style="currentStyle">
-  <div v-if="!!source.group"
-       v-text="source.group"
+  <div bbn-if="!!source.group"
+       bbn-text="source.group"
        class="bbn-b bbn-c bbn-upper bbn-flex-fill"/>
-  <template v-else>
-    <div v-if="source.icon !== undefined"
+  <template bbn-else>
+    <div bbn-if="source.icon !== undefined"
          style="width: 1.8rem">
-      <i v-if="source.icon"
+      <i bbn-if="source.icon"
          :class="[source.icon, 'bbn-m']"/>
     </div>
-    <div v-text="source.text"
+    <div bbn-text="source.text"
          class="bbn-flex-fill"/>
   </template>
-  <i v-if="!!source.items && !!source.items.length"
+  <i bbn-if="!!source.items && !!source.items.length"
      class="nf nf-fa-chevron_right"/>
 </div>
