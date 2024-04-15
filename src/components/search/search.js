@@ -55,11 +55,11 @@
             <appui-task-item :source="source"
                              :editable="false"
                              class="bbn-flex-fill bbn-right-space"/>
-            <bbn-button v-if="isAdded"
+            <bbn-button bbn-if="isAdded"
                         icon="nf nf-fa-minus bbn-lg"
                         @click="remove"
                         class="bbn-no-border bbn-alt-background bbn-red"/>
-            <bbn-button v-else
+            <bbn-button bbn-else
                         icon="nf nf-fa-plus bbn-lg"
                         @click="add"
                         class="bbn-no-border bbn-alt-background bbn-green"/>

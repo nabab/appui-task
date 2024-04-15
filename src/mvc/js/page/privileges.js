@@ -77,9 +77,9 @@
         template: `
           <div class="bbn-alt-background bbn-spadded bbn-flex-width bbn-vmiddle bbn-radius">
             <div class="bbn-flex-fill bbn-background bbn-radius bbn-xspadded bbn-right-space">
-              <div v-text="user.text"/>
+              <div bbn-text="user.text"/>
               <div class="bbn-s bbn-secondary-text-alt bbn-top-xsspace"
-                   v-text="group.text || group.name || group.nom"/>
+                   bbn-text="group.text || group.name || group.nom"/>
             </div>
             <bbn-button class="bbn-no-border bbn-bg-red bbn-white"
                         icon="nf nf-fa-trash"
@@ -133,7 +133,7 @@
                         class="bbn-no-border bbn-right-sspace"
                         :notext="true"
                         @click="add"
-                        v-if="!columnList.collapsed"/>
+                        bbn-if="!columnList.collapsed"/>
             <div :class="['bbn-radius', 'bbn-background', 'bbn-hspadded', {
                    'bbn-vspadded': columnList.collapsed,
                    'bbn-vmiddle': !columnList.collapsed,
@@ -143,7 +143,7 @@
                  style="height: auto; min-width: 2rem; align-items: center">
               <i class="nf nf-md-account_multiple bbn-m bbn-middle"/>
               <div :class="{'bbn-left-xsspace': !columnList.collapsed}"
-                   v-text="columnList.total"/>
+                   bbn-text="columnList.total"/>
             </div>
           </div>
         `,
@@ -194,7 +194,7 @@
                     ref="form">
             <div class="bbn-overlay bbn-spadded">
               <appui-usergroup-picker :multi="true"
-                                      v-model="source.users"
+                                      bbn-model="source.users"
                                       :as-array="true"
                                       :source="users"
                                       :filterable="true"

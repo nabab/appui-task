@@ -99,17 +99,17 @@
           @success="success">
   <div class="bbn-grid-fields bbn-padded">
     <label>` + bbn._('Start') + `</label>
-    <bbn-datetimepicker v-model="source.row.start"
+    <bbn-datetimepicker bbn-model="source.row.start"
                         :max="maxStart"
                         :show-second="true"/>
     <label>` + bbn._('End') + `</label>
-    <bbn-datetimepicker v-model="source.row.end"
+    <bbn-datetimepicker bbn-model="source.row.end"
                         :min="source.row.start"
                         :max="maxEnd"
                         :show-second="true"/>
     <label>`+ bbn._('Message') + `</label>
     <div style="height: 300px">
-      <bbn-textarea v-model="source.row.message"
+      <bbn-textarea bbn-model="source.row.message"
                     class="bbn-h-100"
                     style="width: 100%"/>
     </div>

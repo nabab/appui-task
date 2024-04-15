@@ -2,11 +2,11 @@
      title="<?=_('Tracker')?>">
   <div class="bbn-block bbn-p bbn-no-wrap"
        @click="openWindow">
-    <span v-if="active && progress"
-          v-text="progress"/>
+    <span bbn-if="active && progress"
+          bbn-text="progress"/>
     <i :class="['bbn-b','nf', 'nf-mdi-timer', {'bbn-green': active && progress}]"/>
   </div>
-  <bbn-floater v-if="isVisible"
+  <bbn-floater bbn-if="isVisible"
                :width="300"
                :height="300"
                :element="$el"
@@ -29,19 +29,19 @@
           </div>
         </div>
         <div class="bbn-flex-fill bbn-flex-height">
-          <div v-if="active"
+          <div bbn-if="active"
                class="bbn-block">
             <div class="bbn-header bbn-no-border-top bbn-no-border-left bbn-no-border-right bbn-xspadded">
               <div class="bbn-flex-width">
                 <div class="bbn-flex-fill bbn-b bbn-hspadded"><?=_('In progress')?></div>
-                <div v-if="progress"
+                <div bbn-if="progress"
                      class="bbn-b bbn-hspadded"
-                     v-text="progress"/>
+                     bbn-text="progress"/>
               </div>
             </div>
             <div class="bbn-primary">
               <div class="bbn-flex-width bbn-vmiddle bbn-vxspadded">
-                <div v-text="shorten(getField(list, 'title', 'id', active.id_task))"
+                <div bbn-text="shorten(getField(list, 'title', 'id', active.id_task))"
                      class="bbn-flex-fill bbn-p bbn-b bbn-hspadded"
                      @click="openTask(active.id_task)"
                      title="<?=_('Open task')?>"/>
@@ -57,11 +57,11 @@
           </div>
           <div class="bbn-flex-fill">
             <bbn-scroll>
-              <div v-for="(l,i) in realList"
+              <div bbn-for="(l,i) in realList"
                    :class="['bbn-vxspadded', 'bbn-hspadded', 'bbn-no-border-left', 'bbn-no-border-right', {'bbn-alt': i%2}]">
                 <div class="bbn-flex-width bbn-vmiddle">
                   <div class="bbn-flex-fill bbn-p"
-                       v-text="shorten(l.title)"
+                       bbn-text="shorten(l.title)"
                        @click="openTask(l.id)"
                        title="<?=_('Open task')?>"/>
                   <bbn-button @click="start(l.id)"

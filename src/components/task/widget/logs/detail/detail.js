@@ -20,13 +20,13 @@
       useravatar: {
         template: `
 <div class="bbn-vmiddle">
-  <bbn-initial v-if="source.id_user"
+  <bbn-initial bbn-if="source.id_user"
                :user-id="source.id_user"
                :user-name="userName"
                :height="25"
                :width="25"
                font-size="1em"/>
-  <span v-text="userName" class="bbn-hsmargin"/>
+  <span bbn-text="userName" class="bbn-hsmargin"/>
 </div>
         `,
         props: {

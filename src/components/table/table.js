@@ -198,7 +198,7 @@
     components: {
       useravatar: {
         template: `
-<bbn-initial v-if="source.id_user"
+<bbn-initial bbn-if="source.id_user"
              :user-id="source.id_user"
              :user-name="userName"
              :height="25"
@@ -214,7 +214,7 @@
       },
       prioavatar: {
         template: `
-<bbn-initial v-if="source.priority"
+<bbn-initial bbn-if="source.priority"
              :letters="source.priority.toString()"
              :class="'bbn-white appui-task-pr' + source.priority"
              :title="_('Priority') + ' ' + source.priority"

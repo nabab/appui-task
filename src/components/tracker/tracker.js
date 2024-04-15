@@ -169,7 +169,7 @@
         template: `
 <bbn-form :source="source"
           @submit="save">
-  <bbn-textarea v-model="source.message"
+  <bbn-textarea bbn-model="source.message"
                 class="bbn-overlay"
                 style="width: 100%; padding: 10px"
                 :focused="true"

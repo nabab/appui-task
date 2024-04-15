@@ -25,7 +25,7 @@
       priority: {
         template: `
           <div :class="[source.class, 'bbn-spadded', 'bbn-c']"
-               v-text="source.text"/>
+               bbn-text="source.text"/>
         `,
         props: {
           source: {

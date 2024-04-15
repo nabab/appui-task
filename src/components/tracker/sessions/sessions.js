@@ -68,18 +68,18 @@
                     :validation="validation">
             <div class="bbn-padded bbn-grid-fields">
               <label class="bbn-label">` + bbn._('Start') + `</label>
-              <bbn-datetimepicker v-model="source.row.start"
+              <bbn-datetimepicker bbn-model="source.row.start"
                                   :show-second="true"
                                   :max="maxStart"
                                   required/>
               <label class="bbn-label">` + bbn._('End') + `</label>
-              <bbn-datetimepicker v-model="source.row.end"
+              <bbn-datetimepicker bbn-model="source.row.end"
                                   :show-second="true"
                                   :max="maxEnd"
                                   required/>
               <label class="bbn-label">`+ bbn._('Message') + `</label>
               <div style="height: 300px">
-                <bbn-textarea v-model="source.row.message"
+                <bbn-textarea bbn-model="source.row.message"
                               class="bbn-h-100"
                               style="width: 100%"/>
               </div>
@@ -159,21 +159,21 @@
                    style="gap: var(--space); align-items: flex-end; flex-wrap: wrap">
                 <span>
                   <span class="bbn-toplabel">` + bbn._('Start') + `</span>
-                  <bbn-datetimepicker v-model="source.start"
+                  <bbn-datetimepicker bbn-model="source.start"
                                       :show-second="true"
                                       :max="maxStart"
                                       required/>
                 </span>
                 <span>
                   <span class="bbn-toplabel">` + bbn._('End') + `</span>
-                  <bbn-datetimepicker v-model="source.end"
+                  <bbn-datetimepicker bbn-model="source.end"
                                       :show-second="true"
                                       :max="maxEnd"
                                       required/>
                 </span>
                 <span>
                   <span class="bbn-toplabel">` + bbn._('Task') + `</span>
-                  <bbn-dropdown v-model="source.id_task"
+                  <bbn-dropdown bbn-model="source.id_task"
                                 :source="appuiTracks.root + '/data/list'"
                                 :limit="0"
                                 :filterable="true"
@@ -196,7 +196,7 @@
                      style="max-height: 3.2rem; z-index: 1">
                   <span>
                     <span class="bbn-toplabel">`+ bbn._('Message') + `</span>
-                    <bbn-textarea v-model="source.message"
+                    <bbn-textarea bbn-model="source.message"
                                   :resizable="false"
                                   rows="1"
                                   class="bbn-w-100"
