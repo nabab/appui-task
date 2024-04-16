@@ -6,7 +6,7 @@
               editable="inline"
               :editor="$options.components.toolbarEditor"
               @edit="onEdit"
-              @editSuccess="onEditSuccess"
-              @editFailure="onEditFailure"
+              @editsuccess="onEditSuccess"
+              @editfailure="onEditFailure"
               :map="mapItems"/>
 </div>

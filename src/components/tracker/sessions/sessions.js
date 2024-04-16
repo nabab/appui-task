@@ -129,7 +129,7 @@
             }
           },
           failure(d) {
-            this.tracks.$emit('editFailure', d);
+            this.tracks.$emit('editfailure', d);
           },
           cancel() {
             if (this.tracks
@@ -302,7 +302,7 @@
             }
           },
           onFailure(d) {
-            this.tracks.$emit('editFailure', d);
+            this.tracks.$emit('editfailure', d);
           },
           onCancel() {
             if (this.tracks
