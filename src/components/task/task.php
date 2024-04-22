@@ -158,6 +158,7 @@
               <div class="bbn-padded bbn-background bbn-bordered-left bbn-bordered-right bbn-bordered-bottom bbn-radius-bottom">
                 <div bbn-for="(w, i) in widgetsAvailable"
                      @click="addWidgetToTask(w.code)"
+                     :key="w.code"
                      :class="['bbn-spadded', 'bbn-c', 'bbn-alt-background', 'bbn-m', 'bbn-p', 'bbn-radius', {
                        'bbn-bottom-space': !!widgetsAvailable[i+1]
                      }]">
