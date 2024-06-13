@@ -61,19 +61,38 @@
           });
         }
       },
+      move(row){
+        if ((appui.app.user.id === row.id_user)
+          && appui.app.user.isDev
+        ) {
+          this.getPopup({
+            component: this.$options.components.moveTrack,
+            source: row,
+            title: bbn._('Move track to another task'),
+            width: 400
+          });
+        }
+      },
       gridButtons(row){
         let ret = [];
+        if ((appui.app.user.id === row.id_user)
+          && appui.app.user.isDev
+        ) {
+          ret.push({
+            title: bbn._('Move'),
+            icon: 'nf nf-md-transfer_up',
+            notext: true,
+            action: this.move
+          });
+        }
+
         if (this.canDelete(row)) {
           ret.push({
             title: bbn._('Edit'),
             icon: 'nf nf-fa-edit',
             notext: true,
             action: this.edit
-          });
-        }
-        
-        if (this.canDelete(row)) {
-          ret.push({
+          }, {
             title: bbn._('Remove'),
             icon: 'nf nf-fa-trash',
             notext: true,
@@ -168,6 +187,48 @@
             }
             else {
               this.$set(this.source.row, 'length', 0);
+            }
+          }
+        }
+      },
+      moveTrack: {
+        props: ['source'],
+        template: `
+          <bbn-form :source="formSource"
+                    :action="root + 'actions/tracker/edit'"
+                    :scrollable="false"
+                    @success="onSuccess">
+            <div class="bbn-padded bbn-w-100">
+              <bbn-dropdown placeholder="` + bbn._('Select task') + `"
+                            :source="root + 'data/tasks'"
+                            v-model="formSource.toTask"
+                            :limit="0"
+                            source-value="id"
+                            source-text="title"
+                            class="bbn-w-100"/>
+            </div>
+          </bbn-form>
+        `,
+        data(){
+          return {
+            root: appui.plugins['appui-task'] + '/',
+            formSource: {
+              id: this.source.id,
+              toTask: ''
+            }
+          }
+        },
+        methods: {
+          onSuccess(d){
+            if (d.success) {
+              appui.success();
+              const det = this.closest('bbn-container').find('appui-task-task-widget-tracker-detail');
+              if (det) {
+                det.getRef('table')?.updateData();
+              }
+            }
+            else {
+              appui.error();
             }
           }
         }
