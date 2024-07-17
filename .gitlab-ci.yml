@@ -24,17 +24,17 @@ github-sync:       # This job runs in the build stage, which runs first.
   script:
     - echo "Synching with Github..."
     - cd ~/
-    - rm -rf gitlab_folder
-    - mkdir gitlab_folder
+    - rm -rf plugins
+    - mkdir -p plugins/appui-task
     - git clone --bare git@git.bbn.so:plugins/appui-task.git gitlab_folder
-    - cd gitlab_folder
+    - cd plugins/appui-task
     - git remote add --mirror=fetch github git@github.com:nabab/appui-task.git
     - git fetch git@git.bbn.so:plugins/appui-task.git master
     - git fetch git@github.com:nabab/appui-task.git master
     - git push -f git@github.com:nabab/appui-task.git --all
     - git push -f git@github.com:nabab/appui-task.git --tags
     - cd -
-    - rm -rf gitlab_folder
+    - rm -rf plugins
     - echo "Synching finished !"
   tags:
     - github
