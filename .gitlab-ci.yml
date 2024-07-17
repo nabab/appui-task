@@ -24,7 +24,7 @@ github-sync:       # This job runs in the build stage, which runs first.
   script:
     - echo "Synching with Github..."
     - cd ~/
-    - rmdir -rf gitlab_folder
+    - rm -rf gitlab_folder
     - mkdir gitlab_folder
     - git clone --bare git@git.bbn.so:plugins/appui-task.git gitlab_folder
     - cd gitlab_folder
