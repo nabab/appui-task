@@ -5,7 +5,7 @@
     data() {
       return {
         root: appui.plugins['appui-task'] + '/',
-        users: appui.users
+        users: appui.app.users
       }
     },
     methods: {
