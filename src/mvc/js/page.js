@@ -473,7 +473,7 @@
                           c.$set(c.source, i, v);
                         }
                       });
-                      if ((c.$options._componentTag === 'appui-task-task')
+                      if ((c.$options.name === 'appui-task-task')
                         && (c.source.state === this.mainPage.states.deleted)
                       ) {
                         let cont = c.closest('bbn-container');
