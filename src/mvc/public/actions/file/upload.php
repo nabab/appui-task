@@ -1,5 +1,5 @@
 <?php
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 if (!empty($ctrl->files['file'])
   && !empty($ctrl->arguments[0])
   && \bbn\Str::isInteger($ctrl->arguments[0])

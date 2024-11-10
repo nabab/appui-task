@@ -7,7 +7,7 @@
 use bbn\X;
 use bbn\Str;
 use bbn\Appui\Task;
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 if ($model->hasData('limit')) {
   $task = new Task($model->db);

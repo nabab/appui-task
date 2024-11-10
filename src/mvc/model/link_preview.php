@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 if ( isset($model->data['url'], $model->data['ref']) && \bbn\Str::isUrl($model->data['url']) ){
   $linkPreview = new \LinkPreview\LinkPreview($model->data['url']);

@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 if (!empty($model->data['ref'])
   && !empty($model->data['id_task'])
   && !empty($model->data['text'])

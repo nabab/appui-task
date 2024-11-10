@@ -1,5 +1,5 @@
 <?php
-/** @var $model \bbn\Mvc\Model */
+/** @var bbn\Mvc\Model $model */
 if ($model->hasData('id', true)) {
   $task = new \bbn\Appui\Task($model->db);
   if ($task->exists($model->data['id'])

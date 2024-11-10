@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 $res = [];
 $taskCls = new \bbn\Appui\Task($model->db);
 $id_user = $model->inc->user->getId();

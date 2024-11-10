@@ -3,7 +3,7 @@
  * Describe what it does to show you're not that dumb!
  *
  **/
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 if ( \count($ctrl->arguments) > 1 ){
   switch ( $ctrl->arguments[0] ){
     case 'media':

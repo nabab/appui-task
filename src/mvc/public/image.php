@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 
 if ( isset($ctrl->arguments[0]) ){
   $ctrl->setMode("image");

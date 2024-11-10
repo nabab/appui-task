@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 $res = ['success' => false];
 if ($model->hasData(['id_task' ,'id_user'], true)) {

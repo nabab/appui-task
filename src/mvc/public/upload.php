@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 
 if ( isset($ctrl->files['filename'], $ctrl->arguments[0]) &&
   \bbn\Str::isInteger($ctrl->arguments[0])

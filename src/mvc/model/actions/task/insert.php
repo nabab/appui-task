@@ -1,5 +1,5 @@
 <?php
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 $taskCls = new \bbn\Appui\Task($model->db);
 $ret = [
   'success' => false
