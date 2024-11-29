@@ -81,7 +81,7 @@
           this.setRoles();
         }
         else {
-          this.$delete(this.source, 'roles');
+          delete this.source.roles;
         }
       }
     }
