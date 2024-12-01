@@ -75,8 +75,8 @@
     components: {
       user: {
         template: `
-          <div class="bbn-alt-background bbn-spadded bbn-flex-width bbn-vmiddle bbn-radius">
-            <div class="bbn-flex-fill bbn-background bbn-radius bbn-xspadded bbn-right-space">
+          <div class="bbn-alt-background bbn-spadding bbn-flex-width bbn-vmiddle bbn-radius">
+            <div class="bbn-flex-fill bbn-background bbn-radius bbn-xspadding bbn-right-space">
               <div bbn-text="user.text"/>
               <div class="bbn-s bbn-secondary-text-alt bbn-top-xsspace"
                    bbn-text="group.text || group.name || group.nom"/>
@@ -134,8 +134,8 @@
                         :notext="true"
                         @click="add"
                         bbn-if="!columnList.collapsed"/>
-            <div :class="['bbn-radius', 'bbn-background', 'bbn-hspadded', {
-                   'bbn-vspadded': columnList.collapsed,
+            <div :class="['bbn-radius', 'bbn-background', 'bbn-hspadding', {
+                   'bbn-vspadding': columnList.collapsed,
                    'bbn-vmiddle': !columnList.collapsed,
                    'bbn-flex': columnList.collapsed,
                    'verticaltext': columnList.collapsed
@@ -192,7 +192,7 @@
                     :source="source"
                     @success="onSuccess"
                     ref="form">
-            <div class="bbn-overlay bbn-spadded">
+            <div class="bbn-overlay bbn-spadding">
               <appui-usergroup-picker :multi="true"
                                       bbn-model="source.users"
                                       :as-array="true"

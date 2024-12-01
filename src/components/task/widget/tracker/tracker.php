@@ -1,7 +1,7 @@
-<div class="appui-task-task-widget-tracker bbn-bottom-padded">
+<div class="appui-task-task-widget-tracker bbn-bottom-padding">
   <template bbn-if="!!progress || summary.length">
     <div bbn-if="!!progress"
-          class="bbn-box bbn-bottom-space bbn-flex-width bbn-green bbn-hpadded bbn-vspadded bbn-vmiddle">
+          class="bbn-box bbn-bottom-space bbn-flex-width bbn-green bbn-hpadding bbn-vspadding bbn-vmiddle">
       <i class="bbn-xxxl nf nf-mdi-timer"/>
       <div class="bbn-left-space bbn-xl bbn-flex-fill"
           bbn-text="_('IN PROGRESS')"/>
@@ -9,7 +9,7 @@
           bbn-text="progress"/>
     </div>
     <div bbn-for="s in summary"
-        class="bbn-vmiddle bbn-vsmargin bbn-flex-width bbn-background bbn-radius bbn-right-spadded">
+        class="bbn-vmiddle bbn-vsmargin bbn-flex-width bbn-background bbn-radius bbn-right-spadding">
       <bbn-initial :user-id="s.idUser"
                   :height="25"
                   :width="25"
@@ -28,7 +28,7 @@
             :class="{'bbn-green': !!progress && (currentUserID === s.idUser)}"/>
     </div>
     <div bbn-if="totalTime.length"
-         class="bbn-background bbn-top-space bbn-radius bbn-spadded">
+         class="bbn-background bbn-top-space bbn-radius bbn-spadding">
       <div class="bbn-vmiddle"
            style="justify-content: space-between">
         <span class="bbn-b"><?=_("Total")?></span>
@@ -50,5 +50,5 @@
     </div>
   </template>
   <div bbn-else
-       class="bbn-radius bbn-spadded bbn-background bbn-text bbn-c"><?=_("No data")?></div>
+       class="bbn-radius bbn-spadding bbn-background bbn-text bbn-c"><?=_("No data")?></div>
 </div>

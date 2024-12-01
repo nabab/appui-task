@@ -1,12 +1,12 @@
 <div class="appui-task-home bbn-alt-background bbn-overlay bbn-flex-height">
-  <div class="bbn-alt-background bbn-padded appui-task-home-toolbar">
-    <div :class="['bbn-spadded', 'bbn-background', 'bbn-radius', 'appui-task-box-shadow', 'bbn-vmiddle', 'bbn-nowrap', {
+  <div class="bbn-alt-background bbn-padding appui-task-home-toolbar">
+    <div :class="['bbn-spadding', 'bbn-background', 'bbn-radius', 'appui-task-box-shadow', 'bbn-vmiddle', 'bbn-nowrap', {
            'bbn-flex-width': !mainPage.isMobile(),
            'bbn-flex-height': !!mainPage.isMobile()
          }]">
       <div :class="['bbn-alt-background', 'bbn-vmiddle', 'bbn-radius', 'bbn-flex-fill', {
-             'bbn-hspadded': !mainPage.isMobile(),
-             'bbn-spadded': mainPage.isMobile()
+             'bbn-hspadding': !mainPage.isMobile(),
+             'bbn-spadding': mainPage.isMobile()
            }]"
            style="min-height: 2rem; flex-wrap: wrap">
         <div :class="[{

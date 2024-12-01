@@ -23,8 +23,8 @@
                 :notext="true"/>
   </template>
   <div bbn-if="columnList"
-       :class="['bbn-radius', 'bbn-background', 'bbn-hspadded', {
-          'bbn-vspadded': columnList.collapsed,
+       :class="['bbn-radius', 'bbn-background', 'bbn-hspadding', {
+          'bbn-vspadding': columnList.collapsed,
           'bbn-vmiddle': !columnList.collapsed,
           'bbn-flex': columnList.collapsed,
           'verticaltext': columnList.collapsed

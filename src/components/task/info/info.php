@@ -1,10 +1,10 @@
 <div class="appui-task-task-info">
   <div class="bbn-flex-width bbn-bottom-sspace">
     <div class="bbn-vmiddle bbn-flex-fill">
-      <span class="bbn-right-sspace bbn-radius bbn-xspadded bbn-s bbn-background bbn-text"
+      <span class="bbn-right-sspace bbn-radius bbn-xspadding bbn-s bbn-background bbn-text"
             bbn-text="source.ref"
             :title="_('Reference number')"/>
-      <span class="bbn-vmiddle bbn-right-spadded bbn-radius bbn-background bbn-text">
+      <span class="bbn-vmiddle bbn-right-spadding bbn-radius bbn-background bbn-text">
         <bbn-initial :user-name="userName(source.id_user)"
                     width="1.2rem"
                     height="1.2rem"
@@ -17,7 +17,7 @@
     </div>
     <div bbn-text="task.creation"
          :title="_('Created at')"
-         class="bbn-s bbn-background bbn-text bbn-xspadded bbn-radius"/>
+         class="bbn-s bbn-background bbn-text bbn-xspadding bbn-radius"/>
   </div>
   <bbn-textarea bbn-model="source.title"
                 class="bbn-lg"
@@ -79,9 +79,9 @@
               :class="[
                 'bbn-background',
                 'bbn-radius',
-                'bbn-hspadded',
-                'bbn-vxspadded',
-                'bbn-bordered',
+                'bbn-hspadding',
+                'bbn-vxspadding',
+                'bbn-border',
                 'bbn-p',
                 'bbn-c',
                 'bbn-top-sspace',

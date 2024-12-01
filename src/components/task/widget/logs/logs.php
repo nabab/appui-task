@@ -1,9 +1,9 @@
-<div class="appui-task-task-widget-logs bbn-bottom-padded">
+<div class="appui-task-task-widget-logs bbn-bottom-padding">
   <div bbn-html="_('There are %s logs', '<b>' + source.totLogs + '</b>')"
-       class="bbn-spadded bbn-background bbn-bottom-space bbn-c bbn-radius"/>
+       class="bbn-spadding bbn-background bbn-bottom-space bbn-c bbn-radius"/>
   <div bbn-for="(log, i) in source.lastLogs"
-        :class="['bbn-background', 'bbn-radius', 'bbn-spadded', {'bbn-bottom-sspace': !!source.lastLogs[i+1]}]">
-    <div class="bbn-vmiddle bbn-flex-width bbn-bottom-xspadded">
+        :class="['bbn-background', 'bbn-radius', 'bbn-spadding', {'bbn-bottom-sspace': !!source.lastLogs[i+1]}]">
+    <div class="bbn-vmiddle bbn-flex-width bbn-bottom-xspadding">
       <bbn-initial :user-id="log.id_user"
                    height="1.2rem"
                    width="1.2rem"
@@ -15,7 +15,7 @@
             bbn-text="fdatetime(log.chrono)"/>
     </div>
     <div bbn-html="log.action"
-        class="bbn-top-xspadded"/>
+        class="bbn-top-xspadding"/>
   </div>
   <div bbn-if="source.totLogs > 5"
        class="bbn-background bbn-top-space bbn-c bbn-radius"

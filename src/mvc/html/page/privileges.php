@@ -1,12 +1,12 @@
 <div class="appui-task-privileges bbn-alt-background bbn-overlay bbn-flex-height">
-  <div class="bbn-alt-background bbn-padded">
-    <div :class="['bbn-spadded', 'bbn-background', 'bbn-radius', 'appui-task-box-shadow', 'bbn-vmiddle', 'bbn-nowrap', {
+  <div class="bbn-alt-background bbn-padding">
+    <div :class="['bbn-spadding', 'bbn-background', 'bbn-radius', 'appui-task-box-shadow', 'bbn-vmiddle', 'bbn-nowrap', {
            'bbn-flex-width': !isMobile(),
            'bbn-flex-height': !!isMobile()
          }]">
       <div :class="['bbn-alt-background', 'bbn-vmiddle', 'bbn-radius', 'bbn-flex-fill', {
-             'bbn-hspadded': !isMobile(),
-             'bbn-spadded': isMobile()
+             'bbn-hspadding': !isMobile(),
+             'bbn-spadding': isMobile()
            }]"
            style="min-height: 2rem; flex-wrap: wrap">
         <div :class="[{
@@ -59,7 +59,7 @@
                             uid="id"
                             columnWidth="30rem"/>
     <div bbn-else
-          class="bbn-100 bbn-alt-background bbn-padded">
+          class="bbn-100 bbn-alt-background bbn-padding">
       <div class="bbn-100">
         <bbn-loader class="bbn-radius"
                     style="background-color: var(--default-background)"/>

@@ -15,7 +15,7 @@
                            uid="id"
                            column-width="45rem"/>
   <div bbn-else
-        class="bbn-100 bbn-alt-background bbn-padded">
+        class="bbn-100 bbn-alt-background bbn-padding">
     <div class="bbn-100">
       <bbn-loader class="bbn-radius"
                   style="background-color: var(--default-background)"/>

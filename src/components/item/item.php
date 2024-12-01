@@ -1,16 +1,16 @@
-<div :class="['appui-task-item', 'bbn-radius', 'bbn-spadded', {
+<div :class="['appui-task-item', 'bbn-radius', 'bbn-spadding', {
        'bbn-alt-background': !inverted,
        'bbn-background': inverted
      }]">
   <div class="bbn-flex-width">
     <div class="bbn-vmiddle bbn-flex-fill">
-      <span :class="['bbn-right-sspace', 'bbn-radius', 'bbn-xspadded', 'bbn-s', {
+      <span :class="['bbn-right-sspace', 'bbn-radius', 'bbn-xspadding', 'bbn-s', {
               'bbn-alt-background': inverted,
               'bbn-background': !inverted
             }]"
             bbn-text="source.ref"
             :title="_('Reference number')"/>
-      <span :class="['bbn-vmiddle', 'bbn-right-spadded', 'bbn-radius', {
+      <span :class="['bbn-vmiddle', 'bbn-right-spadding', 'bbn-radius', {
               'bbn-alt-background': inverted,
               'bbn-background': !inverted
             }]">
@@ -50,14 +50,14 @@
     <div bbn-if="source.creation_date === source.last_action"
          bbn-text="mainPage.formatDate(source.creation_date)"
          :title="_('Created at')"
-         :class="['bbn-s', 'bbn-vmiddle', 'bbn-radius', 'bbn-hspadded', {
+         :class="['bbn-s', 'bbn-vmiddle', 'bbn-radius', 'bbn-hspadding', {
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"/>
     <div bbn-else
          bbn-text="mainPage.formatDate(source.last_action)"
          :title="_('Updated at')"
-         :class="['bbn-s', 'bbn-vmiddle', 'bbn-radius', 'bbn-hspadded', {
+         :class="['bbn-s', 'bbn-vmiddle', 'bbn-radius', 'bbn-hspadding', {
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"/>
@@ -100,7 +100,7 @@
                 @click="toggleCollapsed"
                 :notext="true"
                 class="bbn-no-border bbn-right-sspace"/>
-    <div :class="['bbn-middle', 'bbn-vsmargin', 'bbn-radius', 'bbn-spadded', 'bbn-flex-fill', {
+    <div :class="['bbn-middle', 'bbn-vsmargin', 'bbn-radius', 'bbn-spadding', 'bbn-flex-fill', {
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]">
@@ -124,7 +124,7 @@
     </bbn-context>
   </div>
   <div bbn-if="!!showParent && source.parent"
-       :class="['bbn-middle', 'bbn-vsmargin', 'bbn-radius', 'bbn-spadded', {
+       :class="['bbn-middle', 'bbn-vsmargin', 'bbn-radius', 'bbn-spadding', {
          'bbn-alt-background': inverted,
          'bbn-background': !inverted
        }]">
@@ -148,7 +148,7 @@
   </div>
   <template bbn-if="!isCollapsed || !collapseFooter">
     <div bbn-if="source.reference"
-         :class="['appui-task-item-reference', 'bbn-vsmargin', 'bbn-w-100', 'bbn-spadded', 'bbn-radius',{
+         :class="['appui-task-item-reference', 'bbn-vsmargin', 'bbn-w-100', 'bbn-spadding', 'bbn-radius',{
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]"
@@ -157,7 +157,7 @@
          style="width: 100%; justify-content: space-between">
       <div class="bbn-vmiddle">
         <div bbn-if="role"
-             class="bbn-radius bbn-right-sspace bbn-spadded bbn-upper bbn-s"
+             class="bbn-radius bbn-right-sspace bbn-spadding bbn-upper bbn-s"
              bbn-text="role.text"
              :style="{
                backgroundColor: role.backgroundColor + ' !important',

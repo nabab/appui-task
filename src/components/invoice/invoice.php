@@ -2,7 +2,7 @@
           :action="source.root + 'actions/task/bill'"
           @success="afterSubmit"
 >
-  <div class="bbn-grid-fields bbn-padded">
+  <div class="bbn-grid-fields bbn-padding">
     <label><?= _('Ref.') ?></label>
     <div>
       <span bbn-text="currentYear"></span>

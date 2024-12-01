@@ -97,7 +97,7 @@
           :scrollable="false"
           :validation="validation"
           @success="success">
-  <div class="bbn-grid-fields bbn-padded">
+  <div class="bbn-grid-fields bbn-padding">
     <label>` + bbn._('Start') + `</label>
     <bbn-datetimepicker bbn-model="source.row.start"
                         :max="maxStart"

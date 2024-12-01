@@ -1,9 +1,9 @@
-<div class="appui-task-task-widget-roles bbn-bottom-padded bbn-w-100">
-  <div class="bbn-w-100 bbn-radius bbn-bordered bbn-bottom-space bbn-background"
+<div class="appui-task-task-widget-roles bbn-bottom-padding bbn-w-100">
+  <div class="bbn-w-100 bbn-radius bbn-border bbn-bottom-space bbn-background"
        :style="{
          borderColor: getRoleBgColor('managers') + '!important'
        }">
-    <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadded', {
+    <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadding', {
            'bbn-radius-top': isManagerOpen,
            'bbn-radius': !isManagerOpen
          }]"
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div bbn-if="!managers.length && isManagerOpen"
-         class="bbn-spadded bbn-c"
+         class="bbn-spadding bbn-c"
          :style="{
            color: getRoleColor('managers'),
            backgroundColor: getRoleBgColor('managers')
@@ -67,11 +67,11 @@
       <?= _('Not set') ?>
     </div>
   </div>
-  <div class="bbn-w-100 bbn-radius bbn-bordered bbn-bottom-space bbn-background"
+  <div class="bbn-w-100 bbn-radius bbn-border bbn-bottom-space bbn-background"
        :style="{
          borderColor: getRoleBgColor('workers') + '!important'
        }">
-    <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadded', {
+    <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadding', {
            'bbn-radius-top': isWorkerOpen,
            'bbn-radius': !isWorkerOpen
          }]"
@@ -127,7 +127,7 @@
       </div>
     </div>
     <div bbn-if="!workers.length && isWorkerOpen"
-         class="bbn-spadded bbn-c"
+         class="bbn-spadding bbn-c"
          :style="{
            color: getRoleColor('workers'),
            backgroundColor: getRoleBgColor('workers')
@@ -135,12 +135,12 @@
       <?= _('Not set') ?>
     </div>
   </div>
-  <div class="bbn-w-100 bbn-radius bbn-bordered bbn-background"
+  <div class="bbn-w-100 bbn-radius bbn-border bbn-background"
        :style="{
          borderColor: getRoleBgColor('viewers') + '!important'
        }"
        bbn-if="task.canSeeViewers">
-    <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadded', {
+    <div :class="['bbn-b', 'bbn-no-border', 'bbn-xspadding', {
            'bbn-radius-top': isViewerOpen,
            'bbn-radius': !isViewerOpen
          }]"
@@ -195,7 +195,7 @@
       </div>
     </div>
     <div bbn-if="!viewers.length && isViewerOpen"
-         class="bbn-spadded bbn-c"
+         class="bbn-spadding bbn-c"
          :style="{
            color: getRoleColor('viewers'),
            backgroundColor: getRoleBgColor('viewers')

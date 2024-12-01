@@ -1,4 +1,4 @@
-<div :class="['bbn-flex-width', 'bbn-vmiddle', 'bbn-vxspadded', 'bbn-hspadded', {
+<div :class="['bbn-flex-width', 'bbn-vmiddle', 'bbn-vxspadding', 'bbn-hspadding', {
        'bbn-alt-background': !!source.group,
        'bbn-alt-text': !!source.group
      }, source.cls]"

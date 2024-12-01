@@ -1,7 +1,7 @@
 <bbn-form class="appui-task-item-budget"
           :source="formSource"
           @submit.prevent="onSubmit">
-  <div class="bbn-padded bbn-100">
+  <div class="bbn-padding bbn-100">
     <bbn-numeric :decimals="2"
                   :min="0"
                   bbn-model="formSource.price"

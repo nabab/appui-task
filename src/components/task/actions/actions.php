@@ -2,10 +2,10 @@
      style="flex-wrap: wrap">
   <template bbn-if="mainPage.isMobile()">
     <template bbn-if="showBudget">
-      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padded bbn-alt-background bbn-radius"
+      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padding bbn-alt-background bbn-radius"
            bbn-text="_('Budget')"/>
       <div bbn-if="task.canApprove"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.approve() : () => {}"
            :style="{
              color: getStatusBgColor('approved')
@@ -15,21 +15,21 @@
               bbn-text="_('Approve')"/>
       </div>
       <div bbn-if="task.canChangeBudget && !source.price && !source.parent_has_price && !source.children_price"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.addPrice() : () => {}">
         <i class="bbn-m nf nf-md-cash_plus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Add price')"/>
       </div>
       <div bbn-if="task.canChangeBudget && !!source.lastChangePrice && !!source.price"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.editPrice() : () => {}">
         <i class="bbn-m nf nf-md-credit_card_edit"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Edit price')"/>
       </div>
       <div bbn-if="task.canChangeBudget && !!source.lastChangePrice && !!source.price"
-           class="bbn-vmiddle bbn-red bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-red bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.removePrice() : () => {}">
         <i class="bbn-m nf nf-md-trash_can"/>
         <span class="bbn-left-sspace"
@@ -37,10 +37,10 @@
       </div>
     </template>
     <template bbn-if="showStatus">
-      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padded bbn-alt-background bbn-radius"
+      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padding bbn-alt-background bbn-radius"
            bbn-text="_('Status')"/>
       <div bbn-if="task.isActive && !task.isUnapproved && task.canStart"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.start() : () => {}"
            :style="{
              color: getStatusBgColor('ongoing')
@@ -50,7 +50,7 @@
               bbn-text="_('Put on ongoing')"/>
       </div>
       <div bbn-if="task.isActive && !task.isUnapproved && task.canHold"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.hold() : () => {}"
            :style="{
              color: getStatusBgColor('holding')
@@ -60,7 +60,7 @@
               bbn-text="_('Put on hold')"/>
       </div>
       <div bbn-if="(task.isActive || task.isHolding) && !task.isUnapproved && task.canResume"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.resume() : () => {}"
            :style="{
              color: getStatusBgColor('ongoing')
@@ -70,7 +70,7 @@
               bbn-text="_('Resume')"/>
       </div>
       <div bbn-if="(task.isActive || task.isUnapproved) && task.canClose"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.close() : () => {}"
            :style="{
              color: getStatusBgColor('closed')
@@ -80,7 +80,7 @@
               bbn-text="_('Close')"/>
       </div>
       <div bbn-if="task.isClosed && task.canReopen"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.reopen() : () => {}"
            :style="{
              color: getStatusBgColor('opened')
@@ -90,7 +90,7 @@
               bbn-text="_('Reopen')"/>
       </div>
       <div bbn-if="task.isActive && task.canCancel"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.cancel() : () => {}"
            :style="{
              color: getStatusBgColor('canceled')
@@ -100,7 +100,7 @@
               bbn-text="_('Cancel')"/>
       </div>
       <div bbn-if="task.canRemoveTask"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.removeTask : () => {}"
            :style="{
              color: getStatusBgColor('deleted')
@@ -111,10 +111,10 @@
       </div>
     </template>
     <template bbn-if="showRoles">
-      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padded bbn-alt-background bbn-radius"
+      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padding bbn-alt-background bbn-radius"
            bbn-text="_('Roles')"/>
       <div bbn-if="task.canBecomeManager"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.makeMe('managers') : () => {}"
            :style="{
              color: getRoleBgColor('managers')
@@ -124,7 +124,7 @@
               bbn-text="_('Make me a supervisor')"/>
       </div>
       <div bbn-if="task.canRemoveHimselfManager"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.unmakeMe('managers') : () => {}"
            :style="{
              color: getRoleBgColor('managers')
@@ -134,7 +134,7 @@
               bbn-text="_('Remove me from supervisors')"/>
       </div>
       <div bbn-if="task.canBecomeWorker"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.makeMe('workers') : () => {}"
            :style="{
              color: getRoleBgColor('workers')
@@ -144,7 +144,7 @@
               bbn-text="_('Make me a worker')"/>
       </div>
       <div bbn-if="task.canRemoveHimselfWorker"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.unmakeMe('workers') : () => {}"
            :style="{
              color: getRoleBgColor('workers')
@@ -154,7 +154,7 @@
               bbn-text="_('Remove me from workers')"/>
       </div>
       <div bbn-if="task.canBecomeViewer"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.makeMe('viewers') : () => {}"
            :style="{
              color: getRoleBgColor('viewers')
@@ -164,7 +164,7 @@
               bbn-text="_('Make me a spectator')"/>
       </div>
       <div bbn-if="task.canRemoveHimselfViewer"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.unmakeMe('viewers') : () => {}"
            :style="{
              color: getRoleBgColor('viewers')
@@ -174,7 +174,7 @@
               bbn-text="_('Remove me from viewers')"/>
       </div>
       <div bbn-if="task.canBecomeDecider"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.makeMe('deciders') : () => {}"
            :style="{
              color: getRoleBgColor('deciders')
@@ -184,7 +184,7 @@
               bbn-text="_('Make me a decider')"/>
       </div>
       <div bbn-if="task.canRemoveHimselfDecider"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.unmakeMe('deciders') : () => {}"
            :style="{
              color: getRoleBgColor('deciders')
@@ -195,17 +195,17 @@
       </div>
     </template>
     <template bbn-if="showTracker">
-      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padded bbn-alt-background bbn-radius"
+      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padding bbn-alt-background bbn-radius"
            bbn-text="_('Tracker')"/>
       <div bbn-if="source.tracker"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom bbn-red"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom bbn-red"
            @click="task ? task.stopTracker() : () => {}">
         <i class="bbn-m nf nf-mdi-timer_off"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Stop tracker')"/>
       </div>
       <div bbn-else
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom bbn-green"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom bbn-green"
            @click="task ? task.startTracker() : () => {}">
         <i class="bbn-m nf nf-mdi-timer"/>
         <span class="bbn-left-sspace"
@@ -213,10 +213,10 @@
       </div>
     </template>
     <template bbn-if="showOther">
-      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padded bbn-alt-background bbn-radius"
+      <div class="appui-task-task-actions-title bbn-upper bbn-b bbn-secondary-text-alt bbn-padding bbn-alt-background bbn-radius"
            bbn-text="_('Other')"/>
       <div bbn-if="task.canPing"
-           class="bbn-vmiddle bbn-padded appui-task-task-actions-item bbn-bordered-bottom"
+           class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
            @click="task ? task.ping() : () => {}">
         <i class="bbn-m nf nf-fa-hand_pointer_o"/>
         <span class="bbn-left-sspace"

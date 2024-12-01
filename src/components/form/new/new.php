@@ -1,7 +1,7 @@
 <bbn-form :action="root + 'actions/task/insert'"
           :source="source"
           @success="onSuccess">
-  <div class="bbn-padded bbn-grid-fields">
+  <div class="bbn-padding bbn-grid-fields">
     <label class="bbn-label"
            bbn-text="_('Title')"/>
     <bbn-input maxlength="255"

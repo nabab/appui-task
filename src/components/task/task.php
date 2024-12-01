@@ -2,20 +2,20 @@
   <div class="bbn-overlay bbn-flex-width">
     <div class="bbn-flex-fill">
       <div class="bbn-flex-height">
-        <div class="bbn-background bbn-padded appui-task-task-toolbar">
-          <div :class="['bbn-alt-background', 'bbn-radius', 'bbn-nowrap', 'bbn-bordered', 'bbn-flex-width', 'bbn-vmiddle', {'bbn-spadded': !mainPage.isMobile()}]">
-            <div class="bbn-background bbn-vmiddle bbn-hspadded bbn-radius bbn-flex-fill"
+        <div class="bbn-background bbn-padding appui-task-task-toolbar">
+          <div :class="['bbn-alt-background', 'bbn-radius', 'bbn-nowrap', 'bbn-border', 'bbn-flex-width', 'bbn-vmiddle', {'bbn-spadding': !mainPage.isMobile()}]">
+            <div class="bbn-background bbn-vmiddle bbn-hspadding bbn-radius bbn-flex-fill"
                  style="min-height: 2rem; flex-wrap: wrap"
                  bbn-if="!mainPage.isMobile()">
               <appui-task-task-actions :source="source"/>
             </div>
             <div bbn-if="mainPage.isMobile()"
-                 class="bbn-spadded bbn-radius bbn-flex-width bbn-vmiddle"
+                 class="bbn-spadding bbn-radius bbn-flex-width bbn-vmiddle"
                  :style="{
                    color: getStatusColor(getStatusCode(source.state)),
                    backgroundColor: getStatusBgColor(getStatusCode(source.state))
                  }">
-              <div class="bbn-upper bbn-b bbn-lg bbn-hspadded bbn-flex-fill"
+              <div class="bbn-upper bbn-b bbn-lg bbn-hspadding bbn-flex-fill"
                    bbn-text="statusText"/>
               <i bbn-if="isActive && !isUnapproved && canStart"
                  @click="start"
@@ -46,7 +46,7 @@
                  class="nf nf-mdi-menu bbn-p bbn-left-space bbn-xxxl"/>
             </div>
             <div bbn-else
-                 :class="['bbn-upper', 'bbn-b', 'bbn-lg', 'bbn-spadded', 'bbn-radius', 'bbn-c', {
+                 :class="['bbn-upper', 'bbn-b', 'bbn-lg', 'bbn-spadding', 'bbn-radius', 'bbn-c', {
                    'bbn-left-lspace bbn-right-space': !mainPage.isMobile(),
                    'bbn-flex-fill': mainPage.isMobile()
                  }]"
@@ -58,9 +58,9 @@
           </div>
         </div>
         <div class="bbn-flex-fill">
-          <div class="bbn-w-100 bbn-hpadded">
+          <div class="bbn-w-100 bbn-hpadding">
             <appui-task-task-info :source="source"
-                                  class="bbn-w-100 bbn-padded bbn-alt-background bbn-radius bbn-bordered"/>
+                                  class="bbn-w-100 bbn-padding bbn-alt-background bbn-radius bbn-border"/>
           </div>
           <bbn-dashboard bbn-if="dashboard"
                          :sortable="true"
@@ -146,20 +146,20 @@
     <div class="bbn-rel"
          style="width: 300px; min-width: 300px"
          bbn-if="widgetsAvailable.length && !mainPage.isMobile()">
-      <div class="bbn-overlay bbn-padded bbn-background"
+      <div class="bbn-overlay bbn-padding bbn-background"
            style="padding-left: 0">
         <div class="bbn-flex-height bbn-radius">
-          <div class="bbn-bordered-top bbn-spadded bbn-radius-top bbn-alt-background bbn-bordered-left bbn-bordered-right">
-            <div class="bbn-spadded bbn-background bbn-c bbn-b bbn-radius bbn-tertiary-text-alt bbn-upper bbn-bottom-sspace bbn-lg"
+          <div class="bbn-border-top bbn-spadding bbn-radius-top bbn-alt-background bbn-border-left bbn-border-right">
+            <div class="bbn-spadding bbn-background bbn-c bbn-b bbn-radius bbn-tertiary-text-alt bbn-upper bbn-bottom-sspace bbn-lg"
                  bbn-text="_('Widgets')"/>
           </div>
           <div class="bbn-flex-fill">
             <bbn-scroll>
-              <div class="bbn-padded bbn-background bbn-bordered-left bbn-bordered-right bbn-bordered-bottom bbn-radius-bottom">
+              <div class="bbn-padding bbn-background bbn-border-left bbn-border-right bbn-border-bottom bbn-radius-bottom">
                 <div bbn-for="(w, i) in widgetsAvailable"
                      @click="addWidgetToTask(w.code)"
                      :key="w.code"
-                     :class="['bbn-spadded', 'bbn-c', 'bbn-alt-background', 'bbn-m', 'bbn-p', 'bbn-radius', {
+                     :class="['bbn-spadding', 'bbn-c', 'bbn-alt-background', 'bbn-m', 'bbn-p', 'bbn-radius', {
                        'bbn-bottom-space': !!widgetsAvailable[i+1]
                      }]">
                   <i :class="w.icon"/>

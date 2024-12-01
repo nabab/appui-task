@@ -66,7 +66,7 @@
                     @cancel="cancel"
                     ref="form"
                     :validation="validation">
-            <div class="bbn-padded bbn-grid-fields">
+            <div class="bbn-padding bbn-grid-fields">
               <label class="bbn-label">` + bbn._('Start') + `</label>
               <bbn-datetimepicker bbn-model="source.row.start"
                                   :show-second="true"
@@ -153,7 +153,7 @@
                     :buttons="[]"
                     @hook:mounted="setForm"
                     :validation="validation">
-            <div class="bbn-hspadded bbn-bottom-spadded bbn-vmiddle bbn-flex-width"
+            <div class="bbn-hspadding bbn-bottom-spadding bbn-vmiddle bbn-flex-width"
                  style="gap: var(--space); align-items: flex-end">
               <div class="bbn-flex-fill bbn-vmiddle bbn-flex-width"
                    style="gap: var(--space); align-items: flex-end; flex-wrap: wrap">
