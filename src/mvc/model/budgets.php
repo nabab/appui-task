@@ -15,8 +15,9 @@ if ($model->hasData('limit')) {
   $cfg = [
     'table' => 'bbn_tasks',
     'fields' => [
-      'id', 'type', 'bbn_tasks.price', 'state', 'bbn_tasks.ref',
-      'bbn_notes_versions.title',
+      'bbn_tasks.id', 'bbn_tasks.type', 'bbn_tasks.price', 'bbn_tasks.state', 'bbn_tasks.ref',
+      'bbn_tasks.id_parent', 'bbn_notes_versions.title',
+      'parent_title' => 'parents_notes.title',
       'last_date' => 'SUBSTR(FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono)), 1, 19)',
       'accept_date' => 'SUBSTR(FROM_UNIXTIME(MAX(accepted_logs.chrono)), 1, 19)',
       'accepter' => 'accepted_logs.id_user'
@@ -51,13 +52,36 @@ if ($model->hasData('limit')) {
             'value' => $accept_log
           ]
         ]
+      ], [
+        'table' => 'bbn_tasks',
+        'alias' => 'parents',
+        'type' => 'left',
+        'on' => [
+          [
+            'field' => 'bbn_tasks.id_parent',
+            'exp' => 'parents.id'
+          ]
+        ],
+      ], [
+        'table' => 'bbn_notes_versions',
+        'alias' => 'parents_notes',
+        'type' => 'left',
+        'on' => [
+          [
+            'field' => 'parents.id_note',
+            'exp' => 'parents_notes.id_note'
+          ], [
+            'field' => 'parents_notes.latest',
+            'value' => 1
+          ]
+        ]
       ]
     ],
     'where' => [
-      'latest' => 1,
+      'bbn_notes_versions.latest' => 1,
       'bbn_tasks.private' => 0,
       'bbn_tasks.active' => 1,
-      ['price', '>', 0]
+      ['bbn_tasks.price', '>', 0]
     ],
     'group_by' => ['bbn_tasks.id']/*,
     'having' => [
@@ -74,6 +98,6 @@ if ($model->hasData('limit')) {
 else {
   return [
     'states' => $model->inc->options->textValueOptions($model->inc->options->fromCode('states', 'task', 'appui')),
-    'types' => $model->inc->options->textValueOptions($model->inc->options->fromCode('types', 'task', 'appui'))
+    'types' => $model->inc->options->textValueOptions($model->inc->options->fromCode('cats', 'task', 'appui'))
   ];
 }

@@ -9,7 +9,9 @@
     },
     methods: {
       renderTitle(row) {
-        return '<a href="' + this.root + 'page/task/' + row.id + '">' + row.title + '</a>';
+        return '<a href="' + this.root + 'page/task/' + row.id + '">' + row.title + '</a>'
+        + (row.parent_title ? ' (' + bbn._('from') + ' <a href="' + this.root + 'page/task/' + row.id_parent + '">' + row.parent_title + '</a>)' : '');
+        ;
       },
       renderPrice(row) {
         let st = '<span class="bbn-b ';
