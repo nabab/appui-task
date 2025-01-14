@@ -86,7 +86,7 @@
           <bbn-context :source="getStatusMenuSource"
                        item-component="appui-task-item-menu"
                        class="bbn-left-sspace">
-            <bbn-button bbn-text="currentFilters.status ? getField(mainPage.optionsStates, 'text', 'value', currentFilters.status) : _('Status')"
+            <bbn-button bbn-label="currentFilters.status ? getField(mainPage.optionsStates, 'text', 'value', currentFilters.status) : _('Status')"
                         :style="{
                           color: currentFilters.status ? getField(mainPage.optionsStates, 'color', 'value', currentFilters.status) : '',
                           backgroundColor: currentFilters.status ? getField(mainPage.optionsStates, 'backgroundColor', 'value', currentFilters.status) : '',
@@ -100,7 +100,7 @@
           <bbn-context :source="getPriorityMenuSource"
                        item-component="appui-task-item-menu"
                        class="bbn-left-sspace">
-            <bbn-button bbn-text="currentFilters.priority ? getField(mainPage.priorities, 'text', 'value', currentFilters.priority) : _('Priority')"
+            <bbn-button bbn-label="currentFilters.priority ? getField(mainPage.priorities, 'text', 'value', currentFilters.priority) : _('Priority')"
                         :style="{
                           color: currentFilters.priority ? getField(mainPage.priorities, 'color', 'value', currentFilters.priority) : '',
                           backgroundColor: currentFilters.priority ? getField(mainPage.priorities, 'backgroundColor', 'value', currentFilters.priority) : '',
@@ -114,7 +114,7 @@
           <bbn-context :source="getMyRoleMenuSource"
                        item-component="appui-task-item-menu"
                        class="bbn-left-sspace">
-            <bbn-button bbn-text="currentFilters.role ? getField(mainPage.optionsRoles, 'text', 'value', currentFilters.role) : _('Role')"
+            <bbn-button bbn-label="currentFilters.role ? getField(mainPage.optionsRoles, 'text', 'value', currentFilters.role) : _('Role')"
                         :style="{
                           color: currentFilters.role ? getField(mainPage.optionsRoles, 'color', 'value', currentFilters.role) : '',
                           backgroundColor: currentFilters.role ? getField(mainPage.optionsRoles, 'backgroundColor', 'value', currentFilters.role) : '',

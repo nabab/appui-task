@@ -65,7 +65,7 @@
                  :source="getPriorityMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-left-sspace">
-      <bbn-button bbn-text="source.priority"
+      <bbn-button bbn-label="source.priority"
                   :style="{
                     color: 'white',
                     backgroundColor: 'var(--appui-task-pr' + source.priority + ')',
@@ -81,7 +81,7 @@
                  :source="getStatusMenuSource"
                  item-component="appui-task-item-menu"
                  class="bbn-left-sspace">
-      <bbn-button bbn-text="statusText"
+      <bbn-button bbn-label="statusText"
                   :style="{
                     color: statusColor,
                     backgroundColor: statusBgColor,
