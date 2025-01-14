@@ -23,7 +23,7 @@
                        class="bbn-wide bbn-right-sspace bbn-no-border"/>
              <bbn-button @click="addTask"
                          :disabled="!currentSearch.length"
-                         :text="_('Create a task')"
+                         :label="_('Create a task')"
                          icon="nf nf-fa-plus"
                          :notext="mainPage.isMobile()"/>
           </div>
@@ -73,11 +73,11 @@
                bbn-text="isColumnsView ? _('Columns') : _('Rows')"/>
           <div class="bbn-vmiddle">
             <bbn-button icon="nf nf-mdi-arrow_collapse"
-                        :text="_('Collapse all')"
+                        :label="_('Collapse all')"
                         @click="currentComponent.collapseAll()"
                         class="bbn-right-sspace"/>
             <bbn-button icon="nf nf-mdi-arrow_expand"
-                        :text="_('Expand all')"
+                        :label="_('Expand all')"
                         @click="currentComponent.expandAll()"/>
           </div>
         </div>

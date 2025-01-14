@@ -72,7 +72,7 @@
                         :max="3">
             <bbns-widget bbn-if="dashboard?.widgets?.budget && budgetIsVisible"
                         :hidden="!currentWidgets.budget"
-                        :title="dashboard.widgets.budget.text"
+                        :label="dashboard.widgets.budget.text"
                         :icon="dashboard.widgets.budget.icon"
                         :component="dashboard.widgets.budget.component"
                         :uid="dashboard.widgets.budget.code"
@@ -83,7 +83,7 @@
                         :padding="true"/>
             <bbns-widget bbn-if="dashboard?.widgets?.roles"
                         :hidden="!currentWidgets.roles"
-                        :title="dashboard.widgets.roles.text"
+                        :label="dashboard.widgets.roles.text"
                         :icon="dashboard.widgets.roles.icon"
                         :component="dashboard.widgets.roles.component"
                         :uid="dashboard.widgets.roles.code"
@@ -94,7 +94,7 @@
                         :padding="true"/>
             <bbns-widget bbn-if="dashboard?.widgets?.tracker"
                         :hidden="!currentWidgets.tracker"
-                        :title="dashboard.widgets.tracker.text"
+                        :label="dashboard.widgets.tracker.text"
                         :icon="dashboard.widgets.tracker.icon"
                         :component="dashboard.widgets.tracker.component"
                         :uid="dashboard.widgets.tracker.code"
@@ -106,7 +106,7 @@
                         :padding="true"/>
             <bbns-widget bbn-if="dashboard?.widgets?.subtasks"
                         :hidden="!currentWidgets.subtasks"
-                        :title="dashboard.widgets.subtasks.text"
+                        :label="dashboard.widgets.subtasks.text"
                         :icon="dashboard.widgets.subtasks.icon"
                         :component="dashboard.widgets.subtasks.component"
                         :uid="dashboard.widgets.subtasks.code"
@@ -117,7 +117,7 @@
                         :showable="false"/>
             <bbns-widget bbn-if="dashboard?.widgets?.logs && (isAdmin || isAccountManager || isGlobal)"
                         :hidden="!currentWidgets.logs"
-                        :title="dashboard.widgets.logs.text"
+                        :label="dashboard.widgets.logs.text"
                         :icon="dashboard.widgets.logs.icon"
                         :component="dashboard.widgets.logs.component"
                         :uid="dashboard.widgets.logs.code"
@@ -129,7 +129,7 @@
                         :showable="false"/>
             <bbns-widget bbn-if="dashboard?.widgets?.notes"
                         :hidden="!currentWidgets.notes"
-                        :title="dashboard.widgets.notes.text"
+                        :label="dashboard.widgets.notes.text"
                         :icon="dashboard.widgets.notes.icon"
                         :component="dashboard.widgets.notes.component"
                         :uid="dashboard.widgets.notes.code"

@@ -10,7 +10,7 @@
                     :load="false"
                     component="appui-task-home"
                     icon="nf nf-fa-home"
-                    title="<?=_('Home')?>"
+                    label="<?=_('Home')?>"
                     :notext="true"
                     :source="source"/>
     <bbns-container url="sessions"
@@ -18,7 +18,7 @@
                     :load="false"
                     component="appui-task-tracker-sessions"
                     icon="nf nf-md-chart_timeline"
-                    title="<?=_('Tracker sessions editor')?>"
+                    label="<?=_('Tracker sessions editor')?>"
                     :notext="true"
                     :source="source"/>
   </bbn-router>

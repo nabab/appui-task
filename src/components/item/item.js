@@ -397,7 +397,7 @@
               role: role,
               manage: true
             },
-            title: bbn._('Select user(s)'),
+            label: bbn._('Select user(s)'),
             width: 400,
             height: 600
           });
@@ -413,7 +413,7 @@
       },
       editTitle(){
         this.getPopup({
-          title: false,
+          label: false,
           closable: false,
           width: bbn.fn.isMobile() ? '95%' : 600,
           height: bbn.fn.isMobile() ? '95%' : 200,
@@ -423,7 +423,7 @@
       },
       openDescription(){
         this.getPopup({
-          title: false,
+          label: false,
           closable: false,
           width: bbn.fn.isMobile() ? '95%' : '90%',
           height: bbn.fn.isMobile() ? '95%' : '90%',
@@ -434,7 +434,7 @@
       openNotes(){
         if (!this.isDeleted) {
           this.getPopup({
-            title: false,
+            label: false,
             closable: false,
             width: bbn.fn.isMobile() ? '95%' : '90%',
             height: bbn.fn.isMobile() ? '95%' : '90%',
@@ -445,7 +445,7 @@
       },
       editBudget(){
         this.getPopup({
-          title: bbn._('Set the price'),
+          label: bbn._('Set the price'),
           width: 200,
           component: 'appui-task-item-budget',
           source: this.source

@@ -95,14 +95,14 @@
       stop(){
         if (this.active) {
           this.confirm(bbn._('Do you want to write a message?'), () => {
-            this.getPopup().open({
+            this.getPopup({
               component: this.$options.components.trackerMessage,
               source: {
                 message: ''
               },
               width: 800,
               height: 600,
-              title: bbn._('Tracker message')
+              label: bbn._('Tracker message')
             });
           }, () => {
             this.stopPost();

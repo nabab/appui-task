@@ -40,7 +40,7 @@
       insert(){
         if (!this.isClosed) {
           this.getPopup({
-            title: bbn._('New message'),
+            label: bbn._('New message'),
             width: 800,
             height: 750,
             component: 'appui-note-forum-form',
@@ -69,7 +69,7 @@
       edit(n, v){
         if (!this.isClosed) {
           this.getPopup({
-            title: bbn._('Edit'),
+            label: bbn._('Edit'),
             width: 800,
             height: 600,
             component: 'appui-note-forum-form',
@@ -107,7 +107,7 @@
       reply(n, v){
         if (!this.isClosed) {
           this.getPopup({
-            title: bbn._('Reply to') + ' ' + appui.getUserName(n.creator),
+            label: bbn._('Reply to') + ' ' + appui.getUserName(n.creator),
             width: 800,
             height: 600,
             component: 'appui-note-forum-form',

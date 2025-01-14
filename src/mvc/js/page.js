@@ -535,12 +535,12 @@
               }
             });
             this.getPopup({
-              title: bbn._('New task'),
+              label: bbn._('New task'),
               width: 500,
               component: 'appui-task-form-new',
               componentOptions: {
                 source: {
-                  title: '',
+                  label: '',
                   type: '',
                   id_parent: this.source.id,
                   private: !!this.source.private ? 1 : 0
@@ -553,7 +553,7 @@
         searchTask(){
           if (this.canChange && !!this.source.id) {
             this.getPopup({
-              title: bbn._('Search and add subtasks'),
+              label: bbn._('Search and add subtasks'),
               width: 500,
               height: 400,
               scrollable: false,

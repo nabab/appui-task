@@ -108,11 +108,11 @@
       },
       addTask(){
         this.getPopup({
-          title: bbn._('New task'),
+          label: bbn._('New task'),
           width: 500,
           component: 'appui-task-form-new',
           source: {
-            title: this.currentSearch,
+            label: this.currentSearch,
             type: '',
             private: 0
           }

@@ -30,7 +30,7 @@
       },
       edit(row, col, idx){
         return this.$refs.table.edit(row, {
-          title: bbn._("Edit"),
+          label: bbn._("Edit"),
           width: 500
         }, idx);
       },

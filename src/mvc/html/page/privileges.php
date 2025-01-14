@@ -31,11 +31,11 @@
                bbn-text="_('Columns')"/>
           <div class="bbn-vmiddle">
             <bbn-button icon="nf nf-mdi-arrow_collapse"
-                        :text="_('Collapse all')"
+                        :label="_('Collapse all')"
                         @click="collapseAll()"
                         class="bbn-right-sspace"/>
             <bbn-button icon="nf nf-mdi-arrow_expand"
-                        :text="_('Expand all')"
+                        :label="_('Expand all')"
                         @click="expandAll()"/>
           </div>
         </div>

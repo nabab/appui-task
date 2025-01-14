@@ -51,7 +51,7 @@
     <div class="bbn-flex-width"
          style="align-items: stretch">
       <bbn-button icon="nf nf-fa-arrow_left"
-                  :text="_('Come back')"
+                  :label="_('Come back')"
                   :notext="true"
                   @click="setMode(null)"
                   class="bbn-right-sspace bbn-no-border"
@@ -69,13 +69,13 @@
                       bbn-model="currentOrder"/>
         <bbn-button bbn-if="currentOrderIcon"
                     :icon="currentOrderIcon"
-                    :text="currentSort === 'asc' ? _('Ascending order') : _('Descending order')"
+                    :label="currentSort === 'asc' ? _('Ascending order') : _('Descending order')"
                     :notext="true"
                     @click="currentSort = currentSort === 'asc' ? 'desc' : 'asc'"
                     class="bbn-left-sspace bbn-no-border"
                     style="height: auto"/>
         <bbn-button icon="nf nf-fa-close"
-                  :text="_('Remove')"
+                  :label="_('Remove')"
                   :notext="true"
                   @click="currentOrder = null"
                   class="bbn-left-sspace bbn-no-border"
@@ -127,7 +127,7 @@
           </bbn-context>
         </div>
         <bbn-button icon="nf nf-fa-close"
-                  :text="_('Remove')"
+                  :label="_('Remove')"
                   :notext="true"
                   @click="removeFilters"
                   class="bbn-left-sspace bbn-no-border"

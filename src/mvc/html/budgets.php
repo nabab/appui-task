@@ -5,24 +5,24 @@
              :limit="100"
              :pageable="true">
     <bbns-column field="ref"
-                 title="<?= _("Ref.") ?>"
+                 label="<?= _("Ref.") ?>"
                  :width="120"
                  cls="bbn-c"/>
   	<bbns-column field="title"
-                 title="<?= _("Nom") ?>"
+                 label="<?= _("Nom") ?>"
                  :render="renderTitle"
                  :min-width="250"/>
   	<bbns-column field="price"
                  :render="renderPrice"
                  :width="150"
-                 title="<?= _("Price") ?>"/>
+                 label="<?= _("Price") ?>"/>
   	<bbns-column field="state"
                  :width="100"
                  :source="source.states"
-                 title="<?= _("Statut") ?>"/>
+                 label="<?= _("Statut") ?>"/>
   	<bbns-column field="last_date"
                  :width="150"
-                 title="<?= _("Last chamge") ?>"
+                 label="<?= _("Last chamge") ?>"
                  type="datetime"/>
   </bbn-table>
 </div>

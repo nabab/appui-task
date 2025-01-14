@@ -208,13 +208,13 @@
                 <div class="bbn-flex"
                      style="gap: var(--sspace)">
                   <bbn-button @click="save"
-                              text="` + bbn._('Save') + `"
+                              label="` + bbn._('Save') + `"
                               :notext="true"
                               icon="nf nf-fa-check_circle"
                               class="bbn-primary bbn-xl"
                               :disabled="!form || !form.canSubmit"/>
                   <bbn-button @click="cancel"
-                              text="` + bbn._('Cancel') + `"
+                              label="` + bbn._('Cancel') + `"
                               :notext="true"
                               icon="nf nf-fa-times_circle"
                               class="bbn-xl"/>
@@ -224,7 +224,7 @@
                           icon="nf nf-fa-trash"
                           class="bbn-bg-red bbn-white bbn-xl"
                           :notext="true"
-                          text="` + bbn._('Delete') + `"/>
+                          label="` + bbn._('Delete') + `"/>
             </div>
           </bbn-form>
         `,

@@ -521,7 +521,7 @@
       },
       openTrackerDetail(){
         this.getPopup({
-          title: bbn._('Tracker detail'),
+          label: bbn._('Tracker detail'),
           component: 'appui-task-task-widget-tracker-detail',
           source: this.source,
           width: '90%',
@@ -530,7 +530,7 @@
       },
       openAllLogs(){
         this.getPopup({
-          title: bbn._('Logs'),
+          label: bbn._('Logs'),
           component: 'appui-task-task-widget-logs-detail',
           source: this.source,
           width: '90%',

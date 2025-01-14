@@ -142,7 +142,7 @@
     <div class="bbn-c bbn-top-space bbn-w-100"
           bbn-if="showOpenContent">
       <bbn-button class="bbn-no-border bbn-upper bbn-xs"
-                  :text="_('Show more content')"
+                  :label="_('Show more content')"
                   @click="openDescription"/>
     </div>
   </div>

@@ -63,7 +63,7 @@
               source: this.source,
               role: role
             },
-            title: bbn._('Select user(s)'),
+            label: bbn._('Select user(s)'),
             width: 400,
             height: 600
           });

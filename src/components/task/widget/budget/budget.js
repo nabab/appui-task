@@ -102,13 +102,13 @@
       },
       addDecider(){
         if ( this.task.canChangeDecider ){
-          this.getPopup().open({
+          this.getPopup({
             component: 'appui-task-form-role',
             componentOptions: {
               source: this.source,
               role: 'deciders'
             },
-            title: bbn._('Select decider(s)'),
+            label: bbn._('Select decider(s)'),
             width: 400,
             height: 600
           });
@@ -146,8 +146,8 @@
         }
       },
       makeInvoice(){
-        this.getPopup().open({
-          title: bbn._('Invoice creation'),
+        this.getPopup({
+          label: bbn._('Invoice creation'),
           height: '90%',
           width: '70%',
           component: 'appui-task-invoice',

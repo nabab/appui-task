@@ -18,11 +18,11 @@
     methods: {
       addTask(){
         this.getPopup({
-          title: bbn._('New task'),
+          label: bbn._('New task'),
           width: 500,
           component: 'appui-task-form-new',
           source: {
-            title: '',
+            label: '',
             type: !!this.columnsComp && this.columnsComp.isOrderedByTypes ? this.source.id : '',
             private: 0
           }
