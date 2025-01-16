@@ -30,11 +30,11 @@
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': isMobile()}]"
                bbn-text="_('Columns')"/>
           <div class="bbn-vmiddle">
-            <bbn-button icon="nf nf-mdi-arrow_collapse"
+            <bbn-button icon="nf nf-md-arrow_collapse"
                         :label="_('Collapse all')"
                         @click="collapseAll()"
                         class="bbn-right-sspace"/>
-            <bbn-button icon="nf nf-mdi-arrow_expand"
+            <bbn-button icon="nf nf-md-arrow_expand"
                         :label="_('Expand all')"
                         @click="expandAll()"/>
           </div>

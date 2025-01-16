@@ -72,11 +72,11 @@
           <div :class="['bbn-upper', 'bbn-right-space', 'bbn-b', 'bbn-secondary-text-alt', {'bbn-bottom-xsspace': mainPage.isMobile()}]"
                bbn-text="isColumnsView ? _('Columns') : _('Rows')"/>
           <div class="bbn-vmiddle">
-            <bbn-button icon="nf nf-mdi-arrow_collapse"
+            <bbn-button icon="nf nf-md-arrow_collapse"
                         :label="_('Collapse all')"
                         @click="currentComponent.collapseAll()"
                         class="bbn-right-sspace"/>
-            <bbn-button icon="nf nf-mdi-arrow_expand"
+            <bbn-button icon="nf nf-md-arrow_expand"
                         :label="_('Expand all')"
                         @click="currentComponent.expandAll()"/>
           </div>
@@ -94,7 +94,7 @@
         <bbn-button :title="_('Hierarchy')"
                     :class="{'bbn-state-active': currentHierarchy}"
                     @click="currentHierarchy = !currentHierarchy"
-                    icon="nf nf-mdi-file_tree"/>
+                    icon="nf nf-md-file_tree"/>
       </div>
       <div :class="['bbn-upper', 'bbn-b', 'bbn-lg', 'bbn-tertiary-text-alt', {
              'bbn-left-lspace bbn-right-space': !mainPage.isMobile(),

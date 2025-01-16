@@ -119,7 +119,7 @@
            :style="{
              color: getRoleBgColor('managers')
            }">
-        <i class="bbn-m nf nf-mdi-account_plus"/>
+        <i class="bbn-m nf nf-md-account_plus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Make me a supervisor')"/>
       </div>
@@ -129,7 +129,7 @@
            :style="{
              color: getRoleBgColor('managers')
            }">
-        <i class="bbn-m nf nf-mdi-account_minus"/>
+        <i class="bbn-m nf nf-md-account_minus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Remove me from supervisors')"/>
       </div>
@@ -139,7 +139,7 @@
            :style="{
              color: getRoleBgColor('workers')
            }">
-        <i class="bbn-m nf nf-mdi-account_plus"/>
+        <i class="bbn-m nf nf-md-account_plus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Make me a worker')"/>
       </div>
@@ -149,7 +149,7 @@
            :style="{
              color: getRoleBgColor('workers')
            }">
-        <i class="bbn-m nf nf-mdi-account_minus"/>
+        <i class="bbn-m nf nf-md-account_minus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Remove me from workers')"/>
       </div>
@@ -159,7 +159,7 @@
            :style="{
              color: getRoleBgColor('viewers')
            }">
-        <i class="bbn-m nf nf-mdi-account_plus"/>
+        <i class="bbn-m nf nf-md-account_plus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Make me a spectator')"/>
       </div>
@@ -169,7 +169,7 @@
            :style="{
              color: getRoleBgColor('viewers')
            }">
-        <i class="bbn-m nf nf-mdi-account_minus"/>
+        <i class="bbn-m nf nf-md-account_minus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Remove me from viewers')"/>
       </div>
@@ -179,7 +179,7 @@
            :style="{
              color: getRoleBgColor('deciders')
            }">
-        <i class="bbn-m nf nf-mdi-account_plus"/>
+        <i class="bbn-m nf nf-md-account_plus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Make me a decider')"/>
       </div>
@@ -189,7 +189,7 @@
            :style="{
              color: getRoleBgColor('deciders')
            }">
-        <i class="bbn-m nf nf-mdi-account_minus"/>
+        <i class="bbn-m nf nf-md-account_minus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Remove me from deciders')"/>
       </div>
@@ -200,14 +200,14 @@
       <div bbn-if="source.tracker"
            class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom bbn-red"
            @click="task ? task.stopTracker() : () => {}">
-        <i class="bbn-m nf nf-mdi-timer_off"/>
+        <i class="bbn-m nf nf-md-timer_off"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Stop tracker')"/>
       </div>
       <div bbn-else
            class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom bbn-green"
            @click="task ? task.startTracker() : () => {}">
-        <i class="bbn-m nf nf-mdi-timer"/>
+        <i class="bbn-m nf nf-md-timer"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Start tracker')"/>
       </div>
@@ -341,7 +341,7 @@
         <div>
           <bbn-button bbn-if="task.canBecomeManager"
                       @click="task ? task.makeMe('managers') : () => {}"
-                      icon="nf nf-mdi-account_plus"
+                      icon="nf nf-md-account_plus"
                       title="<?= _('Make me a supervisor') ?>"
                       :notext="true"
                       :style="{
@@ -350,7 +350,7 @@
                       }"/>
           <bbn-button bbn-if="task.canRemoveHimselfManager"
                       @click="task ? task.unmakeMe('managers') : () => {}"
-                      icon="nf nf-mdi-account_minus"
+                      icon="nf nf-md-account_minus"
                       title="<?= _('Remove me from supervisors') ?>"
                       :notext="true"
                       :style="{
@@ -359,7 +359,7 @@
                       }"/>
           <bbn-button bbn-if="task.canBecomeWorker"
                       @click="task ? task.makeMe('workers') : () => {}"
-                      icon="nf nf-mdi-account_plus"
+                      icon="nf nf-md-account_plus"
                       title="<?= _('Make me a worker') ?>"
                       :notext="true"
                       :style="{
@@ -368,7 +368,7 @@
                       }"/>
           <bbn-button bbn-if="task.canRemoveHimselfWorker"
                       @click="task ? task.unmakeMe('workers') : () => {}"
-                      icon="nf nf-mdi-account_minus"
+                      icon="nf nf-md-account_minus"
                       title="<?= _('Remove me from workers') ?>"
                       :notext="true"
                       :style="{
@@ -377,7 +377,7 @@
                       }"/>
           <bbn-button bbn-if="task.canBecomeViewer"
                       @click="task ? task.makeMe('viewers') : () => {}"
-                      icon="nf nf-mdi-account_plus"
+                      icon="nf nf-md-account_plus"
                       title="<?= _('Make me a spectator') ?>"
                       :notext="true"
                       :style="{
@@ -386,7 +386,7 @@
                       }"/>
           <bbn-button bbn-if="task.canRemoveHimselfViewer"
                       @click="task ? task.unmakeMe('viewers') : () => {}"
-                      icon="nf nf-mdi-account_minus"
+                      icon="nf nf-md-account_minus"
                       title="<?= _('Remove me from viewers') ?>"
                       :notext="true"
                       :style="{
@@ -395,7 +395,7 @@
                       }"/>
           <bbn-button bbn-if="task.canBecomeDecider"
                       @click="task ? task.makeMe('deciders') : () => {}"
-                      icon="nf nf-mdi-account_plus"
+                      icon="nf nf-md-account_plus"
                       title="<?= _('Make me a decider') ?>"
                       :notext="true"
                       :style="{
@@ -404,7 +404,7 @@
                       }"/>
           <bbn-button bbn-if="task.canRemoveHimselfDecider"
                       @click="task ? task.unmakeMe('deciders') : () => {}"
-                      icon="nf nf-mdi-account_minus"
+                      icon="nf nf-md-account_minus"
                       title="<?= _('Remove me from deciders') ?>"
                       :notext="true"
                       :style="{
@@ -423,13 +423,13 @@
           <bbn-button bbn-if="source.tracker"
                       @click="task ? task.stopTracker() : () => {}"
                       :title="_('Stop tracker')"
-                      icon="nf nf-mdi-timer_off"
+                      icon="nf nf-md-timer_off"
                       class="bbn-bg-red bbn-white"
                       :notext="true"/>
           <bbn-button bbn-else
                       @click="task ? task.startTracker() : () => {}"
                       :title="_('Start tracker')"
-                      icon="nf nf-mdi-timer"
+                      icon="nf nf-md-timer"
                       class="bbn-bg-green bbn-white"
                       :notext="true"/>
         </div>

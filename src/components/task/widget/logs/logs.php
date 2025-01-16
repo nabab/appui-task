@@ -10,7 +10,7 @@
                    font-size="0.7em"/>
       <span bbn-text="userName(log.id_user)"
             class="bbn-flex-fill bbn-hsmargin bbn-s"/>
-      <i class="nf nf-mdi-calendar bbn-hsmargin bbn-s bbn-secondary-text-alt"/>
+      <i class="nf nf-md-calendar bbn-hsmargin bbn-s bbn-secondary-text-alt"/>
       <span class="bbn-s bbn-secondary-text-alt"
             bbn-text="fdatetime(log.chrono)"/>
     </div>
@@ -21,6 +21,6 @@
        class="bbn-background bbn-top-space bbn-c bbn-radius"
        @click="task ? task.openAllLogs() : () => {}"
        :title="_('See all logs')">
-    <i class="nf nf-mdi-dots_horizontal bbn-xl bbn-p"/>
+    <i class="nf nf-md-dots_horizontal bbn-xl bbn-p"/>
   </div>
 </div>

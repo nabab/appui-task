@@ -104,7 +104,7 @@
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]">
-      <i class="nf nf-mdi-lock bbn-red bbn-right-sspace"
+      <i class="nf nf-md-lock bbn-red bbn-right-sspace"
          :title="_('Private')"
          bbn-if="!!source.private"/>
       <div class="bbn-b bbn-secondary-text-alt bbn-upper bbn-p"
@@ -116,7 +116,7 @@
                  class="bbn-left-sspace"
                  item-component="appui-task-item-menu"
                  bbn-if="editable">
-      <bbn-button icon="nf nf-mdi-dots_vertical"
+      <bbn-button icon="nf nf-md-dots_vertical"
                   :title="_('Menu')"
                   :notext="true"
                   class="bbn-no-border"
@@ -128,7 +128,7 @@
          'bbn-alt-background': inverted,
          'bbn-background': !inverted
        }]">
-    <i class="nf nf-mdi-subdirectory_arrow_right bbn-right-sspace"
+    <i class="nf nf-md-subdirectory_arrow_right bbn-right-sspace"
        :title="_('Parent task')"/>
     <div class="bbn-b bbn-tertiary-text-alt bbn-upper bbn-p"
           bbn-html="source.parent.title"

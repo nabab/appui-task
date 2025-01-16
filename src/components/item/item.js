@@ -171,21 +171,21 @@
         }
         let menu = [{
           text: bbn._('Open in new window'),
-          icon: 'nf nf-mdi-open_in_new',
+          icon: 'nf nf-md-open_in_new',
           action: this.seeTask
         }, {
           text: this.isCollapsed ? bbn._('Expand') : bbn._('Collapse'),
-          icon: this.isCollapsed ? 'nf nf-mdi-arrow_expand' : 'nf nf-mdi-arrow_collapse',
+          icon: this.isCollapsed ? 'nf nf-md-arrow_expand' : 'nf nf-md-arrow_collapse',
           action: this.toggleCollapsed
         }];
         if (this.canChange) {
           menu.push({
             text: bbn._('Edit title'),
-            icon: 'nf nf-mdi-format_title',
+            icon: 'nf nf-md-format_title',
             action: this.editTitle
           }, {
             text: bbn._('Priority'),
-            icon: 'nf nf-mdi-numeric',
+            icon: 'nf nf-md-numeric',
             items: this.getPriorityMenuSource()
           });
         }
@@ -193,14 +193,14 @@
         if (status.length) {
           menu.push({
             text: bbn._('Status'),
-            icon: 'nf nf-mdi-play_pause',
+            icon: 'nf nf-md-play_pause',
             items: status
           });
         }
         if (this.canChange) {
           let rolesItems = [{
             text: bbn._('Add or remove managers'),
-            icon: 'nf nf-mdi-account_star',
+            icon: 'nf nf-md-account_star',
             action: () => {
               this.manageRole('managers');
             },
@@ -208,7 +208,7 @@
             color: this.mainPage.getRoleColor('managers')
           }, {
             text: bbn._('Add or remove workers'),
-            icon: 'nf nf-mdi-worker',
+            icon: 'nf nf-md-worker',
             action: () => {
               this.manageRole('workers');
             },
@@ -252,14 +252,14 @@
         if (this.source.num_notes) {
           menu.push({
             text: bbn._('Open notes'),
-            icon: 'nf nf-mdi-comment_multiple_outline',
+            icon: 'nf nf-md-comment_multiple_outline',
             action: this.openNotes
           });
         }
         if (this.canChange && this.removeParent) {
           menu.push({
             text: bbn._('Remove as subtask'),
-            icon: 'nf nf-mdi-playlist_remove',
+            icon: 'nf nf-md-playlist_remove',
             action: this.removeAsSubtask
           });
         }
@@ -352,7 +352,7 @@
               action: this.editBudget
             }, {
               text: bbn._('Remove budget'),
-              icon: 'nf nf-mdi-delete_empty',
+              icon: 'nf nf-md-delete_empty',
               action: this.removeBudget
             });
           }

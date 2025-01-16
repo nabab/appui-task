@@ -43,7 +43,7 @@
                  class="nf nf-fa-hand_pointer_o bbn-p bbn-left-space bbn-xxxl"/>
               <i @click="toggleMobileMenu"
                  title="<?= _("Menu") ?>"
-                 class="nf nf-mdi-menu bbn-p bbn-left-space bbn-xxxl"/>
+                 class="nf nf-md-menu bbn-p bbn-left-space bbn-xxxl"/>
             </div>
             <div bbn-else
                  :class="['bbn-upper', 'bbn-b', 'bbn-lg', 'bbn-spadding', 'bbn-radius', 'bbn-c', {

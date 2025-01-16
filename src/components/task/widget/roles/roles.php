@@ -12,7 +12,7 @@
            color: getRoleBgColor('managers')
          }">
       <div class="bbn-vmiddle bbn-flex-width">
-        <bbn-button :icon="isManagerOpen ? 'nf nf-mdi-arrow_collapse' : 'nf nf-mdi-arrow_expand'"
+        <bbn-button :icon="isManagerOpen ? 'nf nf-md-arrow_collapse' : 'nf nf-md-arrow_expand'"
                     class="bbn-right-sspace bbn-no-border"
                     :title="isManagerOpen ? _('Collapse') : _('Expand')"
                     @click="isManagerOpen = !isManagerOpen"
@@ -22,7 +22,7 @@
                     }"/>
         <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
               @click="isManagerOpen = !isManagerOpen">
-          <i class="nf nf-mdi-account_star bbn-lg bbn-hsmargin"/>
+          <i class="nf nf-md-account_star bbn-lg bbn-hsmargin"/>
           <?= _('Supervisors') ?>
           <span bbn-if="managers.length"
                 class="bbn-badge bbn-s bbn-left-sspace"
@@ -81,7 +81,7 @@
          }">
       <div class="bbn-vmiddle bbn-flex-width">
         <bbn-button class="bbn-right-sspace bbn-no-border"
-                    :icon="isWorkerOpen ? 'nf nf-mdi-arrow_collapse' : 'nf nf-mdi-arrow_expand'"
+                    :icon="isWorkerOpen ? 'nf nf-md-arrow_collapse' : 'nf nf-md-arrow_expand'"
                     :title="isWorkerOpen ? _('Collapse') : _('Expand')"
                     @click="isWorkerOpen = !isWorkerOpen"
                     :notext="true"
@@ -90,7 +90,7 @@
                     }"/>
         <span class="bbn-flex-fill bbn-c bbn-upper bbn-p bbn-middle"
               @click="isWorkerOpen = !isWorkerOpen">
-          <i class="nf nf-mdi-worker bbn-hsmargin"/>
+          <i class="nf nf-md-worker bbn-hsmargin"/>
           <?= _('Workers') ?>
           <span bbn-if="workers.length"
                 class="bbn-badge bbn-s bbn-left-sspace"
@@ -150,7 +150,7 @@
          }">
       <div class="bbn-vmiddle bbn-flex-width">
         <bbn-button class="bbn-right-sspace bbn-no-border"
-                    :icon="isViewerOpen ? 'nf nf-mdi-arrow_collapse' : 'nf nf-mdi-arrow_expand'"
+                    :icon="isViewerOpen ? 'nf nf-md-arrow_collapse' : 'nf nf-md-arrow_expand'"
                     :title="isViewerOpen ? _('Collapse') : _('Expand')"
                     @click="isViewerOpen = !isViewerOpen"
                     :notext="true"

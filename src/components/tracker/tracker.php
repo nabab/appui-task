@@ -4,7 +4,7 @@
        @click="openWindow">
     <span bbn-if="active && progress"
           bbn-text="progress"/>
-    <i :class="['bbn-b','nf', 'nf-mdi-timer', {'bbn-green': active && progress}]"/>
+    <i :class="['bbn-b','nf', 'nf-md-timer', {'bbn-green': active && progress}]"/>
   </div>
   <bbn-floater bbn-if="isVisible"
                :width="300"
@@ -21,10 +21,10 @@
             <span class="bbn-b"><?=_('Tasks list')?></span>
           </div>
           <div>
-            <i class="nf nf-mdi-refresh bbn-p"
+            <i class="nf nf-md-refresh bbn-p"
                @click="refreshList(false)"/>
             &nbsp;
-            <i class="bbn-p nf nf-mdi-window_close"
+            <i class="bbn-p nf nf-md-window_close"
                @click="openWindow"/>
           </div>
         </div>

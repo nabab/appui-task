@@ -14,7 +14,7 @@
            class="bbn-tertiary-text-alt"
            title="<?=_('Tokens')?>">
         <span bbn-text="tokens"/>
-        <i class="nf nf-mdi-coins bbn-m"/>
+        <i class="nf nf-md-coins bbn-m"/>
       </div>
     </div>
     <div class="bbn-vspadding bbn-hxlpadding bbn-c bbn-b bbn-white">
@@ -69,7 +69,7 @@
       <span class="bbn-left-sspace"
             bbn-text="approvedBy"/>
     </div>
-    <i class="nf nf-mdi-calendar bbn-left-sspace bbn-right-xsspace"
+    <i class="nf nf-md-calendar bbn-left-sspace bbn-right-xsspace"
        style="line-height: normal !important"/>
     <span class="bbn-right-sspace"
           bbn-text="approvedOn"/>

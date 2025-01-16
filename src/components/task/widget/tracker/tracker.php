@@ -2,7 +2,7 @@
   <template bbn-if="!!progress || summary.length">
     <div bbn-if="!!progress"
           class="bbn-box bbn-bottom-space bbn-flex-width bbn-green bbn-hpadding bbn-vspadding bbn-vmiddle">
-      <i class="bbn-xxxl nf nf-mdi-timer"/>
+      <i class="bbn-xxxl nf nf-md-timer"/>
       <div class="bbn-left-space bbn-xl bbn-flex-fill"
           bbn-text="_('IN PROGRESS')"/>
       <div class="bbn-left-space bbn-xl"
@@ -17,13 +17,13 @@
       <span bbn-text="s.userName"
             class="bbn-flex-fill bbn-hsmargin"/>
       <i bbn-if="s.notes"
-        class="nf nf-mdi-message_reply_text bbn-left-sspace bbn-right-xsspace bbn-orange bbn-m"
+        class="nf nf-md-message_reply_text bbn-left-sspace bbn-right-xsspace bbn-orange bbn-m"
         :title="_('%s wrote %d note(s)', s.userName, s.notes)"/>
       <sub bbn-if="s.notes"
           bbn-text="s.notes"
           :title="_('%s wrote %d note(s)', s.userName, s.notes)"
           class="bbn-orange bbn-right-sspace"/>
-      <i :class="['nf nf-mdi-timer', 'bbn-hsmargin', {'bbn-green': !!progress && (currentUserID === s.idUser)}]"/>
+      <i :class="['nf nf-md-timer', 'bbn-hsmargin', {'bbn-green': !!progress && (currentUserID === s.idUser)}]"/>
       <span bbn-text="s.total"
             :class="{'bbn-green': !!progress && (currentUserID === s.idUser)}"/>
     </div>
@@ -46,7 +46,7 @@
     <div class="bbn-background bbn-top-space bbn-c bbn-radius"
         @click="task ? task.openTrackerDetail() : () => {}"
         :title="_('See tracker detail')">
-      <i class="nf nf-mdi-dots_horizontal bbn-xl bbn-p"/>
+      <i class="nf nf-md-dots_horizontal bbn-xl bbn-p"/>
     </div>
   </template>
   <div bbn-else

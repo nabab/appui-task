@@ -479,14 +479,14 @@
       trackerButtons(){
         return [{
           text: bbn._('See tracker detail'),
-          icon: 'nf nf-mdi-chart_timeline',
+          icon: 'nf nf-md-chart_timeline',
           action: this.openTrackerDetail
         }];
       },
       logsButtons(){
         return [{
           text: bbn._('See all logs'),
-          icon: 'nf nf-mdi-chart_timeline',
+          icon: 'nf nf-md-chart_timeline',
           action: this.openAllLogs
         }];
       },
