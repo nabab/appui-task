@@ -208,6 +208,13 @@
                 "default": 0,
                 "maxlength": 1
             },
+            "id_git": {
+                "type": "varchar",
+                "null": 1,
+                "default": "NULL",
+                "defaultExpression": false,
+                "maxlength": 255
+            },
             "cfg": {
                 "type": "longtext",
                 "null": 1,
@@ -407,6 +414,13 @@
                 "null": 0,
                 "key": "MUL",
                 "maxlength": 16
+            },
+            "id_git": {
+                "type": "varchar",
+                "null": 1,
+                "default": "NULL",
+                "defaultExpression": false,
+                "maxlength": 255
             },
             "active": {
                 "type": "tinyint",
