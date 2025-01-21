@@ -1,0 +1,76 @@
+[
+    {
+        "text": "Dashboard",
+        "code": "dashboard",
+        "items": [
+            {
+                "text": "Widgets",
+                "code": "widgets",
+                "id_alias": [
+                    "widgets",
+                    "dashboard",
+                    "appui"
+                ],
+                "icon": "nf nf-mdi-widgets",
+                "items": [
+                    {
+                        "text": "Budget",
+                        "code": "budget",
+                        "closable": true,
+                        "component": "appui-task-task-widget-budget",
+                        "icon": "nf nf-fa-money"
+                    },
+                    {
+                        "text": "Last Bugs",
+                        "code": "all_tasks",
+                        "limit": 5,
+                        "closable": true,
+                        "itemComponent": "appui-task-widget-task"
+                    },
+                    {
+                        "text": "My current bugs",
+                        "code": "tasks",
+                        "itemComponent": "appui-task-widget-task",
+                        "limit": 5
+                    },
+                    {
+                        "text": "Notes",
+                        "code": "notes",
+                        "closable": true,
+                        "component": "appui-task-task-widget-notes",
+                        "icon": "nf nf-fa-comments"
+                    },
+                    {
+                        "text": "Roles",
+                        "code": "roles",
+                        "closable": true,
+                        "component": "appui-task-task-widget-roles",
+                        "icon": "nf nf-fa-users"
+                    },
+                    {
+                        "text": "Sub-Tasks",
+                        "code": "subtasks",
+                        "closable": true,
+                        "component": "appui-task-task-widget-subtasks",
+                        "limit": 0,
+                        "icon": "nf nf-oct-tasklist"
+                    },
+                    {
+                        "text": "Tracker",
+                        "code": "tracker",
+                        "closable": true,
+                        "component": "appui-task-task-widget-tracker",
+                        "icon": "nf nf-fa-hourglass_half"
+                    },
+                    {
+                        "text": "Logs",
+                        "code": "logs",
+                        "closable": true,
+                        "component": "appui-task-task-widget-logs",
+                        "icon": "nf nf-mdi-file_document_box"
+                    }
+                ]
+            }
+        ]
+    }
+]

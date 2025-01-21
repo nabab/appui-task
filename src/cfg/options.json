@@ -1,532 +1,434 @@
-{
-  "cfg": {
-    "show_code": 1,
-    "allow_children": 1,
-    "show_icon": 1,
-    "i18n": "en"
-  },
-  "id_parent": ["appui"],
-  "text": "Tasks (project management)",
-  "code": "task",
-  "plugin": true,
-  "id_alias": ["plugin", "list", "templates", "option", "appui"],
-  "icon": "nf nf-oct-tasklist",
-  "tekname": "tasks",
-  "items": [
+[
     {
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1
-      },
-      "text": "Actions",
-      "code": "actions",
-      "items": [
-        {
-          "text": "Added %s as %s",
-          "code": "role_insert"
-        },
-        {
-          "text": "Added a comment",
-          "code": "comment_insert"
-        },
-        {
-          "text": "Added a deadline for %s",
-          "code": "deadline_insert"
-        },
-        {
-          "text": "Added the file %s",
-          "code": "file_insert"
-        },
-        {
-          "text": "Added the link %s",
-          "code": "link_insert"
-        },
-        {
-          "text": "Added the price %s \u20ac",
-          "code": "price_insert"
-        },
-        {
-          "text": "Added the description",
-          "code": "content_insert"
-        },
-        {
-          "text": "Approved the price %s \u20ac",
-          "code": "price_approved"
-        },
-        {
-          "text": "Auto-added as %s",
-          "code": "role_sinsert"
-        },
-        {
-          "text": "Auto-removed as %s",
-          "code": "role_sdelete"
-        },
-        {
-          "text": "Canceled the task",
-          "code": "task_cancel"
-        },
-        {
-          "text": "Changed the deadline from %s to %s",
-          "code": "deadline_update"
-        },
-        {
-          "text": "Changed the price from %s \u20ac to %s \u20ac",
-          "code": "price_update"
-        },
-        {
-          "text": "Changed the priority from %s to %s",
-          "code": "priority_update"
-        },
-        {
-          "text": "Changed the status from %s to %s",
-          "code": "status_update"
-        },
-        {
-          "text": "Changed the title from %s to %s",
-          "code": "title_update"
-        },
-        {
-          "text": "Changed the description",
-          "code": "content_update"
-        },
-        {
-          "text": "Changed the type from %s to %s",
-          "code": "type_update"
-        },
-        {
-          "text": "Closed the task",
-          "code": "task_close"
-        },
-        {
-          "text": "Created the task",
-          "code": "insert"
-        },
-        {
-          "text": "Deleted the file %s",
-          "code": "file_delele"
-        },
-        {
-          "text": "Deleted the link %s",
-          "code": "link_delete"
-        },
-        {
-          "text": "Deleted the task",
-          "code": "delete"
-        },
-        {
-          "text": "Deleted the task's price (%s \u20ac)",
-          "code": "price_delete"
-        },
-        {
-          "text": "Edited a comment",
-          "code": "comment_update"
-        },
-        {
-          "text": "Put the task on hold",
-          "code": "task_hold"
-        },
-        {
-          "text": "Removed %s as %s",
-          "code": "role_delete"
-        },
-        {
-          "text": "Removed a comment",
-          "code": "comment_delete"
-        },
-        {
-          "text": "Removed the deadline for %s",
-          "code": "deadline_delete"
-        },
-        {
-          "text": "Removed the description",
-          "code": "content_delete"
-        },
-        {
-          "text": "Reopened the task",
-          "code": "task_reopen"
-        },
-        {
-          "text": "Replied a comment",
-          "code": "comment_reply"
-        },
-        {
-          "text": "Set the task as waiting for approval",
-          "code": "task_unapproved"
-        },
-        {
-          "text": "Started the task",
-          "code": "task_start"
-        },
-        {
-          "text": "Task ping",
-          "code": "task_ping"
-        }
-      ]
-    },
-    {
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1
-      },
-      "text": "Roles",
-      "code": "roles",
-      "items": [
-        {
-          "text": "Deciders",
-          "code": "deciders",
-          "backgroundColor": "teal",
-          "color": "white"
-        },
-        {
-          "text": "Supervisors",
-          "code": "managers",
-          "backgroundColor": "coral",
-          "color": "white"
-        },
-        {
-          "text": "Viewers",
-          "code": "viewers",
-          "backgroundColor": "skyblue",
-          "color": "white"
-        },
-        {
-          "text": "Workers",
-          "code": "workers",
-          "backgroundColor": "darkseagreen",
-          "color": "white"
-        }
-      ]
-    },
-    {
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1,
-        "show_icon": 1,
-        "sortable": 1
-      },
-      "text": "States",
-      "code": "states",
-      "items": [
-        {
-          "text": "Approved",
-          "code": "approved",
-          "backgroundColor": "darkseagreen",
-          "color": "white"
-        },
-        {
-          "text": "Canceled",
-          "code": "canceled",
-          "backgroundColor": "slateblue",
-          "color": "white"
-        },
-        {
-          "text": "Closed",
-          "code": "closed",
-          "backgroundColor": "green",
-          "color": "white"
-        },
-        {
-          "text": "Deleted",
-          "code": "deleted",
-          "backgroundColor": "crimson",
-          "color": "white"
-        },
-        {
-          "text": "On hold",
-          "code": "holding",
-          "backgroundColor": "orange",
-          "color": "white"
-        },
-        {
-          "text": "Ongoing",
-          "code": "ongoing",
-          "backgroundColor": "dodgerblue",
-          "color": "white"
-        },
-        {
-          "text": "Opened",
-          "code": "opened",
-          "backgroundColor": "darkgray",
-          "color": "white"
-        },
-        {
-          "text": "Postponed",
-          "code": "postponed",
-          "backgroundColor": "salmon",
-          "color": "white"
-        },
-        {
-          "text": "Unapproved",
-          "code": "unapproved",
-          "backgroundColor": "orangered",
-          "color": "white"
-        }
-      ]
-    },
-    {
-      "text": "Tokens",
-      "code": "tokens",
-      "items": [
-        {
-          "text": "Categories",
-          "code": "cats",
-          "items": [
-            {
-              "text": "Developments",
-              "code": "developments",
-              "tokensYear": 960
-            },
-            {
-              "text": "Maintenance proactive",
-              "code": "proactive",
-              "tokensYear": 480
-            },
-            {
-              "text": "Support and maintenance",
-              "code": "support",
-              "tokensYear": 1760
-            }
-          ],
-          "cfg": {
+        "cfg": {
             "show_code": 1,
-            "schema": [
-              {
-                "field": "tokensYear",
-                "ftitle": "Tokens per year",
-                "title": "Tokens",
-                "type": "number"
-              }
-            ]
-          }
+            "allow_children": 1
         },
-        {
-          "text": "Configuration",
-          "code": "config",
-          "active": 0,
-          "billing": {
-            "day": "01",
-            "month": "01",
-            "months": 1
-          },
-          "step": 900,
-          "checkType": 0,
-          "amount": 25
-        }
-      ],
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1
-      }
-    },
-    {
-      "cfg": {
-        "show_code": 1,
-        "show_alias": 1,
-        "allow_children": 1,
-        "inheritance": "cascade",
-        "id_root_alias": [
-          "cats",
-          "tokens",
-          "task",
-          "appui"
+        "text": "Actions",
+        "code": "actions",
+        "items": [
+            {
+                "text": "Added %s as %s",
+                "code": "role_insert"
+            },
+            {
+                "text": "Added a comment",
+                "code": "comment_insert"
+            },
+            {
+                "text": "Added a deadline for %s",
+                "code": "deadline_insert"
+            },
+            {
+                "text": "Added the file %s",
+                "code": "file_insert"
+            },
+            {
+                "text": "Added the link %s",
+                "code": "link_insert"
+            },
+            {
+                "text": "Added the price %s \u20ac",
+                "code": "price_insert"
+            },
+            {
+                "text": "Added the description",
+                "code": "content_insert"
+            },
+            {
+                "text": "Approved the price %s \u20ac",
+                "code": "price_approved"
+            },
+            {
+                "text": "Auto-added as %s",
+                "code": "role_sinsert"
+            },
+            {
+                "text": "Auto-removed as %s",
+                "code": "role_sdelete"
+            },
+            {
+                "text": "Canceled the task",
+                "code": "task_cancel"
+            },
+            {
+                "text": "Changed the deadline from %s to %s",
+                "code": "deadline_update"
+            },
+            {
+                "text": "Changed the price from %s \u20ac to %s \u20ac",
+                "code": "price_update"
+            },
+            {
+                "text": "Changed the priority from %s to %s",
+                "code": "priority_update"
+            },
+            {
+                "text": "Changed the status from %s to %s",
+                "code": "status_update"
+            },
+            {
+                "text": "Changed the title from %s to %s",
+                "code": "title_update"
+            },
+            {
+                "text": "Changed the description",
+                "code": "content_update"
+            },
+            {
+                "text": "Changed the type from %s to %s",
+                "code": "type_update"
+            },
+            {
+                "text": "Closed the task",
+                "code": "task_close"
+            },
+            {
+                "text": "Created the task",
+                "code": "insert"
+            },
+            {
+                "text": "Deleted the file %s",
+                "code": "file_delele"
+            },
+            {
+                "text": "Deleted the link %s",
+                "code": "link_delete"
+            },
+            {
+                "text": "Deleted the task",
+                "code": "delete"
+            },
+            {
+                "text": "Deleted the task's price (%s \u20ac)",
+                "code": "price_delete"
+            },
+            {
+                "text": "Edited a comment",
+                "code": "comment_update"
+            },
+            {
+                "text": "Put the task on hold",
+                "code": "task_hold"
+            },
+            {
+                "text": "Removed %s as %s",
+                "code": "role_delete"
+            },
+            {
+                "text": "Removed a comment",
+                "code": "comment_delete"
+            },
+            {
+                "text": "Removed the deadline for %s",
+                "code": "deadline_delete"
+            },
+            {
+                "text": "Removed the description",
+                "code": "content_delete"
+            },
+            {
+                "text": "Reopened the task",
+                "code": "task_reopen"
+            },
+            {
+                "text": "Replied a comment",
+                "code": "comment_reply"
+            },
+            {
+                "text": "Set the task as waiting for approval",
+                "code": "task_unapproved"
+            },
+            {
+                "text": "Started the task",
+                "code": "task_start"
+            },
+            {
+                "text": "Task ping",
+                "code": "task_ping"
+            }
         ]
-      },
-      "text": "Task categories",
-      "code": "cats",
-      "items": [
-        {
-          "text": "Personal",
-          "code": "personal"
+    },
+    {
+        "cfg": {
+            "show_code": 1,
+            "allow_children": 1
         },
-        {
-          "text": "Technical service",
-          "code": "support",
-          "items": [
+        "text": "Roles",
+        "code": "roles",
+        "items": [
             {
-              "text": "New feature",
-              "code": "new",
-              "id_alias": [
-                "developments",
-                "cats",
-                "tokens",
-                "task",
-                "appui"
-              ]
+                "text": "Deciders",
+                "code": "deciders",
+                "backgroundColor": "teal",
+                "color": "white"
             },
             {
-              "text": "Improvement of an existing feature",
-              "code": "enhancement",
-              "id_alias": [
-                "proactive",
-                "cats",
-                "tokens",
-                "task",
-                "appui"
-              ]
+                "text": "Supervisors",
+                "code": "managers",
+                "backgroundColor": "coral",
+                "color": "white"
             },
             {
-              "text": "Report a bug",
-              "code": "bug",
-              "id_alias": [
-                "support",
-                "cats",
-                "tokens",
-                "task",
-                "appui"
-              ]
+                "text": "Viewers",
+                "code": "viewers",
+                "backgroundColor": "skyblue",
+                "color": "white"
+            },
+            {
+                "text": "Workers",
+                "code": "workers",
+                "backgroundColor": "darkseagreen",
+                "color": "white"
             }
-          ]
-        }
-      ]
+        ]
     },
     {
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1
-      },
-      "text": "Privileges",
-      "code": "privileges",
-      "items": [
-        {
-          "text": "Decider",
-          "code": "decider"
+        "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "show_icon": 1,
+            "sortable": 1
         },
-        {
-          "text": "Global",
-          "code": "global"
-        },
-        {
-          "text": "Group",
-          "code": "group"
-        },
-        {
-          "text": "Manager",
-          "code": "manager"
-        },
-        {
-          "text": "Account Manager",
-          "code": "account_manager"
-        },
-        {
-          "text": "Account Viewer",
-          "code": "account_viewer"
-        },
-        {
-          "text": "Project Manager",
-          "code": "project_manager"
-        },
-        {
-          "text": "Project Viewer",
-          "code": "project_viewer"
-        },
-        {
-          "text": "Assigner",
-          "code": "assigner"
-        },
-        {
-          "text": "Financial Manager",
-          "code": "financial_manager"
-        },
-        {
-          "text": "Financial Viewer",
-          "code": "financial_viewer"
-        },
-        {
-          "text": "Project Supervisor",
-          "code": "project_supervisor"
-        },
-        {
-          "text": "Viewer",
-          "code": "viewer"
-        },
-        {
-          "text": "Worker",
-          "code": "worker"
-        }
-      ]
-    },
-    {
-      "cfg": {
-        "show_code": 1,
-        "allow_children": 1,
-        "inheritance": "cascade",
-        "show_icon": 1
-      },
-      "text": "Plugins",
-      "code": "plugins",
-      "items": [
-        {
-          "text": "Dashboard",
-          "code": "appui-dashboard",
-          "id_alias": ["dashboard", "appui"],
-          "items": [
+        "text": "States",
+        "code": "states",
+        "items": [
             {
-              "text": "Widgets",
-              "code": "widgets",
-              "id_alias": ["widgets", "dashboard", "appui"],
-              "icon": "nf nf-mdi-widgets",
-              "items": [
-                {
-                  "text": "Budget",
-                  "code": "budget",
-                  "closable": true,
-                  "component": "appui-task-task-widget-budget",
-                  "icon": "nf nf-fa-money"
-                },
-                {
-                  "text": "Last Bugs",
-                  "code": "all_tasks",
-                  "limit": 5,
-                  "closable": true,
-                  "itemComponent": "appui-task-widget-task"
-                },
-                {
-                  "text": "My current bugs",
-                  "code": "tasks",
-                  "itemComponent": "appui-task-widget-task",
-                  "limit": 5
-                },
-                {
-                  "text": "Notes",
-                  "code": "notes",
-                  "closable": true,
-                  "component": "appui-task-task-widget-notes",
-                  "icon": "nf nf-fa-comments"
-                },
-                {
-                  "text": "Roles",
-                  "code": "roles",
-                  "closable": true,
-                  "component": "appui-task-task-widget-roles",
-                  "icon": "nf nf-fa-users"
-                },
-                {
-                  "text": "Sub-Tasks",
-                  "code": "subtasks",
-                  "closable": true,
-                  "component": "appui-task-task-widget-subtasks",
-                  "limit": 0,
-                  "icon": "nf nf-oct-tasklist"
-                },
-                {
-                  "text": "Tracker",
-                  "code": "tracker",
-                  "closable": true,
-                  "component": "appui-task-task-widget-tracker",
-                  "icon": "nf nf-fa-hourglass_half"
-                },
-                {
-                  "text": "Logs",
-                  "code": "logs",
-                  "closable": true,
-                  "component": "appui-task-task-widget-logs",
-                  "icon": "nf nf-mdi-file_document_box"
+                "text": "Approved",
+                "code": "approved",
+                "backgroundColor": "darkseagreen",
+                "color": "white"
+            },
+            {
+                "text": "Canceled",
+                "code": "canceled",
+                "backgroundColor": "slateblue",
+                "color": "white"
+            },
+            {
+                "text": "Closed",
+                "code": "closed",
+                "backgroundColor": "green",
+                "color": "white"
+            },
+            {
+                "text": "Deleted",
+                "code": "deleted",
+                "backgroundColor": "crimson",
+                "color": "white"
+            },
+            {
+                "text": "On hold",
+                "code": "holding",
+                "backgroundColor": "orange",
+                "color": "white"
+            },
+            {
+                "text": "Ongoing",
+                "code": "ongoing",
+                "backgroundColor": "dodgerblue",
+                "color": "white"
+            },
+            {
+                "text": "Opened",
+                "code": "opened",
+                "backgroundColor": "darkgray",
+                "color": "white"
+            },
+            {
+                "text": "Postponed",
+                "code": "postponed",
+                "backgroundColor": "salmon",
+                "color": "white"
+            },
+            {
+                "text": "Unapproved",
+                "code": "unapproved",
+                "backgroundColor": "orangered",
+                "color": "white"
+            }
+        ]
+    },
+    {
+        "text": "Tokens",
+        "code": "tokens",
+        "items": [
+            {
+                "text": "Categories",
+                "code": "cats",
+                "items": [
+                    {
+                        "text": "Developments",
+                        "code": "developments",
+                        "tokensYear": 960
+                    },
+                    {
+                        "text": "Maintenance proactive",
+                        "code": "proactive",
+                        "tokensYear": 480
+                    },
+                    {
+                        "text": "Support and maintenance",
+                        "code": "support",
+                        "tokensYear": 1760
+                    }
+                ],
+                "cfg": {
+                    "show_code": 1,
+                    "schema": [
+                        {
+                            "field": "tokensYear",
+                            "ftitle": "Tokens per year",
+                            "title": "Tokens",
+                            "type": "number"
+                        }
+                    ]
                 }
-              ]
+            },
+            {
+                "text": "Configuration",
+                "code": "config",
+                "active": 0,
+                "billing": {
+                    "day": "01",
+                    "month": "01",
+                    "months": 1
+                },
+                "step": 900,
+                "checkType": 0,
+                "amount": 25
             }
-          ]
+        ],
+        "cfg": {
+            "show_code": 1,
+            "allow_children": 1
         }
-      ]
+    },
+    {
+        "cfg": {
+            "show_code": 1,
+            "show_alias": 1,
+            "allow_children": 1,
+            "inheritance": "cascade",
+            "id_root_alias": [
+                "cats",
+                "tokens",
+                "task",
+                "appui"
+            ]
+        },
+        "text": "Task categories",
+        "code": "cats",
+        "items": [
+            {
+                "text": "Personal",
+                "code": "personal"
+            },
+            {
+                "text": "Technical service",
+                "code": "support",
+                "items": [
+                    {
+                        "text": "New feature",
+                        "code": "new",
+                        "id_alias": [
+                            "developments",
+                            "cats",
+                            "tokens",
+                            "task",
+                            "appui"
+                        ]
+                    },
+                    {
+                        "text": "Improvement of an existing feature",
+                        "code": "enhancement",
+                        "id_alias": [
+                            "proactive",
+                            "cats",
+                            "tokens",
+                            "task",
+                            "appui"
+                        ]
+                    },
+                    {
+                        "text": "Report a bug",
+                        "code": "bug",
+                        "id_alias": [
+                            "support",
+                            "cats",
+                            "tokens",
+                            "task",
+                            "appui"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "cfg": {
+            "show_code": 1,
+            "allow_children": 1
+        },
+        "text": "Privileges",
+        "code": "privileges",
+        "items": [
+            {
+                "text": "Decider",
+                "code": "decider"
+            },
+            {
+                "text": "Global",
+                "code": "global"
+            },
+            {
+                "text": "Group",
+                "code": "group"
+            },
+            {
+                "text": "Manager",
+                "code": "manager"
+            },
+            {
+                "text": "Account Manager",
+                "code": "account_manager"
+            },
+            {
+                "text": "Account Viewer",
+                "code": "account_viewer"
+            },
+            {
+                "text": "Project Manager",
+                "code": "project_manager"
+            },
+            {
+                "text": "Project Viewer",
+                "code": "project_viewer"
+            },
+            {
+                "text": "Assigner",
+                "code": "assigner"
+            },
+            {
+                "text": "Financial Manager",
+                "code": "financial_manager"
+            },
+            {
+                "text": "Financial Viewer",
+                "code": "financial_viewer"
+            },
+            {
+                "text": "Project Supervisor",
+                "code": "project_supervisor"
+            },
+            {
+                "text": "Viewer",
+                "code": "viewer"
+            },
+            {
+                "text": "Worker",
+                "code": "worker"
+            }
+        ]
     }
-  ]
-}
+]
