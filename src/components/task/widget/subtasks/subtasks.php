@@ -1,5 +1,5 @@
 <div class="appui-task-task-widget-subtasks">
-  <bbn-column-list :source="mainPage.root + 'data/list'"
+  <bbn-kanban-element :source="mainPage.root + 'data/list'"
                   :filters="currentFilters"
                   :filterable="true"
                   :pageable="true"

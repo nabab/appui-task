@@ -1,5 +1,5 @@
 <div class="appui-task-columns bbn-overlay">
-  <bbn-collapsable-columns bbn-if="ready && !!sections && sections.length"
+  <bbn-kanban bbn-if="ready && !!sections && sections.length"
                            :source="sections"
                            :data="currentData"
                            ref="sections"

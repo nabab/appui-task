@@ -1,6 +1,6 @@
 <!-- HTML Document -->
 <div class="appui-task-list bbn-overlay">
-  <bbn-column-list :source="mainPage.root + 'data/list'"
+  <bbn-kanban-element :source="mainPage.root + 'data/list'"
                    :data="currentData"
                    ref="tasksList"
                    :scrollable="true"

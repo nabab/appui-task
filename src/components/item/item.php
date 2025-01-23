@@ -283,7 +283,7 @@
         </bbn-button>
       </div>
     </div>
-    <bbn-column-list bbn-if="showSubtasks && !!source.num_children"
+    <bbn-kanban-element bbn-if="showSubtasks && !!source.num_children"
                      :class="['bbn-top-space', {
                        'bbn-alt-background': inverted,
                        'bbn-background': !inverted

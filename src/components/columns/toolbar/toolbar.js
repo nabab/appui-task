@@ -70,7 +70,7 @@
     },
     mounted() {
       this.$on('taskcreated', this.onTaskCreated);
-      this.columnList = this.closest('bbn-column-list');
+      this.columnList = this.closest('bbn-kanban-element');
       if (this.columnList) {
         this.columnList.$on('collapsed', this.onCollapsed);
         this.columnList.$on('expanded', this.onExpanded);

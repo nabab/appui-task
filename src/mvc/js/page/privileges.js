@@ -103,7 +103,7 @@
         methods: {
           remove(){
             this.confirm(bbn._('Are you sure you want to remove this user?'), () => {
-              let cl = this.closest('bbn-column-list');
+              let cl = this.closest('bbn-kanban-element');
               if (cl && !!cl.filters && cl.filters.conditions) {
                 let id = bbn.fn.getField(cl.filters.conditions, 'value', 'field', 'id');
                 if (id) {
@@ -181,7 +181,7 @@
           }
         },
         created(){
-          this.$set(this, 'columnList', this.closest('bbn-column-list'));
+          this.$set(this, 'columnList', this.closest('bbn-kanban-element'));
         }
       },
       form: {
@@ -249,7 +249,7 @@
             if (d.success) {
               let main = appui.getRegistered('appui-task-privileges');
               if (main) {
-                let list = main.findByKey(this.source.idPrivilege, 'bbn-column-list');
+                let list = main.findByKey(this.source.idPrivilege, 'bbn-kanban-element');
                 if (list) {
                   list.updateData();
                   appui.success();

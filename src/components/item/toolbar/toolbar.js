@@ -209,7 +209,7 @@
     },
     created(){
       this.mainPage = appui.getRegistered('appui-task');
-      this.columnList = this.closest('bbn-column-list');
+      this.columnList = this.closest('bbn-kanban-element');
     },
     mounted(){
       this.$on('taskcreated', this.onTaskCreated);

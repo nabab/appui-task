@@ -48,7 +48,7 @@
     </div>
   </div>
   <div class="bbn-flex-fill bbn-alt-background">
-    <bbn-collapsable-columns bbn-if="ready && !!sections && sections.length"
+    <bbn-kanban bbn-if="ready && !!sections && sections.length"
                             :source="sections"
                             ref="sections"
                             :component="$options.components.user"
