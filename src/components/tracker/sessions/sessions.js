@@ -11,7 +11,7 @@
         if (!!this.source?.idTrack) {
           let tracks = this.getRef('tracks');
           if (tracks) {
-            tracks.scrollTo(this.source.idTrack);
+            tracks.scrollSet(this.source.idTrack);
           }
         }
       },

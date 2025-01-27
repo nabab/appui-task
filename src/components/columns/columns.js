@@ -40,7 +40,7 @@
       search: {
         type: String
       },
-      role: {
+      userRole: {
         type: String
       },
       hierarchy: {
@@ -53,7 +53,7 @@
         currentData: {
           selection: this.filter,
           title: this.search,
-          role: this.role
+          role: this.userRole
         }
       }
     },
@@ -169,7 +169,7 @@
 
         this.currentData.selection = newVal;
       },
-      role(newVal){
+      userRole(newVal){
         let sections = this.getRef('sections');
         if (!!sections) {
           sections.setAllCheckCollapse();

@@ -156,12 +156,12 @@
     <div class="bbn-vmiddle"
          style="width: 100%; justify-content: space-between">
       <div class="bbn-vmiddle">
-        <div bbn-if="role"
+        <div bbn-if="userRole"
              class="bbn-radius bbn-right-sspace bbn-spadding bbn-upper bbn-s"
-             bbn-text="role.text"
+             bbn-text="userRole.text"
              :style="{
-               backgroundColor: role.backgroundColor + ' !important',
-               color: role.color + ' !important',
+               backgroundColor: userRole.backgroundColor + ' !important',
+               color: userRole.color + ' !important',
                cursor: 'default !important'
              }"/>
         <bbn-button :title="managersTitle"

@@ -144,7 +144,7 @@
         }
         return '';
       },
-      role(){
+      userRole(){
         if (this.mainPage && !!this.source.role) {
           return bbn.fn.getRow(this.mainPage.optionsRoles, 'value', this.source.role);
         }

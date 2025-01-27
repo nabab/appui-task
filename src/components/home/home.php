@@ -110,7 +110,7 @@
                         :order="currentOrder"
                         :filter="currentFilter"
                         :search="currentSearch"
-                        :role="currentRole"
+                        :user-role="currentRole"
                         :hierarchy="currentHierarchy"
                         @hook:mounted="currentComponent = getRef('columnsComponent')"/>
     <appui-task-list bbn-else-if="isListView"
