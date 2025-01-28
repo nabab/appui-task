@@ -71,7 +71,7 @@
                         class="bbn-w-100"
                         :max="3">
             <bbns-widget bbn-if="dashboard?.widgets?.budget && budgetIsVisible"
-                        :hidden="!currentWidgets.budget"
+                        :invisible="!currentWidgets.budget"
                         :label="dashboard.widgets.budget.text"
                         :icon="dashboard.widgets.budget.icon"
                         :component="dashboard.widgets.budget.component"
@@ -82,7 +82,7 @@
                         :buttonsLeft="closeButton"
                         :padding="true"/>
             <bbns-widget bbn-if="dashboard?.widgets?.roles"
-                        :hidden="!currentWidgets.roles"
+                        :invisible="!currentWidgets.roles"
                         :label="dashboard.widgets.roles.text"
                         :icon="dashboard.widgets.roles.icon"
                         :component="dashboard.widgets.roles.component"
@@ -93,7 +93,7 @@
                         :buttonsLeft="closeButton"
                         :padding="true"/>
             <bbns-widget bbn-if="dashboard?.widgets?.tracker"
-                        :hidden="!currentWidgets.tracker"
+                        :invisible="!currentWidgets.tracker"
                         :label="dashboard.widgets.tracker.text"
                         :icon="dashboard.widgets.tracker.icon"
                         :component="dashboard.widgets.tracker.component"
@@ -105,7 +105,7 @@
                         :buttonsRight="trackerButtons"
                         :padding="true"/>
             <bbns-widget bbn-if="dashboard?.widgets?.subtasks"
-                        :hidden="!currentWidgets.subtasks"
+                        :invisible="!currentWidgets.subtasks"
                         :label="dashboard.widgets.subtasks.text"
                         :icon="dashboard.widgets.subtasks.icon"
                         :component="dashboard.widgets.subtasks.component"
@@ -116,7 +116,7 @@
                         :buttonsLeft="closeButton"
                         :showable="false"/>
             <bbns-widget bbn-if="dashboard?.widgets?.logs && (isAdmin || isAccountManager || isGlobal)"
-                        :hidden="!currentWidgets.logs"
+                        :invisible="!currentWidgets.logs"
                         :label="dashboard.widgets.logs.text"
                         :icon="dashboard.widgets.logs.icon"
                         :component="dashboard.widgets.logs.component"
@@ -128,7 +128,7 @@
                         :buttonsLeft="closeButton"
                         :showable="false"/>
             <bbns-widget bbn-if="dashboard?.widgets?.notes"
-                        :hidden="!currentWidgets.notes"
+                        :invisible="!currentWidgets.notes"
                         :label="dashboard.widgets.notes.text"
                         :icon="dashboard.widgets.notes.icon"
                         :component="dashboard.widgets.notes.component"

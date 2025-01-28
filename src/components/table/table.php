@@ -15,7 +15,7 @@
     <bbns-column label="<?= _('ID') ?>"
                  field="id"
                  :width="270"
-                 :hidden="true"
+                 :invisible="true"
                  :showable="true"/>
     <bbns-column label="<i class='nf nf-fa-user'></i>"
                  flabel="<?= _('User') ?>"

@@ -7,7 +7,7 @@
     <bbns-column field="id"
                  label="<?= _("ID") ?>"
                  :width="120"
-                 :hidden="true"/>
+                 :invisible="true"/>
   	<bbns-column field="title"
                  label="<?= _("Title") ?>"
                  :render="renderTitle"
