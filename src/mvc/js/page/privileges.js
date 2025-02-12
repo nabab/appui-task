@@ -84,7 +84,7 @@
             <bbn-button class="bbn-no-border bbn-bg-red bbn-white"
                         icon="nf nf-fa-trash"
                         :notext="true"
-                        @click="remove"/>
+                        @click="removeItem"/>
           </div>
         `,
         props: {
@@ -101,7 +101,7 @@
           }
         },
         methods: {
-          remove(){
+          removeItem(){
             this.confirm(bbn._('Are you sure you want to remove this user?'), () => {
               let cl = this.closest('bbn-kanban-element');
               if (cl && !!cl.filters && cl.filters.conditions) {

@@ -143,7 +143,7 @@
           });
         }
       },
-      remove(n, v){
+      removeItem(n, v){
         if (!this.isClosed) {
           this.confirm(bbn._('Are you sure you want to delete this message?'), () => {
             this.post(this.root + 'actions/messages/delete', {

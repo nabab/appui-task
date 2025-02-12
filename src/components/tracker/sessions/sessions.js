@@ -220,7 +220,7 @@
                               class="bbn-xl"/>
                 </div>
               </div>
-              <bbn-button @click="remove"
+              <bbn-button @click="removeItem"
                           icon="nf nf-fa-trash"
                           class="bbn-bg-red bbn-white bbn-xl"
                           :notext="true"
@@ -279,7 +279,7 @@
               this.form.cancel();
             }
           },
-          remove(){
+          removeItem(){
             this.confirm(bbn._('Are you sure you want to delete this item?'), () => {
               this.post(this.appuiTracks.root + 'actions/tracker/remove', {
                 id: this.source.id

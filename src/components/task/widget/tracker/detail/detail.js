@@ -51,7 +51,7 @@
 
         return false;
       },
-      remove(row){
+      removeItem(row){
         if (this.canEditOrDelete(row)) {
           this.confirm(bbn._('Are you sure you want to delete this track?'), () => {
             this.post(this.root + 'actions/tracker/remove', {id: row.id}, d => {
@@ -82,7 +82,7 @@
             title: bbn._('Remove'),
             icon: 'nf nf-fa-trash',
             notext: true,
-            action: this.remove
+            action: this.removeItem
           });
         }
         return ret;

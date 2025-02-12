@@ -13,7 +13,7 @@
                   :remove-enabled="!isClosed"
                   @edit="edit"
                   @reply="reply"
-                  @remove="remove"
+                  @remove="removeItem"
                   :image-dom="imageDom"
                   :download-url="root + 'download/media/'"
                   :filterable="true"

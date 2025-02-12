@@ -57,7 +57,7 @@
                              class="bbn-flex-fill bbn-right-space"/>
             <bbn-button bbn-if="isAdded"
                         icon="nf nf-fa-minus bbn-lg"
-                        @click="remove"
+                        @click="removeItem"
                         class="bbn-no-border bbn-alt-background bbn-red"/>
             <bbn-button bbn-else
                         icon="nf nf-fa-plus bbn-lg"
@@ -104,7 +104,7 @@
               });
             }
           },
-          remove(){
+          removeItem(){
             if (this.isAdded
               && !!this.idParent
               && !!this.source.id
