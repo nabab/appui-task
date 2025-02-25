@@ -11,7 +11,7 @@
                     "dashboard",
                     "appui"
                 ],
-                "icon": "nf nf-mdi-widgets",
+                "icon": "nf nf-md-widgets",
                 "items": [
                     {
                         "text": "Budget",
@@ -67,7 +67,7 @@
                         "code": "logs",
                         "closable": true,
                         "component": "appui-task-task-widget-logs",
-                        "icon": "nf nf-mdi-file_document_box"
+                        "icon": "nf nf-md-file_document_box"
                     }
                 ]
             }
