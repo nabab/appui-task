@@ -212,7 +212,7 @@
                 "type": "varchar",
                 "null": 1,
                 "default": "NULL",
-                "defaultExpression": false,
+                "defaultExpression": 1,
                 "maxlength": 255
             },
             "cfg": {
@@ -419,7 +419,7 @@
                 "type": "varchar",
                 "null": 1,
                 "default": "NULL",
-                "defaultExpression": false,
+                "defaultExpression": 1,
                 "maxlength": 255
             },
             "active": {
