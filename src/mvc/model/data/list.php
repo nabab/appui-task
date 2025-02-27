@@ -67,7 +67,6 @@ $fields = [
   'role' => 'my_role.role',
   'last' => 'MAX(bbn_tasks_logs.chrono)',
   'last_action' => 'FROM_UNIXTIME(MAX(bbn_tasks_logs.chrono), "%Y-%m-%d %H:%i:%s")',
-  'num_children' => 'COUNT(children.id)',
   'num_notes' => 'COUNT(DISTINCT bbn_tasks_notes.id_note)',
   'duration' => "IF(bbn_tasks.`state` = UNHEX('$state_closed'), MAX(bbn_tasks_logs.chrono), UNIX_TIMESTAMP()) - MIN(bbn_tasks_logs.chrono)"
 ];
@@ -120,16 +119,6 @@ $join = [[
     'conditions' => [[
       'field' => 'bbn_tasks_notes.id_task',
       'exp' => 'bbn_tasks.id'
-    ]]
-  ]
-], [
-  'table' => 'bbn_tasks',
-  'type' => 'left',
-  'alias' => 'children',
-  'on' => [
-    'conditions' => [[
-      'field' => 'bbn_tasks_roles.id_task',
-      'exp' => 'children.id_parent'
     ]]
   ]
 ], [
