@@ -307,7 +307,7 @@
     {
         "cfg": {
             "show_code": 1,
-            "show_alias": 1,
+            "relations": "alias",
             "allow_children": 1,
             "inheritance": "cascade",
             "id_root_alias": [
