@@ -104,8 +104,8 @@ if (!empty($model->data['id'])
   if ( !empty($old['medias']) ){
     array_walk($old['medias'], function($m) use($model, &$ok, $notes){
       if (
-        (\bbn\X::find($model->data['files'], ['id' => $m['id']]) === null) &&
-        (\bbn\X::find($model->data['links'], ['id' => $m['id']]) === null) &&
+        (\bbn\X::search($model->data['files'], ['id' => $m['id']]) === null) &&
+        (\bbn\X::search($model->data['links'], ['id' => $m['id']]) === null) &&
         !$notes->removeMedia($m['id'], $model->data['id'])
       ){
         $ok = false;
