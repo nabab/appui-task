@@ -625,17 +625,27 @@
           }
         });
       }
-      appui.register('appui-task-' + this.source.id, this);
-    },
-    beforeMount(){
+
       if (this.hasStorage) {
         const storage = this.getStorage();
         if (!!storage
           && (storage.widgets !== undefined)
         ) {
-          this.currentWidgets = storage.widgets;
+          bbn.fn.iterate(storage.widgets, (v, k) => this.currentWidgets[k] = v)
         }
       }
+
+      appui.register('appui-task-' + this.source.id, this);
+    },
+    beforeMount(){
+      /* if (this.hasStorage) {
+        const storage = this.getStorage();
+        if (!!storage
+          && (storage.widgets !== undefined)
+        ) {
+          bbn.fn.iterate(storage.widgets, (v, k) => this.currentWidgets[k] = v)
+        }
+      } */
     },
     beforeDestroy(){
       appui.unregister('appui-task-' + this.source.id);
