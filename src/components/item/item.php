@@ -27,7 +27,9 @@
     <bbn-context bbn-if="(!!source.price || !!source.children_price) && canSeeBudget"
                  :source="getBudgetMenuSource"
                  item-component="appui-task-item-menu"
-                 class="bbn-right-sspace">
+                 class="bbn-right-sspace"
+                 ref="budgetContext"
+                 :attach="budgetContextButton">
       <bbn-button :style="{
                     color: 'white',
                     padding: 'var(--xsspace)',
@@ -40,7 +42,10 @@
                     'bbn-bg-orange': !isApproved && (!!source.price || (!!source.children_price && !source.num_children_noprice)),
                     'bbn-bg-red': !isApproved && !!source.children_price && !!source.num_children_noprice
                   }]"
-                  :title="_('Budget')">
+                  :title="_('Budget')"
+                  @click="getRef('budgetContext').click()"
+                  ref="budgetContextButton"
+                  @hook:mounted="budgetContextButton = getRef('budgetContextButton')">
           <span bbn-text="money(source.price || source.children_price)"/>
           <i bbn-if="!isApproved && !!source.children_price && !!source.num_children_noprice"
              class="nf nf-fa-info_circle bbn-left-sspace"
@@ -64,8 +69,10 @@
     <bbn-context bbn-if="!columnsComp || !columnsComp.isOrderedByPriority || isSub"
                  :source="getPriorityMenuSource"
                  item-component="appui-task-item-menu"
-                 class="bbn-left-sspace">
-      <bbn-button bbn-label="source.priority"
+                 class="bbn-left-sspace"
+                 ref="priorityContext"
+                 :attach="priorityContextButton">
+      <bbn-button bbn-text="source.priority"
                   :style="{
                     color: 'white',
                     backgroundColor: 'var(--appui-task-pr' + source.priority + ')',
@@ -75,13 +82,18 @@
                     'cursor': !canChange ? 'default !important' : ''
                   }"
                   class="bbn-upper bbn-s bbn-no-border"
-                  :title="_('Priority')"/>
+                  :title="_('Priority')"
+                  @click="getRef('priorityContext').click()"
+                  ref="priorityContextButton"
+                  @hook:mounted="priorityContextButton = getRef('priorityContextButton')"/>
     </bbn-context>
     <bbn-context bbn-if="!columnsComp || !columnsComp.isOrderedByStatus || isSub"
                  :source="getStatusMenuSource"
                  item-component="appui-task-item-menu"
-                 class="bbn-left-sspace">
-      <bbn-button bbn-label="statusText"
+                 class="bbn-left-sspace"
+                 ref="statusContext"
+                 :attach="statusContextButton">
+      <bbn-button bbn-text="statusText"
                   :style="{
                     color: statusColor,
                     backgroundColor: statusBgColor,
@@ -91,7 +103,10 @@
                     'cursor': !canChangeStatus ? 'default !important' : ''
                   }"
                   class="bbn-upper bbn-s bbn-no-border"
-                  :title="_('Status')"/>
+                  :title="_('Status')"
+                  @click="getRef('statusContext').click()"
+                  ref="statusContextButton"
+                  @hook:mounted="statusContextButton = getRef('statusContextButton')"/>
     </bbn-context>
   </div>
   <div class="bbn-flex-width appui-task-item-titlebar">
@@ -104,23 +119,28 @@
            'bbn-alt-background': inverted,
            'bbn-background': !inverted
          }]">
-      <i class="nf nf-md-lock bbn-red bbn-right-sspace"
-         :title="_('Private')"
-         bbn-if="!!source.private"/>
+      <i bbn-if="!!source.private"
+         class="nf nf-md-lock bbn-red bbn-right-sspace"
+         :title="_('Private')"/>
       <div class="bbn-b bbn-secondary-text-alt bbn-upper bbn-p"
            bbn-html="source.title"
            @click="seeTask"
            style="white-space: normal !important"/>
     </div>
-    <bbn-context :source="getMenuSource"
+    <bbn-context bbn-if="editable"
+                 :source="getMenuSource"
                  class="bbn-left-sspace"
                  item-component="appui-task-item-menu"
-                 bbn-if="editable">
+                 ref="menuContext"
+                 :attach="menuContextButton">
       <bbn-button icon="nf nf-md-dots_vertical"
                   :title="_('Menu')"
                   :notext="true"
                   class="bbn-no-border"
-                  :style="{'cursor': isDeleted ? 'default !important' : ''}"/>
+                  :style="{'cursor': isDeleted ? 'default !important' : ''}"
+                  ref="menuContextButton"
+                  @hook:mounted="menuContextButton = getRef('menuContextButton')"
+                  @click="getRef('menuContext').click()"/>
     </bbn-context>
   </div>
   <div bbn-if="!!showParent && source.parent"

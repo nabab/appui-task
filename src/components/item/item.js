@@ -73,7 +73,11 @@
         currentOrder: [{
           field: 'last_action',
           dir: 'DESC'
-        }]
+        }],
+        budgetContextButton: '',
+        priorityContextButton: '',
+        statusContextButton: '',
+        menuContextButton: '',
       }
     },
     computed: {
@@ -200,7 +204,7 @@
         if (this.canChange) {
           let rolesItems = [{
             text: bbn._('Add or remove managers'),
-            icon: 'nf nf-md-account_star',
+            icon: 'nf nf-md-account_tie',
             action: () => {
               this.manageRole('managers');
             },
@@ -208,7 +212,7 @@
             color: this.mainPage.getRoleColor('managers')
           }, {
             text: bbn._('Add or remove workers'),
-            icon: 'nf nf-md-worker',
+            icon: 'nf nf-md-account_hard_hat',
             action: () => {
               this.manageRole('workers');
             },
@@ -216,7 +220,7 @@
             color: this.mainPage.getRoleColor('workers')
           }, {
             text: bbn._('Add or remove viewers'),
-            icon: 'nf nf-fa-user_secret',
+            icon: 'nf nf-md-account_eye',
             action: () => {
               this.manageRole('viewers');
             },
@@ -226,7 +230,7 @@
           if (this.canChangeDecider) {
             rolesItems.push({
               text: bbn._('Add or remove deciders'),
-              icon: 'nf nf-fa-gavel',
+              icon: 'nf nf-md-account_cash',
               action: () => {
                 this.manageRole('deciders');
               },
