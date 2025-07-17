@@ -1,8 +1,8 @@
 <div class="appui-task-task-widget-logs bbn-bottom-padding">
   <div bbn-html="_('There are %s logs', '<b>' + source.totLogs + '</b>')"
-       class="bbn-spadding bbn-background bbn-bottom-space bbn-c bbn-radius"/>
+       class="bbn-spadding bbn-alt-background bbn-bottom-space bbn-c bbn-radius"/>
   <div bbn-for="(log, i) in source.lastLogs"
-        :class="['bbn-background', 'bbn-radius', 'bbn-spadding', {'bbn-bottom-sspace': !!source.lastLogs[i+1]}]">
+        :class="['bbn-alt-background', 'bbn-radius', 'bbn-spadding', {'bbn-bottom-sspace': !!source.lastLogs[i+1]}]">
     <div class="bbn-vmiddle bbn-flex-width bbn-bottom-xspadding">
       <bbn-initial :user-id="log.id_user"
                    height="1.2rem"

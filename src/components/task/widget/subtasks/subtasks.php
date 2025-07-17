@@ -7,7 +7,7 @@
                   :order="currentOrder"
                   component="appui-task-item"
                   :component-options="{
-                    inverted: true,
+                    inverted: false,
                     removeParent: true,
                     isSub: true,
                     forceCollapsed: true,
@@ -17,6 +17,9 @@
                   :scrollable="false"
                   toolbar="appui-task-item-toolbar"
                   :toolbar-source="source"
+                  :toolbar-options="{
+                    inverted: true
+                  }"
                   :limit="5"
                   ref="list"/>
 </div>

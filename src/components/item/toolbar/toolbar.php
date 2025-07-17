@@ -22,7 +22,7 @@
                 :notext="true"
                 @click="setMode('search')"
                 :disabled="!source.num_children"/>
-    <bbn-button icon="nf nf-md-sort_alphabetical"
+    <bbn-button icon="nf nf-md-sort_alphabetical_variant"
                 :title="_('Order')"
                 :class="['bbn-no-border', 'bbn-right-sspace', {'bbn-state-active': !!currentOrder}]"
                 :notext="true"
