@@ -131,7 +131,7 @@
                           :uid="dashboard.widgets.notes.code"
                           :closable="dashboard.widgets.notes.closable"
                           :source="source"
-                          :full="false"
+                          :full="true"
                           :sortable="false"
                           :showable="false"
                           :buttonsLeft="closeButton"/>
