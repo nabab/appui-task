@@ -131,6 +131,16 @@ $join = [[
       'exp' => 'parent.id'
     ]]
   ]
+], [
+  'table' => 'bbn_tasks',
+  'alias' => 'children',
+  'type' => 'left',
+  'on' => [
+    'conditions' => [[
+      'field' => 'bbn_tasks.id',
+      'exp' => 'children.id_parent'
+    ]]
+  ]
 ]];
 
 $filters = [
