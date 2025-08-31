@@ -5,6 +5,6 @@
  * Date: 06/10/2017
  * Time: 14:21
  *
- * @var $ctrl \bbn\Mvc\Controller
+ * @var bbn\Mvc\Controller $ctrl
  */
 $ctrl->action();

@@ -5,7 +5,7 @@
  * Date: 06/10/2017
  * Time: 14:22
  *
- * @var $model \bbn\Mvc\Model
+ * @var bbn\Mvc\Model $model
  */
 
 if ($model->hasData('id_task', true)){
