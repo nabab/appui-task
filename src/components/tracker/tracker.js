@@ -83,7 +83,7 @@
             }, d => {
               if (d.success && d.tracker) {
                 let task = appui.getRegistered('appui-task-' + idTask);
-                if (bbn.fn.isVue(task)) {
+                if (bbn.cp.isComponent(task)) {
                   task.$set(task.source, 'tracker', d.tracker);
                 }
                 this.active = d.tracker;
@@ -116,14 +116,14 @@
         this.post(this.root + 'actions/tracker/stop', obj, d => {
           if (d.success) {
             let task = appui.getRegistered('appui-task-' + this.active.id_task);
-            if (bbn.fn.isVue(task)) {
+            if (bbn.cp.isComponent(task)) {
               task.$set(task.source, 'tracker', false);
               task.$set(task.source, 'trackers', d.trackers);
               if (!!obj.message) {
                 let notesWidget = task.find(task.dashboard.widgets.notes.component);
-                if (bbn.fn.isVue(notesWidget)) {
+                if (bbn.cp.isComponent(notesWidget)) {
                   let notes = notesWidget.find('appui-task-notes');
-                  if (bbn.fn.isVue(notes)) {
+                  if (bbn.cp.isComponent(notes)) {
                     notes.getRef('forum').updateData();
                   }
                 }

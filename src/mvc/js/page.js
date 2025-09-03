@@ -372,7 +372,7 @@
               this.source.tracker = d.tracker;
               if (!d.trakcer) {
                 let tracker = appui.getRegistered('appui-task-tracker');
-                if (bbn.fn.isVue(tracker)
+                if (bbn.cp.isComponent(tracker)
                   && !!tracker.active
                   && (tracker.active.id === this.source.id)
                 ) {
@@ -383,7 +383,7 @@
               props.tracker = d.tracker;
               props.trackers = d.trackers;
               let columns = this.closest('appui-task-columns');
-              if (bbn.fn.isVue(columns)
+              if (bbn.cp.isComponent(columns)
                 && (columns.order === 'status')
               ) {
                 columns.reloadAll();
@@ -410,7 +410,7 @@
             }
             if (prop === 'priority') {
               let columns = this.closest('appui-task-columns');
-              if (bbn.fn.isVue(columns)
+              if (bbn.cp.isComponent(columns)
                 && (columns.order === 'priority')
               ) {
                 columns.reloadAll();

@@ -562,20 +562,20 @@
           && (this.isWorker || this.isManager)
         ){
           let tracker = appui.getRegistered('appui-task-tracker');
-          if (bbn.fn.isVue(tracker)) {
+          if (bbn.cp.isComponent(tracker)) {
             tracker.start(this.source.id);
           }
         }
       },
       stopTracker(){
         let tracker = appui.getRegistered('appui-task-tracker');
-        if (bbn.fn.isVue(tracker)) {
+        if (bbn.cp.isComponent(tracker)) {
           tracker.stop();
         }
       },
       editPrice(){
         let cp = this.find('appui-task-task-widget-budget');
-        if (bbn.fn.isVue(cp)) {
+        if (bbn.cp.isComponent(cp)) {
           cp.showPriceForm = true;
         }
       },
@@ -595,12 +595,12 @@
                 this.$set(this.source, 'lastChangePrice', null);
                 */
                 let cp = this.find('appui-task-task-widget-budget');
-                if (bbn.fn.isVue(cp)) {
+                if (bbn.cp.isComponent(cp)) {
                   cp.showPriceForm = false;
                   cp.closest('bbn-widget').updateButtons();
                 }
                 let cpSubTasks = this.find('appui-task-task-widget-subtasks');
-                if (bbn.fn.isVue(cpSubTasks)) {
+                if (bbn.cp.isComponent(cpSubTasks)) {
                   cpSubTasks.refresh();
                 }
               }

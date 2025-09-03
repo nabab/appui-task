@@ -13,7 +13,6 @@
     <bbn-dropdown :source="fullCategories"
                   bbn-model="source.type"
                   group="group"
-                  source-value="id"
                   required="required"
                   placeholder="<?= _('Select a type...') ?>"
                   class="bbn-w-100"

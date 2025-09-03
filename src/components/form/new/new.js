@@ -19,13 +19,13 @@
     computed: {
       opener(){
         let floater = this.closest('bbn-floater');
-        return bbn.fn.isVue(floater) ? floater.opener : false;
+        return bbn.cp.isComponent(floater) ? floater.opener : false;
       },
       mainPage(){
         return appui.getRegistered('appui-task');
       },
       fullCategories(){
-        if (bbn.fn.isVue(this.mainPage)
+        if (bbn.cp.isComponent(this.mainPage)
           && (this.mainPage.fullCategories !== undefined)
         ) {
           return bbn.fn.filter(this.mainPage.fullCategories, c => !c.num_children);
@@ -37,7 +37,7 @@
       onSuccess(d){
         if (d.success) {
           appui.success();
-          if (bbn.fn.isVue(this.opener)) {
+          if (bbn.cp.isComponent(this.opener)) {
             this.opener.$emit('taskcreated', d, this.openAfterCreation);
             /*
             if (this.opener.taskTitle !== undefined) {
@@ -53,7 +53,7 @@
               this.opener.source.num_children = d.children.length;
               this.opener.source.has_children = !!d.children.length;
               let widget = this.opener.findByKey('subtasks', 'bbn-widget');
-              if (bbn.fn.isVue(widget)) {
+              if (bbn.cp.isComponent(widget)) {
                 widget.reload();
               }
             }
