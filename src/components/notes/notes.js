@@ -39,6 +39,7 @@
     methods: {
       insert(){
         if (!this.isClosed) {
+          const cp = this;
           this.getPopup({
             label: bbn._('New message'),
             width: 800,
@@ -46,15 +47,6 @@
             component: 'appui-note-forum-form',
             componentOptions: bbn.fn.extend(true, {
               formAction: this.root + 'actions/messages/insert',
-              formSuccess: d => {
-                if (d.success) {
-                  this.getRef('forum').updateData();
-                  appui.success(bbn._('Inserted'));
-                }
-                else {
-                  appui.error(bbn._('Error'));
-                }
-              },
               source: {
                 title: '',
                 text: '',
@@ -62,12 +54,24 @@
                 links: [],
                 locked: 1
               }
-            }, this.form)
+            }, this.form),
+            componentEvents: {
+              success: d => {
+                if (d.success) {
+                  cp.getRef('forum').updateData();
+                  appui.success(bbn._('Inserted'));
+                }
+                else {
+                  appui.error(bbn._('Error'));
+                }
+              }
+            }
           });
         }
       },
       edit(n, v){
         if (!this.isClosed) {
+          const cp = this;
           this.getPopup({
             label: bbn._('Edit'),
             width: 800,
@@ -75,20 +79,6 @@
             component: 'appui-note-forum-form',
             componentOptions: bbn.fn.extend(true, {
               formAction: this.root + 'actions/messages/edit',
-              formSuccess: d => {
-                if (d.success) {
-                  if (!v.isTopic) {
-                    v.topic.updateData();
-                  }
-                  else {
-                    this.getRef('forum').updateData();
-                  }
-                  appui.success(bbn._('Edited'));
-                }
-                else {
-                  appui.error(bbn._('Error'));
-                }
-              },
               data: {
                 id: n.id,
                 id_task: this.source.id
@@ -100,7 +90,23 @@
                 links: n.links,
                 locked: n.locked
               }
-            }, this.form)
+            }, this.form),
+            componentEvents: {
+              success: d => {
+                if (d.success) {
+                  if (!v.isTopic) {
+                    v.topic.updateData();
+                  }
+                  else {
+                    cp.getRef('forum').updateData();
+                  }
+                  appui.success(bbn._('Edited'));
+                }
+                else {
+                  appui.error(bbn._('Error'));
+                }
+              }
+            }
           });
         }
       },
@@ -113,7 +119,20 @@
             component: 'appui-note-forum-form',
             componentOptions: bbn.fn.extend(true, {
               formAction: this.root + 'actions/messages/reply',
-              formSuccess: d => {
+              data: {
+                id_parent: n.id,
+                id_alias: n.id_alias || n.id,
+                id_task: this.source.id
+              },
+              source: {
+                text: '',
+                files: [],
+                links: [],
+                locked: 1
+              }
+            }, this.form),
+            componentEvents: {
+              success: d => {
                 if (d.success) {
                   if (!v.isTopic) {
                     v.topic.updateData();
@@ -127,19 +146,8 @@
                 else {
                   appui.error(bbn._('Error'));
                 }
-              },
-              data: {
-                id_parent: n.id,
-                id_alias: n.id_alias || n.id,
-                id_task: this.source.id
-              },
-              source: {
-                text: '',
-                files: [],
-                links: [],
-                locked: 1
               }
-            }, this.form)
+            }
           });
         }
       },
