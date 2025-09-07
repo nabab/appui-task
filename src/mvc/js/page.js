@@ -591,7 +591,7 @@
           let items = cat.items || false;
           delete cat.items;
           cat.value = cat.id;
-          cat.group = group || (items ? cat.text : '');
+          cat.group = group || (items?.length ? cat.text : '');
           res.push(cat);
           if ( items ){
            bbn.fn.each(items, (c, i) => {
