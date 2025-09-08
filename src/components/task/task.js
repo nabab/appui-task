@@ -118,6 +118,7 @@
       return {
         creation: dayjs(this.source.creation_date).format('DD/MM/YYYY HH:mm'),
         ref: dayjs().unix(),
+        indexes: ['budget', 'roles', 'tracker', 'subtasks', 'logs', 'notes'],
         commentTypes: [{
           text: bbn._('Simple text'),
           value: 'bbn-textarea'
@@ -248,11 +249,12 @@
               if (d.roles !== undefined) {
                 let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
                 if (comps.length) {
-                  bbn.fn.each(comps, c => c.$set(c.source, 'roles', d.roles));
-                  }
+                  bbn.fn.each(comps, c => c.source.roles = d.roles);
+                }
+
                 let t = appui.getRegistered('appui-task-' + this.source.id, true);
                 if (t) {
-                  this.$set(t.source, 'roles', d.roles);
+                  t.source.roles = d.roles;
                 }
               }
               appui.success();
@@ -317,11 +319,11 @@
                 if (d.roles !== undefined) {
                   let comps = this.mainPage.findAllByKey(this.source.id, 'appui-task-item');
                   if (comps.length) {
-                    bbn.fn.each(comps, c => c.$set(c.source, 'roles', d.roles));
+                    bbn.fn.each(comps, c => c.source.roles = d.roles);
                     }
                   let t = appui.getRegistered('appui-task-' + this.source.id, true);
                   if (t) {
-                    this.$set(t.source, 'roles', d.roles);
+                    t.source.roles = d.roles;
                   }
                 }
               }
@@ -490,7 +492,9 @@
           action: this.openAllLogs
         }];
       },
-      closeButton(){
+      closeButton(d){
+        bbn.fn.log('closeButton', d);
+
         return [{
           text: bbn._('Close'),
           icon: 'nf nf-fa-close',
@@ -515,7 +519,7 @@
       },
       removeWidgetFromTask(widget){
         if (!!this.currentWidgets[widget.uid]) {
-          this.$set(this.currentWidgets, widget.uid, 0);
+          this.currentWidgets[widget.uid] = 0;
           widget.close();
         }
       },
