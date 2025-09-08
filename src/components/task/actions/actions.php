@@ -295,7 +295,7 @@
                         color: getStatusColor('ongoing')
                       }"/>
           <bbn-button bbn-if="(task.isActive || task.isUnapproved) && task.canClose"
-                      @click="task ? task.close : () => {}"
+                      @click="task ? task.close() : () => {}"
                       title="<?= _('Close')  ?>"
                       icon="nf nf-fa-check"
                       :notext="true"
