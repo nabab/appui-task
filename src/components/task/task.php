@@ -70,7 +70,7 @@
                           ref="dashboard"
                           class="bbn-w-100"
                           :max="3">
-              <bbn-widget bbn-for="n in indexes"
+              <bbn-widget bbn-for="n in indexes.reverse()"
                           bbn-if="dashboard.widgets[n] && currentWidgets[n]"
                           :label="dashboard.widgets[n].text"
                           :icon="dashboard.widgets[n].icon"
@@ -79,7 +79,9 @@
                           :closable="dashboard.widgets[n].closable"
                           :source="source"
                           :showable="false"
-                          @close="currentWidgets[n] = 0"/>
+                          @close="currentWidgets[n] = 0"
+                          :buttons-right="n === 'tracker' ? trackerButtons() : (n === 'logs' ? logsButtons() : [])"
+                          :full="n === 'notes'"/>
             </bbn-dashboard>
           </bbn-scroll>
         </div>
