@@ -19,30 +19,8 @@
     },
     computed: {
       totalTime(){
-        let d = dayjs.duration((bbn.fn.sum(this.summary, 'totalTime') || 0) * 1000);
-        let res = '';
-        if (d.years()) {
-          let y = d.years();
-          res += '<strong>' + y + '</strong>' + (y === 1 ? bbn._('year') : bbn._('years'));
-        }
-        if (d.months()) {
-          let m = d.months();
-          res += (!!res.length ? ' ' : '') + '<strong>' + m + '</strong>' + (m === 1 ? bbn._('month') : bbn._('months'));
-        }
-        if (d.days()) {
-          let da = d.days();
-          res += (!!res.length ? ' ' : '') + '<strong>' + da + '</strong>' + (da === 1 ? bbn._('day') : bbn._('days'));
-        }
-        if (d.hours()) {
-          let h = d.hours();
-          res += (!!res.length ? ' ' : '') + '<strong>' + h + '</strong>' + (h === 1 ? bbn._('hour') : bbn._('hours'));
-        }
-        if (d.minutes()) {
-          let m = d.minutes();
-          res += (!!res.length ? ' ' : '') +'<strong>' +  m + '</strong>' + (m === 1 ? bbn._('minute') : bbn._('minutes'));;
-        }
-
-        return res;
+        let d = bbn.fn.sum(this.summary, 'totalTime') || 0;
+        return this.secToTime(d, true);
       },
       totalTokens(){
         if (!this.source.trackers) {
@@ -72,6 +50,19 @@
       }
     },
     methods: {
+      secToTime(seconds, cut){
+        let h = Math.floor(seconds / 3600),
+            m,
+            s;
+
+        seconds %= 3600;
+        m = Math.floor(seconds / 60);
+        s = seconds % 60;
+        h = (h < 10) ? '0' + h : h;
+        m = (m < 10) ? '0' + m : m;
+        s = (s < 10) ? '0' + s : s;
+        return h + ':' + m + (cut ? '' : ':'+ s);
+      },
       clearTrackerInterval(){
         if (this.interval) {
           clearInterval(this.interval);
