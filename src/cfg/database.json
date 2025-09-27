@@ -178,14 +178,11 @@
             "ref": {
               "position": 11,
               "type": "varchar",
-              "null": 1,
               "key": null,
               "extra": "VIRTUAL GENERATED",
               "signed": 1,
               "virtual": 1,
               "generation": "concat(easy_id,'/',year(creation_date))",
-              "default": "NULL",
-              "defaultExpression": 1,
               "maxlength": 15
             },
             "deadline": {
@@ -611,12 +608,9 @@
             },
             "end": {
                 "type": "datetime",
-                "null": 1,
                 "extra": "VIRTUAL GENERATED",
                 "virtual": true,
-                "generation": "addtime(`start`,sec_to_time(`length`))",
-                "default": "NULL",
-                "defaultExpression": 1
+                "generation": "addtime(`start`,sec_to_time(`length`))"
             },
             "tokens": {
                 "type": "int",
@@ -678,12 +672,9 @@
             },
             "ref_year": {
                 "type": "year",
-                "null": 1,
                 "extra": "VIRTUAL GENERATED",
                 "virtual": true,
                 "generation": "year(`creation`)",
-                "default": "NULL",
-                "defaultExpression": 1,
                 "maxlength": 4
             },
             "creation": {
