@@ -8,7 +8,7 @@
 $res = [];
 $taskCls = new \bbn\Appui\Task($model->db);
 $id_user = $model->inc->user->getId();
-$id_group = $model->inc->user->getGroup();
+$id_group = $model->inc->user->getIdGroup();
 $state_closed = $taskCls->idState('closed');
 
 //Privileges

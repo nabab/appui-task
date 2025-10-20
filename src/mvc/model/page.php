@@ -30,7 +30,7 @@ $d = [
     }, Task::getOptionsTextValue('roles')),
     'cats' => Task::catCorrespondances()
   ],
-  'usergroup' => $model->inc->user->getGroup(),
+  'usergroup' => $model->inc->user->getIdGroup(),
   'groups' => array_map(function($g) use($arch){
     $g['text'] = $g[$arch['group']];
     unset($g[$arch['group']]);
