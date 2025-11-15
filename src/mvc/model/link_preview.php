@@ -37,7 +37,7 @@ if ( isset($model->data['url'], $model->data['ref']) && \bbn\Str::isUrl($model->
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         $saved = curl_exec($curl);
-        if ( $saved && (\strlen($saved) > 1000) ){
+        if ( $saved && (Str::len($saved) > 1000) ){
           $new = \bbn\Str::encodeFilename(basename($pic), \bbn\Str::fileExt(basename($pic)));
           file_put_contents($path.$root.'/'.$new, $saved);
           unset($saved);
