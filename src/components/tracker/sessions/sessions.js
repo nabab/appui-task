@@ -17,7 +17,7 @@
       },
       onEdit(item){
         if (!!item.start && !!item.end) {
-          if (dayjs(item.end).unix() < dayjs(item.start).unix()) {
+          if (bbn.date(item.end).unix() < bbn.date(item.start).unix()) {
             this.alert(bbn._('The end date must be more recent than the start date'));
             return false;
           }
@@ -96,23 +96,23 @@
           return {
             root: appui.plugins['appui-task'] + '/',
             tracks: this.closest('bbn-floater').opener,
-            maxEnd: dayjs().format('YYYY-MM-DD HH:mm:ss')
+            maxEnd: bbn.date().format('YYYY-MM-DD HH:mm:ss')
           }
         },
         computed: {
           maxStart(){
             if (!this.source.row.end) {
-              return dayjs().format('YYYY-MM-DD HH:mm:ss');
+              return bbn.date().format('YYYY-MM-DD HH:mm:ss');
             }
 
-            let end = dayjs(this.source.row.end).unix(),
-                now = dayjs().unix();
-            return end < now ? this.source.row.end : dayjs().format('YYYY-MM-DD HH:mm:ss');
+            let end = bbn.date(this.source.row.end).unix(),
+                now = bbn.date().unix();
+            return end < now ? this.source.row.end : bbn.date().format('YYYY-MM-DD HH:mm:ss');
           }
         },
         methods: {
           validation(){
-            if ( dayjs(this.source.row.end).unix() < dayjs(this.source.row.start).unix() ){
+            if ( bbn.date(this.source.row.end).unix() < bbn.date(this.source.row.start).unix() ){
               this.alert(bbn._('The end date must be more recent than the start date'));
               return false;
             }
@@ -239,19 +239,19 @@
             appuiTracks: appui.getRegistered('appui-task-sessions-editor'),
             tracks: this.closest('bbn-tracks'),
             form: false,
-            maxEnd: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+            maxEnd: bbn.date().format('YYYY-MM-DD HH:mm:ss'),
             textareaHeight: 'auto'
           }
         },
         computed: {
           maxStart(){
             if (!this.source.end) {
-              return dayjs().format('YYYY-MM-DD HH:mm:ss');
+              return bbn.date().format('YYYY-MM-DD HH:mm:ss');
             }
 
-            let end = dayjs(this.source.end).unix(),
-                now = dayjs().unix();
-            return end < now ? this.source.end : dayjs().format('YYYY-MM-DD HH:mm:ss');
+            let end = bbn.date(this.source.end).unix(),
+                now = bbn.date().unix();
+            return end < now ? this.source.end : bbn.date().format('YYYY-MM-DD HH:mm:ss');
           }
         },
         methods: {
@@ -262,7 +262,7 @@
             return bbn.fn.isFunction(this.tracks.data) ? this.tracks.data() : this.tracks.data;
           },
           validation(){
-            if (dayjs(this.source.end).unix() < dayjs(this.source.start).unix()) {
+            if (bbn.date(this.source.end).unix() < bbn.date(this.source.start).unix()) {
               this.alert(bbn._('The end date must be more recent than the start date'));
               return false;
             }

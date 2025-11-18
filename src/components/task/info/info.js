@@ -10,7 +10,7 @@
     methods: {
       shorten: bbn.fn.shorten,
       minDate(){
-        return dayjs().format('YYYY-MM-DD');
+        return bbn.date().format('YYYY-MM-DD');
       },
       downloadDoc(docId){
         if (!!docId) {

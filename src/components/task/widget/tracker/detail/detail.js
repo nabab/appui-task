@@ -20,13 +20,13 @@
         return this.secToTime(row.length);
       },
       renderStart(row){
-        return dayjs(row.start).format('DD/MM/YYYY HH:mm:ss');
+        return bbn.date(row.start).format('DD/MM/YYYY HH:mm:ss');
       },
       renderEnd(row){
         if ( !row.end ){
           return bbn._('In progress') + '...';
         }
-        return dayjs(row.end).format('DD/MM/YYYY HH:mm:ss');
+        return bbn.date(row.end).format('DD/MM/YYYY HH:mm:ss');
       },
       edit(row, col, idx){
         return this.$refs.table.edit(row, {
@@ -44,7 +44,7 @@
       },
       canEditOrDelete(row) {
         if ((appui.user.id === row.id_user)
-          && (dayjs().diff(dayjs(row.end), 'hours') < 48)
+          && (bbn.date().diff(bbn.date(row.end), 'hours') < 48)
         ) {
           return true;
         }
@@ -119,23 +119,23 @@
         data(){
           return {
             tracker: this.closest('bbn-container').find('appui-task-task-widget-tracker-detail'),
-            maxEnd: dayjs().format('YYYY-MM-DD HH:mm:ss')
+            maxEnd: bbn.date().format('YYYY-MM-DD HH:mm:ss')
           }
         },
         computed: {
           maxStart(){
             if (!this.source.row.end) {
-              return dayjs().format('YYYY-MM-DD HH:mm:ss');
+              return bbn.date().format('YYYY-MM-DD HH:mm:ss');
             }
 
-            let end = dayjs(this.source.row.end).unix(),
-                now = dayjs().unix();
-            return end < now ? this.source.row.end : dayjs().format('YYYY-MM-DD HH:mm:ss');
+            let end = bbn.date(this.source.row.end).unix(),
+                now = bbn.date().unix();
+            return end < now ? this.source.row.end : bbn.date().format('YYYY-MM-DD HH:mm:ss');
           }
         },
         methods: {
           validation(){
-            if ( dayjs(this.source.row.end).unix() < dayjs(this.source.row.start).unix() ){
+            if ( bbn.date(this.source.row.end).unix() < bbn.date(this.source.row.start).unix() ){
               this.alert(bbn._('The end date must be more recent than the start date'));
               return false;
             }
@@ -161,7 +161,7 @@
         watch: {
           'source.row.start'(newVal){
             if ( newVal && this.source.row.end ){
-              this.$set(this.source.row, 'length', dayjs(this.source.row.end).unix() - dayjs(this.source.row.start).unix());
+              this.$set(this.source.row, 'length', bbn.date(this.source.row.end).unix() - bbn.date(this.source.row.start).unix());
             }
             else {
               this.$set(this.source.row, 'length', 0);
@@ -169,7 +169,7 @@
           },
           'source.row.end'(newVal){
             if ( newVal && this.source.row.start ){
-              this.$set(this.source.row, 'length', dayjs(this.source.row.end).unix() - dayjs(this.source.row.start).unix());
+              this.$set(this.source.row, 'length', bbn.date(this.source.row.end).unix() - bbn.date(this.source.row.start).unix());
             }
             else {
               this.$set(this.source.row, 'length', 0);

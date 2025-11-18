@@ -3,10 +3,10 @@
     props: ['source'],
     data(){
       return {
-        currentYear: dayjs().year() + '-',
+        currentYear: bbn.date().year() + '-',
         formData: {
           ref: 0,
-          creation: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          creation: bbn.date().format('YYYY-MM-DD HH:mm:ss'),
           description: this.source.title,
           tax: 20,
           taxable: parseFloat(this.source.price),
@@ -14,7 +14,7 @@
           id_task: this.source.id,
           approved: this.source.approved ? {
             user: bbn.fn.getField(appui.users, 'text', 'value', this.source.approved.id_user),
-            moment: dayjs.unix(this.source.approved.chrono).format('DD/MM/YYYY')
+            moment: bbn.date().unix(this.source.approved.chrono).format('DD/MM/YYYY')
           } : false
         }
       }

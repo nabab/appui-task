@@ -74,7 +74,7 @@
         }, 1000);
       },
       getProgress(){
-        return dayjs().unix() - dayjs(this.source.tracker.start).unix();
+        return bbn.date().unix() - bbn.date(this.source.tracker.start).unix();
       },
       setProgress(){
         this.progress = this.secToTime(this.getProgress());
