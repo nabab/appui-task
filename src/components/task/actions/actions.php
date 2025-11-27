@@ -16,7 +16,7 @@
       </div>
       <div bbn-if="task.canChangeBudget && !source.price && !source.parent_has_price && !source.children_price"
            class="bbn-vmiddle bbn-padding appui-task-task-actions-item bbn-border-bottom"
-           @click="task ? task.addPrice() : () => {}">
+           @click="task ? task.editPrice() : () => {}">
         <i class="bbn-m nf nf-md-cash_plus"/>
         <span class="bbn-left-sspace"
               bbn-text="_('Add price')"/>

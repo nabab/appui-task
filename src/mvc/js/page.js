@@ -297,12 +297,26 @@
               this.update('state', this.mainPage.source.states.ongoing);
             });
           }
+
+          if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.toggleMobileMenu();
+            }
+          }
         },
         hold() {
           if (this.canHold) {
             this.confirm(bbn._('Are you sure you want to put this task on hold?'), () => {
               this.update('state', this.mainPage.source.states.holding);
             });
+          }
+
+          if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.toggleMobileMenu();
+            }
           }
         },
         close() {
@@ -311,12 +325,26 @@
               this.update('state', this.mainPage.source.states.closed);
             });
           }
+
+          if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.toggleMobileMenu();
+            }
+          }
         },
         resume() {
           if (this.canResume) {
             this.confirm(bbn._('Are you sure you want to resume this task?'), () => {
               this.update('state', this.mainPage.source.states.ongoing);
             });
+          }
+
+          if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.toggleMobileMenu();
+            }
           }
         },
         cancel(){
@@ -325,12 +353,26 @@
               this.update('state', this.mainPage.source.states.canceled);
             });
           }
+
+          if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.toggleMobileMenu();
+            }
+          }
         },
         removeTask(){
           if (this.canRemoveTask) {
             this.confirm(bbn._('Are you sure you want to remove this task?'), () => {
               this.update('state', this.mainPage.source.states.deleted);
             });
+          }
+
+          if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.toggleMobileMenu();
+            }
           }
         },
         ping(){
@@ -346,12 +388,26 @@
               });
             });
           }
+
+          if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.toggleMobileMenu();
+            }
+          }
         },
         reopen() {
           if (this.canReopen) {
             this.confirm(bbn._("Are you sure you want to reopen this task?"), () => {
               this.update('state', this.mainPage.source.states.opened);
             });
+          }
+
+          if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.toggleMobileMenu();
+            }
           }
         },
         update(prop, val) {

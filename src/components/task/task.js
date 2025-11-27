@@ -286,6 +286,13 @@
             }
           });
         }
+
+        if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+          const slider = this.getRef('slider');
+          if (slider?.currentVisible) {
+            this.toggleMobileMenu();
+          }
+        }
       },
       _unmakeMe(prop){
         if (this.canUnmakeMe
@@ -328,6 +335,13 @@
                 }
               }
             });
+          }
+        }
+
+        if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+          const slider = this.getRef('slider');
+          if (slider?.currentVisible) {
+            this.toggleMobileMenu();
           }
         }
       },
@@ -476,6 +490,12 @@
           && !this.source.children_price
         ) {
           this.find('appui-task-task-widget-budget').showPriceForm = true;
+          if (this.mainPage.isMobile()) {
+            const slider = this.getRef('slider');
+            if (slider?.currentVisible) {
+              this.task.toggleMobileMenu();
+            }
+          }
         }
       },
       trackerButtons(){
@@ -559,6 +579,13 @@
             });
           });
         }
+
+        if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+          const slider = this.getRef('slider');
+          if (slider?.currentVisible) {
+            this.toggleMobileMenu();
+          }
+        }
       },
       startTracker(){
         if (!this.source.tracker
@@ -570,17 +597,38 @@
             tracker.start(this.source.id);
           }
         }
+
+        if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+          const slider = this.getRef('slider');
+          if (slider?.currentVisible) {
+            this.toggleMobileMenu();
+          }
+        }
       },
       stopTracker(){
         let tracker = appui.getRegistered('appui-task-tracker');
         if (bbn.cp.isComponent(tracker)) {
           tracker.stop();
         }
+
+        if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+          const slider = this.getRef('slider');
+          if (slider?.currentVisible) {
+            this.toggleMobileMenu();
+          }
+        }
       },
       editPrice(){
         let cp = this.find('appui-task-task-widget-budget');
         if (bbn.cp.isComponent(cp)) {
           cp.showPriceForm = true;
+        }
+
+        if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+          const slider = this.getRef('slider');
+          if (slider?.currentVisible) {
+            this.toggleMobileMenu();
+          }
         }
       },
       removePrice(){
@@ -610,6 +658,13 @@
               }
             });
           });
+        }
+
+        if (this.mainPage?.isMobile() && this.toggleMobileMenu) {
+          const slider = this.getRef('slider');
+          if (slider?.currentVisible) {
+            this.toggleMobileMenu();
+          }
         }
       },
       toggleMobileMenu(){
