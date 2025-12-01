@@ -156,13 +156,13 @@
       },
       getInvoiceRef(){
         if ( this.source.invoice ){
-          return bbn.date(this.source.invoice.creation).format('YYYY') + '-' + this.source.invoice.ref;
+          return bbn.dt(this.source.invoice.creation).format('YYYY') + '-' + this.source.invoice.ref;
         }
         return '';
       },
       getInvoiceDate(){
         if ( this.source.invoice ){
-          return bbn.date(this.source.invoice.creation).format('DD/MM/YYYY');
+          return bbn.dt(this.source.invoice.creation).format('DD/MM/YYYY');
         }
         return '';
       },

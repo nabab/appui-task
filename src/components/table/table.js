@@ -121,7 +121,7 @@
         return `<i class="bbn-m nf nf-${icon}" style="color: ${color}" title="${bbn.fn.getField(this.mainPage.source.options.states, "text", "value", row.state)}"/>`;
       },
       renderLast(row){
-        return bbn.date(row.last_action).calendar();
+        return bbn.dt(row.last_action).calendar();
       },
       renderRole(row){
         return bbn.fn.getField(this.mainPage.source.options.roles, "text", "value", row.role) || '-';
@@ -130,17 +130,17 @@
         return bbn.fn.getField(this.mainPage.source.options.cats, "text", "value", row.type);
       },
       renderDuration(row){
-        let start = bbn.date(row.creation_date);
+        let start = bbn.dt(row.creation_date);
         return row.state === this.mainPage.source.states.closed ?
-          bbn.date(row.last_action).from(start, true) :
-          bbn.date().from(start, true);
+          bbn.dt(row.last_action).from(start, true) :
+          bbn.dt().from(start, true);
       },
       renderCreationDate(row){
-        return bbn.date(row.creation_date).calendar();
+        return bbn.dt(row.creation_date).calendar();
       },
       renderDeadline(row){
-        let t = bbn.date(row.deadline),
-            diff = t.unix() - bbn.date().unix(),
+        let t = bbn.dt(row.deadline),
+            diff = t.unix() - bbn.dt().unix(),
             col = 'green',
             isClosed = row.state === this.mainPage.source.states.closed,
             d = isClosed ? t.calendar() : t.fromNow();

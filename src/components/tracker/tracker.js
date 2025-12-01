@@ -52,7 +52,7 @@
         }, 1000);
       },
       getProgress(){
-        this.progress = this.secToTime(bbn.date().unix() - bbn.date(this.active.start).unix());
+        this.progress = this.secToTime(bbn.dt().unix() - bbn.dt(this.active.start).unix());
       },
       secToTime(seconds, cut){
         let h = Math.floor(seconds / 3600),

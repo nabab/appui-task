@@ -472,7 +472,7 @@
                 columns.reloadAll();
               }
             }
-            let lastAction = bbn.date().format('YYYY-MM-DD HH:mm:ss');
+            let lastAction = bbn.dt().format('YYYY-MM-DD HH:mm:ss');
             this.$set(this.source, 'last_action', lastAction);
             props.last_action = lastAction;
             let comps = bbn.fn.unique(this.mainPage.findAllByKey(this.source.id, 'appui-task-item'));
@@ -732,7 +732,7 @@
         return id === appui.user.id;
       },
       formatDate(d){
-        return bbn.date(d).format('DD/MM/YYYY HH:mm');
+        return bbn.dt(d).format('DD/MM/YYYY HH:mm');
       },
       getRoleColor(code){
         if (this.optionsRoles) {

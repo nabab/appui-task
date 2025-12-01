@@ -87,7 +87,7 @@
       },
       fdatetime(d){
         if (!!d) {
-          d = bbn.date(d);
+          d = bbn.dt(d);
           if (d.isValid) {
             return d.format('DD/MM/YYYY HH:mm');
           }
@@ -116,8 +116,8 @@
     },
     data(){
       return {
-        creation: bbn.date(this.source.creation_date).format('DD/MM/YYYY HH:mm'),
-        ref: bbn.date().unix(),
+        creation: bbn.dt(this.source.creation_date).format('DD/MM/YYYY HH:mm'),
+        ref: bbn.dt().unix(),
         indexes: ['budget', 'roles', 'tracker', 'subtasks', 'logs', 'notes'],
         commentTypes: [{
           text: bbn._('Simple text'),
@@ -367,7 +367,7 @@
           this.post(this.root + 'actions/comment/insert', v, (d) => {
             if (d.success && d.comment) {
               d.comment.creation = new Date().getSQL(1);
-              let m = new bbn.date(d.comment.creation);
+              let m = new bbn.dt(d.comment.creation);
               d.comment.since = m.fromNow();
               this.source.notes.push(d.comment);
               this.clearComment();
@@ -403,7 +403,7 @@
          }
       },
       renderSince(d) {
-        return bbn.date(d).fromNow();
+        return bbn.dt(d).fromNow();
       },
       linkEnter() {
          const link = (this.$refs.link.$refs.element.value.indexOf('http') !== 0 ? 'http://' : '') + this.$refs.link.$refs.element.value,
