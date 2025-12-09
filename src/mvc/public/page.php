@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does to show you're not that dumb!
- *
- **/
 use bbn\Str;
 
 /** @var bbn\Mvc\Controller $ctrl */
