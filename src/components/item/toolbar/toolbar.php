@@ -10,11 +10,13 @@
                    text: _('Search existing'),
                    icon: 'nf nf-fa-search',
                    action: searchTask
-                 }]">
+                 }]"
+                 ref="newTaskContext">
       <bbn-button icon="nf nf-fa-plus"
                   :title="_('New task')"
                   class="bbn-no-border bbn-right-sspace"
-                  :notext="true"/>
+                  :notext="true"
+                  @click="getRef('newTaskContext').click()"/>
     </bbn-context>
     <bbn-button icon="nf nf-fa-search"
                 :title="_('Search')"
