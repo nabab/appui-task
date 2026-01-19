@@ -21,8 +21,21 @@
           label: bbn._('New task'),
           width: 500,
           component: 'appui-task-form-new',
+          componentEvents: {
+            taskcreated: (d, openAfterCreation) => {
+              if (d.success && !!d.id) {
+                if (openAfterCreation) {
+                  bbn.fn.link(this.root + 'page/task/' + d.id);
+                }
+
+                if (this.columnList) {
+                  this.columnList.updateData();
+                }
+              }
+            }
+          },
           source: {
-            label: '',
+            title: '',
             type: !!this.columnsComp && this.columnsComp.isOrderedByTypes ? this.source.id : '',
             private: 0
           }
@@ -50,17 +63,6 @@
           });
         }
       },
-      onTaskCreated(d, openAfterCreation){
-        if (d.success && !!d.id) {
-          if (openAfterCreation) {
-            bbn.fn.link(this.root + 'page/task/' + d.id);
-          }
-
-          if (this.columnList) {
-            this.columnList.updateData();
-          }
-        }
-      },
       onCollapsed(){
         this.$forceUpdate();
       },
@@ -69,7 +71,6 @@
       }
     },
     mounted() {
-      this.$on('taskcreated', this.onTaskCreated);
       this.columnList = this.closest('bbn-kanban-element');
       if (this.columnList) {
         this.columnList.$on('collapsed', this.onCollapsed);
@@ -77,7 +78,6 @@
       }
     },
     beforeDestroy(){
-      this.$off('taskcreated', this.onTaskCreated);
       if (this.columnList) {
         this.columnList.$off('collapsed', this.onCollapsed);
         this.columnList.$off('expanded', this.onExpanded);

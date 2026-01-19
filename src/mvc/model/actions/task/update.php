@@ -1,6 +1,9 @@
 <?php
+use bbn\Appui\Task;
+use bbn\X;
+
 if ($model->hasData(['id_task', 'prop'], true)) {
-  $taskCls = new \bbn\Appui\Task($model->db);
+  $taskCls = new Task($model->db);
   $idTask = $model->data['id_task'];
   $includeDeleted = false;
   function getList($id, $t, $d){
@@ -28,7 +31,7 @@ if ($model->hasData(['id_task', 'prop'], true)) {
         isset($model->data['val']) ? $model->data['val'] : null
     )
   ];
-  $res['data'] = \bbn\X::mergeArrays(
+  $res['data'] = X::mergeArrays(
     $taskCls->info($idTask),
     [
       'tracker' => $taskCls->getActiveTrack(false, $idTask),

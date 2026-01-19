@@ -17,10 +17,6 @@
       }
     },
     computed: {
-      opener(){
-        let floater = this.closest('bbn-floater');
-        return bbn.cp.isComponent(floater) ? floater.opener : false;
-      },
       mainPage(){
         return appui.getRegistered('appui-task');
       },
@@ -30,6 +26,29 @@
         ) {
           return bbn.fn.filter(this.mainPage.fullCategories, c => !c.num_children);
         }
+        else if (appui.options.tasks?.categories) {
+          const res = [];
+          const getItem = (cat, group) => {
+            let items = cat.items || false;
+            delete cat.items;
+            cat.value = cat.id;
+            cat.group = group || (items?.length ? cat.text : '');
+            res.push(cat);
+            if ( items ){
+            bbn.fn.each(items, (c, i) => {
+                getItem(c, cat.text);
+              });
+            }
+          };
+          bbn.fn.each(
+            bbn.fn.clone(appui.options.tasks.categories),
+            cat => {
+              getItem(cat);
+            }
+          );
+          return res;
+        }
+
         return [];
       }
     },
@@ -37,31 +56,11 @@
       onSuccess(d){
         if (d.success) {
           appui.success();
-          if (bbn.cp.isComponent(this.opener)) {
-            this.opener.$emit('taskcreated', d, this.openAfterCreation);
-            /*
-            if (this.opener.taskTitle !== undefined) {
-              this.opener.taskTitle = '';
-            }
-            if (bbn.fn.isFunction(this.opener.openTask)) {
-              this.opener.openTask(d.success);
-            }
-            if ((d.children !== undefined)
-              && bbn.fn.isArray(this.opener.source.children)
-            ) {
-              this.opener.source.children.splice(0, this.opener.source.children.length, ...d.children);
-              this.opener.source.num_children = d.children.length;
-              this.opener.source.has_children = !!d.children.length;
-              let widget = this.opener.findByKey('subtasks', 'bbn-widget');
-              if (bbn.cp.isComponent(widget)) {
-                widget.reload();
-              }
-            }
-            */
-          }
+          this.$emit('taskcreated', d, this.openAfterCreation);
         }
         else {
           appui.error();
+          this.$emit('taskfailed', d);
         }
       },
       setRoles(){

@@ -111,20 +111,22 @@
           label: bbn._('New task'),
           width: 500,
           component: 'appui-task-form-new',
+          componentEvents: {
+            taskcreated: (d, openAfterCreation) => {
+              if (d.success && !!d.id) {
+                this.currentSearch = '';
+                if (openAfterCreation) {
+                  bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
+                }
+              }
+            }
+          },
           source: {
-            label: this.currentSearch,
+            title: this.currentSearch,
             type: '',
             private: 0
           }
         });
-      },
-      onTaskCreated(d, openAfterCreation){
-        if (d.success && !!d.id) {
-          this.currentSearch = '';
-          if (openAfterCreation) {
-            bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
-          }
-        }
       },
       setCfgToStorage(){
         this.setStorage({
@@ -143,12 +145,6 @@
           this[i] = v;
         })
       }
-    },
-    mounted(){
-      this.$on('taskcreated', this.onTaskCreated);
-    },
-    beforeDestroy(){
-      this.$off('taskcreated', this.onTaskCreated);
     },
     watch: {
       currentViewMode(newVal){

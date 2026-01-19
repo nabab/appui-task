@@ -120,19 +120,51 @@
           });
         }
       },
-      onTaskCreated(d, openAfterCreation){
-        if (d.success && !!d.id) {
-          if (openAfterCreation) {
-            bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
+      addTask(){
+        if (this.canChange && !!this.source.id) {
+          let roles = bbn.fn.extend(true, {}, this.source.roles);
+          if (roles.deciders) {
+            delete roles.deciders;
           }
-          if ((d.children !== undefined)
-            && bbn.fn.isArray(this.source.children)
-          ) {
-            this.source.children.splice(0, this.source.children.length, ...d.children);
-            this.source.num_children = d.children.length;
-            this.source.has_children = !!d.children.length;
-          }
-          this.columnList.updateData();
+          bbn.fn.iterate(roles, (us, ro) => {
+            if (us.includes(appui.user.id)) {
+              us.splice(us.indexOf(appui.user.id), 1);
+            }
+            if (!us.length) {
+              delete roles[ro];
+            }
+          });
+          this.getPopup({
+            label: bbn._('New task'),
+            width: 500,
+            component: 'appui-task-form-new',
+            componentOptions: {
+              source: {
+                title: '',
+                type: '',
+                id_parent: this.source.id,
+                private: !!this.source.private ? 1 : 0
+              },
+              roles: bbn.fn.numProperties(roles) ? roles : false
+            },
+            componentEvents: {
+              taskcreated: (d, openAfterCreation) => {
+                if (d.success && !!d.id) {
+                  if (openAfterCreation) {
+                    bbn.fn.link(this.mainPage.root + 'page/task/' + d.id);
+                  }
+                  if ((d.children !== undefined)
+                    && bbn.fn.isArray(this.source.children)
+                  ) {
+                    this.source.children.splice(0, this.source.children.length, ...d.children);
+                    this.source.num_children = d.children.length;
+                    this.source.has_children = !!d.children.length;
+                  }
+                  this.columnList.updateData();
+                }
+              }
+            }
+          });
         }
       },
       setMode(mode){
@@ -210,12 +242,6 @@
     created(){
       this.mainPage = appui.getRegistered('appui-task');
       this.columnList = this.closest('bbn-kanban-element');
-    },
-    mounted(){
-      this.$on('taskcreated', this.onTaskCreated);
-    },
-    beforeDestroy(){
-      this.$off('taskcreated', this.onTaskCreated);
     },
     watch: {
       filters: {

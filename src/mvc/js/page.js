@@ -576,36 +576,6 @@
             });
           }
         },
-        addTask(){
-          if (this.canChange && !!this.source.id) {
-            let roles = bbn.fn.extend(true, {}, this.source.roles);
-            if (roles.deciders) {
-              delete roles.deciders;
-            }
-            bbn.fn.iterate(roles, (us, ro) => {
-              if (us.includes(appui.user.id)) {
-                us.splice(us.indexOf(appui.user.id), 1);
-              }
-              if (!us.length) {
-                delete roles[ro];
-              }
-            });
-            this.getPopup({
-              label: bbn._('New task'),
-              width: 500,
-              component: 'appui-task-form-new',
-              componentOptions: {
-                source: {
-                  label: '',
-                  type: '',
-                  id_parent: this.source.id,
-                  private: !!this.source.private ? 1 : 0
-                },
-                roles: bbn.fn.numProperties(roles) ? roles : false
-              }
-            });
-          }
-        },
         searchTask(){
           if (this.canChange && !!this.source.id) {
             this.getPopup({
