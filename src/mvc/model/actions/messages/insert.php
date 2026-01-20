@@ -69,7 +69,11 @@ if (!empty($model->data['ref'])
         'deleteContent' => 0
       ]);*/
       return [
-        'success' => true
+        'success' => true,
+        'data' => [
+          'id_task' => $model->data['id_task'],
+          'id_note' => $id_note
+        ]
       ];
     }
   }

@@ -5,7 +5,7 @@
     <label class="bbn-label"
            bbn-text="_('Title')"/>
     <bbn-input maxlength="255"
-               required="required"
+               :required="true"
                bbn-model="source.title"
                class="bbn-w-100"/>
     <label class="bbn-label"
@@ -13,10 +13,21 @@
     <bbn-dropdown :source="fullCategories"
                   bbn-model="source.type"
                   group="group"
-                  required="required"
+                  :required="true"
                   placeholder="<?= _('Select a type...') ?>"
                   class="bbn-w-100"
                   :groupable="true"/>
+    <template bbn-if="subtask">
+      <label class="bbn-label"
+             bbn-text="_('Subtask of')"/>
+      <bbn-autocomplete :source="root + 'data/list'"
+                        bbn-model="source.id_parent"
+                        :required="true"
+                        placeholder="<?= _('Search and select a task...') ?>"
+                        class="bbn-w-100"
+                        source-text="title"
+                        source-value="id"/>
+    </template>
     <label class="bbn-label"
            bbn-text="_('Private')"/>
     <bbn-checkbox bbn-model="source.private"

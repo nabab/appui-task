@@ -7,6 +7,10 @@
       roles: {
         type: [Boolean, Object],
         default: false
+      },
+      subtask: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
