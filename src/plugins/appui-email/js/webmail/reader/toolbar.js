@@ -78,7 +78,7 @@
           const src = this.webmailReader.currentSelectedSource;
           this.getPopup({
             label: bbn._("Save as message of a task"),
-            width: 700,
+            width: 500,
             component: this.$options.components.note,
             source: {
               title: src.subject || '',
