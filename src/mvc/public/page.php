@@ -2,7 +2,7 @@
 use bbn\Str;
 
 /** @var bbn\Mvc\Controller $ctrl */
-if (defined('BBN_BASEURL') && Str::pos(BBN_BASEURL, APPUI_TASKS_ROOT . 'page/') !== 0) {
+if ($ctrl->getConstant('baseURL') && Str::pos($ctrl->getConstant('baseURL'), APPUI_TASKS_ROOT . 'page/') !== 0) {
   $ctrl->obj->url = APPUI_TASKS_ROOT . 'page';
   $ctrl
     ->setColor('#000', '#FFF')
