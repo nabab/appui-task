@@ -687,7 +687,7 @@
       },
       userAvatar(id){
         const av = bbn.fn.getField(appui.users, 'avatar', 'value', id);
-        return av ? av : bbn.var.defaultAvatar;
+        return av ? av : bbn.data.defaultAvatar;
       },
       userAvatarImg(id){
         const av = this.userAvatar(id),
