@@ -55,7 +55,7 @@ $d = [
 ];
 
 try {
-  $dashboard = new Dashboard('appui-task');
+  $dashboard = new Dashboard($model->db, 'appui-task');
   if (($widgets = $dashboard->getUserWidgetsCode())) {
     $d['dashboard']['widgets'] = $widgets;
     $d['dashboard']['order'] = $dashboard->getOrder($widgets);
