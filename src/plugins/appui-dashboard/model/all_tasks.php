@@ -1,5 +1,5 @@
 <?php
-$model->data['limit'] = isset($model->data['limit']) && is_int($model->data['limit']) ? $model->data['limit'] : 5;
+$model->data['limit'] = isset($model->data['limit']) && is_int($model->data['limit']) ? $model->data['limit'] : 100;
 $model->data['start'] = isset($model->data['start']) && is_int($model->data['start']) ? $model->data['start'] : 0;
 $closed_state = $model->inc->options->fromCode('closed', 'states', 'task', 'appui');
 $executant = $model->inc->options->fromCode('workers', 'roles', 'task', 'appui');
